@@ -1,0 +1,339 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "tierlist",
+    "version": "1.0.1",
+    "archive_sha256": "ac84b4431b0edbda39c8cb0027f1866c907e350a0ef1cba12b61e2a332839904"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "a1b425e306398a42",
+      "packet_sha256": "cbfb102f8504c610",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "15dbc21b74c93834",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs.access(full) in a try block decides whether the rc path is pushed to found; paths are home joined with the five RC_FILES names (f1:6-24).",
+          "evidence_refs": [
+            "s1",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "de5f9251d6305f2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A path is kept only if access does not throw (exists), and runRCChecker returns early when the list is empty, so the guarded code runs when access succeeded.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3c4b8878c5da9f3a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether shell rc files exist on disk, which is a target artifact.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "7765a045628a2326",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shell is bound to process.env.SHELL || \"\" and shell.includes(\"bash\") is part of the if condition.",
+          "evidence_refs": [
+            "s3",
+            "f1:32"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "5e818aee0835b430",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn runs in the then arm when shell.includes(\"bash\") is true; there is no negation.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "d763c7c61b57296f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the SHELL environment variable.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "db21743cc5096001",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shell holds process.env.SHELL and shell.includes(\"zsh\") is the second alternative in the if condition.",
+          "evidence_refs": [
+            "s5",
+            "f1:32"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "6d0484bd2b20f35c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm is reached when shell.includes(\"zsh\") is true (or-joined with bash); positive form.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "15a95d2609dda19a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the SHELL environment variable.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "e96bfdcd2c5db088",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "data is the result of fs.readFile(rcFile) and data.includes(\"wifi-a\") decides the early return.",
+          "evidence_refs": [
+            "s6",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d63171ff9f9d6df6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code returns when data includes wifi-a, so the write is reached only when the content does not include it (not_includes).",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "ed1ef50d05ca7fee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the contents of the rc file.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9a13a279a999d5b1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The empty-list early exit and the already-contains early exit are sequential guards on the write, so they join with and; both must hold (min 2).",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "86c19efab2412e37",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guards decide whether the rc file write happens at all, so the effect is enables.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "506fe4529ab1e024",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write runs when the rc files are present and unmarked; nothing backs off on analysis or CI.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "04fada55488050da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks are whether the rc file exists and whether it already has the marker, which is data availability.",
+          "evidence_refs": [
+            "s1",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "8f317d1c7205daaf",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The s7 guard lexically controls the writeFile region (s8/s9), but the s2 guard is in runRCChecker and the region is in appendWifiA; no call hop (via) links them. The call at f1:41 does follow s2, but the record does not cite it.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8",
+            "s9",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "3602c7dd29546114",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "appendWifiA is not exported and its only caller is the loop in runRCChecker at f1:41, after the empty-list exit. The write inside it is behind the contains check.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "e168ba27d10b44e0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.writeFile on the rc file (fs is promises from \"fs\") is a file write that can append to a shell startup file, so it can do both write_file and persistence.",
+          "evidence_refs": [
+            "s9",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "28c4b3f07f5214b1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The empty-list exit and the if (bash || zsh) nest, so the expression is c1 && (c2 || c3); the minimum satisfying set is 2.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "60777c8f288f0c05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn runs only inside the then arm, with an empty else, so the gate enables it.",
+          "evidence_refs": [
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "73bebc87f7fb1da7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn runs when a matching shell is found; nothing backs off on analysis.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "92a81e7f11239d77",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The SHELL check only picks a shell that can source the file (bash or zsh), which is portability.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "16904f4a1bb4dbc4",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The s4 guard encloses the spawn (s10/s11), but the s2 guard is in runRCChecker and the spawn is in autoSource; no call hop is cited. The call at f1:42 does follow s2.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10",
+            "s11",
+            "f1:42"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "235ca2cdeae631a4",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "autoSource is not exported and is called only at f1:42 inside the loop after the empty-list exit; the spawn sits inside the shell check.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f1:42"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "0be8e3bf9220a597",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawn is imported from child_process and is called with the shell and a -c command, which creates a process.",
+          "evidence_refs": [
+            "s11",
+            "f1:3"
+          ]
+        }
+      ]
+    }
+  ]
+}

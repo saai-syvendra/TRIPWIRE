@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "metrics-probe-dc85",
+    "version": "1.0.0",
+    "archive_sha256": "68420bc5503a8e98bd93f48c1bf2ffe402ee2658e1ed95d82d940b40e649c8f2"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "acbf00183be27bcb",
+      "record_sha256_after": "391ce0265d9a2e22",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "590ac7b9536f6e2e",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The witness started at the main() call on line 340, which is outside g5's region (the if block at line 289). The sink exec at line 20 is reached from inside that block: the runCmd(...) call at line 291 (first Promise.all element) calls function runCmd defined at line 17, which holds the exec call. W"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed what the code settles: g5's payload path is now traced (removed 'payload path not fully traced'). g3 and g4 sinks (http.get at lines 189 and 247) sit in the Promise executors inside their regions, and g7's writeFileSync at line 86 sits directly in its region; verification did not refute them, "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "391ce0265d9a2e22",
+      "record_sha256_after": "4c62863ad7ff1a05",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "fe2980a2249766c2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right about c9. At run.js:67-71 a TRANSFER root that exists but holds no subdirectories leaves dirs empty, so xtfDir stays empty and the if (xtfDir) guard at line 79 is false even though the readdirSync call succeeded. c9 was anchored on that call, so c1 && c9 did not imply the gu"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "4c62863ad7ff1a05",
+      "record_sha256_after": "4c62863ad7ff1a05",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "No record change; needs_manual_review stays true. Guessed recipe fields: g1.else and g6.else list os linux as guessed, and that is accurate. run.js:29 is the only platform test and it compares process.platform to win32 only; the else at run.js:136 runs on every non-win32 platform and no code compare"
+        }
+      ]
+    }
+  ]
+}

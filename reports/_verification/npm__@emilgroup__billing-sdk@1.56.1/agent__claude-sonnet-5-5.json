@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/billing-sdk",
+    "version": "1.56.1",
+    "archive_sha256": "7d40906a1a197aaa75ddc9eb0ee127bdc8defe229aec3d1a279f6f482b6db36b"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "f8d5069f280588c1",
+      "packet_sha256": "17fa9b9fce2f67d9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "119ba24eddbb13a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads process.env.PAYLOAD into BASE64_PAYLOAD, which is the test in s2 (f1:14).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a937923038676b69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:14 exits when BASE64_PAYLOAD is falsy, so the guarded code runs when it is truthy; no value is compared.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "76238902786cf2ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the PAYLOAD environment variable (with a package.json config fallback), so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f6a7636d3a55b10",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single early-exit guard at f1:14 controls the rest of the block; one condition, so c1 alone is right and min 1 holds.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7181d184f9290269",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "If the payload is present the script writes and starts the service; otherwise it exits. There is no per-branch payload selection or target change, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "031cc21679fd2880",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate only requires that a payload was supplied; it does not check for analysis, CI or a sandbox, so activate fits.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "31b6b4f939ce4cae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check only tests that a payload is supplied; it shows no targeting, portability or anti-analysis intent, so unclear is acceptable.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bf7f7c861ad0580d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The four sinks (f1:23, 26, 43, 44) sit directly in the stmt range s3 after the f1:14 early exit, so the empty witnesses are correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d630caf65582b9c3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "index.js is the only file and the sinks are top-level statements after the exit at f1:14. There are no functions, exports, timers or other callers.",
+          "evidence_refs": [
+            "f1:14",
+            "f1:23",
+            "f1:44"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4242ec7971130d16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.writeFileSync (s4, s5) writes files, including the systemd unit that persists the service. execSync from child_process (s6, s7) enables and starts the service, which spawns a process.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "f1:3"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "93f846ff4b52ddda",
+      "packet_sha256": "0c1e3255691f89ed",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "2c943ccda04882a6",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The packet has no slices or files and code/ is empty, so the gate's code cannot be read. The fields alone show a truthy test of process.env.PAYLOAD guarding write_file, persistence and spawn_process, which does not settle whether the purpose is data_availability, targeting or unclear.",
+          "evidence_refs": []
+        }
+      ]
+    }
+  ]
+}

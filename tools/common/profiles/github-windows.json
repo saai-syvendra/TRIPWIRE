@@ -1,0 +1,35 @@
+{
+  "profile": "github-windows",
+  "title": "GitHub Actions windows-latest hosted runner",
+  "note": "A workflow step on the standard x64 `windows-latest` runner (Windows Server 2025), public repository, running `npm install <pkg>` or `pip install <pkg>` with no secrets passed. The repository README at the pinned commit maps windows-latest to the windows-2025-vs2026 image; GitHub's runner page links the plain Windows 2025 image, which has the same Node 22.23 and Python 3.12.10 lines. POSIX root paths (/etc/...) do not exist on Windows; Windows paths, the user, home folder, locale, hostname and full environment are not documented, so those axes stay unknown.",
+  "sources": {
+    "readme": {"url": "https://github.com/actions/runner-images/blob/30b834d537f1db35a264de5ddccb57ce716f6cb8/images/windows/Windows2025-VS2026-Readme.md", "commit": "30b834d537f1db35a264de5ddccb57ce716f6cb8", "read": "2026-10-24", "what": "Windows Server 2025, image 20261007.264.1: Node 22.23.3, Python 3.12.10, NPM 10.9.9, pip 26.2.1, Yarn 1.22.22, tool list, CONDA and VCPKG_INSTALLATION_ROOT"},
+    "repo_readme": {"url": "https://github.com/actions/runner-images/blob/30b834d537f1db35a264de5ddccb57ce716f6cb8/README.md", "commit": "30b834d537f1db35a264de5ddccb57ce716f6cb8", "read": "2026-10-24", "what": "label table: windows-latest = windows-2025-vs2026 (x64); macos-latest = macOS 26 Arm64"},
+    "variables": {"url": "https://docs.github.com/en/actions/reference/workflows-and-actions/variables", "read": "2026-10-24", "what": "default environment variables: CI=true, GITHUB_ACTIONS=true, RUNNER_OS, RUNNER_ARCH, RUNNER_ENVIRONMENT"},
+    "hosted": {"url": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners", "read": "2026-10-24", "what": "public-repository hardware per label; Linux and macOS run with passwordless sudo, Windows as administrator with UAC disabled; Azure-hosted VMs that connect out to GitHub-owned endpoints"},
+    "npm_scripts": {"url": "https://docs.npmjs.com/cli/v11/using-npm/scripts", "read": "2026-10-24", "what": "npm_lifecycle_event, npm_package_*, INIT_CWD in lifecycle scripts"}
+  },
+  "axes": {
+    "os": {"value": "win32", "source": "readme"},
+    "arch": {"value": "x64", "source": "hosted"},
+    "privilege": {"value": "root_or_admin", "source": "hosted"},
+    "cpu_count": {"value": 4, "source": "hosted"},
+    "memory_mb": {"value": 16384, "source": "hosted"},
+    "ci": {"value": "github_actions", "source": "variables"},
+    "network": {"egress": "open", "blocked": [], "source": "hosted"},
+    "env_var": {"set": {"CI": "true", "GITHUB_ACTIONS": "true", "RUNNER_OS": "Windows", "RUNNER_ARCH": "X64", "RUNNER_ENVIRONMENT": "github-hosted", "GITHUB_ACTION": null, "GITHUB_ACTOR": null, "GITHUB_API_URL": null, "GITHUB_ENV": null, "GITHUB_EVENT_NAME": null, "GITHUB_EVENT_PATH": null, "GITHUB_JOB": null, "GITHUB_OUTPUT": null, "GITHUB_PATH": null, "GITHUB_REF": null, "GITHUB_REF_NAME": null, "GITHUB_REPOSITORY": null, "GITHUB_REPOSITORY_OWNER": null, "GITHUB_RUN_ID": null, "GITHUB_RUN_NUMBER": null, "GITHUB_SERVER_URL": null, "GITHUB_SHA": null, "GITHUB_STEP_SUMMARY": null, "GITHUB_WORKFLOW": null, "GITHUB_WORKFLOW_REF": null, "GITHUB_WORKFLOW_SHA": null, "GITHUB_WORKSPACE": null, "RUNNER_NAME": null, "RUNNER_TEMP": null, "RUNNER_TOOL_CACHE": null, "HOME": null, "CONDA": "C:\\Miniconda", "VCPKG_INSTALLATION_ROOT": "C:\\vcpkg"}, "complete": false, "unknown_prefixes": [], "source": ["variables", "readme"]},
+    "file": {"present": [], "absent_prefixes": ["/"], "source": ["readme"]},
+    "installed_tool": {"present": ["bash", "git", "gh", "docker", "jq", "node", "npm", "yarn", "python", "pip", "pipx", "pwsh", "7z"], "complete": false, "source": ["readme"]}
+  },
+  "ecosystems": {
+    "npm": {
+      "package_manager": {"value": "npm", "source": "readme"},
+      "runtime_version": {"value": "22.23.3", "source": "readme"},
+      "env_var": {"set": {"npm_lifecycle_event": "$hook", "INIT_CWD": null, "npm_package_name": null, "npm_package_version": null}, "unknown_prefixes": ["npm_config_", "npm_package_"], "source": ["npm_scripts"]}
+    },
+    "pypi": {
+      "package_manager": {"value": "pip", "source": "readme"},
+      "runtime_version": {"value": "3.12.10", "source": "readme"}
+    }
+  }
+}

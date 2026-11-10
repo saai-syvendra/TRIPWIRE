@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifilSoop",
+    "version": "1.0.0",
+    "archive_sha256": "21287854fe23183b9664861377aa0be38331958554f179df2b86d2a7a0620c40"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "6fe5e34c3ff40469",
+      "packet_sha256": "045a67f6ab5efb8d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "07cd88fda232ad82",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision directly compares `os.name` in the `run` method. (s1; f1:13)",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "364267b64426cfd9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition is `os.name == \"nt\"`, and its then block contains the gated code. (s1, s2; f1:13)",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads Python's `os.name` property and compares it to the Windows name `nt`. (s1; f1:13)",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3fbcbab0f960cb03",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one `if os.name == \"nt\"` guard, with the recorded regions inside its then block, so the single condition is the minimal combination. (s2, s3, s4; f1:13-18, f2:13-18)",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f1:13",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code fetches response text and passes it to `exec`, enabling the download and execution behaviors. (s4, s5, s6; f2:13-16)",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gated fetch and execution run when the environment reports `os.name == \"nt\"`, which activates them on Windows. (s2, s4; f2:13-16)",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f2:13",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code restricts the fetch and execution to the Windows environment, selecting the environment in which this behavior runs. (s2, s4; f2:13-16)",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f2:13",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c755d91dd65bff33",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the network request and the `exec` call are directly within the then block of the Windows check; the response text is passed through replacements into `exec`. (s2, s4, s5, s6; f2:13-16)",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "f2:13",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "70f317f7574badaf",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The class's `run` method is registered as the install command, and the file contains no other call to this method or to the gated fetch/exec; the sinks are inside its Windows check. (s2, s4, s5, s6; f2:13-16, f2:24-29)",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "f2:13",
+            "f2:16",
+            "f2:24"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "2dd6339c51192057",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` performs the network request, and `exec(...)` executes the fetched response text after stripping the surrounding tags. (s5, s6; f2:16)",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f2:16"
+          ]
+        }
+      ]
+    }
+  ]
+}

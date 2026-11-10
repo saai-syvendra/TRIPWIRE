@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pytest-pandas",
+    "version": "16.6.6",
+    "archive_sha256": "d7f50ccc7deb7ae14afd366933293571d8269d262a4235272019826fd70d6906"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d1c82442d9d482b0",
+      "packet_sha256": "98caccab052bbf2b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "8b389e04e62bd02c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 (f1:24) calls os.path.exists on a literal path as the condition of an if statement.",
+          "evidence_refs": [
+            "s1",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "60bd91bbabb36449",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:24-25 exits when the path exists, so the code after it runs only when os.path.exists is false (not_exists) for the literal hifromDreamyOak.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "0772f51a141780a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a file or directory exists on disk, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5e6fa095362b45be",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one early-exit guard with one condition, c1, and the rest of the file (s3) is its then side, so the expression c1 with min 1 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f18622373d5909b6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The marker-file check lets the exec of the decoded code run only when the marker is absent. It does not choose between payloads or change a target, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7437d128bdfcf3cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off only when a marker file is already present, which is a re-run check and not analysis or sandbox detection. The payload runs on a normal install, so activate fits.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6a256593c7d50642",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The marker file does not clearly serve portability, targeting or anti-analysis. It looks like a re-run guard, so unclear is acceptable.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "01322c5465a45113",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exec(base64.b64decode(code)) call at f1:38 lies inside the s3 region that follows the early exit. The witness is empty because the sink is in the region itself.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "db04b5bfa2cb5ee9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The exec call is top-level code in setup.py after the guard. It sits in no function, and the file has no other caller, export or handler that reaches it.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "dcad0527f0ec2ee5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The behaviour 'other' rests on exec of base64-decoded data, which is an eval-kind sink that can run arbitrary code.",
+          "evidence_refs": [
+            "s4",
+            "f1:38"
+          ]
+        }
+      ]
+    }
+  ]
+}

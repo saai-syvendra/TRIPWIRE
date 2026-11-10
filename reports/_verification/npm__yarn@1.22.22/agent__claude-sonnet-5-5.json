@@ -1,0 +1,304 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "yarn",
+    "version": "1.22.22",
+    "archive_sha256": "c17d3797fb9a9115bf375e31bfd30058cac6bc9c3b8807a3d8cb2094794b51ca"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "46c4232b4c5429af",
+      "packet_sha256": "d732fc78cdbf6d92",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "fe5b1b918a865acc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition of the if at f1:21 reads process.env.npm_config_global directly.",
+          "evidence_refs": [
+            "s1",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "da998cfe7c42486d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The bare value is the if test with no negation, so the then arm (s2) runs when it is truthy.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "a4b2ee39078591d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "npm_config_global is set by the npm package manager to flag a global install, so package_manager fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "78003ab9933109db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs.readlinkSync(binPath) sits in a try whose catch returns, so it decides whether the code continues; binPath is the global bin dir joined with a bin name from the manifest.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:44"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "0285ebe3fd1f7c57",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code after the try runs only if readlinkSync did not throw (the catch returns), which is an exists test.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:43-47"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "d49e00357aa063a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code checks whether a symlink exists at the bin path, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "43882f6ba8f9a132",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test at f1:49 is binTarget.startsWith, and binTarget holds the readlinkSync result from f1:44.",
+          "evidence_refs": [
+            "s5",
+            "s3",
+            "f1:44",
+            "f1:49"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "a0e45e05c9f516dc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The positive startsWith('../lib/node_modules/corepack/') test guards the unlink in the then arm, and the value matches.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "4d646d323f8b5b7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test compares the content (link target) read from the file, so file_content fits.",
+          "evidence_refs": [
+            "s5",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5a478b0955874d5e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single if guard (s2) holds one condition, c1, and its region s7 is the whole block, so min 1 and the expression c1 are right.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "59dbaaea89d02bc2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs only when the condition holds and has no else branch, so the gate enables the behaviour.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "94ead2d17190c2c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when a global install is detected and does not back off from analysis, so the polarity is activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "141497dac6e40227",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code acts only on global installs and is skipped otherwise, which is targeting the install mode. It is not anti-analysis.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c4d2a4fde74925ae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The execFileSync call at f1:27 sits directly inside the if block (s7), so the empty witness is correct.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "a0193df4a12a88b2",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file is a top-level script with no functions, exports or timers, and the execFileSync call appears only inside the if block.",
+          "evidence_refs": [
+            "s8",
+            "f1:21-60"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "25d0a04026637e2a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "cp is require('child_process') and execFileSync spawns a process, which supports spawn_process.",
+          "evidence_refs": [
+            "s8",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "e098026c74e08815",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The unlink region (s9) is nested inside the if at s2, the post-try code (catch returns) at s4, and the if at s6, so the three conditions join with and and the minimum is 3.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2df91fcf6138e318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The unlink happens only when all three conditions hold and there is no else branch, so the gate enables it.",
+          "evidence_refs": [
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "a288e2e42963a414",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The deletion runs when the target is found and nothing backs off from analysis, so the polarity is activate.",
+          "evidence_refs": [
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "c1a2a8035a131f59",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The conditions do not check whether data is available. They detect a corepack-owned yarn symlink so that npm's global install does not fail on its ownership check, which is portability (the comment at f1:6-16 says the same, but the code is the evidence). The label I would give is portability.",
+          "evidence_refs": [
+            "s6",
+            "s9",
+            "f1:49-51"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "0b0dd8ba88ed529a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs.unlinkSync at f1:51 is inside the try (s9), which is inside the startsWith if, after the readlink try and inside the global if, so the empty witness is correct.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "cec6df6ed6a563a0",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "unlinkSync is called only at f1:51, in a top-level script with no other callers, exports or timers.",
+          "evidence_refs": [
+            "s10",
+            "f1:51"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "ff5762d32dacddf6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs is require('fs') and unlinkSync deletes a file, which supports delete_file.",
+          "evidence_refs": [
+            "s10",
+            "f1:23"
+          ]
+        }
+      ]
+    }
+  ]
+}

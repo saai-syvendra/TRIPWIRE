@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "prorgessbar2",
+    "version": "0.1",
+    "archive_sha256": "3066e9a9816fab39e178de81e631919136675f421778ce29fd84c70ff14984ae"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "966dde95ec45605d",
+      "record_sha256_after": "13009146129742ea",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "42fa3d4bf659691b",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "g2 is a modifies gate, and its payload is marked unresolved dynamic_dispatch with no witness. It does not claim the Save() call sits in the region or that only admins reach it. In decoded setup.py (d1), the IsUserAnAdmin() then side in state 383984 sets the state to 362814. That state appends 'C:\\Pr"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "18a05d85283f0ad7",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "In d1 state 9653, the test reads os.path.basename(shortcut.TargetPath) for each .lnk found by os.walk and rewrites Arguments and calls Save() only when it is chrome.exe, msedge.exe, launcher.exe or brave.exe. That is a per-artifact check that the thing the payload uses (a Chromium-browser shortcut) "
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed one reason: g3 file_present was a guessed 'Google Chrome.lnk' path. It now says what the code shows: any .lnk under the three walked folders whose TargetPath basename is in the browser list. recipe_guessed_fields is now empty. Two reasons remain. c3/g3 are out of set and await verification. Th"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "13009146129742ea",
+      "record_sha256_after": "cf0c4f59c6c861b7",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "42fa3d4bf659691b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right about the empty witness: the admin block (raw line 69, d1 lines 66-67) only sets state 362814 and continues, and Save() is in the shortcut walk, so an empty witness wrongly put the sink in the region. Added a bind hop on the state assignment in the region and kept unresolved "
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "7a9b2b00f2c820d3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The empty witness was wrong: region s14 (d1 lines 92-94) sets Arguments and state 60921, and Save() is in the separate arm for 60921 (d1:100-101). Added a bind hop on the assignment at d1:93 and kept unresolved dynamic_dispatch. The guard claim holds: d1:93 is the only assignment of 60921 and the ot"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "3c62d8ccc94e7033",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "enables fits the code. At d1:91 a shortcut whose target is not in the list gets state 0 (d1:96): no Arguments change, no Save(), and no other target is acted on instead. Flipping the test leaves no behaviour rather than the same behaviour on a different target, and a machine with no matching shortcu"
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "37fb19f99caec3d8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The drop holds. os.path.exists at d1:117 only chooses between state 29059, which runs os.makedirs (d1:56) and moves to 37668, and state 37668 directly (d1:121). Both sides then run the same open and write of background.js and manifest.json and the same shortcut walk. That being a state transition do"
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "715513960a7265b3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The drop holds. This is the decision statement around the same exists test (d1:117-119). Its true side only sets state 29059 to create the folder, and that arm (d1:55-57) goes to 37668, the same state the false side sets at d1:121. Creating a missing destination folder is plumbing under the gate def"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "cf0c4f59c6c861b7",
+      "record_sha256_after": "545e35c1caf08874",
+      "round": 3,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "81c4fa2125f9bec5",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Round 3, so only escalation is accepted; the claim is unchanged. The refutation of the hop is right: the bind at setup.py line 69 (d1 line 66) stores the integer state 362814, not a function or object. The path itself is readable in d1: state 362814 appends the C:\\ProgramData Start Menu to the folde"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "d166d87789175245",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The bind hop on the integer state 60921 (d1 line 93) stored no function or object, so it was replaced with the Save() receiver's binding, the CreateShortcut assignment at d1 line 87. That line runs before the region, not inside it. The c1 guard was re-cited in d1 (line 6) so guard and region share c"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "needs_manual_review is still true after write_report.py. Both reasons remain: 'out-of-set claim pending verification' for c3 and g3, which only a reviewer can remove, and 'payload path not fully traced', because the g2 and g3 payloads stay unresolved dynamic_dispatch across state-machine transitions"
+        }
+      ]
+    }
+  ]
+}

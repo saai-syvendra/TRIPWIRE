@@ -1,0 +1,2342 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@redhat-cloud-services/hcc-feo-mcp",
+    "version": "0.3.1",
+    "archive_sha256": "73dfde3dc5ac8f3d69e1847499f7b214ec8464f323d207d5f51355be61cde0d6"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "7883a9d51a92ee2c",
+      "packet_sha256": "e57839c338bc6dd9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "68068db04bc38c2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads process.env into a local variable and tests its presence and prefix.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "2a11f661d87cbcd1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested value is read directly from process.env in i7 (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "a136bdce13e3d8ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 tests the lowercased locale returned by Intl.DateTimeFormat().resolvedOptions().",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "09e8aa92ffb79c91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 explicitly reads the locale property, making locale_language appropriate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "577698f85e5feffb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 tests a fallback expression consisting of process.env lookups.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "ad0777298723cfc2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The s3 prefix test uses the literal ru and returns true on a match; s4 exits when ZZ returns true, so continuation requires no such match.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "a3d777ec8cf54e75",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s3 compares an environment value with ru, but its environment variable names are computed by encoded calls and do not establish that the value is a language setting.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "e606b33ff003a92a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 tests a conditional fallback expression that reads process.env.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "d2aaa564e21ba6c8",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Both the environment variable names and the comparison prefix in s5 are encoded calls; readable code does not establish a timezone property.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "4d0865a53506017b",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The import and W9 resolve the call to fs.existsSync, but the filename in the claimed file probe is computed by an encoded call and cannot be confirmed as a concrete target (f1:1).",
+          "evidence_refs": [
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "65e5db1f9e72e051",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fs.existsSync import and W9 test establish a file existence check (f1:1, s6).",
+          "evidence_refs": [
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "ec7a0d2625d81eb2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "i7 returns whether any configured environment prefix matches, and s7 exits on that result; continuation after s8 therefore requires c1.",
+          "evidence_refs": [
+            "s1",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "aa5c8ad6ca21a8f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard exits the process before the awaited kq call completes, controlling whether the subsequent collection and token checks run.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "3e25d25f5868c7e8",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "i7 exits on configured credential prefixes, but those prefixes are encoded; readable code does not establish that these identify analysis environments.",
+          "evidence_refs": [
+            "s1",
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "e8a5421f921aa1e9",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The configured environment names identify credentials, while their tested prefixes remain encoded; the test alone does not establish an anti_analysis purpose.",
+          "evidence_refs": [
+            "s1",
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "5b72861b371fa222",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited exit is inside kq, which s8 awaits before both region calls; each empty witness ends at the call in its own cited region.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "990a49ce1e17d913",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "fq has only the guarded caller, but r has additional callers in collector and action methods; their complete reachability and possible dispatch paths are not established by the cited witnesses (f1:1).",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "566b999c5d415bed",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "fq reaches filesystem collection and r reaches a fetch through P, but the supplied payload list has no sinks supporting self_propagation, modify_other_packages, or persistence (s9, s10; f1:1).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6caafcd5e7fc0b79",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "ZZ returns true for each successive prefix match and otherwise false; s4 exits on true, so continuation requires all three negative conditions.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5",
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "473bcffefe7b0779",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard exits the process before the awaited kq call completes, controlling whether the subsequent collection and token checks run.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "37893a8b2dd8d4e6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The locale and environment prefix matches cause an exit rather than selecting an analysis response, fitting activation restricted by environment values.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "2b41bf58742485a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A locale prefix check and the explicit ru environment prefix exclusion restrict the environments where collection proceeds, supporting targeting.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "2505ced1f3d87c09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited exit is inside kq, which s8 awaits before both region calls; each empty witness ends at the call in its own cited region.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "af59334416adec37",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "fq has only the guarded caller, but r has additional callers in collector and action methods; their complete reachability and possible dispatch paths are not established by the cited witnesses (f1:1).",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "9e4e5412adcb9ab7",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "fq reaches filesystem collection and r reaches a fetch through P, but the supplied payload list has no sinks supporting self_propagation, modify_other_packages, or persistence (s9, s10; f1:1).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "7edb70261a8f8434",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "W9 also returns true when the lock exists but its recorded PID is not alive, after deleting the stale lock; continuation is therefore not equivalent to c5 alone.",
+          "evidence_refs": [
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "c3abe1fe2ad4b4cc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard exits the process before the awaited kq call completes, controlling whether the subsequent collection and token checks run.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "60dd59c56e0b2f14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "W9 allows a new instance to continue and rejects an instance when the lock records a live PID; this activates execution based on instance state.",
+          "evidence_refs": [
+            "s6",
+            "s11",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "4e6d5193d55da4b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check implements a live-PID lock and stale-lock cleanup, which fits none of portability, targeting, anti_analysis, or data_availability; unclear is appropriate.",
+          "evidence_refs": [
+            "s6",
+            "s11",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "54367dea9f1ae12a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited exit is inside kq, which s8 awaits before both region calls; each empty witness ends at the call in its own cited region.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "9d1e80b9bd152c16",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "fq has only the guarded caller, but r has additional callers in collector and action methods; their complete reachability and possible dispatch paths are not established by the cited witnesses (f1:1).",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "9dfedcc5b146e2b2",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "fq reaches filesystem collection and r reaches a fetch through P, but the supplied payload list has no sinks supporting self_propagation, modify_other_packages, or persistence (s9, s10; f1:1).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "1c83948119c692b0",
+      "packet_sha256": "257acc9a30b7830d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "55fbb221b01fc097",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s1 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "b8172f038b283912",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s1, s2 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "7faf145afee07eba",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s1 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "69f04d5eba500905",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s3, s4, s5 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bd8aaaee1fa57fef",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s3, s4, s6 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s36",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "db60893667facf4e",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s3, s4, s6 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s36",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "fa291e762d9515b7",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s6, s7, s11 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s11",
+            "s9",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s8",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s10",
+            "s36",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "4617da12ab15486b",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s38, s4, s39 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s38",
+            "s4",
+            "s39",
+            "s40",
+            "s41",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "0085c82f04b6d68e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s38, s4, s6 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s38",
+            "s4",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s36",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "c99498b4cf28dcc6",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s38, s4, s6 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s38",
+            "s4",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s36",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "e19edc4b953b2131",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s6, s7, s11 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s11",
+            "s9",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s8",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s10",
+            "s36",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "28c168f9b4a394c1",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s2, s4, s42 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s42",
+            "s1",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "a2316c4939fbfd32",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s2, s42, s1 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s2",
+            "s42",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "abc8665add9c71e7",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s2, s42, s1 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s2",
+            "s42",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "d25bf60e3b2960bf",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s2, s42, s1 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s2",
+            "s42",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "76b92e7e97d97ce7",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s2, s4, s6 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s36",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "4954332d80fa4ddf",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s2, s4, s6 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s36",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "11818eeefdef1862",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "File f1 is represented only by a sample_missing placeholder, and s6, s7, s11 contain no source code. The claim cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s11",
+            "s9",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s8",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s10",
+            "s36",
+            "s37"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "83bd9cd0aacdc576",
+      "packet_sha256": "05947e02b218a72c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "d374fcc5fbd48ed5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "i7 reads each configured process.env binding and tests its configured prefix; kq exits when any such test succeeds (s1, s2; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "dd12a620562e9741",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "i7 reads each configured process.env binding and tests its configured prefix; kq exits when any such test succeeds (s1, s2; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "bd6468bb1c70a5a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "i7 reads each configured process.env binding and tests its configured prefix; kq exits when any such test succeeds (s1, s2; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "8cbba6916c399926",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ tests the lowercased Intl locale against ru and kq exits on a true result, leaving the continuation on the negative side (s3, s4; f1:1).",
+          "evidence_refs": [
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "d4bb2e9c2296ff94",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ tests the lowercased Intl locale against ru and kq exits on a true result, leaving the continuation on the negative side (s3, s4; f1:1).",
+          "evidence_refs": [
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "b2ca6369bc957846",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "ZZ tests the lowercased Intl locale against ru and kq exits on a true result, leaving the continuation on the negative side (s3, s4; f1:1).",
+          "evidence_refs": [
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "99018cd419722ec8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ tests the first available locale environment variable for the ru prefix and returns true to the exiting caller (s5, s4; f1:1).",
+          "evidence_refs": [
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0a62241b3c871ae2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ tests the first available locale environment variable for the ru prefix and returns true to the exiting caller (s5, s4; f1:1).",
+          "evidence_refs": [
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "cbdf5c0fa3ab6ab3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ tests the Windows-conditioned locale environment value for the ru prefix and returns true to the exiting caller (s6, s4; f1:1).",
+          "evidence_refs": [
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "8f03b838723ebce8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ tests the Windows-conditioned locale environment value for the ru prefix and returns true to the exiting caller (s6, s4; f1:1).",
+          "evidence_refs": [
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "2227af204cc96a99",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "ZZ tests the Windows-conditioned locale environment value for the ru prefix and returns true to the exiting caller (s6, s4; f1:1).",
+          "evidence_refs": [
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "bd568ce942a96e80",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fs.existsSync alias tests N1, which is joined from os.tmpdir() and the named lock basename; W9 permits continuation when that file is absent (s7; f1:1).",
+          "evidence_refs": [
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "f07808ad2ede91f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fs.existsSync alias tests N1, which is joined from os.tmpdir() and the named lock basename; W9 permits continuation when that file is absent (s7; f1:1).",
+          "evidence_refs": [
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "26b983aae6c46f3d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "mq probes the PID read from the lock with process.kill(pid, 0), returning false on an exception; W9 rejects a successful live-process probe (s9, s7; f1:1).",
+          "evidence_refs": [
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "f662a4ce495aad4c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "mq probes the PID read from the lock with process.kill(pid, 0), returning false on an exception; W9 rejects a successful live-process probe (s9, s7; f1:1).",
+          "evidence_refs": [
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "7faf145afee07eba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "mq probes the PID read from the lock with process.kill(pid, 0), returning false on an exception; W9 rejects a successful live-process probe (s9, s7; f1:1).",
+          "evidence_refs": [
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "f4746b51d4ca2304",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The imported os.cpus alias supplies length, and shouldExecute returns false below four CPUs; execute returns early on that false result (s10, s11).",
+          "evidence_refs": [
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "b9b479de390f11ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The imported os.cpus alias supplies length, and shouldExecute returns false below four CPUs; execute returns early on that false result (s10, s11).",
+          "evidence_refs": [
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "11c6c70367c6596b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The imported os.cpus alias supplies length, and shouldExecute returns false below four CPUs; execute returns early on that false result (s10, s11).",
+          "evidence_refs": [
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "a5ff3a7c54a038ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "x1 tests every path in hQ through the imported fs.existsSync alias; a match makes shouldExecute reject execution (s12, s11; f1:1).",
+          "evidence_refs": [
+            "s12",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "9c9df37ec9718ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "x1 tests every path in hQ through the imported fs.existsSync alias; a match makes shouldExecute reject execution (s12, s11; f1:1).",
+          "evidence_refs": [
+            "s12",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "c71b9603a4bc5885",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The paths identify endpoint-security products rather than VM or sandbox artifacts; security-product detection is the fitting category (s12; f1:1).",
+          "evidence_refs": [
+            "s12",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "84f34a27907f8c53",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "The execSync command is selected by platform: Windows runs tasklist while other systems run ps aux, so the probe does not run exactly the single claimed command (s13; f1:1).",
+          "evidence_refs": [
+            "s13",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "2cde6ad3aba9d058",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "The execSync command is selected by platform: Windows runs tasklist while other systems run ps aux, so the probe does not run exactly the single claimed command (s13; f1:1).",
+          "evidence_refs": [
+            "s13",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "1b6bf9f9347c5f26",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "x1 lowercases process-list output and searches it for the entries in fQ, rejecting execution when a match is found (s13, s11; f1:1).",
+          "evidence_refs": [
+            "s13",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "94e079e51d318a4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute rejects CI equal to the literal true string, so execute continues on its unequal side (s14, s11).",
+          "evidence_refs": [
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "098de9a0edd29c38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute rejects CI equal to the literal true string, so execute continues on its unequal side (s14, s11).",
+          "evidence_refs": [
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "55476ed5902c9809",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "shouldExecute rejects CI equal to the literal true string, so execute continues on its unequal side (s14, s11).",
+          "evidence_refs": [
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "eb7dc5e28f9e5546",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute rejects GITHUB_ACTIONS equal to the literal true string, so execute continues on its unequal side (s15, s11).",
+          "evidence_refs": [
+            "s15",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "db9e31677390ec17",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute rejects GITHUB_ACTIONS equal to the literal true string, so execute continues on its unequal side (s15, s11).",
+          "evidence_refs": [
+            "s15",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "e7b5556f4cd79f16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "shouldExecute rejects GITHUB_ACTIONS equal to the literal true string, so execute continues on its unequal side (s15, s11).",
+          "evidence_refs": [
+            "s15",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "c3ad6ed546701265",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute rejects JENKINS_HOME when it is defined, leaving execution enabled only when it is undefined (s14, s11).",
+          "evidence_refs": [
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "910363e95bb96dfe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute rejects JENKINS_HOME when it is defined, leaving execution enabled only when it is undefined (s14, s11).",
+          "evidence_refs": [
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "be06803117694a8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "shouldExecute rejects JENKINS_HOME when it is defined, leaving execution enabled only when it is undefined (s14, s11).",
+          "evidence_refs": [
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "93afcd3717f7bcd2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "R8.execute checks process.platform membership in the literal darwin/linux array before downloading and publishing packages (s16, s17).",
+          "evidence_refs": [
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "cb070b7f53eae2cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "R8.execute checks process.platform membership in the literal darwin/linux array before downloading and publishing packages (s16, s17).",
+          "evidence_refs": [
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "1bd3680a3bf16679",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "R8.execute checks process.platform membership in the literal darwin/linux array before downloading and publishing packages (s16, s17).",
+          "evidence_refs": [
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c14.L1",
+          "claim_sha256": "37076beef5a71a81",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Y6 constructs isGitHubActions from GITHUB_ACTIONS strictly equal to the true string, then rejects execute when that property is false (s18, s19; f1:1).",
+          "evidence_refs": [
+            "s18",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "4f07e037022bd707",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Y6 constructs isGitHubActions from GITHUB_ACTIONS strictly equal to the true string, then rejects execute when that property is false (s18, s19; f1:1).",
+          "evidence_refs": [
+            "s18",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c14.L6.category",
+          "claim_sha256": "7189e12a38831ad7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Y6 constructs isGitHubActions from GITHUB_ACTIONS strictly equal to the true string, then rejects execute when that property is false (s18, s19; f1:1).",
+          "evidence_refs": [
+            "s18",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c15.L1",
+          "claim_sha256": "65050881890ada51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Y6 constructs isLinuxRunner from RUNNER_OS strictly equal to Linux, then rejects execute when that property is false (s20, s19).",
+          "evidence_refs": [
+            "s20",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c15.L2",
+          "claim_sha256": "beaaaf11211ed673",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Y6 constructs isLinuxRunner from RUNNER_OS strictly equal to Linux, then rejects execute when that property is false (s20, s19).",
+          "evidence_refs": [
+            "s20",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c15.L6.category",
+          "claim_sha256": "8c50fad41c1ed4f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Y6 constructs isLinuxRunner from RUNNER_OS strictly equal to Linux, then rejects execute when that property is false (s20, s19).",
+          "evidence_refs": [
+            "s20",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c16.L1",
+          "claim_sha256": "5f35cd3fc081e38a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq binds WORKFLOW_ID from process.env and returns when both configured filter variables are falsy (s21, s22).",
+          "evidence_refs": [
+            "s21",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c16.L2",
+          "claim_sha256": "8720f2192572392c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq binds WORKFLOW_ID from process.env and returns when both configured filter variables are falsy (s21, s22).",
+          "evidence_refs": [
+            "s21",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c16.L6.category",
+          "claim_sha256": "841634eab7312a83",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "hq binds WORKFLOW_ID from process.env and returns when both configured filter variables are falsy (s21, s22).",
+          "evidence_refs": [
+            "s21",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c17.L1",
+          "claim_sha256": "5d950c41549a3e1f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq binds REPO_ID_SUFFIX from process.env and returns when both configured filter variables are falsy (s23, s22).",
+          "evidence_refs": [
+            "s23",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c17.L2",
+          "claim_sha256": "8be8996f56dc7095",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq binds REPO_ID_SUFFIX from process.env and returns when both configured filter variables are falsy (s23, s22).",
+          "evidence_refs": [
+            "s23",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c17.L6.category",
+          "claim_sha256": "98ad47c15fc4b648",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "hq binds REPO_ID_SUFFIX from process.env and returns when both configured filter variables are falsy (s23, s22).",
+          "evidence_refs": [
+            "s23",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c18.L1",
+          "claim_sha256": "4cfffd419345c44f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq directly uses process.env.GITHUB_ACTIONS as its if condition, without comparing it to a particular string (s24, s25).",
+          "evidence_refs": [
+            "s24",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c18.L2",
+          "claim_sha256": "08c72866dad6a218",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq directly uses process.env.GITHUB_ACTIONS as its if condition, without comparing it to a particular string (s24, s25).",
+          "evidence_refs": [
+            "s24",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c18.L6.category",
+          "claim_sha256": "b27bad0a8749bbab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "hq directly uses process.env.GITHUB_ACTIONS as its if condition, without comparing it to a particular string (s24, s25).",
+          "evidence_refs": [
+            "s24",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c19.L1",
+          "claim_sha256": "4e5e8046f9f2564d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq destructures GITHUB_WORKFLOW_REF from process.env and applies includes with the bound WORKFLOW_ID value (s26, s27; f1:1).",
+          "evidence_refs": [
+            "s26",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c19.L2",
+          "claim_sha256": "6a062065030ebcb4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq destructures GITHUB_WORKFLOW_REF from process.env and applies includes with the bound WORKFLOW_ID value (s26, s27; f1:1).",
+          "evidence_refs": [
+            "s26",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c19.L6.category",
+          "claim_sha256": "860a4ebaae23f143",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "hq destructures GITHUB_WORKFLOW_REF from process.env and applies includes with the bound WORKFLOW_ID value (s26, s27; f1:1).",
+          "evidence_refs": [
+            "s26",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c20.L1",
+          "claim_sha256": "da59d0d80e5bca62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq destructures GITHUB_REPOSITORY from process.env and applies includes with the bound REPO_ID_SUFFIX value (s28, s27; f1:1).",
+          "evidence_refs": [
+            "s28",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c20.L2",
+          "claim_sha256": "e880b6d6ef0036c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq destructures GITHUB_REPOSITORY from process.env and applies includes with the bound REPO_ID_SUFFIX value (s28, s27; f1:1).",
+          "evidence_refs": [
+            "s28",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c20.L6.category",
+          "claim_sha256": "7ef1a5784005c6c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "hq destructures GITHUB_REPOSITORY from process.env and applies includes with the bound REPO_ID_SUFFIX value (s28, s27; f1:1).",
+          "evidence_refs": [
+            "s28",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "86b0c51cbf957d6d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "i7 returns whether any configured decoy prefix matches, and kq exits on that result before the awaited continuation (s1, s2, s29; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "638d76381caf52fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The decoy-prefix exit suppresses the subsequent collection and action pipeline, so its effect is enables (s2, s29; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "4cca6e8a677f2116",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The prefixes are explicitly configured decoy credentials whose presence causes process exit, supporting evade (s1, s2; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b017a5daff4fcfef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code backs off when configured fake credential prefixes appear, supporting anti_analysis (s1, s2; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bd8aaaee1fa57fef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "bq awaits kq before the listed regions; ingest reaches R8 and its package sinks, finalize dispatches through the constructed sender objects, and _q queues s4 for cq to execute its hook write (s29, s32, s33, s34; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s29",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "7719b3ae732c579d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The code has one bq entry and its kq call applies i7 before the collection, sender, and package paths; the hook action is queued only in that pipeline or its fallback (s2, s29, s34; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "fa291e762d9515b7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fq reaches credential file and runner-memory reads, r performs account reconnaissance, dispatch reaches the POST sender, R8 writes and republishes injected packages, and s4 writes a SessionStart execution hook (s30, s31, s35, s40, s52, s59; f1:1).",
+          "evidence_refs": [
+            "s30",
+            "s31",
+            "s35",
+            "s40",
+            "s52",
+            "s59",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "8f93ca02c1a0fcab",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "ZZ returns true on any of its three locale matches, so the continuation requires all three negative conditions, with minimum three (s3, s5, s6, s4).",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "b0270eab5180bb3f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "A locale match exits before the collection pipeline, so its effect is enables (s4, s29; f1:1).",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "de204dfe30cbe560",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The continuation targets systems outside the ru locale group, without a test for analysis infrastructure, fitting activate (s3, s5, s6, s4).",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "fddf51c5b7a72b0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The locale exclusion distinguishes a language population, supporting targeting (s3, s5, s6).",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "0085c82f04b6d68e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The listed bq regions follow the awaited kq locale exit; the package, sender, and queued s4 implementations connect those calls to the listed sinks (s4, s29, s32, s33, s34; f1:1).",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4",
+            "s29",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "3e273b586d061f06",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The same e1 publication sink is also called by u8.publishPackage from hq, which runs before the locale and lock checks and outside the R8 platform branch (s69, s70, s40; f1:1).",
+          "evidence_refs": [
+            "s69",
+            "s70",
+            "s50",
+            "s40",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "e19edc4b953b2131",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The implementations behind the listed sinks read credentials, inspect account data, POST collected data, rewrite and publish packages, and install a SessionStart hook (s30, s31, s35, s40, s52, s59; f1:1).",
+          "evidence_refs": [
+            "s30",
+            "s31",
+            "s35",
+            "s40",
+            "s52",
+            "s59",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "11f169ff87ee4b05",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "W9 succeeds when the lock is absent or its recorded PID probe fails, matching c5 || c6 with minimum one (s7, s9; f1:1).",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "a2316c4939fbfd32",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The live lock PID check decides whether the main pipeline continues, fitting enables (s7, s9; f1:1).",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "abc8665add9c71e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The lock admits a fresh or stale-lock instance rather than detecting analysis infrastructure, fitting activate (s7, s9; f1:1).",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "d25bf60e3b2960bf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The lock implements single-instance coordination without showing a portability, targeting, anti-analysis, or credential-availability purpose, fitting unclear (s7, s9; f1:1).",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "76b92e7e97d97ce7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The listed bq regions follow the W9 exit in awaited kq, and their package, sender, and queued s4 calls reach the listed sinks (s29, s32, s33, s34; f1:1).",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "ec5d8602a82cfaa0",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The same e1 publication sink is also called by u8.publishPackage from hq, which runs before the locale and lock checks and outside the R8 platform branch (s69, s70, s40; f1:1).",
+          "evidence_refs": [
+            "s69",
+            "s70",
+            "s50",
+            "s40",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "11818eeefdef1862",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The listed sink implementations support credential collection, account reconnaissance, network exfiltration, package rewriting/publication, and a persistent SessionStart hook (s30, s31, s35, s40, s52, s59; f1:1).",
+          "evidence_refs": [
+            "s30",
+            "s31",
+            "s35",
+            "s40",
+            "s52",
+            "s59",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "3a3876d6662d004c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "shouldExecute rejects low CPU count, a positive x1 result, or any CI marker, so all six listed negative conditions are required (s10, s12, s13, s14, s11).",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "4d9dcd85cb046f2d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "t4 skips the persistence installation when shouldExecute is false, fitting enables (s11, s62, s63).",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "f241a3409d2cad35",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Low CPU count, security products, and CI markers cause the installer to back off, fitting evade (s10, s12, s13, s14).",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "14c4c7a8b3598f9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The combined hardware, security-product, and CI rejection supports anti_analysis (s10, s12, s13, s14).",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "4563742a1289e3c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the temporary-file write and Bun.spawn call follow the early return in the same t4.execute method (s11, s62, s63).",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "7c60f001600ecaea",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The spawn occurs only in t4.execute after its own shouldExecute early return, so every caller must traverse this guard (s11, s63; f1:1).",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "bc4faba3d602a35f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Bun.spawn launches bash and receives RZ on stdin; RZ copies the monitor and writes/enables a user service or LaunchAgent, supporting persistence (s62, s63; f1:1).",
+          "evidence_refs": [
+            "s63",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "06b0bad0f9098543",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single platform membership guard encloses both package download and publication regions, requiring the one listed condition (s17, s53, s46).",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "e886e95adea49038",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform branch enables archive rewriting and package publication, fitting enables (s17, s53, s46).",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "d6b0a81b37ae2b8d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform branch positively admits darwin and linux for package propagation, fitting activate (s16, s17).",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "9ee5ff6f8a30c22b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Portability fits better: the admitted platforms share the Unix shell tooling used by downloadPackages and archive handling (s17, s54, s58).",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "aa9d2bc6a4b3967c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded map callback calls R8.publishPackage and e1; downloadPackages invokes its local callback, which calls updateTarball and reaches the manifest write (s17, s46, s48, s50, s53, s57, s52).",
+          "evidence_refs": [
+            "s16",
+            "s17",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "c44ea07d7ae438f8",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The same e1 publication sink is also called by u8.publishPackage from hq, which runs before the locale and lock checks and outside the R8 platform branch (s69, s70, s40; f1:1).",
+          "evidence_refs": [
+            "s69",
+            "s70",
+            "s50",
+            "s40",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "b11832bf492ae3b5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "updateTarball embeds the running package code and adds a preinstall command before writing the manifest, and e1 uploads the changed archive using fetch PUT (s58, s52, s51, s40; f1:1).",
+          "evidence_refs": [
+            "s40",
+            "s52",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "a52aa10ff3d7cc35",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "execute returns when either stored Actions/Linux flag is false, leaving dumpMemory behind their conjunction with minimum two (s19, s64).",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "2924ba0caba054d5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Actions/Linux flags enable runner-memory collection, fitting enables (s19, s64).",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "7504440cc99056ae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code admits a Linux Actions runner as a credential source, fitting activate (s18, s20, s19, s64).",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "e1f8f24f78df70d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The flags identify the specific runner environment whose worker memory is collected, supporting targeting (s19, s66; f1:1).",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "b418d0923b79482d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded dumpMemory call resolves to Y6.dumpMemory, then runPrivilegedStdin, whose child_process.execSync alias runs the privileged command (s64, s66, s67, s68, s65).",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "s20",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "1f9474f2783cdbcd",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only call to Y6.dumpMemory is inside Y6.execute after the Actions/Linux early return, and runPrivilegedStdin is reached through that call (s19, s64, s67; f1:1).",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "4068333f24f93f7b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The execSync alias runs privileged Python with the supplied dump script, which reads the runner process memory; execute extracts credential values from the resulting bytes (s65, s68, s66; f1:1).",
+          "evidence_refs": [
+            "s65",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "7514da7dd13335fe",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "hq requires c18 && (c16 || c17) && (!c16 || c19) && (!c17 || c20); when both filters are configured both must match, contrary to the claimed OR (s22, s25, s27).",
+          "evidence_refs": [
+            "s22",
+            "s25",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.effect",
+          "claim_sha256": "5a5b911825391d15",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The workflow/repository filters enable the OIDC package propagation path, fitting enables (s25, s27, s69, s71).",
+          "evidence_refs": [
+            "s22",
+            "s25",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.polarity",
+          "claim_sha256": "4286342a482e25cc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The filters positively identify an Actions workflow or repository for propagation, fitting activate (s22, s25, s27).",
+          "evidence_refs": [
+            "s22",
+            "s25",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.purpose",
+          "claim_sha256": "19eab42bc9190d62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The configured workflow and repository filters select propagation targets, supporting targeting (s21, s23, s26, s28, s69).",
+          "evidence_refs": [
+            "s22",
+            "s25",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3",
+          "claim_sha256": "81a394bfb821693b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "new u8().execute resolves to the cited method and downloadPackages; its local mapped callback calls u8.publishPackage, which exchanges the token and calls e1 to publish (s69, s71, s72, s73, s70; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s25",
+            "s27",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3.excl",
+          "claim_sha256": "0f03fa3f6678cde7",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only u8 construction/execution is the guarded hq site, and its package publishing method is called by its own download callback (s69, s71, s73, s70; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s25",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L5",
+          "claim_sha256": "3836f489cf31ccf7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "u8.publishPackage reaches network token exchange and e1 publication after updateTarball inserts the running code and preinstall entry, supporting self-propagation (s70, s73; f1:1).",
+          "evidence_refs": [
+            "s70",
+            "f1:1"
+          ]
+        }
+      ]
+    }
+  ]
+}

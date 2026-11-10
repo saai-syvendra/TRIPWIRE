@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "dfdfdfdfhhh",
+    "version": "1.0.0",
+    "archive_sha256": "3d60ebe5c1c0daaaca3c534ec45755a0b319f6eaf9594b4fffb783d55d793db4"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "044eee1fcfe4896d",
+      "packet_sha256": "223a5aa265a887a0",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "312af74abec7d8c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:19 compares os.path.exists(f'C:\\Users\\{login}\\...\\System64\\') == False in an if condition; login comes from os.getlogin().",
+          "evidence_refs": [
+            "s1",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "8ef1989d80382871",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if at f1:19 runs when os.path.exists(...) == False, i.e. not_exists, on the System64 path built from the login name. The path matches the claimed value.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "45ed37b3c79ea25f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only checks whether a directory exists, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "7f61a3aa92c7dfcd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if with one condition and no other guards or compound tests, so expression c1 with min 1 is right. The then region spans f1:21-26.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "3a4919f16d7877ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else branch is just pass, so the check only enables the whole payload and does not select between payloads. The directory also serves as an already-installed marker.",
+          "evidence_refs": [
+            "s2",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c505d38bb10f9b6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the marker directory is absent. Nothing in the code backs off on analysis, CI or a sandbox, so this is activation.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "50d0c70a9aa38acb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check is a re-run guard on the dropped directory. It does not select targets, detect analysis, or check for data, so unclear fits.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "1f51ce83a67f4a66",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sinks sit directly in the then block: file writes at f1:22, 23, 24 and 25, and subprocess.run at f1:26, which runs the dropped VBS (WIN32.vbs). No intermediate hops are needed.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "da884401517c25e1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The code is inline in CustomInstallCommand.run and is registered through cmdclass as the install command. The file has no other callers, exports or timers, and the else branch only passes.",
+          "evidence_refs": [
+            "f1:11",
+            "f1:51",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ee59c1dbb9a933a6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open().write at s4-s6 are file writes (a dropped bat, vbs, startup vbs and a helper script). subprocess.run at s7 creates a process that runs the VBS, which runs the bat. The bat holds the bitsadmin download of a runtime archive and an exe, then starts them, so the download and exec_downloaded behav",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "f1:22",
+            "f1:25"
+          ]
+        }
+      ]
+    }
+  ]
+}

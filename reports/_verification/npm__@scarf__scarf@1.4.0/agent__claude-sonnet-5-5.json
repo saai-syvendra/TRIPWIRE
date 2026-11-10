@@ -1,0 +1,2498 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@scarf/scarf",
+    "version": "1.4.0",
+    "archive_sha256": "d5b13758ca8f84c0e050bbe4b4b36247cba55871d0b7ef9c8bc8c42c6b52ae14"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d19de7a34abf303a",
+      "packet_sha256": "5db537d97c95f143",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "70a7ee33bb062a3e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "localDevPort is bound once to process.env.SCARF_LOCAL_PORT (f1:4) and is the test of the ternaries at f1:5 and f1:10.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:4"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "1b21bf1247d9c9bb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both ternaries use localDevPort as a bare truthy test and the then arm (http, localhost) is the guarded side.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:5",
+            "f1:10"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "a7c1a340c39d8967",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable, so env_var fits.",
+          "evidence_refs": [
+            "f1:4"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "c058260a0070818b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "userHasOptedIn compares process.env.SCARF_ANALYTICS to 'true', and its result is used in conditions at f1:182, f1:276 and f1:286.",
+          "evidence_refs": [
+            "s5",
+            "f1:62"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "142a6c66c898e459",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each cited guard reaches its guarded code only when userHasOptedIn is true (reject on disabled and not opted in, reject on not opted in and yarn, else side of the not-opted-in test), so the positive form is SCARF_ANALYTICS === 'true'.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "bdebbfa39cbc320c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads an environment variable.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "496f123314b84559",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "userHasOptedOut tests process.env.SCARF_ANALYTICS === 'false', and the function is used in decisions at f1:282 and f1:300.",
+          "evidence_refs": [
+            "s9",
+            "f1:58"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "b11be99fc56bd792",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code runs when userHasOptedOut is false (early reject at f1:282, then side of the not-opted-out test at f1:300), i.e. SCARF_ANALYTICS is not 'false'.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "fda1660ccc215baa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads an environment variable.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "dc9d012683c00d1a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "userHasOptedOut tests process.env.SCARF_NO_ANALYTICS === 'true' at f1:58 and is used as a decision.",
+          "evidence_refs": [
+            "s12",
+            "f1:58"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "3c5bc499a6f12943",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same guards as the opt-out check: the guarded code needs userHasOptedOut false, so SCARF_NO_ANALYTICS is not 'true'.",
+          "evidence_refs": [
+            "s12",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "ad4a0564ffc2ab36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads an environment variable.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "5ded7bd28688bb08",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "userHasOptedOut tests process.env.DO_NOT_TRACK === '1' at f1:58 and is used as a decision.",
+          "evidence_refs": [
+            "s13",
+            "f1:58"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "f75a8173a117870a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code needs userHasOptedOut false, so DO_NOT_TRACK is not '1'.",
+          "evidence_refs": [
+            "s13",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "ebc87dbc6423cdde",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads an environment variable.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "62c6bc3a98a034aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "scarfApiToken is assigned once from process.env.SCARF_API_TOKEN (f1:260) and is the test of if (scarfApiToken) at f1:400.",
+          "evidence_refs": [
+            "s14",
+            "f1:260"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "d8a101224a32b638",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the bare truthy test sets the Authorization header.",
+          "evidence_refs": [
+            "s15",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "10863e77bcf891ef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads an environment variable.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "3ab29bc4a7f9dc88",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isYarn takes execPath from npmExecPath(), a one-line helper returning process.env.npm_execpath (f1:29-31), and tests it with endsWith.",
+          "evidence_refs": [
+            "s16",
+            "f1:29",
+            "f1:138"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "ad531f4e9f329c77",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exit at f1:276 fires on not opted in and isYarn(), so the continuing side needs execPath not ending in any of the five names; that is equivalent to the anchored not_regex.",
+          "evidence_refs": [
+            "s16",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "8f05c2959a7df1d6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It identifies which package manager is running the install.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "f38f7c7a57ebaf46",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isTopLevel and isGlobal each negate or double-negate process.env.npm_config_global, and both are used in the condition at f1:186.",
+          "evidence_refs": [
+            "s17",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "7f57289ba3128106",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The reject at f1:186 needs isTopLevel (global unset); passing it needs not top level or isGlobal, so the global flag being truthy is one positive alternative.",
+          "evidence_refs": [
+            "s17",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "4b6e657d16278cfc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "npm_config_global says whether the package manager is doing a global install.",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "cee7959acad3678a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:281 tests dependencyInfo.parent.scarfSettings.defaultOptIn directly.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "6fa395518535bc23",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the bare truthy test holds the opt-out check and the opted-in logging.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "b73cdaae54d64358",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "defaultOptIn is a setting of the consuming (parent) package, so consuming_app fits.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "a1f39111e9eb1793",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "dependencyToReport.anyInChainDisabled is the first operand of the if test at f1:182.",
+          "evidence_refs": [
+            "s22",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "a9ba037a8aba39b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The reject at f1:182 fires on anyInChainDisabled and not opted in, so the continuing side needs anyInChainDisabled falsy (or opted in).",
+          "evidence_refs": [
+            "s22",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "b22098369589812e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is derived from the package.json settings of the dependency chain, so consuming_app fits.",
+          "evidence_refs": [
+            "s22",
+            "f1:164"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "f581015c0eb48505",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "parentIsRoot compares parent and root name/version and is used in the decisions at f1:84, f1:88 and f1:268.",
+          "evidence_refs": [
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "f678cb0eedf0fdd7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of f1:268 needs parentIsRoot(...) truthy, with no negation.",
+          "evidence_refs": [
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "9be86b204f2ca40b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It checks whether the package depending on Scarf is the root app being installed.",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "220c84990eb7915f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "allowTopLevel is a one-line helper returning rootPackage.scarfSettings.allowTopLevel, used in the conditions at f1:186 and f1:268.",
+          "evidence_refs": [
+            "s25",
+            "s19",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "232f1d558ae019b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The reject at f1:186 has not-allowTopLevel as an operand, so passing it needs allowTopLevel truthy as one alternative, and f1:268 needs it truthy in its then arm.",
+          "evidence_refs": [
+            "s25",
+            "s19",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "034d25965130c53c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is a package.json setting of the consuming root package.",
+          "evidence_refs": [
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "44a27da62fa3b8db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "skipTraversal is a one-line helper returning rootPackage.scarfSettings.skipTraversal, and it is the test of the if at f1:221.",
+          "evidence_refs": [
+            "s26",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "f98b11245be5ebdc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:221 returns early when skipTraversal is truthy, so the npm ls path at f1:242 is reached with it falsy.",
+          "evidence_refs": [
+            "s26",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "afa29ee7e77fabf1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is a package.json setting of the consuming root package.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "c14.L1",
+          "claim_sha256": "5b894c8e69498ef8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "userHasOptedIn compares process.env.SCARF_ANALYTICS to 'true' and is negated in the decisions at f1:286 and f1:299.",
+          "evidence_refs": [
+            "s5",
+            "f1:62"
+          ]
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "4d9f71daa4c7aab1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both guards are then arms of if (!userHasOptedIn(...)), so the guarded code needs SCARF_ANALYTICS !== 'true'.",
+          "evidence_refs": [
+            "s5",
+            "s28",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c14.L6.category",
+          "claim_sha256": "577a4dd0ffb5f597",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads an environment variable.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c15.L1",
+          "claim_sha256": "1c24f69d5ba61153",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:281 tests dependencyInfo.parent.scarfSettings.defaultOptIn directly.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "c15.L2",
+          "claim_sha256": "fd3037e78138a247",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guards cite the else arm of the defaultOptIn if (f1:298), which runs when it is falsy.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "c15.L6.category",
+          "claim_sha256": "719c5f6578332422",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "defaultOptIn is a setting of the consuming (parent) package.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c16.L1",
+          "claim_sha256": "ca55b535e894a17e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "parentIsRoot feeds isTopLevel and isGlobal, which are tested at f1:186.",
+          "evidence_refs": [
+            "s23",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c16.L2",
+          "claim_sha256": "ef8386ceb91ec251",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The reject at f1:186 needs isTopLevel, which requires parentIsRoot; parentIsRoot falsy makes isTopLevel false, so it is one positive alternative for passing.",
+          "evidence_refs": [
+            "s23",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c16.L6.category",
+          "claim_sha256": "1b5b2f43b78296bc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It checks whether the package depending on Scarf is the root app being installed.",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3ae4e11038b1545a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single condition (localDevPort truthy) and each of the two ternaries has it as its only test, one region each (require('http') and 'localhost').",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4c94474aef92e492",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The same upload runs either way; the env var only picks the host and transport it goes to (localhost over http versus the default host over https), which is modifies.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:388"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b0e62c04c7657522",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test does not back off on analysis or sandbox signals; it switches to a local endpoint, so activate fits.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "7e17c2e26423f457",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is a local-development endpoint override with no portability, targeting, anti-analysis or data-availability meaning, so unclear fits.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "8abd3ae505c3ac25",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm (http) is what the declaration at f1:5 stores under https, and f1:406 calls https.request on that binding; both http and https expose request, so the network sink is reached. The declaration encloses the region rather than sitting inside it.",
+          "evidence_refs": [
+            "s29",
+            "s30",
+            "s32",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1ba8531401fa55c5",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "The same https.request call at f1:406 is reached when localDevPort is unset (else arm binds the https module), so the sink is not limited to the then side.",
+          "evidence_refs": [
+            "s31",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "007007c80bd54ff7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The exfil sink is https.request posting the JSON payload, and the https binding is the http or https module, both network clients.",
+          "evidence_refs": [
+            "s31",
+            "s32",
+            "f1:385"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "70ad4949ded8af1d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One guard, the early return when skipTraversal is truthy, leaves the npm ls call on the skipTraversal-falsy side, so the expression is just c13.",
+          "evidence_refs": [
+            "s27",
+            "s26",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "41389caf922f16b8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The skip branch only returns precomputed info and never runs the traversal, so the test decides whether the npm ls traversal runs at all, which is enables.",
+          "evidence_refs": [
+            "s27",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "126b3032d0ec2030",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is a user configuration switch, not an analysis or sandbox evasion check, so activate fits.",
+          "evidence_refs": [
+            "s26",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "973df33c3b445cae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The setting only chooses a shallow report or a full traversal, with no clear environmental purpose, so unclear fits.",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "09a0dee32f64caa3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The def hop (the promise arrow function) lies inside the return at f1:242 and calls exec, which is bound to child_process.exec at f1:3.",
+          "evidence_refs": [
+            "s33",
+            "s35",
+            "s34",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "3d3188e7c2eaa721",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "getDependencyInfo is exported (f1:554), so the exec can be reached without the skipTraversal test, and the catch at f1:238 also falls through to the exec when the require throws.",
+          "evidence_refs": [
+            "s33",
+            "s34",
+            "f1:238",
+            "f1:554"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "d814066582fd4f4d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The recon sink is a child_process.exec of npm ls @scarf/scarf --json --long, a process-creation sink that lists the installed dependency tree.",
+          "evidence_refs": [
+            "s34",
+            "f1:3",
+            "f1:243"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "c17026d35b21b706",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The two sequential rejects pass on (not chain-disabled or opted in) and on (not root, or global, or allowTopLevel), so the guards nest with and over those or-groups, and the smallest satisfying set is 2. The scarfSettings.enabled alternative inside userHasOptedIn is not recorded as a condition.",
+          "evidence_refs": [
+            "s6",
+            "s19",
+            "s36",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "f22d20cdf027aade",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Passing both rejects resolves the dependency info so reporting can proceed, which is enables.",
+          "evidence_refs": [
+            "s6",
+            "s19",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "9e863f2939d27d16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guards are consent and top-level configuration checks, not analysis or sandbox evasion.",
+          "evidence_refs": [
+            "s6",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "83f7041351cd9e4b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guards decide which installs get reported (consent, root, global or allowTopLevel), which fits targeting.",
+          "evidence_refs": [
+            "s6",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "17182de7baf166f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The resolve at f1:190 settles the promise awaited at f1:262, after which reportPostInstall continues to the https.request at f1:406. The path runs through further gates but is reachable.",
+          "evidence_refs": [
+            "s36",
+            "s37",
+            "s31",
+            "f1:242",
+            "f1:262"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "e82ca9f1f731e682",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "With skipTraversal set, getDependencyInfo returns the shallow info at f1:236 without passing the checks at f1:182 and f1:186, and reportPostInstall still reaches the request at f1:406.",
+          "evidence_refs": [
+            "s27",
+            "s31",
+            "f1:236"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "2766320ccaa30c63",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The exfil network sink is supported, but no recon sink is cited for the regions and none lies in them; the exec calls (f1:243, f1:249) sit outside the guarded region.",
+          "evidence_refs": [
+            "s31",
+            "s36",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "3b7ee3f2149a13ff",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single if at f1:268 joins parentIsRoot and allowTopLevel with &&, and its then block holds the git sha lookup.",
+          "evidence_refs": [
+            "s24",
+            "s38",
+            "s23",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "a9e938bc10912325",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only decides whether the git rev-parse lookup runs, which is enables.",
+          "evidence_refs": [
+            "s24",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "07cb8204c116eb6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is a configuration check, not an analysis or sandbox evasion check.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "f43499c0f3e90b29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It restricts the sha lookup to the top-level root package that opted in, which fits targeting.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "f8ff187b45ab74e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call at f1:269 sits in the then block, reaches getGitShaFromRootPath (f1:247), whose promise arrow function (f1:248) calls exec at f1:249.",
+          "evidence_refs": [
+            "s38",
+            "s40",
+            "s41",
+            "s42",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "ee7b6180f9a7effd",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "getGitShaFromRootPath is exported in module.exports (f1:555), so the exec can be reached without the f1:268 test.",
+          "evidence_refs": [
+            "s41",
+            "s39",
+            "f1:555"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "54a914a1d0c88933",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is child_process.exec of cd and git rev-parse HEAD, a process-creation sink that reads the repository commit.",
+          "evidence_refs": [
+            "s39",
+            "f1:3",
+            "f1:249"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "c1c6597526ecf93b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The one exit at f1:276 rejects on not opted in and yarn, so the rest of the function runs when opted in or not yarn, an or of the two conditions.",
+          "evidence_refs": [
+            "s7",
+            "s5",
+            "s16",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "4fd963addf53063d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Passing the check lets the rest of reportPostInstall, including the upload, run, which is enables.",
+          "evidence_refs": [
+            "s7",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "81b2f27992b6c9c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check is on opt-in and package manager, not on analysis or sandbox signals.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "eee0018736cbbdd7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It restricts which installs report (opted in, or not run by yarn), which fits targeting.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "9395de140c2f9aba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The promise arrow function at f1:405 lies inside the region after the exit at f1:276 and calls https.request at f1:406.",
+          "evidence_refs": [
+            "s43",
+            "s44",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "fb379de1e3023d77",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only request call is at f1:406 inside reportPostInstall after the exit at f1:276, so every caller of that function, including the export and the main entry, passes the gate first.",
+          "evidence_refs": [
+            "s7",
+            "s31",
+            "f1:556",
+            "f1:563"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "e0ac35e3a5a4fde9",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The exfil network sink is supported, but the region from f1:280 on contains no exec call and no recon sink is cited; the exec calls are made earlier in reportPostInstall.",
+          "evidence_refs": [
+            "s43",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "8eb49f1b2953f112",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The nesting is the f1:276 exit (or), then the defaultOptIn then arm, then the opt-out reject, which passes only when SCARF_ANALYTICS, SCARF_NO_ANALYTICS and DO_NOT_TRACK are all unset-ish; the minimum is 5.",
+          "evidence_refs": [
+            "s7",
+            "s21",
+            "s10",
+            "s45"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "9b7dc3a554a50dd1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The region ends with resolve(dependencyInfo), which lets the report proceed, so the gate enables it.",
+          "evidence_refs": [
+            "s45",
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "9b587870776ac073",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks are opt-out and consent signals, not analysis or sandbox evasion.",
+          "evidence_refs": [
+            "s10",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "1359d7fff5ddb77f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks select which installs report (consent and opt-out signals), which fits targeting.",
+          "evidence_refs": [
+            "s10",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "07015e59f84f7ed1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The resolve at f1:297 completes the promise awaited at f1:280, after which redaction, payload building and the https.request at f1:406 follow.",
+          "evidence_refs": [
+            "s45",
+            "s46",
+            "s31",
+            "f1:375"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "3dc61bc95f6c9766",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "The else branch (defaultOptIn falsy) also resolves at f1:370 and f1:341, reaching the same request without passing these guards.",
+          "evidence_refs": [
+            "s53",
+            "s31",
+            "f1:341",
+            "f1:370"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "f4ec87f58a22983c",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The exfil network sink is supported, but the region holds no exec call and no recon sink is cited for it.",
+          "evidence_refs": [
+            "s45",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "0c7ce36480cec092",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guards nest the f1:276 exit, the defaultOptIn then arm, the opt-out reject and the not-opted-in if at f1:286, all joined by and with a minimum of 6.",
+          "evidence_refs": [
+            "s7",
+            "s21",
+            "s10",
+            "s28",
+            "s47"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.effect",
+          "claim_sha256": "686185d2f1d5583e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The not-opted-in test only decides whether the notice is logged and its timestamp written, which is enables.",
+          "evidence_refs": [
+            "s28",
+            "s47",
+            "s49"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.polarity",
+          "claim_sha256": "d8c83865e55d2ece",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is not an evasion check; it decides whether the notice runs.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.purpose",
+          "claim_sha256": "7bc5e08332e04a50",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write only records a rate-limit timestamp, so no purpose beyond unclear is evident.",
+          "evidence_refs": [
+            "s52",
+            "s47"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3",
+          "claim_sha256": "e12da10648338fc5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "rateLimitedUserLog is called at f1:287 inside the region, it calls writeCurrentTimeToLogHistory at f1:512, and that function calls fs.writeFileSync at f1:541.",
+          "evidence_refs": [
+            "s49",
+            "s50",
+            "s51",
+            "s52",
+            "s48"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3.excl",
+          "claim_sha256": "ca17e8a6cc846e24",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "rateLimitedUserLog is also called at f1:306 in the other branch and is exported (f1:548), so the write is reachable without this gate.",
+          "evidence_refs": [
+            "s50",
+            "s55",
+            "f1:548"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L5",
+          "claim_sha256": "a17b1e1516b4d1b6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is fs.writeFileSync, with fs bound to require('fs') at f1:6, so it is a file write.",
+          "evidence_refs": [
+            "s48",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g8.L4",
+          "claim_sha256": "a2c5ae6af8b42e2d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The region at f1:370 sits on the else sides of the defaultOptIn if and of the not-opted-in if, after the f1:276 exit; the guards join with and (c2 repeated), and the minimum is 2.",
+          "evidence_refs": [
+            "s7",
+            "s21",
+            "s8",
+            "s53"
+          ]
+        },
+        {
+          "claim_id": "g8.L6.effect",
+          "claim_sha256": "517b172c33218782",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Resolving only when explicitly opted in lets the report continue, so the gate enables it.",
+          "evidence_refs": [
+            "s53",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g8.L6.polarity",
+          "claim_sha256": "1af766a2a45fcd4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is a consent check, not an evasion check.",
+          "evidence_refs": [
+            "s8",
+            "s53"
+          ]
+        },
+        {
+          "claim_id": "g8.L6.purpose",
+          "claim_sha256": "db18cd7236a392c0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It selects which installs report (explicit opt-in on a not-default-opt-in package), which fits targeting.",
+          "evidence_refs": [
+            "s8",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g8.then.L3",
+          "claim_sha256": "faac61ee7883399e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The resolve at f1:370 completes the promise awaited at f1:280, after which the https.request at f1:406 follows.",
+          "evidence_refs": [
+            "s53",
+            "s31",
+            "f1:375"
+          ]
+        },
+        {
+          "claim_id": "g8.then.L3.excl",
+          "claim_sha256": "2cc594d41659d8c9",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "The defaultOptIn-true path also resolves at f1:297, reaching the same request without passing these guards.",
+          "evidence_refs": [
+            "s46",
+            "s31",
+            "f1:297"
+          ]
+        },
+        {
+          "claim_id": "g8.then.L5",
+          "claim_sha256": "b319224dc3e154ec",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The exfil network sink is supported, but the region is only a resolve call and no recon sink is cited for it.",
+          "evidence_refs": [
+            "s53",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g9.L4",
+          "claim_sha256": "59fbd40cedb96d4f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The nesting is the f1:276 exit, the else of defaultOptIn, the not-opted-in then arm at f1:299, and the not-opted-out then arm at f1:300; all join with and, with a minimum of 6.",
+          "evidence_refs": [
+            "s7",
+            "s21",
+            "s8",
+            "s11",
+            "s54"
+          ]
+        },
+        {
+          "claim_id": "g9.L6.effect",
+          "claim_sha256": "5ce59097c79967a8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block only decides whether the opt-in prompt and its rate-limit write run, which is enables.",
+          "evidence_refs": [
+            "s54",
+            "s55"
+          ]
+        },
+        {
+          "claim_id": "g9.L6.polarity",
+          "claim_sha256": "75518855b3a6526e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is not an evasion check.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g9.L6.purpose",
+          "claim_sha256": "cd4b98710100a175",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write only records a rate-limit timestamp, so unclear fits.",
+          "evidence_refs": [
+            "s52",
+            "s54"
+          ]
+        },
+        {
+          "claim_id": "g9.then.L3",
+          "claim_sha256": "3995207f382f33c0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "rateLimitedUserLog is called at f1:306 inside the region, it calls writeCurrentTimeToLogHistory at f1:512, and that function calls fs.writeFileSync at f1:541.",
+          "evidence_refs": [
+            "s55",
+            "s50",
+            "s51",
+            "s52",
+            "s48"
+          ]
+        },
+        {
+          "claim_id": "g9.then.L3.excl",
+          "claim_sha256": "5a08a55e6492d4a1",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "rateLimitedUserLog is also called at f1:287 and exported (f1:548), so the write is reachable without this gate.",
+          "evidence_refs": [
+            "s49",
+            "s50",
+            "f1:548"
+          ]
+        },
+        {
+          "claim_id": "g9.then.L5",
+          "claim_sha256": "8249fef71b8a7b71",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is fs.writeFileSync, with fs bound to require('fs') at f1:6, so it is a file write.",
+          "evidence_refs": [
+            "s48",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g10.L4",
+          "claim_sha256": "204d3fbb89a34769",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The f1:276 exit (or) precedes the token if at f1:400, so the guards nest with and and the minimum is 2. The reject paths inside the earlier promise are not recorded as guards.",
+          "evidence_refs": [
+            "s7",
+            "s15",
+            "s56"
+          ]
+        },
+        {
+          "claim_id": "g10.L6.effect",
+          "claim_sha256": "f90c0c303ad77d5f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The token only adds an Authorization header to the same upload, changing the account it is sent under, which is modifies.",
+          "evidence_refs": [
+            "s15",
+            "s57"
+          ]
+        },
+        {
+          "claim_id": "g10.L6.polarity",
+          "claim_sha256": "d7e44291927e3984",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is not an evasion check.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g10.L6.purpose",
+          "claim_sha256": "f77fa9a343982750",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch applies only when a credential is present in the environment, which fits data_availability.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g10.then.L3",
+          "claim_sha256": "aa4e0ca28c315a91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The assignment at f1:402 inside the then block sets the header on reqOptions, which is passed to https.request at f1:406; the https binding is a network module either way.",
+          "evidence_refs": [
+            "s57",
+            "s56",
+            "s31",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "g10.then.L3.excl",
+          "claim_sha256": "189f9fa89f17a192",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "The https.request at f1:406 sits after the if block and runs whether or not the token is set, so it is reached without this side of the gate.",
+          "evidence_refs": [
+            "s31",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g10.then.L5",
+          "claim_sha256": "0120d1ab2a355f9f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is https.request posting the JSON payload, a network sink via the http or https module bound at f1:5.",
+          "evidence_refs": [
+            "s31",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "k_463793af5c.L6.drop",
+          "claim_sha256": "6169d7f1f1d9259c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The SCARF_VERBOSE test in logIfVerbose only controls whether a message is printed, so it decides nothing that runs.",
+          "evidence_refs": [
+            "s58",
+            "f1:49"
+          ]
+        },
+        {
+          "claim_id": "k_61dc9b65f9.L6.drop",
+          "claim_sha256": "bfd857f8fa2ea546",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try around require('crypto') only picks hashed names or a placeholder inside the payload; the upload happens either way, so it gates no behaviour.",
+          "evidence_refs": [
+            "s59",
+            "s60",
+            "f1:99"
+          ]
+        },
+        {
+          "claim_id": "q_bdf1484c2b.L6.drop",
+          "claim_sha256": "e554b8e18bea8a52",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same try around require('crypto'): it only changes whether identifiers are hashed or replaced by a placeholder, not what runs.",
+          "evidence_refs": [
+            "s60",
+            "f1:99"
+          ]
+        },
+        {
+          "claim_id": "q_fa892312ac.L6.drop",
+          "claim_sha256": "f633a165f776ff4c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if on SCARF_VERBOSE in logIfVerbose only controls whether a message is printed.",
+          "evidence_refs": [
+            "s61",
+            "f1:50"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "37d1c7e8923c4e06",
+      "packet_sha256": "69948e65874526d7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "caf768c4637a05a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the then arm of the localDevPort ternaries (f1:5, f1:10) https is bound to require('http') and the host to 'localhost'; reportPostInstall (f1:259) calls https.request at f1:406 through that binding.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "43ccfbd2f23df337",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The same https.request at f1:406 also runs when SCARF_LOCAL_PORT is unset (else arm: https module, host scarf[.]sh), so the sink is not reached only through the then side.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:5",
+            "f1:10"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "0c2111be01284f88",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The resolve at f1:190 comes after both rejecting early exits (f1:182, f1:186). It settles the promise from getDependencyInfo, which reportPostInstall awaits at f1:262, and the request at f1:406 follows.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "6d2ece0ed21fef1f",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "getDependencyInfo returns early at f1:236 on the skipTraversal path without reaching f1:190. reportPostInstall is also exported and run from f1:563, and its other branches resolve at f1:297, f1:341 and f1:370 before the same request.",
+          "evidence_refs": [
+            "f1:221",
+            "f1:236",
+            "f1:297",
+            "f1:370",
+            "f1:563",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "a8c32e2370ddbf56",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is https.request, a network call that POSTs a payload of platform, arch, node version and dependency info (recon data) to the host, so the exfil/recon behaviours rest on a network sink.",
+          "evidence_refs": [
+            "s5",
+            "f1:377",
+            "f1:388"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "1705df42ba539a8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Region f1:286-297 is inside the defaultOptIn then branch (f1:281) and after the yarn exit (f1:276) and the opted-out exit (f1:282). resolve(dependencyInfo) at f1:297 releases the await, and the request at f1:406 follows.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "cb314006baa8cce9",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The same request is also reached through the else branch of the defaultOptIn check, via resolve at f1:341 and f1:370, and when defaultOptIn is true and the user has already opted in.",
+          "evidence_refs": [
+            "f1:341",
+            "f1:370",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "d05e909a96f9e39c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is a network request (https.request) posting platform and dependency data.",
+          "evidence_refs": [
+            "s5",
+            "f1:377"
+          ]
+        },
+        {
+          "claim_id": "g8.then.L3",
+          "claim_sha256": "045266b87fa9010b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "resolve(dependencyInfo) at f1:370 is in the else of the if at f1:299 (which is in the else of the defaultOptIn if at f1:281), after the yarn exit at f1:276. It releases the await that precedes the request at f1:406.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s18",
+            "s19",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g8.then.L3.excl",
+          "claim_sha256": "8d98444c5bb3ea46",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The request is also reached via resolve at f1:297 (defaultOptIn branch) and f1:341, so this side is not the only path.",
+          "evidence_refs": [
+            "f1:297",
+            "f1:341",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g8.then.L5",
+          "claim_sha256": "0b68f571f1cbfea5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is a network POST (https.request) of platform, arch and dependency info.",
+          "evidence_refs": [
+            "s5",
+            "f1:377"
+          ]
+        },
+        {
+          "claim_id": "g10.then.L3",
+          "claim_sha256": "e29955d44f523fda",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if (scarfApiToken) block at f1:400 sets reqOptions.headers.Authorization (f1:402). reqOptions is then passed to https.request at f1:406, which sits after the yarn exit at f1:276. The request itself is not conditional on the token.",
+          "evidence_refs": [
+            "s13",
+            "s20",
+            "s21",
+            "s22",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g10.then.L3.excl",
+          "claim_sha256": "82100d33e7558266",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The https.request at f1:406 runs whether or not SCARF_API_TOKEN is set; the token only adds an Authorization header.",
+          "evidence_refs": [
+            "s20",
+            "s5",
+            "f1:406"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "7e59873b92e3c085",
+      "packet_sha256": "24fad3eca444b5ef",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c17.L1",
+          "claim_sha256": "5f2166b8bffdb45c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "userHasOptedIn at f1:62 returns rootPackage.scarfSettings.enabled (or SCARF_ANALYTICS === 'true'), and its result is used as a decision in the guards at f1:182, 276, 286 and 299.",
+          "evidence_refs": [
+            "s1",
+            "f1:62"
+          ]
+        },
+        {
+          "claim_id": "c17.L2",
+          "claim_sha256": "4bc05e83e512bae9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code after the exits at f1:182 and f1:276 is reached only when userHasOptedIn is true or the other exit condition is false, so 'enabled truthy' is the positive form. The else side of f1:299 is likewise reached when userHasOptedIn is true.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c17.L6.category",
+          "claim_sha256": "59e380b4a7890138",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "scarfSettings.enabled is a setting read from the root package.json of the app consuming the package, so consuming_app fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c18.L1",
+          "claim_sha256": "509623d96bd50fd8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same site as c17: rootPackage.scarfSettings.enabled is read in userHasOptedIn at f1:62, and the result is negated in the decisions at f1:286 and f1:299.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c18.L2",
+          "claim_sha256": "a894f5f446b0db20",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guards at f1:286 and f1:299 are 'if (!userHasOptedIn(...))', so their then side needs enabled to be falsy (along with SCARF_ANALYTICS not 'true').",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c18.L6.category",
+          "claim_sha256": "d83615fdea4e093d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The value is a root package.json setting, so consuming_app fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c19.L1",
+          "claim_sha256": "bdffa1f550eb8b6a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "userHasOptedOut at f1:57 compares rootPackage.scarfSettings.enabled === false, and the result is used as a decision at f1:282 and f1:300.",
+          "evidence_refs": [
+            "s6",
+            "f1:57"
+          ]
+        },
+        {
+          "claim_id": "c19.L2",
+          "claim_sha256": "a4878c9cd3971edf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early reject at f1:282 and the 'if (!userHasOptedOut)' at f1:300 mean the guarded code needs enabled !== false. The operator is written in positive form.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c19.L6.category",
+          "claim_sha256": "a9a801b8d4f3193d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The value is a root package.json setting, so consuming_app fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c527734e17b4348b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When localDevPort is set, the ternary at f1:5 binds `https` to require('http') and f1:10 sets the host to localhost. f1:406 calls https.request on that bound variable, which reaches the network sink.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "s14",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "be73e835e87f4820",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The else side of the same ternary (require('https'), host scarf.sh) reaches the same https.request at f1:406. The gate only selects the module and host, so the sink is not exclusive to the then side.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "96973d1cb4d58a2d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink at f1:406 is https.request on a variable bound to the http or https module, then req.write(data) and req.end(). That is a network sink able to send the payload.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "409c74a20b23c1a3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:182 rejects on anyInChainDisabled && !optedIn, so the continuation needs c10 or c2 or c17. f1:186 rejects on topLevel && !global && !allowTopLevel, so it needs c16 or c8 or c12. The two exits are sequential, so they join with and, and the minimum is 2.",
+          "evidence_refs": [
+            "s2",
+            "s15",
+            "s16",
+            "s17",
+            "s1",
+            "s18",
+            "s19",
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "1bcc180ad8f338b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gates decide whether processing resolves, which lets the report proceed, or rejects, which aborts it. They do not choose between payloads or targets, so the effect is enables.",
+          "evidence_refs": [
+            "s2",
+            "s15",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "c015054f0902d1a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code proceeds to report when the conditions hold and backs off on opt-out. These are consent and config checks, not analysis evasion, so activate fits.",
+          "evidence_refs": [
+            "s2",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "48bf73faee8403f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gates decide which installs get reported (dependency chain not disabled, opt-in, not the top-level package). That is a selection of which targets run, so targeting is the closest label.",
+          "evidence_refs": [
+            "s2",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "9516c31eb500fdd3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "resolve(dependencyToReport) at f1:190 resolves the promise built at f1:242. reportPostInstall awaits it at f1:262 and reaches the https.request at f1:406 only if it resolves. A reject aborts earlier.",
+          "evidence_refs": [
+            "s22",
+            "s23",
+            "s13",
+            "f1:242",
+            "f1:262"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "03c9e2ddac6f5280",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "getDependencyInfo returns shallowDepInfo directly at f1:236 when skipTraversal is set, bypassing processDependencyTreeOutput and both guards. reportPostInstall is also exported and reaches the sink that way.",
+          "evidence_refs": [
+            "s13",
+            "f1:221",
+            "f1:236",
+            "f1:556"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "449ba3d6cdbe1a1c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is https.request at f1:406 with req.write(data), which is a network send.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "8ac18f8dd0f018ac",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:276 rejects on !optedIn && isYarn(), so the continuation needs optedIn (c2 or c17) or not yarn. isYarn is an endsWith test on npm_execpath, equivalent to the not_regex in c7. These are alternatives, so the minimum is 1.",
+          "evidence_refs": [
+            "s3",
+            "s1",
+            "s17",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "51af01034968ec3a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate only decides whether the report proceeds or aborts, so the effect is enables.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "647bbb0c56d662da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code proceeds on opt-in or a non-yarn package manager and aborts otherwise. That is not analysis evasion, so activate fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "992186b63c1788e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides which installs are reported, based on opt-in and package manager. Targeting is the closest label, though the yarn check could also be read as portability.",
+          "evidence_refs": [
+            "s3",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "6931d8d1aff058f3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Region s25 starts at f1:280, after the exit at f1:276, and contains the new Promise at f1:405 (s26). Its arrow function (s27) contains the https.request sink at f1:406.",
+          "evidence_refs": [
+            "s25",
+            "s26",
+            "s27",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "efd693ea8be43753",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The https.request at f1:406 sits in reportPostInstall after the yarn exit at f1:276 and is not reachable another way. The function is only entered through that body.",
+          "evidence_refs": [
+            "s3",
+            "s13",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "afc21e1ce5f12b58",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is https.request with req.write and req.end, a network send.",
+          "evidence_refs": [
+            "s13",
+            "s26",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "ee53d552cd92021b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The nested guards are the yarn exit (c2 or c17 or c7), then if defaultOptIn (c9). Then the opt-out exit at f1:282 needs not-opted-out, which is c19 and c3 and c4 and c5. They join with and, and the minimum is 1+1+4 = 6.",
+          "evidence_refs": [
+            "s3",
+            "s28",
+            "s7",
+            "s6",
+            "s30",
+            "s31",
+            "s32",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "ed4d070c3333c9e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gates only decide whether the promise resolves and the report is sent, so the effect is enables.",
+          "evidence_refs": [
+            "s7",
+            "s28",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "4a27ecc5c753d7da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The report runs when the user is not opted out and has not disabled it, and aborts otherwise. That is not analysis evasion, so activate fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "dfda33c0bab710ef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gates decide which installs are reported, based on consent flags. Targeting is the closest label.",
+          "evidence_refs": [
+            "s7",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "839d89476bc5f26a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "resolve(dependencyInfo) at f1:297 sits in the defaultOptIn then side after the opt-out exit. It resolves the promise at f1:280, and the code after the await reaches https.request at f1:406, which uses the `https` variable bound at f1:5.",
+          "evidence_refs": [
+            "s33",
+            "s34",
+            "s14",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "988ffd62727c9210",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The else side of the defaultOptIn guard also resolves at f1:370 after opt-in, and the code then reaches the same https.request at f1:406. The sink is reachable without this then side.",
+          "evidence_refs": [
+            "s28",
+            "s41",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "338ce4d8592f0d4b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is https.request on a variable bound to the http or https module, with req.write(data). That is a network send.",
+          "evidence_refs": [
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "59b7da6112c6fae8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The nesting is the yarn exit, then if defaultOptIn, then the not-opted-out exit (c19, c3, c4, c5). The final if (!userHasOptedIn) at f1:286 needs enabled falsy (c18) and SCARF_ANALYTICS != 'true' (c14). They join with and, and the minimum is 1+1+4+2 = 8.",
+          "evidence_refs": [
+            "s3",
+            "s28",
+            "s7",
+            "s5",
+            "s17",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.effect",
+          "claim_sha256": "cb96ef66eb10e480",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the notice is printed and the rate-limit history file is written (rateLimitedUserLog). It enables that behaviour and does not choose a target or payload.",
+          "evidence_refs": [
+            "s5",
+            "s37",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.polarity",
+          "claim_sha256": "b2e96e8a4672173e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write runs when the user has not opted in and the gate conditions hold. It is not analysis evasion, so activate fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.purpose",
+          "claim_sha256": "3cb8528e6f66cad2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gated action is a throttled console notice with a temp-file history write. It fits none of portability, targeting, anti-analysis or data availability, so unclear stands.",
+          "evidence_refs": [
+            "s5",
+            "s38",
+            "s40"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3",
+          "claim_sha256": "b7922adf0174173a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "rateLimitedUserLog is called at f1:287 inside the f1:286 block (s37). It calls writeCurrentTimeToLogHistory at f1:512 (s39), which runs fs.writeFileSync at f1:541 (s36). The hop order is call, def, call, def, sink.",
+          "evidence_refs": [
+            "s35",
+            "s37",
+            "s38",
+            "s39",
+            "s40",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3.excl",
+          "claim_sha256": "01f7781de2a4d564",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "rateLimitedUserLog is also called at f1:306 on the defaultOptIn-false branch, and it is exported at f1:548. The writeFileSync at f1:541 is therefore reachable without this gate.",
+          "evidence_refs": [
+            "s43",
+            "s38",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "g8.L4",
+          "claim_sha256": "145f980a3fd815c3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The nesting is the yarn exit (c2, c17, c7), the else side of the defaultOptIn guard (c15 falsy), and the else side of if (!optedIn) at f1:299, which needs opted in (c2 or c17). The resolve at f1:370 is in that region. They join with and, and the minimum is 2.",
+          "evidence_refs": [
+            "s3",
+            "s28",
+            "s4",
+            "s41",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g8.L6.effect",
+          "claim_sha256": "3a62ee8512533f80",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gates only decide whether the report proceeds, so the effect is enables.",
+          "evidence_refs": [
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "g8.L6.polarity",
+          "claim_sha256": "13a48be167051742",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The report proceeds when the user has opted in. That is not analysis evasion, so activate fits.",
+          "evidence_refs": [
+            "s4",
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "g8.L6.purpose",
+          "claim_sha256": "8fc055188535229e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gates decide which installs are reported, based on opt-in. Targeting is the closest label.",
+          "evidence_refs": [
+            "s4",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g8.then.L3",
+          "claim_sha256": "6fe419cbf0134374",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "resolve(dependencyInfo) at f1:370 is in the opted-in else side of both guards. It resolves the promise awaited at f1:280, and the code then reaches https.request at f1:406 on the variable bound at f1:5.",
+          "evidence_refs": [
+            "s41",
+            "s14",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g8.then.L3.excl",
+          "claim_sha256": "4f49791d7f33a595",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The defaultOptIn-true branch also resolves at f1:297 and reaches the same https.request at f1:406.",
+          "evidence_refs": [
+            "s34",
+            "s41",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g8.then.L5",
+          "claim_sha256": "b6b733c625bd71a9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is https.request on a variable bound to the http or https module, with req.write(data), a network send.",
+          "evidence_refs": [
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g9.L4",
+          "claim_sha256": "82dee2ba09d6a803",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The nesting is the yarn exit, the else side of the defaultOptIn guard (c15), then if (!optedIn) at f1:299 needing c14 and c18, then if (!optedOut) at f1:300 needing c19, c3, c4 and c5. They join with and, and the minimum is 1+1+2+4 = 8.",
+          "evidence_refs": [
+            "s3",
+            "s28",
+            "s4",
+            "s8",
+            "s29",
+            "s6",
+            "s30",
+            "s31",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "g9.L6.effect",
+          "claim_sha256": "49240530701234be",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the opt-in prompt is logged and the rate-limit history written, so it enables that behaviour.",
+          "evidence_refs": [
+            "s8",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "g9.L6.polarity",
+          "claim_sha256": "27dec41cabe98b46",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gated action runs when the user has not opted in or out. It is not analysis evasion, so activate fits.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g9.L6.purpose",
+          "claim_sha256": "638aac64a01c90c2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gated action is a user prompt and a throttle-file write. It fits none of the listed purposes, so unclear stands.",
+          "evidence_refs": [
+            "s8",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "g9.then.L3",
+          "claim_sha256": "3e4d8e6340bd3f76",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "rateLimitedUserLog is called at f1:306 inside the f1:300 block (s43). It calls writeCurrentTimeToLogHistory (s39), which runs fs.writeFileSync at f1:541 (s36). The hop order is call, def, call, def, sink.",
+          "evidence_refs": [
+            "s42",
+            "s43",
+            "s38",
+            "s39",
+            "s40",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "g9.then.L3.excl",
+          "claim_sha256": "e866029b44ea357e",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "rateLimitedUserLog is also called at f1:287 on the defaultOptIn-true branch, and it is exported. The writeFileSync at f1:541 is reachable without this gate.",
+          "evidence_refs": [
+            "s37",
+            "s38",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "g10.L4",
+          "claim_sha256": "a965eb5a983445fa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The block at f1:400-403 is guarded by the yarn exit (c2 or c17 or c7) and by if (scarfApiToken), where scarfApiToken is process.env.SCARF_API_TOKEN read at f1:260 (c6). They nest, so they join with and, and the minimum is 2.",
+          "evidence_refs": [
+            "s3",
+            "s44",
+            "s45",
+            "f1:260"
+          ]
+        },
+        {
+          "claim_id": "g10.L6.effect",
+          "claim_sha256": "e839732a55478717",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The request is sent either way. The token only adds a Basic Authorization header, which chooses the account the report is attributed to, so modifies fits.",
+          "evidence_refs": [
+            "s44",
+            "s46",
+            "s47"
+          ]
+        },
+        {
+          "claim_id": "g10.L6.polarity",
+          "claim_sha256": "5cc94d5efd72f819",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The header is added when the token is present. That is not analysis evasion, so activate fits.",
+          "evidence_refs": [
+            "s44"
+          ]
+        },
+        {
+          "claim_id": "g10.L6.purpose",
+          "claim_sha256": "3961541e31585a89",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch depends on whether the SCARF_API_TOKEN credential is available, which is data availability.",
+          "evidence_refs": [
+            "s44",
+            "s45"
+          ]
+        },
+        {
+          "claim_id": "g10.then.L3",
+          "claim_sha256": "905a4ca3eca6eff0",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The region only assigns reqOptions.headers.Authorization at f1:402. The https.request at f1:406 sits outside the if block and runs whether or not a token exists. The bind hop does not reach it as a call, and the sink is only data-dependent on the region.",
+          "evidence_refs": [
+            "s46",
+            "s47",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g10.then.L3.excl",
+          "claim_sha256": "217ef028f1906206",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The https.request at f1:406 runs when SCARF_API_TOKEN is unset, because the if at f1:400 is skipped. The sink is reachable without this then side.",
+          "evidence_refs": [
+            "s44",
+            "s13"
+          ]
+        }
+      ]
+    }
+  ]
+}

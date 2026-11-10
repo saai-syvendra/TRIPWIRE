@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "websockets",
+    "version": "17.3",
+    "archive_sha256": "1c7dd93a1c9f89297471493674b1fc1d9467cafd45374f2172213046bdb3a329"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e081db1212728933",
+      "packet_sha256": "15e327924fbb3a8a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "4820eafa00bd69da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly compares os.environ.get(\"BUILD_EXTENSION\") with a string constant (s1; f1:22).",
+          "evidence_refs": [
+            "s1",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "f5266c75f00f6bf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm assigns an empty extension list when the environment lookup equals \"no\", with no intervening negation (s1, s3).",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e3584dc934143a16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested value comes directly from the BUILD_EXTENSION environment variable, so env_var fits (f1:22).",
+          "evidence_refs": [
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c1049a8b074004ae",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One if condition, c1, selects the empty list or the extension declaration, so each side requires one condition outcome (s2). The optional argument comparison within the else arm does not control entry to either region (s4).",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "89c664209a697738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test enables or disables the speedups extension by choosing an extension declaration or an empty list, which is passed to setuptools.setup (f1:22, f1:26, f1:38).",
+          "evidence_refs": [
+            "f1:22",
+            "f1:26",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "04bb08f7e442a139",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The environment setting controls activation of the extension build; the non-no case supplies the extension to setup, without testing for analysis or sandbox conditions (f1:22-38).",
+          "evidence_refs": [
+            "s2",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "25970526afe7af73",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Portability fits: the setting disables a C extension or declares it optional unless explicitly required, and setup receives the resulting extension list (f1:22-38). This is concrete build configuration rather than an unclear purpose.",
+          "evidence_refs": [
+            "s2",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "786aeeabbeb0eca4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited Extension call is directly inside the else assignment, so the empty witness reaches the sink within the claimed region (s2, s4, s5).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "354670d992053ace",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited sink is a direct top-level call occurring only in the else arm; the supplied file contains no other call site or function wrapping this sink (f1:22-39).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "f1:34"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "a4fb9fcbfac81bf2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink constructs a setuptools.Extension for the speedups C source, and the resulting list is passed as ext_modules to setuptools.setup, supporting benign_build (f1:5, f1:26-29, f1:34-38).",
+          "evidence_refs": [
+            "f1:5",
+            "s5",
+            "f1:34",
+            "f1:38"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "8cc273248036063a",
+      "packet_sha256": "c54abc2d740936ce",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "cf63fa251168d12e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The packet lists no files or slices, and no code files are present to anchor condition c1 or establish its purpose.",
+          "evidence_refs": []
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "8cc273248036063a",
+      "packet_sha256": "c54abc2d740936ce",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "cf63fa251168d12e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "The packet provides no files, slices, or code references for the claimed environment test, and no package code is present to establish its purpose.",
+          "evidence_refs": []
+        }
+      ]
+    }
+  ]
+}

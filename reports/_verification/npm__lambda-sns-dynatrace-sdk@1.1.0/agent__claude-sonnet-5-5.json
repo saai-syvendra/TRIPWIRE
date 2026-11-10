@@ -1,0 +1,331 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "lambda-sns-dynatrace-sdk",
+    "version": "1.1.0",
+    "archive_sha256": "38723c37fe9513340cfcd5b0f94229e968b60a8f581600fcd9eed1812b807540"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "39750c242514d839",
+      "packet_sha256": "7159601ac73066fd",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "d5e9398a9fbb40f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary test at f1:18 is fs.existsSync('/etc/passwd'), where fs is require('fs') (f1:3).",
+          "evidence_refs": [
+            "s1",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "c34f894ef0c2fdb3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm (readFileSync) runs only when existsSync('/etc/passwd') is true, with the path as a plain literal. That is the positive 'exists' form.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "163acbacf646fa9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a specific file artifact (/etc/passwd) is present on the host, which fits target_artifact.",
+          "evidence_refs": [
+            "s1",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "574fb73796435fb9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary test at f1:19 is fs.existsSync('/etc/hosts'), with fs bound at f1:3.",
+          "evidence_refs": [
+            "s2",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "7869b3f0ec2a6fd4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readFileSync arm runs only when existsSync('/etc/hosts') is true, with the path as a plain literal.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "32c8e1e2ad2e752a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the file artifact /etc/hosts is present, which fits target_artifact.",
+          "evidence_refs": [
+            "s2",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d18f6ce92ff9fe52",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single ternary guard on existsSync('/etc/passwd') with no other conditions, so the expression c1 and then_min 1 are correct.",
+          "evidence_refs": [
+            "s3",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6422b03bfa869fa3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check only gates whether the file is read. Otherwise null is used, so it enables the read rather than selecting between payloads.",
+          "evidence_refs": [
+            "s3",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "96622836f2ce77fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The read runs when the file is present. Nothing backs off on analysis, CI or a sandbox, so the polarity is activate.",
+          "evidence_refs": [
+            "s3",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "482388ea08988881",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check avoids a read error when /etc/passwd is absent, for example on non-POSIX hosts. That is about whether the data exists, not about targeting or evasion.",
+          "evidence_refs": [
+            "s3",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "02156817cc03c4eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fs.readFileSync('/etc/passwd') call (s4) sits in the then arm of the ternary (s3), so the empty witness is correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "18ddd18135881523",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The read appears once, at module top level in f1:18, with no function, export, timer or other caller that reaches it without the existsSync test.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7af59908c364ac68",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.readFileSync on /etc/passwd is a file read, which supports recon. The content is put into the data later sent over https at f1:43-54.",
+          "evidence_refs": [
+            "s4",
+            "f1:18",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "b276dd71033b1e48",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single ternary guard on existsSync('/etc/hosts') with no other conditions, so the expression c2 and then_min 1 are correct.",
+          "evidence_refs": [
+            "s5",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "016c302af05fa1c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check only gates whether the file is read. Otherwise null is used, so it enables the read.",
+          "evidence_refs": [
+            "s5",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "0244cb92c10a1d15",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The read runs when the file is present. Nothing backs off on analysis, so the polarity is activate.",
+          "evidence_refs": [
+            "s5",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "90d3125646273c90",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check avoids a read error when /etc/hosts is absent, so it is about data availability.",
+          "evidence_refs": [
+            "s5",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "d7b515fc03618ac2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fs.readFileSync('/etc/hosts') call (s6) sits in the then arm of the ternary (s5), so the empty witness is correct.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "eb319335b82ad105",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The read appears once, at module top level in f1:19, with no other caller, export or timer reaching it.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "83dd6c1924adc046",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.readFileSync on /etc/hosts is a file read, which supports recon. The content is put into the data later sent over https.",
+          "evidence_refs": [
+            "s6",
+            "f1:19",
+            "f1:3"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "39750c242514d839",
+      "packet_sha256": "65898afa54dc2efb",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "f8f3e201324d19cc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The ternary at f1:18 has a single test, fs.existsSync('/etc/passwd') (s2), and the then arm (s3) is the readFileSync call. One condition, so the expression c1 is right.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1b9fe2912d092e7b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The fs.readFileSync('/etc/passwd') call at f1:18 sits directly in the ternary's then arm, in top-level module code. It is not in a function, so no other caller, export, timer or handler reaches it. Nothing else in the file reads that path.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "548d3e7c3ca053d8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The ternary at f1:19 has a single test, fs.existsSync('/etc/hosts') (s5), and the then arm (s6) is the readFileSync call. One condition, so the expression c2 is right.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "7070f753e13c4dfa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The fs.readFileSync('/etc/hosts') call at f1:19 sits directly in the ternary's then arm, in top-level module code. It is not in a function, so no other caller, export, timer or handler reaches it. Nothing else in the file reads that path.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "f1:19"
+          ]
+        }
+      ]
+    }
+  ]
+}

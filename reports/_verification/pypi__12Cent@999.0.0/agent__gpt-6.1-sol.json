@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "12Cent",
+    "version": "999.0.0",
+    "archive_sha256": "3e67b6d875ee1c3302bdc98d019ed438975a494f315e1c5d966d35dedee1494f"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "71f8727df4d59bd4",
+      "packet_sha256": "daea720347c24fdc",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_e90d64fd40.L6.drop",
+          "claim_sha256": "4bd4196969e299f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The directory listing supplies reconnaissance data, with a fixed fallback string on failure (f1:33–37). Both outcomes flow into the same payload and unconditional POST, so this is collection error handling rather than an environment gate deciding whether a behaviour runs (f1:38–40).",
+          "evidence_refs": [
+            "s1",
+            "f1:33",
+            "f1:38",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "q_cb1eb3789f.L6.drop",
+          "claim_sha256": "45f8dfb07f77ddc8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The try/except substitutes a fixed string when the directory listing fails and then rejoins the successful path (f1:33–38). The install hook sends the collected data in either case, so the exception handling does not gate the exfiltration behaviour (f1:40, f1:49).",
+          "evidence_refs": [
+            "s2",
+            "f1:38",
+            "f1:40",
+            "f1:49"
+          ]
+        }
+      ]
+    }
+  ]
+}

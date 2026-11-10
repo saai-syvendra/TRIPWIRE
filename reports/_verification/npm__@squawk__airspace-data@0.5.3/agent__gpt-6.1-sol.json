@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@squawk/airspace-data",
+    "version": "0.5.3",
+    "archive_sha256": "ee3030df5a6bc5652135a04f54d2be035713da222c979ccbf223553eedcfec0f"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "5c27c25cbbd8f212",
+      "packet_sha256": "130072542fd894d7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "0ff075c6a1c4499f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The imported execFileSync is tested through hc returning success or failure; main supplies bun with the default --version arguments.",
+          "evidence_refs": [
+            "f1:2",
+            "s1",
+            "s2",
+            "f1:75"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2920da2adbea68b6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hc returns false when the probe throws, and main continues after its early return only when the bun probe fails.",
+          "evidence_refs": [
+            "f1:75",
+            "f1:80",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "faff6df9162447c6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The probe checks whether an installed bun command successfully reports its version.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "11d0f6cbe314d69f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole early return leaves the remaining main block on the failed bun probe side, requiring only c1.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "318bba4d30d7cf16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Probe failure enables the download, extraction and execution sequence; success returns before that sequence.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "897e9f10d239db02",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The sequence activates when the bun version probe fails, without testing for analysis or sandbox environments.",
+          "evidence_refs": [
+            "f1:75",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fbe5ed002936a303",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The purpose is portability: probe failure triggers downloading a platform-specific Bun runtime and executing the local entry script with it.",
+          "evidence_refs": [
+            "f1:29",
+            "f1:39",
+            "s2",
+            "s3",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "e046d1f414534e5e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The region after the return calls dl and xb through the cited definitions, reaching their download, write and process sinks; the final execution sink is directly in the region.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "bd4ad3435c221233",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only initial dl call and only xb call occur after the bun guard; dl recursion retains that origin, and no alternate caller or export bypasses the guard to these sinks.",
+          "evidence_refs": [
+            "f1:56",
+            "f1:176",
+            "f1:190",
+            "f1:191",
+            "f1:195",
+            "f1:201"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1e62593fa081dfde",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The imported HTTPS client downloads to an fs write stream, execFileSync launches unzip, and the extracted runtime is executed after extraction.",
+          "evidence_refs": [
+            "f1:2",
+            "f1:3",
+            "f1:4",
+            "s4",
+            "s7",
+            "s8",
+            "f1:185",
+            "f1:191",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_e3b45e7ecc.L6.drop",
+          "claim_sha256": "671ccaa9b2e18496",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Alpine test contributes to mu, selecting the musl versus baseline runtime archive on Linux x64 and deciding which binary is downloaded and executed.",
+          "evidence_refs": [
+            "s12",
+            "f1:31",
+            "f1:32",
+            "f1:179",
+            "f1:182",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_ee268cee48.L6.drop",
+          "claim_sha256": "551c76ae499448ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows test chooses PowerShell archive extraction with native extraction as a fallback; it is preparation plumbing for the same runtime.",
+          "evidence_refs": [
+            "s13",
+            "f1:149",
+            "f1:155",
+            "f1:173"
+          ]
+        },
+        {
+          "claim_id": "k_fb8d4a4bec.L6.drop",
+          "claim_sha256": "79a463355dc51643",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows flag determines the executable filename and permission handling, which are path and startup plumbing for the runtime.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s16",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "q_1b5207c68a.L6.drop",
+          "claim_sha256": "720dce95c1080174",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ternary chooses the executable filename used for extraction and launch, which is path and startup plumbing.",
+          "evidence_refs": [
+            "s15",
+            "f1:186",
+            "s9",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "q_d3f8d1a986.L6.drop",
+          "claim_sha256": "0f66356d88f62091",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This condition only sets executable permissions on non-Windows systems before the same runtime launch, making it startup plumbing.",
+          "evidence_refs": [
+            "s16",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "q_e15f376488.L6.drop",
+          "claim_sha256": "c5759c6919bc8197",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This branch chooses PowerShell extraction or native ZIP extraction, changing preparation of the same runtime rather than selecting a payload or target.",
+          "evidence_refs": [
+            "s17",
+            "f1:145",
+            "f1:173"
+          ]
+        },
+        {
+          "claim_id": "q_ef8ef5748f.L6.drop",
+          "claim_sha256": "e99e261acff8db6c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This try block supplies the Alpine fallback for mu, selecting the musl versus baseline downloaded runtime on Linux x64 and participating in a portability gate.",
+          "evidence_refs": [
+            "s18",
+            "f1:31",
+            "f1:32",
+            "f1:179",
+            "f1:182"
+          ]
+        }
+      ]
+    }
+  ]
+}

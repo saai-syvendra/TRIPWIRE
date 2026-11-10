@@ -1,0 +1,252 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "setuptools",
+    "version": "84.2.1",
+    "archive_sha256": "3ff8b3b5492a0aa66960f4419365a86b84e013070d4313e4d4a6894f5d64d6bc"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "87a1f932c516b7be",
+      "packet_sha256": "c4491e05f820ceaa",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_01e8a2c250.L6.drop",
+          "claim_sha256": "824188990f0676f1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The musllinux module detects the runtime linker and yields compatible platform tags; this is packaging-library functionality, not a gate deciding install-time code execution (f1:36-56, f1:59-75).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "k_11fab8d9ee.L6.drop",
+          "claim_sha256": "2083a570dd7ecd7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version module selects a deprecation decorator implementation for Python versions, a compatibility detail within the packaging library (f2:28-49).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "k_2ae2d76ded.L6.drop",
+          "claim_sha256": "74fcc35dc202c12f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version module selects a regex variant to accommodate Python implementation/version behavior while parsing versions (f2:231-239).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "k_2e993e87a9.L6.drop",
+          "claim_sha256": "86f012354ea08b83",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version comparison is nested under the module-level TYPE_CHECKING block, so it does not select runtime code. This is a type-checking-only branch (f3:39-46).",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "k_3849872860.L6.drop",
+          "claim_sha256": "ab6f75d1918c23e1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version module selects a regex variant to accommodate Python implementation/version behavior while parsing versions (f2:231-239).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "k_6189f2f0a0.L6.drop",
+          "claim_sha256": "99ca83c99a6450c3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "sys.version_info selects tomllib or tomli, so this is an environment-dependent Python-version compatibility check (f4:6-9).",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "k_7169766c44.L6.drop",
+          "claim_sha256": "d733b379b863cc1a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "sys.platform determines whether get_module_constant is defined, making this a platform-dependent branch (f5:110-115).",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "k_73a525aea8.L6.drop",
+          "claim_sha256": "efde2053928e6b6a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "sys.version_info selects between two add_note implementations, so this is an environment-dependent compatibility check (f4:12-20).",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "k_8bc6129c21.L6.drop",
+          "claim_sha256": "371f2a7fdbd57ba4",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "sys.platform determines whether get_module_constant is defined, making this a platform-dependent branch (f5:110-115).",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "k_92b00cf8f7.L6.drop",
+          "claim_sha256": "0da357bd48af819a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version module selects a regex variant to accommodate Python implementation/version behavior while parsing versions (f2:231-239).",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "k_9bd0887a30.L6.drop",
+          "claim_sha256": "7e5ede2ba4241a8d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison and both imports are nested under typing.TYPE_CHECKING, so they are excluded from normal runtime execution (f6:15-21).",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_e2c8adda3a.L6.drop",
+          "claim_sha256": "7dd046dab433b00d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "sys.version_info selects the LOCALE_ENCODING value, so the result depends on the Python runtime version (f7:3-9).",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "q_04388cff90.L6.drop",
+          "claim_sha256": "c0a69a4e2fc158d3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "sys.version_info selects tomllib or tomli, so this is an environment-dependent Python-version compatibility check (f4:6-9).",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "q_22913be2cb.L6.drop",
+          "claim_sha256": "aaaf82527064a1e7",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "sys.version_info selects between two add_note implementations, so this is an environment-dependent compatibility check (f4:12-20).",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "q_268f8eae4f.L6.drop",
+          "claim_sha256": "66511888012030db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The entire version-dependent import selection is nested under typing.TYPE_CHECKING, so it is not a runtime gate (f6:15-21).",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_2fab165aec.L6.drop",
+          "claim_sha256": "cb2cb8d4e8969867",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version module selects a regex variant to accommodate Python implementation/version behavior while parsing versions (f2:231-239).",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "q_69f992ef58.L6.drop",
+          "claim_sha256": "5943172f31de6556",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try block reads the executable and ELF interpreter to support musllinux platform-tag detection; it is library functionality (f1:36-56).",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "q_bfc8a89481.L6.drop",
+          "claim_sha256": "67bb01a5d7899348",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "sys.version_info selects the LOCALE_ENCODING value, so the result depends on the Python runtime version (f7:3-9).",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_c03d046564.L6.drop",
+          "claim_sha256": "b19a3add66c17c4e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "sys.platform determines whether get_module_constant is defined, making this a platform-dependent branch (f5:110-115).",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "q_eda60b1a03.L6.drop",
+          "claim_sha256": "339f76c010354e74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version module selects a deprecation decorator implementation for Python versions, a compatibility detail within the packaging library (f2:28-49).",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "q_f65ddbe22a.L6.drop",
+          "claim_sha256": "60d63d16c52b3efa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version comparison is inside the TYPE_CHECKING block and only selects a typing import for type checking (f3:39-46).",
+          "evidence_refs": [
+            "s21"
+          ]
+        }
+      ]
+    }
+  ]
+}

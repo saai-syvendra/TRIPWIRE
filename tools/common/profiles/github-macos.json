@@ -1,0 +1,35 @@
+{
+  "profile": "github-macos",
+  "title": "GitHub Actions macos-latest hosted runner",
+  "note": "A workflow step on the standard `macos-latest` runner (macOS 26 on Apple silicon, arm64), public repository, running `npm install <pkg>` or `pip3 install <pkg>` with no secrets passed. The runner's user, home folder, locale, hostname and full environment are not documented, so those axes stay unknown.",
+  "sources": {
+    "readme": {"url": "https://github.com/actions/runner-images/blob/30b834d537f1db35a264de5ddccb57ce716f6cb8/images/macos/macos-26-arm64-Readme.md", "commit": "30b834d537f1db35a264de5ddccb57ce716f6cb8", "read": "2026-10-24", "what": "macOS 26.6.2, image 20261013.0424.1: Node.js 24.21.0, Python3 3.15.0, NPM 11.19.0, Pip3 26.2.1, Yarn 1.22.22, Homebrew, tool list, browser driver variables"},
+    "repo_readme": {"url": "https://github.com/actions/runner-images/blob/30b834d537f1db35a264de5ddccb57ce716f6cb8/README.md", "commit": "30b834d537f1db35a264de5ddccb57ce716f6cb8", "read": "2026-10-24", "what": "label table: windows-latest = windows-2025-vs2026 (x64); macos-latest = macOS 26 Arm64"},
+    "variables": {"url": "https://docs.github.com/en/actions/reference/workflows-and-actions/variables", "read": "2026-10-24", "what": "default environment variables: CI=true, GITHUB_ACTIONS=true, RUNNER_OS, RUNNER_ARCH, RUNNER_ENVIRONMENT"},
+    "hosted": {"url": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners", "read": "2026-10-24", "what": "public-repository hardware per label; Linux and macOS run with passwordless sudo, Windows as administrator with UAC disabled; Azure-hosted VMs that connect out to GitHub-owned endpoints"},
+    "npm_scripts": {"url": "https://docs.npmjs.com/cli/v11/using-npm/scripts", "read": "2026-10-24", "what": "npm_lifecycle_event, npm_package_*, INIT_CWD in lifecycle scripts"}
+  },
+  "axes": {
+    "os": {"value": "darwin", "source": "readme"},
+    "arch": {"value": "arm64", "source": "hosted"},
+    "privilege": {"value": "root_or_admin", "source": "hosted", "note": "steps run as a normal user with passwordless sudo, so a sudo probe or a step that elevates gets root"},
+    "cpu_count": {"value": 3, "source": "hosted"},
+    "memory_mb": {"value": 7168, "source": "hosted"},
+    "ci": {"value": "github_actions", "source": "variables"},
+    "network": {"egress": "open", "blocked": [], "source": "hosted"},
+    "env_var": {"set": {"CI": "true", "GITHUB_ACTIONS": "true", "RUNNER_OS": "macOS", "RUNNER_ARCH": "ARM64", "RUNNER_ENVIRONMENT": "github-hosted", "GITHUB_ACTION": null, "GITHUB_ACTOR": null, "GITHUB_API_URL": null, "GITHUB_ENV": null, "GITHUB_EVENT_NAME": null, "GITHUB_EVENT_PATH": null, "GITHUB_JOB": null, "GITHUB_OUTPUT": null, "GITHUB_PATH": null, "GITHUB_REF": null, "GITHUB_REF_NAME": null, "GITHUB_REPOSITORY": null, "GITHUB_REPOSITORY_OWNER": null, "GITHUB_RUN_ID": null, "GITHUB_RUN_NUMBER": null, "GITHUB_SERVER_URL": null, "GITHUB_SHA": null, "GITHUB_STEP_SUMMARY": null, "GITHUB_WORKFLOW": null, "GITHUB_WORKFLOW_REF": null, "GITHUB_WORKFLOW_SHA": null, "GITHUB_WORKSPACE": null, "RUNNER_NAME": null, "RUNNER_TEMP": null, "RUNNER_TOOL_CACHE": null, "HOME": null, "CHROMEWEBDRIVER": "/usr/local/share/chromedriver-mac-arm64", "EDGEWEBDRIVER": "/usr/local/share/edge_driver", "GECKOWEBDRIVER": "/opt/homebrew/opt/geckodriver/bin"}, "complete": false, "unknown_prefixes": [], "source": ["variables", "readme"]},
+    "file": {"present": ["/etc/passwd", "/etc/hosts"], "absent_prefixes": [], "source": ["readme"]},
+    "installed_tool": {"present": ["bash", "git", "gh", "jq", "curl", "node", "npm", "yarn", "python3", "pip3", "pipx", "brew", "pwsh", "7z"], "complete": false, "source": ["readme"]}
+  },
+  "ecosystems": {
+    "npm": {
+      "package_manager": {"value": "npm", "source": "readme"},
+      "runtime_version": {"value": "24.21.0", "source": "readme"},
+      "env_var": {"set": {"npm_lifecycle_event": "$hook", "INIT_CWD": null, "npm_package_name": null, "npm_package_version": null}, "unknown_prefixes": ["npm_config_", "npm_package_"], "source": ["npm_scripts"]}
+    },
+    "pypi": {
+      "package_manager": {"value": "pip", "source": "readme"},
+      "runtime_version": {"value": "3.15.0", "source": "readme"}
+    }
+  }
+}

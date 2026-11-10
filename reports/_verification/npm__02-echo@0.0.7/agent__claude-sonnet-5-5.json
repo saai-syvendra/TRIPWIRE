@@ -1,0 +1,377 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "02-echo",
+    "version": "0.0.7",
+    "archive_sha256": "a3fb60c049272535735cde0df929c982e36b46c494d3e44809f7b4fae3b7059a"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "6e41ed17eb750039",
+      "packet_sha256": "97b92e3283fbd13f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "cfdd210fb41393ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "cQ0 returns true only when the trimmed text output of the ps|grep Bun.$ command is not empty (s1, f1:1), and the result is the first operand of the && that guards gQ0 (s2, s3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "75594f8564a9ea9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pQ0 runs `sudo -n true` with nothrow and returns exitCode===0, so the guarded gQ0 call needs a zero exit status, the positive 'exists' form (s4, s2).",
+          "evidence_refs": [
+            "s4",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "709682406ef059ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "findGitHubTokenEnvVars iterates Object.entries(process.env) and tests each value with startsWith('ghp_'/'gho_'); the returned token decides authentication (s5).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "3b277297deb30987",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A matching env value becomes this.token, so isAuthenticated is true; the guarded block in s6 runs on !isAuthenticated (no env value starting ghp_/gho_), i.e. not_startswith. The '|| !repoExists()' alternative is a minor extra path.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "3fb259bd0130f0dd",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "getToken runs `gh auth token` and returns the output only if it startsWith gho_/ghp_, otherwise null (also null on exception). The test is a prefix test on the output, not a plain existence test, so 'not_exists' is a different operator and the code does not decide it.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "6abaf83330555a6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The result of fetchToken() is stored in a variable and tested with `if(!_0x441f22)` that selects the NPM_TOKEN or destructive branch (s8, s20).",
+          "evidence_refs": [
+            "s8",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "e1548760c9e60d3e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The variable holds process.env.NPM_TOKEN with an .npmrc fallback; the else arm of `if(_0x4692e0)` runs when it is falsy, i.e. not_exists (s9, s10).",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "db9cf31ffc5c8247",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "mL0 wraps fs/promises readFile and oL0 calls it for cwd and home .npmrc, skipping on empty content and matching the _authToken regex; the result feeds the NPM_TOKEN fallback (s11, f1:1).",
+          "evidence_refs": [
+            "s11",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "a83c07441eecd98b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "oL0 uses the regex (?:_authToken|:_authToken)=(...) on the file lines and yields no token when nothing matches; then NPM_TOKEN stays falsy and the else arm of s10 runs.",
+          "evidence_refs": [
+            "s11",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "a92c60dd467197e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the content of the .npmrc file for an auth token, which is a target artifact on disk.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c14.L6.category",
+          "claim_sha256": "7c8c451da7a06556",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Bun.$ test is `sudo -n true`, a check for passwordless sudo, which is privilege.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "128b29d4852aa882",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "gQ0 is called inside if(GITHUB_ACTIONS && RUNNER_OS==='Linux') and then inside if(await cQ0() && await pQ0()); the nested guards join with and, giving four conditions.",
+          "evidence_refs": [
+            "s12",
+            "s2",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "ec5ad1dd6419a775",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "gQ0 only runs when all four conditions hold, and it is the single payload (stops resolver, flushes iptables), so the gate enables it.",
+          "evidence_refs": [
+            "s2",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "af76b92dcc5f45f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code does not back off on detection; it acts on a Linux runner when the agent process and sudo are present, so it runs on a target.",
+          "evidence_refs": [
+            "s2",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "222afdcfaedeeba9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The decisive test looks for a monitoring agent process (/home/agent/agent) and the payload disables DNS config and flushes firewall rules, so the purpose I would give is anti_analysis rather than targeting.",
+          "evidence_refs": [
+            "s1",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "92aa04dce17589af",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Searching f1 shows gQ0 called only in Ry1 (s18) behind the guards, and cQ0/pQ0/Ry1 each have a single call site; no other caller, export or timer reaches gQ0.",
+          "evidence_refs": [
+            "s16",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "546496a4e0cd55f8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "gQ0 runs Bun.$ shell commands (systemctl stop/restart, copy resolved.conf, iptables -F), which are process creation that alters network defences.",
+          "evidence_refs": [
+            "s17",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "643628e2f9c3e8ee",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The destructive branch sits in the else of if(NPM_TOKEN), inside if(!fetchToken result), inside the unauthenticated block; these nested guards join with and. The extra '|| !repoExists()' alternative is not an environment condition.",
+          "evidence_refs": [
+            "s6",
+            "s20",
+            "s10",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "5ca418e345bd614a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The home-directory wipe runs only when the guards hold, so the gate enables it.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "e1f159b2b1d788af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The wipe runs when no usable token is found; it does not back off on analysis, so it is activate.",
+          "evidence_refs": [
+            "s21",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "1487a3ea43fc5ce0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Every condition tests whether a GitHub, npm or server token is available, and the wipe happens only when none is found, so the purpose I would give is data_availability.",
+          "evidence_refs": [
+            "s6",
+            "s20",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "68ddefad513e73bd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The CI Linux if encloses the && of cQ0() and pQ0(); the docker sudoers write is in pQ0's catch, reached when the sudo check fails. The conditions nest with and.",
+          "evidence_refs": [
+            "s12",
+            "s3",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "b330c47c16c1692a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The docker command that copies a runner file into /etc/sudoers.d runs only under these guards, so the gate enables it.",
+          "evidence_refs": [
+            "s24",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "7a2bc60ed0836387",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs on a matching Linux CI runner and does not back off on analysis.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "6f82fe2f23f55119",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The privilege step only runs on a GitHub Actions Linux runner lacking passwordless sudo, which selects the environment where it is needed.",
+          "evidence_refs": [
+            "s12",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "514a5905ecf3a7a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The pQ0() call (s25) sits in the && region under the CI and agent guards, it reaches the pQ0 definition (s26), and the docker sudoers command (s24) is in that definition's catch block.",
+          "evidence_refs": [
+            "s25",
+            "s26",
+            "s24",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "0e562423531a1f1f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "pQ0 has one call site, in Ry1 behind the CI and agent guards; no other caller, export or timer reaches it.",
+          "evidence_refs": [
+            "s23",
+            "s25",
+            "s26"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d8cebd115c7316f8",
+      "packet_sha256": "c4fc9be18c38445b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "52b05d8bf1e3a8fc",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "packet.json has empty files and slices lists and there is no code/ folder, so the gate cannot be tied to any code. The purpose label cannot be checked.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "16d5b44ae0ef7ada",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "packet.json has empty files and slices lists and there is no code/ folder, so the gate cannot be tied to any code. The purpose label cannot be checked.",
+          "evidence_refs": []
+        }
+      ]
+    }
+  ]
+}

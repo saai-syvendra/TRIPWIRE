@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp_sock",
+    "version": "0.1.20",
+    "archive_sha256": "0dae61137382fa4adb9a710da4fe27fd3008df53c638bb8e20bf2eb57b1bdda4"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "779f75dd50f53972",
+      "packet_sha256": "75944d94cf0655f6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "083da30ca1015f4e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision directly compares `sys.version_info` with the minimum-version tuple. (s1)",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "741415494c579652",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test raises when `sys.version_info < (3, 5, 3)`, so reaching the subsequent code requires the version to be at least `(3, 5, 3)`. (s2)",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "803a386414de1790",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads `sys.version_info` and enforces a Python version minimum. (s1)",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "8c3b5ef5ce2a26d2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one early-exit version condition; the code region after it is reached when that condition does not trigger, giving the single condition `c1`. (s2, s3)",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ded1d23b8ffbc164",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Passing the minimum-version check permits the following install-time code, including subprocess calls and the later payload entry point, to run. (s2, s3)",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7c18c189a17474a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check raises on versions below the threshold, allowing the code to proceed on supported versions. (s2, s3)",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6e0b05532322c308",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check enforces a declared Python minimum version, which is a portability requirement. (s2)",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "06c307fcc6c25af2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The subprocess calls and bundled main definition are in the post-check region; `asyncio.run(main())` invokes that definition, which reaches the session POST sink. (s2, s3, s4, s6, s7, s5)",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s6",
+            "s7",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "fcf0a7d62bbd44b8",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited process and network sinks are in the top-level post-check install block, and the shown `main` invocation is within that block; no alternate caller of these sinks is shown in the file. (s2, s3, s4, s5, s6, s7)",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ea6104326eae21b3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The branch calls subprocess for process creation and posts the collected zip through the HTTP session; the bundled code also reads browser credentials and system details, writes collected files, and gathers browser and application data for the archive. (s3, s4, s5, s7)",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "k_f26f200a5a.L6.drop",
+          "claim_sha256": "af1bcdca54b7dd26",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This check is part of the stickytape temporary package writer: it creates a missing package directory and its `__init__.py`; it does not select an environment-dependent payload behavior. (s8)",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "q_b9fb603138.L6.drop",
+          "claim_sha256": "6f8516c7320939d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The enclosing code writes an `__init__.py` only when a temporary package directory is absent, a package-construction detail rather than an environment gate deciding payload behavior. (s9)",
+          "evidence_refs": [
+            "s9"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "siitoogether",
+    "version": "0.0.8",
+    "archive_sha256": "ab3206c6cc49175de86d036d6d021cab73221ee6e201f6d41b9e0750b4f74cb0"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "3f7ea902b6755060",
+      "packet_sha256": "99426e1c82129cd0",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_eeafdbe8fb.L6.drop",
+          "claim_sha256": "4f0add932ce2e961",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform.system() == 'Windows' test only chooses whether Popen gets executable='/bin/bash'. Both branches run the same command with shell=True, so it changes how the command starts, not what runs (plumbing, not a gate) (s1, s2, f1:196-201).",
+          "evidence_refs": [
+            "s1",
+            "f1:196"
+          ]
+        },
+        {
+          "claim_id": "q_73c8c3444a.L6.drop",
+          "claim_sha256": "1c78f8f7780b13e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both arms of this if call subprocess.Popen on the same command and differ only in the shell executable. Whether the command runs is decided by the session id match in poll_commands (f1:160), not by this test.",
+          "evidence_refs": [
+            "s2",
+            "f1:160",
+            "f1:196-201"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pip-doom",
+    "version": "0.1.0",
+    "archive_sha256": "a6f80674d75dfcbff92cb330845211a0e4c292dfe8325bcbd415b94a5033986d"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "ed491bec5de93820",
+      "packet_sha256": "f0160ec578dad677",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "2319a8b65062ba61",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both cited sites are `if` decisions directly comparing `sys.platform` with `'win32'` (f1:12, f1:22).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ae0012fccfa8bbe5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each test is `sys.platform == 'win32'`, and its then branch is the positive branch of that comparison (f1:12, f1:22).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads Python's `sys.platform` value to select platform-specific execution code (f1:12).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d14d72e4533aa503",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The condition `sys.platform == 'win32'` appears in two separate decisions, and the platform-specific binary choice and execution choice each use that single condition; their then and else branches need one condition each (f1:12-18, f1:22, f1:141).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "3bedd72689c48425",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branch chooses different executables (`doom-ascii_win64.exe` or `doom-ascii_win32.exe`, the mac binary, or the generic binary), then invokes platform-specific process behavior; this selects the executable payload by environment (f1:12-18, f1:102-105, f1:128-132, f1:141).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s10",
+            "s11",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d1097ad894d9895e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows condition activates the Windows-specific execution branch, while other platforms select and run the non-Windows executable path (f1:12-18, f1:22, f1:141).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "12cfacb192b07eb3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test selects an executable appropriate to the host platform and chooses Windows-specific console handling, which is portability behavior (f1:12-18, f1:22-25, f1:141).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "67c4bbe5513546d8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The generic `subprocess.call` is in the else branch of the second Windows test, but the first Windows test only encloses binary selection and ends before `chmod` and the second test; thus the sink is not on the else side of the first cited guard (f1:12-20, f1:22, f1:141).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "e2ad59ed7b612ba4",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "`run_game` contains the generic process call on the non-Windows side, but the file does not show whether some outside caller can reach `run_game` by another route; exclusivity across callers is not decided by this function body (f1:7, f1:141).",
+          "evidence_refs": [
+            "f1:7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "7f546b4a3e1a20f0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The else-side sink calls `subprocess.call` with the selected executable and arguments, which can spawn a process (f1:141).",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "57202c1c5c25bd51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The two Windows process sinks are directly inside the then branch of the second `if sys.platform == 'win32'`; the first Windows test has already selected the Windows binary (f1:12-14, f1:22-23, f1:102-105, f1:128-132).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6fe5999d4cf316f9",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "Both process sinks are in `run_game`, but this file does not show whether another caller reaches `run_game` through a route that bypasses the platform gate; exclusivity across callers is not established here (f1:7, f1:102-105, f1:128-132).",
+          "evidence_refs": [
+            "f1:7",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "d9e0b406b86d947c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both cited sinks call `subprocess.Popen` or `subprocess.call` with the selected executable, which can spawn a process (f1:102-105, f1:128-132).",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_83e2e1dbc9.L6.drop",
+          "claim_sha256": "c17ebd43afc36601",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The `elif sys.platform == 'darwin'` test is an environment gate selecting the Mac executable, so it is part of platform portability behavior (f1:15-18).",
+          "evidence_refs": [
+            "s12",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "k_b56109009d.L6.drop",
+          "claim_sha256": "8ebef69452804969",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The `sys.platform == 'win32'` test selects Windows executable and architecture handling, so it is an environment gate for platform-specific behavior (f1:12-14).",
+          "evidence_refs": [
+            "s13",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "q_9ab299314a.L6.drop",
+          "claim_sha256": "b9adf381c9352db5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The conditional expression tests whether `'64'` occurs in the host machine name and selects the 64-bit or 32-bit Windows executable, making it part of an architecture portability gate (f1:13-14).",
+          "evidence_refs": [
+            "s14",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_a6103d6cf9.L6.drop",
+          "claim_sha256": "248af5fe00d83a2f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The `elif sys.platform == 'darwin'` test selects the Mac executable for that environment and is part of platform portability behavior (f1:15-18).",
+          "evidence_refs": [
+            "s15",
+            "s3"
+          ]
+        }
+      ]
+    }
+  ]
+}

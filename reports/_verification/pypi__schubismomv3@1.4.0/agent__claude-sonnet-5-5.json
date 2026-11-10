@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "schubismomv3",
+    "version": "1.4.0",
+    "archive_sha256": "ad69b41870bac36f48682dd4fc5b5d43ac7515a3fb88c66c3972dd135d21c7f2"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ba4c5f7147301ca1",
+      "packet_sha256": "45a805e69f33ab62",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "e0b6a43745b58431",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:12 `if os.name == \"nt\"` compares os.name directly in the run() branch condition.",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "512d0f3405bf52c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if at f1:12 is reached only when os.name == \"nt\"; no negation is involved and the operator is ==.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.name reads the operating system family, so category os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "0ae358541b396fbb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if at f1:12 with one condition and no other nested guards, so the expression c1 and then_min 1 are correct.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "2f733a23adb8d0ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write and spawn run only when the OS is Windows and there is no alternative payload in an else, so the gate enables the behaviour.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "6c66b589154d30db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs on a matching target (Windows) and the test does not back off on analysis, CI or sandboxes, so the polarity is activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "678cd5844b69618e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The dropper is aimed at Windows hosts only (APPDATA path, detached no-window process) and does nothing elsewhere, which fits targeting.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "54fb766356c35e54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The open(...,'w') write at f1:22 and the Popen at f1:26 both sit inside the if-then block that starts at f1:13, so the empty witnesses are correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "78eb5170ec9a8599",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "setup.py has no other function, export or handler reaching the write or the Popen; they sit only in GruppeInstall.run under the os.name == \"nt\" branch.",
+          "evidence_refs": [
+            "s3",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b699d54eb198f073",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(gruppe_path,'w') with file.write is a file write, and subprocess.Popen (imported at f1:14) creates a process.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f1:14"
+          ]
+        }
+      ]
+    }
+  ]
+}

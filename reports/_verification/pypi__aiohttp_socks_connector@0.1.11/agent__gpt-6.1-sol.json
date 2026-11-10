@@ -1,0 +1,338 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp_socks_connector",
+    "version": "0.1.11",
+    "archive_sha256": "183decb0bec9e159ff575058c6474063d8c55791cd471fd90872f1f6a78c2aab"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "2d910a5f7551a108",
+      "packet_sha256": "420ba89b48d4fc29",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "34477d04f7c950d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 directly compares sys.version_info with a version tuple in the condition at f1:26.",
+          "evidence_refs": [
+            "s1",
+            "f1:26"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ed08a52adefa7d3e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The less-than comparison raises at f1:27, so continuation requires version_info greater than or equal to (3, 5, 3).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "803a386414de1790",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads the Python runtime version through sys.version_info.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "b59de925fdaa76f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The equality in s3 reads sys.argv[1] directly as part of the exit decision.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "f235375f9a4fd469",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The equality compares sys.argv[1] with install; the surrounding negation and early exit leave that alternative positive for continuation.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "d1fe29fb89ab8ae0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The setup command argument is compared with install, identifying a package installation operation.",
+          "evidence_refs": [
+            "s3",
+            "f1:32",
+            "f1:58"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "e3c5beff4a43c407",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The membership test in s5 directly reads sys.argv[1] in the exit condition.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "76ccd8a21eb23967",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code tests whether bdist occurs in sys.argv[1]; negation followed by exit makes inclusion a positive continuation alternative.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "2787758ef3f46882",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The setup command argument is checked for bdist, identifying a package distribution operation.",
+          "evidence_refs": [
+            "s5",
+            "f1:32",
+            "f1:58"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "81c24425345faab9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited version guard permits the later argument-log region only on c1, with one required condition.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "0b43b19ce03ec765",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "An unsupported version raises before the argument-log write, while the supported-version continuation contains that write.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7292349f298efec2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version check permits execution on supported runtimes and contains no analysis-environment detection.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b8d8f780d2b41649",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The minimum runtime comparison and its immediate exception implement a Python compatibility requirement.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bc19b4e0dfcc0b8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The open call in s7 sits directly in s6, after the version guard whose failing edge raises without a handler.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "dbcefac4b9460d2a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The argument-log open is a top-level statement after the uncaught version exception guard; the file contains no alternate entry into that statement.",
+          "evidence_refs": [
+            "f1:26",
+            "f1:27",
+            "f1:51"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "27d3a75b3460b484",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The built-in open uses append/update mode, and its context body writes the argument string to the file.",
+          "evidence_refs": [
+            "s7",
+            "f1:52"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "4dba9b22286f0a03",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Continuation past the cited guards requires the supported version and either install equality or bdist inclusion, so the smallest satisfying set has two conditions.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "f530818d4c92f058",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version failure raises and the command mismatch exits before the try block containing the file writes and process launch.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "826f711a3f7f0997",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "These checks permit the payload on supported runtimes during installation or distribution commands, without testing for analysis tooling.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "d255a1a0626992a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version requirement establishes compatibility, while the command filter restricts execution to installation or distribution; the code does not establish a single more specific purpose for their combination.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "502b6ed802721400",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both cited sink calls are directly inside the try region after the version exception and command exit guards.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "abc085c177d4cf1a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file-writing and os.system sites are top-level try-body statements after both guards, with no alternate caller or handler entering those sites.",
+          "evidence_refs": [
+            "f1:26",
+            "f1:58",
+            "f1:69",
+            "f1:81",
+            "f1:91"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "4a2feafd26616159",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The built-in open uses write mode, and os.system is bound to the imported os module and launches a shell command.",
+          "evidence_refs": [
+            "f1:2",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "k_282f990700.L6.drop",
+          "claim_sha256": "2713afba1403e559",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The directory-existence test only controls mkdir for the storage folder; payload writes and launch follow outside that conditional, making it storage plumbing.",
+          "evidence_refs": [
+            "s11",
+            "f1:79",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "q_8feea40970.L6.drop",
+          "claim_sha256": "ffe113461be24bef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The conditional only creates the storage directory when absent; it does not select or enable the following payload writes or launch.",
+          "evidence_refs": [
+            "s12",
+            "s9",
+            "s10"
+          ]
+        }
+      ]
+    }
+  ]
+}

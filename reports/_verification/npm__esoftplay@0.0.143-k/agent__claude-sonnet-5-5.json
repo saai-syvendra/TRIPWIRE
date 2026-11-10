@@ -1,0 +1,790 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "esoftplay",
+    "version": "0.0.143-k",
+    "archive_sha256": "b8c355d1f1abf89738c700996bcc70163d283f3d21f515ddd5cc67884e3d2e6a"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ea526485e0addf65",
+      "packet_sha256": "93eb550e9f279200",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "97a0ec6eed4ef349",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:20 branches on fs.existsSync(packjson), with packjson defined at f1:6 as DIR + package.json.",
+          "evidence_refs": [
+            "s1",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "70b0a3d601a3465d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm runs when existsSync(DIR + 'package.json') is true, i.e. ../../package.json (f1:5-6). The else arm only logs 'not found'.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:5",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1a1c961e3785cdc3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks for the consuming project's own package.json two levels above the package, so consuming_app fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "a5f66c785a14225d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:143 is the condition of an if on fs.existsSync(pathJSTimer).",
+          "evidence_refs": [
+            "s3",
+            "f1:143"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "3ff682c69ed1aacd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pathJSTimer is DIR + node_modules/react-native/Libraries/Core/Timers/JSTimers.js (f1:16). The then arm runs when it exists, with no negation.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "60d489677f8291ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks for a file inside an installed dependency (react-native) in node_modules, so dependency_tree fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "f1b9d6986784c7e1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:150 is the condition of an if on fs.existsSync(pathLowercasePrompt).",
+          "evidence_refs": [
+            "s5",
+            "f1:150"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "80ec12e0119a674e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pathLowercasePrompt is DIR + node_modules/@react-navigation/core/src/useNavigationBuilder.tsx (f1:18). The then arm runs when it exists.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "60b9a3a9d2dc7ff1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks for a file inside the installed @react-navigation/core dependency, so dependency_tree fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "c0b130ad12f81998",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:395 is the condition of an if on fs.existsSync('../@firebase/app/dist/index.rn.cjs.js').",
+          "evidence_refs": [
+            "s7",
+            "f1:395"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "379c69a7c7418353",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The literal path is ../@firebase/app/dist/index.rn.cjs.js and the then arm runs when it exists. There is no else arm.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "e965d1bac7aa4507",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks for a file inside the installed @firebase/app dependency, so dependency_tree fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "df86675453d8f2be",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:401 is the condition of an if on fs.existsSync('../@expo/vector-icons').",
+          "evidence_refs": [
+            "s9",
+            "f1:401"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "c15393e425b11b87",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The literal path is ../@expo/vector-icons. The then arm (f1:402-413) runs when it exists, and the else arm only logs.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "abb31ca8947f1612",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the @expo/vector-icons dependency is installed, so dependency_tree fits.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "87fc05c7561caf79",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single guard at f1:20 has the one condition c1. The cited region is its whole then block.",
+          "evidence_refs": [
+            "s2",
+            "s11",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4cfcf9245f4e6407",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block only runs when package.json exists, and it writes, deletes and spawns inside. Without the file nothing runs, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "70968f8cf912c7aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the file is present, and nothing backs off on analysis, so activate fits.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "91aa7f631e7b7c75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check confirms the file the script reads and rewrites exists, so data_availability fits.",
+          "evidence_refs": [
+            "s2",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "232eade7302a8e5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The writeFile at f1:45 sits directly in the then block. The writeFile at f1:351 (s14) takes the callback (s15) that holds fs.unlink at f1:353 and execSync at f1:387.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "313b42729abdfce3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file has no exports and no other callers or timers. All the sinks are inside the f1:20 block, and f1 is the only record file.",
+          "evidence_refs": [
+            "s11",
+            "f1:20",
+            "f1:420"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4ad8caf0d20a5438",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.writeFile is a file write and fs.unlink is a file delete. execSync is imported from child_process (f1:3), so it spawns a process.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s16",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "55aadb222f6145ae",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The f1:143 if is nested inside the f1:20 if, so the conditions join with and. The only other enclosing guard is the args check, which is not an environment condition.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s17",
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "38c2088324d465dc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The JSTimers patch only happens if the file exists, so enables fits.",
+          "evidence_refs": [
+            "s4",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "76f9917b0d52c5b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The patch runs when the files are present, so activate fits.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "4e1b610e4f831f8b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check confirms the file to be patched exists, so data_availability fits.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "0bf181c602d6b2ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs.writeFileSync at f1:146 sits directly in the then block of the f1:143 if, so no witness hops are needed.",
+          "evidence_refs": [
+            "s18",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "5fb1721dc8d2e8ef",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The write is inline, with no function wrapping it and no other caller or export.",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "bb3845d91e0f39cb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.writeFileSync rewrites a file in the react-native package under node_modules.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "11f30621d6b05266",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The f1:150 if is nested inside the f1:20 if, so the conditions join with and. Its else arm only logs.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s19",
+            "s1",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "e26da4a431c6c215",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The patch of useNavigationBuilder.tsx only happens if the file exists, so enables fits.",
+          "evidence_refs": [
+            "s6",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "3c4c04fbc6912230",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The patch runs when the file is present, so activate fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "9d5164123af67ac8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check confirms the file to be patched exists, so data_availability fits.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "d073e5b50791483c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs.writeFileSync at f1:154 sits directly in the then block of the f1:150 if.",
+          "evidence_refs": [
+            "s20",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "d3e8d0c96713531a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The write is inline, with no other caller or export.",
+          "evidence_refs": [
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "e257706c97b2dcfc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.writeFileSync rewrites a file in the @react-navigation/core package.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "e00b2a733925921e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The f1:395 if is nested inside the writeFile callback, which sits inside the f1:20 if, so the conditions join with and.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s21",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "b0c3a4b60cfef2a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The firebase patch only happens if the file exists, so enables fits.",
+          "evidence_refs": [
+            "s8",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "c4a518477430a898",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The patch runs when the file is present, so activate fits.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "ae9cb53d94a09f70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check confirms the file to be patched exists, so data_availability fits.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "94381877d474a1a0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs.writeFileSync at f1:398 sits directly in the then block of the f1:395 if.",
+          "evidence_refs": [
+            "s22",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "4219855494a8f6c5",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The write is inline in the writeFile callback, with no other caller or export.",
+          "evidence_refs": [
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "fa972a65a5494a14",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.writeFileSync rewrites a file in the @firebase/app package.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "c30b88c37cd52775",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The f1:401 if is nested inside the writeFile callback, which sits inside the f1:20 if, so the conditions join with and.",
+          "evidence_refs": [
+            "s2",
+            "s10",
+            "s23",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "4d211290869ab87b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The esoftplay_icons.ts file inside @expo/vector-icons is only written if that package exists, so enables fits.",
+          "evidence_refs": [
+            "s10",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "7dca7916c328d46b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write runs when the package is present, so activate fits.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "04ff886309c5dd0a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check confirms the package whose files are read and extended is installed, so data_availability fits.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "d2639a345fff909a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readdir call (s25) in the then block takes the callback (s26), and f1:412 writeFileSync (s24) is inside it.",
+          "evidence_refs": [
+            "s25",
+            "s26",
+            "s24",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "1f3ea35d56e32c4e",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The callback is anonymous and passed only to readdir at f1:403. It has no other callers or exports.",
+          "evidence_refs": [
+            "s25",
+            "s26",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "38cb41064d7cf4ea",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.writeFileSync writes esoftplay_icons.ts into the @expo/vector-icons package. It is reached through the readdir callback.",
+          "evidence_refs": [
+            "s24",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "k_5df869dddc.L6.drop",
+          "claim_sha256": "564740f57e4678e2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This test for an installed dependency in node_modules decides whether the lib goes into installExpoLibs. That list decides whether the bunx expo install command is appended before execSync at f1:387, so it is a gate over process spawning.",
+          "evidence_refs": [
+            "s27",
+            "f1:357",
+            "f1:384",
+            "f1:387"
+          ]
+        },
+        {
+          "claim_id": "k_61b42fa257.L6.drop",
+          "claim_sha256": "4ba01a11fc99e0d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only creates a missing modules folder before the install command is built. It is idempotent plumbing and does not decide what runs.",
+          "evidence_refs": [
+            "s28",
+            "s34",
+            "f1:375"
+          ]
+        },
+        {
+          "claim_id": "k_8782dc6b72.L6.drop",
+          "claim_sha256": "82472a6ef51858a3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This test for an installed dev dependency decides whether it goes into installDevLibs. That list decides whether the bun add --dev command is appended before execSync, so it is a gate over process spawning.",
+          "evidence_refs": [
+            "s29",
+            "f1:368",
+            "f1:378",
+            "f1:387"
+          ]
+        },
+        {
+          "claim_id": "k_9bedd86efc.L6.drop",
+          "claim_sha256": "b85eaa2d2ffb5c4b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The not-exists test on config.live.json decides whether that file is written at all. Without it an existing live config would be overwritten, so it is a gate over a file write.",
+          "evidence_refs": [
+            "s30",
+            "s33",
+            "f1:80"
+          ]
+        },
+        {
+          "claim_id": "k_af98d19d96.L6.drop",
+          "claim_sha256": "11077c05b63a8a9c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only guards reading config.json, with an empty default if missing. It affects the data used and does not decide what runs.",
+          "evidence_refs": [
+            "s31",
+            "s35",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "k_d0050db34a.L6.drop",
+          "claim_sha256": "03c69ef57bc19910",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only guards reading app.json, with an empty default if missing. It affects the data used and does not decide what runs.",
+          "evidence_refs": [
+            "s32",
+            "s38",
+            "f1:88"
+          ]
+        },
+        {
+          "claim_id": "q_4404d2d07a.L6.drop",
+          "claim_sha256": "90273f65bb84dfdf",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the if statement of the f1:80 not-exists test on config.live.json. It decides whether that file is written, so it is a gate over a file write.",
+          "evidence_refs": [
+            "s33",
+            "f1:80"
+          ]
+        },
+        {
+          "claim_id": "q_718ee59a2b.L6.drop",
+          "claim_sha256": "ccc3b7680575bef6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement of the modules folder check. It only creates a missing folder and does not decide what runs.",
+          "evidence_refs": [
+            "s34",
+            "f1:375"
+          ]
+        },
+        {
+          "claim_id": "q_82839eef7e.L6.drop",
+          "claim_sha256": "c8295802ac78666d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement around the config.json read. It only falls back to an empty default and does not decide what runs.",
+          "evidence_refs": [
+            "s35",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "q_8fcdab1c47.L6.drop",
+          "claim_sha256": "5b77191e16bdfdf9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the if statement of the per-lib node_modules check. It decides whether the lib goes into the install list and so whether the bunx expo install command is spawned.",
+          "evidence_refs": [
+            "s36",
+            "f1:357",
+            "f1:384",
+            "f1:387"
+          ]
+        },
+        {
+          "claim_id": "q_d064eb7d36.L6.drop",
+          "claim_sha256": "84245ac8bf3e3e54",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the if statement of the per-devlib node_modules check. It decides whether the lib goes into the dev install list and so whether the bun add --dev command is spawned.",
+          "evidence_refs": [
+            "s37",
+            "f1:368",
+            "f1:378",
+            "f1:387"
+          ]
+        },
+        {
+          "claim_id": "q_d28601a4e2.L6.drop",
+          "claim_sha256": "f5d1eb21df7d02aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement around the app.json read. It only falls back to an empty default and does not decide what runs.",
+          "evidence_refs": [
+            "s38",
+            "f1:88"
+          ]
+        }
+      ]
+    }
+  ]
+}

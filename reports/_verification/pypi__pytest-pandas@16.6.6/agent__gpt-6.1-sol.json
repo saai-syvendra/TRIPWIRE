@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pytest-pandas",
+    "version": "16.6.6",
+    "archive_sha256": "d7f50ccc7deb7ae14afd366933293571d8269d262a4235272019826fd70d6906"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "d1c82442d9d482b0",
+      "packet_sha256": "98caccab052bbf2b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "8b389e04e62bd02c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os import at f1:23 binds os, and the if condition directly calls os.path.exists with the marker name at f1:24.",
+          "evidence_refs": [
+            "s1",
+            "f1:23"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "60bd91bbabb36449",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check uses the literal hifromDreamyOak and exits when it succeeds. Reaching the subsequent guarded code therefore requires that path not to exist.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "0772f51a141780a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition calls os.path.exists on a relative path, so file_or_dir_exists describes the environmental property it reads.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5e6fa095362b45be",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole guard exits on marker existence, leaving s3 on its non-existence side. Thus the combination is c1 and its minimum satisfying set contains one condition.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f18622373d5909b6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The marker check either terminates execution or permits the later exec call. It enables that behavior without selecting an alternative payload or changing its target.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7437d128bdfcf3cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The visible condition activates the exec path when a named marker is absent. The readable code does not associate this marker with analysis, CI, or a sandbox, so activate fits the shown test.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6a256593c7d50642",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The readable code checks a marker and exits, but does not establish what the marker represents or why its existence should suppress execution. The purpose is therefore unclear from the shown code.",
+          "evidence_refs": [
+            "f1:24",
+            "f1:25",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "01322c5465a45113",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exec call at f1:38 sits directly in region s3 after the early exit at f1:24-25. No witness hops are needed to reach this sink from that region.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "db04b5bfa2cb5ee9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited exec is a module-level statement following the marker-triggered exit. The full file contains no alternate caller, handler, or entry into that statement that bypasses the check.",
+          "evidence_refs": [
+            "f1:1",
+            "s2",
+            "s4",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "dcad0527f0ec2ee5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is the unshadowed Python exec builtin applied to the result of base64.b64decode. This supports the recorded eval sink and generic other behavior without asserting what the encoded body does.",
+          "evidence_refs": [
+            "f1:29",
+            "s4"
+          ]
+        }
+      ]
+    }
+  ]
+}

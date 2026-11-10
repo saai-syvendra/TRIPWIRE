@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "12Cent",
+    "version": "999.0.0",
+    "archive_sha256": "3e67b6d875ee1c3302bdc98d019ed438975a494f315e1c5d966d35dedee1494f"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "71f8727df4d59bd4",
+      "packet_sha256": "daea720347c24fdc",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_e90d64fd40.L6.drop",
+          "claim_sha256": "4bd4196969e299f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `os.listdir` call reads `/root/.ssh/` into `ld3` and does not test an environment value or decide whether subsequent code runs (s1). The install method proceeds to add `ld3` to `ploads` and post it (s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "q_cb1eb3789f.L6.drop",
+          "claim_sha256": "45f8dfb07f77ddc8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `try` block attempts to list `/root/.ssh/`, with an exception handler supplying a fallback value; neither branch gates whether later code runs (s2). The resulting `ld3` is included in the data sent by the subsequent `requests.post` call (s2).",
+          "evidence_refs": [
+            "s2"
+          ]
+        }
+      ]
+    }
+  ]
+}

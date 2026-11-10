@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@parcel/watcher",
+    "version": "2.6.0",
+    "archive_sha256": "ab42807be3df24a12d01e31568a7e61def1a4bee636a7c60a397319eff677e95"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "1264b7b62bc236eb",
+      "packet_sha256": "510608ca3f131d43",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "978a7c649e67034e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if test at f1:5 compares process.env.npm_config_build_from_source directly (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "d8965bc607b65645",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:5 uses a positive strict equality to the string 'true', and the then-block is the guarded code with no negation or else (s2).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "a2e948bbab8e9b37",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "npm_config_* variables are set by the package manager (npm) to pass its config, so package_manager fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "88e5e41c96e012b9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one if guard with a single condition and no else; its then-block (s3) is the only region, so the expression c1 is correct with min 1.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f44704cd9b956866",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The build only runs when the condition holds and nothing runs otherwise, so the effect is enables.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "ca2b7b9782f87935",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the opt-in flag is set and does not back off on any analysis signal, so the polarity is activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c28c5fc30476e0fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only reflects a user's npm option to build from source and does not target a victim or evade analysis, so unclear is acceptable.",
+          "evidence_refs": [
+            "s1",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "dbf496df8297f80c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "build() is called inside the then-block at f1:6 (s5), its definition at f1:9 (s6) contains the spawn call at f1:10 (s4).",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "2d9cc08ee04a369e",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only call to build() is at f1:6 inside the gate. The file has no exports, timers or handlers that reach it.",
+          "evidence_refs": [
+            "f1:6",
+            "f1:9",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "30832fe78f0d41f4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is spawn destructured from child_process (f1:3), which creates a process, so it supports a build step run via node-gyp rebuild.",
+          "evidence_refs": [
+            "s4",
+            "f1:3"
+          ]
+        }
+      ]
+    }
+  ]
+}

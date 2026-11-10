@@ -1,0 +1,397 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "puppeteer",
+    "version": "25.16.0",
+    "archive_sha256": "08568210e4f2c972d25499d06f215f39fcc2112b7bf167437cfc4f8d5f70676d"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ef1edfd908bb4e27",
+      "packet_sha256": "6b19931991038a0c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "a00e7e9264f1fd39",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads PUPPETEER_SKIP_DOWNLOAD via getBooleanEnvVar (f1:9-10, process.env[name]) and stores it in configuration.skipDownload, which the decision at s2 tests.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a9dff49a062437f8",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The guarded code runs when skipDownload is falsy, but getBooleanEnvVar returns false for '', '0', 'false' and 'off' (f1:14-19). The variable can exist and still let the download run, so not_exists is only approximately the same as the real test, which is closer to 'not truthy'.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6acaabbefbf610f1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "2976bff183a509f8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 reads process.env.PUPPETEER_EXECUTABLE_PATH into configuration.executablePath, which the if at f1:111 tests and which then sets skipDownload to true, the value s2 tests.",
+          "evidence_refs": [
+            "s3",
+            "f1:111",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "833cb99d5d15bad6",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The test is on truthiness of the merged executablePath (f1:111). An empty env value is still taken by ?? but is falsy, so the download proceeds even though the variable exists. The claimed not_exists is therefore only approximate.",
+          "evidence_refs": [
+            "s3",
+            "f1:108-113",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "b3e0184b8e98003c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "80918a15bee91bc6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 calls lilconfig('puppeteer', {searchPlaces}).search() over package.json and puppeteer config files. The result is spread into configuration, whose skipDownload and executablePath feed the s2 decision.",
+          "evidence_refs": [
+            "s4",
+            "f1:104",
+            "f1:111"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "635b159f50ef5ea2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The config found by search() supplies configuration.skipDownload and executablePath (f1:104, 109, 111-116). The download proceeds only when they do not enable skipping, so 'no config setting these' describes the guard.",
+          "evidence_refs": [
+            "s4",
+            "s3",
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "d92c2a6d39e823aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the consuming project's puppeteer configuration files (package.json, .puppeteerrc*, puppeteer.config.*), so consuming_app fits.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "92aa76ece65618a0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "All three sources are merged into the single configuration.skipDownload tested by the one early exit at s2. The rest of the function runs only when none of them enables skipping, so the nested guards join with and.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "54b15872231136ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the browser download runs at all (s2 returns early otherwise), so the effect is enables.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c425af9056842798",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The download runs unless the user opts out. This is not a back-off from analysis or CI, so the polarity is activate.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "168b03dbdc07d8dd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks are user opt-out switches and config for the download. They are not targeting, anti-analysis or a platform difference, so unclear fits.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "83f2b7516aca4c6a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call at s7 (f2:52) is inside the post-guard region s5. It calls downloadBrowser, defined at s8, whose body calls install() from @puppeteer/browsers at s6.",
+          "evidence_refs": [
+            "s5",
+            "s7",
+            "s8",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "47b4813efe8ed15d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "downloadBrowser is not exported and is called only from downloadBrowsers, after the s2 guard (f2:52, 64, 76). Every caller of the exported downloadBrowsers passes that same guard.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8",
+            "f2:34"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "759540bc93501cd9",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The download behaviour rests on install() from @puppeteer/browsers (s6), a network sink. No sink is cited for write_file, and the file writes happen inside the external library, whose code is not shown.",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "k_cc186e4e13.L6.drop",
+          "claim_sha256": "15f45a2d5e59c6de",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The RUNNER_DEBUG check only decides whether console.error(error) is printed (f3:28-30). It does not change what runs.",
+          "evidence_refs": [
+            "s9",
+            "f3:28"
+          ]
+        },
+        {
+          "claim_id": "q_70cfc6a92d.L6.drop",
+          "claim_sha256": "0d0351389361cae0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if body is only console.error(error). The warn and process.exit(0) that follow are outside the if, so the test is log-only.",
+          "evidence_refs": [
+            "s10",
+            "f3:28-35"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "408942e8e8436db3",
+      "packet_sha256": "8ea3aeeccbbdeaaf",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0548b70ad1c80bd9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:87-113 lilconfig('puppeteer').search() result is spread into configuration, and a truthy config skipDownload or executablePath (which forces skipDownload=true) makes the early exit at f2:37 fire; reaching the download code needs neither to be set (unless the env var overrides).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:104-113"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "3456f99ce2d2d318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the consuming project's puppeteer config files (package.json, .puppeteerrc*, puppeteer.config.*), so consuming_app fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "70ec1465958aa00c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:116 calls getBooleanEnvVar('PUPPETEER_SKIP_DOWNLOAD'), which reads process.env[name] and tests it for undefined and for the false-valued strings; the result decides skipDownload via ??.",
+          "evidence_refs": [
+            "s3",
+            "f1:9-23"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "242d10c5ffbaedd8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "getBooleanEnvVar returns false for lowercased '', '0', 'false', 'off'; that false overrides any config value, so skipDownload is falsy and f2:37 does not exit, reaching the download code.",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "f1:14-19"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "ecc5d311d0ee1bae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the environment variable PUPPETEER_SKIP_DOWNLOAD, so env_var is correct.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c6abbae2ee56dfc0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Env var set to a false-like value (c4) alone gives skipDownload=false. Otherwise the env var is unset (c1), and neither PUPPETEER_EXECUTABLE_PATH (c2) nor the config (c3) sets skipDownload or executablePath. A set env var with another value gives true. So c4 || (c1 && c2 && c3) matches, and one cond",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "f1:108-116"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "e01d0f82f7cda377",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides only whether the browser download runs at all (early return otherwise); it does not choose between payloads or targets, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "72a859c7e2157e84",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The download runs when the user has not opted out; the gate does not detect analysis or sandboxes, so activate is the closer label.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "44ce59c63010eff1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is a user opt-out switch for the download, with no targeting or anti-analysis behaviour; unclear is acceptable.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4924d1b27e05a1cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The downloadBrowser call at f2:52 sits inside the rest of the block after the early return at f2:37-40 (s5). It reaches downloadBrowser (f2:9), whose install() call at f2:14 is the download sink from @puppeteer/browsers.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7",
+            "s8",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1ff53bd4899e2b4d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "downloadBrowser is module-local and not exported. Its only callers are the three pushes inside downloadBrowsers after the skipDownload early return (f2:52, 64, 76). The per-browser skipDownload checks only add further conditions.",
+          "evidence_refs": [
+            "f2:9",
+            "f2:34-82",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

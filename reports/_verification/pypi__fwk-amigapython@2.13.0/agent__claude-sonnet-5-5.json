@@ -1,0 +1,1160 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "fwk-amigapython",
+    "version": "2.13.0",
+    "archive_sha256": "f8ed3b1f670e46d17d48bb53ccbc5d708c2aa3f7165c85c1d25488eaf2d764d7"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "7262129edd8b5602",
+      "packet_sha256": "a52cd2424e98e6cf",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "877827fc3826779c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:64 tests os.environ.get('GITHUB_ACTIONS') directly in an if condition.",
+          "evidence_refs": [
+            "s1",
+            "f1:64"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "843646834fcc1da2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The value is tested for truthiness. _ci_provider returns 'github' if it is set. collect_environment_context returns None when the provider is 'unknown', so reaching the guarded code needs it truthy (or another marker). The `if ctx` guard then lets submit_metrics run.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "a9994cc6aefbf027",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI provider marker.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "f63ce8466b6fc7ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:66 tests os.environ.get('JENKINS_URL') in an if condition.",
+          "evidence_refs": [
+            "s4",
+            "f1:66"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "894e3971542d9bac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Truthy JENKINS_URL makes _ci_provider return 'jenkins', which passes the 'unknown' early exit at f1:185.",
+          "evidence_refs": [
+            "s4",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "449605cdb53b3323",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "JENKINS_URL is a CI provider marker.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "06434c1cc675c5a8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:68 tests os.environ.get('BUILD_BUILDID') in an if condition.",
+          "evidence_refs": [
+            "s5",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "b24f2a3f75d0476b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Truthy BUILD_BUILDID makes _ci_provider return 'azdo', which passes the 'unknown' early exit.",
+          "evidence_refs": [
+            "s5",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "8ae19cd40d2b7fb8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "BUILD_BUILDID is an Azure DevOps CI marker.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "3eeacd8ecf0360af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:70 tests os.environ.get('GITLAB_CI') in an if condition.",
+          "evidence_refs": [
+            "s6",
+            "f1:70"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "cd168387a159564e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Truthy GITLAB_CI makes _ci_provider return 'gitlab', which passes the 'unknown' early exit.",
+          "evidence_refs": [
+            "s6",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "5560b118e3fc984d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITLAB_CI is a CI provider marker.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "af3acf6f29a30f52",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:155 binds node = platform.node(), and f1:156 tests node.startswith.",
+          "evidence_refs": [
+            "s7",
+            "f1:155"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "69840d0d0821285d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is a positive startswith('icr-') and leads to return True. A False result from _validate_framework_scope hits the early exit at f1:187, so the positive form is what reaches the guarded code.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "c9931340374e63a8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads the host name.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "88f901d1d1c078d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:156 tests 'sca' in node, where node is platform.node().",
+          "evidence_refs": [
+            "s9",
+            "f1:155"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "6048bf54a4d5e3f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is a positive substring check ('sca' in node), joined by 'and' with the startswith test.",
+          "evidence_refs": [
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "b455377964f44e85",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads the host name.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "525792fd21c26a96",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:167 branches on os.path.isdir('/opt/icr/hooks').",
+          "evidence_refs": [
+            "s10",
+            "f1:167"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "7d1da5b10246e62b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A directory that exists returns True from _validate_framework_scope, which passes the early exit at f1:187.",
+          "evidence_refs": [
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "168ea3ca2282fb5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It checks whether a directory exists.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "9ade6a5475092c74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "repo = os.environ.get('GITHUB_REPOSITORY'), and the owner derived from it is compared at f1:161.",
+          "evidence_refs": [
+            "s11",
+            "f1:158"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "c6b1154486741238",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The owner part of the repo, lowercased, is compared with == 'inditex' and leads to return True.",
+          "evidence_refs": [
+            "s11",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "18b58a3d8fbd3b8c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads an environment variable.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "35f42c1689517db1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "val = os.environ.get(key, '') is read in a loop over GOPROXY, PIP_INDEX_URL and DP_INTERNAL_MAVEN_REPOSITORY, and f1:165 tests val.",
+          "evidence_refs": [
+            "s12",
+            "f1:164"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "5f3b5661004067c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "'inditex.jfrog.io' in val is a positive substring test that leads to return True.",
+          "evidence_refs": [
+            "s12",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "f919d5f6bce48e1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads environment variables.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "ab7be590e04d71cc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "dp = os.environ.get('DP_TOKEN'), which is base64-decoded and then tested at f1:173.",
+          "evidence_refs": [
+            "s13",
+            "f1:169",
+            "f1:172"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "a7308044b100baed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The literal is plain in the code and is tested with a positive `in` against the decoded token, which leads to return True.",
+          "evidence_refs": [
+            "s13",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "a7caccb9b0171e52",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads the DP_TOKEN environment variable.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "8cc479304e2108db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "runner = os.environ.get('RUNNER_NAME', ''), and f1:178 tests runner.startswith.",
+          "evidence_refs": [
+            "s14",
+            "f1:177"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "49e5c0b208f89c90",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "startswith('icr-inditex') is in positive form and leads to return True.",
+          "evidence_refs": [
+            "s14",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "76b20a3bfa5ff38e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads the RUNNER_NAME environment variable.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "d5d730450113c4c2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:20 tests os.environ.get('AMIGA_TELEMETRY', 'true').lower() in an if condition.",
+          "evidence_refs": [
+            "s15",
+            "f2:20"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "8e2586db7d8f528b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code returns early when the value is in ('false','0','no'). Reaching the guarded code therefore needs not_in, which matches the claim.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "b2360f135faa47f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads an environment variable.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "dd1d3c77c7e371f7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single early-exit guard with a single condition, so the expression c12 is right and min 1 holds.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "00c333e7cdcb33e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Without the opt-out the telemetry thread starts and runs the payload. Otherwise nothing runs, so the gate enables it.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "eb052bb946f72065",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The AMIGA_TELEMETRY opt-out is a user switch and does not detect analysis, CI or a sandbox. The label should be 'activate', since it runs unless disabled.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "df89ff0f3d3b7787",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The documented opt-out flag does not evade analysis. I would label it 'unclear' (or 'portability') rather than 'anti_analysis'.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "650f2012f940e422",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The thread bind (target=_deferred_init) is inside the try region. _deferred_init calls submit_metrics, which calls _do_checkin, and that function contains the urlopen sink.",
+          "evidence_refs": [
+            "s17",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "750af79f5b1cdf32",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "submit_metrics is called only from _deferred_init. _deferred_init is only a thread target in _bootstrap, which runs once at import after the opt-out check. I found no other callers, exports or timers.",
+          "evidence_refs": [
+            "s17",
+            "s20",
+            "s21",
+            "f2:59"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ba547d344e00ec40",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The thread runs _deferred_init, which reaches environment and file reads for recon and credentials, a urlopen POST for exfil, and subprocess.run(shell=True) on remote directives for a reverse shell. The only payload cited here is the exfil one, but the code supports all four.",
+          "evidence_refs": [
+            "s18",
+            "s35",
+            "s29",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "63be1a0e6d709763",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The s2 exit needs one of the CI markers c1-c4. The s8 exit needs (c5 and c6) or c7-c11. The guards nest, so the two groups join with and. The two-term minimum (one condition from each group) is right.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s3",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "131b920648fee4bf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks decide whether the collection and beacon code runs at all, so the effect is 'enables'.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "bfd36dfa5e500ee3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs only when the environment looks like the target (CI plus inditex markers), so it activates on a target.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e053cba1e93a25e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code restricts the payload to inditex-specific hosts, repositories, registries and tokens. That is targeting.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "a041ffae84390477",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The s25 region reaches the recon, credential and OIDC network sinks through calls to _python_context, _resolve_extended and _oidc_token. The s21 region calls submit_metrics, which reaches the urlopen exfil sink through _do_checkin. It also reaches subprocess.run through the thread bind to _beacon_lo",
+          "evidence_refs": [
+            "s25",
+            "s21",
+            "s27",
+            "s28",
+            "s30",
+            "s31",
+            "s33",
+            "s34",
+            "s22",
+            "s23",
+            "s24",
+            "s36",
+            "s37",
+            "s38",
+            "s39",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "50a2ffef996a871d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "collect_environment_context and submit_metrics are called only from _deferred_init, which is only reached from the gated _bootstrap thread. No other caller, export or timer reaches them.",
+          "evidence_refs": [
+            "s20",
+            "s21",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "d3edf7aa3ac5cde4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Recon comes from platform calls. Credential reads come from the k8s token and docker config file reads and the OIDC urlopen. Exfil is the urlopen POST. The reverse shell is subprocess.run(shell=True) on server-supplied directives from a polling loop.",
+          "evidence_refs": [
+            "s26",
+            "s29",
+            "s32",
+            "s18",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "q_27bef7acc7.L6.drop",
+          "claim_sha256": "b3f22907399240cc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement whose two conditions are already recorded as c5 and c6. It is a duplicate, not a missed gate.",
+          "evidence_refs": [
+            "s40",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "q_61236564eb.L6.drop",
+          "claim_sha256": "119b9e53e44eba10",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement for GITHUB_ACTIONS, whose call is already recorded as c1. It is a duplicate.",
+          "evidence_refs": [
+            "s41",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "q_759bdc1998.L6.drop",
+          "claim_sha256": "d2df94adfe8b7b78",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement for JENKINS_URL, already recorded as c2. It is a duplicate.",
+          "evidence_refs": [
+            "s42",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "q_8a4a492c63.L6.drop",
+          "claim_sha256": "8c881fdc7ce055fd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement for BUILD_BUILDID, already recorded as c3. It is a duplicate.",
+          "evidence_refs": [
+            "s43",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_c1a5443f16.L6.drop",
+          "claim_sha256": "15e4c76578b3ab82",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement for os.path.isdir, already recorded as c7. It is a duplicate.",
+          "evidence_refs": [
+            "s44",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "q_cf80b32774.L6.drop",
+          "claim_sha256": "f07e10679d193746",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement for GITLAB_CI, already recorded as c4. It is a duplicate.",
+          "evidence_refs": [
+            "s45",
+            "s6"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "84ab2a94498957f4",
+      "packet_sha256": "da91053cc0389154",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "fd99586fd44e4d0f",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "packet.json has empty files and slices lists and the folder has no code/ directory, so the cited os.environ.get('AMIGA_TELEMETRY') test cannot be located in any code.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c5b817d6df9643a8",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "packet.json has empty files and slices lists and the folder has no code/ directory, so the cited os.environ.get('AMIGA_TELEMETRY') test cannot be located in any code.",
+          "evidence_refs": []
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "898b1bac16ba0ca4",
+      "packet_sha256": "0ead7ca07295abbc",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d0c763746ad1b513",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The telemetry opt-out check at f1:20 returns early, and the thread start in the try block (s2) lies on the continuing side. The thread targets _deferred_init (s5), which calls collect_environment_context and submit_metrics (s13, s8). From there each witness chain reaches its sink: _do_checkin urlope",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s18",
+            "s19",
+            "s21",
+            "s22",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s3",
+            "s12",
+            "s17",
+            "s20",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "3f7c306c4fe95397",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "In the three packet files, _deferred_init is started only from _bootstrap (f1:31-36), and _bootstrap is called once at module import (f1:59). collect_environment_context and submit_metrics are called only from _deferred_init (f1:52, f1:54). No other callers, exports, timers or handlers reach the pay",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8",
+            "s13",
+            "f1:59"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "02ba106187427d55",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Exfil and the OIDC token fetch rest on urllib urlopen network calls (s3, s20). The credential read rests on open() of the service-account token and docker config (s17). Recon rests on platform.node (s12). The command-execution behaviour rests on subprocess.run with shell=True on a directive polled f",
+          "evidence_refs": [
+            "s3",
+            "s12",
+            "s17",
+            "s20",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "cc17ca1340a6a249",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early returns on an unknown CI provider (s30) and on a failed scope check (s31) make the rest of collect_environment_context (s33) the continuing side. The 'if ctx' test (s32) encloses the submit_metrics call (s8). Each witness is traceable in order: s15 to s16 to s12, s18 to s19 to s17, s21 to ",
+          "evidence_refs": [
+            "s30",
+            "s31",
+            "s32",
+            "s33",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s15",
+            "s16",
+            "s18",
+            "s19",
+            "s21",
+            "s22",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s3",
+            "s12",
+            "s17",
+            "s20",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "fc50dc456d969601",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "_python_context, _resolve_extended and _oidc_token are called only from collect_environment_context after the two guards. That function and submit_metrics are called only from _deferred_init (f1:52, f1:54). No other caller in the packet files bypasses the gate.",
+          "evidence_refs": [
+            "s33",
+            "s8",
+            "s13",
+            "f3:183-198",
+            "f1:52",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "ee318a967fd67eae",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Each behaviour matches its sink kind. Exfil and the OIDC fetch use urllib urlopen (s3, s20). The credential read uses open() on the service-account token and docker config (s17). Recon uses platform.node (s12). Command execution uses subprocess.run with shell=True on a remotely polled directive (s23",
+          "evidence_refs": [
+            "s3",
+            "s12",
+            "s17",
+            "s20",
+            "s23"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "a511f612e1af0241",
+      "packet_sha256": "92b1830c44469e3b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "1de462c8f35650b0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:64 tests os.environ.get('GITHUB_ACTIONS') in an if; f2:19 reads it through the loop variable m over ci_markers, which contains 'GITHUB_ACTIONS', inside any() in the guard.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "569997dc4b2a324f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:64 is a plain truthy test; f2:19 has 'not any(...)' then return, so the code after it runs when the value is truthy. The s4 early exit on 'unknown' and the s5 'if ctx' also need the truthy form.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "7c89c2b4b571e75b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:66 tests os.environ.get('JENKINS_URL'); f2:19 reads it via m over ci_markers, which includes 'JENKINS_URL'.",
+          "evidence_refs": [
+            "s6",
+            "s2",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "85c1bcea8bcb3018",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:66 is a truthy test returning 'jenkins'; f2:19 is 'not any' then return, so reaching the code needs a truthy value. The guards are early exits on the negated form.",
+          "evidence_refs": [
+            "s6",
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "4c7df2d8cf47c9e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:68 tests os.environ.get('BUILD_BUILDID'); f2:19 reads it via m over ci_markers, which includes 'BUILD_BUILDID'.",
+          "evidence_refs": [
+            "s7",
+            "s2",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "c9eda7ec81e9e876",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:68 is a truthy test returning 'azdo'; f2:19 is 'not any' then return, so the guarded code needs a truthy value.",
+          "evidence_refs": [
+            "s7",
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "e1c88c321ea5fb73",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:18-19: 'CI' is the first entry of ci_markers and os.environ.get(m) is evaluated for it inside any() in the if condition.",
+          "evidence_refs": [
+            "s2",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "25d219344d9ea168",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:19-20 returns when no marker is truthy, so the import in f2:22 is reached only if os.environ.get('CI') (or another marker) is truthy.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "73f15b095bd9cb89",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CI is a generic CI-environment marker variable read alongside GITHUB_ACTIONS, JENKINS_URL and BUILD_BUILDID, so ci_marker fits.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "c29cf4bdcb8e16f9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "In the packet files, _deferred_init is started only from _bootstrap (f3:31-36), after the AMIGA_TELEMETRY early exit at f3:20-21. collect_environment_context and submit_metrics are called only from _deferred_init (f3:52-54), so the payload sits behind this gate. The witness chain matches the code.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "f3:59"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "fa003e2a948449e4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s3 is an OR of CI, GITHUB_ACTIONS, JENKINS_URL and BUILD_BUILDID. s4 exits on 'unknown', which is an OR of the four provider markers. s37 is an OR of (node startswith icr- and 'sca' in node), the inditex repo owner, the jfrog value, the isdir check, the DP_TOKEN decode and the RUNNER_NAME prefix. Th",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s37",
+            "s5",
+            "s38",
+            "s39",
+            "s40",
+            "s41",
+            "s42",
+            "s43",
+            "s44",
+            "s45"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "3cc4b6ef3d9c6e6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "If the gate fails, collect_environment_context returns None and nothing is collected, sent or executed. If it passes, the recon, credential read, exfil and shell-execution behaviours all run, so the gate enables them.",
+          "evidence_refs": [
+            "s4",
+            "s37",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "23072252465b9969",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs only when CI markers and the inditex scope markers are present, and it backs off otherwise. That is activate, not an evasion of analysis.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "935cd35453f34c1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "_validate_framework_scope restricts the payload to specific organisation markers: hostname icr-*sca*, GitHub owner inditex, inditex.jfrog.io, /opt/icr/hooks, a specific DP_TOKEN value and a RUNNER_NAME prefix. This is victim targeting.",
+          "evidence_refs": [
+            "s37",
+            "s39",
+            "s41",
+            "s42",
+            "s43",
+            "s44",
+            "s45"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "0d00724f2451a3f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each witness holds. _python_context (s22->s23->s19), _resolve_extended (s25->s26->s24 open of the SA token) and _oidc_token (s28->s29->s27 urlopen) are called in collect_environment_context after both early exits. submit_metrics (s15->s16) reaches _do_checkin (s17->s18->s10), and the thread bind (s3",
+          "evidence_refs": [
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s10",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s36",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "3ff560d3c6777e84",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The payload does not depend on passing the setup.py guard (s3). _bootstrap runs on any import of amigapython._internal (f3:59) with its own CI marker set, which adds SYSTEM_TEAMFOUNDATIONSERVERURI and GITLAB_CI, so a plain import reaches the same chain. The s4, s37 and s5 guards still apply on that ",
+          "evidence_refs": [
+            "s3",
+            "s9",
+            "f3:23",
+            "f3:59",
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "f66a93c06498c2ec",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Recon reads platform.node, arch and OS (s19). Credential read is open() of the Kubernetes service account token and the docker config (s24), plus urlopen with the OIDC bearer token (s27). Exfil is a urllib POST to a remote host with TLS verification disabled (s10). The shell behaviour is subprocess.",
+          "evidence_refs": [
+            "s19",
+            "s24",
+            "s27",
+            "s10",
+            "s30",
+            "s34"
+          ]
+        }
+      ]
+    }
+  ]
+}

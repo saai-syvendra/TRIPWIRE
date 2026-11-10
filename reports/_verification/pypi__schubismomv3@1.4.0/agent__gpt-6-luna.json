@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "schubismomv3",
+    "version": "1.4.0",
+    "archive_sha256": "ad69b41870bac36f48682dd4fc5b5d43ac7515a3fb88c66c3972dd135d21c7f2"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "ba4c5f7147301ca1",
+      "packet_sha256": "45a805e69f33ab62",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "e0b6a43745b58431",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly compares `os.name` with a string at the cited site (f1:12).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "512d0f3405bf52c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is reached when `os.name == \"nt\"` evaluates true (f1:12).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads `os.name`, an operating system property, so the `os` category fits (f1:12).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "0ae358541b396fbb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one cited then guard, and its sole condition is `os.name == \"nt\"`; the guarded block therefore has the single-condition expression `c1` (f1:12-23).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "2f733a23adb8d0ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows condition enables both writing the `gruppe.py` file and starting it as a subprocess; no alternate target is selected or modified (f1:20-26).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "6c66b589154d30db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The install code takes the payload actions when the environment reports Windows (`os.name == \"nt\"`), which is an activate gate (f1:12-26).",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "678cd5844b69618e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This test gates Windows-specific install actions, including use of `APPDATA` and Windows process creation flags, indicating platform portability rather than selecting a victim target (f1:12, 20, 26).",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "54fb766356c35e54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the file write and `subprocess.Popen` call are directly inside the `os.name == \"nt\"` then block, so the empty witnesses reach sinks within the guarded region (f1:12-26).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "78eb5170ec9a8599",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "In the only recorded file, both sink calls occur solely within the then branch of the `os.name == \"nt\"` decision; no other call sites, exports, timers, or handlers lead to those sinks (f1:10-28).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b699d54eb198f073",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`open(gruppe_path, 'w')` followed by `file.write(content)` writes a file, and `subprocess.Popen(...)` starts a process (f1:20-26).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

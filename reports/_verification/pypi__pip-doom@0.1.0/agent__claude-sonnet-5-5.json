@@ -1,0 +1,709 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pip-doom",
+    "version": "0.1.0",
+    "archive_sha256": "a6f80674d75dfcbff92cb330845211a0e4c292dfe8325bcbd415b94a5033986d"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "650396ce5b77c1d4",
+      "packet_sha256": "b2eebf8b53ffb0c6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "2319a8b65062ba61",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both f1:12 and f1:22 compare sys.platform to 'win32' in an if condition.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ae0012fccfa8bbe5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both ifs use `sys.platform == 'win32'` with no negation, and the then arm is the Windows code.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform reads the operating system, so os is the right category.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3180fa4362061623",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both guards test the same single condition, sys.platform == 'win32', so the expression c1 with min 1 is right.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "3bedd72689c48425",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Windows runs a different launch path (console setup, demo run, then a warp game run with key injection) than other platforms, which run a plain call, so selects fits.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d1097ad894d9895e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs on the matching platform and nothing in it backs off on analysis, CI or a sandbox, so activate fits.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "12cfacb192b07eb3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check picks the matching game binary and Windows console handling, which is portability.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "78d487f490d45ada",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The sink at f1:141 sits in the else of the second if (f1:22). The first if (f1:12) has an else arm holding only the binary assignment at f1:18, so s7 is not on that guard's else side and the guard controls no region.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "3c83ac8aa90e32ec",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The subprocess.call at f1:141 appears only in the else arm of the platform check, and the only file in the record has no other caller of it.",
+          "evidence_refs": [
+            "s7",
+            "f1:141"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "a208028554bec49b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.call at f1:141 creates a process, which matches spawn_process.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "57202c1c5c25bd51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Popen at f1:102 and subprocess.call at f1:128 sit directly in the then block of the second win32 if (s6). The first guard's then block (s5) holds the binary selection for the same branch.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6fe5999d4cf316f9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The two spawn sites at f1:102 and f1:128 are inside the win32 then block of run_game and the only file in the record has no other path to them.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "d9e0b406b86d947c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.Popen and subprocess.call both create processes, which matches spawn_process.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "k_83e2e1dbc9.L6.drop",
+          "claim_sha256": "c17ebd43afc36601",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin test at f1:15 only picks the binary filename for the same launch, so it is plumbing and not a gate.",
+          "evidence_refs": [
+            "s10",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_b56109009d.L6.drop",
+          "claim_sha256": "8ebef69452804969",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `'64' in machine` test at f1:14 only picks between two Windows binary filenames and does not change what runs.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "q_9ab299314a.L6.drop",
+          "claim_sha256": "b9adf381c9352db5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditional expression at f1:14 only selects a binary filename inside the win32 branch, which is plumbing.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "q_a6103d6cf9.L6.drop",
+          "claim_sha256": "248af5fe00d83a2f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif at f1:15 only assigns a macOS binary filename and the same launch follows in every case, so it is not a gate.",
+          "evidence_refs": [
+            "s13"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ed491bec5de93820",
+      "packet_sha256": "4e194044838b53ab",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d14d72e4533aa503",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both decisions (f1:12 and f1:22) test the same condition sys.platform == 'win32'. Each leads to its own region (s5, s6), so the join is c1 or c1, which is c1. The else regions s7, s8 and s9 are the non-win32 sides. The darwin elif at f1:15 only picks the binary path, so it is not a gate.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "f1:12",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "7f546b4a3e1a20f0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink at f1:141 is subprocess.call([binary, ...]) in the else branch. subprocess is imported at f1:4, so this is a process-creation sink that can spawn a process, and it sits directly in region s9.",
+          "evidence_refs": [
+            "s9",
+            "f1:141",
+            "f1:4"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "9c16465c06857d0f",
+      "packet_sha256": "c51fd4cd79e8599a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "9fcf0230053f5b3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both cited tests are `sys.platform == 'win32'` and the guarded blocks run on the true side (f1:12, f1:22).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "6c9dbad30eaf5fb8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`machine` is bound once to platform.machine().lower() at f1:13 and tested by `'64' in machine` in the ternary at f1:14.",
+          "evidence_refs": [
+            "s5",
+            "f1:13",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "645b846152d5fdee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary's then arm (win64 exe) is taken when '64' in machine, a positive substring test.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "7f7e8614d5c3345c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "platform.machine() is the CPU architecture and the test picks a 64-bit or 32-bit binary, so `arch` fits.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "ded6ac96a79079e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif at f1:15 directly compares sys.platform.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "e65211346f376097",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif compares `sys.platform == 'darwin'` and its then block assigns the mac binary.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "907865d3f2adec59",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform is read to detect the operating system, so `os` fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "1eb96db1b097c67e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The ternary on machine is nested inside the win32 if (f1:12-14), so the then region needs both conditions. The else region (win32 exe) needs c1 true and c2 false, so both conditions are involved and the minimum is 2.",
+          "evidence_refs": [
+            "s3",
+            "s6",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "05a677f8dd531144",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each branch chooses a different executable (win64 or win32 build) that is later spawned, so the effect is `selects`.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "44a1417db68dc4b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs the game on the matching platform and nothing backs off on analysis, so the polarity is `activate`.",
+          "evidence_refs": [
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "c29997e593af8d74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only picks the binary build that fits the OS and CPU width, which is portability.",
+          "evidence_refs": [
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "f190b17b75fe5ddf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After the win32 32-bit binary is assigned (s10), control reaches the win32 block at f1:22, where `binary` is passed to Popen (s11) and subprocess.call (s12) in the same function. The `unresolved` marker concerns only the callee name.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "f1:20",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3.excl",
+          "claim_sha256": "88acc67c33e031da",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The sinks at s11 and s12 are gated only by sys.platform at f1:22, not by the machine test, so the win64 branch reaches them too. The non-win32 path spawns the same `binary` at s15.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s15",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L5",
+          "claim_sha256": "14175449ca49994b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.Popen and subprocess.call at s11 and s12 create processes, which matches spawn_process.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "7c79ba9f7a95c4da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After the win64 binary is assigned (s9), the win32 block at f1:22 spawns that `binary` at s11 and s12 in the same function.",
+          "evidence_refs": [
+            "s9",
+            "s11",
+            "s12",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "5d212cc8798e149c",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The win32 32-bit branch also reaches s11 and s12, since f1:22 tests only the platform. The non-win32 path spawns the same binary variable at s15.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s15",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "9fca4f0718ea9304",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.Popen and subprocess.call at s11 and s12 are process-creation sinks.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "6abd8a93bdbde5ed",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The elif has a single condition, `sys.platform == 'darwin'`. Its then region is the mac binary (s13) and its else region is the default binary (s14), so the minimum is 1.",
+          "evidence_refs": [
+            "s8",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "623b5dd95ab5f3b0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin and default branches assign different executables that are then spawned, so the effect is `selects`.",
+          "evidence_refs": [
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "23eeca277bb1faea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch picks the binary to run for the current OS and has no evasion logic, so the polarity is `activate`.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "48facb5b06a816f3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test selects the OS-specific build of a bundled game binary, which is portability.",
+          "evidence_refs": [
+            "s8",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.else.L3",
+          "claim_sha256": "941ba7bcb68e53ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The default binary is assigned at s14. Control then flows to the non-win32 else at f1:140, where subprocess.call spawns `binary` (s15).",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "f1:141"
+          ]
+        },
+        {
+          "claim_id": "g3.else.L3.excl",
+          "claim_sha256": "22ad026c4da170f8",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "s15 runs for any non-win32 platform, which includes the darwin branch (s13). It is not limited to the else side of the darwin test.",
+          "evidence_refs": [
+            "s15",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.else.L5",
+          "claim_sha256": "8dc14dcdb845481e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.call at f1:141 spawns a process.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "06148478e6b272b5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin binary is assigned at s13. Darwin is not win32, so control reaches the else branch where subprocess.call spawns that `binary` (s15).",
+          "evidence_refs": [
+            "s13",
+            "s15",
+            "f1:141"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "62fc6ff3ae193119",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "s15 is also reached on linux and other non-win32 platforms through the default branch (s14), so it is not exclusive to the darwin side.",
+          "evidence_refs": [
+            "s15",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "23b2d8f8c7016c93",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.call at f1:141 is a process-creation sink.",
+          "evidence_refs": [
+            "s15"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "68d267e9061feeb8",
+      "packet_sha256": "1b9a505b72e688ab",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "0ad87239b1c5095f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The region s3 (the win32 binary name) sits on the then side of the win32 if (s1) and the else side of the ternary (s2). The binary assigned at f1:14 (s5) is the executable launched by Popen (s4, f1:102) and call (s6, f1:128), both inside the later win32 block.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s5",
+            "s4",
+            "s6",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3.excl",
+          "claim_sha256": "f55775c16de79202",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The sinks at f1:102 and f1:128 run for every win32 machine, so the '64' arm of the ternary reaches them too. Other platforms reach a separate subprocess.call at f1:141 with the same arguments.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "f1:141",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L5",
+          "claim_sha256": "aade2a8c42447ba1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s4 is subprocess.Popen and s6 is subprocess.call, with subprocess imported at f1:4. Both create processes, so they can do spawn_process.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "f1:4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "80435a5b2ff261b6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The region s7 (the win64 binary name) is on the then side of both the win32 if (s1) and the ternary (s2). The binary assigned at f1:14 (s5) is launched by Popen (s4) and call (s6).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s7",
+            "s5",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "6387902952825fe5",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The same sinks (f1:102, f1:128) are also reached when the ternary picks the win32 binary. Other platforms reach f1:141, which runs the same kind of binary with the same arguments.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "f1:141",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "8fdb1b9218c952e2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s4 is subprocess.Popen and s6 is subprocess.call, with subprocess imported at f1:4. Both create processes.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "f1:4"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@cheqplease/structured-logger",
+    "version": "2.2.5",
+    "archive_sha256": "3d7a73d851699f7bf5a1205d5a5add6da617cedfe713d4d246b74cdba7aa66ff"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "0bca5600b8d25f74",
+      "packet_sha256": "8cafdb3a400a79be",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "61d566aabe9550b9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:34 compares os.platform() to 'win32' as the condition of a ternary; os is the node os module (f1:3).",
+          "evidence_refs": [
+            "s1",
+            "f1:34"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "cc17f736627966fe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary at f1:34 uses os.platform() === 'win32' with no negation, and the then arm (spawn cmd.exe) is reached when it is true.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e9f7e4ead656086a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the operating system platform, so category os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "aa8b19c9029abcda",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The only guard is the ternary at f1:34-36 with one condition, so expression c1 is right. The then region is spawn cmd.exe (s3) and the else region is spawn bash (s4).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "9304ebc33089665d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Both arms run the same behaviour, an interactive shell piped to the socket (f1:39-41). The test only picks the shell executable for the OS, which is plumbing and not a gate that selects a payload or enables or retargets one.",
+          "evidence_refs": [
+            "s2",
+            "f1:34-41"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "485e84d8afdf4340",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test does not back off on analysis, CI or a sandbox. Both outcomes run the shell, so the polarity is activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "39f3712ff14bb4a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ternary picks cmd.exe on Windows and /bin/bash elsewhere, so the same shell works on each OS. That is portability.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "99cc9c1c2de7b2a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "spawn('/bin/bash', ['-i']) at f1:36 is the else arm of the ternary, and spawn is the child_process spawn imported at f1:2. The sink is in the region itself, so the empty witness holds.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "5b5d0278d35e1d66",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "This spawn call appears once, inside the connect callback of establishReverseShell. That function is called once at f1:59, and the file has no exports, timers or other callers.",
+          "evidence_refs": [
+            "s4",
+            "f1:59"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "50aecf8c863dda72",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawn from child_process creates a bash process whose stdin and stdout are piped to the network socket (f1:39-41), which is a reverse shell.",
+          "evidence_refs": [
+            "s4",
+            "f1:2",
+            "f1:39-41"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "29b0dbea6fd5a8ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "spawn('cmd.exe') at f1:35 is the then arm of the ternary, and spawn is the child_process spawn. The sink is in the region itself.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ae3b11ef80111311",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cmd.exe spawn appears once, in the same callback, and is reached only through establishReverseShell called at f1:59. The file has no other callers, exports or timers.",
+          "evidence_refs": [
+            "s3",
+            "f1:59"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "0d67f6f9476fb4de",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawn('cmd.exe') from child_process creates a process whose stdio is piped to the socket (f1:39-41), which gives a reverse shell.",
+          "evidence_refs": [
+            "s3",
+            "f1:2",
+            "f1:39-41"
+          ]
+        },
+        {
+          "claim_id": "k_99dccb102f.L6.drop",
+          "claim_sha256": "ddc4ed5475aa692a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The writeFileSync at f1:63 unconditionally writes a log file. It tests no environment property and decides nothing about what runs.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_0e1342d7e2.L6.drop",
+          "claim_sha256": "a45daa89a11cdccc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The try at f1:62-69 only wraps the evidence-log write to swallow errors. It is error handling, not an environment gate.",
+          "evidence_refs": [
+            "s6"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "6ab35ba8996d9b75",
+      "packet_sha256": "7d395486fd73498e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_f6bea5bfc3.L6.drop",
+          "claim_sha256": "a36e4b1f45475e5f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The os.platform() === 'win32' test only picks cmd.exe or /bin/bash -i as the shell for the same reverse shell. Both branches do the same thing, so this is plumbing in how the payload starts and not a gate. The reverse shell runs unconditionally from establishReverseShell() at f1:59.",
+          "evidence_refs": [
+            "s1",
+            "f1:34",
+            "f1:59"
+          ]
+        },
+        {
+          "claim_id": "q_b471e690fd.L6.drop",
+          "claim_sha256": "31c91905bd3394b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ternary only chooses the shell binary (cmd.exe or bash -i) and both results are piped to the same socket. It does not decide whether the behaviour runs, so it is plumbing and not an environment gate.",
+          "evidence_refs": [
+            "s2",
+            "f1:34",
+            "f1:39"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@hybridaione/hybridclaw",
+    "version": "0.28.6",
+    "archive_sha256": "e901c69a9dfafbb927ecb60b998dedfca36cb94a66433ba023a8001f9f755307"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "378f7c219493e0b2",
+      "record_sha256_after": "378f7c219493e0b2",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "013098c0d072a390",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "package.json line 113 is 'command -v git >/dev/null 2>&1 && test -w .git/config && husky || true'. The 'command -v git' part is a tool lookup that only aborts the step when git is missing; gate-analysis Step 5 lists such lookups as prerequisites that go in requirements, not gate conditions. The reco"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The out-of-set reason no longer applies. The remaining reasons stand: the source label is malicious while the install-time code (postinstall-container.mjs nested 'npm install --ignore-scripts --omit=dev' and the husky prepare hook) is a plain dependency bootstrap. The runtime code in dist/ does not "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "378f7c219493e0b2",
+      "record_sha256_after": "fe85d5e80e975000",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "dfb11d2111181f59",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "package.json line 113 runs 'test -w .git/config', which is true only when the file exists and the current user can write it. That is stricter than the claimed 'exists', and no operator in the schema names writability, so the operator is now 'other'. Value and anchor are unchanged, and a note explain"
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "34bc667574a08ac2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Two reviewers are right that 'test -w' reads write permission, but the category list has no file-permission label. 'privilege' is about root or admin, and 'other' would put a settable check out of scope. file_or_dir_exists is the nearest label and stays, because the file's absence outside a git chec"
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "fc7aa90b56e0388b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The route to the spawnSync at line 164 passes three tests: container/package.json exists (line 64), no src (line 73) and missing dependencies non-empty (line 83). Only c1 is an environment condition in the record. container/package.json is listed in the manifest 'files' and present in the tarball, s"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6118953307f918c3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Lines 73-80 return reason 'source-checkout' and skip the bootstrap, and a packaged layout goes on to install the container dependencies. The check has a clear purpose, adapting to the install layout, so 'unclear' was wrong. Purpose is now portability and purpose_reason says so."
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "013098c0d072a390",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The hook string at package.json line 113 does require 'command -v git' to succeed before husky runs. The record keeps it as an installed_tool requirement, because the gate-analysis rules list a tool lookup that only aborts the step when missing as a requirement, not a gate. The same rules also count"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "90547469dc63fd8e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The prepare command at package.json line 113 runs husky only in a writable git checkout and ends in '|| true', so other layouts skip the hook setup without failing. That is a clear install-layout purpose, so 'unclear' was wrong. Purpose is now portability and purpose_reason says so."
+        },
+        {
+          "claim_id": "k_0216a9a545.L6.drop",
+          "claim_sha256": "5ca51362f3a7efb3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 64 tests the package's own container/package.json. The manifest 'files' list includes that path and the file is in the unpacked tarball, so the result is the same on every machine and no environment can flip it short of altering the package. It does end the inspection early, but it tests the pa"
+        },
+        {
+          "claim_id": "q_a9ebd1fa2c.L6.drop",
+          "claim_sha256": "8576b498ad1bcef9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This if at line 64 is the decision on the same shipped container/package.json test. The return at lines 65-70 cannot be reached on an install of this tarball, because the file is listed in manifest 'files' and present in the package. The check depends on package contents, not the environment, so not"
+        },
+        {
+          "claim_id": "k_d6c5f47944.L6.drop",
+          "claim_sha256": "16ff907b8365fd6d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 28 repeats the existence test on the same shipped container/package.json. On the install path inspectContainerBootstrap has already passed that test at line 64 before findMissingContainerDependencies calls this helper at line 37, so this test adds no independent decision. The empty-list return "
+        },
+        {
+          "claim_id": "q_21315b5903.L6.drop",
+          "claim_sha256": "47465e51f3cc02e7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement around the repeated test at line 28. Line 64 has already established that the file exists on the install path, and the file ships in the tarball, so the 'return []' side is not reached at install and cannot change the later decision at line 83."
+        },
+        {
+          "claim_id": "k_44aa320d56.L6.drop",
+          "claim_sha256": "3fab7c4fe440c2f9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 52 checks container/node_modules/<dep>/package.json for each dependency to build the list of what to install. Its only effect is to skip the nested npm install when a copy is already there, which is the 'reusing an already-downloaded copy instead of fetching it again' case the gate definition l"
+        },
+        {
+          "claim_id": "q_f21dafdab3.L6.drop",
+          "claim_sha256": "c7d229db71c48d54",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This if at line 52 only pushes a dependency onto the missing list, which decides whether an already-present copy is reused instead of fetched again. The gate definition lists that as plumbing, and it is not a target or environment selection: the same nested install of the same dependencies is the on"
+        },
+        {
+          "claim_id": "k_376abbfe30.L6.drop",
+          "claim_sha256": "7dc617aaa6c71bae",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "fs.existsSync(npmExecPath) at line 123 feeds the choice at line 119 between running npm-cli.js through process.execPath and running plain npm. Both returns carry the same installArgs (lines 127 and 133), so the test only changes how the same install starts, which is plumbing. Line 131's fallback nee"
+        },
+        {
+          "claim_id": "q_c46978f0c9.L6.drop",
+          "claim_sha256": "3fad6b5488a97521",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at lines 119-124 picks the command for the same operation: both sides use installArgs, built once at line 108, and go to the same spawnSync at line 164. A different launcher for one behaviour is plumbing, not a gate."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "fe85d5e80e975000",
+      "record_sha256_after": "fe85d5e80e975000",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Record left unchanged: re-reading the install path found nothing to fix, and needs_manual_review stays true. Checked: package.json has only the postinstall and prepare install-time hooks, with no binding.gyp, so no implicit node-gyp step. scripts/postinstall-container.mjs imports only node:child_pro"
+        }
+      ]
+    }
+  ]
+}

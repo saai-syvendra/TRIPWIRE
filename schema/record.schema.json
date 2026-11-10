@@ -1,0 +1,475 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tripwire/record.schema.json",
+  "title": "TRIPWIRE package record (schema v3.2; v3.1 records stay valid)",
+  "oneOf": [
+    { "$ref": "#/$defs/analysed" },
+    { "$ref": "#/$defs/skipped" },
+    { "$ref": "#/$defs/member" }
+  ],
+  "$defs": {
+    "category_in_scope": {
+      "description": "What a condition tests when it is a machine-environment property an analysis VM can set (os, an environment variable, a file, a tool, privilege, locale, ...). target_artifact is a check that something worth stealing exists (a wallet, a credentials file); it counts as a gate because an environment can plant a decoy.",
+      "enum": ["os", "arch", "libc", "env_var", "ci_marker", "package_manager", "hostname", "username",
+               "home_or_path", "locale_language", "timezone", "time_date", "uptime",
+               "network_reachability", "ip_or_geo_local", "vm_sandbox_artifact", "target_artifact",
+               "file_or_dir_exists", "file_content", "installed_tool", "hardware", "process_list",
+               "privilege", "runtime_version"]
+    },
+    "category_out_of_scope": {
+      "description": "What a condition tests when no analysis VM can set it from the environment alone: the dependency tree, the project that installs the package, a server's reply, the public IP. Recorded, but out of scope for environment derivation.",
+      "enum": ["dependency_tree", "consuming_app", "server_response", "external_ip_geo", "other"]
+    },
+    "behaviour": {
+      "description": "A kind of action a branch performs; a branch's behaviours each rest on a sink of a matching kind (payload).",
+      "enum": ["recon", "cred_read", "exfil", "download", "exec_downloaded", "spawn_process",
+               "write_file", "delete_file", "persistence", "destructive", "defense_evasion",
+               "self_propagation", "crypto_mining", "reverse_shell", "modify_other_packages",
+               "benign_build", "other"]
+    },
+    "hook": {
+      "description": "The install-time entry point that runs the gate's code: an npm lifecycle script, the implicit node-gyp build, or PyPI setup.py, a custom cmdclass, an in-tree build backend or setup_requires.",
+      "enum": ["resolve", "preinstall", "install", "postinstall", "preprepare", "prepare", "postprepare",
+               "node_gyp_implicit", "setup_py", "cmdclass", "build_backend", "setup_requires"]
+    },
+    "axes": {
+      "description": "An environment recipe: the values of fixed machine axes under which a branch is taken. A missing key means the branch does not depend on that axis. Keys listed in recipe_guessed_fields are stand-ins for values the analyst could not recover.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "os": { "type": "string" },
+        "arch": { "type": "string" },
+        "libc": { "type": "string" },
+        "env_var": { "type": "object", "additionalProperties": { "type": ["string", "null"] } },
+        "env_var_absent": { "type": "array", "items": { "type": "string" } },
+        "hostname": { "type": "string" },
+        "username": { "type": "string" },
+        "home_dir": { "type": "string" },
+        "locale": { "type": "string" },
+        "timezone": { "type": "string" },
+        "datetime": { "type": "string" },
+        "network": { "type": "object", "additionalProperties": { "enum": ["reachable", "unreachable"] } },
+        "installed_tool": { "type": "array", "items": { "type": "string" } },
+        "file_present": { "type": "array", "items": { "type": "string" } },
+        "file_absent": { "type": "array", "items": { "type": "string" } },
+        "privilege": { "enum": ["root_or_admin", "normal_user"] },
+        "cpu_count": { "type": "integer" },
+        "memory_mb": { "type": "integer" },
+        "uptime_s": { "type": "integer" },
+        "package_manager": { "type": "string" },
+        "runtime_version": { "type": "string" },
+        "ci": { "type": "string" }
+      }
+    },
+    "package": {
+      "type": "object",
+      "required": ["ecosystem", "name", "version", "source_dataset", "source_label",
+                   "cluster_key", "released_at", "released_at_source"],
+      "additionalProperties": false,
+      "properties": {
+        "ecosystem": { "enum": ["npm", "pypi"] },
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "archive_sha256": { "type": ["string", "null"] },
+        "source_dataset": { "enum": ["datadog", "pypi_malregistry", "openssf", "bkc", "benign_sample", "other", "unknown"] },
+        "source_label": { "enum": ["malicious", "benign", "unknown"] },
+        "cluster_key": { "type": "string" },
+        "released_at": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "released_at_source": { "enum": ["registry", "dataset", null] },
+        "analysis_type": { "enum": ["ai", "tool"] },
+        "model_name": { "type": ["string", "null"] },
+        "sample_path": { "type": ["string", "null"], "description": "archive path relative to samples/, a hint; archive_sha256 is authoritative" },
+        "package_root": { "type": ["string", "null"], "description": "package folder relative to the unpacked archive, e.g. layer1/package" }
+      }
+    },
+    "anchor": {
+      "description": "A byte range in a package file (or in a derived file when derived_from names a derivation). sha256 is the first 16 hex chars of SHA-256 over exactly those bytes; line is informational.",
+      "type": "object",
+      "required": ["file", "derived_from", "start_byte", "end_byte", "node_type", "sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "file": { "type": "string" },
+        "derived_from": { "type": ["string", "null"], "pattern": "^d\\d+$" },
+        "start_byte": { "type": "integer", "minimum": 0 },
+        "end_byte": { "type": "integer", "minimum": 0 },
+        "node_type": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{16}$" },
+        "line": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "site": {
+      "description": "Where a condition is tested. candidate is the generator's id (k_...) for an in-set site, null for a site the analyst added.",
+      "type": "object",
+      "required": ["candidate", "anchor"],
+      "additionalProperties": false,
+      "properties": {
+        "candidate": { "type": ["string", "null"], "pattern": "^k_[0-9a-f]{10}$" },
+        "anchor": { "$ref": "#/$defs/anchor" }
+      }
+    },
+    "guard": {
+      "description": "One decision point of a gate: the if/ternary/switch case/short-circuit/early exit/try whose test holds the gate's conditions. arm says which outcome of the test leads to the gate's then branch.",
+      "type": "object",
+      "required": ["candidate", "site", "kind", "arm", "conditions"],
+      "additionalProperties": false,
+      "properties": {
+        "candidate": { "type": ["string", "null"], "pattern": "^q_[0-9a-f]{10}$" },
+        "site": { "$ref": "#/$defs/anchor" },
+        "kind": { "enum": ["if", "elif", "ternary", "switch_case", "switch_default", "short_circuit", "early_exit",
+                           "try_except", "loop", "other"] },
+        "arm": { "enum": ["then", "else"] },
+        "conditions": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^c\\d+$" } },
+        "via": {
+          "description": "Only for an early exit that ends the process (exit, not return or throw) inside a helper: the calls that run the helper, innermost first (the call of the function holding the guard, then the call of the function holding that call, ...). The code after each call, in its block, is on the guard's side too.",
+          "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/anchor" }
+        }
+      }
+    },
+    "probe": {
+      "description": "What a condition runs or reads to test the environment, when that is not a plain API read: a command whose output, exit status or failure is tested (exec), or a file whose content or existence is tested (file). callee is the call that does it, target the command line (`*` for an interpolation) or the path; value then holds the compared needle or sentinel.",
+      "type": "object",
+      "required": ["kind", "callee", "target", "accessor"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["exec", "file"] },
+        "callee": { "type": "string" },
+        "target": { "type": ["string", "null"], "maxLength": 300 },
+        "accessor": { "enum": ["stdout", "stderr", "returncode", "error", "throws", "content", "exists", "other"] }
+      }
+    },
+    "dropped": {
+      "description": "A prefilled candidate the analyst judged not to be a gate condition or guard, with why. The anchor is copied from the candidate set by write_report.",
+      "type": "object",
+      "required": ["candidate", "reason_code"],
+      "additionalProperties": false,
+      "properties": {
+        "candidate": { "type": "string", "pattern": "^[kq]_[0-9a-f]{10}$" },
+        "anchor": { "$ref": "#/$defs/anchor" },
+        "reason_code": { "enum": ["library_code", "not_environmental", "dead_branch", "not_install_time", "log_only",
+                                  "duplicate_of", "re_entry_guard", "other"] },
+        "note": { "type": "string", "maxLength": 200 }
+      },
+      "allOf": [{ "if": { "properties": { "reason_code": { "enum": ["other", "duplicate_of"] } } },
+                  "then": { "required": ["note"] } }]
+    },
+    "hop": {
+      "description": "One step from a branch region to a sink: a call site, the function definition it reaches, an import or file launch, a bundle unit, or a bind (an object key, property assignment or argument that stores a function or object a later call reaches by that name).",
+      "type": "object",
+      "required": ["hop", "anchor"],
+      "additionalProperties": false,
+      "properties": {
+        "hop": { "enum": ["call", "def", "import", "run_file", "unit", "bind"] },
+        "anchor": { "$ref": "#/$defs/anchor" }
+      }
+    },
+    "payload": {
+      "description": "A sink that a branch behaviour rests on, with the witness path from the branch region to it (empty when the sink sits in the region itself). When the path cannot be traced statically, the witness holds the hops that can be and `unresolved` says why it stops.",
+      "type": "object",
+      "required": ["behaviour", "sink_kind", "sink", "witness"],
+      "additionalProperties": false,
+      "properties": {
+        "behaviour": { "$ref": "#/$defs/behaviour" },
+        "sink_kind": { "enum": ["exec", "network", "fs_write", "fs_delete", "fs_read", "eval", "decode", "other"] },
+        "sink": { "$ref": "#/$defs/anchor" },
+        "witness": { "type": "array", "items": { "$ref": "#/$defs/hop" } },
+        "unresolved": { "enum": ["dynamic_dispatch", "computed_callee"] }
+      }
+    },
+    "derivation": {
+      "description": "A reproducible transform of package content (decoded string table, inline hook script, or hand-cracked cipher decoded to source) that anchors can point into. Rebuilt and checked by output_sha256; never produced by running package code.",
+      "type": "object",
+      "required": ["id", "recipe", "recipe_version", "input", "params", "output_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^d\\d+$" },
+        "recipe": { "enum": ["inline_script", "obfuscatorio_strings", "decode_spec"] },
+        "recipe_version": { "type": "integer", "minimum": 1 },
+        "input": {
+          "type": "object", "required": ["file", "derived_from"], "additionalProperties": false,
+          "properties": { "file": { "type": "string" }, "derived_from": { "type": ["string", "null"], "pattern": "^d\\d+$" } }
+        },
+        "params": { "type": "object" },
+        "output_sha256": { "type": "string", "pattern": "^[0-9a-f]{16}$" },
+        "stats": { "type": "object" }
+      }
+    },
+    "branch": {
+      "description": "One outcome of a gate. min_conditions is the smallest number of conditions that must hold together to take it (derived from the expression); behaviours and payload say what it does; env_recipe is an environment that takes it.",
+      "type": "object",
+      "required": ["min_conditions", "behaviours", "env_recipe", "recipe_guessed_fields", "regions", "payload"],
+      "additionalProperties": false,
+      "properties": {
+        "min_conditions": { "type": "integer", "minimum": 1 },
+        "behaviours": { "type": "array", "items": { "$ref": "#/$defs/behaviour" } },
+        "env_recipe": { "$ref": "#/$defs/axes" },
+        "recipe_guessed_fields": { "type": "array", "items": { "type": "string" } },
+        "requires": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^c\\d+$" },
+                      "description": "else branch only (3.2): conditions that still hold on the else side, because their guards enclose both branches (if X { if Y {A} else {B} }: B requires X)" },
+        "regions": { "type": "array", "items": { "$ref": "#/$defs/anchor" } },
+        "payload": { "type": "array", "items": { "$ref": "#/$defs/payload" } }
+      }
+    },
+    "member": {
+      "description": "A package whose install-time code hashes to the same cluster_key as an analysed representative: it shares that record's gates and labels.",
+      "type": "object",
+      "required": ["schema_version", "record_type", "package"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "enum": ["3.1", "3.2"] },
+        "record_type": { "const": "member" },
+        "package": { "$ref": "#/$defs/package" }
+      }
+    },
+    "skipped": {
+      "description": "A sample with nothing to analyse at install time (no install code, import-time only, payload in a dependency, not a package) or no usable archive. Kept so that rates have denominators.",
+      "type": "object",
+      "required": ["schema_version", "record_type", "package", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "enum": ["3.1", "3.2"] },
+        "record_type": { "const": "skip" },
+        "package": {
+          "type": "object",
+          "required": ["name", "source_dataset", "source_label", "released_at",
+                       "released_at_source"],
+          "additionalProperties": false,
+          "properties": {
+            "ecosystem": { "enum": ["npm", "pypi", "unknown"] },
+            "name": { "type": "string" },
+            "version": { "type": ["string", "null"] },
+            "archive_sha256": { "type": ["string", "null"] },
+            "source_dataset": { "type": "string" },
+            "source_label": { "enum": ["malicious", "benign", "unknown"] },
+            "cluster_key": { "type": "string" },
+            "released_at": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+            "released_at_source": { "enum": ["registry", "dataset", null] },
+            "analysis_type": { "enum": ["ai", "tool"] },
+            "model_name": { "type": ["string", "null"] },
+            "sample_path": { "type": ["string", "null"] },
+            "package_root": { "type": ["string", "null"] }
+          }
+        },
+        "reason": { "enum": ["not_a_package", "no_install_code", "import_time_only", "payload_in_dependency", "files_missing", "duplicate"] },
+        "note": { "type": "string", "maxLength": 300 }
+      }
+    },
+    "analysed": {
+      "description": "A campaign representative's full record: its install entry points, every environment condition it tests, the gates that combine them and what each branch does, all anchored in the package bytes.",
+      "type": "object",
+      "required": ["schema_version", "record_type", "package", "execution", "requirements", "conditions", "gates",
+                   "behaviours", "obfuscation", "reachability", "attack_type", "claude_assessment",
+                   "assessment_reason", "label_disagreement", "confidence", "needs_manual_review", "normalisation",
+                   "candidate_review", "candidate_check"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "enum": ["3.1", "3.2"] },
+        "record_type": { "const": "analysed" },
+        "package": { "allOf": [{ "$ref": "#/$defs/package" },
+                                { "required": ["analysis_type", "model_name", "sample_path", "package_root"] }] },
+        "execution": {
+          "type": "object",
+          "required": ["entry_points"],
+          "additionalProperties": false,
+          "properties": {
+            "entry_points": {
+              "type": "array", "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["hook", "command", "runs_on", "file_chain", "interpreter", "launch_style", "silent_failure"],
+                "additionalProperties": false,
+                "properties": {
+                  "hook": { "$ref": "#/$defs/hook" },
+                  "command": { "type": "string" },
+                  "runs_on": { "enum": ["always", "git_or_local_install_only", "sdist_build_only"] },
+                  "file_chain": { "type": "array", "items": { "type": "string" } },
+                  "interpreter": { "enum": ["node", "python", "sh", "cmd", "powershell", "other"] },
+                  "launch_style": {
+                    "type": "array",
+                    "items": { "enum": ["direct_script", "inline_eval", "inline_shell", "shell_pipe", "detached_child",
+                                        "download_then_exec", "native_build", "dropped_binary", "decoded_eval"] }
+                  },
+                  "silent_failure": { "type": "boolean" }
+                }
+              }
+            },
+            "delays": {
+              "type": "array",
+              "items": { "type": "object", "required": ["site", "seconds"],
+                         "properties": { "site": { "type": "string" }, "seconds": { "type": "number" }, "purpose": { "type": "string" } } }
+            },
+            "notes": { "type": "array", "items": { "type": "string", "maxLength": 300 } }
+          }
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["axis", "value", "reason"],
+            "additionalProperties": false,
+            "properties": {
+              "axis": { "enum": ["os", "arch", "network", "installed_tool", "file_present", "privilege", "runtime_version", "other"] },
+              "value": { "type": ["string", "array"] },
+              "reason": { "type": "string" },
+              "sites": { "type": "array", "items": { "$ref": "#/$defs/anchor" } }
+            }
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Every deliberate test of the environment, written in the form that must be true to reach the guarded code (os == win32). value is the compared value as recovered; sites anchor each place it is tested.",
+          "items": {
+            "type": "object",
+            "required": ["id", "category", "api", "operator", "value", "value_recovered", "in_scope", "sites",
+                         "provenance"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "pattern": "^c\\d+$" },
+              "category": { "anyOf": [{ "$ref": "#/$defs/category_in_scope" }, { "$ref": "#/$defs/category_out_of_scope" }] },
+              "api": { "type": "string" },
+              "operator": { "enum": ["==", "!=", "in", "not_in", "startswith", "not_startswith", "includes",
+                                     "not_includes", "regex", "not_regex", "truthy", "falsy",
+                                     ">", "<", ">=", "<=", "exists", "not_exists", "other"] },
+              "value": {},
+              "value_recovered": { "enum": ["plain", "decoded", "partial", "not_recovered"] },
+              "in_scope": { "type": "boolean" },
+              "sites": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/site" } },
+              "provenance": { "enum": ["in_set", "out_of_set"] },
+              "probe": { "$ref": "#/$defs/probe" },
+              "value_site": { "$ref": "#/$defs/anchor" },
+              "inherited": { "type": "boolean", "description": "v3.2: the test is code copied verbatim from the legitimate package being impersonated (e.g. its interpreter-version guard), not the attacker's own check. Still part of the gate expression." }
+            }
+          }
+        },
+        "gates": {
+          "type": "array",
+          "description": "Conditions that decide which behaviour runs. expression combines condition ids with && and ||; polarity is activate (runs on a target) or evade (backs off on suspected analysis); effect is enables, selects (a different payload per branch) or modifies (the same behaviour on a different target).",
+          "items": {
+            "type": "object",
+            "required": ["gate_id", "hook", "expression", "guards", "provenance", "polarity", "effect", "purpose",
+                         "purpose_reason", "then", "else"],
+            "additionalProperties": false,
+            "properties": {
+              "gate_id": { "type": "string", "pattern": "^g\\d+$" },
+              "hook": { "$ref": "#/$defs/hook" },
+              "expression": { "type": "string" },
+              "guards": { "type": "array", "items": { "$ref": "#/$defs/guard" } },
+              "provenance": { "enum": ["in_set", "out_of_set"] },
+              "polarity": { "enum": ["activate", "evade"] },
+              "effect": { "enum": ["enables", "selects", "modifies"] },
+              "purpose": { "enum": ["portability", "targeting", "anti_analysis", "data_availability", "unclear"] },
+              "purpose_reason": { "type": "string" },
+              "then": { "$ref": "#/$defs/branch" },
+              "else": { "oneOf": [{ "$ref": "#/$defs/branch" }, { "type": "null" }] }
+            }
+          }
+        },
+        "behaviours": {
+          "type": "object",
+          "required": ["ungated", "gated"],
+          "additionalProperties": false,
+          "properties": {
+            "ungated": { "type": "array", "items": { "$ref": "#/$defs/behaviour" } },
+            "gated": { "type": "array", "items": { "$ref": "#/$defs/behaviour" } }
+          }
+        },
+        "obfuscation": {
+          "type": "object",
+          "required": ["level", "techniques", "decoded", "unrecovered"],
+          "additionalProperties": false,
+          "properties": {
+            "level": { "enum": ["none", "light", "moderate", "heavy"] },
+            "techniques": { "type": "array", "items": { "type": "string" } },
+            "decoded": { "type": ["boolean", "null"] },
+            "unrecovered": { "type": "array", "items": { "type": "object", "required": ["file", "reason"] } }
+          }
+        },
+        "reachability": {
+          "type": "object",
+          "required": ["needs_remote", "endpoints"],
+          "additionalProperties": false,
+          "properties": {
+            "needs_remote": { "type": "boolean" },
+            "endpoints": {
+              "type": "array",
+              "items": {
+                "type": "object", "required": ["indicator", "role"], "additionalProperties": false,
+                "properties": {
+                  "indicator": { "type": "string" },
+                  "role": { "enum": ["second_stage", "exfil_sink", "c2", "reverse_shell"] }
+                }
+              }
+            }
+          }
+        },
+        "attack_type": { "enum": ["typosquat", "dependency_confusion", "compromised_maintainer", "starjacking",
+                                  "protestware", "malicious_new_package", "benign", "unknown"] },
+        "family_hint": { "type": ["string", "null"], "maxLength": 120 },
+        "claude_assessment": { "enum": ["malicious", "suspicious", "benign", "unclear"] },
+        "assessment_reason": { "type": "string" },
+        "label_disagreement": { "type": "boolean" },
+        "confidence": { "enum": ["high", "medium", "low"] },
+        "needs_manual_review": { "type": "boolean" },
+        "review_reasons": { "type": "array", "items": { "type": "string" } },
+        "normalisation": {
+          "type": "object",
+          "required": ["derivations", "candidate_set"],
+          "additionalProperties": false,
+          "properties": {
+            "derivations": { "type": "array", "items": { "$ref": "#/$defs/derivation" } },
+            "candidate_set": {
+              "type": "object", "required": ["generator", "sha256"], "additionalProperties": false,
+              "properties": { "generator": { "type": "string" }, "sha256": { "type": "string", "pattern": "^[0-9a-f]{16}$" } }
+            },
+            "units_summary": {
+              "description": "Bundle module units per file (webpack, esbuild, browserify) by guessed role. The full unit list is in prepared.json.",
+              "type": "array",
+              "items": {
+                "type": "object", "required": ["file", "derived_from", "bundler", "count", "by_role"],
+                "additionalProperties": false,
+                "properties": {
+                  "file": { "type": "string" }, "derived_from": { "type": ["string", "null"], "pattern": "^d\\d+$" },
+                  "bundler": { "type": "string" }, "count": { "type": "integer", "minimum": 0 },
+                  "entry": { "type": ["string", "null"] },
+                  "by_role": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 },
+                               "propertyNames": { "enum": ["package", "library", "unknown"] } }
+                }
+              }
+            },
+            "truncation": {
+              "description": "Where the generator stopped short (see prepared.json truncation).",
+              "type": "object", "required": ["walk_limit", "context_limited_files"], "additionalProperties": false,
+              "properties": { "walk_limit": { "type": "boolean" },
+                              "context_limited_files": { "type": "integer", "minimum": 0 } }
+            }
+          }
+        },
+        "candidate_review": {
+          "description": "Prefilled candidates the analyst removed. Every prefilled k_ site and q_ guard is either cited in the record or listed here (write_report enforces it).",
+          "type": "object", "required": ["dropped"], "additionalProperties": false,
+          "properties": { "dropped": { "type": "array", "items": { "$ref": "#/$defs/dropped" } } }
+        },
+        "candidate_check": {
+          "description": "Derived by write_report: how much of the record the deterministic candidate set grounds.",
+          "type": "object",
+          "required": ["condition_candidates", "condition_sites_cited", "conditions_in_set", "conditions_out_of_set",
+                       "guard_candidates", "guards_cited", "candidates_dropped", "gates_in_set", "gates_out_of_set",
+                       "out_of_set_ids", "anchor_refusals"],
+          "additionalProperties": false,
+          "properties": {
+            "condition_candidates": { "type": "integer", "minimum": 0 },
+            "condition_sites_cited": { "type": "integer", "minimum": 0 },
+            "conditions_in_set": { "type": "integer", "minimum": 0 },
+            "conditions_out_of_set": { "type": "integer", "minimum": 0 },
+            "guard_candidates": { "type": "integer", "minimum": 0 },
+            "guards_cited": { "type": "integer", "minimum": 0 },
+            "candidates_dropped": { "type": "integer", "minimum": 0 },
+            "gates_in_set": { "type": "integer", "minimum": 0 },
+            "gates_out_of_set": { "type": "integer", "minimum": 0 },
+            "out_of_set_ids": { "type": "array", "items": { "type": "string", "pattern": "^[cg]\\d+$" } },
+            "anchor_refusals": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    }
+  }
+}

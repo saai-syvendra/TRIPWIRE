@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "selnium",
+    "version": "0.1",
+    "archive_sha256": "1f5b703a8a935b722767a8ba07aec248ea3bd0f7211506f62f0fbd7ef8c75edc"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "84920728602617ee",
+      "record_sha256_after": "106a806b2ae12444",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "33ea9711d51ff2da",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited call at d1 line 45 only appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the folder list, which writes nothing. The persistence write is the WScript shortcut .Save() at d1 line 100, reached when os.walk over that list finds a browser .lnk. Re-cited the g3 sink to the Save() call with"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "5d18a5952a30e319",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The tests at d1 lines 81 and 90 select .lnk files whose TargetPath basename is chrome.exe, msedge.exe, launcher.exe or brave.exe, so only Chromium browser shortcuts get --load-extension. That picks the victim artifact; it does not check whether data the payload needs is present. Purpose changed from"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Resolved the guessed recipe fields: g2's env_var APPDATA was dropped because the code only reads os.getenv('APPDATA') to build paths and never tests it, and g4's file_present now names a concrete .lnk under %APPDATA%\\Microsoft\\Windows\\Start Menu (a folder the code walks at d1 line 48) targeting chro"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "106a806b2ae12444",
+      "record_sha256_after": "88ba71e4387f3280",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "0472e2fe7a0b355c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "In the decoded setup.py, state 383984 tests IsUserAnAdmin(): if true it moves to 362814, which appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the folder list, and both sides then continue to 18005. So c2 only adds the ProgramData folder to the walk (modifies the target set). A ProgramData sh"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "88ba71e4387f3280",
+      "record_sha256_after": "88ba71e4387f3280",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "e9ad840948965158",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "g3 is a modifies gate for the ProgramData shortcuts, not for the shortcut save in general (that is g4). In decoded setup.py state 383984 (d1 line 64) tests IsUserAnAdmin() and only when true goes to state 362814, which appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the folder list (d1 line 6"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "88ba71e4387f3280",
+      "record_sha256_after": "9ad2335f5f2f7862",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bf47ad853144295f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The definition of portability needs each branch to run a platform-specific version of the same behaviour. Here there is no other version: d1:6 wraps all the code in sys.platform == 'win32', and on any other OS nothing runs but setup(). The pip.main(['install','pypiwin32']) call at d1:13 only serves "
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "7b6d04e2a984e019",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refutation says the gate selects no victim artifact, but targeting also covers a payload that only exists for one OS. The region under c1 && c4 (d1:35-126) writes a browser extension to %APPDATA%\\Extension and edits Windows .lnk shortcuts, and no other OS branch runs a counterpart, so this is no"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "7eb9a99bd0305238",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The deterministic cannot_tell was a real gap: the c6 guard at d1:90 controlled no cited region, because the Save() region at d1:100 is a separate state outside that if statement. Added the d1:91-93 statement range (the --load-extension assignment and the move to state 60921, the same region g4 cites"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "8a74e341a97a982f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refutation says the admin test only affects a path and does not choose a target artifact. At d1:64-65 IsUserAnAdmin() leads to state 362814, which at d1:45 appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the list that d1:78-79 walks. The folder list is what decides which .lnk files the re"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "562699df1347ac36",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refutation says the admin test does not choose a victim artifact and only changes a route through setup. The admin branch at d1:64-65 does only one thing: d1:45 adds the all-users Start Menu to the folders walked at d1:78-79, so admin rights decide whether all-users browser shortcuts are hijacke"
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "f3fc2956fde15ae3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refutation is right that the check decides whether makedirs runs, but that does not make it a gate. At d1:116 a missing %APPDATA%\\Extension goes to state 29059, which runs os.makedirs at d1:55 and moves to 37668. An existing folder goes to 37668 directly at d1:120. Both sides then open backgroun"
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "1c09ff37cee2c0d6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the decision statement of the same test as k_648bbff21c. At d1:116-120 its true side runs os.makedirs (state 29059, d1:55) and rejoins at state 37668, which is where its false side goes directly. Both sides reach the same writes at d1:122 and later, so the branch does not decide which behavi"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "needs_manual_review is still true after write_report.py. The one remaining reason is 'out-of-set claim pending verification' for c3, c4, c5, c6, g1, g2, g3 and g4. It clears only once a reviewer verifies those claims, so a repair session cannot remove it."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "9ad2335f5f2f7862",
+      "record_sha256_after": "9ad2335f5f2f7862",
+      "round": 3,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "c4af85866d402cfc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The sink is reached from the code the c2 guard controls. In d1, state 383984 (f2:63-67) goes to 362814 when IsUserAnAdmin() is true; 362814 appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the folder list built in state 1929, then goes to 18005. 18005 leads through the extension write states ("
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "3ba4b29377b30410",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Round 3, so only escalation is accepted and the record is left unchanged. The code agrees with the reviewers on the facts: the IsUserAnAdmin() test only decides whether ProgramData Start Menu is appended, both outcomes reach 18005 and then the walk in 790593, so c2 is not needed for Save() as such. "
+        }
+      ]
+    }
+  ]
+}

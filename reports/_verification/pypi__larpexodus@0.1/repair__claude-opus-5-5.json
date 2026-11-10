@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "larpexodus",
+    "version": "0.1",
+    "archive_sha256": "d6942ef7bff3c44886dc01ab155d0a40967974ed9c0b3e442ff6f451924fbf4d"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "c2ce311bceaeb042",
+      "record_sha256_after": "c2ce311bceaeb042",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Re-read setup.py lines 6-29: CustomInstallCommand.run downloads CBLines.exe with powershell Invoke-WebRequest (line 13) and, if the exit code is 0 and the file exists (line 15), starts it with Start-Process (line 19), while the comment at line 18 calls it a downloaded MP3 file. The record already de"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "c2ce311bceaeb042",
+      "record_sha256_after": "c2ce311bceaeb042",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_9299f491be.L6.drop",
+          "claim_sha256": "114cb96c449d52e9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "os.path.exists(output_file) at setup.py:15 tests the path built at line 9, the same path the PowerShell command at lines 12-13 was just told to write with -OutFile. It reads the result of the script's own download, not a property of the host chosen by the author. It is also joined with and to downlo"
+        },
+        {
+          "claim_id": "q_3575928f06.L6.drop",
+          "claim_sha256": "230cc6702e708ed6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at setup.py:15-25 has only two tests, returncode == 0 on the subprocess.run at line 13 and os.path.exists on the file that same call writes. Both are outcomes of the payload's own download step, and neither checks the OS, a variable, a host name, a target artifact or any other deliberate envi"
+        }
+      ]
+    }
+  ]
+}

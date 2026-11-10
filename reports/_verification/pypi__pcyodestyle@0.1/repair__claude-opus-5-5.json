@@ -1,0 +1,197 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pcyodestyle",
+    "version": "0.1",
+    "archive_sha256": "98163d2df511c6a82e37f27bd770729965d57201c5b14203a16029aff20e9bf7"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "012416da169deb17",
+      "record_sha256_after": "ecd9707daef33883",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_4fb68d086f.L6.drop",
+          "claim_sha256": "d782d7f33d2b3650",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "At setup.py:68 the IsUserAnAdmin() true side (line 69) sets the state to 362814 (436*833+1-375; the shift term is 0), which is the line 45 branch that appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the shortcut scan list used at line 82. The false side (line 71) sets the same value line 48 s"
+        },
+        {
+          "claim_id": "q_6301778a53.L6.drop",
+          "claim_sha256": "ad9a61890b0f3dd0",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The if at setup.py:68 is the decision for c5: its then side routes to the line 45 append of the ProgramData Start Menu folder. The drop was removed and the if is now g3's guard (arm then, conditions [c5]) with region lines 69-70."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Resolved: the dropped-candidate reason (admin probe is now g3; Extension-dir check confirmed as mkdir plumbing, its not-exists side sets state 29059, the makedirs branch), the guessed file_present path (replaced with the folders decoded from lines 51-54 and 62 and the .lnk suffix at line 85), and th"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ecd9707daef33883",
+      "record_sha256_after": "ecd9707daef33883",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "50484a03f030ba05",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "In this flattened state machine the continue at setup.py:70 does not skip the payload; it returns to the dispatcher with the state the line 69 assignment sets. That opaque expression evaluates to 436*(853&963)+756//406-(374|341) = 362814 (the shifted term is 374<<309>>945 = 0), which is the line 45 "
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "d46830e3bbde6c9b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same trace as c5.L2: the then arm of the line 68 if sets state 362814 and continues to the dispatcher, which runs the line 45-46 append of the all-users Start Menu folder and then sets 18005 (line 48), rejoining the non-admin path. The extra shortcut scope exists only when IsUserAnAdmin() is truthy,"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "820c532765718070",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The region at setup.py:69-70 sets state 362814 and continues; the dispatcher then runs the line 45 append (adding C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the scan list) and moves to 18005, then on through the Extension write to the os.walk shortcut loop, where a browser match sets 60921 (211*"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "64b88d24c2c0e43b",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The admin check does not decide whether the shortcut hijack runs: both sides reach the same os.walk and .Save() path. The admin side only adds the all-users Start Menu folder (line 45) to the folders whose shortcuts get --load-extension, so the same persistence behaviour acts on a different, environ"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The whole setup.py body sits in `if sys.platform == 'win32':` (line 6) with no else and no version of the behaviour for any other OS. The gate-analysis definitions call a platform check portability when each branch runs a platform-specific version of the same behaviour, and targeting when the payloa"
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "87c47a7dcfc1e364",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "At setup.py:94-97 a shortcut whose TargetPath basename is chrome.exe, msedge.exe, launcher.exe or brave.exe gets .Arguments set and state 60921 (the .Save() at line 104); any other shortcut sets (...)>>8932 = 0, which ends the loop with no write. No shortcut is changed unless one of those browsers m"
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "fad4ec32ca2af31a",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "At setup.py:120 `if not os.path.exists(%APPDATA%\\Extension)` sets state 58*536+0-2029 = 29059, the line 58 branch that only runs os.makedirs, and that branch sets 71*544+2-958 = 37668. When the folder exists, the fall-through at line 124 sets the same 37668. State 37668 (line 125) is the open/write "
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "4d351b376fc12360",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement around the same line 120 existence check as k_648bbff21c. Its then arm goes to the makedirs state 29059, which leads to 37668, and its fall-through sets 37668 directly, so the file write at line 126 runs either way. A miss does not skip the write: it only creates the folder "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ecd9707daef33883",
+      "record_sha256_after": "15ccbdb21767af96",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The line 6 if on sys.platform == 'win32' has no else, and the only code after it is the plain setup() call at line 132. No other OS gets a version of the behaviour. The gate-analysis definition gives portability when each branch runs a platform-specific version of the same behaviour, and targeting w"
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "86ee3b71ffebeaa9",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that .Save() at line 104 sits outside the cited region (the line 95 assignment) while the empty witness claimed it was inside. Added the state 60921 arm (lines 104-105) as a second g2 region, so the sink now sits in a region. That arm is on c1's then side. Evaluating every in"
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "87c47a7dcfc1e364",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "enables fits. At line 94 a browser match sets the Arguments and state 60921, which leads to .Save(). No match runs line 99, whose value shifts right by 8932 from a positive number to 0, ending the loop with no Arguments write and no Save. The false side has no persistence at all, not the same behavi"
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8aa3ffedd1d9fe44",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The code does not back off when admin. At line 68 the true side sets state 362814 (line 69) and continues to line 46, which appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the scan list, then line 48 sets 18005. The false side sets 18005 directly at line 71. Both sides then run the same drop "
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "79a87476318a1541",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refutation reads the continue as a back-off, but line 69 evaluates to 362814, the branch that adds the all-users Start Menu to the scan list, and both sides rejoin at 18005. The encoded path is recoverable from its char codes at lines 46-47: C:\\ProgramData\\Microsoft\\Windows\\Start Menu. Elevation"
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "fad4ec32ca2af31a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The not-exists side does not skip the write. Line 121 evaluates to 29059, the os.makedirs arm at line 59, and line 60 then sets 37668. The exists side sets 37668 at line 124 with the identical expression. State 37668 is the open at line 126, so the drop and everything after it run on both sides. The"
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "4d351b376fc12360",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement around the line 120 test dropped as k_648bbff21c. Its continue does not skip the write at line 126: line 121 goes to 29059 (makedirs, line 59), line 60 goes to 37668, and the fall-through at line 124 goes to the same 37668 with the same expression. Both sides reach the open "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "15ccbdb21767af96",
+      "record_sha256_after": "d8916284c70d3688",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged after write_report. Candidate decoder py_shift_charcode_join (derivation d1) replays the char-code strings and state arithmetic and confirms win32, the browser list and the state hops (browser match sets 60921, the .Save() arm; admin sets 362814, the ProgramData append). No claim chang"
+        }
+      ]
+    }
+  ]
+}

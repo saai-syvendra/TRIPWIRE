@@ -1,0 +1,1097 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "xpack-video-submission",
+    "version": "1.0.6",
+    "archive_sha256": "cab507bc6306c32019d4daa68eba2eadd1912c9b8f284512f1a39bb60ec484e8"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "365a75dc1b1e19ed",
+      "packet_sha256": "8bc86b363de5a299",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "df6e4a868dc804c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "getEffectiveInstallRoot reads process.cwd() into cwd and tests cwd.includes(\"node_modules\") in an if (f1:129-130).",
+          "evidence_refs": [
+            "s1",
+            "f1:130"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a7fc4af8d47c1b46",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "installRoot is non-null only when cwd includes node_modules, and installInSameDir needs installRoot truthy, so both guarded blocks (f1:378, f1:527) need includes in positive form.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:286-291"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1e3770265844985e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads whether the working directory path contains node_modules, a path property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "8e7f1698d51d9e8c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "getInitCwd binds raw = process.env.INIT_CWD and tests !raw in an if (f1:143-144).",
+          "evidence_refs": [
+            "s4",
+            "f1:144"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "10028155d7cf14e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A falsy INIT_CWD returns null, so initCwd is null and installInSameDir is falsy; the guarded blocks need INIT_CWD truthy.",
+          "evidence_refs": [
+            "s4",
+            "s2",
+            "s3",
+            "f1:144"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "190bdfda59547b72",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "INIT_CWD is the variable npm sets for lifecycle scripts, so package_manager fits.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "6c81f5832762eddc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs.existsSync(resolved) is the condition of the if at f1:147.",
+          "evidence_refs": [
+            "s5",
+            "f1:147"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "7ca9cee3ee201c1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "resolved is path.resolve(INIT_CWD); the path is returned only if it exists, and a null initCwd blocks both guarded blocks.",
+          "evidence_refs": [
+            "s5",
+            "s2",
+            "s3",
+            "f1:146-147"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "1072d14daa3d4261",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is a filesystem existence check on a directory.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "9a54b39b355cd2bb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The installInSameDir decision compares two path.resolve results (f1:288-291).",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "8eae5730e8cf209f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "installInSameDir is true only when path.resolve(installRoot) !== path.resolve(initCwd); installRoot is two levels above cwd. Both guarded blocks read it.",
+          "evidence_refs": [
+            "s6",
+            "s2",
+            "s3",
+            "f1:131"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "9b056d11d3b85c1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test compares resolved directory paths.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "ed351b305789258e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "respText comes from response.text() and looksLikeHtml calls startsWith(\"<!doctype\") on it, which the if at f1:357 reads.",
+          "evidence_refs": [
+            "s7",
+            "f1:349",
+            "f1:354"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "59d5e7466f3e2600",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "If looksLikeHtml, the code prints and calls process.exit(1), so the code after the exit runs only when the text does not start with <!doctype (and not <html).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:357-371"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "934eb8922f1f23ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test inspects the body returned by the server.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "3ec862c08ba61c9b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The second operand of looksLikeHtml calls startsWith(\"<html\") on the response text.",
+          "evidence_refs": [
+            "s9",
+            "f1:355"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "b320f94c04d31563",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "looksLikeHtml is an or of the two prefixes and its true branch exits, so the continuing code needs not-startswith <html.",
+          "evidence_refs": [
+            "s9",
+            "s8",
+            "f1:352-371"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "a5d7add2b14dd6d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test inspects the body returned by the server.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "dd1fd3cb3a803bb5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "if (response.status === 200) is a direct decision on response.status.",
+          "evidence_refs": [
+            "s10",
+            "f1:373"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "1da5f6de428f9731",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if at f1:373 holds the guarded code, and the test is a positive === 200.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "299285db963d9691",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the HTTP status of the server response.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "3e873f02959930cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites test data.status where data = JSON.parse of the response text (f1:375-376 and f1:208-209, text from res.text()).",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "9c5d34a016d1dcfe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both guarded blocks need data.status === \"allowed\" in positive form; the s15 guard is `if (allowed)`, which pollUntilPaid sets only on that comparison (f1:209).",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "34dcb82541f9d6a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads a field of the server's JSON reply.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "61115ac2265a962f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "if (response.status === 402) is a direct decision on response.status.",
+          "evidence_refs": [
+            "s16",
+            "f1:409"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "e2e43d68bdb68484",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The 402 block is the then arm of a positive === 402 test.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "aeaf308d0e4b5aaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the HTTP status of the server response.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "3989f4089bb1f30c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "reason = payload.reason || \"\" and /github|subscription/i.test(reason) feeds the if at f1:434.",
+          "evidence_refs": [
+            "s18",
+            "f1:431-434"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "218aae9c85882f4e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isGitHubRequired true leads to process.exit(1) at f1:457, so the code after it runs only when the regex does not match.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "b93983220c4bc83a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The regex is applied to the reason field the server returned.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "21e6e80eac34d4b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "if (response.status === 401) is a direct decision on response.status.",
+          "evidence_refs": [
+            "s20",
+            "f1:557"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "dc0475b038542047",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The 401 block is the then arm of a positive === 401 test.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "9a364faddf550c4e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the HTTP status of the server response.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a78ba1214eba9c1f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The HTML check exits unless both prefix tests are negative (c5 and c6), and the 402 block nested after it needs c9; the region s22 is that 402 block. Three conditions is the minimum.",
+          "evidence_refs": [
+            "s8",
+            "s17",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "24ee5d4e0ec46abc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The browser-open spawn runs only inside the 402 branch; otherwise it is not reached from this path, so the gate enables it.",
+          "evidence_refs": [
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "885b91607931abe7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the server answers 402; it does not back off on analysis or sandbox signals.",
+          "evidence_refs": [
+            "s17",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "f34b9930cd25c819",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate reads the payment server's reply; it is not portability, targeting or anti-analysis, so unclear fits.",
+          "evidence_refs": [
+            "s8",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ee44671c575f39b5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:506 (inside the 402 block) calls waitForEnterThenOpenUrl (f1:63), which calls openInBrowser at f1:72 and f1:86; openInBrowser runs exec at f1:49. Every hop can be followed.",
+          "evidence_refs": [
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s23",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "3af04fd64de907cf",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "waitForEnterThenOpenUrl is also called at f1:325 (missing config), f1:452 and f1:580 (401 branch), so the exec sink is reachable without this gate.",
+          "evidence_refs": [
+            "f1:325",
+            "f1:452",
+            "f1:580",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "8beb161a85a796c6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "exec is the child_process function destructured at f1:35, which creates a process.",
+          "evidence_refs": [
+            "s23",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "45e166678f9ad5ec",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The poll at f1:523 sits in the 402 block after the isGitHubRequired exit, which leaves only when the regex does not match; with the HTML check that needs c5, c6, c9 and c10, four conditions.",
+          "evidence_refs": [
+            "s8",
+            "s17",
+            "s19",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "c34b47844f78c246",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The status poll is made only after these conditions hold.",
+          "evidence_refs": [
+            "s28",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "b655800fdd811748",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The poll runs when payment is required; there is no analysis-evasion logic.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "1d771b0a475424c2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate depends on the server's reply and reason text, not on a target or sandbox property.",
+          "evidence_refs": [
+            "s18",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "0d29f8e23361cf7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:523 calls pollUntilPaid (f1:197), whose body does the fetch at f1:201.",
+          "evidence_refs": [
+            "s30",
+            "s31",
+            "s29",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "8e20ecc833f5c7ca",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "pollUntilPaid is called only at f1:523, inside the gated block.",
+          "evidence_refs": [
+            "s30",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "489da134c7fa35d5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is fetch of apiHost/api/install/status with a POST body holding the project key, device id and GitHub name, a network sink.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "d9a0927abc4ea486",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Region s32 needs c5, c6, c7, c8 and the installInSameDir block (c1-c4); region s33 needs c5, c6, c9, c10, the poll result (c8) and the same block. That is the stated or-of-ands, and the minimum is 8.",
+          "evidence_refs": [
+            "s8",
+            "s11",
+            "s14",
+            "s2",
+            "s17",
+            "s19",
+            "s15",
+            "s3",
+            "s32",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "77c222a2d547e6bd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The nested npm init and npm install spawns run only when all the conditions hold.",
+          "evidence_refs": [
+            "s32",
+            "s33",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "86778ebc457c09b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the user's folder differs from npm's install root; it does not back off on analysis.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "b7bc6e8db3dc69ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate combines server reply and folder layout, and none of portability, targeting, anti_analysis or data_availability fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "2d99360aa9accc7a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "installInDirectory is called at f1:387 (region s32) and f1:532 (region s33), and its body holds execSync(\"npm init -y\") at f1:163 and the npm install execSync at f1:172.",
+          "evidence_refs": [
+            "s35",
+            "s38",
+            "s36",
+            "s34",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "06dbadfc7aa3923f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "installInDirectory is called only at f1:387 and f1:532, both inside the guarded regions.",
+          "evidence_refs": [
+            "s35",
+            "s38",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "389554c8d9a1f22a",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "spawn_process rests on execSync, which is fine. write_file is tied to execSync(\"npm init -y\"), a process-creation sink; installInDirectory reaches no file-write API, only execSync and fs.existsSync.",
+          "evidence_refs": [
+            "s37",
+            "s34",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "ed51b7f7476c39e3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The HTML-check exit needs c5 and c6, and the 401 block s39 is the then arm of the c11 test; three conditions.",
+          "evidence_refs": [
+            "s8",
+            "s21",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "5758ff15715b74e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The browser-open spawn at f1:580 runs only inside the 401 block.",
+          "evidence_refs": [
+            "s39",
+            "s40"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "9a74a921ed226908",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs when the server answers 401; there is no evasion logic.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "3b640dff3bbf0a60",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate reads an auth error status from the server, not a target property.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "13e80de99800c801",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:580 (in the 401 block) calls waitForEnterThenOpenUrl (f1:63), which calls openInBrowser (f1:72); openInBrowser runs exec at f1:49.",
+          "evidence_refs": [
+            "s40",
+            "s25",
+            "s26",
+            "s27",
+            "s23",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "040e6bf68b06fd02",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "waitForEnterThenOpenUrl is also called at f1:325, f1:452 and f1:506, so the exec sink is reachable without the 401 gate.",
+          "evidence_refs": [
+            "f1:325",
+            "f1:452",
+            "f1:506",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "ddfe4bc8aaa94903",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "exec from child_process (f1:35) creates a process.",
+          "evidence_refs": [
+            "s23",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "k_01cfd88f1c.L6.drop",
+          "claim_sha256": "12e7b3d4d8bad714",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "DEBUG_OPEN is read only to print debug console.log lines (f1:46-52); it changes no behaviour.",
+          "evidence_refs": [
+            "s41",
+            "s52",
+            "s50"
+          ]
+        },
+        {
+          "claim_id": "k_085813f98d.L6.drop",
+          "claim_sha256": "0c3b8ea6b9131441",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform chain only picks which opener command string (open, start or xdg-open) is built for the same browser-open call, which is plumbing.",
+          "evidence_refs": [
+            "s42",
+            "s57"
+          ]
+        },
+        {
+          "claim_id": "k_0ef145f071.L6.drop",
+          "claim_sha256": "8eae35180cfaf999",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32 branch only writes a progress line to stderr and flushes the UI stream.",
+          "evidence_refs": [
+            "s43",
+            "s55"
+          ]
+        },
+        {
+          "claim_id": "k_4efdc1ae62.L6.drop",
+          "claim_sha256": "8222a60e4f762b00",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The second half of the DEBUG_OPEN test only controls debug logging.",
+          "evidence_refs": [
+            "s44",
+            "s52"
+          ]
+        },
+        {
+          "claim_id": "k_a07baa46f8.L6.drop",
+          "claim_sha256": "f73996672c10ea2d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32 test only chooses the terminal stream (CON or /dev/tty) for UI output.",
+          "evidence_refs": [
+            "s45",
+            "s49"
+          ]
+        },
+        {
+          "claim_id": "k_a8fa080037.L6.drop",
+          "claim_sha256": "bcda894cb179a72f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "releasePackageDirLock only changes the working directory to avoid a Windows rename lock; it gates no payload.",
+          "evidence_refs": [
+            "s46",
+            "s54"
+          ]
+        },
+        {
+          "claim_id": "k_b470b1c9e8.L6.drop",
+          "claim_sha256": "b946d4d302f865dd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin test is the first step of the opener-command selection, which is plumbing for the same browser-open spawn.",
+          "evidence_refs": [
+            "s47",
+            "s57"
+          ]
+        },
+        {
+          "claim_id": "k_fab89e0c8c.L6.drop",
+          "claim_sha256": "31424299848783b4",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The fs.existsSync(package.json) test decides whether the execSync(\"npm init -y\") process spawn runs, so it is a missed gate on that spawn.",
+          "evidence_refs": [
+            "s48",
+            "s51",
+            "f1:161-163"
+          ]
+        },
+        {
+          "claim_id": "q_01412ef4bc.L6.drop",
+          "claim_sha256": "ba3a31ea967b4486",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch only picks the CON or /dev/tty write stream for UI output.",
+          "evidence_refs": [
+            "s49",
+            "s45"
+          ]
+        },
+        {
+          "claim_id": "q_0665c45202.L6.drop",
+          "claim_sha256": "d9f73d67f6a038a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The DEBUG_OPEN && stderr test only guards a debug console.log.",
+          "evidence_refs": [
+            "s50"
+          ]
+        },
+        {
+          "claim_id": "q_3de2653ab9.L6.drop",
+          "claim_sha256": "23beb1f94c1bcffd",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The whole if (!fs.existsSync(packageJsonPath)) statement decides whether the execSync(\"npm init -y\") process spawn runs, a missed gate on that behaviour.",
+          "evidence_refs": [
+            "s51",
+            "f1:161-163"
+          ]
+        },
+        {
+          "claim_id": "q_4e2ff93596.L6.drop",
+          "claim_sha256": "55e784cab0f0cb08",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if (DEBUG_OPEN) block only prints a debug line.",
+          "evidence_refs": [
+            "s52"
+          ]
+        },
+        {
+          "claim_id": "q_65a367a22f.L6.drop",
+          "claim_sha256": "792e15b502d0fba6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the fs.existsSync test already recorded as the c3 condition (s5), so it is a duplicate.",
+          "evidence_refs": [
+            "s53",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_8c8f712047.L6.drop",
+          "claim_sha256": "d094b3a6773d6b5f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if only chdirs out of the package folder (Windows rename lock) and gates no payload.",
+          "evidence_refs": [
+            "s54"
+          ]
+        },
+        {
+          "claim_id": "q_b4b5d8a7a4.L6.drop",
+          "claim_sha256": "a5afea45cf6dce20",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch only writes a progress line to stderr and flushes the UI stream.",
+          "evidence_refs": [
+            "s55"
+          ]
+        },
+        {
+          "claim_id": "q_c826db2caa.L6.drop",
+          "claim_sha256": "60cb81415404cb93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This if is the cwd.includes(node_modules) test already recorded as c1 (s1), so it is a duplicate.",
+          "evidence_refs": [
+            "s56",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "q_c8dcab0872.L6.drop",
+          "claim_sha256": "ac2a255e16f57b4c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform if/else chain only picks the opener command string for the same browser-open call.",
+          "evidence_refs": [
+            "s57"
+          ]
+        },
+        {
+          "claim_id": "q_d8dc1ce2c2.L6.drop",
+          "claim_sha256": "b9eda336e7322d2e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the !raw INIT_CWD test already recorded as c2 (s4), so it is a duplicate.",
+          "evidence_refs": [
+            "s58",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "q_e20d794684.L6.drop",
+          "claim_sha256": "0637afcea64b4981",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32/else part of the opener chain only picks the command string for the same browser-open call.",
+          "evidence_refs": [
+            "s59"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "1d1bb0ec989ec727",
+      "packet_sha256": "ba42f96c914eb8f7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "5ebfb751d86f2b29",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The witness holds (call at f1:506 inside the 402 block, waitForEnterThenOpenUrl, openInBrowser, exec at f1:49), but the same functions are also reached from other callers outside this gate: f1:325 (missing config), f1:452 (GitHub-required branch inside 402, before the payment UI), f1:580 (401 branch",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s4",
+            "f1:325",
+            "f1:452",
+            "f1:580",
+            "f1:86"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "b70755937ab983d2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The server-response checks decide whether the browser-open process is spawned or the install proceeds or aborts, so the effect is enabling a single behaviour. There is no alternative payload per branch and no change of target host or artifact.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4",
+            "f1:373",
+            "f1:409"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "a635200e292802b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs the guarded action when the server answers with allowed or payment required. It does not back off on sandbox, CI or analysis signals, so the polarity is activate.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:373",
+            "f1:409"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "c0c24f811466c319",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions are a license/payment server's HTML-or-JSON response and status plus install-directory checks. None of them targets a victim, avoids analysis, or adapts to a platform or to data being present, so unclear is the fitting purpose label.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:127",
+            "f1:142"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "d41bd062f5334ccc",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The witness holds (call at f1:580 inside the 401 block, waitForEnterThenOpenUrl, openInBrowser, exec at f1:49), but openInBrowser is also reached from the 402 branch (f1:506, f1:452), the missing-config branch (f1:325) and the Enter handler (f1:86). So the sink is not reachable only through the 401 ",
+          "evidence_refs": [
+            "s11",
+            "s6",
+            "s7",
+            "s8",
+            "s4",
+            "f1:506",
+            "f1:452",
+            "f1:325",
+            "f1:86"
+          ]
+        }
+      ]
+    }
+  ]
+}

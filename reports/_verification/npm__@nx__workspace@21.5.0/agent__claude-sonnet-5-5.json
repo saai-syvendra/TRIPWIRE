@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@nx/workspace",
+    "version": "21.5.0",
+    "archive_sha256": "c707580690cd29a57d986059d600c3afe112f8df74935608363ab61d972fc3d2"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "18f442a0ab148b30",
+      "packet_sha256": "108bfd53de475b7c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "efca9e975e68a1ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition of the if at f1:134 is fs.existsSync(npmrcPath), and npmrcPath is path.join(home, '.npmrc') at f1:132, so it probes ~/.npmrc.",
+          "evidence_refs": [
+            "s1",
+            "f1:132",
+            "f1:134"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "36df18e6a1cf9bf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if at f1:134 runs only when existsSync(~/.npmrc) is true, with no negation; the read at f1:135 is inside that arm.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "1b1a0519b4ab164e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code nests the guards: the top-level exit on win32 (f1:27), then the try around spawnSync('npm', ['whoami']), then if (r.status === 0 && r.stdout), then the existsSync if. The status and stdout checks are two conditions in one test, so the cited conditions join with and, and the minimum is 5.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s2",
+            "f1:27",
+            "f1:128",
+            "f1:129",
+            "f1:134"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "03c02c15d1a105b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fs.readFileSync call on npmrcPath at f1:135 sits inside region s10, which is the then block of the existsSync if. The witness is empty and the sink is in the region itself.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "f1:135"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "7cef72da482d27bc",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The read of ~/.npmrc at f1:135 appears once in the file, inside the async IIFE under the guards. It is not in a named function, export, timer or handler that anything else calls. The only other reads are of /tmp/inventory.txt and the paths listed in it.",
+          "evidence_refs": [
+            "s11",
+            "f1:135",
+            "f1:144"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "5316eace6bc77ed5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.readFileSync on the ~/.npmrc path is a file-read sink, and its result is stored in result.npmrcContent. That fits cred_read, since .npmrc commonly holds npm tokens.",
+          "evidence_refs": [
+            "s11",
+            "f1:135"
+          ]
+        },
+        {
+          "claim_id": "k_58f99aefd9.L6.drop",
+          "claim_sha256": "dc1e2cf7dd130e96",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The anchor is the readFileSync call, a payload sink, not a decision. The environment test it depends on, existsSync, is already recorded as c10, so leaving this out of the gates is right.",
+          "evidence_refs": [
+            "s11",
+            "f1:135"
+          ]
+        },
+        {
+          "claim_id": "q_662519e487.L6.drop",
+          "claim_sha256": "6d8f6cfffe63d3ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The anchor is a try block with an empty catch that only swallows read errors. It tests no environment property and decides nothing about what runs. The existsSync test inside it is recorded separately.",
+          "evidence_refs": [
+            "s12",
+            "f1:133",
+            "f1:137"
+          ]
+        }
+      ]
+    }
+  ]
+}

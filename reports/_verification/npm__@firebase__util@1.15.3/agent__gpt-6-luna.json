@@ -1,0 +1,373 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@firebase/util",
+    "version": "1.15.3",
+    "archive_sha256": "0a812b12ea0d186c2c864417140ef27954dc28bf9cbb6097dc5cb447a24be877"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "58ceedff8a1073c6",
+      "packet_sha256": "eb318c4fae374f51",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f8bde5c929cbf578",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly compares `process.env.X_GOOGLE_TARGET_PLATFORM` with `'fah'` at the cited decision. The same binding is read in the `if` test.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "3436f51f68d36025",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `=== 'fah'` and its then arm returns early, so the later guarded fetch path is reached when the environment value is not `'fah'`. In the sense leading to that later code, the positive condition is `!= 'fah'`.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "da00e9cd88760537",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the `X_GOOGLE_TARGET_PLATFORM` process environment property directly.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "31fdc77d1ffc987b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`envVariable` is assigned from `process.env[ENV_VARIABLE]?.trim()`, and `ENV_VARIABLE` is the literal `FIREBASE_WEBAPP_CONFIG`; the cited falsy check tests that binding.",
+          "evidence_refs": [
+            "s3",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9fdb650baf937bf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`if (!envVariable) return undefined` exits when the value is falsy, so subsequent config parsing is reached when the trimmed environment value is truthy. `getFinalConfig` also exits when its partial config is absent.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "3d91c5a8a026f6cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The value originates from the `FIREBASE_WEBAPP_CONFIG` process environment property.",
+          "evidence_refs": [
+            "s3",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "0ffb13af95e0306d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The cited test calls `startsWith` on `projectId`, which is assigned from `partialConfig.projectId || '-'`; it does not read `process.env.FIREBASE_WEBAPP_CONFIG` at this site.",
+          "evidence_refs": [
+            "s6",
+            "f1:70"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d902e36c19b49c8b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The tested receiver is `projectId` and the value is `'demo-'`; `projectId` comes from `partialConfig.projectId || '-'`, not directly from `process.env.FIREBASE_WEBAPP_CONFIG`. The return on a starts-with match skips the later fetch.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:70"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "8dc5d8ef143ce351",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This check categorizes the `projectId` field in the supplied config, rather than reading an environment property; its category is config data.",
+          "evidence_refs": [
+            "s6",
+            "f1:70"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "35773ff1639a3b3c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The expression checks the local bindings `appId` and `apiKey`, assigned from `partialConfig.appId` and `partialConfig.apiKey`; it does not test `process.env.FIREBASE_WEBAPP_CONFIG` at this site.",
+          "evidence_refs": [
+            "s8",
+            "f1:76-77"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "5c4300207e69f870",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The test is `!appId || !apiKey`, and its true branch warns and returns; the later fetch requires both fields to be present. Neither tested binding is the environment variable itself.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "f1:76-77"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "6de75a2e3846a6e1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check concerns availability of `appId` and `apiKey` fields in `partialConfig`, so it is a config data check, not an environment variable category.",
+          "evidence_refs": [
+            "s8",
+            "f1:76-77"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "015075811a0fca86",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "judgement",
+          "evidence": "Reaching the fetch region requires a truthy parsed config and a non-`'fah'` platform, then a project ID not starting with `'demo-'`, and both app ID and API key present. The latter two checks are not the claimed repeated environment-value conditions: they inspect config fields, so the recorded `c4` ",
+          "evidence_refs": [
+            "s4",
+            "s2",
+            "s7",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "061eb4cd35c4de94",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate permits the config refresh request to run only when the required config is available and the early-return cases do not apply. The request fetches web configuration and merges it into the supplied config.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s9",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e3daf7dc5e3b326d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch enables the config refresh on environments outside the App Hosting and emulator special cases, rather than backing off because analysis or a sandbox is detected.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bd4b3351a5073c5b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks determine whether enough config data is available and whether it needs refreshing; the code returns existing config in the special cases and otherwise fetches missing fresh web config.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s9",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "98c18706e364a551",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fetch statement is reached after the early returns for absent config, App Hosting, demo projects, and missing app ID or API key. The `fetch` call is in the later region controlled by those checks.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1918266cd2f8977c",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The cited region shows the fetch under `getFinalConfig`, but the file does not establish from these slices whether another caller can reach that function or the same request outside this chain; the call site and export/caller context need broader control-flow review.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "6b335c5c1d034eb0",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "other",
+          "evidence": "The sink is a network `fetch` that retrieves Firebase web configuration, but the stated behavior `benign_build` is not defined by the code or the packet’s behavior criteria, so the code alone does not establish that classification.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "5369dcaba3472faa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The config parser region is reached after `getPartialConfig` returns a truthy parsed config; within that function the truthy check encloses both the JSON and file-path parsing routes. There is one required condition for this region.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "14b8b09364f7fe99",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A present config enables parsing and the subsequent config refresh pipeline; without it the helper returns undefined and later config-dependent work is skipped.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d08facdbd4b62959",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A nonempty supplied config activates parsing; the code contains no analysis or sandbox detection in this gate.",
+          "evidence_refs": [
+            "s3",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e3480e37259b8df6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment value supplies configuration data needed by the later config processing; the check ensures that data exists.",
+          "evidence_refs": [
+            "s3",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "1ab300dc65ca80a8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `readFile` call occurs inside `getPartialConfig` after its truthy environment-value check, and the containing region is the file-path parsing route for that value.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "f2bb645b954005f6",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The file shows the read in `getPartialConfig`, but exclusivity requires confirming that no other caller can reach that read outside this gate; the available code does not establish a complete caller graph.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "aae41931e4a6672e",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "other",
+          "evidence": "`readFile` reads configuration contents, but the packet does not define `benign_build` as a behavior that this read itself performs; the code shown does not decide the behavior label.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_fe169d0b26.L6.drop",
+          "claim_sha256": "14a530ba1589feb2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `startsWith('{\"')` check chooses whether the already supplied value is parsed as inline JSON or treated as a file path. It is a format discriminator, not an environment check deciding which install behavior runs.",
+          "evidence_refs": [
+            "s14",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "q_c0cb4022cc.L6.drop",
+          "claim_sha256": "d114d3ce1e0bcb91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The full branch selects inline JSON parsing when the value starts with the JSON prefix and otherwise constructs a file URL and reads a file; it distinguishes input representation, not an environment gate deciding install behavior.",
+          "evidence_refs": [
+            "s15",
+            "s13"
+          ]
+        }
+      ]
+    }
+  ]
+}

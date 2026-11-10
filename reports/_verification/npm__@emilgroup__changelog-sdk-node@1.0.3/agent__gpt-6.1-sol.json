@@ -1,0 +1,938 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/changelog-sdk-node",
+    "version": "1.0.3",
+    "archive_sha256": "9f6b69a0e89749375c67df59c67435be4a33249c9a1e3d198dd05945d4b2a00c"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "9b991725c5c061cc",
+      "packet_sha256": "c83eef5de61599db",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "5ae5a2be3a183c97",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The destructured execSync binding runs the claimed command inside a try whose catch handles failure (f1:3, f1:37-44).",
+          "evidence_refs": [
+            "s1",
+            "f1:3",
+            "f1:44"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "f49b9d51d858904a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Successful completion of the command permits its output to reach token insertion; a thrown error skips that insertion (f1:37-44).",
+          "evidence_refs": [
+            "s1",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "942ad24c88a5a8d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The command queries the configured npm authentication token, a credential artifact used for publishing (f1:38-42).",
+          "evidence_refs": [
+            "s1",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "a44d0c6cad693971",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads configToken, bound directly to trimmed stdout from the imported execSync command (f1:3, f1:38-41).",
+          "evidence_refs": [
+            "s3",
+            "s1",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "497df86014ada556",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The first conjunct requires trimmed command output to be truthy before inserting it into tokens (f1:41-42).",
+          "evidence_refs": [
+            "s3",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "76b4f89b41480149",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The command queries the configured npm authentication token, a credential artifact used for publishing (f1:38-42).",
+          "evidence_refs": [
+            "s1",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "8908bcc919ae3035",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads configToken, bound directly to trimmed stdout from the imported execSync command (f1:3, f1:38-41).",
+          "evidence_refs": [
+            "s4",
+            "s1",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "a8c4b13e2759036f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition excludes the literal string undefined with !== before token insertion (f1:41-42).",
+          "evidence_refs": [
+            "s4",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "3dd1f54ec2fef927",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The command queries the configured npm authentication token, a credential artifact used for publishing (f1:38-42).",
+          "evidence_refs": [
+            "s1",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "2639304b37b60517",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads configToken, bound directly to trimmed stdout from the imported execSync command (f1:3, f1:38-41).",
+          "evidence_refs": [
+            "s5",
+            "s1",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "bd1a47cd641439a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition excludes the literal string null with !== before token insertion (f1:41-42).",
+          "evidence_refs": [
+            "s5",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "9200986478d83df2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The command queries the configured npm authentication token, a credential artifact used for publishing (f1:38-42).",
+          "evidence_refs": [
+            "s1",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "87fe901bf85d16a8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "The tested file content comes from a loop over home, working-directory and system npm configuration files, rather than exactly the claimed home-file probe (f1:11-21).",
+          "evidence_refs": [
+            "s6",
+            "f1:11",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "b464751967a7d87d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The match uses the claimed regular expression, and its result must be present to add a token (f1:20-22).",
+          "evidence_refs": [
+            "s6",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "cc98294cac80d489",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test filters authentication tokens read from npm configuration artifacts (f1:18-22).",
+          "evidence_refs": [
+            "s6",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "032f2bea52dd641b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "The tested file content comes from a loop over home, working-directory and system npm configuration files, rather than exactly the claimed home-file probe (f1:11-21).",
+          "evidence_refs": [
+            "s7",
+            "f1:11",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "650bea8cc909f790",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The negation of startsWith excludes captured values beginning with the literal interpolation prefix (f1:21-22).",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "ca88889affd30ae9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test filters authentication tokens read from npm configuration artifacts (f1:18-22).",
+          "evidence_refs": [
+            "s7",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "2cea0b31901c1a1f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The filter tests keys obtained directly from Object.keys(process.env), and selected keys are subsequently read (f1:27-31).",
+          "evidence_refs": [
+            "s8",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "10679fe6eda55599",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The key predicate accepts the two exact names or names containing both substrings; only nonempty trimmed comma-separated values are inserted (f1:27-34).",
+          "evidence_refs": [
+            "s8",
+            "f1:34"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "66b1c82438ef7a98",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The predicate and subsequent value reads inspect process environment variables (f1:27-34).",
+          "evidence_refs": [
+            "s8",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "c209198c543f05f3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "whoami is awaited from fetchJson, whose resolved value is JSON parsed from the https.get response body (f2:9-15, f2:51-52).",
+          "evidence_refs": [
+            "s9",
+            "f2:11",
+            "f2:14",
+            "f2:51"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "5f6cff35a540c8ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return rejects a missing response or falsy username, so continuation requires a truthy username (f2:52).",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "526a50be816577d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The username is read from the parsed network response returned by fetchJson (f2:11-14, f2:51-52).",
+          "evidence_refs": [
+            "s9",
+            "f2:11",
+            "f2:14"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "19dbcb5e05947321",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "owned comes from getOwned, which builds an array from parsed https.get search responses; its length controls the return (f2:37-55).",
+          "evidence_refs": [
+            "s11",
+            "f2:40",
+            "f2:42",
+            "f2:46",
+            "f2:54"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "1b1251c2f090f3ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "getOwned returns an array, so continuing past the falsy length check requires length greater than zero (f2:38-46, f2:55).",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "f2:38",
+            "f2:46"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "8064059db38d7c1b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checked array is assembled from package names in registry search responses (f2:40-46, f2:54-55).",
+          "evidence_refs": [
+            "s11",
+            "f2:40",
+            "f2:42"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c1093c35f685c866",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "File matches passing the prefix filter, nonempty environment tokens, and successful valid config output independently add to the same set; any one environment token suffices (f1:16-45, f1:88).",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7",
+            "s8",
+            "s25",
+            "f1:45"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "af406a8f6b441828",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks enable the publishing path when usable credentials or associated package data are available; failed checks omit that path.",
+          "evidence_refs": [
+            "s2",
+            "s13",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "21107226cebcc8d6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks activate publishing for available credentials or package ownership, without testing for analysis environments.",
+          "evidence_refs": [
+            "s2",
+            "s13",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "106e44813062e9d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks establish availability of credentials or the account and package data required for publishing.",
+          "evidence_refs": [
+            "s2",
+            "s13",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ebbc0438e55d3941",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn lies inside the token-length branch and launches the resolved deployment file; that file calls its local run definition, which contains the publishing sink (f1:88-95, f2:49-81).",
+          "evidence_refs": [
+            "s13",
+            "s15",
+            "s16",
+            "s17",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "8aa9d640815238a7",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The deployment file has its own immediately invoked entry point reading environment tokens and calling run, so it can reach publishing without the index token-length decision (f2:76-82).",
+          "evidence_refs": [
+            "s16",
+            "f2:76",
+            "f2:77",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "f19b043da3c24d28",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink resolves to child_process.execSync and invokes npm publish after rewriting the package name and version for owned packages (f2:4, f2:57-66).",
+          "evidence_refs": [
+            "s14",
+            "f2:4",
+            "f2:57",
+            "f2:64"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "e52e8e043d9e9e3b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both early returns must be avoided before the shared publishing region, requiring username truthiness and a nonempty owned array (f2:52-57).",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d7f23fe694dc77b5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks enable the publishing path when usable credentials or associated package data are available; failed checks omit that path.",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s18",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d890b420adc20c13",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks activate publishing for available credentials or package ownership, without testing for analysis environments.",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s18",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "cf65213a08570e2d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks establish availability of credentials or the account and package data required for publishing.",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s18",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "5cbff151b8342000",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sink lies directly in the region after both early returns inside run (f2:52-66).",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s18",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "2a474c0d1bb8cab9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The publishing sink occurs only inside run after both early returns, so even the independent deployment entry point must pass these checks (f2:49-81).",
+          "evidence_refs": [
+            "s17",
+            "s10",
+            "s12",
+            "s14",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "722b0e4d02e905cf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink resolves to child_process.execSync and invokes npm publish after rewriting the package name and version for owned packages (f2:4, f2:57-66).",
+          "evidence_refs": [
+            "s14",
+            "f2:4",
+            "f2:57",
+            "f2:64"
+          ]
+        },
+        {
+          "claim_id": "k_36f8487214.L6.drop",
+          "claim_sha256": "394eb15666bbb928",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence test only cleans up a temporary README when no original existed; it manages restoration rather than selecting the publishing payload (f2:60-71).",
+          "evidence_refs": [
+            "s19",
+            "f2:60",
+            "f2:70"
+          ]
+        },
+        {
+          "claim_id": "k_4023412a83.L6.drop",
+          "claim_sha256": "802ae44dc08f45e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks whether the package-local deployment script exists before starting it, which is launch plumbing rather than an environment target gate (f1:89-95).",
+          "evidence_refs": [
+            "s20",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "k_bca9f38bb4.L6.drop",
+          "claim_sha256": "01382223dd85f193",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test records whether an original README needs restoration after publishing, without gating the publishing operation (f2:60-71).",
+          "evidence_refs": [
+            "s21",
+            "s14",
+            "f2:70"
+          ]
+        },
+        {
+          "claim_id": "q_1cf3c7b7df.L6.drop",
+          "claim_sha256": "e439ca4826293145",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test records whether an original README needs restoration after publishing, without gating the publishing operation (f2:60-71).",
+          "evidence_refs": [
+            "s22",
+            "s14",
+            "f2:70"
+          ]
+        },
+        {
+          "claim_id": "q_505f4df0cc.L6.drop",
+          "claim_sha256": "899b040d7c01e3f6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence test only cleans up a temporary README when no original existed; it manages restoration rather than selecting the publishing payload (f2:60-71).",
+          "evidence_refs": [
+            "s23",
+            "f2:60",
+            "f2:70"
+          ]
+        },
+        {
+          "claim_id": "q_7a5d11e5ee.L6.drop",
+          "claim_sha256": "0068388746fac903",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks whether the package-local deployment script exists before starting it, which is launch plumbing rather than an environment target gate (f1:89-95).",
+          "evidence_refs": [
+            "s24",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_b30584949f.L6.drop",
+          "claim_sha256": "f18c2f07f828faf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the same conjunction already represented by the config-output conditions c2, c3 and c4 (f1:41).",
+          "evidence_refs": [
+            "s25",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_c6a7742791.L6.drop",
+          "claim_sha256": "5b79f24f1869d1f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This try handles the same command success or failure already represented by c1 (f1:37-44).",
+          "evidence_refs": [
+            "s26",
+            "s1"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "04d6332fab96c9f9",
+      "packet_sha256": "5d04aa7ac3a3ec55",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "a3a10b876f410ba1",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "Slice s1 contains only a sample-missing placeholder, and code/f1.unavailable.txt also reports the sample missing. No code is available to anchor the claimed API test or file probe.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "e5fe95f0d9255688",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "Slices s1 and s2 contain only sample-missing placeholders, and code/f1.unavailable.txt supplies no code. The claimed regex comparison and its guarded polarity cannot be anchored.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "50a6bffd456fa744",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "Slice s3 contains only a sample-missing placeholder, and code/f1.unavailable.txt also reports the sample missing. No code is available to anchor the claimed API test or file probe.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "cd1bd44448c96c89",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "Slices s3 and s2 contain only sample-missing placeholders, and code/f1.unavailable.txt supplies no code. The claimed prefix comparison and its guarded polarity cannot be anchored.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "d27f091b61353418",
+      "packet_sha256": "7abcd5c8d3e3ee07",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "46fdf08971001184",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The execSync probe is inside a try block; only a successful return can reach the token addition, while its exception is caught without adding that token (f1:37-44).",
+          "evidence_refs": [
+            "s1",
+            "f1:41",
+            "f1:44"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "396a1c73dea75cbd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The trimmed stdout of the execSync probe is bound to configToken, whose truthiness is required before adding it to the token set (f1:38-42).",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "11b0c44d042e6623",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The token-addition condition explicitly requires configToken !== 'undefined', comparing the probe stdout against that string (f1:38-42).",
+          "evidence_refs": [
+            "s4",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "b1e99a1164c30c82",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The token-addition condition explicitly requires configToken !== 'null', comparing the probe stdout against that string (f1:38-42).",
+          "evidence_refs": [
+            "s5",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "a3a10b876f410ba1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loop reads each constructed npmrc path with fs.readFileSync, splits its content into lines, and tests each regex match before adding its capture (f1:11-22).",
+          "evidence_refs": [
+            "s6",
+            "f1:11",
+            "f1:18",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "8ab7d833423b4112",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The regex in s6 matches the claimed auth-token pattern against lines from the npmrc content, and a successful match is required by the addition condition (f1:18-22).",
+          "evidence_refs": [
+            "s6",
+            "f1:18",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "50a6bffd456fa744",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The startsWith decision reads a capture obtained by matching lines of the fs.readFileSync result for the npmrc paths (f1:11-22).",
+          "evidence_refs": [
+            "s7",
+            "f1:18",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "0fea31e42c9449d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The capture is added only when !m[1].startsWith('${') holds, positively requiring the claimed not_startswith condition (f1:21-22).",
+          "evidence_refs": [
+            "s7",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "d0aca70c6ab0187b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The key filter accepts the two exact names or keys containing both NPM and TOKEN; their values are split and trimmed, and only nonempty pieces are added (f1:27-34).",
+          "evidence_refs": [
+            "s8",
+            "f1:31",
+            "f1:34"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2ca436f335893153",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The claimed conjunction does not describe every cited region: s13 spawns the deploy script before either remote-response guard is evaluated, whereas only s14 follows both remote guards (f1:88-95; f2:51-56).",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "b6927d4742075510",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Available credentials enable the deploy launch, and successful identity and owned-package checks enable the publication loop; no alternate payload branch is present (f1:87-95; f2:51-66).",
+          "evidence_refs": [
+            "s2",
+            "s9",
+            "s10",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "c2faff256d5c9a85",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks proceed when usable credentials, a username, and owned packages are available, activating publication rather than detecting an analysis environment (f1:18-42; f2:51-66).",
+          "evidence_refs": [
+            "s3",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "d5c34ff82a10d55e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions obtain credential material and require an authenticated username and available package names before publishing, supporting data_availability (f1:18-42; f2:51-66).",
+          "evidence_refs": [
+            "s3",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "8000743ea8cce87f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded spawn targets the constructed deploy-script path, whose entry point calls the local run definition; its publication sink follows both early returns inside the claimed region (f1:89-95; f2:49-81).",
+          "evidence_refs": [
+            "s13",
+            "s16",
+            "s17",
+            "s18",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "db22657fafa55a4a",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The deploy file independently invokes its async entry point, reads tokens directly from the environment, and calls run without passing f1:88; this reaches the same publication sink after its local checks (f2:76-82).",
+          "evidence_refs": [
+            "f2:76",
+            "f2:77",
+            "s17",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "0bd04fcb4e6980aa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink resolves to child_process.execSync and runs npm publish after rewriting the local package name and version for each owned package, providing a mechanism for self-propagation (f2:4; f2:57-66).",
+          "evidence_refs": [
+            "f2:4",
+            "f2:57",
+            "f2:64",
+            "s15"
+          ]
+        }
+      ]
+    }
+  ]
+}

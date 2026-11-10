@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pthon",
+    "version": "1.0.0",
+    "archive_sha256": "36d005a0d15b185977290bc0214d32d38456776b7a498d171b89300374c94a2f"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "af74da254ade993c",
+      "packet_sha256": "f1b4cd300404a8b7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "e78afc8c6cba9753",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13 is the condition of an if statement comparing os.name to a string; os is imported at f1:12.",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "1315a6b904398e65",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm (s2) runs the guarded code when os.name == \"nt\"; the operator is positive and there is no negation or else arm.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.name reads the operating system family, so category os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "7ee9df5332eeed87",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single if on os.name == \"nt\" guards the whole block (s3 and its decoded form s4), so the expression is just c1 with a minimum of 1 condition.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os check only decides whether the download-and-exec runs at all, and there is no alternative payload, so the effect is enables.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the host is Windows; this is not a back-off on analysis, so polarity is activate.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload is restricted to Windows hosts (the classifiers also say Windows only), which is targeting rather than anti-analysis.",
+          "evidence_refs": [
+            "s2",
+            "f1:36"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "5a94d231a726d409",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The requests.get call (s5) and the exec (s6) sit directly inside the then block of the os.name check, so the empty witness is correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1503be9c98d8435b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The exec sits in run() of the install command class, inside the nt branch; the file has no other caller, export or timer that reaches it.",
+          "evidence_refs": [
+            "f1:10-18",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "abd9f0fa792972eb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get fetches a remote URL (network, download) and the result text is passed to exec (eval of downloaded code).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

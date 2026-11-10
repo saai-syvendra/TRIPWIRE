@@ -1,0 +1,374 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "tierlist",
+    "version": "1.0.1",
+    "archive_sha256": "ac84b4431b0edbda39c8cb0027f1866c907e350a0ef1cba12b61e2a332839904"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "05d12ed8c2300359",
+      "packet_sha256": "463b55604927d419",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "15dbc21b74c93834",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`findExistingRC` calls `fs.access(full)` and adds `full` to `found` only when the awaited access succeeds; the catch skips inaccessible paths. The `full` path is assembled from the home directory and each listed RC filename.",
+          "evidence_refs": [
+            "s1",
+            "f1:6",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "de5f9251d6305f2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Successful access marks an RC file as found, and `runRCChecker` returns only when the resulting list is empty; thus the guarded loop runs when at least one access confirms an existing file. The two listed guard entries refer to the same early return.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3c4b8878c5da9f3a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The access probe checks whether one of the named shell startup files exists under the home directory, so `target_artifact` describes the tested property.",
+          "evidence_refs": [
+            "s1",
+            "f1:6",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "7765a045628a2326",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`autoSource` assigns `process.env.SHELL || \"\"` to `shell`, then the cited conditional tests that variable with `includes`.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:33"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "5e818aee0835b430",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditional includes `shell.includes(\"bash\")` as one disjunct, and `shell` is the value of `process.env.SHELL` with an empty-string fallback. The then branch therefore runs when this comparison is true or when the other disjunct is true.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:33"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "d763c7c61b57296f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads `process.env.SHELL` through the local `shell` variable, making `env_var` the appropriate category.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "db21743cc5096001",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`autoSource` assigns `process.env.SHELL || \"\"` to `shell`, then the cited conditional tests that variable with `includes`.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:33"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "6d0484bd2b20f35c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditional includes `shell.includes(\"zsh\")` as one disjunct, and `shell` is the value of `process.env.SHELL` with an empty-string fallback. The then branch therefore runs when this comparison is true or when the other disjunct is true.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:33"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "15a95d2609dda19a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads `process.env.SHELL` through the local `shell` variable, making `env_var` the appropriate category.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "e96bfdcd2c5db088",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`appendWifiA` awaits `fs.readFile(rcFile, \"utf8\")` into `data`, and the cited condition calls `data.includes` on that result.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d63171ff9f9d6df6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When `data.includes(\"wifi-a\")` is true, the function returns; the subsequent write is reached when that string is absent. `data` contains the awaited file contents read by `fs.readFile`.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "ed1ef50d05ca7fee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition examines the contents returned from reading the RC file, so `file_content` is the appropriate category.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9a13a279a999d5b1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`runRCChecker` returns when no existing RC files were found, and otherwise calls `appendWifiA` for each; that function writes only after the `wifi-a` presence check fails. These nested conditions require both an existing RC file and the marker's absence, with two minimum conditions.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "86c19efab2412e37",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "With an existing RC file that lacks `wifi-a`, the code appends the marker text to that file, enabling the persistence and file-write behavior stated in the claim.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s8",
+            "f1:13-14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "506fe4529ab1e024",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The behavior runs when the target startup file exists and does not already contain the marker, which activates the write on that target.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "04fada55488050da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code finds available startup files and avoids appending duplicate marker content, so the gate is about whether the target file is available for the persistence write.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "8f317d1c7205daaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After at least one RC path is found, `runRCChecker` calls `appendWifiA`; within it, the marker check returns on a match and the cited write follows on the missing-marker side. The sink is the write expression in that region.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8",
+            "s9",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "3602c7dd29546114",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "`appendWifiA` is a private function with a single call site in `runRCChecker`'s loop, and that loop is skipped when no RC files exist; the write itself is also skipped when the marker is already present. No other caller of the write path appears in this file.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8",
+            "s9",
+            "f1:28",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "e168ba27d10b44e0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The branch calls `fs.writeFile` with the RC path and existing contents plus `TEXT`, which can write the marker into the startup file and provide persistence.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "28c4b3f07f5214b1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The existing-file check gates the loop, and `autoSource` spawns only when either the shell contains `bash` or it contains `zsh`. The resulting path combines the existing-file condition with the two alternatives, with two minimum conditions.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "60777c8f288f0c05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When an RC file exists and the shell matches either listed shell name, the code calls `spawn`, enabling process creation.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "73bebc87f7fb1da7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The process spawn runs for the listed target shell environments after an RC file is found, so the gate activates behavior on those targets.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "92a81e7f11239d77",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code recognizes bash and zsh before issuing a shell-specific `source` command, which makes portability the purpose of this shell check.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "16904f4a1bb4dbc4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existing-file check permits the loop, which calls `autoSource`; inside that function the bash-or-zsh condition directly contains the cited `spawn` sink. The sink therefore lies on the then side of both guards.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10",
+            "s11",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "235ca2cdeae631a4",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "`autoSource` is private and its only call is in the loop reached after the existing-file check; its spawn is additionally controlled by the bash-or-zsh condition. No alternate caller of this spawn path appears in the file.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s11",
+            "f1:34"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "0be8e3bf9220a597",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited `spawn` is imported from `child_process` and launches the selected shell with `-c` and a `source` command, so it is a process creation sink.",
+          "evidence_refs": [
+            "s11",
+            "f1:2",
+            "f1:34"
+          ]
+        }
+      ]
+    }
+  ]
+}

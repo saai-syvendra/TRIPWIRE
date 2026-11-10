@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "com.meta.utilities",
+    "version": "99.0.0",
+    "archive_sha256": "58911b5d5646b17538de8bd1875c3b38761b8eb9736131bd1587d83b58cb723a"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b2fe605eee75a402",
+      "packet_sha256": "2e555b7d49e3ae59",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_c8c37a7229.L6.drop",
+          "claim_sha256": "d1ad6d358da7b506",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited call at f1:15 runs uname -a only to collect a value stored in `uname` and later sent in the data object; no branch or later decision reads it, so it is not an environment gate.",
+          "evidence_refs": [
+            "s1",
+            "f1:15",
+            "f1:29"
+          ]
+        },
+        {
+          "claim_id": "q_65eaba9809.L6.drop",
+          "claim_sha256": "1c216008e08ac4d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/catch at f1:14-18 only handles an execSync failure by setting a fallback string 'N/A'. Everything after it (f1:20-59) runs either way, so the try does not decide what runs and is not a gate.",
+          "evidence_refs": [
+            "s2",
+            "f1:14",
+            "f1:20"
+          ]
+        }
+      ]
+    }
+  ]
+}

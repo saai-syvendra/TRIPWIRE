@@ -1,0 +1,2365 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-opus-4-8",
+  "package": {
+    "ecosystem": "npm",
+    "name": "02-echo",
+    "version": "0.0.7",
+    "archive_sha256": "a3fb60c049272535735cde0df929c982e36b46c494d3e44809f7b4fae3b7059a"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-4-8",
+      "record_sha256": "2dff216eb1b0f93b",
+      "packet_sha256": "8a6732a70116d73b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f22062ada8f51546",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 highlights process['env']['BUILDKITE'] as the first operand of the if-condition in jy1, a decision on that env var.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "dec0b967546f628d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The value is read truthily in `if(process['env']['BUILDKITE']||...)await aL0()` with no negation reaching the then-side.",
+          "evidence_refs": [
+            "s1",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "362a1dcce04ccb98",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "BUILDKITE is the Buildkite CI presence flag, a ci_marker.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "5212f3d445370824",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 highlights process['env']['PROJECT_ID'] as an operand of the jy1 if-condition.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c28684a1c977c1a8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Read truthily in the OR-chain condition leading to aL0(); no negation on the then-side.",
+          "evidence_refs": [
+            "s2",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "78c5f20916fcb51c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "PROJECT_ID is a generic valued environment variable read as a presence check; env_var fits.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "71b8ac12addffeb0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 is process['env']['GITHUB_ACTIONS'] in the jy1 OR-chain; s4 is the same env var in Ry1's `if(process['env']['GITHUB_ACTIONS']&&...)`.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "d8956a038f24d797",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites read it truthily to reach the guarded code (OR-chain to aL0() at s3; AND condition at s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "10982771f1224395",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is the GitHub Actions CI presence flag, a ci_marker.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "5beef0a4c1b7b1fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 highlights process['env']['CODEBUILD_BUILD_NUMBER'] as an operand of the jy1 if-condition.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "4d5f86c075b401cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Read truthily in the OR-chain condition leading to aL0().",
+          "evidence_refs": [
+            "s5",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "d900d3a9a95b7a09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CODEBUILD_BUILD_NUMBER is a valued env variable read for presence; env_var is defensible.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "d2a1360a8d78fd3d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 highlights process['env']['CIRCLE_SHA1'] as the last operand of the jy1 OR-chain condition.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "10d9582e7afb1e39",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Read truthily in the OR-chain condition leading to aL0().",
+          "evidence_refs": [
+            "s6",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "7846854148e91a0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CIRCLE_SHA1 is a valued env variable (CircleCI commit sha) read for presence; env_var is defensible.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "91646ffc38d4b844",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 highlights process['env']['RUNNER_OS']==='Linux' in Ry1's guard condition.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "e14d33a879833f54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Code is `process['env']['RUNNER_OS']==='Linux'`, an == comparison to 'Linux' in positive form leading to the then-side.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "e52862cf492aaa69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "RUNNER_OS is a GitHub Actions environment variable naming the runner OS; env_var fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "2142dfacda4e13de",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8: cQ0 runs Bun['$']`ps -axco command | grep \"/home/agent/agent\"` and reads .text(); its trimmed stdout feeds the `!==''` decision used in Ry1's guard.",
+          "evidence_refs": [
+            "s8",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "a9e0fdeed143e0f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "cQ0 returns `(...text()).trim()!==''`, i.e. probe output compared unequal to empty (exists); true (process found) reaches the guarded code.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "152c709f9519e06a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The probe runs `ps` to list running processes and greps for an agent process; process_list fits.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "c77f33f75cedb046",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9: pQ0 runs Bun['$']`sudo -n true`.nothrow() and reads exitCode; its `===0` result feeds Ry1's guard.",
+          "evidence_refs": [
+            "s9",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "14d941925a9f1026",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pQ0 returns `exitCode===0x0`, i.e. probe exit status equal to 0 (exists); true reaches the guarded code.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "30ce27e9067833d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The probe `sudo -n true` tests passwordless sudo privilege; privilege fits.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "ae18e8a9056277c2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s10 sits in a loop over Object['entries'](process['env']); the decision tests each env value _0x1c0a60 (bound from process.env) with startsWith.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "fbedd8d492b7e1bd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Code returns the env value when it startsWith one of ['ghp_','gho_']; reaching the destructive path requires no value to start with them, i.e. not_startswith.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "e7590ddbf2ae0428",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition iterates and reads process.env values; env_var fits.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "3ea095fc6a2b43fe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s11: getToken runs Bun['spawnSync'](['gh','auth','token'],{stdout:'pipe'}) and reads .stdout.toString().trim(), matching the probe.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "53d57242bcd64326",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "At s11 the gh-auth-token output is validated with startsWith('gho_')/startsWith('ghp_'), a prefix check, not an existence/empty comparison; same negated polarity but a different operator than not_exists.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "a2fba1cff9fc95c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The probe invokes the `gh` CLI (`gh auth token`) to obtain a token; installed_tool fits.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "2e9dcf80517563b7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s12: `let _0x441f22=await _0x1b7dd4['fetchToken']()` is the value read by the decision `if(!_0x441f22)`.",
+          "evidence_refs": [
+            "s12",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "7ca20e095221e938",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fetchToken issues this['octokit']['rest']['search']['repos'] (a GitHub API network request) and reads the response; server_response fits.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "128d7e1aeb43ce9c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s13: `_0x4692e0=process['env']['NPM_TOKEN']` then `if(!_0x4692e0)`; the env var is read by that decision.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "2284c29e6b7d9f67",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "NPM_TOKEN is read and checked via `if(!_0x4692e0)`; the destructive else at s29 requires it absent (not_exists).",
+          "evidence_refs": [
+            "s13",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "5c3ecae8a2b1503a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "NPM_TOKEN is an environment variable read for presence; env_var fits.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "6e172c0a94c1c094",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The cited node s14 is a regex literal; the .npmrc read in oL0 is performed by mL0 via `(await import('fs/promises')).readFile(...,'utf8')`, not fs.readFileSync — a different API.",
+          "evidence_refs": [
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "59e23f839fff54f2",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "s14 tests .npmrc lines with a regex matching `_authToken=`; the value _authToken is present but the operator is a regex match, not includes (same negated polarity, different operator).",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "b12c91f66a10bcf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads ~/.npmrc (and ./.npmrc) looking for an auth token; a credential target file, so target_artifact fits.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2771677f424d2b49",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s15 is a single if whose test ORs c1..c5 (`BUILDKITE||PROJECT_ID||GITHUB_ACTIONS||CODEBUILD_BUILD_NUMBER||CIRCLE_SHA1`); then_min 1, else needs all 5 false (else_min 5).",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "5f9a953a94b71780",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else branch (no CI marker) spawns a backgrounded process; the behaviour is present only there, so the gate enables it.",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "461e737080045861",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "aL0() runs in both branches (foreground under CI, backgrounded otherwise); the code does not back off on CI, so polarity is activate.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "7bb38702bf2974e6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The CI check only decides foreground vs background execution of the same routine; no clear targeting/portability/anti-analysis/data rationale, so unclear fits.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "ed21c161d6a14023",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sink s17 (Bun['spawn']([execPath,argv[1]],{env:{...,POSTINSTALL_BG:'1'}})) sits directly in the else-block region s16; empty witness holds.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "fc467574d7f2a32d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The Bun.spawn is an inline call reached only inside jy1's else branch (guarded by POSTINSTALL_BG!=='1' and argv[1]); no other caller, export or timer reaches it.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "212930a5d7e3916c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawn_process rests on Bun['spawn'] (s17), which creates a process; consistent.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "bb8be25c59015146",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s18 `if(GITHUB_ACTIONS&&RUNNER_OS==='Linux')` nests s19 `if(await cQ0()&&await pQ0())await gQ0()`; the four conditions join with AND, then_min 4.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "9561d64eb20fdb19",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When all four conditions hold, gQ0 (defense_evasion) and pQ0 (persistence) run; these behaviours exist only on the then side, so the gate enables them.",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "8e082ce55cba8b83",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate fires its payload only on a GitHub Actions Linux runner with the agent process and sudo present; it runs on that target (activate), not backing off.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "8faa5801c457b484",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions narrow to a specific environment (GitHub Actions + Linux + a particular agent process + sudo), i.e. targeting.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "7d3cabb81019aa91",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "defense_evasion is clean (gQ0() call s22 in region s20 -> def s23 -> sink s21), but the persistence sink s24 is inside pQ0, which is guard condition c8; its call s25 lies outside region s20 and runs during guard evaluation even when gQ0 is never reached.",
+          "evidence_refs": [
+            "s20",
+            "s24",
+            "s25",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "ff1b3d11956f2c30",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "gQ0, pQ0 and cQ0 each have a single caller inside Ry1's gated block (confirmed by whole-file search); no other caller, export or timer reaches them.",
+          "evidence_refs": [
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "5da7d277528657e0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "defense_evasion rests on gQ0's Bun.$ calls stopping systemd-resolved and flushing iptables (s21); persistence rests on pQ0's Bun.$ copy into /etc/sudoers.d (s24); both are exec sinks capable of the behaviours.",
+          "evidence_refs": [
+            "s21",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "8ad115d9ae83d4ad",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s27 (`!isAuthenticated()||!repoExists()`, c9&c10) nests s28 (`if(!fetchToken())`, c11) nests s29 (`if(_0x4692e0)...else`, else arm c12&c13); the destructive path needs all five, joined with AND, then_min 5.",
+          "evidence_refs": [
+            "s27",
+            "s28",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "9a4e821c5976a876",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When no credential is found through any of the five checks, the branch runs a destructive wipe; the behaviour is present only there, so the gate enables it.",
+          "evidence_refs": [
+            "s29",
+            "s30",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "2ddf667f541169d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch actively destroys files on the host when no token is obtained; it acts on the target (activate), not an evasion back-off.",
+          "evidence_refs": [
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "fd5361e72b8e83d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate ties a destructive wipe to the absence of any harvestable credential; this maps to none of portability/targeting/anti_analysis/data_availability, so unclear fits.",
+          "evidence_refs": [
+            "s27",
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "59c7fd6037a06d54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The destructive sink s31 (Bun['spawnSync'] del/cipher under %USERPROFILE%) sits directly in region s30; empty witness holds.",
+          "evidence_refs": [
+            "s30",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "050ff425a2e24924",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The spawnSync is an inline call reached only inside the nested else that fires when all five credential checks fail; no other path reaches it.",
+          "evidence_refs": [
+            "s29",
+            "s30",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "9656e27310fbcccd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "destructive rests on Bun['spawnSync'] running a recursive file-deletion/wipe command (s31); the exec sink can carry out destruction.",
+          "evidence_refs": [
+            "s30",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "k_50e0566ba2.L6.drop",
+          "claim_sha256": "cd3c73b6286ff195",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s32 (fs.existsSync(bunBinDir)) in setup_bun.js only decides whether ~/.bun/bin is prepended to PATH; benign setup, not a gate deciding what payload runs.",
+          "evidence_refs": [
+            "s32",
+            "s47"
+          ]
+        },
+        {
+          "claim_id": "k_7f3e4e84a7.L6.drop",
+          "claim_sha256": "5b86f4634362fcd0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s33 (!process.env.PATH.includes(bunBinDir)) is the second half of the same PATH-setup check on line 59; benign, not a payload gate.",
+          "evidence_refs": [
+            "s33",
+            "s47"
+          ]
+        },
+        {
+          "claim_id": "k_8243b60281.L6.drop",
+          "claim_sha256": "a397e3905de5a3e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s34 (process.platform==='win32') in reloadPath() only selects how PATH is reloaded (registry vs profile files); benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s34",
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "ee083484e6343791",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s35 (fs.existsSync(environmentScript)) checks for the package's own bundled bun_environment.js before launching it; a self-file presence check, not an environmental condition.",
+          "evidence_refs": [
+            "s35",
+            "s44"
+          ]
+        },
+        {
+          "claim_id": "k_997be1f6bc.L6.drop",
+          "claim_sha256": "15ac7ac2a9e4f974",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s36 (fs.existsSync(bunPath)) loops candidate paths to locate the bun executable; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s36",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "6b66b837ac95e968",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s37 (process.platform==='win32') in downloadAndSetupBun only selects the bun install command (PowerShell vs curl|bash); benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s37",
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "k_d36ad8d600.L6.drop",
+          "claim_sha256": "b950c025a3466cad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s38 (fs.existsSync(profileFile)) loops shell profile files to source them for PATH; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s38",
+            "s45"
+          ]
+        },
+        {
+          "claim_id": "k_e0dfd8b59b.L6.drop",
+          "claim_sha256": "47123d399abda6fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s39 (process.platform==='win32') only chooses which candidate install paths to search; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s39",
+            "s48"
+          ]
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "c873451036757453",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s40 (process.platform==='win32' ? 'where bun' : 'which bun') in isBunOnPath only picks the lookup command; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s40"
+          ]
+        },
+        {
+          "claim_id": "q_53e1d98b0c.L6.drop",
+          "claim_sha256": "fbc1d57bdea0f1b5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s41 is the whole reloadPath platform if; it only reloads PATH two ways; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "a1db8188149e2235",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s42 is the isBunOnPath command ternary; it only selects where/which bun; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s42"
+          ]
+        },
+        {
+          "claim_id": "q_98259f004c.L6.drop",
+          "claim_sha256": "b6bc156fa10d82b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s41 (same reloadPath platform if) only governs how PATH is reloaded; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "q_af02d7c460.L6.drop",
+          "claim_sha256": "46d8092c5a7fa934",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s43 is the `if(fs.existsSync(bunPath))return bunPath` that locates the bun binary; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "0492349c1c26810a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s44 is the `if(fs.existsSync(environmentScript))` launcher; it tests the package's own shipped file, not an environmental property, so not_environmental holds.",
+          "evidence_refs": [
+            "s44"
+          ]
+        },
+        {
+          "claim_id": "q_d012987235.L6.drop",
+          "claim_sha256": "3eeb04dd795f9a71",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s45 is the `if(fs.existsSync(profileFile))` block that sources profiles for PATH; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s45"
+          ]
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "fc083560f56434ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s46 is the downloadAndSetupBun platform if choosing the bun install command; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "q_e8c9ed15f1.L6.drop",
+          "claim_sha256": "c6ae8519724aeba8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s47 is the whole line-59 if that prepends ~/.bun/bin to PATH; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s47"
+          ]
+        },
+        {
+          "claim_id": "q_fd4553b6fa.L6.drop",
+          "claim_sha256": "59216ed3f6aae910",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s48 is the platform if that builds the list of candidate bun install locations; benign setup, not a payload gate.",
+          "evidence_refs": [
+            "s48"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-4-8",
+      "record_sha256": "d8cebd115c7316f8",
+      "packet_sha256": "95f9791385604932",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "35040a6dfbd6bc0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 shows process[\"env\"][\"BUILDKITE\"] as the first operand of the if-condition in jy1, a plain decision on that env var.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "28bad3f859560bb0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if (s2) uses process.env.BUILDKITE directly in a truthy OR test with no negation; its then-arm (await aL0()) is reached when BUILDKITE is truthy.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "362a1dcce04ccb98",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "BUILDKITE is the Buildkite CI system marker; ci_marker fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "a13fb4bb086645bb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 shows process[\"env\"][\"PROJECT_ID\"] as an operand of the jy1 if-condition.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "11ad20392d1d2cd1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "PROJECT_ID is used directly in the truthy OR test (s2); then-arm reached when truthy, no negation.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "78c5f20916fcb51c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "PROJECT_ID is a generic environment variable read via process.env; env_var fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "2978833d412452b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 (jy1 OR-chain) and s5 (Ry1 condition) both test process[\"env\"][\"GITHUB_ACTIONS\"] in a decision.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "25375181274b407e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites use GITHUB_ACTIONS in truthy form leading to the then-arm (s2 OR, s6 GITHUB_ACTIONS&&RUNNER_OS); no negation.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "10982771f1224395",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is the GitHub Actions CI marker; ci_marker fits.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "b5cb27edd4535e0d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 shows process[\"env\"][\"CODEBUILD_BUILD_NUMBER\"] as an operand of the jy1 if-condition.",
+          "evidence_refs": [
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "fbbe101a8cc34aa0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CODEBUILD_BUILD_NUMBER is used directly in the truthy OR test (s2); then-arm reached when truthy.",
+          "evidence_refs": [
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "d900d3a9a95b7a09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CODEBUILD_BUILD_NUMBER is read from process.env; env_var is an accurate category for the read.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "4981866fbda8c732",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8 shows process['env']['CIRCLE_SHA1'] as the final operand of the jy1 if-condition.",
+          "evidence_refs": [
+            "s8",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "6a0a56122a361b11",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CIRCLE_SHA1 is used directly in the truthy OR test (s2); then-arm reached when truthy.",
+          "evidence_refs": [
+            "s8",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "7846854148e91a0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CIRCLE_SHA1 is read from process.env; env_var is an accurate category for the read.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "dd195c72476f65eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 shows process[\"env\"][\"RUNNER_OS\"]==='Linux' in the Ry1 if-condition.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "cab1aa44b00f0d26",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code compares RUNNER_OS === 'Linux' (s9); == with value Linux in positive form reaches the then-arm (s6).",
+          "evidence_refs": [
+            "s9",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "e52862cf492aaa69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "RUNNER_OS is read from process.env; env_var fits.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "05ff83dbf6ed9e10",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s10 runs Bun['$']`ps -axco command | grep \"/home/agent/agent\"`['text'](); cQ0's return value is read by the gate decision. The probe command and stdout accessor match.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "cfdd210fb41393ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "cQ0 returns (await Bun.$`ps...`.text()).trim()!=='' (s10): output compared unequal to empty = exists; the guarded code runs when the agent process is present.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "152c709f9519e06a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The probe runs ps to enumerate running processes; process_list fits.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "f3e177bc661c688f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s13 runs Bun['$']`sudo -n true`[\"nothrow\"]() in pQ0 and reads exitCode; probe command and returncode accessor match.",
+          "evidence_refs": [
+            "s13",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "75594f8564a9ea9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pQ0 returns exitCode===0 for `sudo -n true` (s13): exit status equal to 0 = exists; guarded gQ0 runs when sudo succeeds.",
+          "evidence_refs": [
+            "s13",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "30ce27e9067833d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The probe `sudo -n true` tests passwordless sudo privilege; privilege fits.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "709682406ef059ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s14 tests value.startsWith(prefix) where the value is bound from Object.entries(process.env) inside findGitHubTokenEnvVars.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "3b277297deb30987",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "findGitHubTokenEnvVars early-returns the value when startsWith('ghp_'/'gho_') is true (s14); reaching the no-token path (toward s15) requires not_startswith of both prefixes.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "e7590ddbf2ae0428",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check scans process.env values for GitHub token prefixes; env_var fits.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "75f03f1da23683ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s16 runs Bun[\"spawnSync\"](['gh','auth','token'],...); its stdout is read and checked by getToken. Probe command and stdout accessor match.",
+          "evidence_refs": [
+            "s16",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "3fb259bd0130f0dd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "getToken returns the gh output only if it is a valid token, else null (s16); reaching the credential-less path requires `gh auth token` to yield no token = not_exists.",
+          "evidence_refs": [
+            "s16",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "a2fba1cff9fc95c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The probe invokes the installed `gh` CLI to obtain a token; installed_tool fits.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "6abaf83330555a6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s17 calls _0x1b7dd4['fetchToken']() and binds the result to _0x441f22, which the next decision (if(!_0x441f22)) reads.",
+          "evidence_refs": [
+            "s17",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "7ca20e095221e938",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fetchToken obtains a token from a remote server; server_response fits.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "0a5e8120fee7107b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s18 reads process[\"env\"][\"NPM_TOKEN\"] into _0x4692e0, later read by the if(_0x4692e0) decision (s19).",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "e1548760c9e60d3e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The destructive else-arm of if(_0x4692e0) (s19) runs when _0x4692e0 (NPM_TOKEN, else oL0 fallback) is falsy = NPM_TOKEN not_exists.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "5c3ecae8a2b1503a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "NPM_TOKEN is read from process.env; env_var fits.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "db9cf31ffc5c8247",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s20 is _0x98b30b['readFile'](path,'utf8') where _0x98b30b=await import('fs/promises'); its caller oL0 passes join(homedir(),'.npmrc'), so the probe reads ~/.npmrc content.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "a83c07441eecd98b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "oL0 returns the match of /(?:_authToken|:_authToken)=([a-zA-Z0-9\\-._~+/]+=*)/ against each .npmrc line; reaching the destructive else (s19) needs the content to not match = not_regex of that exact pattern.",
+          "evidence_refs": [
+            "s20",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "a92c60dd467197e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The read targets the ~/.npmrc npm credential artifact; target_artifact fits.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c14.L1",
+          "claim_sha256": "4d0a993eb7aa50d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s13 runs Bun['$']`sudo -n true` inside pQ0's try; probe command matches, accessor is whether the try throws into the catch.",
+          "evidence_refs": [
+            "s13",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "5bbaa4656ed3ceae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pQ0's catch (s21 else arm) — the docker-escape path — runs when the `sudo -n true` try throws = not_exists.",
+          "evidence_refs": [
+            "s13",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "c14.L6.category",
+          "claim_sha256": "7c8c451da7a06556",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The probe `sudo -n true` tests sudo privilege; privilege fits.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "b3ba17313f7ab224",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 joins the five env checks with || in a single if; any one truthy reaches the then-arm (then_min 1), all five false reaches else (else_min 5).",
+          "evidence_refs": [
+            "s2",
+            "s1",
+            "s3",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "5f9a953a94b71780",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else-arm (no CI marker) enables a background respawn via Bun.spawn (s24); the then-arm has no distinct labelled behaviour, so the gate enables spawn_process.",
+          "evidence_refs": [
+            "s2",
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "461e737080045861",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs in both branches (aL0 directly in CI, backgrounded otherwise); it does not back off, so polarity is activate.",
+          "evidence_refs": [
+            "s2",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "7bb38702bf2974e6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The CI test only switches foreground vs background execution of aL0; its purpose is not clearly targeting/anti_analysis, so unclear is defensible.",
+          "evidence_refs": [
+            "s2",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "ed21c161d6a14023",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the else side of s2 the block (s23) directly contains Bun['spawn']([execPath,argv[1]],{env:{...process.env,POSTINSTALL_BG:'1'}}) (s24); empty witness, sink in region.",
+          "evidence_refs": [
+            "s2",
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "9155a1f5806d0f74",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The Bun.spawn is inline in jy1's else block only; jy1 is defined and called exactly once and no other path reaches that statement.",
+          "evidence_refs": [
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "212930a5d7e3916c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawn_process rests on Bun.spawn (s24), a process-creation sink.",
+          "evidence_refs": [
+            "s24",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "128b29d4852aa882",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Ry1 nests if(GITHUB_ACTIONS&&RUNNER_OS==='Linux') (s6) around if(await cQ0()&&await pQ0()) (s11); nested guards join with and as c3&&c6&&c7&&c8, then_min 4.",
+          "evidence_refs": [
+            "s6",
+            "s11",
+            "s9",
+            "s10",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "ec5ad1dd6419a775",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When all four conditions hold the then-path runs gQ0 (defense_evasion); the gate enables that behaviour.",
+          "evidence_refs": [
+            "s6",
+            "s11",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "af76b92dcc5f45f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate actively runs gQ0 on the detected environment rather than backing off; polarity activate.",
+          "evidence_refs": [
+            "s6",
+            "s11",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "52b05d8bf1e3a8fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Conditions detect a monitoring agent (/home/agent/agent) with sudo and the payload disables DNS/firewall; the purpose is anti_analysis.",
+          "evidence_refs": [
+            "s10",
+            "s13",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "688041f20757bc46",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Region s25 is await gQ0(); call s27 (gQ0()) reaches def s28, which contains the sink s26 Bun.$`sudo systemctl stop systemd-resolved`.",
+          "evidence_refs": [
+            "s25",
+            "s27",
+            "s28",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "92aa04dce17589af",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "gQ0 is defined once and called only from Ry1's gated inner if; no other caller, export or timer reaches it.",
+          "evidence_refs": [
+            "s25",
+            "s27",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "546496a4e0cd55f8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "defense_evasion rests on s26, a Bun.$ exec sink running `sudo systemctl stop systemd-resolved` and iptables flushes that disable defenses.",
+          "evidence_refs": [
+            "s26",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "643628e2f9c3e8ee",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Nested guards s15 (!isAuthenticated => c9&&c10), s29 (if(!fetchToken) => c11) and s19 else (!_0x4692e0 => c12&&c13) join with and; all five needed, then_min 5.",
+          "evidence_refs": [
+            "s15",
+            "s29",
+            "s19",
+            "s14",
+            "s16",
+            "s17",
+            "s18",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "5ca418e345bd614a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When no credentials of any kind are found the then-path runs the destructive wipe; the gate enables that behaviour.",
+          "evidence_refs": [
+            "s15",
+            "s19",
+            "s30",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "e1f159b2b1d788af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The destructive payload fires when no credentials are present; the gate activates its action rather than backing off.",
+          "evidence_refs": [
+            "s19",
+            "s30",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "16d5b44ae0ef7ada",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All conditions test whether stealable credentials are available (github/npm tokens); the gate reads data availability and wipes when none exist.",
+          "evidence_refs": [
+            "s15",
+            "s29",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "59c7fd6037a06d54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Region s30 directly contains the sink s31 Bun[\"spawnSync\"]([\"cmd.exe\",...del /F /Q /S...cipher /W...]); empty witness, sink in region.",
+          "evidence_refs": [
+            "s30",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "e2fd626e4a3d79dc",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The destructive spawnSync is inline in the nested credential-less branch only; no other path reaches that statement.",
+          "evidence_refs": [
+            "s30",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "9656e27310fbcccd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "destructive rests on s31, a Bun.spawnSync exec sink running del/cipher (and a bash shred variant), which deletes the user's files.",
+          "evidence_refs": [
+            "s31",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "68ddefad513e73bd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s6 (c3&&c6) nests around the short-circuit s12 (cQ0 => c7) and pQ0's try/catch s21 (catch arm => c14); joined with and as c3&&c6&&c7&&c14, then_min 4.",
+          "evidence_refs": [
+            "s6",
+            "s12",
+            "s21",
+            "s9",
+            "s10",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "b330c47c16c1692a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When sudo -n true fails, pQ0's catch runs the docker privileged write to /etc/sudoers.d/runner (persistence); the gate enables that behaviour.",
+          "evidence_refs": [
+            "s21",
+            "s32",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "7a2bc60ed0836387",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate installs a persistent sudoers backdoor on the detected environment rather than backing off; polarity activate.",
+          "evidence_refs": [
+            "s21",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "6f82fe2f23f55119",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Conditions select a specific GitHub Actions Linux runner environment with the agent to establish a foothold; targeting is defensible.",
+          "evidence_refs": [
+            "s6",
+            "s10",
+            "s13",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "514a5905ecf3a7a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Region s32 is await pQ0(); call s34 (pQ0()) reaches def s35, whose catch contains sink s33 Bun.$`docker run --rm --privileged ... cp /host/tmp/runner /host/etc/sudoers.d/runner`.",
+          "evidence_refs": [
+            "s32",
+            "s34",
+            "s35",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "0e562423531a1f1f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "pQ0 is defined once and called only from Ry1's gated inner if; the docker sink in its catch has no other reaching path.",
+          "evidence_refs": [
+            "s32",
+            "s34",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "4fdb6fcbf6e564c7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "persistence rests on s33, a Bun.$ exec sink that runs a privileged docker container to drop a sudoers file for a persistent backdoor.",
+          "evidence_refs": [
+            "s33",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "k_50e0566ba2.L6.drop",
+          "claim_sha256": "cd3c73b6286ff195",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s36 fs.existsSync(bunBinDir) only decides whether ~/.bun/bin is prepended to PATH during bun setup; it is plumbing, not an environment gate deciding the payload.",
+          "evidence_refs": [
+            "s36",
+            "s51"
+          ]
+        },
+        {
+          "claim_id": "k_7f3e4e84a7.L6.drop",
+          "claim_sha256": "5b86f4634362fcd0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s37 !process.env.PATH.includes(bunBinDir) only guards a PATH edit; plumbing, not a gate.",
+          "evidence_refs": [
+            "s37",
+            "s51"
+          ]
+        },
+        {
+          "claim_id": "k_8243b60281.L6.drop",
+          "claim_sha256": "a397e3905de5a3e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s38 process.platform==='win32' in reloadPath only selects how PATH is refreshed (registry vs profiles); plumbing, not a gate controlling the payload.",
+          "evidence_refs": [
+            "s38",
+            "s45"
+          ]
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "ee083484e6343791",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s39 fs.existsSync(environmentScript) checks for the package's own bundled bun_environment.js (always shipped) rather than an environment property, so it is not an environmental gate.",
+          "evidence_refs": [
+            "s39",
+            "s48"
+          ]
+        },
+        {
+          "claim_id": "k_997be1f6bc.L6.drop",
+          "claim_sha256": "15ac7ac2a9e4f974",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s40 fs.existsSync(bunPath) only locates the bun executable among candidate install paths; plumbing, not a gate.",
+          "evidence_refs": [
+            "s40",
+            "s47"
+          ]
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "6b66b837ac95e968",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s41 process.platform==='win32' only selects the bun install command (powershell vs curl); portability plumbing for installing bun, not a payload gate.",
+          "evidence_refs": [
+            "s41",
+            "s50"
+          ]
+        },
+        {
+          "claim_id": "k_d36ad8d600.L6.drop",
+          "claim_sha256": "b950c025a3466cad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s42 fs.existsSync(profileFile) only decides which shell profile to source for PATH; plumbing, not a gate.",
+          "evidence_refs": [
+            "s42",
+            "s49"
+          ]
+        },
+        {
+          "claim_id": "k_e0dfd8b59b.L6.drop",
+          "claim_sha256": "47123d399abda6fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s43 process.platform==='win32' in findBunExecutable only picks the candidate path list; plumbing, not a gate.",
+          "evidence_refs": [
+            "s43",
+            "s52"
+          ]
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "c873451036757453",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s44 process.platform==='win32' only chooses `where bun` vs `which bun`; plumbing, not a gate.",
+          "evidence_refs": [
+            "s44",
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "q_53e1d98b0c.L6.drop",
+          "claim_sha256": "fbc1d57bdea0f1b5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s45 is the reloadPath win32 if; it only selects how PATH is refreshed, plumbing, not a payload gate.",
+          "evidence_refs": [
+            "s45"
+          ]
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "a1db8188149e2235",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s46 is the `where bun`/`which bun` platform ternary; plumbing for locating bun, not a gate.",
+          "evidence_refs": [
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "q_98259f004c.L6.drop",
+          "claim_sha256": "b6bc156fa10d82b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s45 reloadPath win32 if only selects the PATH-refresh method; plumbing, not a gate.",
+          "evidence_refs": [
+            "s45"
+          ]
+        },
+        {
+          "claim_id": "q_af02d7c460.L6.drop",
+          "claim_sha256": "46d8092c5a7fa934",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s47 if(fs.existsSync(bunPath))return bunPath only locates the bun binary; plumbing, not a gate.",
+          "evidence_refs": [
+            "s47"
+          ]
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "0492349c1c26810a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s48 if(fs.existsSync(environmentScript)) checks for the package's own shipped payload file, not an environment property; not an environmental gate.",
+          "evidence_refs": [
+            "s48"
+          ]
+        },
+        {
+          "claim_id": "q_d012987235.L6.drop",
+          "claim_sha256": "3eeb04dd795f9a71",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s49 is the profileFile existsSync if inside reloadPath; plumbing for sourcing a shell profile, not a gate.",
+          "evidence_refs": [
+            "s49"
+          ]
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "fc083560f56434ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s50 is the downloadAndSetupBun win32 if selecting the bun install command; portability plumbing, not a payload gate.",
+          "evidence_refs": [
+            "s50"
+          ]
+        },
+        {
+          "claim_id": "q_e8c9ed15f1.L6.drop",
+          "claim_sha256": "c6ae8519724aeba8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s51 if(fs.existsSync(bunBinDir)&&!PATH.includes(bunBinDir)) only edits PATH; plumbing, not a gate.",
+          "evidence_refs": [
+            "s51"
+          ]
+        },
+        {
+          "claim_id": "q_fd4553b6fa.L6.drop",
+          "claim_sha256": "59216ed3f6aae910",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s52 is the findBunExecutable win32 if selecting candidate paths; plumbing, not a gate.",
+          "evidence_refs": [
+            "s52"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-4-8",
+      "record_sha256": "e7bc4399f0daba4b",
+      "packet_sha256": "38a9ef2beadefcad",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "c3f65d62e2fcff69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In Ry1 the if condition reads process.env.GITHUB_ACTIONS directly as a decision (s1), part of `if(process.env.GITHUB_ACTIONS && process.env.RUNNER_OS==='Linux')`.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "5842decd3288272e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.env.GITHUB_ACTIONS is tested in its bare truthy form (no negation) in the if that must be true to reach the guarded body (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "404d6e672d2e87a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "getToken runs Bun.spawnSync(['gh','auth','token']) and returns the token only if it startsWith gho_/ghp_ else null (s3, s17); the destructive guard fires on !isAuthenticated() (token null), i.e. the not_startswith direction (s4).",
+          "evidence_refs": [
+            "s3",
+            "s17",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "1f02496e2b69b571",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test probes the installed `gh` CLI (`gh auth token`) and checks its output prefix, reading the presence/auth of an installed tool (s3, s17).",
+          "evidence_refs": [
+            "s3",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "49533dd9599ae960",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pQ0 runs Bun.$`sudo -n true`; the catch arm (error present = not_exists) runs the docker fallback and returns true toward gQ0 (s5, s7, s6).",
+          "evidence_refs": [
+            "s5",
+            "s7",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c15.L1",
+          "claim_sha256": "5801e9e227d9fbe4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition calls _0x1b7dd4.repoExists() as a decision (s8); repoExists is defined as `return this.gitRepo!==null` (s3).",
+          "evidence_refs": [
+            "s8",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c15.L2",
+          "claim_sha256": "c311315865eaee1b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Guarded code runs on `!isAuthenticated()||!repoExists()`; reaching it via the repoExists arm requires !repoExists(), i.e. repoExists falsy (s8, s4).",
+          "evidence_refs": [
+            "s8",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c15.L6.category",
+          "claim_sha256": "eaa617aca7009180",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "gitRepo is set from the GitHub API response (`(...).data.owner.login + '/' + name`) and repoExists reflects whether that server call produced a repo, so it reads a server_response (s3, f1:9138566 region).",
+          "evidence_refs": [
+            "s8",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "4b31ab5e320c58fe",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Outer if is c3&&c6 (s2); inner `if(await cQ0()&&await pQ0())await gQ0()` nests c7 and pQ0's (c8||c14) (s6), giving c3&&c6&&c7&&(c8||c14); min 4 conditions.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "910fc57449731efb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the conditions hold, gQ0 (network-defense tampering) is turned on; the complementary case simply does nothing, so the gate enables the behaviour (s6, s11).",
+          "evidence_refs": [
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "ea576e4a36678ae7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate detects CI (GITHUB_ACTIONS) plus an analysis agent process and sudo, then runs gQ0 to disable systemd-resolved and flush iptables — an anti-analysis / defense-evasion response (s2, s7, s12).",
+          "evidence_refs": [
+            "s2",
+            "s10",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "849dabe3179b78c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "gQ0 stops the DNS resolver, swaps its config and flushes iptables OUTPUT/DOCKER-USER chains, defeating the sandbox's network monitoring — purpose anti_analysis (s12, s14).",
+          "evidence_refs": [
+            "s12",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "3df8d0e69604a428",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Region `await gQ0()` (s11) calls gQ0 (s13) reaching its definition (s14), whose body is the exec sink Bun.$`sudo systemctl stop systemd-resolved` (s12).",
+          "evidence_refs": [
+            "s11",
+            "s13",
+            "s14",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "c2afd7d98692bf2b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "gQ0 has exactly one call site, the gated `await gQ0()` inside Ry1; no other caller, export or timer reaches it.",
+          "evidence_refs": [
+            "s11",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "10bfe37485113eb4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Guard s4 is `!isAuthenticated()||!repoExists()` = (c9&&c10)||c15; nested s15 is `if(!fetchToken())` (c11) and s16 else is `!NPM_TOKEN`&&no-authToken (c12&&c13), giving ((c9&&c10)||c15)&&c11&&c12&&c13; min 4.",
+          "evidence_refs": [
+            "s4",
+            "s15",
+            "s16",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "1e795b683775924a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The complete absence of every credential source enables the destructive home-directory wipe; the gate turns that single payload on (s16, s21).",
+          "evidence_refs": [
+            "s16",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "9c3922fb64627c73",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When no credentials are found the code runs a disk-wipe payload (shred/cipher) on the host — an active destructive action, polarity activate (s21, s22).",
+          "evidence_refs": [
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "2a35c5974f984172",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload shreds files under $HOME / wipes %USERPROFILE%, destroying data availability (s21, s22).",
+          "evidence_refs": [
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "df95c3af9e5562e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Empty witness: the exec sink Bun.spawnSync(['cmd.exe',...del...]) / bash shred (s22) sits directly inside the then region s21.",
+          "evidence_refs": [
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "7f93b87a74231a0d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The destructive Bun.spawnSync call is inline, reached only through the nested guards (s4/s15/s16); no other path or caller reaches it (s21, s22).",
+          "evidence_refs": [
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "358040831fba4bce",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Outer if c3&&c6 (s2), short-circuit `cQ0()&&pQ0()` requires c7 (s23), and pQ0's try/catch else arm fires when `sudo -n true` throws = c14 (s7); all AND, giving c3&&c6&&c7&&c14, min 4.",
+          "evidence_refs": [
+            "s2",
+            "s23",
+            "s7",
+            "s24",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "5553491370840084",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Region await pQ0() (s24) calls pQ0 (s27) reaching its definition (s28), whose catch runs the exec sink Bun.$`docker run ... cp ... /etc/sudoers.d/runner` (s26).",
+          "evidence_refs": [
+            "s24",
+            "s27",
+            "s28",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "334277b0122f97d0",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "pQ0 has exactly one call site (the gated `await pQ0()` in Ry1) and the docker sink lives only in its catch block, so the sink is reached only through this gate (s24, s26, s28).",
+          "evidence_refs": [
+            "s24",
+            "s26",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "49a4093b80807a89",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The exec sink runs a docker command that copies a file into /etc/sudoers.d/runner, installing a persistent sudoers backdoor — a sink that achieves persistence (s26).",
+          "evidence_refs": [
+            "s26",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "k_1d78b2b7a0.L6.drop",
+          "claim_sha256": "8b46f706a111de7e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The CODEBUILD_BUILD_NUMBER check (s29) is one term of jy1's OR that only chooses foreground vs backgrounded execution; aL0() runs in both arms, so it gates no behaviour (s34).",
+          "evidence_refs": [
+            "s29",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "k_71bd5f629a.L6.drop",
+          "claim_sha256": "61d787c3eb99c87d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The BUILDKITE check (s30) is one term of jy1's OR deciding only sync vs background launch; aL0() runs either way, so it is not an environment gate (s34).",
+          "evidence_refs": [
+            "s30",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "k_7a098a216e.L6.drop",
+          "claim_sha256": "10a59154673a5dbf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The PROJECT_ID check (s31) only selects foreground vs backgrounded run of the same aL0() payload, so it decides no behaviour (s34).",
+          "evidence_refs": [
+            "s31",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "k_7d1c2347bd.L6.drop",
+          "claim_sha256": "1728fb42991b3509",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The GITHUB_ACTIONS term in jy1 (s32) only chooses sync vs background execution; aL0() runs in both arms, so this occurrence is not a gate (s34).",
+          "evidence_refs": [
+            "s32",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "k_e5e0fe5ff9.L6.drop",
+          "claim_sha256": "7ef1bad3df62943a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The CIRCLE_SHA1 check (s33) is one term of jy1's OR that only controls launch mode; aL0() runs regardless, so it gates no behaviour (s34).",
+          "evidence_refs": [
+            "s33",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "q_4ff52879e6.L6.drop",
+          "claim_sha256": "01cd4dfb9a0a2181",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The whole jy1 if (s34) runs aL0() in the then arm and, in the else arm, re-spawns itself in background and still runs aL0(); it decides only how the payload starts, not what runs.",
+          "evidence_refs": [
+            "s34"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@postman/node-keytar",
+    "version": "7.9.5",
+    "archive_sha256": "d231ea190a11a2e551690ab1ee689d492fd99f67c856e8e4fd924a90982999d4"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "044102c560045779",
+      "record_sha256_after": "eeddd78a19068c8e",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "b3f7cb078c392104",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "cQ0 runs Bun.$`ps -axco command | grep \"/home/agent/agent\"` and the JS test at the site is (await ...text()).trim() !== ''. The process name is matched by grep inside the command, so the JS compared value is the empty string. Changed operator to != and value to \"\"; the probe target keeps the full co"
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "5aa9f1aef6c3d192",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The site is _0x1b7dd4['isAuthenticated']() on new dq(), not a process.env read. dq.isAuthenticated returns !!this.token, and the constructor sets token from getToken(): findGitHubTokenEnvVars scans process.env values for ghp_/gho_ prefixes, else Bun.spawnSync(['gh','auth','token']). Changed api to G"
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "2798427551be0511",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "env_var was wrong for a method call, but server_response is wrong too: isAuthenticated makes no request; it only tests a locally found GitHub token (env var values with ghp_/gho_ prefix or gh auth token output). The npm reference lists token-prefix env vars and gh auth token as target_artifact, so t"
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "a179e59810855f23",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The claim is about os.platform(), not the helper's label. $y1 calls a0_0xf22814.platform() (os.platform) and sets platform to \"windows\" only when it is 'win32', so _0x46410c.platform === \"windows\" at the site holds exactly when os.platform() == 'win32'. The value an environment must have is win32; \""
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed what the code shows: g2's env_var_absent [NPM_TOKEN] and file_absent [~/.npmrc] are no longer marked guessed, because the code reads process.env.NPM_TOKEN and then oL0 reads _authToken from ./.npmrc and ~/.npmrc. The flag stays because all 16 conditions and gates are out of set and still pendi"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "eeddd78a19068c8e",
+      "record_sha256_after": "a7ec645cc99097d5",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "6912bdc7bd48453a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "repoExists returns this.gitRepo!==null, but gitRepo starts null and is only set in createRepo after createForAuthenticatedUser returns an owner and name. The local field caches whether the GitHub API accepted the repo creation. No file or credential on the machine is read, so target_artifact does no"
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "758abb51e6fc8904",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The code at the site is _0x449178[\"status\"]==0xc9, where _0x449178 is the awaited octokit.request result, so operator == and value 201 are what the code compares. Reading the status property of the response is the normal way to test this API; the record does not claim the call itself is the operand."
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "92e265019cb8c7e1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that the aL0 guard controls no region: await gQ0() sits in Ry1, and the aL0 test only wraps the call of Ry1. Ry1 has that one caller and tests GITHUB_ACTIONS again itself, so the aL0 guard is removed and c1 stays guarded by the Ry1 test. The region now lies on the then side o"
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "7a2f6ef3e6f57bc8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "pQ0 does have a second true path: if the sudo -n true call throws, the catch runs the privileged Docker copy into /etc/sudoers.d and returns true unless that throws too. Added c14 (sudo probe throws) and c15 (Docker call completes); expression is now c1 && c2 && c3 && (c4 || (c14 && c15)). A non-zer"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "a4e961749e02b24d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Claim changed because the g1 expression and used conditions changed (c14, c15 added for the pQ0 fallback) and purpose_reason now names the fallback. The label targeting stands: the gate limits DNS and firewall tampering to a Linux GitHub Actions runner with the /home/agent/agent process and a privil"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "cc3194375dbde2e6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right on the count: c5 || c6 is one test, so the else side needs one of them plus c7, c8, c9 and c10 false, which is 5, not 6. else.requires listed both OR arms as if both were needed; it now lists c5, c7, c8, c9 and else.min_conditions computes to 5. requires cannot express or, so"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "2592176800ba919a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c10 picks between cmd.exe del and cipher on Windows and bash find and shred elsewhere, both wiping the home directory and then exiting. That is a platform-specific version of the same behaviour, which is the definition of portability. The refuting evidence confirms these separate commands and names "
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "88513de253eec1ab",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the only region and sink was the Bun.spawn of run.sh, which cannot support download. Added the curl call (download) and the config.sh call (exec_downloaded) as regions and sinks, and a spawn_process entry on Bun.spawn. Behaviours are unchanged. A note and review reason recor"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "1d6bce2807ea85f6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Under c13 the code branches on platform() linux, win32 and darwin, each downloading and registering the matching runner build and starting it in the background. That is one behaviour in platform-specific versions, so portability fits. The refuting evidence itself says the OS branch serves portabilit"
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "d818a6433f7cc7fb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js line 69 only picks the command that installs Bun: irm|iex on Windows, curl|bash elsewhere. Both sides run the same execSync and go on to the same launch of bun_environment.js. Finding or obtaining a runtime is plumbing under the gate definition, with bun.sh recorded as a network require"
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "4a84b03db08e9f1d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The drop stands but its reason is sharpened: reason_code other becomes not_environmental. existsSync at line 181 tests bun_environment.js beside setup_bun.js in the same package, built with __dirname, so it reads nothing about the victim. This is not data availability: no environment can remove the "
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "a6d462aca5c4a664",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at line 69 assigns one of two install command strings and both then run through the same execSync, with the same reload and Bun lookup after it. Both sides end in the same behaviour, obtaining the runtime, so this is plumbing and not a gate. The refuting evidence only restates that the two co"
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "6a93e0c56afc336f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The old note was wrong to say both branches reach the same payload: the else side is process.exit(0), as the refutation says. Note corrected and reason_code set to not_environmental. The drop stands because the test is on the package's own shipped file, so the else side only runs on a damaged packag"
+        }
+      ]
+    }
+  ]
+}

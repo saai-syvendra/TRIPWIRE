@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@prisma/engines",
+    "version": "7.10.1",
+    "archive_sha256": "d19ab01ea2f5fda4df81bd5bf0622f8966be5a6fa6724dd688d6e6485f292edf"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d509925999754b9f",
+      "packet_sha256": "af8d24da759e6f5d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_2b0b49b763.L6.drop",
+          "claim_sha256": "be3d2f6c866f8cf3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The truthiness test of PRISMA_CLI_BINARY_TARGETS at f1:41 decides whether binaryTargets is set, and that value is passed to download() at f1:47-53. So the environment picks which platform binaries are fetched (effect modifies, purpose portability). It is a gate the record misses, though a benign one",
+          "evidence_refs": [
+            "s1",
+            "f1:41",
+            "f1:52"
+          ]
+        },
+        {
+          "claim_id": "q_13dfe7c570.L6.drop",
+          "claim_sha256": "adc769ec2e0272e5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The if statement at f1:41-43 reads the environment variable and sets binaryTargets only when it is present. That value feeds the download() call at f1:47-53 and changes which binaries are downloaded. It is a gate on the download's target (modifies, portability), not log text or plumbing.",
+          "evidence_refs": [
+            "s2",
+            "f1:41",
+            "f1:52"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "195e9e55494a1650",
+      "packet_sha256": "18c932bb42eaf497",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "7d00d9f480129f95",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the process.env variable PRISMA_CLI_BINARY_TARGETS (s2, f1:41), which is an environment variable.",
+          "evidence_refs": [
+            "s2",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "f2f9f8bb758f2265",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single decision on the env var at f1:41 with no other conditions, so the expression c1 is correct.",
+          "evidence_refs": [
+            "s1",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ee7ff81dcb1b5973",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The env var only sets binaryTargets, the platforms to fetch. The download runs either way, so the gate changes which artifacts are downloaded (modifies).",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "f1:41",
+            "f1:47"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b10b752afaa6a84c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Nothing backs off on analysis, CI or a sandbox. The truthy env var only supplies explicit targets to the download, so activate fits better than evade.",
+          "evidence_refs": [
+            "s1",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "40e219eb59842950",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The variable lists binary targets (platforms) for the engine download, which is a portability setting.",
+          "evidence_refs": [
+            "s1",
+            "f1:42"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "91db9131e05e933c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The if at f1:41 only guards the assignment of binaryTargets (s3). The download call (s4/s5, f1:47) comes after the if block closes and runs whether or not the env var is set.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s5",
+            "f1:41",
+            "f1:47"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "c0664e94aa1ad456",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The download at f1:47 is not gated by the env var. It runs on every pass through the else branch of main, with binaryTargets undefined when the var is unset.",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "s5",
+            "f1:47"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "388591004f95f464",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is the download() call from @prisma/fetch-engine with a version and showProgress, which fetches binaries over the network. That matches the download behaviour.",
+          "evidence_refs": [
+            "s5",
+            "f1:28",
+            "f1:47"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "a19b42e4f7cb4a2d",
+      "packet_sha256": "d3ca2e68b45a54f1",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_2b0b49b763.L6.drop",
+          "claim_sha256": "5e98e3aa2b4aac95",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The env read at f1:41 only fills an optional binaryTargets list passed to download(); the download at f1:47 runs whether or not it is set, so it selects platforms and does not decide what runs.",
+          "evidence_refs": [
+            "s1",
+            "f1:41",
+            "f1:47"
+          ]
+        },
+        {
+          "claim_id": "q_13dfe7c570.L6.drop",
+          "claim_sha256": "bda2a9906f29e539",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The if at f1:41-43 only sets an optional binaryTargets override and has no else or early exit; the download call at f1:47 is outside it and runs unconditionally, so it is not an environment gate.",
+          "evidence_refs": [
+            "s2",
+            "f1:41",
+            "f1:47"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "vue-demi",
+    "version": "0.14.10",
+    "archive_sha256": "b239890af0797bac06350b2e78d9030aff37824b03f74711130bd9dcf3198e19"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "67b55bc83a07b3fa",
+      "record_sha256_after": "2b3292a1266a75a7",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c9752cff1aa8cd34",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The witness listed an import hop on require('./utils') at postinstall.js:1 after the call switchVersion(2.7) at line 9, but line 1 is outside the region, so the hop was not inside the previous step. The call is tied to switchVersion in utils.js:51 by the destructured require binding on line 1, which"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The only reason left is out-of-set claim pending verification (c2, c3, c4, c5, g1, g2). Only a reviewer verifying those claims can remove it, so the flag stays."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2b3292a1266a75a7",
+      "record_sha256_after": "e94c26b589b96814",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "6febb235c2e065a4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "postinstall.js line 5 tests !Vue || typeof Vue.version !== 'string'. The typeof half is a presence check on Vue.version, the same value the startsWith tests on lines 8, 11 and 14 read, and layers.md L4 says such a check is part of that test, not another condition. Any version matching c2, c3 or c4 i"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9bb766ff014a3be8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The gpt-6.1-sol refutation is right. A Vue 2.7.x version satisfies c1 and c3, but line 8 takes switchVersion(2.7), and utils.js line 56 (version === 2) then skips updateVue2API, so the write at utils.js line 47 does not run. Added c6 (Vue.version not_startswith 2.7., same site as c2) with an if guar"
+        },
+        {
+          "claim_id": "q_252e2ae770.L6.drop",
+          "claim_sha256": "fa42d38d653f6239",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The try at utils.js lines 7-11 only returns require(name), or undefined when it throws. It selects no behaviour itself: both outcomes return to the caller, and the decisions on the result are the if tests at postinstall.js line 5 and utils.js line 30. Those are already recorded as g1 and g2 guards, "
+        }
+      ]
+    }
+  ]
+}

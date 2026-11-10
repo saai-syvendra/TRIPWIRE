@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "autotel-devtools",
+    "version": "3.0.2",
+    "archive_sha256": "839080c228cd97adb5076d825327cacc06e511e004a31752bd9c227b8efffd8d"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "1ee1274743762885",
+      "record_sha256_after": "2d96eb03d11329c6",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Resolved three reasons from the code. (1) a1 SSH propagation is now gate g5: a1.shouldExecute runs Bun.spawnSync(['which','ssh']) and tests exitCode===0 && stdout length>0 (c12); PX calls shouldExecute then execute; a1.execute returns early when collectHosts finds no host from ~/.ssh/known_hosts (c1"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2d96eb03d11329c6",
+      "record_sha256_after": "571525c9da640af6",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "63d39c7d291ef4a3",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The behaviours are real but only cred_read had a sink. Added payloads: recon (os.hostname in I6.execute), exfil (S PUT to the GitHub contents API in P9.commitFileWithRetry, reached from u1.finalize, flush, dispatch and send), self_propagation (C4 npm publish, reached from u1.ingest, handleNpmTokens,"
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "9bf5959f27580c45",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same fix as g1.then.L5: g2 guards the same code after await uX(), so it now cites the same recon, exfil, self_propagation and persistence sinks and the same added regions. Exfil and persistence are marked dynamic_dispatch for the same reasons."
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "7eae5f691ea76d6e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. z7 has a third test after the two cited ones: when SystemRoot is set it reads LANG, then LANGUAGE, then LC_ALL and returns true on a ru prefix, so LANG=ru with LC_ALL=en passes c6 and still exits. Added c16 on that test, put it on the z7 guard, and changed the expression to "
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "2502e28955b73218",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same fix as g1.then.L5: g3 guards the same code after await uX(), so it now cites the same recon, exfil, self_propagation and persistence sinks and the same added regions. Exfil and persistence are marked dynamic_dispatch for the same reasons."
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "53e498f01203a820",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. yX returns false only when the lock exists and mK(pid) is true; when process.kill(pid, 0) throws it deletes the lock, writes its own pid and returns true. A stale lock therefore passes, so c7 alone is not equivalent. Added c15 (process.kill, not_exists) and changed the expre"
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "10eee67e03cff8ba",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. The cited region was only the let declaration, while writeFileSync and Bun.spawn sit in the try statement after it, so the empty witnesses were wrong. Added that try statement as a region; both sinks now sit directly in it. The deterministic note that guard 0 controls no reg"
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "f93e9843b4b6e8cf",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The stale-lock part is right: the expression now has (c7 || c15), and c16 joins from the z7 fix (min 12). The fallback part is true of the code but stays out of the expression: fL's catch reaches t1 and PX after a throw from uX, and a throw is not a deliberate environmental test. It is recorded in e"
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "9db7c84900972fc6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The verifier's route exists: PX sits after fL's try/catch and the catch sets the module list to t1(), which includes a1, so a throw from uX (cwd gone in IX, or a lock read failure in yX) reaches s32 without the exit guards deciding. The claim hash changed only because the g5 guards gained c15 and c1"
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "e3a5bd2c6518993f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The stale-lock part is right: the expression now has (c7 || c15), and c16 joins from the z7 fix (min 10). The fallback part stays out of the expression for the reason given on g4.L4 and is escalated under g5.then.L3."
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "db18a9c2b137961c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Label kept as activate, and I do not accept this refutation: g5's own conditions (c12 which ssh, c13/c14 host lists) run the payload where a propagation surface exists, and the evade conditions are inherited from g1 and g2, which carry that label themselves. It cannot be logged as rejected because t"
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "87d7ac5082bbab9f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Label kept as data_availability, and I do not accept this refutation: what g5 adds over the outer gates is a check that ssh and hosts to propagate to exist, which matches that purpose, and the anti_analysis and locale purposes are already recorded on g1 and g2. It cannot be logged as rejected becaus"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "571525c9da640af6",
+      "record_sha256_after": "44ec00347961ef56",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged after write_report.py. Resolved: the bK path is now gate g7 (c20 to c28: WORKFLOW_ID/REPO_ID_SUFFIX set, GITHUB_ACTIONS, workflow and repo match, OIDC token, OIDC_PACKAGES); npm self-propagation is now gate g6 (c17 darwin/linux in g1.execute, c18 E7 registry validation, c19 npm token m"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1552 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@antv/data-set",
+    "version": "0.12.8",
+    "archive_sha256": "c25a05b1466b698cd38b42eae952aa828c30d4839af54968dcb91c20d128b80c"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "13d497ccfc5d243e",
+      "packet_sha256": "85e7f5b04ab8e5db",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b1040032aa363ab4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1 (s1) reads process.env[envVar] from the table u2, whose only entry is envVar GITHUB_TOKEN, and tests startsWith on that value; the result gates a process.exit in x2 (s3).",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ff6b3fb69488c26b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "u2 holds prefix 'ghp_decoyGitHubToken' in plain text; j1 returns true on startsWith and x2 exits then, so the guarded code needs not_startswith.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3b0b6b78c52f27a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable (GITHUB_TOKEN) value, so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "e6a33c1f6a5dae28",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 (s2) lowercases Intl.DateTimeFormat().resolvedOptions().locale and tests startsWith('ru'); the site is a decision, and x2 exits when U7 is true.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "f2b5e58660b3702d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 returns true when the locale starts with 'ru' and x2 then calls process.exit(0), so the guarded code needs not_startswith 'ru'.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "2f2d12f8cde06c6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the Intl locale language, which is locale_language.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "1345cc81731a41ac",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "x2 has two sequential early exits, if(j1()) exit and if(U7()) exit, and J2 awaits x2 before the payload region. Both must pass, so c1 && c2 is right.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "14024e019111591a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload in J2 runs only when both exit checks pass, so the gate enables it and does not pick between payloads.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "6b698376d41a3f7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both conditions make the code back off: the process exits on the decoy-token prefix, which looks like an analysis honeypot, and on a ru locale.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "a7260c2a2b0c3723",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The decoy-token check fits anti_analysis, but the ru-locale exit is a victim-targeting exclusion. One purpose label does not fit both conditions cleanly.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "8402998b05703ad4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Region s6 sits in J2 after the awaited x2(), which exits the process on either guard. Its call to b (s8) reaches b's definition (s9); b calls X (s10); X (s11) calls fetch, the sink (s7).",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s4",
+            "s6",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d85186499b5411f8",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "The sink function X and the helper b are called from many other places in f1, such as the repo and org helpers and a metadata lookup, none of which pass through x2's gate.",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ed8938e4471dd2aa",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The payload lists only a network sink (fetch in X) for exfil. No sink is cited for recon, cred_read or spawn_process, so the code shown does not decide those behaviours.",
+          "evidence_refs": [
+            "s7",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "k_0873e77c0c.L6.drop",
+          "claim_sha256": "d639d5ce85e4dd36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock-file existence check in a1/_o is a single-instance guard (is the pid in the lock file alive?), not an environment property.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "k_1cf3c7b7c4.L6.drop",
+          "claim_sha256": "7bf2c9de1deb77cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.env.__DAEMONIZED is set by the code itself when it respawns detached, so the check stops the respawn from repeating.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_b6b5ce918f.L6.drop",
+          "claim_sha256": "da952f785ec3a09e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock-file existence test in a1 is a single-instance re-entry guard.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "q_9ccf9f0f20.L6.drop",
+          "claim_sha256": "9ff6478bf9e1067e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "if(process.env.__DAEMONIZED) return false is a re-entry guard against re-spawning the daemon; the variable is set by the code itself.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_baa2dc756e.L6.drop",
+          "claim_sha256": "154169800c3d3318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block checks whether the lock file's pid is still alive and returns false if it is, which is a re-entry guard.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "q_d568cfc6cc.L6.drop",
+          "claim_sha256": "9fbb00d84df36e7a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "_o only removes the lock file if it exists, as cleanup on exit. It is not an environment gate (it is part of the re-entry lock handling).",
+          "evidence_refs": [
+            "s17"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "a59af23131ad8da9",
+      "packet_sha256": "3f041f5d88f5dd69",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "5e8bf586ef170da4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1 (s1) calls startsWith on process.env[envVar], and the only entry in the u2 table is envVar GITHUB_TOKEN (f1:1), so the decision reads process.env.GITHUB_TOKEN through the table.",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b69852fc68dcf61f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1 returns true when GITHUB_TOKEN startsWith the prefix 'ghp_decoyGitHubToken' (u2 table), and x2 exits the process when j1() is true (s2). The guarded code therefore needs not_startswith.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "b7084e731d66bd5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 returns true when the Intl locale lowercased startsWith 'ru', and x2 exits when U7() is true (s4). Reaching the guarded code needs not_startswith 'ru'.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "29e841259fcd922a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 tests startsWith('ru') on LC_ALL||LC_MESSAGES||LANGUAGE||LANG (s5). It also tests a SystemRoot-conditional chain of LANG/LANGUAGE/LC_ALL (s6), which uses a subset of those alternatives.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0fb07d2397362b47",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The startsWith('ru') tests in U7 return true, which makes x2 exit (s4). The guarded code is reached only when they are false, so not_startswith 'ru' is correct.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "9fd4859993ca0bf6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the locale and language environment variables (LC_ALL, LC_MESSAGES, LANGUAGE, LANG) for a 'ru' prefix, which is the locale_language category.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d079971615b5da6b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "x2 exits if j1() (c1) and exits if U7() (c2 or c3). Since the J2 payload runs only if x2 returns, the guards join as not-c1 and not-c2 and not-c3, which is c1 && c2 && c3 in positive form. x2 holds other exits (B7/z1, a1) that are not cited.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7b737a3d382469ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload in J2 runs only when the gate passes and there is no alternative branch, so the gate enables it.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "35fae1b760e391af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All three conditions make the code exit instead of running (decoy token, ru locale), so the gate backs off rather than selecting a target. The label evade fits.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "26001610a9e138ad",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The decoy-token check is anti-analysis, but two of the three conditions are a Russian-locale exclusion, which is targeting. A single purpose label does not clearly fit.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "70514e14c553631f",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "The sink path runs through b and X to fetch, but b and X are also called from many other functions: token validation, repo and secret handling, and the file PUT. The workflow-ref branch before x2 runs Lo().execute() without the gate. The payload helpers are therefore reachable without passing this g",
+          "evidence_refs": [
+            "s9",
+            "s11",
+            "s12",
+            "s13",
+            "s2"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "a59af23131ad8da9",
+      "packet_sha256": "767ff093f1c7e94d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "5e8bf586ef170da4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1 in s1 reads process.env[envVar] over the u2 table, whose only entry is envVar GITHUB_TOKEN with a decoy prefix, and tests it with startsWith; x2 exits on j1() (s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b69852fc68dcf61f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "x2 calls process.exit(0) when j1() is true, i.e. when GITHUB_TOKEN startsWith the u2 prefix, so the guarded code runs only under not_startswith; an unset token gives false and passes.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3b0b6b78c52f27a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the value of an environment variable (GITHUB_TOKEN).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1bb0191fea28d028",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 lowercases Intl.DateTimeFormat().resolvedOptions().locale and tests startsWith('ru'), returning true; x2 exits when U7() is true (s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "b7084e731d66bd5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A locale starting with ru makes U7 true and x2 exits, so the guarded code needs not_startswith ru.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "2f2d12f8cde06c6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the runtime locale and compares it with a language prefix.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "29e841259fcd922a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 tests the LC_ALL||LC_MESSAGES||LANGUAGE||LANG chain with startsWith('ru'). s6 tests a SystemRoot-conditioned LANG||LANGUAGE||LC_ALL variant, which still reads these variables.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0fb07d2397362b47",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each startsWith ru in U7 returns true, and x2 then exits (s4), so the guarded code needs not_startswith ru.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "9fd4859993ca0bf6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The locale environment variables LC_ALL, LC_MESSAGES, LANGUAGE and LANG are compared with a language prefix.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d079971615b5da6b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "J2 awaits x2(), which exits on j1() (c1) and on U7() (c2 or c3 in one test). Passing needs c1, c2 and c3 all false-in-exit form, so the guards join with and and min is 3.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7b737a3d382469ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks only allow or stop the single payload path; no per-branch alternative payload exists.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "35fae1b760e391af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off, exiting with status 0, when the decoy token or a ru locale is seen.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "26001610a9e138ad",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The decoy-token check is anti-analysis, but two of the three conditions are a Russian-locale skip, which is targeting or geofencing rather than analysis evasion. One label does not cover the whole gate.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7465e279a4cec52f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loop in s8 (after await x2() in J2) calls b(token) (s10). b (s11) calls X (s12). X (s13) holds the fetch to the GitHub API host (s9). The hops are in order.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "70514e14c553631f",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "X is called from many other functions (U, tr and others) and b has several other call sites in f1, so the fetch sink is reachable without passing this gate.",
+          "evidence_refs": [
+            "s9",
+            "s11",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ed8938e4471dd2aa",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The payload lists only one sink, a GET to the GitHub API in X, reached via a token validity check (b). It supports a network sink but does not show recon, cred_read or spawn_process in the region.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_0873e77c0c.L6.drop",
+          "claim_sha256": "d639d5ce85e4dd36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In a1 the lock-file check reads a stored pid and returns false if that process is alive, so it stops a second instance (re-entry/single-instance guard) and is not an environment gate.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "k_1cf3c7b7c4.L6.drop",
+          "claim_sha256": "7bf2c9de1deb77cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z1 returns early if __DAEMONIZED is set, and the respawned child is launched with __DAEMONIZED=1, so this is a re-entry guard.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "k_b6b5ce918f.L6.drop",
+          "claim_sha256": "da952f785ec3a09e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock-file existence test in a1 feeds the pid-liveness check that blocks a second instance, so it is a re-entry guard.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "q_9ccf9f0f20.L6.drop",
+          "claim_sha256": "9ff6478bf9e1067e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The __DAEMONIZED env flag set on the respawned child is checked first in z1 to prevent re-spawning.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "q_baa2dc756e.L6.drop",
+          "claim_sha256": "154169800c3d3318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if-block in a1 returns false when the pid in the lock file is alive, otherwise it clears the lock, which is a single-instance re-entry guard.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_d568cfc6cc.L6.drop",
+          "claim_sha256": "9fbb00d84df36e7a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "_o removes the lock file only if it exists, as cleanup of the re-entry lock, and decides no behaviour.",
+          "evidence_refs": [
+            "s19"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "e1fe955203e158a2",
+      "packet_sha256": "99ba123c600b90d8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3e848b8e32d59690",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "In x2, `if(j1()) exit` (s1/s4: GITHUB_TOKEN startsWith the decoy prefix) and `if(...,U7()) exit` (s3; U7 exits on a 'ru' Intl locale in s5 and on 'ru' LC_*/LANG values in s6/s7) are sequential early exits, and J2 only continues past `await x2()` (s2) when none fire. So the guarded code needs not-c1 ",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "b3dc844865ba42e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Every witness chain follows from code in J2 after the guards. J2 calls Z2 (s14), which binds zo/vo (s16/s24) and calls their execute (s17/s25); zo.execute reaches readHotspots then the readFile reader (s19-s22, s13), and vo.execute runs the execSync 'gh auth token' (s26, s23). x2 calls z1 (s28), whi",
+          "evidence_refs": [
+            "s8",
+            "s12",
+            "s13",
+            "s14",
+            "s23",
+            "s27",
+            "s30",
+            "s31",
+            "s37",
+            "s38",
+            "s42"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "73208e2af52a56b9",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "J2 is invoked once, at the end of the file, and x2 is called only from J2. However, q2 runs inside x2 before the locale guard U7. It runs `new Lo().execute()` in a GitHub Actions context, and I could not read the body of Lo or confirm whether it reaches the same sinks. b() also has several callers, ",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1f528929b8744221",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Each behaviour rests on a sink of the right kind. Recon is a fetch to the GitHub API /user endpoint (s38, s41). cred_read is a fs readFile of credential paths (s13) and an execSync of 'gh auth token' (s23). Spawn is child_process spawn of a detached copy of the process (s27). Exfil is a fetch POST o",
+          "evidence_refs": [
+            "s13",
+            "s23",
+            "s27",
+            "s30",
+            "s38"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "47f6ac8e39e2f534",
+      "packet_sha256": "30248ed2f6b6992e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "f56faeabe0d482a0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1() returns true when GITHUB_TOKEN is defined and startsWith the decoy prefix, and x2 exits when j1() is true, so the guarded code runs when the token does not start with it.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "47df747c1b52ff04",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 returns true when the Intl locale lowercased startsWith 'ru' and x2 exits on U7(), so the guarded code needs not_startswith ru.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "cd8d0b7500c5ce8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 returns true when LC_ALL||LC_MESSAGES||LANGUAGE||LANG startsWith 'ru' (s5) and x2 exits on it; s6 is a SystemRoot-conditional variant over a subset of the same variables with the same operator and value.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "d8ed278ed79d75b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP() compares the length of cpus() (imported from os) against 4 in an if that returns false.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "1b7cd1da70ba6205",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP returns false when cpus().length<4 and f7 returns when !CP(), so the guarded code needs >=4.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "afd39eb8fe00d549",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the CPU core count, which is a hardware property.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "b958cc2da18bc8e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP() compares process.env.CI === 'true' directly in the condition of an if that returns false.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "95a3d8a244a8b5e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP returns false when CI==='true' and f7 returns on !CP(), so the guarded code needs CI != 'true'.",
+          "evidence_refs": [
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "51616d1c5640849a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CI env var is a CI marker.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "f4a30fc85ad1cc9d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP() compares process.env.GITHUB_ACTIONS === 'true' in the same if condition.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "bbc11cc2adf6e92d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP returns false when GITHUB_ACTIONS==='true', so the guarded code needs it to differ from 'true'.",
+          "evidence_refs": [
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "9ce45d6d4637bece",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI marker.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "5f6958e0cfec8c55",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP() tests process.env.JENKINS_HOME !== undefined in the condition of an if that returns false.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "4808d5c3df1d9b4c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP returns false when JENKINS_HOME is defined, so the guarded code needs it to be undefined (not_exists).",
+          "evidence_refs": [
+            "s11",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "fb9efd3d02811caa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "JENKINS_HOME is a CI marker.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "5f1c7802f3081bcd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "checkAppleSilicon compares the platform() call result to 'darwin' and Vo.execute branches on it.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "2eaa2862b93276fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execute returns when platform==='darwin' && arch==='arm64'; one way to reach the guarded code is platform != darwin (joined by or with the arch test).",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "24dc31211a3428d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform name is an operating-system property.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "531280072a102dac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "checkAppleSilicon compares arch() to 'arm64' and execute branches on the result.",
+          "evidence_refs": [
+            "s14",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "779af440060f803d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return fires only when darwin and arm64; arch != arm64 is one way to reach the guarded code.",
+          "evidence_refs": [
+            "s14",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "ea7b828c129bb680",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CPU architecture is an arch property.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "e7a07c2d46c52016",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "settingsSearch scans '**/settings.json' with Bun.Glob and, for each result, continues unless Qo.some(includes) holds on the lowercased path.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "3eec287aa70be786",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Only scanned paths that include 'claude' or 'codex' (Qo) are stored in settingsFiles, which addHook then loops over (the guarded region).",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "a7a8878a37529f97",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test selects which settings.json files of Claude/Codex are present on disk, i.e. the target artifact.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "8ddebde1bbc874e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "q2 opens with if(process.env.GITHUB_ACTIONS).",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "d908db4e84c5cf58",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then block of that plain truthiness if holds the Lo execute call.",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "03ae0822196a8c0f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI marker.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "5d6ef351f6db4e7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_WORKFLOW_REF is destructured from process.env and tested with ?.includes(first parameter) in the inner if.",
+          "evidence_refs": [
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "c7be9fa178475e17",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "x2 calls q2('release.yml','/somerepository'), so the includes test compares GITHUB_WORKFLOW_REF against release.yml and gates the Lo execute call.",
+          "evidence_refs": [
+            "s19",
+            "s20",
+            "s77"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "c360fc7254429d31",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads a specific GitHub env var value.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "412cfbd854ec4bd0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_REPOSITORY is destructured from process.env and tested with ?.includes(second parameter).",
+          "evidence_refs": [
+            "s21",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "29028d9e22645383",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The second argument passed by x2 is '/somerepository', and includes of it is joined by && with the workflow test to gate the Lo execute call.",
+          "evidence_refs": [
+            "s21",
+            "s20",
+            "s77"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "ca9ddfd4724c3c4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads a specific GitHub env var value.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d1e673d528b1b7c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "J2 calls x2() (guards) then Z2(); Z2 news zo and vo and calls their execute. zo.execute reaches readHotspots then the readFile in the per-file reader, vo.execute runs the gh auth command, z1 spawns a detached process, and the send chain flush/dispatch/send reaches the POST fetch. b and X reach the G",
+          "evidence_refs": [
+            "s22",
+            "s25",
+            "s29",
+            "s30",
+            "s28",
+            "s38",
+            "s42",
+            "s45",
+            "s55"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "a6cd9befbfee4d1c",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "J2 appears to be the only entry and Z2 and z1 each have one caller, but q2 runs before the U7 locale check so its Lo path skips c2/c3. I could not confirm that the shared fetch helpers (X, send) are not reachable from other callers.",
+          "evidence_refs": [
+            "s4",
+            "s75",
+            "s55"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c08e1f52d3cb06ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Credential reading rests on readFile and the gh auth token exec, spawn on a child_process spawn, exfil on a fetch POST, and recon on GitHub /user token validation via fetch.",
+          "evidence_refs": [
+            "s28",
+            "s38",
+            "s42",
+            "s45",
+            "s55"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "b9db520e26c98b76",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f7 runs after the x2 exits (c1,c2,c3) and CP's early returns (c4 to c7); all are early exits joined by and.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8",
+            "s60"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "b8bd3aed7c5d7b98",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks decide whether the payload runs at all, so the effect is enables.",
+          "evidence_refs": [
+            "s8",
+            "s60"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "edc9c90fa0cab76c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off on a decoy token, CI markers and low CPU count, which is evasion.",
+          "evidence_refs": [
+            "s1",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "8d4af76b7329ef77",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Decoy token, CI and CPU-count checks are sandbox and analysis detection.",
+          "evidence_refs": [
+            "s1",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "26a8b2d6816b08a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f7() is called in the finally block (s63 inside s60); f7 holds the writeFileSync and the Bun.spawn.",
+          "evidence_refs": [
+            "s60",
+            "s63",
+            "s64",
+            "s62",
+            "s65"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "6bcb2bb1f3f25daa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "f7 has a single call site (J2 finally) and CP is only called inside f7.",
+          "evidence_refs": [
+            "s63",
+            "s64"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "6c026c267ab8b348",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "write_file rests on writeFileSync, but persistence is tied to Bun.spawn of bash, a process-creation sink; the script is written to a temp dir that is removed afterwards and nothing persistent is written here.",
+          "evidence_refs": [
+            "s62",
+            "s65",
+            "s61"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "8f0bd9ead63d6af7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Vo.execute runs after c1 and c2/c3 exits via x2, and its early return fires only when darwin and arm64, giving (c8 or c9); the finally block is not gated by CP.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s13",
+            "s66"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "e8b5d8e8821d5934",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks only decide whether the file copy runs.",
+          "evidence_refs": [
+            "s13",
+            "s67"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "7f4fd9f0479452ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform and arch check skips only darwin arm64; it does not back off on analysis.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "113f59659b9be771",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The reason for skipping Apple Silicon is not shown in the code.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "e01ad16c3c79a22a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "new Vo().execute() in the finally (s69 inside s66) reaches the execute definition, whose loop (s67) calls Bun.write.",
+          "evidence_refs": [
+            "s66",
+            "s69",
+            "s70",
+            "s67",
+            "s68"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "8f307ee3daa63c93",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "new Vo() occurs once (J2 finally) and execute has no other caller.",
+          "evidence_refs": [
+            "s69",
+            "s70"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "f476733a3025b27c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Bun.write copies the running script into ~/.claude and ~/.codex package directories, which is a file write.",
+          "evidence_refs": [
+            "s68"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "34aba8794ac0242d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "addHook is reached through the same exits as g3 and only loops over settings files that passed the claude/codex path filter, so c10 is nested and joined by and.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s13",
+            "s16",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "7cb3b17b90ea616e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Whether settings files exist decides whether the hook is written.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "3e33528334924fc4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The added condition enables the behaviour when settings files are found and does not back off on analysis.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "8bcc8a992be2d37b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The hook is written only if matching settings files exist and are writable.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "e75b748fb9dbdc13",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execute (s70) calls this.addHook() (s71) and addHook (s74) holds the settings write via Bun.write (s73) inside the loop try (s72).",
+          "evidence_refs": [
+            "s66",
+            "s69",
+            "s70",
+            "s71",
+            "s74",
+            "s72",
+            "s73"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "f91d06ad6ce33576",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "addHook is called only from execute, which is called only once.",
+          "evidence_refs": [
+            "s71",
+            "s69"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "99699deccd460408",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Bun.write rewrites settings.json with a SessionStart hook command, a file write that persists.",
+          "evidence_refs": [
+            "s73",
+            "s72"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "107ebd023e704c90",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "q2 runs before U7 so c2/c3 do not apply; Lo runs only after the j1 exit (c1) and nested ifs on GITHUB_ACTIONS, then workflow and repo includes joined by &&.",
+          "evidence_refs": [
+            "s2",
+            "s18",
+            "s20",
+            "s75"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "6166745ba6b06917",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks decide whether Lo runs.",
+          "evidence_refs": [
+            "s20",
+            "s75"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "b6fec1b8bdbd507b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Lo runs only on a specific workflow and repository, so the check enables the run on a target.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "d3538c03e29a7454",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The workflow file and repository name match a specific target.",
+          "evidence_refs": [
+            "s19",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "741ec23afc7b3cf4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "x2 calls q2 (s77), q2 calls new Lo().execute() (s75), whose execute fetches the OIDC token and calls downloadPackages (s76).",
+          "evidence_refs": [
+            "s77",
+            "s78",
+            "s75",
+            "s79",
+            "s76"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "71bf3c5d67c2a039",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "new Lo() occurs once, in q2.",
+          "evidence_refs": [
+            "s75"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "757e5750167063fd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Lo.execute fetches an Actions OIDC token and calls downloadPackages, in the same class as the npm OIDC token exchange, a network sink.",
+          "evidence_refs": [
+            "s76",
+            "s79"
+          ]
+        }
+      ]
+    }
+  ]
+}

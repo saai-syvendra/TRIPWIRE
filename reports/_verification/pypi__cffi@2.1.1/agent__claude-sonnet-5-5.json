@@ -1,0 +1,536 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "cffi",
+    "version": "2.1.1",
+    "archive_sha256": "dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "8375c1de3bbf7671",
+      "packet_sha256": "450899ed504389e4",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "fdb7a7f1de23c559",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 compares sys.version_info < (3, 14) in the condition of the if at f1:21.",
+          "evidence_refs": [
+            "s1",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "35b04459c3f1a9b5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code tests `< (3, 14)` and raises, so the code after it runs only when version_info >= (3, 14) (or the build is not free-threaded).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "aa3a47477f55fdd7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the Python interpreter version, so runtime_version fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "2512a681fb594b91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 compares sys.platform == \"win32\" in the if condition at f1:132.",
+          "evidence_refs": [
+            "s3",
+            "f1:132"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9c8151e62dfba67d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if at f1:132 is taken when sys.platform == \"win32\" (and uses_msvc()).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "0382003d852e4b0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform is the operating system, so os fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "7b491ec8497922d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 binds FREE_THREADED_BUILD to bool(sysconfig.get_config_var('Py_GIL_DISABLED')), and that variable is read in the condition at f1:21.",
+          "evidence_refs": [
+            "s5",
+            "s2",
+            "f1:19",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "3c5cc12a03593bf9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code after the raise is reached when FREE_THREADED_BUILD is falsy (or version >= 3.14), so falsy is the positive form for that side.",
+          "evidence_refs": [
+            "s5",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "5897b584204ab476",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Py_GIL_DISABLED describes the interpreter build (free-threaded or not), which is a runtime/version property.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "1bf2d2935f5417f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "uses_msvc returns config.try_compile on a source that hits #error unless _MSC_VER is defined, and the result is read in the condition at f1:132.",
+          "evidence_refs": [
+            "s6",
+            "s3",
+            "f1:111",
+            "f1:132"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "79075f90ed235d3a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm at f1:132 runs only when uses_msvc() returns a truthy try_compile result.",
+          "evidence_refs": [
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "c1a12f77c52934f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test probes the installed C compiler by compiling a snippet, so installed_tool fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "7066960fd28788e5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The raise fires on FT and version<3.14, so the code after it runs on not FT or version>=3.14, which is c3 || c1.",
+          "evidence_refs": [
+            "s2",
+            "s1",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6be7c375caf23b6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard decides whether the rest of setup.py runs at all (it raises otherwise), which is enabling.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "221810e678f00a56",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is a supported-version check that refuses unsupported builds, not a check for analysis or sandboxes, so activate fits.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "808fef4ba8ccaf9e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check rejects the free-threaded 3.13 build because CFFI does not support it, which is portability.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d2829cf8e69250a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "setup() at f1:185 (s8) lies inside the s7 region after the early-exit raise, so an empty witness is correct.",
+          "evidence_refs": [
+            "s8",
+            "s7",
+            "f1:185"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4c8ee1ab7b6ec8a1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "setup() sits in the __main__ block of the same module after the raise, and no other caller or export reaches it.",
+          "evidence_refs": [
+            "s8",
+            "f1:170"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "daa2eddf958f9230",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The setuptools setup() call is the normal build action, so a benign_build behaviour on an 'other' sink fits.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "5cdacd192b1e3ce4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The version guard nests with the platform and MSVC-probe guard at f1:132, which join with and. The then side needs 1+1+1 = 3 conditions and the else side 2.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "6b4cae3e9a44add1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branches pick different build setups: bundled libffi sources on Windows with MSVC, otherwise pkg-config and compiler probes.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "428aafe55a5c5074",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Nothing backs off on analysis; the checks only select the build configuration.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "349f72fb31f61285",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks choose how to build libffi per platform and compiler, which is portability.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "e0f44d4452975dca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else block calls use_pkg_config() (s12), whose definition (s13) calls _ask_pkg_config (s14). That definition (s15) holds the subprocess.Popen sink (s11).",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3.excl",
+          "claim_sha256": "673d8ed5812fe7da",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "use_pkg_config is called only at f1:153, and _ask_pkg_config only from use_pkg_config, so the Popen call is reached only through the else arm.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s15",
+            "f1:153"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L5",
+          "claim_sha256": "2e14f68aab4c67e7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.Popen of pkg-config is process creation, which fits a benign build-configuration step.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "7cdcb31a3560982b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.listdir at f1:141 (s16) lies inside the s9 then block, so an empty witness is correct.",
+          "evidence_refs": [
+            "s16",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "2bc53e840ee4156e",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The os.listdir call is inline in the then block, with no function or other caller around it.",
+          "evidence_refs": [
+            "s16",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "c0a584665aba4126",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "os.listdir reads a local directory to list the bundled libffi sources, which is a file read supporting a benign build.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_06dbf40e32.L6.drop",
+          "claim_sha256": "decc227ffa7d5544",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The PKG_CONFIG_SYSROOT_DIR lookup only prefixes include and library paths, which is build plumbing and not a gate.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_08532a1afc.L6.drop",
+          "claim_sha256": "56fa6113193cac9c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The freebsd check only appends default include and library directories, which is path plumbing.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "k_12296761eb.L6.drop",
+          "claim_sha256": "f4d717b784c17543",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check only skips an optional __sync_synchronize compile probe whose result adds a macro; it is build plumbing.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "k_2ca02ae20e.L6.drop",
+          "claim_sha256": "8fb8e0c19e18239a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ARM64 check decides which bundled libffi setup is used: the arm64 include and library dirs, or listing the x86/x64 libffi sources (s16). That is a missed gate on the Windows libffi choice.",
+          "evidence_refs": [
+            "s20",
+            "s9",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_ebbf1e28d8.L6.drop",
+          "claim_sha256": "3c0bf923e8c8c0ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin check only decides whether to point PKG_CONFIG_PATH at the Homebrew libffi, which is path plumbing.",
+          "evidence_refs": [
+            "s21",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "k_fc00e71976.L6.drop",
+          "claim_sha256": "9063fe58badac04b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os.path.exists check for brew is part of the same Homebrew path plumbing and does not decide what is built.",
+          "evidence_refs": [
+            "s22",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "q_0192d69bfb.L6.drop",
+          "claim_sha256": "8ecf904cbc92d3b5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if only skips an optional compile probe on win32 or when no compiler was found; it is not an install-time gate.",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "q_04d77445f6.L6.drop",
+          "claim_sha256": "9ee1094b90ee3591",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the Homebrew PKG_CONFIG_PATH plumbing check; it does not decide what runs.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "q_43e3d93e00.L6.drop",
+          "claim_sha256": "f0d198a920d108d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The freebsd branch only appends include and library directories, which is path plumbing.",
+          "evidence_refs": [
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "q_8c105d1eeb.L6.drop",
+          "claim_sha256": "9a6a5ac38b2528a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch only prefixes pkg-config paths with the sysroot, which is path plumbing.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "q_98517bab29.L6.drop",
+          "claim_sha256": "c3fa0ba3613a1b93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 is the whole if statement at f1:132, whose conditions are already recorded as c2 and c4, so it is a duplicate.",
+          "evidence_refs": [
+            "s4",
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "q_cebb00cafe.L6.drop",
+          "claim_sha256": "a87071c0c73415e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 is the body block of the recorded c2/c4 gate, not a separate test.",
+          "evidence_refs": [
+            "s9"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "2fa91e31e5f30438",
+      "packet_sha256": "70ce0726509efd9c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "48f7002d9abc5e43",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The raise at f1:21 fires only when FREE_THREADED_BUILD and version < 3.14, so the code after it runs when the build is not free-threaded (c3) or version >= 3.14 (c1). The next decision at f1:132 needs sys.platform == win32 (c2) and uses_msvc() (c4) for the then region, so the expression is (c3 || c1",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "f1:21",
+            "f1:132"
+          ]
+        }
+      ]
+    }
+  ]
+}

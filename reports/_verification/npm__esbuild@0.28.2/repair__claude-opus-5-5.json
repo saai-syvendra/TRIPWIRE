@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "esbuild",
+    "version": "0.28.2",
+    "archive_sha256": "e045f94c235c7adc50e77ba2a579c7bec41b496b6b47c3a7845f7c1e19959a88"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "63ae3c7324c81cd8",
+      "record_sha256_after": "63ae3c7324c81cd8",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "b1db20e7b74f2e64",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The site at install.js:74 is `platformKey in knownWebAssemblyFallbackPackages`, and platformKey is declared at install.js:67 as the template literal `${process.platform} ${os.arch()} ${os.endianness()}`, so the test does read process.platform (joined with arch and endianness, which is why the value "
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "fb80218fa58a10d0",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "When c1, c2 and c3 hold, checkAndPreparePackage (install.js:258-263) calls applyManualBinaryPathOverride and returns. That function writes the bin/esbuild shim (writeFileSync at install.js:217) and rewrites lib/main.js (install.js:221); neither write happens on any other path, so flipping the condit"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Both reasons remain. guessed recipe fields: every guessed value is a free choice the code leaves open. g1 accepts any existing ESBUILD_BINARY_PATH other than /usr/bin/esbuild (isValidBinaryPath at install.js:31, existsSync at install.js:259), so the path /opt/esbuild/esbuild is a placeholder. The g2"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "63ae3c7324c81cd8",
+      "record_sha256_after": "63ae3c7324c81cd8",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "fb80218fa58a10d0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:258-264: the recorded g1 branch is write_file, and its sinks (the bin/esbuild shim write at 217, the lib/main.js prepend at 222) run only inside applyManualBinaryPathOverride, called only at 262. Not modifies: the variable's value changes the shim text, but the closed side has no counterp"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "76be52c09812a7c0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:258-259 tests only the variable's value and whether that path exists. No platform, arch or OS property is read, and the branches are not platform-specific versions of one behaviour, which is what portability means in the gate-analysis definitions. The check picks no kind of victim (target"
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "1535773ae9461862",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:268-290: the npm install exec (187), the registry fetch (248), the write (250) and the temp folder delete (211) are reached only from the catch of require.resolve at 269 and only past the isWASM throw at 278. When the package resolves, none of them runs; with isWASM the install throws ins"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "466ad7bb6456ed5f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:226-235: linkSync at 229 and renameSync at 230 run only when the test at 226 is true, and the false side has no statements, so write_file runs or nothing does. That passes the flip test and is enables. The refutation is right that the result changes how the version check starts the binary"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "879fc786f27fbe0d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:226 tests os2.platform() !== win32, isYarn() and isWASM, which are platform and package manager properties, so the check limits the hard link to environments where replacing the shim with the native binary is used. Portability is the nearest value of the purpose enum and is what purpose_r"
+        },
+        {
+          "claim_id": "k_5ac6641f52.L6.drop",
+          "claim_sha256": "ff8f156786ee5c7e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:205-209: lstatSync reads entries of installDir, the package's own temporary npm-install folder, created at 184 and removed in the finally at 196. It tests no property of the machine. The catch at 207 only skips an entry that cannot be read, which is error swallowing, and isDirectory at 21"
+        },
+        {
+          "claim_id": "q_2a9ba8f897.L6.drop",
+          "claim_sha256": "b2f88225f53101df",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:205-209: this try only wraps lstatSync on an entry of the package's own temporary npm-install folder (created at 184) and continues the loop on error. That is error swallowing inside a cleanup walk. Directory recursion and unlink at 210-211 both delete, so no behaviour class depends on it"
+        },
+        {
+          "claim_id": "k_6a1ea602e7.L6.drop",
+          "claim_sha256": "9cde3dce2fe22224",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:118-134: this test sits in the catch of a failed version check, and both sides end by throwing (124 and 134). The refutation is right that the true side also runs sw_vers at 121, so the difference is not literally only text. But the output goes only into os3, whose only reads are the erro"
+        },
+        {
+          "claim_id": "q_d89d9e0aa2.L6.drop",
+          "claim_sha256": "05eb8dce6baf7bc6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:118-133: the if runs in the catch of a failed version check; its body throws at 124 and the code after it throws at 134, so the install fails either way. The sw_vers call at 121 only fills os3, which is read only by the error template at 124-132, and its failure is swallowed at 122. The s"
+        },
+        {
+          "claim_id": "q_0b3cb0707a.L6.drop",
+          "claim_sha256": "a2315784972fd452",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same if statement as q_d89d9e0aa2 (install.js:118-133). Both sides throw (124 and 134), and sw_vers at 121 feeds only os3, read only by the error template at 124-132, so the branch only decides the error text and log_only holds."
+        }
+      ]
+    }
+  ]
+}

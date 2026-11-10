@@ -1,0 +1,416 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@redhat-cloud-services/hcc-feo-mcp",
+    "version": "0.3.1",
+    "archive_sha256": "73dfde3dc5ac8f3d69e1847499f7b214ec8464f323d207d5f51355be61cde0d6"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "7883a9d51a92ee2c",
+      "packet_sha256": "e57839c338bc6dd9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "68068db04bc38c2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "i7 reads `process.env[_0x35ea97]` and uses that value in the `startsWith` decision (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "2a11f661d87cbcd1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision reads named environment variables through `process.env` (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "a136bdce13e3d8ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ calls `Intl.DateTimeFormat()`, reads `resolvedOptions().locale`, and uses it in a `startsWith` decision (s2).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "09e8aa92ffb79c91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested value is the locale returned by `Intl.DateTimeFormat().resolvedOptions()` (s2).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "577698f85e5feffb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ reads several computed properties of `process.env` and uses their values in the `startsWith` decision (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "ad0777298723cfc2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ returns true when the selected environment value starts with `ru`; kq exits when ZZ is true, so continuation requires that test to be false (s3, s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "a3d777ec8cf54e75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision compares environment-provided language-like values against `ru` (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "e606b33ff003a92a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ tests a computed `process.env` value with `startsWith` (s5).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "d2aaa564e21ba6c8",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The environment property name and prefix are computed by `f4abccab2` calls, so the code shown does not identify this property as a timezone (s5).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "4d0865a53506017b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`_0x44a3f9` is imported from `fs` as `existsSync`, and W9 uses it on N1 in a decision (s6).",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "65e5db1f9e72e051",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "W9 tests whether its temporary lock path exists with the imported `fs.existsSync` function (s6).",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "ec7a0d2625d81eb2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The i7 check exits from kq when true, and bq proceeds to its regions only after awaiting kq; this is the single condition c1 on the continuation path (s7, s8, s9, s10).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "aa5c8ad6ca21a8f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early exit prevents the later main routine from reaching its credential collection and token validation work (s7-s10).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "3e25d25f5868c7e8",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "i7 backs off when an environment value matches one of several encoded prefixes, but those prefixes do not reveal from this code whether it is detecting analysis or another target condition (s1).",
+          "evidence_refs": [
+            "s1",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "e8a5421f921aa1e9",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The code checks known environment-variable names against encoded prefixes, whose purpose is not identifiable from the readable code (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "5b72861b371fa222",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The continuation after `await kq()` contains both cited regions, and kq exits when i7 is true (s7-s10).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "990a49ce1e17d913",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The cited regions occur in bq after kq, but the packet evidence does not establish that bq or the reached work has no other entry path (s8-s10).",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "566b999c5d415bed",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "The cited sinks show credential collection and token validation, but do not establish exfiltration, self-propagation, package modification, or persistence for every listed behaviour (s9, s10).",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6caafcd5e7fc0b79",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "kq performs the locale check, then the `ru` environment check, then the encoded environment check, exiting on any true result; all three must be false to continue to bq (s2-s5, s4, s8).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "473bcffefe7b0779",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks only gate access to the later main routine; no alternate payload or environment-selected target is shown (s4, s8-s10).",
+          "evidence_refs": [
+            "s4",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "37893a8b2dd8d4e6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks exit on the locale/environment matches and let the main routine proceed when those matches are absent (s2-s5, s4, s8).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "2b41bf58742485a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The locale and environment-prefix checks determine which environment can proceed to the routine (s2-s5).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "2505ced1f3d87c09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The main routine awaits kq before reaching both regions, and kq exits when any cited check is true (s4, s8-s10).",
+          "evidence_refs": [
+            "s4",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "af59334416adec37",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The regions are reached after kq in bq, but these references do not establish that no other entry path can reach the work (s8-s10).",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "9e4e5412adcb9ab7",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "The cited calls show credential collection and token validation, not sinks for every listed behaviour such as exfiltration, propagation, package modification, and persistence (s9, s10).",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "7edb70261a8f8434",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "operator_mismatch",
+          "evidence": "W9 proceeds when the lock is absent, but also when an existing lock contains a PID that is no longer running; therefore the continuation condition is not simply `not_exists` (s6).",
+          "evidence_refs": [
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "c3abe1fe2ad4b4cc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "W9 controls whether the main routine proceeds and does not select another payload or target (s6, s8-s10).",
+          "evidence_refs": [
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "60dd59c56e0b2f14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "W9 permits continuation when it can claim the lock and exits when another live process owns it (s6, s11).",
+          "evidence_refs": [
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "4e6d5193d55da4b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "W9 checks and writes a PID lock, and declines to continue when another live process owns it; this is a re-entry guard (s6).",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "54367dea9f1ae12a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When W9 returns false, kq exits; otherwise kq returns and bq proceeds to both regions after `await kq()` (s6, s8-s10, s11).",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "9d1e80b9bd152c16",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The regions are reached after kq in bq, but the provided slices do not establish that no other entry path reaches the work (s8-s10).",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "9dfedcc5b146e2b2",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "The cited calls show credential collection and token validation, not sinks for every listed behaviour such as exfiltration, propagation, package modification, and persistence (s9, s10).",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        }
+      ]
+    }
+  ]
+}

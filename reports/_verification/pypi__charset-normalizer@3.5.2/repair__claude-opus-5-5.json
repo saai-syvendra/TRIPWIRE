@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "charset-normalizer",
+    "version": "3.5.2",
+    "archive_sha256": "39de2a259fc954455c57274dc94c79d5842774e1247a016aff30bc0efed0f4ef"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "16c02da89852c191",
+      "record_sha256_after": "16c02da89852c191",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2b7d605e22c17894",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "backend.py:8 and setup.py:8 both compare the env value with == and the string literal \"1\". record.json stores c1.value as the JSON string \"1\" with operator ==, not an integer, so the value_mismatch refutation does not apply. No negation sits between the test and the if USE_CYTHON guard at setup.py:1"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "8906d6d4233ef117",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c1 is a build opt-in read from CHARSET_NORMALIZER_USE_CYTHON, not a platform check. Portability means each branch runs a platform-specific version of the same behaviour, and setup.py:13 picks between compiled extensions and pure Python on any platform. The fallback the refutation cites (setup.py:14-"
+        },
+        {
+          "claim_id": "k_41491787d8.L6.drop",
+          "claim_sha256": "8167013f147ab614",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "backend.py:12 only decides whether CYTHON_SPEC is the string Cython>=3.2,<3.3 or Cython>=3.2,<3.4. Both arms name Cython and the only use of the value is the append at backend.py:28-30, which happens only when USE_CYTHON holds. Flipping the test changes a version bound in the build requirements, not"
+        },
+        {
+          "claim_id": "q_3e9940ddc1.L6.drop",
+          "claim_sha256": "e3fae903db0850c6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The ternary at backend.py:11-13 assigns one of two Cython version ranges to CYTHON_SPEC and runs nothing else. Both arms lead to the same later append of a Cython requirement, under USE_CYTHON only, so no behaviour differs between them. Taking part in build configuration, as the refutations argue, i"
+        },
+        {
+          "claim_id": "q_7a9d5d6836.L6.drop",
+          "claim_sha256": "03ae51f5517faf25",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "backend.py:28-30 only appends CYTHON_SPEC to the list that get_requires_for_build_wheel and get_requires_for_build_editable return to the frontend. It runs no build step itself, and the list is a build requirement, which is dependency tree. The environment test in it is c1, already in the record wit"
+        },
+        {
+          "claim_id": "q_6af4dcdffe.L6.drop",
+          "claim_sha256": "fcb5d8314dc3c3ec",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "backend.py:47-53 imports Cython under USE_CYTHON and raises RuntimeError only when the import fails. Otherwise both sides of the if reach the same _orig.build_wheel call at backend.py:54, so flipping c1 here changes no behaviour when Cython is present. A lookup that only aborts the step when the too"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "No claim changed, so record.json still has needs_manual_review true. The one remaining reason is out-of-set claim pending verification: c1 and g1 cite setup.py sites that are out of set because the tool did not chain setup.py. That reason goes only once a reviewer verifies those claims, so this sess"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "mysql-connector-pyhton",
+    "version": "0.1",
+    "archive_sha256": "4709764d33adc0cc3e025f1a9f9aa303b62eb77da41170ca0a1e8cd7983a403a"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d34bfe7d23fef712",
+      "record_sha256_after": "f7a97192e7ba62c6",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "0623c92c6f141d04",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The if at setup.py:26 (IsUserAnAdmin) has only paths.append of the all-users Start Menu folder in its body. The shortcut loop at line 40 and the shortcut.Save() sink at line 50 sit outside it and run whether or not the user is admin. The check only widens the folder list, so it is not a gate. Remove"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "f55a4b2ffb427d38",
+          "final_seen": "refuted",
+          "confirmed": true,
+          "decision": "fixed",
+          "reason": "Confirmed: the loop region is not under c2, so c1 && c3 && c2 did not describe the code. Gate g2 removed. Its admin check only appends a folder to the loop's list, and the loop and sink are covered by g1 (c1 && c3) and g3 (c1 && c3 && c4 && c5)."
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "484b6de6454ef4b3",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "In the loop at setup.py:40-50, c4 (file.endswith('.lnk'), line 43) and c5 (basename of TargetPath in chrome.exe/msedge.exe/launcher.exe/brave.exe, line 48) guard the only shortcut rewrite. When they are false for a file, nothing runs for it. No other target gets the behaviour instead. When no matchi"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "550aecf99d14ccdb",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c4 and c5 test whether a browser shortcut file exists for the payload to rewrite. Persistence (shortcut.Save at line 50) only happens if one is found. The gate-analysis skill files this kind of target-artifact test, where the thing the payload uses must exist, under data_availability. The check limi"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Two reasons are resolved: the g2 shared-loop reason went away when g2 was removed, and the guessed package_manager and file_present recipe fields were replaced with values read from the code (sys.argv[1] bdist_wheel/install at line 13, the three folders at lines 21-23 and the targets at line 48). Th"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f7a97192e7ba62c6",
+      "record_sha256_after": "9719fcabe32bd7da",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_7b91d7e5d8.L6.drop",
+          "claim_sha256": "c0196d6045ce24a7",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "setup.py:26-27 appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to paths only when IsUserAnAdmin() is true, and the loop at line 40 rewrites every browser shortcut found under paths, so the check decides which victim shortcuts get --load-extension. That is a modifies gate under the skill's defini"
+        },
+        {
+          "claim_id": "q_73012633ad.L6.drop",
+          "claim_sha256": "fce2c2f39bb8c46f",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The if at setup.py:26 is the decision for c6: its body adds the all-users Start Menu to the walked folders, widening the shortcuts patched at lines 49-50. Drop removed; the if is now the c6 guard (arm then) of gate g2, whose regions are the append at line 27 and the rewrite at lines 49-50, sink shor"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "9719fcabe32bd7da",
+      "record_sha256_after": "9719fcabe32bd7da",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "5574da6ca7118c01",
+          "final_seen": "refuted",
+          "confirmed": true,
+          "decision": "escalated",
+          "reason": "Confirmed refutation, so it cannot be rejected. The code at setup.py:26-27 only appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the paths list when IsUserAnAdmin() is true; the .lnk test (line 43), the browser TargetPath test (line 48) and shortcut.Save() (line 50) sit in a later loop over pa"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "9719fcabe32bd7da",
+      "record_sha256_after": "9719fcabe32bd7da",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "9706554e2d09d37e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refutation proposes portability, but that label needs each branch to run a platform-specific version of the same behaviour. setup.py line 5 is `if sys.platform == 'win32':` with no else, and the only code outside it is the shared setup() call at line 54. The extension drop at lines 14-36 has no "
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "1d0eba035dd2bbb8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The record already labels g2 purpose as targeting, and purpose_reason says the admin test widens the folders walked. The refuting evidence argues for targeting 'rather than the claimed data availability', so it agrees with the label in the record and contradicts nothing in it. The code supports targ"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "484b6de6454ef4b3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Not a confirmed refutation (agents only, split 2 to 1). modifies means the same behaviour runs either way and the environment decides what it acts on, as g2 does: the loop runs with or without c6 and only its folder list changes. g3 has no such alternative. The tests at lines 43 and 48 are plain ifs"
+        }
+      ]
+    }
+  ]
+}

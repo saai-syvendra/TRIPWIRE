@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "core-js",
+    "version": "3.51.0",
+    "archive_sha256": "2a7abc3121a44b75acdf02b9bdd7408e22633f70f422fc0bd5b9e00abb17bb31"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "bb367a04178743f8",
+      "record_sha256_after": "0d7d990fb4955807",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "8e2ec2963770ab69",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "In isBannerRequired (postinstall.js) the line 38 if returns false when any of c1 to c5 holds in its exit form, and the line 45 if (banners.indexOf(BANNER) !== -1) return false also returns from the function before the try at line 50 that holds the writeFileSync at line 52. Reaching the write therefo"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Replaced the guessed npm_config_loglevel=notice with env_var_absent npm_config_loglevel: line 12 tests ['silent','error','warn'].indexOf(env.npm_config_loglevel) !== -1, which is false when the variable is unset, so that value is read from the code. file_absent /tmp/core-js-banners stays guessed bec"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "0d7d990fb4955807",
+      "record_sha256_after": "0d7d990fb4955807",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "6c85c42aebc5c4fb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "postinstall.js:45 `if (banners.indexOf(BANNER) !== -1) return false;` is a return from isBannerRequired, so when the test is true the function ends before the try at line 50 and the writeFileSync at line 52 never runs. That is control over the region even though the guard is nested in the line 43 if"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "1b7b134aabc19699",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The label unclear fits. The refutation proposes data_availability, which the gate-analysis definition limits to a check that the thing to steal or use exists. The tests at postinstall.js:9-23 and line 38 read output and opt-out settings (npm_config_loglevel, ADBLOCK, DISABLE_OPENCOLLECTIVE, OPEN_SOU"
+        }
+      ]
+    }
+  ]
+}

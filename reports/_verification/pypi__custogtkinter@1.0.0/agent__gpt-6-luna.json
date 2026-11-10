@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "custogtkinter",
+    "version": "1.0.0",
+    "archive_sha256": "b9c86ca05442b762ad4c38156f57d5da89b7b8d31b8c3abcc92e2d7e57de9ed7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "4f89b38aa555ee37",
+      "packet_sha256": "b955f3a4e484056c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b809fa698da121c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision directly compares `os.name` with the string `nt` in the install command's `run` method.",
+          "evidence_refs": [
+            "s1",
+            "f1:11-13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "74b5525d49a3d8e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition is `os.name == \"nt\"`, and its then block contains the guarded code.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads Python's `os.name` property to select the platform-specific branch.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "23a298a93cf401cf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole guard is the `os.name == \"nt\"` condition, and its then block is the cited region, so the branch has one condition (`c1`).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Within the Windows branch, `requests.get(...).text` is passed to `exec`, so the gate enables retrieval and execution of the branch's downloaded code.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded retrieval and execution run when `os.name` equals `nt`, which activates them on that target platform.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition selects the Windows platform and gates the install-time payload on that platform, which is targeting.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "766de760b70c71e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the network request and the `exec` call sit directly inside the cited `if` then block, so each sink is reached from that region without an intermediate hop.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "861caff72fa688e8",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The recorded install method contains both sinks only inside the `os.name == \"nt\"` then block, and the package setup registers this method as its install command; no alternate sink path appears in the recorded files.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "f2:11-19"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4f7e0e798a672452",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` performs the network request, and its response text is passed to Python's `exec`, supporting the download and exec_downloaded behaviours.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

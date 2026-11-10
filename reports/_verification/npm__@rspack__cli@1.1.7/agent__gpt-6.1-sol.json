@@ -1,0 +1,521 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@rspack/cli",
+    "version": "1.1.7",
+    "archive_sha256": "f77f3b9068bb0478b3f005249370489038bef26fd9de6c5978d7a3a1dc997646"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "10ffe1d21e050302",
+      "packet_sha256": "15e4201de80cd7ec",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "43c7aae5d8ad89e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 switches directly on process.platform, returning the Linux enum for the linux case.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "4850e4b4ad53ac59",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 exits when the platform enum differs from LINUX, so continuation requires process.platform equal to linux.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "c590482958061a3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads the operating system through process.platform, fitting os.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1a7d470589202150",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 returns the country field of the bundled Axios GET response, and s8 tests that returned value in its switch.",
+          "evidence_refs": [
+            "s3",
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "921fce2a3cda7584",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8 shares one payload call across CN, RU, HK, UNK, BY and IR; s3 and its catch also supply UNK on unsuccessful geolocation.",
+          "evidence_refs": [
+            "s3",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "8c8d68a0f8cc0498",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 requests IP geolocation and s3 reads its country field, fitting external_ip_geo.",
+          "evidence_refs": [
+            "s3",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "d005ba27d1120962",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:1 builds the three credential paths from os.homedir and maps them into the fs.existsSync test at s5, including the claimed probe target.",
+          "evidence_refs": [
+            "f1:1",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "52d6bdb12529361a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 reads the corresponding file only when fs.existsSync returns true; s7 permits posting only after at least one non-null read result survives filtering.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "c94498ac4f20619f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 checks for a credential artifact that s6 subsequently reads, fitting target_artifact.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "51accd3f9eb6caad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:1 builds the three credential paths from os.homedir and maps them into the fs.existsSync test at s5, including the claimed probe target.",
+          "evidence_refs": [
+            "f1:1",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "7f9dccc11a188fc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 reads the corresponding file only when fs.existsSync returns true; s7 permits posting only after at least one non-null read result survives filtering.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "50ba181e9caa3aae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 checks for a credential artifact that s6 subsequently reads, fitting target_artifact.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "a5df226956467f0e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:1 builds the three credential paths from os.homedir and maps them into the fs.existsSync test at s5, including the claimed probe target.",
+          "evidence_refs": [
+            "f1:1",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "c54803694e82fcf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 reads the corresponding file only when fs.existsSync returns true; s7 permits posting only after at least one non-null read result survives filtering.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "e9ae720346437bf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 checks for a credential artifact that s6 subsequently reads, fitting target_artifact.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a22f4ddf7ab54450",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 exits on non-Linux platforms before s8, so the single condition c1 controls the region and its minimum is one.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4cff6d9cb1d152bb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 enables the geolocation request in s8 only after the Linux check passes.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b8e38e95625d5a00",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 continues on Linux and exits on other platforms, activating the payload on a target platform.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "d9e2f57ea66fbdab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 restricts subsequent geolocation and payload execution to Linux hosts, fitting targeting.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "784236583efb0918",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s10 is inside s8 and invokes s11; s12 passes s13 to the awaiter, whose definition in f1:1 invokes the generator containing s9.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "12ea37616f3b7113",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "s9 occurs in a locally invoked anonymous generator reached only through s10 after the platform exit check; f1:1 supplies no export or alternative caller for it.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s10",
+            "s13",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "118e3b82f6105409",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s9 uses the bundled Axios network client to retrieve IP geolocation, and s3 reads the returned country for reconnaissance.",
+          "evidence_refs": [
+            "s9",
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "4d9602cd6eba4547",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 requires Linux before the country switch, and s8 routes the six listed cases to the shared call s14, giving c1 and c2 with minimum two.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "82a41e95f42e4f76",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 and s8 enable the shared payload call only for Linux and the accepted country results.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "31e90f49d89353cc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform and country checks positively admit selected hosts to the payload rather than testing for analysis tooling.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "37bfd8e42f661902",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 and s8 restrict the downloader and execution path by operating system and country, fitting targeting.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "ce002ab3c480d02a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s16 resolves to s17, whose awaiter invokes the generator bound at s19; the nested download functions and Promise executor follow the cited calls and bindings to all five sinks.",
+          "evidence_refs": [
+            "s14",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "61a296d3c75dd855",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "f1:1 contains only the guarded call to _0x490324; both callers of the spawn-and-delete helper occur inside that function, and the download helpers are local immediate invocations.",
+          "evidence_refs": [
+            "s8",
+            "s17",
+            "s31",
+            "s32",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "8f17c10bbc4c751f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The resolved Axios and fs bindings download and write archives, and the child_process helper spawns the extracted program then unlinks it. The fallback in s17 downloads XMRig and launches it with pool and mining options.",
+          "evidence_refs": [
+            "s15",
+            "s17",
+            "s24",
+            "s29",
+            "s30",
+            "s35",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "cb39d762704a626c",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "s6 controls each file read separately, while s7 tests the count of successful non-null reads, not the OR of file existence checks. Existing files whose reads all fail satisfy the claimed existence expression but do not reach s37.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s36",
+            "s37",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "dbd141c64d78fa06",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 enables credential reads for existing artifacts and s7 enables exfiltration when a read result is available, fitting enables.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s36",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "2d284982ccd33d9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks admit Linux hosts with accepted country results and available credential artifacts, fitting activate.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "c05494a2d75158b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The artifact checks and nonempty result check determine whether credential data is available to read and send, fitting data_availability.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s36",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "0f741c6c68429639",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s36 is directly in the true arm of s6, and s38 is directly inside s37 after the early return at s7. Both local functions run within s17, reached by the platform and country guarded call.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s17",
+            "s6",
+            "s7",
+            "s36",
+            "s37",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "8db6030640235275",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The credential reader and sender are local immediate invocations inside the sole guarded _0x490324 call; s36 requires existence and s38 requires a surviving read result.",
+          "evidence_refs": [
+            "s8",
+            "s17",
+            "s6",
+            "s7",
+            "s36",
+            "s38",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "2bb7c60615639865",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s36 resolves to fs.promises.readFile on the credential paths; s38 resolves to Axios POST and sends the combined read contents encoded as base64.",
+          "evidence_refs": [
+            "s36",
+            "s38",
+            "f1:1"
+          ]
+        }
+      ]
+    }
+  ]
+}

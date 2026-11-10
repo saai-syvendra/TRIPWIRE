@@ -1,0 +1,474 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pycolorate",
+    "version": "1.0.1",
+    "archive_sha256": "366bd7e6e4a3e9d0d11e2e965ab365b0776879912e0e165b7dbbf28018070c6c"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "bebedb521aebb3fd",
+      "packet_sha256": "90a6bc25d0383736",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "e905ab5dc1fd9ffd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try body reads os.getenv through its imported alias ge and uses the result in path construction, which can transfer control to except (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "09e2bf6e8b1d0e92",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The result is concatenated with path suffixes, rather than tested for truthiness; an empty string permits concatenation while None raises (f1:20). This implicit availability check does not establish the claimed truthy operator.",
+          "evidence_refs": [
+            "f1:20",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "0df43a1ee22ceb86",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The alias ge is imported from os.getenv and reads APPDATA (f1:19-20).",
+          "evidence_refs": [
+            "f1:19",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c128e2d62aea1caa",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "An empty APPDATA string permits path construction and entry into the cited region despite being falsy (f1:20-22). The region therefore does not require the claimed truthy c1 expression.",
+          "evidence_refs": [
+            "f1:20",
+            "f1:22",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "8efff26ea4868b2d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "APPDATA supplies the directory for local files, while failures fall back to executing the downloaded text (f1:20-31). This is storage and startup plumbing rather than an enables environment gate under the effect definition.",
+          "evidence_refs": [
+            "f1:20",
+            "s3",
+            "f1:28",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "595d25f725690c02",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Successful use of APPDATA permits the local file operations; the code does not detect analysis environments and back off (s2, s3). The activate polarity fits this execution direction.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "d2122d3de5058023",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code uses APPDATA for local paths and falls back to executing downloaded text when the local route fails (f1:20-31). This supports the portability label.",
+          "evidence_refs": [
+            "f1:20",
+            "s3",
+            "f1:28",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "f8bcc4685bb5141f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All three cited sinks are direct calls inside the cited region of the try body, requiring no function hops (s2-s6).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ce123de17b1fa75a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited write and removal calls occur inline only in the try body; the except arm executes fl and has no path to these same call sites (f1:17-31).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "12170a6350dd83b1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The write call uses a file opened in w mode, and both removal calls resolve to remove imported from os (f1:19, f1:23-27). These sinks support write_file and delete_file.",
+          "evidence_refs": [
+            "f1:19",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e687090e4631d487",
+      "packet_sha256": "02402f2817f88583",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "eb0062cb2a90fedc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The import binds ge to os.getenv, and ge('APPDATA') supplies loc; when the variable is absent, concatenating None with the path suffix raises an exception before the file operations. Thus reaching those operations requires APPDATA to exist, although later failures can also enter the exception handle",
+          "evidence_refs": [
+            "f1:19",
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "b1ddc581bab73c21",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The value is read from the APPDATA environment variable through the os.getenv alias ge, so env_var fits.",
+          "evidence_refs": [
+            "f1:19",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5324a0cb29113a19",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited region follows the APPDATA-dependent path construction within the try body, with no alternative path around that construction. Its environment condition is c1 alone, giving a minimum of one; the later file-existence decisions control individual operations inside the region.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "32fb84c6abe3cd76",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "An absent APPDATA causes path construction to fail before the conditional deletions and write, transferring control to exec(fl). Its presence therefore enables the cited file operations, subject to their additional file-existence checks.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b5efb49d18e17a5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The file operations become reachable when APPDATA is available; the code does not use this condition to detect analysis or back off from it. This supports activate.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b9cf1dfaa87b8b32",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "APPDATA supplies the base directory for the Windows-style file paths, with an exception fallback that executes the downloaded text directly. This supports portability between environments that support those local file operations and those that do not.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "f1:31"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "d94b252353ac9552",
+      "packet_sha256": "a29d91b9fbb14850",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2dcc65919122b6e1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:19-20 binds ge to os.getenv and concatenates APPDATA into paths; an absent value raises and takes the fallback at f1:31.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:19",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "29342126a9418961",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:18 imports os.path.exists as ex, and s3 compares ex(p1) with True.",
+          "evidence_refs": [
+            "f1:18",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c09a581d2efc639f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:20 builds p1 from APPDATA and the aes.txt suffix; s3 requires its existence to reach remove(p1).",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "ced6c7cb8d6cffd6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s3 tests filesystem path existence through os.path.exists, imported at f1:18.",
+          "evidence_refs": [
+            "s3",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "1f54708c79db7496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 opens p2, constructed from APPDATA and the rsa.txt suffix at f1:20, inside the try body whose failures reach the except arm.",
+          "evidence_refs": [
+            "s5",
+            "s2",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "653a93469acc0edf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:20 constructs the claimed rsa.txt path; f1:28 requires opening and reading it successfully before local execution, with exceptions taking f1:31.",
+          "evidence_refs": [
+            "f1:20",
+            "s5",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "188e34af7bd6f27b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:28 attempts to read the local rsa.txt file, with failure selecting the fallback at f1:31, so the property is local file availability.",
+          "evidence_refs": [
+            "f1:28",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6e345e93125a0f12",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "s6 deletes p1 before the c3 open is attempted, while s7 follows the entire if/elif rather than nesting under c2. The regions therefore do not share c1 && c2 && c3 or require a minimum of three conditions.",
+          "evidence_refs": [
+            "s6",
+            "s5",
+            "s7",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "bceb7109b610912e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:28 executes local rsa.txt contents, whereas f1:31 executes the response fetched into fl at f1:16; the exception path selects a different payload source.",
+          "evidence_refs": [
+            "f1:16",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "3383ef2fc10b6a99",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:20-28 uses environment and file availability to activate local deletion and execution, with downloaded execution as fallback at f1:31. The checks do not identify analysis environments.",
+          "evidence_refs": [
+            "f1:20",
+            "s4",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e35b2bb4c442b9ad",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The appropriate purpose is data_availability: f1:22-28 checks files before deletion and attempts local rsa.txt execution, falling back to downloaded contents on failure at f1:31.",
+          "evidence_refs": [
+            "s4",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "c94ae0ee53b03d6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8 lies on the false side of the p1 test with an additional p2 test, and s9 lies in the except arm of s2. Each empty-witness sink is directly in its region and each guard controls a region.",
+          "evidence_refs": [
+            "s4",
+            "s8",
+            "s2",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3.excl",
+          "claim_sha256": "9c8c0b6a99281e27",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited remove(p2) occurs only in the elif arm at f1:24-25, and the cited exec(fl) occurs only in the except arm at f1:30-31. These direct top-level sinks have no separately callable enclosing function in the readable stage.",
+          "evidence_refs": [
+            "f1:24",
+            "s8",
+            "f1:30",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L5",
+          "claim_sha256": "702ff0ba9285e76c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:16 assigns fetched response text to fl and s9 executes it; f1:19 imports os.remove and s8 invokes it on p2. These support downloaded execution and file deletion.",
+          "evidence_refs": [
+            "f1:16",
+            "f1:19",
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "655e3356f9e37f6e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 lies in the then arm of s4, and both s6 and s7 lie in the try body of s2. Every region lies on at least one claimed guard side, every guard controls a region, and the sinks are directly present.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "0ed4dca8d7b72a7f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited remove(p1) is confined to the true arm at f1:22-23, and the cited local exec is confined to the try body at f1:28. Neither is in a separately callable function supplying another entry path.",
+          "evidence_refs": [
+            "f1:22",
+            "s6",
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "c1fff8c0fa4f4adc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s7 invokes exec on contents read from p2, supporting generic execution, while s6 calls os.remove imported at f1:19 to delete p1.",
+          "evidence_refs": [
+            "s7",
+            "s6",
+            "f1:19"
+          ]
+        }
+      ]
+    }
+  ]
+}

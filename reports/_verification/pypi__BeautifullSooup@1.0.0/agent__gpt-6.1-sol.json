@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifullSooup",
+    "version": "1.0.0",
+    "archive_sha256": "b2a6e5d9a92c8870b973c391a608b4132bb45cfae1dd6b5a9c5eb1f0a4835fa7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "3c48443fcb078e33",
+      "packet_sha256": "0e11b6a5f69d4f50",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "90f762ed7aa5cd47",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The local import binds os, and the if condition directly tests os.name (f1:12-13, s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "308dee44294e1170",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares os.name to the literal nt with ==, and the guarded code occupies its then arm without negation (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads the operating-system property os.name, so the os category fits (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2d78a8c2f1500113",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both file versions place the cited regions under the single os.name == nt condition, with no additional decision in that arm (s2, s4). The expression is c1 and requires one condition.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The then arm contains the request and execution of its response, and there is no alternative payload arm (f2:13-18). The condition enables these behaviours.",
+          "evidence_refs": [
+            "s4",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The equality test activates the guarded execution when os.name is nt; it does not test for analysis tooling or a sandbox (s1, s4).",
+          "evidence_refs": [
+            "s1",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS comparison restricts the download and execution to the nt environment while ordinary installation follows outside the condition (f2:13-18). This supports targeting rather than merely adjusting an installation path or command.",
+          "evidence_refs": [
+            "s4",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ea633b9d99fd54a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The original guarded region and its supplied derived counterpart both occupy the then arm of the same OS test (s2, s4). The request and exec sinks sit directly within the derived region, so no witness hops are needed (s5, s6).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "e886095974cdbab1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited sinks occur only inside the conditional in run; invoking this method through the registered install class still passes through that condition (f2:11-18, f2:29-31). Neither full file contains another caller or alternate entry to these sink expressions.",
+          "evidence_refs": [
+            "f1:11",
+            "f1:29",
+            "f2:11",
+            "f2:13",
+            "f2:16",
+            "f2:29"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "2c3bac8559c43e30",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The local requests import binds the get call to a network client, and the response text flows through tag removal directly into exec (f2:14-16). These sinks support downloading content and executing the downloaded content.",
+          "evidence_refs": [
+            "f2:14",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

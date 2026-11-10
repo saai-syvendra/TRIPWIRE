@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeaufifulSoup",
+    "version": "1.0.0",
+    "archive_sha256": "c6d2c95ade7310592d63ef3a449e0c78d8ddbddcbb3901cef750e49f217767c5"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "d76dc34664272539",
+      "packet_sha256": "e0f184d3649095b9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "7bc5521bd1b7b29f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly compares `os.name` to a string, so the cited decision tests the named API.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "61977928cd2cd98f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm is entered when `os.name == \"nt\"`; no negation changes the condition before this guarded code.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads `os.name`, an operating-system property, so category `os` fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3dac24ad3ee71229",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one guard testing c1, and its then region is the guarded block; the minimum condition set is therefore c1.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch the code requests remote text and passes the response text to `exec`, enabling those behaviors.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch activates the remote request and execution when the operating-system name is Windows.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS-name check selects Windows as the environment on which the remote code is requested and executed, which is targeting.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4f3f20b996cb1e62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the network request and the `exec` call sit directly inside the then block controlled by the cited if; the request's response text is what `exec` receives.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "275c6a88cf47677a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The network and execution calls occur only inside the custom install command's `run` method under the Windows if; the shown setup registers that class as the install command and contains no other call site to those sinks.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f2:18",
+            "f2:28"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "0e11cfc36769bed9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get` performs the network request, and the response's text is passed to Python's `exec`, supporting download and execution of downloaded code.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

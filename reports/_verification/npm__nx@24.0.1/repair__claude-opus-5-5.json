@@ -1,0 +1,1701 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "nx",
+    "version": "24.0.1",
+    "archive_sha256": "a6e40c32b13fa893c9a7e0b532a56c8d32b3cd245edb8771486c45b686f3bbaf"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "197ca70f657b14a7",
+      "record_sha256_after": "8d52946d2639144e",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Removed the guessed recipe field: post-install.js:23 tests fileExists(join(workspaceRoot, 'nx.json')) and workspace-root.js sets workspaceRoot by walking up from process.cwd() to the first directory with nx.json, so file_present <workspace root>/nx.json is read from the code in g1 and g2. Still flag"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "8d52946d2639144e",
+      "record_sha256_after": "9296bcb7a53fd628",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "08d74340c303935a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The two post-install.js guards controlled no g2 region, because the only region sat in update-manager.js and the witnesses started there. Added post-install.js:26 (the call under both guards) as a region and started the download, write_file and delete_file witnesses at that call and its def, so the "
+        },
+        {
+          "claim_id": "k_c2907fd3f9.L6.drop",
+          "claim_sha256": "4ab9c5e5eaf1e846",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "workspace-root.js:18 reads NX_WORKSPACE_ROOT_PATH to return it as the root instead of walking up from cwd. Either way a root comes back and c2 tests its nx.json, so it only locates the workspace: no behaviour or victim target changes, and c2 already records the real test."
+        },
+        {
+          "claim_id": "q_d243dbabe8.L6.drop",
+          "claim_sha256": "576b68e9b164e6d4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "workspace-root.js:18 returns NX_WORKSPACE_ROOT_PATH as the root instead of walking up from cwd. Either way a root comes back and c2 tests its nx.json, so it only locates the workspace: no behaviour or victim target changes, and c2 already records the real test."
+        },
+        {
+          "claim_id": "k_998b2c4c7d.L6.drop",
+          "claim_sha256": "ab30b2129b2d391f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:64: NAPI_RS_NATIVE_LIBRARY_PATH only names the file to require; otherwise the binding is found by platform. Both sides load a binding and nothing else, so this locates a prerequisite and is plumbing."
+        },
+        {
+          "claim_id": "k_37150a217a.L6.drop",
+          "claim_sha256": "dcee38f3da6bddf3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:66: require of the NAPI_RS_NATIVE_LIBRARY_PATH file; failure only pushes to loadErrors. Both outcomes stay in binding loading, so this locates a prerequisite and is plumbing."
+        },
+        {
+          "claim_id": "k_f5139c4f6e.L6.drop",
+          "claim_sha256": "380d90f475d5ec0f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:70: generated NAPI-RS platform test. Each side only requires that platform's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_2fc79aecf1.L6.drop",
+          "claim_sha256": "b7b18099294d605c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:71: generated NAPI-RS arch test. Each side only requires that arch's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_41cd661f1c.L6.drop",
+          "claim_sha256": "34cb6bfc8c7bba42",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:157: generated NAPI-RS arch test. Each side only requires that arch's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_8d4c29406e.L6.drop",
+          "claim_sha256": "68bb7564f0d6939d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:208: generated NAPI-RS arch test. Each side only requires that arch's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_564b3b6e2c.L6.drop",
+          "claim_sha256": "967e9dd3bf21dfc0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:244: generated NAPI-RS arch test. Each side only requires that arch's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_dc5b4b0155.L6.drop",
+          "claim_sha256": "044a32e981ce00f4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:298: generated NAPI-RS arch test. Each side only requires that arch's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_b7e3f09623.L6.drop",
+          "claim_sha256": "fc1050e1f97ec2b4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:470: generated NAPI-RS arch test. Each side only requires that arch's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_8d3cf00a18.L6.drop",
+          "claim_sha256": "f4917257fe09d7d4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:78: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_731ec0eb56.L6.drop",
+          "claim_sha256": "5576824807d36587",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:80: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_20e8ddf703.L6.drop",
+          "claim_sha256": "9eb066e7ac086cf1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:96: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_7a00c5af7e.L6.drop",
+          "claim_sha256": "9d84493716b2f2da",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:117: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_e89303526d.L6.drop",
+          "claim_sha256": "70cef6973f5a2b18",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:133: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_758f2a30e5.L6.drop",
+          "claim_sha256": "733ad8d7e1c77cf5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:150: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_c78d6266f7.L6.drop",
+          "claim_sha256": "ea1a481a92af7eea",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:166: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_cb1ecfec6c.L6.drop",
+          "claim_sha256": "9873515ac8de9884",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:185: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_4543b76adc.L6.drop",
+          "claim_sha256": "a9126dcdc3ff0b56",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:201: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_2739127943.L6.drop",
+          "claim_sha256": "8835fc1e2dbb72f0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:217: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_aa7420d6e8.L6.drop",
+          "claim_sha256": "44a4e2a8a50b8608",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:237: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_ef70a81fb5.L6.drop",
+          "claim_sha256": "8c183043650449a0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:253: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_6a523eb7e7.L6.drop",
+          "claim_sha256": "69f6c7f18711f88b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:274: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_a34d3e3611.L6.drop",
+          "claim_sha256": "2e0c12fbd1fbcb45",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:290: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_7da130dbed.L6.drop",
+          "claim_sha256": "f7c038668fc35cc4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:308: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_d28abead28.L6.drop",
+          "claim_sha256": "cf7d940868b402ef",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:324: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_a9b70434dc.L6.drop",
+          "claim_sha256": "31c25ca3b899f85d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:342: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_00145527fe.L6.drop",
+          "claim_sha256": "ec1d16bb4e2ca2d0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:358: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_2a67890d54.L6.drop",
+          "claim_sha256": "f1ab195134bd86f9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:376: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_117672852c.L6.drop",
+          "claim_sha256": "4e4b3dc24a14f822",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:392: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_d125eda290.L6.drop",
+          "claim_sha256": "34eb6b4853b21aa7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:410: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_96dc3bce06.L6.drop",
+          "claim_sha256": "6a10e632bac930be",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:426: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_b4e418ddb1.L6.drop",
+          "claim_sha256": "ed4b96ad17bd00aa",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:443: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_15248800b6.L6.drop",
+          "claim_sha256": "c8682c9292c9355e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:459: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_5649ba941d.L6.drop",
+          "claim_sha256": "db4a7fa6951906a9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:479: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_437d0b672a.L6.drop",
+          "claim_sha256": "d96d4bceb083c829",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:495: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_96613baa9f.L6.drop",
+          "claim_sha256": "da87a689c0568137",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:511: version test with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. It only accepts or rejects a dependency binding, covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_65924e2ef1.L6.drop",
+          "claim_sha256": "c81ad998409612a0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:80: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_e05871fabc.L6.drop",
+          "claim_sha256": "7e91a39456bb1a44",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:96: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_ac7e71efa0.L6.drop",
+          "claim_sha256": "c3ee568d4a0f9fcc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:117: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_cd7e6234c5.L6.drop",
+          "claim_sha256": "065826d37a3e4034",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:133: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_b5e81b5d6b.L6.drop",
+          "claim_sha256": "6f5bd7c2bce8d9d7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:150: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_9dbac85f27.L6.drop",
+          "claim_sha256": "50cd03c127fb6368",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:166: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_5eeeef2241.L6.drop",
+          "claim_sha256": "058e62761f45962a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:185: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_ad4c6cc065.L6.drop",
+          "claim_sha256": "76672dd69d9ed02a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:201: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_662013760d.L6.drop",
+          "claim_sha256": "5c47f417c6e9fa08",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:217: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_ae2dc64b00.L6.drop",
+          "claim_sha256": "cbe2117c6f312ded",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:237: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_88bfa36584.L6.drop",
+          "claim_sha256": "0415c460df746d10",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:253: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_4096013916.L6.drop",
+          "claim_sha256": "8e0417b495367a2c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:274: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_59ad536e10.L6.drop",
+          "claim_sha256": "d032076f8ee7aca6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:290: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_24f9fc18c0.L6.drop",
+          "claim_sha256": "96139b01c476375f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:308: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_e40efae78f.L6.drop",
+          "claim_sha256": "8845c9c279aa606e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:324: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_909ad3efb7.L6.drop",
+          "claim_sha256": "bb51faaa7aa5a03a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:342: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_87985ea8b6.L6.drop",
+          "claim_sha256": "11b81ea0e446abf1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:358: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_d6221971e5.L6.drop",
+          "claim_sha256": "f66a94c3065f77f0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:376: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_8bc8319aec.L6.drop",
+          "claim_sha256": "9a6b8dd29ddbf720",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:392: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_3aa9482f1d.L6.drop",
+          "claim_sha256": "41f2454b92d36c5a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:410: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_ea1497c89f.L6.drop",
+          "claim_sha256": "77dcd7f846ee0cc3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:426: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_002f20ea07.L6.drop",
+          "claim_sha256": "4e161992fcd83682",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:443: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_e04deb67e7.L6.drop",
+          "claim_sha256": "cf4ee2d3a95d2b87",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:459: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_01cd5143c6.L6.drop",
+          "claim_sha256": "ec6c478fd4c3ff56",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:479: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_c563c3687e.L6.drop",
+          "claim_sha256": "3120a21645e1cb3a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:495: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_b23765f1ef.L6.drop",
+          "claim_sha256": "2b6745b1a6310e95",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:511: NAPI_RS_ENFORCE_VERSION_CHECK !== '0' half of the version test. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "k_797b656c20.L6.drop",
+          "claim_sha256": "e1da14bd109cd7e2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:87: generated NAPI-RS arch test. Each side only requires that arch's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_a2a41e4346.L6.drop",
+          "claim_sha256": "171323fcf47fb09d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:332: generated NAPI-RS arch test. Each side only requires that arch's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_9261bccdc3.L6.drop",
+          "claim_sha256": "8b0f6f7d8947182e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:502: generated NAPI-RS arch test. Each side only requires that arch's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_c4478128f8.L6.drop",
+          "claim_sha256": "ce41e68fb3ffe4a1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:94: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_2f5c353243.L6.drop",
+          "claim_sha256": "2816a49093bb9802",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:106: generated NAPI-RS platform test. Each side only requires that platform's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_ebba7bcbfe.L6.drop",
+          "claim_sha256": "a783f585aa4d10fe",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:107: generated NAPI-RS arch test. Each side only requires that arch's binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_bef4db9975.L6.drop",
+          "claim_sha256": "a1c6ba0d24b78cb4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:192: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_959fbcf4ea.L6.drop",
+          "claim_sha256": "bd6a739d7ec0a639",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:228: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_334c1d8e72.L6.drop",
+          "claim_sha256": "2b79d88253e5fe10",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:264: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_d922948c12.L6.drop",
+          "claim_sha256": "ccd3737111054028",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:486: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_15ce62b4ef.L6.drop",
+          "claim_sha256": "8a0b141539b50c4f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:115: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_f17618825d.L6.drop",
+          "claim_sha256": "87ce0ca8a177cfd9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:131: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_765b181d9b.L6.drop",
+          "claim_sha256": "3b8ed2af90f6c4a3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:141: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_eca209e1ea.L6.drop",
+          "claim_sha256": "68117c85b0f7392c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:148: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_275085996c.L6.drop",
+          "claim_sha256": "09c3d4807fd647d2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:164: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_eebf419fa5.L6.drop",
+          "claim_sha256": "c141f0021b47d963",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:176: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_8ec7c067ee.L6.drop",
+          "claim_sha256": "cffa50e214798735",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:183: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_2ef26b1f9d.L6.drop",
+          "claim_sha256": "5cd27ec23caca25d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:199: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_4a4f5db2c2.L6.drop",
+          "claim_sha256": "4fa984e2d9fc6564",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:215: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_4b29cbf8cc.L6.drop",
+          "claim_sha256": "35fe1d01cb1228d0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:227: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_a55aa71699.L6.drop",
+          "claim_sha256": "d2e9afe9ffb0eca8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:235: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_31647734b4.L6.drop",
+          "claim_sha256": "5f2f50023a4dc6e5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:251: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_6a1413256f.L6.drop",
+          "claim_sha256": "373bdf3873f95fbb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:263: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_cad1015afc.L6.drop",
+          "claim_sha256": "330a8153a9d91d6a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:12: linux test in isMusl(), whose result only picks the musl or gnu binding file. The same load behaviour runs either way, so this is plumbing."
+        },
+        {
+          "claim_id": "k_a8f88fd79a.L6.drop",
+          "claim_sha256": "eed78c7e1abc7f96",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:28: reads /usr/bin/ldd for musl, feeding isMusl(), whose result only picks the musl or gnu binding file. The same load behaviour runs either way, so this is plumbing."
+        },
+        {
+          "claim_id": "k_090022cffb.L6.drop",
+          "claim_sha256": "476d0522628a80fe",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:56: ldd --version output feeds isMusl(), whose result only picks the musl or gnu binding file. The same load behaviour runs either way, so this is plumbing."
+        },
+        {
+          "claim_id": "k_7464f941c8.L6.drop",
+          "claim_sha256": "86e38ddf312435ae",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:272: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_2c0a3f1519.L6.drop",
+          "claim_sha256": "7c9510e927f38d90",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:288: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_6211d6fbe2.L6.drop",
+          "claim_sha256": "48a6de1bef521414",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:306: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_20b7895e49.L6.drop",
+          "claim_sha256": "0ac26015037c9896",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:322: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_620cf6689f.L6.drop",
+          "claim_sha256": "c4da5100e50feea6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:340: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_8fa1d4f75d.L6.drop",
+          "claim_sha256": "e993c597314501d4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:356: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_762e0b38d4.L6.drop",
+          "claim_sha256": "ea34874c6c255c35",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:366: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_9d6f8db63a.L6.drop",
+          "claim_sha256": "f1b4271c499e5a86",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:374: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_8cc4429ce5.L6.drop",
+          "claim_sha256": "4edc7a1083871bd0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:390: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_932ce38490.L6.drop",
+          "claim_sha256": "0c0d18bd6a259820",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:400: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_8161deae93.L6.drop",
+          "claim_sha256": "5a214a6561f56148",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:408: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_88d44f4664.L6.drop",
+          "claim_sha256": "695f094d16675dda",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:424: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_58facdc641.L6.drop",
+          "claim_sha256": "7fbfc438069f7cd2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:434: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_c0b5d2e36b.L6.drop",
+          "claim_sha256": "460dbc8138a5000c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:441: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_9c885e43bd.L6.drop",
+          "claim_sha256": "4c3660386c1cfe58",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:450: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_6dd196bd10.L6.drop",
+          "claim_sha256": "c5562ac8400b35cd",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:457: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_6fdea669ef.L6.drop",
+          "claim_sha256": "4717565831591c15",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:469: generated NAPI-RS platform or arch test. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "k_0ec1f46ee3.L6.drop",
+          "claim_sha256": "efe639dcedefae58",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:477: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_58cf0b6059.L6.drop",
+          "claim_sha256": "19bbe58f6a373f97",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:493: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_7ef9513c52.L6.drop",
+          "claim_sha256": "2b1bffca576c2aff",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:509: require of one binding in a try; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "k_94a755d2a5.L6.drop",
+          "claim_sha256": "0d5054f89e63b5ed",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:528: WASI fallback when no native binding loaded or NAPI_RS_FORCE_WASI is set. It loads another build of the same binding, so the same behaviour runs and this is plumbing."
+        },
+        {
+          "claim_id": "k_da0bf6b862.L6.drop",
+          "claim_sha256": "bb388ad070590239",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:539: second WASI fallback test, trying @nx/nx-wasm32-wasi. It loads another build of the same binding, so the same behaviour runs and this is plumbing."
+        },
+        {
+          "claim_id": "k_7835d28e51.L6.drop",
+          "claim_sha256": "10f6980591ba2171",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "nx.wasi.cjs:37: existsSync on the debug wasm next to the module. That file ships in this package (dist/src/native), so this is no machine-environment test, and it only picks a build of the same binding. Plumbing."
+        },
+        {
+          "claim_id": "k_28dcd90e3a.L6.drop",
+          "claim_sha256": "ac7d97548afb03fd",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "nx.wasi.cjs:39: existsSync on the wasm next to the module. That file ships in this package (dist/src/native), so this is no machine-environment test, and it only picks a build of the same binding. Plumbing."
+        },
+        {
+          "claim_id": "k_6d6c1aa6f0.L6.drop",
+          "claim_sha256": "93136b8af53d6457",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:541: require of @nx/nx-wasm32-wasi in the WASI fallback; failure is only recorded. It loads another build of the same binding, so the same behaviour runs and this is plumbing."
+        },
+        {
+          "claim_id": "k_44b0202366.L6.drop",
+          "claim_sha256": "1e56235ea48fe1b1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:554: NAPI_RS_FORCE_WASI === 'error' with no WASI binding throws and ends the load. An opt-in abort when a binding is missing selects no other behaviour; it is covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_5a4f26d6f2.L6.drop",
+          "claim_sha256": "36cd600a60b7abac",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:64: NAPI_RS_NATIVE_LIBRARY_PATH only names the file to require; otherwise the binding is found by platform. Both sides load a binding and nothing else, so this locates a prerequisite and is plumbing."
+        },
+        {
+          "claim_id": "q_bb3d756075.L6.drop",
+          "claim_sha256": "dfdf9d4f3560fb47",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:65: try around the NAPI_RS_NATIVE_LIBRARY_PATH require; failure only pushes to loadErrors. Both outcomes stay in binding loading, so this locates a prerequisite and is plumbing."
+        },
+        {
+          "claim_id": "q_4a89662723.L6.drop",
+          "claim_sha256": "426ea747693c6472",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:70: generated NAPI-RS platform decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_93a11a39a6.L6.drop",
+          "claim_sha256": "6834bdaef4d5e5a1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:71: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_b55ee07b50.L6.drop",
+          "claim_sha256": "becdef614d7aa732",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:77: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_4854d1ece2.L6.drop",
+          "claim_sha256": "5bb92489ee01db20",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:80: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_d487551e0d.L6.drop",
+          "claim_sha256": "04c4700c333834c1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:87: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_c3ff75edf0.L6.drop",
+          "claim_sha256": "b32dca6768a6a086",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:93: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_24ac95fd18.L6.drop",
+          "claim_sha256": "90a26e8b8d57d7cd",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:96: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_4dd3ad92b1.L6.drop",
+          "claim_sha256": "78557145b03e6569",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:106: generated NAPI-RS platform decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_aeb8b2052b.L6.drop",
+          "claim_sha256": "50b4b70de46e45b0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:107: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_51d4d5e52c.L6.drop",
+          "claim_sha256": "066a0c8b826bd777",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:114: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_47a70905ed.L6.drop",
+          "claim_sha256": "2d70498469b13c59",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:117: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_2c5d7dbf8c.L6.drop",
+          "claim_sha256": "88dd7f5b3226a1c1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:130: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_5753796d51.L6.drop",
+          "claim_sha256": "9f8a08370fc30382",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:133: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_9cf92f66c7.L6.drop",
+          "claim_sha256": "d3fdd838462bad2a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:141: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_f85377406b.L6.drop",
+          "claim_sha256": "ddd01aeba1e3eab1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:147: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_9d4e44c3ed.L6.drop",
+          "claim_sha256": "03e20ec700cf8f60",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:150: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_a55aab2b64.L6.drop",
+          "claim_sha256": "34adabdf3f9b8482",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:157: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_6e3b868e22.L6.drop",
+          "claim_sha256": "8a5a38fe8b77ec7b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:163: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_7164cbaf38.L6.drop",
+          "claim_sha256": "0675bc255ea8a698",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:166: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_cfacd2a3d8.L6.drop",
+          "claim_sha256": "c9b0931f5c38ec74",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:176: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_1c59e6ddfc.L6.drop",
+          "claim_sha256": "15009b7737cf682d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:182: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_471f0d2959.L6.drop",
+          "claim_sha256": "deb9d8e98bf2abef",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:185: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_12ed5dfd45.L6.drop",
+          "claim_sha256": "4fb77cc74f959db8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:192: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_395c755b72.L6.drop",
+          "claim_sha256": "5399d67815b57f44",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:198: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_4af8c78089.L6.drop",
+          "claim_sha256": "10a73c6b80a39d2b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:201: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_5698effb19.L6.drop",
+          "claim_sha256": "ddf0c2fd10f9c1fb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:208: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_1322554c80.L6.drop",
+          "claim_sha256": "454e2b7c23f951bb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:214: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_97f716e3e4.L6.drop",
+          "claim_sha256": "c5a77d389b48d7fe",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:217: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_3a743cf653.L6.drop",
+          "claim_sha256": "be0446b906bb8eac",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:227: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_66edadf979.L6.drop",
+          "claim_sha256": "b4067c5a71a13ae7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:228: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_724c669be5.L6.drop",
+          "claim_sha256": "b164ec82ebe306b0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:234: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_4a318846ea.L6.drop",
+          "claim_sha256": "c548c9233ee52cb4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:237: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_cdf4cfa965.L6.drop",
+          "claim_sha256": "1cb1e895f4a89aaf",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:244: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_f20686aa2e.L6.drop",
+          "claim_sha256": "ec3a9e4d1e4b5d2c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:250: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_38cf2f9dc8.L6.drop",
+          "claim_sha256": "aa2270bdccfd7665",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:253: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_d5954daf2d.L6.drop",
+          "claim_sha256": "3654644a525e4f80",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:263: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_d706711876.L6.drop",
+          "claim_sha256": "4d4eddaffec64ff3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:264: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_58cc6a879f.L6.drop",
+          "claim_sha256": "354a1e8a5c53af1d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:12: linux decision in isMusl(), whose result only picks the musl or gnu binding file. The same load behaviour runs either way, so this is plumbing."
+        },
+        {
+          "claim_id": "q_f699ac2731.L6.drop",
+          "claim_sha256": "0d79054428bd7f30",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:27: try around the /usr/bin/ldd read in the musl probe, whose result only picks the musl or gnu binding file. The same load behaviour runs either way, so this is plumbing."
+        },
+        {
+          "claim_id": "q_e9a9bb62f8.L6.drop",
+          "claim_sha256": "6230256ccacf95eb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:55: try around ldd --version in the musl probe, whose result only picks the musl or gnu binding file. The same load behaviour runs either way, so this is plumbing."
+        },
+        {
+          "claim_id": "q_2a610cf904.L6.drop",
+          "claim_sha256": "7a29db76d9c875fe",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:271: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_f939ad0b34.L6.drop",
+          "claim_sha256": "5b96e19262138e8d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:274: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_e6415a0bd7.L6.drop",
+          "claim_sha256": "8b0448491d3e6644",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:287: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_b13376f0f5.L6.drop",
+          "claim_sha256": "e5c2a34ec0ddc247",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:290: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_b0af09e2b6.L6.drop",
+          "claim_sha256": "65ac1be25da98f7b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:298: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_69cdd243e9.L6.drop",
+          "claim_sha256": "f92998849679fa6e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:305: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_2903a3934e.L6.drop",
+          "claim_sha256": "78ec06a9ec2ac7c1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:308: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_fe882c495c.L6.drop",
+          "claim_sha256": "0fe6a3a526261700",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:321: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_e62e5152d7.L6.drop",
+          "claim_sha256": "9e596e6c8b2020c0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:324: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_b2ff9641b5.L6.drop",
+          "claim_sha256": "55921042c16dad7e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:332: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_cf86731b3f.L6.drop",
+          "claim_sha256": "66c6ccb33ce2e10f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:339: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_c98269d649.L6.drop",
+          "claim_sha256": "d887bd25ae5a5b52",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:342: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_ae4d492a54.L6.drop",
+          "claim_sha256": "f6a378e5f6f7077f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:355: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_626b69a54b.L6.drop",
+          "claim_sha256": "4946ce43ce3e2c06",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:358: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_191f240393.L6.drop",
+          "claim_sha256": "f4ee67de07f02423",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:366: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_ea8573162b.L6.drop",
+          "claim_sha256": "29e3f9dcf3d30264",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:373: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_a609a113c0.L6.drop",
+          "claim_sha256": "570c3c0e6fe0dce7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:376: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_309c9078eb.L6.drop",
+          "claim_sha256": "69c227658b4d70f7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:389: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_983dfdf682.L6.drop",
+          "claim_sha256": "303f42b9322a8d49",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:392: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_57f622d220.L6.drop",
+          "claim_sha256": "cc34d3462e36edaf",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:400: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_d861d7fe04.L6.drop",
+          "claim_sha256": "cb5d1f9c43d126ed",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:407: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_ca918320d3.L6.drop",
+          "claim_sha256": "bff81cdbd30a314c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:410: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_496e34cd91.L6.drop",
+          "claim_sha256": "3bd69f228425a2fd",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:423: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_4875fb84aa.L6.drop",
+          "claim_sha256": "d223d44611a72a79",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:426: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_a3b0d08743.L6.drop",
+          "claim_sha256": "db2369585cb13894",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:434: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_6d0b459292.L6.drop",
+          "claim_sha256": "2ae46b9fc6cf3166",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:440: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_61799067c7.L6.drop",
+          "claim_sha256": "b6b6579150c80804",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:443: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_aec9ce94dd.L6.drop",
+          "claim_sha256": "861017fc14255d02",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:450: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_a8649c15c8.L6.drop",
+          "claim_sha256": "992967ab0eeb10f6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:456: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_711745f23a.L6.drop",
+          "claim_sha256": "e90e4e46c8af0848",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:459: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_929247a5ba.L6.drop",
+          "claim_sha256": "3fbd5250c3e9a457",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:469: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_ebd43284b8.L6.drop",
+          "claim_sha256": "49b054035b704c8e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:470: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_52f16d94b8.L6.drop",
+          "claim_sha256": "59498f54e20f59e8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:476: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_f9d35b31a8.L6.drop",
+          "claim_sha256": "b46dce0bbc1e5fae",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:479: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_1c09ed4b6c.L6.drop",
+          "claim_sha256": "265baa0e552bbb5a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:486: generated NAPI-RS platform or arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_6a025b65fc.L6.drop",
+          "claim_sha256": "b87fafc103464ddc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:492: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_d18906aadb.L6.drop",
+          "claim_sha256": "2027d8998b5d8d19",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:495: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_6a6f786665.L6.drop",
+          "claim_sha256": "29da2ed35e336d94",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:502: generated NAPI-RS arch decision. Each side only requires the matching binding or records a load error, so the same behaviour runs: a platform-picked dependency, not a gate. Total failure is the native binding requirement."
+        },
+        {
+          "claim_id": "q_ef2f879c28.L6.drop",
+          "claim_sha256": "63515a90d49bd432",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:508: try around one binding require; failure only pushes to loadErrors and the chain moves on. A fallback chain is a prerequisite, already recorded as the native binding requirement."
+        },
+        {
+          "claim_id": "q_725af0bb15.L6.drop",
+          "claim_sha256": "3626279214fb919e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:511: version decision with NAPI_RS_ENFORCE_VERSION_CHECK. The throw is caught in the same try and goes to loadErrors, so the loader moves to the next binding. Covered by the native binding requirement."
+        },
+        {
+          "claim_id": "q_4247780aaa.L6.drop",
+          "claim_sha256": "3dbfcce8596048b5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:528: WASI fallback decision when no native binding loaded or NAPI_RS_FORCE_WASI is set. It loads another build of the same binding, so the same behaviour runs and this is plumbing."
+        },
+        {
+          "claim_id": "q_77dc5f9a4d.L6.drop",
+          "claim_sha256": "04d5bdcca42c2912",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:539: second WASI fallback decision, trying @nx/nx-wasm32-wasi. It loads another build of the same binding, so the same behaviour runs and this is plumbing."
+        },
+        {
+          "claim_id": "q_e83465bafa.L6.drop",
+          "claim_sha256": "8bfd8000038714cf",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "nx.wasi.cjs:37: decision on the debug wasm next to the module. That file ships in this package (dist/src/native), so this is no machine-environment test, and it only picks a build of the same binding. Plumbing."
+        },
+        {
+          "claim_id": "q_3fbdcf8a9b.L6.drop",
+          "claim_sha256": "b04207ca7d5ca56c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "nx.wasi.cjs:39: decision on the wasm next to the module. That file ships in this package (dist/src/native), so this is no machine-environment test, and it only picks a build of the same binding. Plumbing."
+        },
+        {
+          "claim_id": "q_86078a37a9.L6.drop",
+          "claim_sha256": "5b41282b4adf4967",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:540: try around the @nx/nx-wasm32-wasi require; failure is only recorded. It loads another build of the same binding, so the same behaviour runs and this is plumbing."
+        },
+        {
+          "claim_id": "q_ad3b8393f9.L6.drop",
+          "claim_sha256": "c82146003d0b5313",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:540: try around the @nx/nx-wasm32-wasi require; failure is only recorded. It loads another build of the same binding, so the same behaviour runs and this is plumbing."
+        },
+        {
+          "claim_id": "q_00ea0d5326.L6.drop",
+          "claim_sha256": "71d83b58e8900d14",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-bindings.js:554: NAPI_RS_FORCE_WASI === 'error' with no WASI binding throws and ends the load. An opt-in abort when a binding is missing selects no other behaviour; it is covered by the native binding requirement."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "9296bcb7a53fd628",
+      "record_sha256_after": "9296bcb7a53fd628",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Record unchanged and still flagged; no reason could be removed from the code. 'payload path not fully traced': g2's write_file sink, createWriteStream at update-manager.js:385, sits in the anonymous handler given to extract.on('entry') at line 374. That handler is called by the tar-stream dependency"
+        }
+      ]
+    }
+  ]
+}

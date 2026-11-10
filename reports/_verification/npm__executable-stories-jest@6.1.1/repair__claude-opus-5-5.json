@@ -1,0 +1,165 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "executable-stories-jest",
+    "version": "6.1.1",
+    "archive_sha256": "c14564535e12a4d790bc6dd864af05d2661d57f7b67f7a0b57f4d020759135f5"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "74ad553b496a3668",
+      "record_sha256_after": "74ad553b496a3668",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The flag must stay. In d12, fL() at bytes 581200-581970 calls await uX(), then _3() and h3() build a provider list. That list runs through u1.run(providers.map(p => x => p.executeStreaming(x))), and the result is sent with PX(). The module that does the credential read is picked at runtime from that"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "74ad553b496a3668",
+      "record_sha256_after": "c02415c640c5aa56",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "e2501e60132bf6f6",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited sink was the npm tokens fetch in the token validator, which supports none of recon, cred_read or exfil as the main path. Re-cited from the code: _3() calls I6.execute directly (new I6() in scope), which runs execSync('gh auth token') (cred_read, exec) and os.hostname() (recon, other); exfi"
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3a9d798f71974b38",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same wrong sink as g1. cred_read now cites execSync('gh auth token') in I6.execute via await _3(); exfil cites the DomainSender.send fetch POST via await finalize(). Added the _3 and finalize awaits as regions, since both sit after the yX() lock check in fL()."
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "24636b8c4f9793a8",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "yX() reads a tmpdir lock file, exits only if the PID in it is alive, otherwise writes its own PID; W6() deletes it at exit. It is a single-instance lock and does not test for analysis, CI or a sandbox, so polarity changed from evade to activate."
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "5d49ca38a3f7fae5",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "i1.execute writes updater.py into a mkdtemp /tmp/update- dir and spawns bash with a stdin script, then rmSync's the dir in finally. Nothing visible installs anything that survives; the d7/n7 contents are encrypted with a() and not decoded. Removed persistence from g3 and from behaviours.gated, noted"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "2d7d6b4928da2109",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "In g1.execute the ['darwin','linux'].includes(process.platform) test wraps the download-and-republish step with no alternative branch; it restricts the step to Unix-like hosts and does not choose a victim, so purpose changed from targeting to portability."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "c02415c640c5aa56",
+      "record_sha256_after": "c02415c640c5aa56",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The flag has to stay. In d12, i1.execute (bytes ~288692-289336) writes d7 to /tmp/update-*/updater.py and pipes n7 to `bash -s --` through Bun.spawn. d7 and n7 are defined near bytes 229953 and 238053 as a(hexKey, base64Blob): AES-GCM decryption followed by Bun.gunzipSync. No registered decoder cove"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "c02415c640c5aa56",
+      "record_sha256_after": "c68f03a7b7a03e10",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "bf29738b49ad19aa",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The anchor is _0x54a899(f4), the existsSync test at the top of yX. When it is false, yX skips the block, writes its pid and returns true, so not_exists on <tmpdir>/tmp.0144018410.lock does lead to the guarded code, and the value and operator hold. The refutation's point is that a stale lock (file pr"
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "ee08ea9038280c7b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that the command is not exactly ps aux: the execSync argument is a ternary of 'tasklist 2>/dev/null' on win32 and 'ps aux 2>/dev/null' elsewhere. probe.target is now '* 2>/dev/null', which matches both, and a note names the two commands."
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "3484b23e6ebd0ba4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The includes test at the anchor loops over DQ, so the single value crowdstrike was only one of the needles. The value is now the full 17 entry DQ list as defined in the code, value_recovered is plain, and the probe target carries the corrected command. Any entry found in the lowercased output makes "
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "81d7196ecd60e6b1",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The witness jumped from the finalize call straight to x9.send. It now cites each hop: bind on the 'dispatch' key of new u1, the finalize call, u1.finalize, this.flush(), u1.flush, this.dispatch(batch), the f1 dispatch arrow, sender.send(envelope), x9.send. The declaration holding the bind was added "
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "3f0bb572ad4bb086",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same broken hop as g1.then.L3 and the same fix: the path from finalize through u1.flush and the f1 dispatch arrow to sender.send and x9.send is now cited hop by hop, with a bind on the 'dispatch' key and the declaration added as a region. The last hop stays unresolved=dynamic_dispatch because the se"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "4de05ef5c487625e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "yX returns true when the lock is absent, and also when the lock exists but mK(pid) is false, because it then deletes the stale lock and continues. c4 alone did not describe that. Added c12 (process.kill liveness probe, falsy, anchored on process.kill in mK), set the expression to c4 || c12 and liste"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "fe531c49ccaa0e39",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The region was the whole execute body, including the shouldExecute early return itself. It is now the try statement after that return, which holds both sinks (writeFileSync of updater.py and Bun.spawn of bash), so the region is only the code the early exit controls and the empty witnesses still hold"
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "4234657f2743cc06",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "bK only proceeds when WORKFLOW_ID or REPO_ID_SUFFIX is set, then inside GITHUB_ACTIONS tests that GITHUB_WORKFLOW_REF and GITHUB_REPOSITORY include those values before running X6.execute. That limits the step to chosen workflows or repositories, which is targeting. The one refuting verdict gives no "
+        }
+      ]
+    }
+  ]
+}

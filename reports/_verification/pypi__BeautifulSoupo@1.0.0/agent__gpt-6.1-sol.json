@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifulSoupo",
+    "version": "1.0.0",
+    "archive_sha256": "05733685a21291b06354a7a3fca27c36fe77d9d2628897064ea1fe0735174884"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "9d51b7cc9a54473b",
+      "packet_sha256": "e943466080b8570b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f9d63ddc88c079fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly compares os.name after importing os in the same function (s1; f1:12).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "5022cb99e2367fc1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm runs when os.name equals the literal nt; there is no intervening negation or early exit (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads os.name, so it categorizes the operating system (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "efd5df1d34e58071",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The region has one enclosing condition, os.name == nt, with no additional conjunction or alternative; one condition suffices (s2, s3).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The readable derived code places retrieval and execution in the operating-system test's then arm, with no alternative payload branch, so the gate enables those actions (f2:13, f2:16).",
+          "evidence_refs": [
+            "f2:13",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The positive nt match activates the guarded execution; the condition does not test for analysis tooling (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The operating-system match restricts payload execution to the nt target, with no alternate operating-system implementation, supporting targeting (f2:13, f2:16).",
+          "evidence_refs": [
+            "f2:13",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a14e6b5b6d871987",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In the supplied readable derived file, both requests.get and its enclosing exec sit directly inside the same os.name == nt then arm (f2:13, s4, s5).",
+          "evidence_refs": [
+            "f2:13",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "12477c91a19515a0",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Both sinks occur only inside the guarded run method, and calling that method still evaluates the guard; the complete supplied files show no alternate entry to those sink statements (f2:11, f2:13, f2:16, f2:30).",
+          "evidence_refs": [
+            "f2:11",
+            "f2:13",
+            "f2:16",
+            "f2:30"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "e394c02376e9c6cd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The local requests import binds the HTTP retrieval call, whose response text flows through tag removal directly into exec, supporting download and execution of downloaded code (f2:14, s4, s5).",
+          "evidence_refs": [
+            "f2:14",
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

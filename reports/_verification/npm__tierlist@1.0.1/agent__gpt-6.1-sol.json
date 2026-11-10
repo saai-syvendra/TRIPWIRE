@@ -1,0 +1,370 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "tierlist",
+    "version": "1.0.1",
+    "archive_sha256": "ac84b4431b0edbda39c8cb0027f1866c907e350a0ef1cba12b61e2a332839904"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "05d12ed8c2300359",
+      "packet_sha256": "463b55604927d419",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "15dbc21b74c93834",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The imported fs.promises.access is awaited in a try body, and only successful probes add the home-relative startup paths to found (f1:2, f1:6, f1:16, s1).",
+          "evidence_refs": [
+            "f1:2",
+            "f1:6",
+            "f1:16",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "de5f9251d6305f2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Successful access probes populate the list; an empty list returns before either guarded operation, so the positive condition is existence (s1, f1:22, s2).",
+          "evidence_refs": [
+            "s1",
+            "f1:22",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3c4b8878c5da9f3a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The access probes check startup files that will be modified, supporting target_artifact (f1:6, s1, f1:41).",
+          "evidence_refs": [
+            "f1:6",
+            "s1",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "7765a045628a2326",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shell is bound to process.env.SHELL with an empty fallback and then tested using includes (f1:32, s3).",
+          "evidence_refs": [
+            "f1:32",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "5e818aee0835b430",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The literal bash includes test contributes positively through OR to the spawn branch (s3, s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "d763c7c61b57296f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested value comes from the SHELL environment variable (f1:32, s3).",
+          "evidence_refs": [
+            "f1:32",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "db21743cc5096001",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The zsh test reads the local shell binding assigned from process.env.SHELL (f1:32, s5).",
+          "evidence_refs": [
+            "f1:32",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "6d0484bd2b20f35c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The literal zsh includes test contributes positively through OR to the spawn branch (s5, s4).",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "15a95d2609dda19a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested value comes from the SHELL environment variable (f1:32, s5).",
+          "evidence_refs": [
+            "f1:32",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "e96bfdcd2c5db088",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "data receives the awaited fs.readFile result for rcFile and is tested in the next statement (f1:27, s6).",
+          "evidence_refs": [
+            "f1:2",
+            "f1:27",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d63171ff9f9d6df6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Finding the literal marker returns; the file write requires that the read content not include it (s6, s7, s8).",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "ed1ef50d05ca7fee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The decision examines text read from the startup file, supporting file_content (f1:27, s6).",
+          "evidence_refs": [
+            "f1:27",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9a13a279a999d5b1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The only appendWifiA call follows the nonempty accessible-file-list check, and its write requires absent marker content; both conditions are necessary, giving a minimum of two (s2, f1:41, s7, s8).",
+          "evidence_refs": [
+            "s2",
+            "f1:41",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "86c19efab2412e37",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks enable a startup-file write when an accessible file lacks the marker, with no alternative write payload (s1, s2, s7, s9).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "506fe4529ab1e024",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks activate modification of available startup files lacking the marker, without detecting analysis environments (f1:6, s1, s7, s9).",
+          "evidence_refs": [
+            "f1:6",
+            "s1",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "04fada55488050da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate requires an available startup artifact and checks whether its entry is already present, supporting data_availability (s1, s2, s7, s9).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "8f317d1c7205daaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sink is directly inside the cited write region after the marker return; its containing function is called only after the empty-list return (s7, s8, s9, s2, f1:41).",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8",
+            "s9",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "3602c7dd29546114",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "appendWifiA is not exported and has only the call at f1:41, so its write always passes both checks; exported and direct entries both enter runRCChecker before its list check (f1:26, f1:36, s2, s7, f1:44).",
+          "evidence_refs": [
+            "f1:26",
+            "f1:36",
+            "s2",
+            "s7",
+            "f1:41",
+            "f1:44"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "e168ba27d10b44e0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is fs.promises.writeFile and appends an entry to shell startup files, providing a file write and persistence through future startup processing (f1:2, f1:6, f1:14, s9).",
+          "evidence_refs": [
+            "f1:2",
+            "f1:6",
+            "f1:14",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "28c4b3f07f5214b1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The only autoSource call follows the nonempty-list check, and its spawn requires either shell includes test; the minimum is c1 plus c2 or c3 (s2, f1:42, s4, s10).",
+          "evidence_refs": [
+            "s2",
+            "f1:42",
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "60777c8f288f0c05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "With an available startup file, the shell condition enables the source subprocess; the alternative branch has no subprocess (s2, f1:42, s4, s11).",
+          "evidence_refs": [
+            "s2",
+            "f1:42",
+            "s4",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "73bebc87f7fb1da7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate activates sourcing for available files under matching shells, without testing for analysis environments (s2, f1:32, s4, s11).",
+          "evidence_refs": [
+            "s2",
+            "f1:32",
+            "s4",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "92a81e7f11239d77",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The shell tests restrict the source subprocess operation to bash- or zsh-named shells, supporting portability (f1:32, s4, s11).",
+          "evidence_refs": [
+            "f1:32",
+            "s4",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "16904f4a1bb4dbc4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sink lies directly inside the cited then region, and the sole autoSource call follows the empty-list early return (s4, s10, s11, s2, f1:42).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10",
+            "s11",
+            "f1:42"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "235ca2cdeae631a4",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "autoSource is not exported and has only the call at f1:42 after the accessible-file-list check; its spawn always passes the local shell test (f1:31, f1:36, s2, s4, f1:42).",
+          "evidence_refs": [
+            "f1:31",
+            "f1:36",
+            "s2",
+            "s4",
+            "f1:42",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "0be8e3bf9220a597",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawn is imported from child_process and called with the shell and command arguments, so the sink can create a process (f1:3, s11).",
+          "evidence_refs": [
+            "f1:3",
+            "s11"
+          ]
+        }
+      ]
+    }
+  ]
+}

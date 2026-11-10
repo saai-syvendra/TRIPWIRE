@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "MarkupSafe",
+    "version": "3.0.4",
+    "archive_sha256": "2e9ad7dd851bf45fab9f75cbff4cb493fee9979e8d8c7c9c3ee119022518edd6"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "93e1c3532eb52680",
+      "record_sha256_after": "93e1c3532eb52680",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "q_cdb829d81d.L6.drop",
+          "claim_sha256": "c75d51ead74de8a9",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if/elif/else at setup.py:60-83 tests CIBUILDWHEEL and supports_speedups (platform.python_implementation() not in PyPy/Jython/GraalVM, lines 54-58), but every branch only calls run_setup(True) or run_setup(False), i.e. setuptools setup() with or without the _speedups C extension, plus printed war"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "93e1c3532eb52680",
+      "record_sha256_after": "93e1c3532eb52680",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_ac939c6491.L6.drop",
+          "claim_sha256": "273bc86bfe9a525b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:60 tests os.environ.get(\"CIBUILDWHEEL\", \"0\") == \"1\". When supports_speedups is true, both sides call run_setup(True) (line 61 and line 64), the same setup() call building the same _speedups extension. The only difference is the try/except BuildFailed at lines 63-71: with the variable unset,"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1413 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@sentry/cli",
+    "version": "3.8.2",
+    "archive_sha256": "bf41352446858449efcf8644a4c416c1e11210635b7f1c294340dac5daf9d9ac"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "5cdad082470e49d7",
+      "packet_sha256": "689691a681d1bf53",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "76ef3d38d578404a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:305 compares process.env.SENTRYCLI_SKIP_DOWNLOAD === '1' in an if that exits the process.",
+          "evidence_refs": [
+            "s1",
+            "f1:305"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "7f9ba29387cd903a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when the variable equals '1', so the rest of the script runs only when it is not '1' (!=).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "939b17718d1a0104",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "d44129e992f82855",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:53 binds platform = os.platform() and f2:55 tests platform === 'darwin'.",
+          "evidence_refs": [
+            "s3",
+            "f2:53",
+            "f2:55"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "b8bff6c14107f077",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "packageName is set only when platform === 'darwin', and the s4 early exit fires when packageName is undefined, so the positive form is ==.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "84657163fdd5aa18",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.platform() is an operating-system property, so os fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "4d78e62331f04b26",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:58 tests platform === 'linux', and platform comes from os.platform().",
+          "evidence_refs": [
+            "s5",
+            "f2:53"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "02cad2dea88bfdb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The linux branch sets packageName, which the s4 exit then requires, so == linux is the positive form.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "978c8170b5c0aa44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads the OS platform.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "725149b899a9fa64",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:58 tests platform === 'freebsd', and platform comes from os.platform().",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "95fc3596f7d9411b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same || chain as linux: == freebsd leads to a defined packageName.",
+          "evidence_refs": [
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "2d6ea31ef46ef9f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads the OS platform.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "6eea75ad0f939909",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:58 tests platform === 'android', and platform comes from os.platform().",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "faed30b0fb103af0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "== android is one alternative of the linux-family branch.",
+          "evidence_refs": [
+            "s7",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "f8e6cd592df1eedd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads the OS platform.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "fa2f67342e4ea1f6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites are case 'x64' of switch(arch), with arch = os.arch() at f2:52.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "f2:52"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "0400f2f8ea722001",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "case 'x64' means arch == x64 and sets packageName, which the s4 exit requires.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "ca7d28871c8f7ce5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.arch() is a CPU architecture, so arch fits.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "e53961c2ad0c3d71",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites are case 'x86' of switch(arch) on os.arch().",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "dbffd438f9ce3400",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "case 'x86' is a positive match that sets packageName.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "e19279cc6d2a8dab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads the CPU architecture.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "9dcb6b8477eec11f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites are case 'ia32' of switch(arch) on os.arch().",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "84a13638a87c5b8b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "case 'ia32' is a positive match that sets packageName.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "f7247a57965f6a23",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads the CPU architecture.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "d09a6c433c15d73e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites are case 'arm64' of switch(arch) on os.arch().",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "d1e261bc19121717",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "case 'arm64' is a positive match that sets packageName.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "37899ca0677e51d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads the CPU architecture.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "a2174c02fe802f2e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The site is case 'arm' of switch(arch) on os.arch() in the linux branch.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "7cf1c3928f19b6de",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "case 'arm' is a positive match that sets packageName.",
+          "evidence_refs": [
+            "s16",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "c0bfd54b09e07363",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads the CPU architecture.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "5dca66f5534ef556",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:75 tests platform === 'win32', and platform comes from os.platform().",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "d9199053b27dae44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32 branch sets packageName for the arch cases, which the s4 exit requires.",
+          "evidence_refs": [
+            "s17",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "fd1db23d18073b84",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads the OS platform.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "f9684e4dfcd704c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:192 compares process.env.SENTRYCLI_USE_LOCAL === '1' in an if.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "93de36db88b534d7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then block runs when the variable equals '1', so == 1 is the positive form.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "f64b68f778f8baf0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c14.L1",
+          "claim_sha256": "70c02daf0518d4de",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:318 calls require.resolve on `${pkg}/${subpath}` inside a try, and its throw decides which arm runs.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "b51c8ac68c91331a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fallback download sits in the catch arm, which runs only when require.resolve throws (not_exists). Success exits the process.",
+          "evidence_refs": [
+            "s20",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "c14.L6.category",
+          "claim_sha256": "1b5583703ca7d73f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It checks whether an optional dependency package is installed, so dependency_tree fits.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "da11377e7c4427e8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The expression matches the nesting: the s2 exit gives c1, the s4 exit gives the platform and arch combinations (darwin; linux/freebsd/android with 5 archs; win32 with x64/x86/ia32/arm64), and the catch gives c14. The minimum is c1, c2, c14 = 3.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s21",
+            "f2:55-88"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "144b14cc5cbf09dd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the fallback download and version-check run at all, so enables fits.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b2ed9b7ae6bb72a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs on matching platforms; nothing backs off on analysis or CI, so activate fits.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b806a8eceb33ddc7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks pick a supported platform binary and fall back when optional dependencies are missing, which is portability.",
+          "evidence_refs": [
+            "s4",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "100bdc0f35a70977",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The region s22 (catch arm, after both exits) calls downloadBinary().then(() => checkVersion()), which calls helper.execute. helper is required from ../js/helper, and exports.execute is its execute, which runs childProcess.execFile at f2:315.",
+          "evidence_refs": [
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s23",
+            "f2:12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "bda272b5d7be41ad",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "execute and getPath are exported from js/helper (f2:12-13), so any consumer of the package can reach the execFile/spawn sink without passing the install gates.",
+          "evidence_refs": [
+            "f2:12",
+            "f2:13",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "573a019970eba51f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is childProcess.execFile from node:child_process (f2:24), run on the binary path getPath() returns. Process execution is what exec_downloaded needs.",
+          "evidence_refs": [
+            "s23",
+            "f2:24"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6aaee3428923ec68",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "c13 is an if nested inside downloadBinary, itself reached under c1, platform/arch and c14, so it joins with and. The minimum is 4 on both sides: c1, c2, c14 plus c13 or its negation.",
+          "evidence_refs": [
+            "s19",
+            "s2",
+            "s4",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "33fadcbbca485848",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "c13 picks between copying a local binary and downloading one, which is a different payload source per branch, so selects fits.",
+          "evidence_refs": [
+            "s19",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "b627cc227a882e3e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both branches run on a target and nothing is evaded.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "1d854575992d73b5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The mix of a user opt-in env var with platform and dependency checks fits no single purpose cleanly. It is neither targeting nor anti-analysis, so unclear is acceptable.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "1e4206cb9c659416",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The sinks fetch (f1:231) and copyFileSync (f1:292) do sit in region s30, on the else side of the c13 if. But s30 is in the downloadBinary body (f1:208-294), lexically before the s2, s4 and s21 guards. The call that reaches it (f1:330) is not among the cited hops, so those guards control no cited reg",
+          "evidence_refs": [
+            "s30",
+            "s31",
+            "s32",
+            "s19",
+            "f1:330"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3.excl",
+          "claim_sha256": "0b2651c4a684ba48",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "downloadBinary is called only at f1:330, in the catch arm, and install.js has no exports, so the fetch and write are not reachable another way.",
+          "evidence_refs": [
+            "s31",
+            "s32",
+            "f1:330"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L5",
+          "claim_sha256": "2003f8a0ab384638",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fetch from undici is a network sink (f1:12, 231), and fs.copyFileSync writes the binary to disk (f1:292).",
+          "evidence_refs": [
+            "s31",
+            "s32",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "45269d36fde69102",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "fs.copyFileSync(binPath, outputPath) at f1:198 sits in the then block of the c13 if. But region s29 is inside downloadBinary, lexically before the s2, s4 and s21 guards, and the call hop at f1:330 is not cited.",
+          "evidence_refs": [
+            "s29",
+            "s33",
+            "s19",
+            "f1:330"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "1005e365391647bf",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The copy at f1:198 is only in downloadBinary, which is called only at f1:330 and is not exported.",
+          "evidence_refs": [
+            "s33",
+            "f1:330"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "96e7752ed2b5f5f3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.copyFileSync from node fs writes a file, so write_file is supported.",
+          "evidence_refs": [
+            "s33",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "k_13e24a6d7b.L6.drop",
+          "claim_sha256": "b8d5ca81a523ad89",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "SENTRY_BINARY_PATH only overrides the path of the CLI binary in the library path lookup. It is path plumbing and does not change what the install does.",
+          "evidence_refs": [
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "k_1be48aaffa.L6.drop",
+          "claim_sha256": "1a048db4272e1595",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The win32 check only picks the .exe filename suffix, which is plumbing.",
+          "evidence_refs": [
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "k_27e6b846b9.L6.drop",
+          "claim_sha256": "aa95e0262d2fa53b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "APPDATA only picks the npm cache folder, a destination path and not a gate.",
+          "evidence_refs": [
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "k_3708b8b76c.L6.drop",
+          "claim_sha256": "54231a5c52edc815",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This reads checksums.txt for integrity validation. A missing file only skips validation and does not change what runs.",
+          "evidence_refs": [
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "k_3e1b048d05.L6.drop",
+          "claim_sha256": "6dc399a31e13f5ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "SENTRYCLI_SKIP_CHECKSUM_VALIDATION toggles only the integrity check. Download and write happen either way, so it is not an install gate.",
+          "evidence_refs": [
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "k_6e3b371f18.L6.drop",
+          "claim_sha256": "742a3d507f45c896",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "existsSync(fallbackBinaryPath) only chooses which binary path to return in the library lookup, which is path plumbing.",
+          "evidence_refs": [
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "k_8132379db6.L6.drop",
+          "claim_sha256": "377137630cfa3413",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This switch on platform only builds the binary's subpath string, and every branch yields a bin/sentry-cli name, so it is not a gate.",
+          "evidence_refs": [
+            "s40"
+          ]
+        },
+        {
+          "claim_id": "k_81a1a97247.L6.drop",
+          "claim_sha256": "48c81d9e006acebc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The win32 case only sets the .exe subpath, which is plumbing.",
+          "evidence_refs": [
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "k_a411cbdf01.L6.drop",
+          "claim_sha256": "9421579063a98368",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The darwin case only sets the subpath string.",
+          "evidence_refs": [
+            "s42"
+          ]
+        },
+        {
+          "claim_id": "k_bd74cec5d4.L6.drop",
+          "claim_sha256": "a1a22cac72457db4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The default case sets the same subpath as the others, so it decides nothing.",
+          "evidence_refs": [
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "k_bf18ae2bcb.L6.drop",
+          "claim_sha256": "bc35d5abede34363",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The freebsd case only sets the subpath string.",
+          "evidence_refs": [
+            "s44"
+          ]
+        },
+        {
+          "claim_id": "k_d766e6937c.L6.drop",
+          "claim_sha256": "26c63821575b12c8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "existsSync(cachedPath) decides whether the network download runs. If the cached binary exists it is copied and the function returns before fetch (f1:214-217). This is a missed gate on the download behaviour.",
+          "evidence_refs": [
+            "s45",
+            "s56",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "k_f9e922de13.L6.drop",
+          "claim_sha256": "68ac9f76ff222b81",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The android case only sets the subpath string.",
+          "evidence_refs": [
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "q_1a444f1190.L6.drop",
+          "claim_sha256": "8d29e3befe7c7d62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the linux arm64 case, which is already recorded as a site of c9, so it is a duplicate.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "q_24cde2b84a.L6.drop",
+          "claim_sha256": "f1394233089cf1ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the win32 arm64 case, already recorded as a site of c9, so it is a duplicate.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_36aecfad5d.L6.drop",
+          "claim_sha256": "16ef9dc7830e9c3c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The try wraps the checksum file read. A missing file only skips validation and does not change what is installed.",
+          "evidence_refs": [
+            "s47"
+          ]
+        },
+        {
+          "claim_id": "q_4cf8bc4688.L6.drop",
+          "claim_sha256": "ed28315129c695a7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The APPDATA check only picks the cache folder, so it is plumbing.",
+          "evidence_refs": [
+            "s48"
+          ]
+        },
+        {
+          "claim_id": "q_4ebe331368.L6.drop",
+          "claim_sha256": "0a0906dae8de58ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the if statement for SKIP_CHECKSUM_VALIDATION, which only toggles the integrity check and not the payload.",
+          "evidence_refs": [
+            "s49"
+          ]
+        },
+        {
+          "claim_id": "q_4f40fc1876.L6.drop",
+          "claim_sha256": "6d9089d8618520cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the if statement for the SENTRY_BINARY_PATH override, a library path override.",
+          "evidence_refs": [
+            "s50"
+          ]
+        },
+        {
+          "claim_id": "q_61d4e46955.L6.drop",
+          "claim_sha256": "a62fdd73d700360f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ternary only chooses the .exe suffix for the filename.",
+          "evidence_refs": [
+            "s51"
+          ]
+        },
+        {
+          "claim_id": "q_91898e70c0.L6.drop",
+          "claim_sha256": "85872877c6d443d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The android case only sets the subpath string.",
+          "evidence_refs": [
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "q_96bdec3f53.L6.drop",
+          "claim_sha256": "b2bea906056be57f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The default subpath case decides nothing, since it matches the other cases.",
+          "evidence_refs": [
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "q_972a018caa.L6.drop",
+          "claim_sha256": "a270d16c8183e260",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the linux x64 case, already recorded as a site of c6, so it is a duplicate.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "q_a1bd6ae45d.L6.drop",
+          "claim_sha256": "0666025f99a4f3a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the linux arm case, already recorded as the site of c10, so it is a duplicate.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "q_a3c4af0012.L6.drop",
+          "claim_sha256": "070a5a62b0003c55",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the if statement for the fallback-path existence check, which only picks the binary path in the library lookup.",
+          "evidence_refs": [
+            "s52"
+          ]
+        },
+        {
+          "claim_id": "q_b069d83008.L6.drop",
+          "claim_sha256": "89b61b510c9e3b72",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the win32 x64 case, already recorded as a site of c6, so it is a duplicate.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "q_b9a3e5845f.L6.drop",
+          "claim_sha256": "daecc23a4105f036",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the else-if chain for linux/freebsd/android, whose tests are already recorded as c3, c4 and c5, so it is a duplicate.",
+          "evidence_refs": [
+            "s53",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "q_bb2673ebe4.L6.drop",
+          "claim_sha256": "9429782eb71117f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the top if on darwin, which is already recorded as c2, so it is a duplicate.",
+          "evidence_refs": [
+            "s54",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "q_bd2a531cf7.L6.drop",
+          "claim_sha256": "e0f83fef3983a198",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the win32 if, already recorded as c11, so it is a duplicate.",
+          "evidence_refs": [
+            "s55",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "q_c03cfc30a3.L6.drop",
+          "claim_sha256": "b1d5dc06cad9a19d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the linux ia32 case, already recorded as a site of c8, so it is a duplicate.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "q_d87641f5f5.L6.drop",
+          "claim_sha256": "9126d5db944746d5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the if statement around the cached-binary check. It decides whether the download runs or the cached copy is used, which is a gate the record misses for the download behaviour.",
+          "evidence_refs": [
+            "s56",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "q_e3418a4968.L6.drop",
+          "claim_sha256": "6e8a97b1a6434a3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the win32 ia32 case, already recorded as a site of c8, so it is a duplicate.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "q_f85512edee.L6.drop",
+          "claim_sha256": "884489077d191ba2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The win32 subpath case only sets the .exe path string.",
+          "evidence_refs": [
+            "s41"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "95de85f3822b8b93",
+      "packet_sha256": "25d9a1c696921257",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "6d87cfe0405601ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:305 exits when SENTRYCLI_SKIP_DOWNLOAD === '1', so the code after it runs only when the variable != '1'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "f763fa5f4ed215b0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:55 sets packageName only when platform === 'darwin'; f1:313 throws when packageName is undefined, so passing it needs a match.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "886288bf46e5726c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:58 platform === 'linux' is one alternative that can set packageName; the s4 early exit passes only if it is set.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "4586aa2254142e86",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:58 platform === 'freebsd' is an alternative that leads to a packageName; s4 requires a defined packageName.",
+          "evidence_refs": [
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "ae0170874d9f90a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:58 platform === 'android' is an alternative that leads to a packageName; s4 requires a defined packageName.",
+          "evidence_refs": [
+            "s7",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "48caa113d756174f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "case 'x64' in the linux switch (f2:60) and the win32 switch (f2:77) each set packageName.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "9ee5863b04805973",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "case 'x86' falls through to the i686 package in both the linux (f2:63) and win32 (f2:80) switches.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "ebc2a2baff6d350d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "case 'ia32' sets the i686 package in both the linux (f2:64) and win32 (f2:81) switches.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "5f051d910fb72b0e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "case 'arm64' sets a package in both the linux (f2:67) and win32 (f2:84) switches.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "db368b68b5ceccee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "case 'arm' in the linux switch (f2:70) sets @sentry/cli-linux-arm.",
+          "evidence_refs": [
+            "s16",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "1ed4cba80f7de238",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:75 else-if platform === 'win32' leads to win32 packages; s4 requires a defined packageName.",
+          "evidence_refs": [
+            "s17",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "bc73411de12e018a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "require.resolve of the dist package path at f1:318 is in the try; the fallback download runs only in the catch, i.e. when resolve throws (package not found).",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c15.L1",
+          "claim_sha256": "2d3f15812b9cdf1f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:287 is an if-condition comparing process.env.SENTRYCLI_SKIP_CHECKSUM_VALIDATION with '1'.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c15.L2",
+          "claim_sha256": "4bcdb3ff1c0860ce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then-block at f1:287-289 runs when the variable !== '1'; this is the positive form with no extra negation.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "c15.L6.category",
+          "claim_sha256": "c5f2ec406bed441f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads a process.env variable, so env_var fits.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "8184b64724b03928",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The nested guards join with and. Darwin is a single platform. Linux/freebsd/android take x64, x86, ia32, arm64 or arm. Win32 takes x64, x86, ia32 or arm64, with no arm case. The try-catch and the checksum if are separate nested guards. then_min 4 (c1, c2, c14, c15) is the smallest satisfying set.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s19",
+            "s21",
+            "f2:55-88"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "8e6cb1a41a133b6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions decide whether the checksum validation (and its temp-file delete on mismatch) runs; they do not choose a different payload or target, so enables fits.",
+          "evidence_refs": [
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "61b4204bebddf95d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code runs when the skip flags are unset and the platform is supported. Nothing backs off on analysis or CI, so activate fits.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "60efac4d87bcda7d",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The conditions mix platform/arch selection (portability), user skip flags and a dependency fallback. The guarded region only validates a download checksum, so no single purpose clearly fits and unclear is defensible but not decided by the code.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s19",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "ca3dcdd028bf13cc",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "Region s22 sits in downloadBinary (f1:187-294), lexically outside the s2, s4 and s19 guarded blocks. The only guard that encloses it is s21. downloadBinary is called only from the catch at f1:330, but no 'via' call is cited to extend those guards. The call (s24), def (s25) and sink unlink (s23) hops",
+          "evidence_refs": [
+            "s22",
+            "s24",
+            "s25",
+            "s23",
+            "f1:330"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "203ac878b9ebe98d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "validateChecksum is called only at f1:288, inside downloadBinary. downloadBinary is called only at f1:330 in the catch. Neither is exported, and f2 exports neither.",
+          "evidence_refs": [
+            "f1:288",
+            "f1:330",
+            "f2:12-20"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "ff745fe4e0721dfd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.unlinkSync(tempPath) at f1:178 deletes a file, which is an fs_delete sink. It is reached from the call at f1:288 into validateChecksum.",
+          "evidence_refs": [
+            "s23",
+            "s24",
+            "s25"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "0d35349f4849f657",
+      "packet_sha256": "bfd9a0097f739460",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "5d8d90c67fc2d323",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The catch block (s4, f1:321-339) runs only after the SKIP_DOWNLOAD exit (s1), the platform check (s2) and a failed require.resolve (s3). It calls downloadBinary().then(() => checkVersion()) (s6), checkVersion calls helper.execute (s7, s8), and execute wraps its body in __awaiter and new Promise (s10",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "15c6d75eb75676e3",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "checkVersion is only called from the catch block (f1:331). However, execute is exported from js/helper.js (f2:12) and is the package's general API, so execFile and spawn can be reached by other callers without passing this gate.",
+          "evidence_refs": [
+            "f2:12",
+            "f2:265",
+            "f1:331",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7a32adfe5501e98f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is childProcess.execFile(getPath(), ...) (s5). childProcess is bound to node:child_process (f2:24), so it creates a process. The binary it runs is the one downloadBinary fetched and wrote to disk, which matches exec_downloaded.",
+          "evidence_refs": [
+            "s5",
+            "f2:24",
+            "f1:187"
+          ]
+        }
+      ]
+    }
+  ]
+}

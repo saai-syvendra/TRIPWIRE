@@ -1,0 +1,591 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "aicp-tracker",
+    "version": "1.2.9",
+    "archive_sha256": "69f07b17dc085678c06da0d033ac4bd728ce25b83eedc9d7eaf4b27ba0760db0"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "c7856b8199997da1",
+      "packet_sha256": "3d5aac61ee38c361",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "782b78d01e4ec6e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:5 tests process.env.CI in the condition of an if that exits the process (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "e3f8c6b2ddb737b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:5 calls process.exit(0) when process.env.CI is truthy, so the code after it runs only when CI is falsy.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "f4e9e1b79dc4f134",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.env.CI is the standard CI marker, and the comment at f1:4 says CI environments are skipped.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "b6204d9339d82641",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:5 tests process.env.npm_config_yes as the second operand of the || in the early-exit condition.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "8fd526e36b223cdd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A truthy npm_config_yes exits the process, so the code after it runs only when it is falsy.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "553f4097e5be3d28",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "npm_config_yes is an npm CLI setting (--yes), so package_manager fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "7271b9f478792079",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:10 compares process.env.npm_lifecycle_event to 'postinstall', and f1:11 branches on the result.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "00eaaf93696a8053",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded block at f1:11 is the then side of isPostinstall, which is npm_lifecycle_event === 'postinstall'.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "66f7c7437a8994b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "npm_lifecycle_event is set by the package manager, so package_manager fits.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "a7512b657257bb8c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:16 binds projectPath to process.env.INIT_CWD, and f1:17 branches on it.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "c7c93b8d66119c8c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block at f1:17-21 runs only when projectPath (INIT_CWD) is truthy.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "bab0cbd4373fe1d2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "INIT_CWD is set by npm to the directory where the install was run, so package_manager fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "6c9ae42e7974688b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The exit on CI || npm_config_yes means both must be falsy, giving c1 && c2. That is followed by the nested ifs for c3 and c4, so all four are joined with and and min is 4.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "1b79c77f88344184",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the config write at f1:20 happens at all, so enables fits.",
+          "evidence_refs": [
+            "s8",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c15bdacbcf030b3f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The leading test backs off by exiting when CI or --yes is set, so evade fits it.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "a197f869f801614c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The CI skip is for non-interactive installs, and the only action is saving the project path to the tool's own config. Nothing hides from analysis; I would label the purpose portability.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "1d89eeda39da1895",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Inside s8, require('../src/config') (s10) leads to config.save (s11), which is defined in f2:19 (s12) and calls fs.writeFileSync at f2:21 (s9). The region is on the then side of all three guards.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s11",
+            "s12",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4baa2edcd4c51178",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "config.save is exported and also called from main() at f1:178 (setup run directly) and from daemon.start at f4:44, neither of which passes the gate.",
+          "evidence_refs": [
+            "f1:178",
+            "f4:44",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "fd344eb4a1acff26",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is fs.writeFileSync at f2:21, which writes a file, so write_file is supported.",
+          "evidence_refs": [
+            "s9",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "k_01a7667ff5.L6.drop",
+          "claim_sha256": "2349a61b9c8cda96",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test in pathToProjectFolder only formats a path name for log scanning, which the daemon does and the postinstall path never reaches.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_094ced4256.L6.drop",
+          "claim_sha256": "0a91cd7515fec199",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync checks in daemon.start run when the tracker is started, not in the postinstall path.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "k_09d70ceb8d.L6.drop",
+          "claim_sha256": "ba3cade275db7d5c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The postinstall alternative at f1:203 is dead because the postinstall block always ends in process.exit(0) at f1:30. The require.main alternative only fires on a direct run.",
+          "evidence_refs": [
+            "s15",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "k_1239834643.L6.drop",
+          "claim_sha256": "0c1a8c3de2866e4c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the readPid try/catch in the daemon, and it is not run at install.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_1d50ce13c4.L6.drop",
+          "claim_sha256": "7bc5ae5e99359967",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is a statSync try/catch in the log parser, used by the daemon tick and not at install.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_41c233e6d4.L6.drop",
+          "claim_sha256": "a96caa24d20a9cc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync in findMatchingProjectFolder is part of log-scanner, used by the daemon only.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "k_6c61e5ee5f.L6.drop",
+          "claim_sha256": "9550380cf68f840d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync in findJsonlFiles is used by the daemon tick, not at install.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "k_77a2b5ffdc.L6.drop",
+          "claim_sha256": "8b77934be51fc17b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ensureDir's existsSync only decides whether to create the config directory, which is plumbing and not an environment gate.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "k_95f3a42a5d.L6.drop",
+          "claim_sha256": "e1a3776c576006f6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The daemon.start check on .git is not run at install.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "k_a1cea2dea1.L6.drop",
+          "claim_sha256": "aa16319c8bbd71ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync in findMatchingProjectFolder is part of log scanning and is not run at install.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "k_a51868ffb8.L6.drop",
+          "claim_sha256": "c70aae8931bd1f7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The WAL load try/catch is used by the daemon sender, not at install.",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "k_c9d1468013.L6.drop",
+          "claim_sha256": "b75559603fcc6508",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync in config.load only returns null or the file contents. Both outcomes at f1:26 lead to process.exit(0), so it decides nothing environmental.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "k_de74ee80c0.L6.drop",
+          "claim_sha256": "848e43fc14de9506",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test is inside installAutoStart, which is called only from main(). main runs on a direct setup, never in postinstall, because that path exits first.",
+          "evidence_refs": [
+            "s25",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "k_eeb70bae91.L6.drop",
+          "claim_sha256": "e1c3404a6869b982",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin branch is inside installAutoStart, which is not reachable from postinstall.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "q_018c488651.L6.drop",
+          "claim_sha256": "22b72cfa9237d315",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The projectPath ternary is in daemon.start, which is not run at install.",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "q_11613f3d70.L6.drop",
+          "claim_sha256": "b44abea987123fae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The isProject branch is in daemon.start, which is not run at install.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "q_270eb2b29e.L6.drop",
+          "claim_sha256": "a10af79eeadc1eab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return in findMatchingProjectFolder belongs to the daemon's log scanning, not install.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "q_539d6597a2.L6.drop",
+          "claim_sha256": "7fddb8531152caea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ensureDir only creates the config directory, which is plumbing.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "q_69d3315884.L6.drop",
+          "claim_sha256": "2bad9897b1773dd9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The WAL load try/catch is not run at install.",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "q_73d2312bfc.L6.drop",
+          "claim_sha256": "3bb93fe2d9010369",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The f1:203 if has a dead postinstall alternative, because the postinstall block always exits at f1:30. Its require.main alternative only fires on a direct run.",
+          "evidence_refs": [
+            "s32",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_7b364f84c1.L6.drop",
+          "claim_sha256": "2eee7ba944af1679",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The statSync try/catch is in the log parser, used by the daemon only.",
+          "evidence_refs": [
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "q_7c8153f5c8.L6.drop",
+          "claim_sha256": "650e54160e6af5ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform if-chain is in installAutoStart, reachable only from a direct setup run.",
+          "evidence_refs": [
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "q_8075be8f65.L6.drop",
+          "claim_sha256": "f8b77ea73863829d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync guard in findJsonlFiles is used by the daemon tick, not at install.",
+          "evidence_refs": [
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "q_85acc468ea.L6.drop",
+          "claim_sha256": "579b85a5d6c0d5c8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The cited if (isPostinstall) at f1:11 is live at install and is the c3 guard of g1, so it is a gate and not a dead branch.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "q_a8a6f576a5.L6.drop",
+          "claim_sha256": "56273770ec743a69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform if in pathToProjectFolder only formats a path name for log scanning.",
+          "evidence_refs": [
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "q_bad001f289.L6.drop",
+          "claim_sha256": "c2efa873e3517641",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The directory-existence loop in findMatchingProjectFolder is daemon-side log scanning.",
+          "evidence_refs": [
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "q_c6102e1049.L6.drop",
+          "claim_sha256": "c3ca567b21795b3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readPid try/catch is in the daemon and is not run at install.",
+          "evidence_refs": [
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "q_d3354ce534.L6.drop",
+          "claim_sha256": "9f70534ddb971958",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32 branch writes auto-start files in installAutoStart, which only a direct setup run reaches. Postinstall exits at f1:30 first.",
+          "evidence_refs": [
+            "s39",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_f6ccd36f95.L6.drop",
+          "claim_sha256": "bb95aeb17aacb20e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync in config.load only returns null or the file contents. Both outcomes lead to the same exit, so it is not an environment gate.",
+          "evidence_refs": [
+            "s40"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "1360d0716ea7f9b6",
+      "packet_sha256": "0ecf2f13635bce58",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "531770278d91dfd7",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "The packet lists no slices or files and code/ is empty, so the claimed gate cannot be tied to any code.",
+          "evidence_refs": []
+        }
+      ]
+    }
+  ]
+}

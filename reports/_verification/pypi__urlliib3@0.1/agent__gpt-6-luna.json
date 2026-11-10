@@ -1,0 +1,596 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "urlliib3",
+    "version": "0.1",
+    "archive_sha256": "53e38266103fa7f765c6c180e877226f2544a04aea3ceead26a0ca8e2b1a3274"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "e10a3d71f39db7c3",
+      "packet_sha256": "45716f12a966d376",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The cited platform comparison computes its operand through obfuscated built-in lookups and integer lists, so the API/value/operator cannot be read at that site.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "49e7803b55613936",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The cited platform comparison computes its operand through obfuscated built-in lookups and integer lists, so the API/value/operator cannot be read at that site.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison reads sys.platform, an operating-system property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly calls ctypes.windll.shell32.IsUserAnAdmin() and branches on its truth value.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly calls ctypes.windll.shell32.IsUserAnAdmin() and branches on its truth value.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin() is a privilege or elevation check.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "3a6cc223b5f3861b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks whether sys.argv[1] is in ['egg_info', 'build'].",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "e1e6f5ceb5ba2356",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks whether sys.argv[1] is in ['egg_info', 'build'].",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "5f437c9990fd1805",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks whether sys.argv[1] is in ['egg_info', 'build'].",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "b2f12b47aabd452c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif checks whether sys.argv[1] is in ['bdist_wheel', 'install'].",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "1b2fe478434f4fc9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif checks whether sys.argv[1] is in ['bdist_wheel', 'install'].",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "fbd4b40e9cd7aa93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif checks whether sys.argv[1] is in ['bdist_wheel', 'install'].",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "b80e994ea0e596d6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition calls endswith on a filename and tests for the .lnk suffix, so it reads the target artifact.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "7c3548a265bfa3e3",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The code uses endswith('.lnk'); that operator is not the claimed regex operator, but it has the same positive polarity, so it does not contradict the claim under the packet rules.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "06bc119bbae4c215",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition calls endswith on a filename and tests for the .lnk suffix, so it reads the target artifact.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "de56d2a4847de9db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares os.path.basename of the shortcut TargetPath against the four named executable basenames.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "425eff7975593d03",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares os.path.basename of the shortcut TargetPath against the four named executable basenames.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "136c1e890aad774d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares os.path.basename of the shortcut TargetPath against the four named executable basenames.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "96befc258aefae59",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The Windows check encloses the egg_info/build check, and both enclose the payload region; these conditions therefore combine with and.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "87c89bfcfca8f351",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The nested checks enable the pip install operation on the selected Windows build commands; they do not select between payloads.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "f31679185a30dd37",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch activates pip installation for the specified Windows package commands, which is target selection.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "03530df6d393f922",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch activates pip installation for the specified Windows package commands, which is target selection.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "03e019cdd78baab9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The pip.main install call is inside the nested Windows and egg_info/build region.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "e0b8145d322d276c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The install call is within the sole top-level matching branch in this file; the setup() call follows the branch and no other call to pip.main appears in the readable code.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "93cc38d2865626f9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "pip.main(['install', 'pypiwin32']) invokes package installation, which can download the named package.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "61af9b20809a1afc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The Windows branch encloses the bdist_wheel/install elif, so both conditions are required for this region.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "68084f5d32718fc6",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks enable creation of extension files during the selected Windows install commands; no alternate payload is selected.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "5770df9a6afc981f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch performs its file creation on the Windows install path, a target selection that activates the behavior.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0ea32c7e6493cb31",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch performs its file creation on the Windows install path, a target selection that activates the behavior.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "400b05ef15252279",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The shown file open/write and directory creation operations lie inside the Windows bdist_wheel/install branch.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "24b886d969e81b9d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file creation operations occur only within the top-level Windows install branch; the readable file contains no other caller of those operations.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "0daed53c8ba81abf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code opens files for writing, writes the extension manifest and background script, and creates the Extension directory.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "924331078a2c7564",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The .lnk suffix test and executable basename test are nested inside the Windows bdist_wheel/install branch, requiring all four conditions.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7",
+            "s8",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "d2e7a42624b94d1c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "For matching browser shortcuts, the code changes the shortcut Arguments to load the extension and saves that shortcut, modifying the selected artifact.",
+          "evidence_refs": [
+            "s8",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "231f900cf12ae59a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch activates on matching browser shortcut targets, which is target selection.",
+          "evidence_refs": [
+            "s8",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "4c2977c963b9c1ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch activates on matching browser shortcut targets, which is target selection.",
+          "evidence_refs": [
+            "s8",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "aab9cfd693faf8b3",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The cited sink is a Save() method reached through a dynamically dispatched COM shortcut object; the packet leaves that dispatch unresolved, so the witness and exclusivity cannot be confirmed from these slices.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "73bc3f74a32acd3d",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The cited sink is a Save() method reached through a dynamically dispatched COM shortcut object; the packet leaves that dispatch unresolved, so the witness and exclusivity cannot be confirmed from these slices.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "952bed5820987572",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Save() is called on a COM shortcut object, but the method binding and its effects are not resolved in the cited code.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "e9f41f73ba013e05",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The claimed region is in obfuscated f1 state-machine code, and the state transitions around the admin check cannot be fully followed from the cited text.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "2f7adc300513aee2",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The admin check sits in an obfuscated state machine, and the cited text does not establish what behavior its branch changes.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "5efcd79d7c26d0e9",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The admin check sits in an obfuscated state machine, and the cited text does not establish what behavior its branch changes.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "6028c4531be5eb03",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The admin check sits in an obfuscated state machine, and the cited text does not establish what behavior its branch changes.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "e6ae30dd6339b061",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The claimed sink is a dynamically dispatched COM shortcut Save() call, and its path from this obfuscated admin branch cannot be confirmed from the cited code.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "4602440bd9a59e3a",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The claimed sink is a dynamically dispatched COM shortcut Save() call, and its path from this obfuscated admin branch cannot be confirmed from the cited code.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "478979a60c49b6be",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The Save() method is invoked on a COM shortcut object whose binding and effects are unresolved.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "d2755580177ea881",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check only decides whether to create the Extension directory; the same state machine continues to the later file creation either way, so this check does not gate the payload behavior.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "a4ef5fa77175b479",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check only decides whether to create the Extension directory; the same state machine continues to the later file creation either way, so this check does not gate the payload behavior.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        }
+      ]
+    }
+  ]
+}

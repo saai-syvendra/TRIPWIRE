@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "13Cent",
+    "version": "999.0.2",
+    "archive_sha256": "86f1df6643a915c6b759a0beef64dcb0b81716dae0739928a8c5dca19d3b7658"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "e7e0066e9834ee17",
+      "record_sha256_after": "e7e0066e9834ee17",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_7c0fcef421.L6.drop",
+          "claim_sha256": "e3c1f8358c167d57",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:58 is open('/.dockerenv','rb') used only to get the body for the POST at setup.py:59. No exists, stat or access call tests the file, and the result is never compared. The verifiers are right that a failed open skips that POST, but the gate rule needs a deliberate test, or a try/except whose"
+        },
+        {
+          "claim_id": "q_59f427ce70.L6.drop",
+          "claim_sha256": "6fcfd204be7b21d1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The try statement at setup.py:57-61 has a bare except whose whole body is pass. It selects no alternative action, sets no flag and exits nothing, and control reaches setup.py:62 whether the body succeeds or fails. The skill lists this as error swallowing, recorded as silent_failure on the entry poin"
+        }
+      ]
+    }
+  ]
+}

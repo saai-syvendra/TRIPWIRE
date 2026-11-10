@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "beautifulsoup-numpy",
+    "version": "10.13.10",
+    "archive_sha256": "185594beac54aae7825f13a97466ac03618750e9370a7134a87c0a9f509dce47"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "7e69b355df8291ec",
+      "packet_sha256": "4979fb272708da41",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "1ddc7c81afe04586",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 (f1:24) is the test of an if statement calling os.path.exists on a literal path, imported via `import os` at f1:23.",
+          "evidence_refs": [
+            "s1",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "6aab9ef75db3a7aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:24-25 exits when os.path.exists(the literal marker name) is true, so the code after it (s3) runs only when the path does not exist; not_exists is the positive form for reaching it. The literal in the code is the marker name starting with 'hifrom'.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:24",
+            "f1:25"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "dd67913f1e6267fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads whether a file or directory exists in the current working directory, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d8d3b866357c7f68",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one early-exit guard with a single condition (not os.path.exists marker). The rest of the module (s3, f1:26-40) is on the guard's else side, so the expression c1 and then_min 1 match.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:24",
+            "f1:25"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "af9dfe773edf1a1b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard decides whether the remaining code (s3, which base64-decodes and execs a blob) runs at all. It does not pick a payload or a target, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "305917b7decc3351",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is a marker-file re-entry check that does not look for analysis, CI or a sandbox. The code runs when the marker is absent, which is the default state on a target, so activate is the better label than evade.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "4ccf99c7688078c2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The marker file only avoids re-running. It does not show portability, targeting, anti-analysis or data availability, so unclear fits.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        }
+      ]
+    }
+  ]
+}

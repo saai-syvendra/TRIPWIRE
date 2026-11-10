@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "builderknower",
+    "version": "0.1.10",
+    "archive_sha256": "cd18dd0d42fc519c172d28bb0675bbf1727303383dde272ca5887bd97f895ab0"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "8c58970ca4b924a7",
+      "packet_sha256": "cbe27c6be5c62c54",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_15b3645825.L6.drop",
+          "claim_sha256": "b66b9c13c3f9767e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited os.system curl call (f1:49) is an unconditional statement in CustomInstallCommand.run; it reads no environment property and decides nothing. The environment is only data it sends. Nothing else guards or selects it.",
+          "evidence_refs": [
+            "s1",
+            "f1:49"
+          ]
+        },
+        {
+          "claim_id": "q_b645ea0bb3.L6.drop",
+          "claim_sha256": "7b321f39b3c8ea7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try statement at f1:48 only wraps the call in exception handling and is not an environment test. The except clause only prints errors, so it selects no behaviour. The code inside always runs on install.",
+          "evidence_refs": [
+            "s2",
+            "f1:48"
+          ]
+        }
+      ]
+    }
+  ]
+}

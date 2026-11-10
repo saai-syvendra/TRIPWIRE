@@ -1,0 +1,326 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "ansi-universal-ui",
+    "version": "1.4.0",
+    "archive_sha256": "ed13ba42adfe25d89e70f3df47faa2d39243a928985131f4bd703e819026d982"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d091170c9edcc07b",
+      "packet_sha256": "743f7df905569dd6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "7507fafffb47d3a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "PLATFORM is bound to process.platform (f1:27) and ASSETS[PLATFORM] is the operand of the if-test at f1:28.",
+          "evidence_refs": [
+            "s1",
+            "f1:27",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2d506886cc5b9a87",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ASSETS has only the keys win32 and darwin (f1:16-25). The process exits when ASSETS[PLATFORM] is falsy, so the rest runs only when the platform is win32 or darwin.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:16",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "9f2c1f90542e4f13",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the operating-system platform, so os is the right category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c06b993e9ca15f7c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single early-exit guard on one condition, and everything after it (f1:30 onward) runs only when that condition holds. No other guard is involved.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "19494f0ab3580773",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The whole download, extract and run flow is skipped on other platforms and runs unchanged on win32 and darwin, so the gate enables it. The URL varies with the platform, but the behaviour does not.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1e963a8671adb08e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code runs on the supported platforms. It does not back off on signs of analysis, CI or a sandbox.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6a04ce2259b2160c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check only confirms that a platform-specific standalone Python build exists to download (ASSETS keys, f1:16-25). That makes the purpose portability, not targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:16",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "f4206773f0fe4c09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The async IIFE (s5, s6) comes after the early exit. It calls downloadString (s7, s8), which holds the https.get at s4. It calls setupPython (s10, s11), which holds the mkdirSync at s9. It also holds the spawn at s12. All hops can be followed statically, including the one marked unresolved.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6851f95e0a67f5aa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "downloadString and setupPython are called only from the IIFE (f1:69, f1:72, plus their own recursion on redirects). The IIFE is invoked once at top level after the platform exit, and the file has no exports or timers.",
+          "evidence_refs": [
+            "f1:28",
+            "f1:66",
+            "f1:69",
+            "f1:72"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "aca9a07f00d6e6d4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The download rests on https.get (s4), a network sink. The write rests on fs.mkdirSync (s9), plus tar extraction into CACHE_DIR spawned at f1:56. Execution rests on child_process spawn of the downloaded Python binary (s12).",
+          "evidence_refs": [
+            "s4",
+            "s9",
+            "s12",
+            "f1:56"
+          ]
+        },
+        {
+          "claim_id": "k_25c096b203.L6.drop",
+          "claim_sha256": "e9852356c4636168",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is only an existsSync check on the cache directory before mkdirSync. It tests filesystem state, not the environment, and decides no behaviour, so it is plumbing and not a gate.",
+          "evidence_refs": [
+            "s13",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_a28ccb09c3.L6.drop",
+          "claim_sha256": "ee0b72ade3126e7e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is an existsSync check for a cached Python binary. It only skips re-downloading the runtime. The remote script is fetched and run either way, so it is a cache check and not an environment gate.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_67c9a2b5b4.L6.drop",
+          "claim_sha256": "224270c6a185d4f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement around the cached-runtime check (f1:68-70). It only decides whether to install the runtime, and the remote script runs either way, so it is not an environment gate.",
+          "evidence_refs": [
+            "s15",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "q_914e5a9395.L6.drop",
+          "claim_sha256": "e9fa788144851528",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if statement that creates the cache directory only when it is missing (f1:48). It tests filesystem state and is not an environment gate.",
+          "evidence_refs": [
+            "s16",
+            "f1:48"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b24c18739a80aa52",
+      "packet_sha256": "29efde043a637c2c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "6f9818c1ab92301e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The top-level early exit at f1:28 (process.exit(1) when no ASSETS entry for the platform) leaves the rest of the file (s2) on the then side. The async IIFE (s4/s5) calls downloadString (s6 -> s7, https.get at s3) and setupPython (s9 -> s10, spawn tar at s8), and spawns the local python directly at s",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "13e3975682960c3c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "downloadString and setupPython are called only from the IIFE at f1:66-91, apart from their own redirect recursion. There are no exports, timers or handlers, and the IIFE runs only after the platform guard at f1:28 passes.",
+          "evidence_refs": [
+            "f1:28",
+            "f1:66",
+            "f1:37",
+            "f1:52"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "cd2786f42854b11c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The download behaviour rests on https.get (network, s3). The write_file behaviour rests on spawn('tar') extracting the downloaded archive into CACHE_DIR (s8), which writes files to disk. The exec_downloaded behaviour rests on spawn of the downloaded python binary with the downloaded script piped to ",
+          "evidence_refs": [
+            "s3",
+            "s8",
+            "s11",
+            "f1:82"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "0a7b711df0ad5006",
+      "packet_sha256": "4436b600582a72f8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "55de6fbef0e1eea6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard at f1:28 exits when the platform has no ASSETS entry, so the rest of the file (s2) is the then side. The IIFE (s4/s5) calls downloadString (s6, s7), which reaches https.get inside a Promise (s8/s9, f1:35). It also calls setupPython (s11, s12), whose https.get callback (s15/s16) contains sp",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s11",
+            "s12",
+            "s15",
+            "s16",
+            "s10",
+            "s17",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "dea9a42982b36ac3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sink functions are called only from the top-level IIFE (f1:66), which comes after the process.exit guard at f1:28. downloadString and setupPython call themselves only to follow redirects. There are no exports, timers or other handlers, and index.js is the only file in the record.",
+          "evidence_refs": [
+            "f1:28",
+            "f1:66",
+            "f1:69",
+            "f1:72",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4e935a8cdace774d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The download uses https.get (f1:35, f1:50), which is a network sink. The file write is tar extraction of the downloaded archive into CACHE_DIR through spawn('tar') (f1:56), which drops files on disk. The downloaded base64 code is decoded and fed to the spawned local python through stdin (f1:72-82), ",
+          "evidence_refs": [
+            "s3",
+            "s10",
+            "s17",
+            "f1:35",
+            "f1:56",
+            "f1:72",
+            "f1:78"
+          ]
+        }
+      ]
+    }
+  ]
+}

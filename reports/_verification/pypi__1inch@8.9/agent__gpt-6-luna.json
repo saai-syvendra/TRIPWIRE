@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "1inch",
+    "version": "8.9",
+    "archive_sha256": "23915c9434509cfb98ac61235b9592deddbb2d23dc420fd79a35b0e116dbe502"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "b00e57bbb04cd3bd",
+      "packet_sha256": "bed52d393b099e84",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "2091b75635362752",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition directly calls `os.path.exists` on the stated path (f1:12).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "96dcb82ea635e531",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `not os.path.exists(...)`, and the guarded then block runs when that existence test is false (f1:12-14).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "c0c7f32986f2a291",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks whether the named filesystem path exists using `os.path.exists` (f1:12).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "acecd0ffc63c70c7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one `if` guard, and its then region is controlled by exactly the single `not_exists` condition (f1:12-14).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "498e4e1af28959b7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the then side, the code downloads and expands an archive, removes the temporary archive, installs dependencies, and starts the updater (f1:14); these actions are enabled by the missing-directory test.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "879b73016550f15a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The installation actions run when the specified updater directory is absent, so the gate activates the actions on that condition (f1:12-14).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c50b499c655a30b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code does not explain why this directory controls installation; it only skips the install command when the directory exists, leaving the gate's purpose unclear (f1:12-14).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "08c32d8136526318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded region calls `run(...)` (f1:14), whose definition invokes `subprocess.Popen(...)` (f1:7-9), so the execution sink is reached through the stated call and definition hops on the then side.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d1d3f5c3318588ba",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only call to `run` in setup.py is inside the guarded then block, and the `Popen` sink is inside `run` (f1:7-14); no other caller reaches that sink.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "66b4a682da248260",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guarded command downloads an archive, writes it to the temporary path and expands it, removes the archive, then starts hidden processes; these support download, file write, deletion, execution, and defense evasion respectively (f1:14).",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "f1:14",
+            "s4"
+          ]
+        }
+      ]
+    }
+  ]
+}

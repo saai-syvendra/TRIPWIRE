@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "Ailyboostbot",
+    "version": "1.0",
+    "archive_sha256": "87959124b8262a6e351c9b00865dc7a2d429edbdb0b11c4d2c5614417e9ad306"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "8c762abe5ec8be5b",
+      "record_sha256_after": "18fa41ade2df490e",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "c5 value set to plain: ZipThings gets path 'C:\\Program Files (x86)\\Steam\\config' from the PathsToZip literal and arg 'Steam' leaves pathC unchanged, so f\"{pathC}/loginusers.vdf\" (setup.py:502) is fully literal. The flag must stay. c2, c3 and c4 are sets of paths built from APPDATA/LOCALAPPDATA, and "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "18fa41ade2df490e",
+      "record_sha256_after": "c14d9c9646b349d0",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "719eb503fc07461f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right for the line 586 site: KiwiFolder tests every child of a keyword-named folder and the child needs no keyword of its own. Lines 601-605 do need the keyword. The value now covers both: keyword-named entries and any child of a keyword-named folder. Added a note on the line 586 e"
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "e3772c56d7c766eb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited b64decode at line 477 only decodes the master key and reads no credential. Moved the cred_read sink to the open call at line 481, inside the region, which reads the .log and .ldb files the tokens are taken from, and set sink_kind to fs_read."
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "4a075110fe517f41",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the c5 and c7 early exits sit in the Steam elif (lines 501-510), so the rest of their enclosing block is only line 510, and the only cited region (lines 511-516) was outside it. Added line 510 as a region, which lies on the c5 and c7 sides. Lines 511-516 stay as the region h"
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "95689f401b971c4c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "On the Steam call of ZipThings the code needs all three: line 496 returns unless c4 holds, line 502 unless c5 holds, line 509 unless c7 holds, all before the upload at line 515. Non-Steam calls reach the same lines with c4 alone, as the verifiers say, and g4 records that path. What selects the Steam"
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "ed27368a1b5d5f4d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "enables fits the code. On the Steam call, a false c5 (line 502) or c7 (line 509) returns from ZipThings before ZipFile and upload, so nothing is sent for that call; when both hold the Steam config folder is zipped and uploaded. There is no second payload (selects), and the conditions do not redirect"
+        },
+        {
+          "claim_id": "k_ee61418539.L6.drop",
+          "claim_sha256": "7457a84e32cbe5fc",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that not_environmental is the wrong reason: __import__ at line 35 tests what is installed on the machine. The candidate stays dropped because it is not a gate: on failure line 37 runs pip for a module the payload needs, then lines 39-40 import both modules unconditionally and"
+        },
+        {
+          "claim_id": "q_51818e9113.L6.drop",
+          "claim_sha256": "d354c7ba8c2bd000",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same decision as k_ee61418539: this is the try/except around the line 35 probe. The test is environmental, so not_environmental was wrong, but both sides reach the same imports at lines 39-40 and the same payload, so the pip fallback is plumbing and not a gate. Changed reason_code to other with a no"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "c14d9c9646b349d0",
+      "record_sha256_after": "ff843244058bf7a2",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "b10d0c9307cf4514",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right that no sink backed cred_read. The code has one: zf.write(pathC+'/'+file) at setup.py:513, inside the g5 region at lines 511-516, reads every file of the Steam config folder, loginusers.vdf included, into the zip. Added it as a cred_read payload with sink_kind fs_read and an"
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "9a46a48d4ba95f0c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Both agents are right that lines 511-516 are shared and that wallet and Metamask calls reach them with c4 alone, but that path is recorded as g4 (expression c4). g5 is scoped to the Steam call only, which line 538 sets up and line 564 starts with arg 'Steam'. On that call the elif at line 501 is tak"
+        },
+        {
+          "claim_id": "k_ee61418539.L6.drop",
+          "claim_sha256": "2387246a9d54d505",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Lines 34-38 try __import__ on requests and Crypto.Cipher and, on failure, start pip install and sleep 3 seconds. Lines 39-40 then import both unconditionally, and the same payload follows on either side, so the outcome of the test decides no payload behaviour. It only prepares a module the payload n"
+        },
+        {
+          "claim_id": "q_51818e9113.L6.drop",
+          "claim_sha256": "a718df3d4fcd920d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the try/except statement around the same probe at line 35. The handler at lines 37-38 only runs pip install and a 3 second sleep, and both sides continue to the unconditional imports at lines 39-40 and the same payload. It is dependency plumbing, not a gate, with pip recorded in requirements"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed two reasons: the g6 recipe now uses passw.txt, built from code literals (keyword 'passw' line 624, '.txt' line 602, '/Desktop' line 613), so recipe_guessed_fields is empty and both guessed-recipe reasons are gone. write_report.py still sets needs_manual_review. Remaining reasons: c7 and g5 are"
+        }
+      ]
+    }
+  ]
+}

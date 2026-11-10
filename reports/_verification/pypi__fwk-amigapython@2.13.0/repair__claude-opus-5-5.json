@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "fwk-amigapython",
+    "version": "2.13.0",
+    "archive_sha256": "f8ed3b1f670e46d17d48bb53ccbc5d708c2aa3f7165c85c1d25488eaf2d764d7"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "7262129edd8b5602",
+      "record_sha256_after": "84ab2a94498957f4",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "eb052bb946f72065",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "_bootstrap in amigapython/_internal/__init__.py:20 returns early only when AMIGA_TELEMETRY is false/0/no, a user opt-out documented in the module docstring (line 8). It does not look for analysis, CI or a sandbox, and the payload runs by default, so polarity changed from evade to activate."
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "df89ff0f3d3b7787",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The same check at __init__.py:20 is a documented opt-out flag, not an anti-analysis test; it neither targets a victim nor adapts to the platform, so purpose changed from anti_analysis to unclear and purpose_reason rewritten."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The record still carries a rule 8 misleading-text finding (docstrings claim anonymous telemetry while resolver.py and transport.py harvest credentials and run a shell beacon), which must stay flagged, and c8-c12, g1 and g2 are out of set pending verification. Re-reading the code agrees with g2's gro"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "84ab2a94498957f4",
+      "record_sha256_after": "898b1bac16ba0ca4",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "650f2012f940e422",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right that the witness skipped the start of the thread: it went from the target= bind straight to def _deferred_init. The witness now cites the threading.Thread(...) call (__init__.py:31), the target=_deferred_init bind (:32), worker.start() (:36), then the def. The bind no longer"
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ba547d344e00ec40",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right that only the exfil sink was cited for four behaviours. The behaviours are correct, so payload entries were added instead of removing them: recon (platform.node, resolver.py:59), cred_read (open of the service-account token, resolver.py:101, and the OIDC urlopen, resolver.py"
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "a041ffae84390477",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right that the exfil and reverse_shell witnesses began at def submit_metrics, outside both regions. Both now begin with the submit_metrics(ctx) call at __init__.py:54, which is the second g2 region. The reverse_shell witness also now cites the threading.Thread(...) call (transport"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "898b1bac16ba0ca4",
+      "record_sha256_after": "a511f612e1af0241",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Record is still flagged. Fixed on re-reading: g2 said GITLAB_CI alone passes the CI test, but setup.py _register (line 19) accepts only CI, GITHUB_ACTIONS, JENKINS_URL or BUILD_BUILDID, so GITLAB_CI needs CI as well. Added c13 (CI), setup.py sites on c1-c3, the _register early-exit guard and its try"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp_socks_connector",
+    "version": "0.1.11",
+    "archive_sha256": "183decb0bec9e159ff575058c6474063d8c55791cd471fd90872f1f6a78c2aab"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2d910a5f7551a108",
+      "record_sha256_after": "2d910a5f7551a108",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b8d8f780d2b41649",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py line 26 is `if sys.version_info < (3, 5, 3): raise RuntimeError(\"aiohttp_socks_connector requires Python 3.5.3+\")`, a plain minimum-interpreter compatibility check with no victim selection, and the record labels g1 purpose as portability. The one refuting verifier gives portability as the l"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "d255a1a0626992a2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "g3 is c1 && (c3 || c4). The c1 part (line 26) is an interpreter minimum, and the c3/c4 part (line 58) is `if not (\"install\" == sys.argv[1] or \"bdist\" in sys.argv[1]): sys.exit()`. The refutation reads the argv test as targeting, but targeting means limiting the payload to one kind of victim, and thi"
+        }
+      ]
+    }
+  ]
+}

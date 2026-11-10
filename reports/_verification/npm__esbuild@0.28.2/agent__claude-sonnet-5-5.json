@@ -1,0 +1,630 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "esbuild",
+    "version": "0.28.2",
+    "archive_sha256": "e045f94c235c7adc50e77ba2a579c7bec41b496b6b47c3a7845f7c1e19959a88"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "63ae3c7324c81cd8",
+      "packet_sha256": "47fc18a9edc0393a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "efab949068e63aa1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Line 29 binds ESBUILD_BINARY_PATH to process.env.ESBUILD_BINARY_PATH, and the helper at f1:30 tests it with !!x; the helper is called on that variable at f1:258.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:29"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "20d5df2c92ffc77a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if at f1:258 is reached only when !!x is true, so the value is truthy.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "00aad0de0c05c2fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "902a98f4edb5842a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The x !== comparison at f1:30 is on the parameter the helper receives from the env-derived ESBUILD_BINARY_PATH.",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "f1:29"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "741ee6e9e9e21ed1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The helper is && with !==, and the if at f1:258 enters its then arm only when the value differs from the literal, so != is the positive form.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "47198c9164d37406",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The compared value comes from an environment variable.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "d3aaba4bdba792ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:259 branches on fs2.existsSync(ESBUILD_BINARY_PATH), so the probe callee and target match.",
+          "evidence_refs": [
+            "s4",
+            "f1:259"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "ae3fb97934344df4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is !existsSync with the guarded code in the else arm, so the path must exist to reach it.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "1ee4705e2fe45bbb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "existsSync checks whether a file exists.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "6140c15e87ba91f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The require.resolve of pkg/subpath sits in a try whose catch holds the fallback install, so a throw is the decision; the target is the template pkg/subpath.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "949e21fe1618eeaa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fallback code runs in the catch block, reached only when require.resolve throws, which is not_exists.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "fddfe6916f643c75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the platform package is resolvable among installed dependencies.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "b1db20e7b74f2e64",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The in test at f1:74 is on platformKey, which is built from process.platform at f1:67.",
+          "evidence_refs": [
+            "s8",
+            "f1:67"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "e96b1d8af1bd09a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isWASM is true only when platformKey is in the wasm fallback map (android arm, android x64, openharmony arm64); the throw at f1:278 and the !isWASM test at f1:226 both lead to the guarded code only when it is not in that map.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "f1:58-62"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "79ab11af0bb20ac2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The key is built from the operating system and architecture.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "7257e9e4bd843099",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:226 compares os2.platform() with win32.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "3c343220a498bf14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the && chain at f1:226 requires os2.platform() !== \"win32\".",
+          "evidence_refs": [
+            "s11",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "394d4c33453143af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating system.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "b0fbe8e261ad2d6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isYarn destructures npm_config_user_agent from process.env, tests it for presence and runs a regex on it.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "56ac75d5832177c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard is !isYarn(); isYarn returns the regex result, or false when the variable is unset, so the then arm needs the agent not to match yarn/.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "737bc7a592e640a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The user agent string identifies the package manager running the install.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d7aa74030d59abae",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The outer if (helper = truthy && !==) nests the else arm of the existsSync test, so the conditions join with and and three are needed to reach the region.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "fb80218fa58a10d0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The env var decides which binary is wired in, with a wrapper written for the user-supplied path in place of the platform package, so the effect is modifies (target chosen by the environment), not enables.",
+          "evidence_refs": [
+            "s15",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "5465fa106a711d70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs when a valid custom binary is present; nothing backs off on analysis.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "76be52c09812a7c0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A user-set override path has no clear targeting, evasion or availability purpose, so unclear fits.",
+          "evidence_refs": [
+            "s2",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "279e4839033cbd74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call at f1:262 sits in the else block of the guards and reaches applyManualBinaryPathOverride, whose writeFileSync is the sink.",
+          "evidence_refs": [
+            "s14",
+            "s16",
+            "s17",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "f6ac97b4b16f38e2",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "applyManualBinaryPathOverride is called only at f1:262 and install.js has no exports or timers reaching it.",
+          "evidence_refs": [
+            "s16",
+            "f1:215",
+            "f1:262"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "6505a7bce3fc7257",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs2.writeFileSync writes the wrapper file and rewrites lib/main.js.",
+          "evidence_refs": [
+            "s15",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "8836234e642afdb3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The region lies in the catch block and after the isWASM throw, so both conditions must hold and are joined with and.",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "1535773ae9461862",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fallback install only runs when the platform package is missing and the platform is not wasm-only.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "bcbb15b7435d82a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch installs the binary when it is missing; it does not evade analysis.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "5befa1dcf87de6b5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The message at f1:271-277 says this works around a missing optional dependency, which is portability.",
+          "evidence_refs": [
+            "s7",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "cca6915047946151",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The calls at f1:282 and f1:286 are in the region; installUsingNPM holds execSync and calls removeRecursive (f1:196), whose unlinkSync is the delete sink; downloadDirectlyFromNPM holds the fetch and writeFileSync.",
+          "evidence_refs": [
+            "s18",
+            "s20",
+            "s21",
+            "s19",
+            "s27",
+            "s28",
+            "s26",
+            "s23",
+            "s24",
+            "s22",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "ff03b308a1d58901",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "installUsingNPM, downloadDirectlyFromNPM and removeRecursive are called only from the cited sites and from removeRecursive itself.",
+          "evidence_refs": [
+            "s20",
+            "s23",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "17546d49e014f73b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "child_process.execSync spawns, the local fetch wraps https.get for the download, writeFileSync writes and unlinkSync deletes.",
+          "evidence_refs": [
+            "s19",
+            "s22",
+            "s25",
+            "s26",
+            "f1:147-158"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "fae25e3ad88b6d88",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One if joins the three conditions with &&: platform !== win32, !isYarn() and !isWASM, the last being the not-in-wasm condition.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "466ad7bb6456ed5f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch only performs the optional link-and-replace step when it is taken.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "93a494a1d275822d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The step runs on ordinary targets; nothing evades analysis.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "879fc786f27fbe0d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions are about platform and package manager support for replacing the JS shim with the native binary.",
+          "evidence_refs": [
+            "s10",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "27a83b0f1774c500",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs2.renameSync at f1:230 lies directly in the block under the guard.",
+          "evidence_refs": [
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "1cd2a4c1c0f849d5",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "maybeOptimizePackage is called only at f1:292 and the rename sits inside the guard.",
+          "evidence_refs": [
+            "s29",
+            "s30",
+            "f1:292"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "6edb5052d5089720",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The block links and renames files with fs2.linkSync and fs2.renameSync, which change files on disk.",
+          "evidence_refs": [
+            "s30",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "k_5ac6641f52.L6.drop",
+          "claim_sha256": "ff8f156786ee5c7e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/catch around lstatSync only skips unreadable entries during cleanup and reads no environment property.",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "k_6a1ea602e7.L6.drop",
+          "claim_sha256": "9cde3dce2fe22224",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin check only picks the error message text; the code throws on both paths.",
+          "evidence_refs": [
+            "s32",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "k_bdbbaa74e6.L6.drop",
+          "claim_sha256": "e65214302c1ba0b0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sw_vers call only fills the macOS version in the error message.",
+          "evidence_refs": [
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "q_0b3cb0707a.L6.drop",
+          "claim_sha256": "a2315784972fd452",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both branches throw; the if only chooses the error text, so it is log-only.",
+          "evidence_refs": [
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "q_2a9ba8f897.L6.drop",
+          "claim_sha256": "b2f88225f53101df",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try is error handling for lstatSync in recursive cleanup, not an environment check.",
+          "evidence_refs": [
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "q_7befdb7ee1.L6.drop",
+          "claim_sha256": "cf8e7ee37816c170",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try only guards the sw_vers lookup used for the message text.",
+          "evidence_refs": [
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "q_c53c402f86.L6.drop",
+          "claim_sha256": "0a134a2ca6ba53c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The presence check on npm_config_user_agent is the preamble to the yarn regex test already recorded as c7.",
+          "evidence_refs": [
+            "s37",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "q_d89d9e0aa2.L6.drop",
+          "claim_sha256": "05eb8dce6baf7bc6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if only selects the error message text and both paths throw, so it is log-only.",
+          "evidence_refs": [
+            "s34"
+          ]
+        }
+      ]
+    }
+  ]
+}

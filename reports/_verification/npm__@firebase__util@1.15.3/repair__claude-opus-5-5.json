@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@firebase/util",
+    "version": "1.15.3",
+    "archive_sha256": "0a812b12ea0d186c2c864417140ef27954dc28bf9cbb6097dc5cb447a24be877"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "58ceedff8a1073c6",
+      "record_sha256_after": "58ceedff8a1073c6",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "31fdc77d1ffc987b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "postinstall.js:22 binds const ENV_VARIABLE = 'FIREBASE_WEBAPP_CONFIG' (assigned once), line 25 binds const envVariable = process.env[ENV_VARIABLE]?.trim(), and the cited identifier at line 27 is the test of if (!envVariable) return undefined. The test reads process.env.FIREBASE_WEBAPP_CONFIG through"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Remaining reasons: guessed recipe fields and out-of-set claim pending verification. g1's env_var value for FIREBASE_WEBAPP_CONFIG is a placeholder JSON built from what the code requires (starts with '{\"' at line 33, projectId not starting with 'demo-' at line 73, appId and apiKey truthy at line 78);"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "58ceedff8a1073c6",
+      "record_sha256_after": "e805a51b7ee49499",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "0ffb13af95e0306d",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Line 73 calls startsWith on projectId, bound at line 70 to partialConfig.projectId || '-', not on the env string. Changed api to partialConfig.projectId; the site is unchanged."
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d902e36c19b49c8b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Operator not_startswith and value demo- are right for the early return at line 73, but the operand was misattributed. The api is now partialConfig.projectId, so the requirement applies to the parsed field."
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "8dc5d8ef143ce351",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The test reads a parsed config field that arrives inline in FIREBASE_WEBAPP_CONFIG (line 35) or from the file it names (lines 50-51). No category covers this: env_var misses the file route, file_content misses the inline route, and other or consuming_app would mark as out of scope a value a VM can s"
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "35773ff1639a3b3c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Line 78 tests !appId || !apiKey, bound at lines 76-77 to partialConfig fields, not the env string. c5 now has api partialConfig.appId with its site on !appId, and new condition c6 has api partialConfig.apiKey with its site on !apiKey."
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "5c4300207e69f870",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The line 78 early return needs both fields truthy to continue, which is not truthiness of the raw env value. Split into c5 (partialConfig.appId truthy) and c6 (partialConfig.apiKey truthy), each on its own operand."
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "6de75a2e3846a6e1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Same open label as c4.L6.category: appId and apiKey are parsed config fields that arrive inline or from a file, and no category covers both routes without marking a VM-settable value out of scope. Kept env_var on c5 and on the new c6; a person should settle the label."
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "015075811a0fca86",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The four early exits at lines 62, 67, 73 and 78 are sequential and join with and, but line 78 holds two tests. Expression is now c2 && c1 && c4 && c5 && c6, the line 78 guard lists c5 and c6, and min_conditions is recomputed. c4, c5 and c6 no longer claim the raw env value."
+        },
+        {
+          "claim_id": "k_fe169d0b26.L6.drop",
+          "claim_sha256": "14a530ba1589feb2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "startsWith('{\"') at line 33 only picks how the value of FIREBASE_WEBAPP_CONFIG is decoded. The then side parses it as inline JSON (line 35); otherwise it is read as a path and the file is parsed (lines 45-51). Both return the same config to getFinalConfig and both end in benign_build, so flipping th"
+        },
+        {
+          "claim_id": "q_c0cb4022cc.L6.drop",
+          "claim_sha256": "d114d3ce1e0bcb91",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement around the line 33 prefix test, so the same reason applies: inline JSON and file path are two representations of one config value, both returned to the same caller, and both sides end in benign_build. It decides the input format, not which behaviour runs."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "e805a51b7ee49499",
+      "record_sha256_after": "e805a51b7ee49499",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Record left unchanged. The only guessed field is g1.then env_var FIREBASE_WEBAPP_CONFIG. Re-reading postinstall.js confirms the recipe value opens g1: it starts with {\" so line 33 takes the JSON.parse path at line 35, projectId p passes the not-demo- test at line 73, appId and apiKey are truthy at l"
+        }
+      ]
+    }
+  ]
+}

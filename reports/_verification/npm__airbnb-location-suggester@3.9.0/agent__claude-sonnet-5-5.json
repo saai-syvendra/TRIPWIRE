@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "airbnb-location-suggester",
+    "version": "3.9.0",
+    "archive_sha256": "943f402acd284c05da479fc731affa17e9bb504bf6a00a37ce0a96f4c257291a"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "5937f6253501b14a",
+      "packet_sha256": "aab79cdb0c287cb3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_bb9a54b9bd.L6.drop",
+          "claim_sha256": "f3921d53219e8502",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isPreinstall is defined at f1:5 and read only at f1:80, 85, 99, 107 and 112. Each of those reads guards a console.log or console.error call, so the variable only affects logging.",
+          "evidence_refs": [
+            "s1",
+            "f1:5",
+            "f1:80",
+            "f1:112"
+          ]
+        },
+        {
+          "claim_id": "q_1005e3f207.L6.drop",
+          "claim_sha256": "804a304ffc422753",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The !isPreinstall test at f1:112 only guards console.error of the WebSocket import failure. Nothing else runs under it.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "q_6136c0e2bb.L6.drop",
+          "claim_sha256": "f2b916318dd50e9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test at f1:107 only guards console.error in the ws error handler.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "q_c0dc4a9d4f.L6.drop",
+          "claim_sha256": "557714b8c906d06a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test at f1:80 only guards two console.log calls that print the responses. The requests were already sent before it.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "q_f7a50dc258.L6.drop",
+          "claim_sha256": "3a94d1d5702a5a1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test at f1:99 only guards a console.log. ws.send and ws.close at f1:102-103 run regardless of it.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_fa0a7e97ce.L6.drop",
+          "claim_sha256": "be06cef0b4ba1dbf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test at f1:85 only guards console.error. The sendViaWebSocket(data) fallback at f1:88 sits outside the if and always runs.",
+          "evidence_refs": [
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

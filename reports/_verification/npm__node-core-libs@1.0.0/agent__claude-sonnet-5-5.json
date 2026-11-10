@@ -1,0 +1,514 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "node-core-libs",
+    "version": "1.0.0",
+    "archive_sha256": "fed0f5b410cf6d312f0e5c40be26e00deb3278477a3757814a2dfc437e22fdbe"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "f72342af27f3a761",
+      "packet_sha256": "f6ada4793693920d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "49154b658fd1e643",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:2 compares process.platform to 'win32' in an if that decides whether the script exits.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b64170d74dab349b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:2 exits when platform !== 'win32', so the code after it runs only when platform == 'win32'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "09aef09ce13f160f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating system via process.platform, so os is the right category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "a32d20d55b99239a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:17 branches on f.existsSync(up), where f is require('fs').",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "bf751a11a6a86c0c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "up is p.join(nm,'node-fetch-utils','package.json') with nm two levels above __dirname, and the then branch runs only when it exists.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:12",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "9bc41475336296db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a file exists, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "d68220064d5c3bfa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:27 branches on f.existsSync(op).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "761c0fa1636cfb29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "op is p.resolve(__dirname,'..','package.json') and the then branch runs only when it exists.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:26"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "160e9c8d1b73a27f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a file exists, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "063a07eab191ec04",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:40 tests d.length where d is the buffer from the http.get response collected by _g('/nl').",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:8",
+            "f1:39"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "5a2ebb78b6a7823d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early exit fires when !d or d.length<16, so the guarded code runs only when the length is >= 16.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "f987e6b37bbe24c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the size of the server's response, so server_response fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "93d72d77a010f1a8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single early-exit guard on the platform test covers the rest of the file, so the expression is just c1.",
+          "evidence_refs": [
+            "s2",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "77001a549828b60a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check only lets the download and write run on Windows, with no alternative payload, so it enables.",
+          "evidence_refs": [
+            "s2",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "ad4efd521fe7ba91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The script runs only on Windows and does not back off on analysis, so the polarity is activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "5d5b4ee97033fb09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload is Windows-specific (wscript and a vbs launcher), and the gate exits on other OSes, which is targeting.",
+          "evidence_refs": [
+            "s2",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "df4e48793509f06d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The IIFE (s11, s12) calls _g (s13), whose def (s14) holds the http.get (s10). It also calls _tidy (s16), whose def (s17) holds the tmpdir writeFileSync (s15). All of it comes after the platform exit.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "92d5c5a4569f811d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "_g and _tidy are called only from the IIFE and from _tidy-calling lines after the platform exit; there are no exports or timers.",
+          "evidence_refs": [
+            "f1:2",
+            "f1:38",
+            "f1:50"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "a11c32674cce2679",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "http.get is a network sink and fs.writeFileSync is a file write sink, matching download and write_file.",
+          "evidence_refs": [
+            "s10",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9d07c1eb46da40fe",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The existsSync if (f1:17) is nested in _tidy, which runs only after the platform exit, so c1 and c2 join with and.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "4997d87742a2eb11",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write to the other package's package.json happens only if the file exists, so the gate enables it.",
+          "evidence_refs": [
+            "s4",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "b899928277933740",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch acts when the target file is present and is not an analysis-evasion check.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "62067768e02b49eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check only guards reading and rewriting a file that may not be there, which is data availability.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "a8d56319ea198b63",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The writeFileSync at f1:22 sits directly inside the existsSync then block (s18); the empty witness is correct, and _tidy runs after the platform exit.",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "14caef8364e5c71c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The write is reachable only through _tidy, whose callers are all in the IIFE after the platform exit.",
+          "evidence_refs": [
+            "s17",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "4efdc165e9e9664b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.writeFileSync on another package's package.json is a file write sink.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "ac6796085934c93e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The existsSync if at f1:27 is nested after the platform exit, so c1 and c3 join with and.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "6209075dd5a7781d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Stripping the postinstall and install scripts from the package's own package.json runs only if that file exists, so the gate enables it.",
+          "evidence_refs": [
+            "s6",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "9539e59fa989e813",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs when the file is present and does not back off on analysis.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "2e5fc89d49c15a72",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check only confirms the file exists before reading it, which is data availability.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "c344a039e5ef1aa7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The writeFileSync at f1:30 is directly inside the then block (s20); the empty witness is correct.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "6c19166311839726",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The write is reachable only through _tidy, which is called only from the IIFE after the platform exit.",
+          "evidence_refs": [
+            "s17",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "7331b4168616c406",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The writeFileSync rewrites package.json after deleting its postinstall and install scripts, which is a file write that removes traces.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "eb2434207e188fe4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform early exit and the length early exit (f1:40) are sequential, and the code after both runs only if both pass, so c1 and c4 join with and.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "8fdb39927b850374",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The dropped file is written and run only if the server returned at least 16 bytes, so the gate enables it.",
+          "evidence_refs": [
+            "s8",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "fb40496df1b0f52f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check backs off only when the server returns no payload, not on analysis, so the polarity is activate.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "de597a309806784a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The length check only tests whether the server supplied a payload, which is data availability.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "65a6055491b30451",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The writeFileSync calls (f1:43, f1:44), the wscript spawn (f1:45) and the unlinkSync (f1:48) all sit in the rest of the block after both early exits; the empty witnesses are correct.",
+          "evidence_refs": [
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "84a87e08a0e1ccef",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "These statements are inline in the IIFE, not in a function, so no other caller, export or timer can reach them.",
+          "evidence_refs": [
+            "s22",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "0b89fb3891ce6b9d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "writeFileSync is a file write, child_process.spawn of wscript.exe (detached, hidden window) is process creation, and unlinkSync is a file delete.",
+          "evidence_refs": [
+            "s23",
+            "s24",
+            "s25",
+            "s26"
+          ]
+        }
+      ]
+    }
+  ]
+}

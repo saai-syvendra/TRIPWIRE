@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "Ailyboostbot",
+    "version": "1.0",
+    "archive_sha256": "87959124b8262a6e351c9b00865dc7a2d429edbdb0b11c4d2c5614417e9ad306"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "c14d9c9646b349d0",
+      "packet_sha256": "7b7dba9f5841197f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "c8004ff6fb131460",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Kiwi scans Desktop, Downloads and Documents. KiwiFile picks entries whose lowercased name holds a credential keyword and requires isfile with '.txt', or isdir (s2, s3). KiwiFolder then continues only while each child passes isfile (s1). The operators are in positive form.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:610",
+            "f1:586",
+            "f1:602"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "9abc4c8b8bf0a038",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether specific victim files or folders exist on disk, so target_artifact fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "40fdbdd6cf89716c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GetDiscord returns early when Local State is missing (s7). The rest of the function (s8) reads the .log and .ldb files (s9) and calls uploadToken (s11). uploadToken (s12) calls LoadUrlib (s13), and LoadUrlib (s14) calls urlopen (s10).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "f31b921bce06f550",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "uploadToken is also called from getToken (f1:411). LoadUrlib is called from many other places (f1:292, 328, 360, 389). The network sink is therefore reachable without passing the GetDiscord gate.",
+          "evidence_refs": [
+            "f1:411",
+            "f1:292",
+            "f1:389",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "9f0bafbd0b9f9cd5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cred_read sink opens the leveldb .log and .ldb files for reading (s9). The exfil sink is urlopen of a Request carrying data (s10).",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "9a46a48d4ba95f0c",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "Guards c5 and c7 (s16, s17) sit inside the 'Steam' elif block only. The zip and upload region (s22) is outside that block and runs for wallet entries after only c4 (s15). The expression c4 && c5 && c7 and then_min 3 therefore overstate the condition.",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s17",
+            "s22",
+            "f1:498",
+            "f1:501"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "5793a456c3eb4d7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Region s22 calls upload (s24). upload (s25) calls LoadRequests('POST', hook, files=files) at f1:390 (s26). LoadRequests (s27) runs requests.post(url, files=files) (s23). Region s21 only sets the zip name, and s22 lies after the s15 guard.",
+          "evidence_refs": [
+            "s22",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "ef43f648dfa76078",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "upload is also called from GatherAll (f1:570) and from the main body (f1:681). LoadRequests is reached through upload without passing the ZipThings gates.",
+          "evidence_refs": [
+            "f1:570",
+            "f1:681",
+            "s25",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "b10d0c9307cf4514",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "The claim lists cred_read and exfil, but the payload has a sink only for exfil (requests.post, s23). No sink is cited for cred_read.",
+          "evidence_refs": [
+            "s23",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "d56a575568791c83",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Every cited guard tests the same file or folder existence condition: s4 in KiwiFolder, s5 and s6 in KiwiFile. Each guards its own region (s28, s29, s30), so a single condition c6 with a minimum of 1 is right.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s28",
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "7c2ef8322acc5248",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "If no keyword-named file or folder exists, nothing is uploaded. The check enables the file collection and upload rather than choosing between payloads or changing the target.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "5670aea8bcd42eeb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code continues to collect and upload files when the artifacts are present. It does not back off on analysis or a sandbox.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "d3543846a86e18ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether credential-named files exist to steal, which is data availability.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "k_ee61418539.L6.drop",
+          "claim_sha256": "2387246a9d54d505",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "This try/except around __import__ only bootstraps dependencies (pip install of requests and pycryptodome). It reads no environment property and decides no payload.",
+          "evidence_refs": [
+            "s31",
+            "f1:34"
+          ]
+        },
+        {
+          "claim_id": "q_51818e9113.L6.drop",
+          "claim_sha256": "a718df3d4fcd920d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The same dependency-bootstrap try/except. It is not an environment gate, because it only installs missing modules.",
+          "evidence_refs": [
+            "s32",
+            "f1:35"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ff843244058bf7a2",
+      "packet_sha256": "30303d7253da9376",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "845df08416cab65d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early returns at s1 (f1:496), s2 (f1:502) and s3 (f1:509) guard the code that follows, including s4 and s5. zf.write at f1:513 sits in s5 itself. upload() at f1:515 (s8) leads to def upload (s9), which calls LoadRequests at f1:390 (s10). That reaches def LoadRequests (s11), which holds requests.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "592b3bb78d8c65a1",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "upload() is also called outside ZipThings, at f1:570 in GatherAll and at f1:681 in Kiwi ('kiwi' path). Those calls reach the same upload and LoadRequests code without passing the ZipThings guards. LoadRequests is reached from upload at f1:390, but the f1:570 call can also reach it. Only the kiwi bra",
+          "evidence_refs": [
+            "f1:570",
+            "f1:681",
+            "f1:515",
+            "f1:390",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "e2b46000852dec64",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "zf.write(pathC+'/'+file) at f1:513 reads files from the target folder into a zip, which fits cred_read/fs_read. requests.post(url,files=files) at f1:83 is a network upload, which fits exfil/network.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:513",
+            "f1:83"
+          ]
+        }
+      ]
+    }
+  ]
+}

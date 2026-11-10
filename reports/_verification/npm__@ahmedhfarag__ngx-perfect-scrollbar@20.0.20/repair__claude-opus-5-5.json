@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@ahmedhfarag/ngx-perfect-scrollbar",
+    "version": "20.0.20",
+    "archive_sha256": "e03af02027dca7b872b16f326bf5f9d3d2a3957686966bf7470da358b059ca16"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "88f845e99fa83823",
+      "record_sha256_after": "a209e937888d193b",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Grounded three guessed recipes in the code: g1 GITHUB_TOKEN is now ghp_, the prefix main() tests with startsWith (c5); g2 NPM_TOKEN is now null because main() only tests process.env.NPM_TOKEN for truthiness before validateToken; g3 ~/.aws/credentials is the first path parseAwsProfiles joins, and fro"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "a209e937888d193b",
+      "record_sha256_after": "f7d6e73b71ea526e",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "3a2bb9f0a58f7585",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The persistence and exfil payloads cited spawn(...) calls in extraction() and migration(), which only start the dropped /tmp/processor.sh and /tmp/migrate-repos.sh detached. The workflow push and the repo mirroring happen inside those bash scripts (curl/git in string modules) with no citable JS sink"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f7d6e73b71ea526e",
+      "record_sha256_after": "f7d6e73b71ea526e",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "g4 recipe env_var GOOGLE_APPLICATION_CREDENTIALS stays guessed: the GCPModule (bundle.js bytes 235500-237300) only builds new GoogleAuth({scopes}) and checks getProjectId() and getClient(), naming no credential source; the env var is one of several google-auth-library ADC sources (also the gcloud AD"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f7d6e73b71ea526e",
+      "record_sha256_after": "24d95908b88e5561",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "f263ee0003e0682e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The expression matches the code. The first if in main() is F.isAuthenticated()&&(isLinux()||isMac()). isAuthenticated() is !!this.token, and this.token comes from getToken(), which returns process.env.GITHUB_TOKEN if set, else the trimmed output of gh auth token, so c1 and c2 are read through that h"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "4409be0f4dd472ec",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "data_availability is the definition that fits: it applies when the check tests that the thing to steal or use exists. Three of the four and-groups test a usable GitHub credential: a token from GITHUB_TOKEN or gh auth token (c1, c2), a ghp_ or gho_ prefix (c5, c6) and a getAuthenticated result (c7). "
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "38ba27b508f43bd2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The code tests that a usable npm credential exists. oe is NPM_TOKEN, else parseNpmToken() reading _authToken from .npmrc; validateToken() returns null with no token and otherwise asks the registry whoami endpoint; se&&(isLinux()||isMac()) then guards the republishing. The refutation says the checks "
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "4bfbaffa4de35cc5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. GCPModule.initialize awaits this.auth.getProjectId() and this.auth.getClient() and sets isValidCredentials only under if(t&&r), and isValid() returns that flag, so the guard reads two tests, not one. They can fail apart: getProductionProjectId returns GCLOUD_PROJECT or GOOGL"
+        }
+      ]
+    }
+  ]
+}

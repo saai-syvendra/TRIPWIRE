@@ -1,0 +1,580 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "aicp-tracker",
+    "version": "1.2.9",
+    "archive_sha256": "69f07b17dc085678c06da0d033ac4bd728ce25b83eedc9d7eaf4b27ba0760db0"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "1360d0716ea7f9b6",
+      "packet_sha256": "c7beffa26d90bdc1",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "782b78d01e4ec6e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads process.env.CI directly in the early-exit decision (f1:5).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "e3f8c6b2ddb737b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early exit occurs when CI is truthy, so the remaining code is reached when process.env.CI is falsy (f1:5).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "f4e9e1b79dc4f134",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the CI environment marker process.env.CI, matching ci_marker (f1:5).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "b6204d9339d82641",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads process.env.npm_config_yes directly in the early-exit decision (f1:5).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "8fd526e36b223cdd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early exit occurs when npm_config_yes is truthy, so the remaining code is reached when it is falsy (f1:5).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "553f4097e5be3d28",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads npm_config_yes, an npm/package-manager environment property (f1:5).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "7271b9f478792079",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code compares process.env.npm_lifecycle_event directly (f1:10).",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "00eaaf93696a8053",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The postinstall branch requires the lifecycle event to equal the string postinstall (f1:10-11).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "66f7c7437a8994b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lifecycle_event property identifies the npm lifecycle stage, matching package_manager (f1:10).",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "a7512b657257bb8c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The projectPath value is assigned from process.env.INIT_CWD and tested in the following branch (f1:16-17).",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "c7c93b8d66119c8c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch body runs when the INIT_CWD-derived projectPath is truthy (f1:16-20).",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "bab0cbd4373fe1d2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "INIT_CWD is read as the npm install invocation directory and is a package-manager environment property (f1:16).",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "6c9ae42e7974688b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The projectPath write lies after the CI/npm_config_yes early exit, inside the postinstall branch, and inside the truthy projectPath branch, so all four conditions are required (f1:5,10-20).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "1b79c77f88344184",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Passing the combined environment checks reaches config.save with the existing config plus projectPath, enabling a configuration file write (f1:16-20; f2:19-22).",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c15bdacbcf030b3f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate exits when CI or npm_config_yes is set and proceeds in postinstall with INIT_CWD, so it backs off in CI/unattended contexts (f1:5,10-20).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "531770278d91dfd7",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The checks select an install path and skip CI/unattended runs, but the code does not establish whether the purpose is portability or anti-analysis.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "1d89eeda39da1895",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early-exit guard leaves the remainder of the file reachable only on its else side, and the postinstall and INIT_CWD branches contain the cited write region (f1:5,10-20).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4baa2edcd4c51178",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The same config save function is called from the setup flow and daemon.start, so the filesystem sink can also be reached outside these guards (f1:20,177-178; f4:41-45).",
+          "evidence_refs": [
+            "s8",
+            "s11",
+            "s12",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "fd344eb4a1acff26",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guarded call reaches config.save, whose definition invokes fs.writeFileSync on CONFIG_FILE (f1:20; f2:19-22).",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "k_01a7667ff5.L6.drop",
+          "claim_sha256": "2349a61b9c8cda96",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check only chooses path string conversion in a log-scanning helper, not install-time behavior (f3:15-23).",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_094ced4256.L6.drop",
+          "claim_sha256": "0a91cd7515fec199",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The project-directory check is inside daemon.start and decides whether to update projectPath when the tracker is started (f4:37-50).",
+          "evidence_refs": [
+            "s14",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "k_09d70ceb8d.L6.drop",
+          "claim_sha256": "ba3cade275db7d5c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The npm_lifecycle_event alternative is unreachable here because the earlier top-level postinstall branch exits at f1:30; this auto-run check is only reachable for direct invocation (f1:5,11-30,203).",
+          "evidence_refs": [
+            "s15",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "k_1239834643.L6.drop",
+          "claim_sha256": "0c1a8c3de2866e4c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "readPid reads a PID file for daemon start/stop handling; it does not gate install behavior (f4:33-35).",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_1d50ce13c4.L6.drop",
+          "claim_sha256": "7bc5ae5e99359967",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file stat check controls incremental log parsing in parseNewLines, not install behavior (f5:112-116).",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_41c233e6d4.L6.drop",
+          "claim_sha256": "a96caa24d20a9cc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence/directory checks search Claude project folders in a runtime scanner helper (f3:29-40).",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "k_6c61e5ee5f.L6.drop",
+          "claim_sha256": "9550380cf68f840d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This check returns no scanned files when the Claude projects directory is absent; it belongs to runtime log scanning (f3:45-50).",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "k_77a2b5ffdc.L6.drop",
+          "claim_sha256": "8b77934be51fc17b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ensureDir checks for the config directory immediately before creating it from config.save, rather than gating install execution (f2:10-12,19-22).",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "k_95f3a42a5d.L6.drop",
+          "claim_sha256": "e1a3776c576006f6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The project marker check is in daemon.start and selects whether to save the current working directory at tracker start (f4:37-45).",
+          "evidence_refs": [
+            "s21",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "k_a1cea2dea1.L6.drop",
+          "claim_sha256": "aa16319c8bbd71ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "findMatchingProjectFolder checks projectPath and the Claude directory while locating runtime log folders (f3:29-40).",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "k_a51868ffb8.L6.drop",
+          "claim_sha256": "c70aae8931bd1f7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The WAL loader catches file read/parse failures and supplies an empty record list; it is runtime storage handling (f6:14-16).",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "k_c9d1468013.L6.drop",
+          "claim_sha256": "b75559603fcc6508",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "config.load returns null when its config file is absent; this is configuration loading, not an install-time environment gate (f2:14-17).",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "k_de74ee80c0.L6.drop",
+          "claim_sha256": "848e43fc14de9506",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check chooses the auto-start file format, but installAutoStart is called only from the interactive setup main flow, after the postinstall path exits (f1:5,11-30,37-40,60-66).",
+          "evidence_refs": [
+            "s25",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "k_eeb70bae91.L6.drop",
+          "claim_sha256": "e1c3404a6869b982",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Darwin branch selects a LaunchAgent implementation in installAutoStart, which the postinstall path never reaches because it exits earlier (f1:5,11-30,60-66).",
+          "evidence_refs": [
+            "s26",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_018c488651.L6.drop",
+          "claim_sha256": "22b72cfa9237d315",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isProject chooses the project path passed to a daemon worker when start is called, a runtime tracking choice (f4:37-50).",
+          "evidence_refs": [
+            "s27",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "q_11613f3d70.L6.drop",
+          "claim_sha256": "b44abea987123fae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The project marker check controls saving cwd and selecting the worker project path inside daemon.start (f4:37-50).",
+          "evidence_refs": [
+            "s28",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "q_270eb2b29e.L6.drop",
+          "claim_sha256": "a10af79eeadc1eab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This check is inside findMatchingProjectFolder, a runtime log-scanning lookup (f3:29-40).",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "q_539d6597a2.L6.drop",
+          "claim_sha256": "7fddb8531152caea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ensureDir is a filesystem prerequisite for config.save, not an environment gate deciding install execution (f2:10-12,19-22).",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "q_69d3315884.L6.drop",
+          "claim_sha256": "2bad9897b1773dd9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The WAL load fallback handles missing or malformed runtime storage and does not gate install behavior (f6:14-16).",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "q_73d2312bfc.L6.drop",
+          "claim_sha256": "3bb93fe2d9010369",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The npm_lifecycle_event alternative is unreachable here because the earlier top-level postinstall branch exits at f1:30; this auto-run check is only reachable for direct invocation (f1:5,11-30,203).",
+          "evidence_refs": [
+            "s15",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "q_7b364f84c1.L6.drop",
+          "claim_sha256": "2eee7ba944af1679",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/catch around statSync handles a missing/unreadable log during runtime parsing (f5:112-116).",
+          "evidence_refs": [
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "q_7c8153f5c8.L6.drop",
+          "claim_sha256": "650e54160e6af5ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branches install OS-specific auto-start files in the interactive setup flow, which postinstall exits before reaching (f1:5,11-30,60-102).",
+          "evidence_refs": [
+            "s34",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_8075be8f65.L6.drop",
+          "claim_sha256": "f8b77ea73863829d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The directory existence check is a runtime early return from Claude log scanning (f3:45-50).",
+          "evidence_refs": [
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "q_85acc468ea.L6.drop",
+          "claim_sha256": "579b85a5d6c0d5c8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The cited postinstall branch is reachable and writes INIT_CWD into configuration, then continues setup messaging before exiting; it is not a dead branch (f1:11-30).",
+          "evidence_refs": [
+            "s1",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_a8a6f576a5.L6.drop",
+          "claim_sha256": "56273770ec743a69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows condition only changes project path encoding in the scanner helper (f3:15-23).",
+          "evidence_refs": [
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "q_bad001f289.L6.drop",
+          "claim_sha256": "c2efa873e3517641",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence and directory checks select a matching Claude project folder in a scanner helper (f3:29-40).",
+          "evidence_refs": [
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "q_c6102e1049.L6.drop",
+          "claim_sha256": "c3ca567b21795b3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "readPid reads a runtime daemon PID file and returns null on failure; it is not an install-time gate (f4:33-35).",
+          "evidence_refs": [
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "q_d3354ce534.L6.drop",
+          "claim_sha256": "9f70534ddb971958",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test chooses an auto-start persistence mechanism in interactive setup, while the postinstall path exits before setup reaches installAutoStart (f1:5,11-30,60-102).",
+          "evidence_refs": [
+            "s39",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "q_f6ccd36f95.L6.drop",
+          "claim_sha256": "bb95aeb17aacb20e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "config.load checks for the configuration file while loading settings and does not gate install execution (f2:14-17).",
+          "evidence_refs": [
+            "s40"
+          ]
+        }
+      ]
+    }
+  ]
+}

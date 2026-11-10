@@ -1,0 +1,307 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "landsat-tiler",
+    "version": "1.1.0",
+    "archive_sha256": "2e6bf52f5389eb306d5a0fa2f60651c745dfc3ee34dbd7439c9114f501f984c5"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "4c398931503623e8",
+      "packet_sha256": "573d3a980e0696c3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "84c4ed7543be87fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 directly tests fs.existsSync as the condition of the ternary at s2; f1:3 binds fs to the filesystem module.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a6fc91f76fa8b58f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 passes the claimed literal path to fs.existsSync without negation. The then arm at s2 reads that same file when the existence test succeeds.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "163acbacf646fa9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:18 checks existence of the specific local file subsequently read into the system-data object, supporting target_artifact.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "153ff02067e65a1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 directly tests fs.existsSync as the condition of the ternary at s4; f1:3 binds fs to the filesystem module.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "67feb8afca44ebde",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 passes the claimed literal path to fs.existsSync without negation. The then arm at s4 reads that same file when the existence test succeeds.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "32c8e1e2ad2e752a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:19 checks existence of the specific local file subsequently read into the system-data object, supporting target_artifact.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "f8f3e201324d19cc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 tests only the condition at s1 to reach s5, so the expression is the single claimed condition and the minimum is one. The neighboring ternary is independent.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6422b03bfa869fa3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 enables the file read at s5 when the file exists and otherwise supplies null; it neither chooses an alternative payload nor changes the read target.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "96622836f2ce77fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 activates the read at s5 on existence of the target file and supplies null otherwise, supporting activate rather than analysis avoidance.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "482388ea08988881",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 checks availability of the same file read at s5 and substitutes null when absent, supporting data_availability.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "02156817cc03c4eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 is the readFileSync call directly in the then arm of s2; the region and sink coincide, requiring no witness hops.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1b9fe2912d092e7b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "s5 is directly and exclusively in the then arm of s2. The full file has no other read of this target or wrapper, export, timer or handler bypassing this guard to reach the sink.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3",
+            "f1:1",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7af59908c364ac68",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:3 binds fs to the filesystem module, and s5 reads the target system file as UTF-8 into the collected system-data object at f1:9, supporting recon.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "548d3e7c3ca053d8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s4 tests only the condition at s3 to reach s6, so the expression is the single claimed condition and the minimum is one. The neighboring ternary is independent.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "016c302af05fa1c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 enables the file read at s6 when the file exists and otherwise supplies null; it neither chooses an alternative payload nor changes the read target.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "0244cb92c10a1d15",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 activates the read at s6 on existence of the target file and supplies null otherwise, supporting activate rather than analysis avoidance.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "90d3125646273c90",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 checks availability of the same file read at s6 and substitutes null when absent, supporting data_availability.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "d7b515fc03618ac2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 is the readFileSync call directly in the then arm of s4; the region and sink coincide, requiring no witness hops.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "7070f753e13c4dfa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "s6 is directly and exclusively in the then arm of s4. The full file has no other read of this target or wrapper, export, timer or handler bypassing this guard to reach the sink.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3",
+            "f1:1",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "83dd6c1924adc046",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:3 binds fs to the filesystem module, and s6 reads the target system file as UTF-8 into the collected system-data object at f1:9, supporting recon.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3",
+            "f1:9"
+          ]
+        }
+      ]
+    }
+  ]
+}

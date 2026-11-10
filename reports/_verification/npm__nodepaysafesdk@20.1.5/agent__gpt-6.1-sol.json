@@ -1,0 +1,232 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "nodepaysafesdk",
+    "version": "20.1.5",
+    "archive_sha256": "f5052c7e65490cce243746e661ee2bda95ad69ceec059de93f77d8bebe4100fa"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "8ad5c399937453e9",
+      "packet_sha256": "c66d250b2061331e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "67cd7ab3f2b30ae2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The shell command tests readability with [ -r ] on the claimed file, and its success controls the following cat command (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "465c4859275381ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readability probe must succeed for the following cat command to run; the && edge is positive and has no intervening negation (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "34f5028a395d04c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks whether the current process can read the protected credential file, supporting the privilege category (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "580ce7b07fc4e72d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Within the shell group, the single readability condition controls the credential read through &&, so the cited local guard expression is c1 with minimum one condition (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4583945813bc53e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "A successful readability test enables the credential-file cat command; failure instead produces fallback text (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e5a88d6b95ddf091",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The positive test activates the credential read when access is available, supporting activate polarity (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "e1c411db7680fa59",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks that credential data is readable before attempting to collect it, supporting data_availability (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7496be5a2719aea5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The cited exec call runs unconditionally at top level; the readability decision occurs inside the shell command it launches and controls only the nested cat command (f1:3–9). The empty witness therefore does not place the cited sink inside the guarded region.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1c07fb1a6ec26728",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The cited exec sink is reached regardless of the shell readability test's outcome because it launches the command containing that test (f1:9).",
+          "evidence_refs": [
+            "s2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7c4169c79998de47",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "exec is imported from child_process and receives the shell command containing the conditional credential-file read, so the sink can perform cred_read (f1:1, s1, s2).",
+          "evidence_refs": [
+            "f1:1",
+            "s1",
+            "s2"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e5b816cc944ff215",
+      "packet_sha256": "84637847b7c6bcf0",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a9212dbdc620c856",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "Slices s1, s2 and s3 contain only sample-missing placeholders, and code/f1.unavailable.txt likewise reports the sample missing. No code is available to anchor the guard, bind hop or sink.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0ff0ac3ce11b6156",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "Slices s1, s2 and s3 contain only sample-missing placeholders, and code/f1.unavailable.txt supplies no source. The claimed gated path and any alternative callers cannot be anchored.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c62616baeec2eb55",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The sink slice s2 and bind slice s3 contain only sample-missing placeholders, as does the available file code/f1.unavailable.txt. No source anchors a sink capable of the claimed credential read.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e5b816cc944ff215",
+      "packet_sha256": "63f22090368a8781",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a9212dbdc620c856",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The exec call at f1:9 runs unconditionally with the string bound at f1:3; the shell readability check in s1 controls only the nested shadow-file read after that process starts. The cited sink therefore lies outside the guard's then side, and the string binding does not create a guarded call path.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0ff0ac3ce11b6156",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The top-level exec call at f1:9 is reached regardless of the shell readability check in s1. That check controls a command inside its argument, so reaching the cited sink does not require passing the claimed gate.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c62616baeec2eb55",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The exec binding is imported directly from child_process at f1:1 and called with command at f1:9. That command includes a readability test followed by reading the system shadow password file, supporting the claimed credential-read capability.",
+          "evidence_refs": [
+            "f1:1",
+            "s1",
+            "s2",
+            "s3"
+          ]
+        }
+      ]
+    }
+  ]
+}

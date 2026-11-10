@@ -1,0 +1,432 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "prorgessbar2",
+    "version": "0.1",
+    "archive_sha256": "3066e9a9816fab39e178de81e631919136675f421778ce29fd84c70ff14984ae"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "13009146129742ea",
+      "packet_sha256": "76ebb96f0a0cac92",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "At the cited site the platform comparison is built from computed names and integer expressions, so the API is not readable at that encoded site. The readable counterpart appears in derived slice s2, but the claim cites s1.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "263c0e42d75c1b83",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The cited comparison is still encoded, so its compared value and operator cannot be confirmed from s1; s2 shows the readable derived comparison against win32.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The visible operand is sys.platform, an operating system platform property, so os is the appropriate category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly calls ctypes.windll.shell32.IsUserAnAdmin() as an if test.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition calls IsUserAnAdmin() directly and enters the block when its result is truthy.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin() checks whether the current process has administrator privilege.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "12b860b0e9e7fe1f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The basename result is assigned to a variable and that variable is tested in a later membership condition.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1a2e12051f2acfed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code assigns basename(TargetPath), then checks membership in the four listed executable names before changing shortcut arguments.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "e824794d9264ebfc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checked basename is the shortcut target executable, so target_artifact fits the property being tested.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "52f1535ddeb0eb16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited region is the body of the platform if, so its single condition c1 is sufficient for the then side.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6d27bd959d872be2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows guarded branch performs a package install and writes files, which are actions enabled by the platform condition.",
+          "evidence_refs": [
+            "s3",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "820afc2b20c5e461",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs the install actions when the platform is Windows, showing activation on the targeted platform.",
+          "evidence_refs": [
+            "s3",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform condition selects the Windows-specific installation and payload actions.",
+          "evidence_refs": [
+            "s3",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ec9567f33ab5c57f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both cited calls are within the platform branch: pip.main installs a package and the file write emits payload content.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "287f95722b7537fc",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The install and write calls occur in the sole setup.py platform branch shown, with no other caller or exported function reaching them.",
+          "evidence_refs": [
+            "s3",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "6cb174b066c994d2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The file write and pip install are sinks capable of writing payload files and downloading/installing a package.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "f062323b662e4151",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The privilege condition is nested inside the Windows branch, and the cited region requires both conditions.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d14263a49e9ac562",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When administrator privilege is present, the code adds a ProgramData startup folder; without it, it uses user startup locations, changing the persistence target.",
+          "evidence_refs": [
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "041e967c8d80c71a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The nested branch performs its persistence setup only when Windows and administrator privilege are both true.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0dc20a87f8622ea5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The privilege and platform conditions choose among persistence locations appropriate to the current privilege context.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "42fa3d4bf659691b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited region lies inside the Windows branch and the administrator condition; the shortcut Save call is within that region.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "02b8c1c95f3cd642",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The shortcut Save call is reached only inside the Windows and administrator branch in setup.py; no separate caller to this action is present.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "2c8a6ea598386cca",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Save() commits the modified shortcut to disk, supporting the persistence behavior.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "8ccc93a5b6282f09",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The browser-name check is nested in the Windows branch, and its region requires both the platform and target executable condition.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s6",
+            "s8",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "3c62d8ccc94e7033",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The browser check decides whether an existing shortcut gets an extension-loading argument and is saved, modifying a target artifact rather than enabling a new behavior.",
+          "evidence_refs": [
+            "s8",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "f35a84e70ef9ce68",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The shortcut modification runs only for the listed browser targets, so the gate activates on the targeted artifacts.",
+          "evidence_refs": [
+            "s8",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "18a05d85283f0ad7",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested shortcut target is specifically a browser executable; this is targeting, rather than a data-availability check.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "7a9b2b00f2c820d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The browser shortcut Save() is in the body of the target-name condition and under the Windows gate.",
+          "evidence_refs": [
+            "s3",
+            "s8",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "64f4218ae7ac6f6a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The shortcut Save() path is only present in the nested Windows and browser-target block in setup.py, with no other caller shown.",
+          "evidence_refs": [
+            "s3",
+            "s8",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "8e4e962b30c2413a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shortcut object is created from a .lnk, its arguments are changed, and Save() persists that modified shortcut.",
+          "evidence_refs": [
+            "s8",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "37fb19f99caec3d8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence check is part of the install-time state machine: when the Extension directory is absent, it transitions to the directory-creation step and loops; when present, it proceeds.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "715513960a7265b3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This existence check controls the install-time branch that creates the missing Extension directory, so it is part of a gate rather than an omitted non-gate check.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        }
+      ]
+    }
+  ]
+}

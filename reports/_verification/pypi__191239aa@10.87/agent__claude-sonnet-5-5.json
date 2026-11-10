@@ -1,0 +1,289 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "191239aa",
+    "version": "10.87",
+    "archive_sha256": "436dcc66a91b6c0529e55a82c9bba09e4c2c3dc1efacd56498ffd89a0dc36c18"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "9124f5dce6797cf9",
+      "packet_sha256": "443398a15531b429",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "870cc94b396d5959",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:11 compares the result of os.getlogin() directly (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "84bf3b94e9793a6b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `os.getlogin() != <plain string literal>` and the guarded block runs when it is true, so != is the positive form; there is no else and no early exit.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e50e943e37418a7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.getlogin() returns the current login user name, so the property read is the username.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "cc749edac652d21f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if at f1:11 with one condition and no other guard around it, so the expression is c1 and then_min is 1.",
+          "evidence_refs": [
+            "s2",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "53daa11d73035f29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then block holds the whole download, persistence and execution chain and there is no else branch, so the gate enables it rather than selecting between payloads.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1413a3aafb6ed74a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs for every user except the author's handle; this is not a back-off on analysis, CI or sandbox, so polarity is activate.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "be29cf27df1a7e74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check excludes one specific user (the author, who also appears as the package author at f1:27) so the payload runs on every other victim; targeting fits better than portability or anti_analysis.",
+          "evidence_refs": [
+            "s1",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0257c09045a945f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Popen reg add call (s4) and the curl subprocess.call (s5) are written directly inside the if block (s3), so empty witnesses are correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "c435db875229d580",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks are module-level statements in setup.py inside the one if; there are no functions, other callers or exports in the file that reach them.",
+          "evidence_refs": [
+            "f1:11",
+            "f1:15",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ce122b4f431bce62",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s4 launches reg add on the RunOnce key (persistence) with a hidden window, and s5 runs curl.exe to write a file from a remote URL (download); both are subprocess process-creation sinks that can do this.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "9124f5dce6797cf9",
+      "packet_sha256": "fae35f196404248f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "79fdc6fe8bd95b14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:11 is `if os.getlogin() != \"Tahg\":` with the registry-add, download and execute code in its then-block (s2), so the positive form that reaches the guarded code is `!=` against a plain string literal. There is no negation or early exit to flip it.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:11"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "9124f5dce6797cf9",
+      "packet_sha256": "f208ca5eeb43c030",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ef7b03df9f2d5f16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:11 compares the result of os.getlogin() directly in the if condition.",
+          "evidence_refs": [
+            "s1",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "79fdc6fe8bd95b14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:11 is `os.getlogin() != <literal>` and the payload sits in its then block, so the positive form is `!=`. The literal is a plain string.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e50e943e37418a7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the logged-in user name, so username is the right category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c7eb9587b2bb2380",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard with one condition and the whole payload block is its then side, so expression c1 with min 1 is right.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "53daa11d73035f29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only switches the one payload (persistence, download, run) on or off, and there is no else branch, so the effect is enables.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1413a3aafb6ed74a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs for every user except the author, so it activates on targets. It does not back off from analysis.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "be29cf27df1a7e74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The author's own account is excluded from the payload, which is a targeting choice rather than portability or anti-analysis.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0257c09045a945f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Popen of reg add (s4) and the subprocess.call of curl (s5) sit directly inside the then block, so the empty witness is correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "3d2e214772f5b9d6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The payload is module-level code in setup.py inside this if. It is not in a function, so there is no other caller, export or handler, and no other path reaches it.",
+          "evidence_refs": [
+            "s3",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ce122b4f431bce62",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Popen runs reg add to write a RunOnce key (persistence) with CREATE_NO_WINDOW (hidden window). subprocess.call runs curl.exe to download an exe to a temp path. Both are process-creation sinks that can do these things.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "eslint-plugin-prettier",
+    "version": "4.2.3",
+    "archive_sha256": "087219661b4a36c342452700c9631fd056d1451339a9813f5a888958c06da9bd"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "98954627e7a04e7d",
+      "packet_sha256": "672e57d89732a924",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "6f224b3e81e727d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:154 compares os.platform() directly in the if condition; os is bound to require('os') at f1:2.",
+          "evidence_refs": [
+            "s1",
+            "f1:154"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "5b79f18401e6ee6e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:154 is `os.platform() === 'win32'` with no negation, and the guarded block runs when it is true.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e9f7e4ead656086a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating-system platform, so os is the right category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "4a2d829f8a889c9c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard on os.platform()==='win32' with no other conditions, so the expression c1 and then_min of 1 are right.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "fef4ef4cb187e074",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The rundll32 spawn only runs inside the win32 branch and there is no else, so the gate enables the behaviour.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "a4975fee68b59a1e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs on a Windows host and does not back off on any analysis or sandbox signal, so the polarity is activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ce4c1dc4eff5b74f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check decides whether a Windows-only DLL is loaded through rundll32, so it selects Windows victims. Portability is arguable, but targeting fits.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "61832896970187bc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn call at f1:156-157 sits directly in the then block (f1:154-161), so the empty witness is correct.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "636f9e7646c9e013",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The spawn is in logDiskSpace, which is only called at f1:191. There are no exports, timers or other callers in the file.",
+          "evidence_refs": [
+            "f1:191",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "28a6872e71f02a0f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The string pieces join into require('child_process')['spawn']('rundll32', [...]), which is process creation.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "k_0f7f344e61.L6.drop",
+          "claim_sha256": "06f06dc400a5b3fe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync check in ensureDir only decides whether the log directory is created, which is housekeeping and not an environment gate.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "k_8a4bbd2e33.L6.drop",
+          "claim_sha256": "adb39fe52e49200a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The anchor is the require('child_process') call, which is not an environment test. The gating is the platform check, which is recorded separately.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "q_0c60980057.L6.drop",
+          "claim_sha256": "e4757770286bdf69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if in ensureDir is a directory-exists check for logging, and both branches only create or log a directory, so it is not an environment gate.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "q_53e1523f20.L6.drop",
+          "claim_sha256": "43dabf1f4c42a0fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/catch only handles errors and tests no environment property. The environment gate inside it is recorded separately.",
+          "evidence_refs": [
+            "s8"
+          ]
+        }
+      ]
+    }
+  ]
+}

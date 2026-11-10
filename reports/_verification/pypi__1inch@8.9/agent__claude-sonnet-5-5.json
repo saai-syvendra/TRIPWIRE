@@ -1,0 +1,276 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "1inch",
+    "version": "8.9",
+    "archive_sha256": "23915c9434509cfb98ac61235b9592deddbb2d23dc420fd79a35b0e116dbe502"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b00e57bbb04cd3bd",
+      "packet_sha256": "1d2a9b6625ac9d53",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "38ca786ed8e7af34",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:12 is an if-statement whose test is a negated call of os.path.exists on a literal path (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "fc58b116d50aa365",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The body at f1:13-14 runs under `not os.path.exists(...)` with a single negation, so the guarded code runs when the path does not exist (not_exists). The value is the plain literal C:/ProgramData/Updater.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "c0c7f32986f2a291",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads whether a directory path exists on the filesystem, which is file_or_dir_exists.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "60d87138ae0efaf4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if with one condition and no else and no other nested guards, so the expression c1 is right and then_min is 1.",
+          "evidence_refs": [
+            "s2",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "498e4e1af28959b7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The download-and-run chain only executes when the gate passes, and there is no alternative branch, so the gate enables it.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "879b73016550f15a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the Updater directory is absent, that is, on a fresh target. It does not back off on any analysis or sandbox signal.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c50b499c655a30b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is an already-installed marker check (re-entry guard). It is not a portability, targeting, anti-analysis or data-availability check, so unclear fits.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "08c32d8136526318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call to run() at f1:14 lies inside the then-block (s3), reaches def run at f1:7 (s6), and that def contains subprocess.Popen with shell=True at f1:8 (s4).",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "074d16cc5fd95939",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "run() is called only at f1:14, inside the gate. The file has no other callers, exports, timers or handlers that reach Popen.",
+          "evidence_refs": [
+            "f1:14",
+            "f1:7",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "66b4a682da248260",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is subprocess.Popen with shell=True (exec). The command it runs does Invoke-WebRequest (download), writes update.zip and Expand-Archive (write_file), runs Remove-Item (delete_file), starts the extracted server.pyw/launch.vbs (exec_downloaded), and uses hidden windows and silenced errors (de",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f1:14"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b00e57bbb04cd3bd",
+      "packet_sha256": "bed52d393b099e84",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "2091b75635362752",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:12 tests os.path.exists on a literal path as the condition of an if statement.",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "96dcb82ea635e531",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:12 is `not os.path.exists(r\"C:/ProgramData/Updater\")`, so the then block runs only when the path does not exist, which is not_exists with that value.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "c0c7f32986f2a291",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a filesystem directory exists, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "acecd0ffc63c70c7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard on one condition with no other decisions, so the expression c1 and then_min 1 are right.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "498e4e1af28959b7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The whole download, extract and run chain sits inside the then block and does not run otherwise, so the gate enables it. There is no alternative payload.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "879b73016550f15a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the Updater folder is absent, meaning the machine is not yet infected. This is an activation condition, with no backing off on analysis or sandbox signals.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c50b499c655a30b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check is an already-installed re-entry marker that does not target a victim or detect analysis, so unclear fits.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "08c32d8136526318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The run(...) call at f1:14 is inside the then block. It reaches def run at f1:7, whose subprocess.Popen(shell=True) at f1:8 is the sink.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d1d3f5c3318588ba",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "run is called only at f1:14 inside the gate, and the file has no other callers, exports, timers or handlers that reach Popen.",
+          "evidence_refs": [
+            "f1:14",
+            "f1:7",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "66b4a682da248260",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is subprocess.Popen with shell=True, running a powershell command line. That command line downloads a zip with Invoke-WebRequest, writes it and extracts it, deletes it with Remove-Item, starts the extracted code, and hides windows and silences errors.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

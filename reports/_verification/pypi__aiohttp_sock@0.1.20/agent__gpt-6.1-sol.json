@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp_sock",
+    "version": "0.1.20",
+    "archive_sha256": "0dae61137382fa4adb9a710da4fe27fd3008df53c638bb8e20bf2eb57b1bdda4"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "779f75dd50f53972",
+      "packet_sha256": "75944d94cf0655f6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "083da30ca1015f4e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 directly compares sys.version_info, using the sys import at f1:5.",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "741415494c579652",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 raises when the version is below (3, 5, 3), so continuation into s3 requires >= (3, 5, 3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "803a386414de1790",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s1 reads the Python interpreter version tuple, supporting runtime_version.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "8c3b5ef5ce2a26d2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole cited early exit in s2 admits its continuation under c1 alone, with a minimum of one condition.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ded1d23b8ffbc164",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The exception in s2 blocks later setup and payload code on older interpreters; continuation enables that code without selecting a different payload or target.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7c18c189a17474a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 permits execution on interpreters meeting the minimum version and does not check analysis indicators, fitting activate.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6e0b05532322c308",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 enforces a minimum interpreter version before setup and subsequent code, supporting portability.",
+          "evidence_refs": [
+            "s2",
+            "f1:34",
+            "f1:49"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "06c307fcc6c25af2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 is within s3 after the version early exit, and s6 invokes the main definition in s7 containing s5. Both sink paths are on the continuation side of s2.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s6",
+            "s7",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "fcf0a7d62bbd44b8",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The supplied file has one main definition and one invocation, both after the uncaught version exception, and the subprocess sink is also after it. No alternate caller, export, timer or handler bypasses the guard in this file.",
+          "evidence_refs": [
+            "s2",
+            "f1:50",
+            "f1:133",
+            "f1:194"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ea6104326eae21b3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:50-53 invokes pip through subprocess, supporting process creation and downloads; f1:83-84 and f1:182 write files, and s5 posts the archive through the ClientSession bound at f1:115 and f1:145. The module writer and subsequent imports connect browser database reads and host reconnaissance at f1:97",
+          "evidence_refs": [
+            "f1:50",
+            "f1:53",
+            "f1:83",
+            "f1:84",
+            "f1:97",
+            "f1:100",
+            "f1:113",
+            "f1:115",
+            "f1:126",
+            "f1:145",
+            "f1:163",
+            "f1:168",
+            "f1:182",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "k_f26f200a5a.L6.drop",
+          "claim_sha256": "af1bcdca54b7dd26",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s8 checks whether a directory in the newly created temporary package tree needs creation; the module write at f1:83-84 follows regardless. This is extraction plumbing rather than an environment gate deciding payload behaviour.",
+          "evidence_refs": [
+            "s8",
+            "f1:60",
+            "f1:66",
+            "f1:80",
+            "f1:83",
+            "f1:84"
+          ]
+        },
+        {
+          "claim_id": "q_b9fb603138.L6.drop",
+          "claim_sha256": "6f8516c7320939d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s9 avoids recreating temporary package directories and initializer files, while f1:83-84 writes the module outside this condition. This is extraction plumbing rather than an environment gate deciding payload behaviour.",
+          "evidence_refs": [
+            "s9",
+            "f1:60",
+            "f1:80",
+            "f1:83",
+            "f1:84"
+          ]
+        }
+      ]
+    }
+  ]
+}

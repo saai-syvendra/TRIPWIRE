@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@redhat-cloud-services/entitlements-client",
+    "version": "4.0.11",
+    "archive_sha256": "2d687501e01b03709e0a5b206cca7cbd30651378d5c272aebcb8c6985024043f"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "6d9ac70e12c62ced",
+      "record_sha256_after": "2e576a68f5574ac9",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0541bf12e51b60e0",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The anchored call in ZZ() (d11 bytes 174830-174968) is (process.env.LC_ALL||LC_MESSAGES||LANGUAGE||LANG||'').toLowerCase().startsWith('ru'); the compared value is the literal 'ru'. Set c3.value to \"ru\"; the env var names stay in api/notes, not in the value."
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "26a3d0960362de20",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "ZZ() returns true and kq exits when the Intl locale or LC_ALL/LC_MESSAGES/LANGUAGE/LANG starts with 'ru'. That excludes victims by language, it does not detect analysis, CI or a sandbox, so under the layer definition the polarity is activate (purpose stays targeting). Changed g2.polarity from evade "
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "ec80af831c5a4d14",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "In t4.execute the guard `if(!await this.shouldExecute())return!0x1;` is followed by `let _0x17c123=...,_0x54b0a3=...;` (the only cited region) and then a try statement holding the fs write of cat.py and Bun.spawn(['bash',...]). Both sinks sit in the try, outside the cited region. Added the try_state"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged: every condition and gate is out of set and awaits verification; g1-g3 payloads are wrapper sinks with unresolved dynamic_dispatch because the real fs/network sinks sit in dynamically dispatched modules; g4 and g5 expressions omit the enclosing kq conditions c1-c4; c6 is cited only on "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2e576a68f5574ac9",
+      "record_sha256_after": "5c09ac1896fc5237",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "4cf0f915bc6fd7e7",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c4 is cited on existsSync(N1), the test `if(existsSync(N1)){...}` in W9. When that test is false W9 goes straight to writing the lock and returns true, so not_exists is the right operator for this test and its value is correct. The verifiers' point is that a present lock with a dead PID also continu"
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "715c5520102f448f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation is right: x1 loops `for(p of hQ) if(existsSync(p))`, one path per call, so no call reads the comma-joined probe target. probe.target is now `*` (the loop variable) and the seven hQ paths moved to value. _0x6e258b is the fs existsSync import alias, so the api stands."
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "8d918add518ca64e",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation is right: the existsSync operands are the hQ paths, not a descriptive agent list. value now lists the seven hQ paths exactly. The process-name test is a separate execSync output check and is now its own condition c12 (process_list, not_includes the fQ names), added to g4's expression and "
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "3394fd71662b3a3a",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation is right: the exfil sink sat outside the only region while the witness was empty. Added the later statements of the bq try block as regions (x8/j8 declaration, ingest loop, run/finalize statement), all after kq() on the guard's side. Each payload now has a witness: fq to W6.execute to rea"
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "05bddad47fed5ea1",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation is right that recon and self_propagation had no sink. Payloads now cover all four behaviours: cred_read on readFile in W6, recon on os.hostname in O6, self_propagation on the registry PUT fetch in e1 (via ingest, handleNpmTokens, R8), exfil on sender.send in x8.dispatch. Exfil keeps unres"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "4d6916aba12ff89c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "anti_analysis fits. Gq pairs four variables with literal decoy prefixes (ghp_decoyGitHubToken, npm_F4k3NPMToken, sk-ant-api03-fake, fake_circle). i7 is true only when a variable is defined and starts with that prefix, and kq then exits. It never tests that a usable credential exists: with every vari"
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "828e58c0456d71ee",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same fix as g1.then.L5: the kq guards gate the same code, so g2 now has the same regions and payloads, with a sink for each of recon, cred_read, exfil and self_propagation."
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "58a9aacceb3655e8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation is right: ZZ has a third test, `(SystemRoot?LANG||LANGUAGE||LC_ALL:'').startsWith('ru')`, with a different variable priority, so c2 and c3 can hold while it still exits. Added c10 on that test. Expression is now c2 && c3 && c10, the guard lists c10, min_conditions becomes 3."
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "ac735319f63495f1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed because g2's expression and purpose fields now carry c10. The label activate stands: ZZ tests only the host locale and looks for no analysis, CI or sandbox marker, so it limits the worm to non-Russian-locale hosts. Passing the conditions on its own does not make a gate evade, which is the on"
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "1a5e27d5b0c73e1b",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same fix as g1.then.L5: g3 now has the same regions and payloads, with a sink for each of recon, cred_read, exfil and self_propagation."
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "4a40ce11c7f51c30",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation is right: W9 returns false only when the lock exists and mq(pid) is true, so continuing needs the lock absent or the recorded PID dead. Added c11 on process.kill(pid,0) in mq. Expression is now c4 || c11 and the `!W9()` guard lists both conditions. min_conditions stays 1."
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "089ec9cca2f72025",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed because g3's expression now carries c11. The label activate stands: the check looks for a live instance of the worm, not for analysis, CI or a sandbox, so evade does not fit. One verifier calls it a re-entry guard, but it is not a marker passed to the payload's own child: the lock file is on"
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "b33bc8904db15d9e",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation is right, and the behaviours were wrong. Decoded d12 shows YZ (cat.py) polls GitHub commit search for RSA-signed URLs, then downloads and runs them, and RZ installs it as a systemd user service or LaunchAgent. Neither reads credentials or does recon. Removed recon and cred_read, added per"
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "cc2e947d538bc463",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation is right: the g5 region has no exfil sink. Y6.execute only returns the secrets to fq, and they leave through the shared j8/x8 path, which runs whether or not g5 opens, so exfil is removed from g5 and stays on g1-g3. cred_read is re-cited on the real sink, execSync of `sudo python3` in run"
+        }
+      ]
+    }
+  ]
+}

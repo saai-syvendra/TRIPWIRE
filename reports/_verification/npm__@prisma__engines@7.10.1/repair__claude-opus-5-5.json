@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@prisma/engines",
+    "version": "7.10.1",
+    "archive_sha256": "d19ab01ea2f5fda4df81bd5bf0622f8966be5a6fa6724dd688d6e6485f292edf"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d509925999754b9f",
+      "record_sha256_after": "195e9e55494a1650",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_2b0b49b763.L6.drop",
+          "claim_sha256": "be3d2f6c866f8cf3",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "At dist/scripts/postinstall.js:41 the truthiness test of process.env.PRISMA_CLI_BINARY_TARGETS sets binaryTargets, which is passed to download() at line 47. The environment decides which engine builds the download fetches, a change of target rather than of storage folder or launch, so it is a modifi"
+        },
+        {
+          "claim_id": "q_13dfe7c570.L6.drop",
+          "claim_sha256": "adc769ec2e0272e5",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The if statement at dist/scripts/postinstall.js:41-43 is the decision on c1, and its block feeds binaryTargets into the download() call at line 47. Kept it as guard of gate g1 (expression c1, arm then, effect modifies, purpose portability), with then regions on the block and the download statement a"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "195e9e55494a1650",
+      "record_sha256_after": "a19b42e4f7cb4a2d",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "91db9131e05e933c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The if at dist/scripts/postinstall.js:41 guards only the assignment binaryTargets = process.env.PRISMA_CLI_BINARY_TARGETS.split(','); the download() call at line 47 follows the block and runs whether or not the variable is set. With the line 47 region removed the then side does no behaviour, so the "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "a19b42e4f7cb4a2d",
+      "record_sha256_after": "a19b42e4f7cb4a2d",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "k_2b0b49b763.L6.drop",
+          "claim_sha256": "5e98e3aa2b4aac95",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "dist/scripts/postinstall.js:41 reads process.env.PRISMA_CLI_BINARY_TARGETS only to decide whether line 42 fills binaryTargets. download() at line 47 sits after the if block, so it runs with or without the variable, with the same options, then the same cleanupLockFile at line 54. Both verifiers who r"
+        },
+        {
+          "claim_id": "q_13dfe7c570.L6.drop",
+          "claim_sha256": "bda2a9906f29e539",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at dist/scripts/postinstall.js:41-43 has one statement in its block, the assignment binaryTargets = process.env.PRISMA_CLI_BINARY_TARGETS.split(\",\") at line 42, with no else and no exit. The candidate gate in prepared.json has an empty sinks list for this then region, and the note in the drop"
+        }
+      ]
+    }
+  ]
+}

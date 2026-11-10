@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "epic-fortnite-webpack-config",
+    "version": "1.0.1",
+    "archive_sha256": "cc2561be826500fab782a4795b3c01a1bab8899009a89ffae05d29d68bf2dfbe"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "735b59e7b6f40c91",
+      "packet_sha256": "c63a8cf0b1ed2322",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_ed9672957f.L6.drop",
+          "claim_sha256": "37de190f65a99c68",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 is the readFileSync call inside readFullFile, a file read, not a decision; nothing it does changes whether sendProof runs (f1:64).",
+          "evidence_refs": [
+            "s1",
+            "f1:31",
+            "f1:64"
+          ]
+        },
+        {
+          "claim_id": "k_f7fbe729cb.L6.drop",
+          "claim_sha256": "94c3d52582949b02",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 is an existsSync guard inside a read helper. It only decides whether a file's text is included in the data, and sendProof(proof) runs unconditionally at f1:64, so it is not an environment gate.",
+          "evidence_refs": [
+            "s2",
+            "f1:30",
+            "f1:59",
+            "f1:64"
+          ]
+        },
+        {
+          "claim_id": "q_28fb90300b.L6.drop",
+          "claim_sha256": "64b64581b202adf2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 is the if around existsSync in readFullFile. Its only effect is whether the file content or null is collected. The send is not inside it.",
+          "evidence_refs": [
+            "s3",
+            "f1:30",
+            "f1:64"
+          ]
+        },
+        {
+          "claim_id": "q_9d81308a83.L6.drop",
+          "claim_sha256": "469d1a67c028c22f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 is the try/catch in readFullFile that wraps the read for error handling. It is not an environment check, and the exfiltration call at f1:64 runs regardless.",
+          "evidence_refs": [
+            "s4",
+            "f1:29",
+            "f1:64"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp",
+    "version": "3.14.5",
+    "archive_sha256": "5558a7f5a05af9ecf744af91e5baefc436f93c9333e656c27ec253f9a6bbe178"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "81c9523a62f1bcfc",
+      "packet_sha256": "67171f9e9e7ca69d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "edb28547062a6761",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:8 compares sys.version_info with (3, 10) in an if condition.",
+          "evidence_refs": [
+            "s1",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "c5cceaa692333e97",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:8-9 raises when sys.version_info < (3, 10), so the code after it runs only when sys.version_info >= (3, 10).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "df4e47b8edfb78a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the Python interpreter version, so runtime_version fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3ef1d8be059f37f0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single early-exit guard at f1:8-9 with one condition, so the expression c1 and min_conditions 1 match.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "851285c845d4baf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Passing the version check lets the normal setup() build run. It does not pick a payload or change a target, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e54886d56219c740",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check only rejects unsupported Python versions. It does not back off on analysis or sandbox detection, so activate fits.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "11c93e3b2b8bd612",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The error message says aiohttp 3.x requires Python 3.10+, which is a compatibility requirement, so portability fits.",
+          "evidence_refs": [
+            "s2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0f7cdec9b1d40626",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "setup(**setup_kwargs) at f1:108 is module-level code after the early raise at f1:8-9, so it lies in the region the guard controls. The empty witness is correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "3faeb12698e6a615",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "setup() is called once, at module level in setup.py, after the version guard. No other function, export or handler calls it.",
+          "evidence_refs": [
+            "s4",
+            "f1:108"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ab461270dfa3988d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The behaviour is a benign build and the sink is the setuptools setup() call at f1:108, which matches sink_kind other.",
+          "evidence_refs": [
+            "s4",
+            "f1:5",
+            "f1:108"
+          ]
+        }
+      ]
+    }
+  ]
+}

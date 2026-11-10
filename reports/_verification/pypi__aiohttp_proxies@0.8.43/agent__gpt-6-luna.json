@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp_proxies",
+    "version": "0.8.43",
+    "archive_sha256": "b940a05937917e602453daf93e388ffa113e62b30ebab078fccef2e776cec331"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "e412486432e7e670",
+      "packet_sha256": "7cbc73c55c59a9f9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "c0ba59b2f35dc21c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition compares the value at `sys.argv[1]` with `install`, so the cited site is a decision on `sys.argv`.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b1cca845c6321ed2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is reached when `install` equals `sys.argv[1]` (along with the stated length check); the equality is not negated on the then path.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6d224a38bffd796f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the command-line arguments in `sys.argv` and checks for the package command `install`, which is a package-manager category check.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1edaf5709000e6d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited condition tests whether `bdist` occurs in `sys.argv[1]`, making it a decision on `sys.argv`.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "2577c6c6af903208",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The second disjunct is `bdist` in `sys.argv[1]`; it is positive and leads to the then branch when true.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "ef4d84b36b675c2f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test examines the command-line argument for `bdist`, a package build command, so `package_manager` fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "ccd3df90a8c7944b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The condition is `(len(sys.argv) > 0 and install == sys.argv[1]) or bdist in sys.argv[1]`; the two claimed conditions are alternative disjuncts, and the extra length check guards the first access.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "e3bc668311dab0a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When either package-command condition holds, the branch gathers host and login data, sends a request, writes an executable, and starts it; the gate enables these behaviors.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d3bb27ac429d1949",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then-side payload runs when the arguments match `install` or include `bdist`, so this is activation on the target package operation.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "cd77730bdd771850",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The commands select when the payload runs, without identifying a victim or analysis environment; the purpose is unclear rather than targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "365fb727b675205e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All four cited calls appear in the try blocks nested under the if at line 23: host/login collection, `urlopen`, file creation, and `subprocess.Popen` are on its then side.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0601ffac77c834e9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The payload calls are inline in the top-level then branch, with no function to call from elsewhere; the other top-level setup code does not reach these sinks.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7cf163d8cb10c96b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`os.getlogin()` and `platform.node()` collect host identity, `urlopen(req)` performs network access, `open(file, 'wb')` writes a file, and `subprocess.Popen(...)` starts a process.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "k_f5f2ceb2d0.L6.drop",
+          "claim_sha256": "0c2875aa5c411b0d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version comparison is an active environment gate: on Python versions below 3.6 it raises and stops setup, while other versions continue. Its purpose is portability, so `dead_branch` does not explain omitting it.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "q_62c293d311.L6.drop",
+          "claim_sha256": "1b4bed34763cdd2e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version comparison is an active environment gate: on Python versions below 3.6 it raises and stops setup, while other versions continue. Its purpose is portability, so `dead_branch` does not explain omitting it.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "profile": "docker-default",
+  "title": "Stock Docker container from the official language image",
+  "note": "`docker run node:lts npm install <pkg>` (node:24 on bookworm, the LTS line on 2026-10-24) or `docker run python:3 pip install <pkg>` (python:3.15 on trixie), with no options: default bridge network, root, hostname the container ID.",
+  "sources": {
+    "node_image": {"url": "https://github.com/nodejs/docker-node/blob/84410eeaede25daf49826da8265fbf548cc604fe/24/bookworm/Dockerfile", "commit": "84410eeaede25daf49826da8265fbf548cc604fe", "read": "2026-10-24"},
+    "node_versions": {"url": "https://github.com/nodejs/docker-node/blob/84410eeaede25daf49826da8265fbf548cc604fe/versions.json", "commit": "84410eeaede25daf49826da8265fbf548cc604fe", "read": "2026-10-24", "what": "24 is LTS until 26 enters LTS on 2026-10-28; debian-default bookworm"},
+    "python_image": {"url": "https://github.com/docker-library/python/blob/d01180b5d8b1664a9b87862e3cafeafbe87383c6/3.15/trixie/Dockerfile", "commit": "d01180b5d8b1664a9b87862e3cafeafbe87383c6", "read": "2026-10-24"},
+    "python_tags": {"url": "https://github.com/docker-library/python/blob/d01180b5d8b1664a9b87862e3cafeafbe87383c6/generate-stackbrew-library.sh", "commit": "d01180b5d8b1664a9b87862e3cafeafbe87383c6", "read": "2026-10-24", "what": "3.15 carries the `3` and `latest` tags; trixie is the default variant"},
+    "base_bookworm": {"url": "https://github.com/docker-library/buildpack-deps/tree/fb12875aa41571f6288d524576174843fe738995/debian/bookworm", "commit": "fb12875aa41571f6288d524576174843fe738995", "read": "2026-10-24"},
+    "base_trixie": {"url": "https://github.com/docker-library/buildpack-deps/tree/fb12875aa41571f6288d524576174843fe738995/debian/trixie", "commit": "fb12875aa41571f6288d524576174843fe738995", "read": "2026-10-24"},
+    "base_files": {"url": "https://packages.debian.org/trixie/amd64/base-files/filelist", "read": "2026-10-24", "what": "dot.bashrc and dot.profile, installed as /root/.bashrc and /root/.profile"},
+    "docker_network": {"url": "https://docs.docker.com/engine/network/", "read": "2026-10-24", "what": "default bridge reaches outside networks; hostname defaults to the container ID"},
+    "npm_scripts": {"url": "https://docs.npmjs.com/cli/v11/using-npm/scripts", "read": "2026-10-24", "what": "npm_lifecycle_event, npm_package_*, INIT_CWD in lifecycle scripts"}
+  },
+  "axes": {
+    "os": {"value": "linux", "source": "node_image"},
+    "arch": {"value": "x64", "source": "node_image"},
+    "libc": {"value": "glibc", "source": "base_bookworm"},
+    "privilege": {"value": "root_or_admin", "source": "node_image"},
+    "username": {"value": "root", "source": "node_image"},
+    "home_dir": {"value": "/root", "source": "node_image"},
+    "hostname": {"value": "<container id>", "random": true, "source": "docker_network"},
+    "timezone": {"value": "UTC", "source": "base_bookworm"},
+    "ci": {"value": "none", "source": "docker_network"},
+    "network": {"egress": "open", "blocked": [], "source": "docker_network"},
+    "env_var": {"set": {"PATH": null, "HOME": "/root", "HOSTNAME": null}, "complete": true, "unknown_prefixes": [], "source": ["node_image", "python_image", "docker_network"]},
+    "file": {"present": ["/etc/passwd", "/etc/hosts", "/.dockerenv", "~/.bashrc", "~/.profile"], "absent_prefixes": ["~/", "/opt/", "/tmp/", "/Library/"], "source": ["base_bookworm", "base_trixie", "base_files"]},
+    "installed_tool": {"present": ["bash", "sh", "tar", "gzip", "bzip2", "xz", "unzip", "curl", "wget", "gpg", "git", "hg", "svn", "ssh", "scp", "ps", "make", "gcc", "g++", "cc", "file", "patch"], "complete": true, "source": ["base_bookworm", "base_trixie"]}
+  },
+  "ecosystems": {
+    "npm": {
+      "locale": {"value": "C", "source": "node_image"},
+      "package_manager": {"value": "npm", "source": "node_image"},
+      "runtime_version": {"value": "24.22.1", "source": "node_image"},
+      "env_var": {"set": {"NODE_VERSION": "24.22.1", "YARN_VERSION": "1.22.22", "npm_lifecycle_event": "$hook", "INIT_CWD": null, "npm_package_name": null, "npm_package_version": null}, "unknown_prefixes": ["npm_config_", "npm_package_"], "source": ["node_image", "npm_scripts"]},
+      "installed_tool": {"present": ["node", "npm", "npx", "yarn", "corepack"], "source": ["node_image"]}
+    },
+    "pypi": {
+      "locale": {"value": "C.UTF-8", "source": "python_image"},
+      "package_manager": {"value": "pip", "source": "python_image"},
+      "runtime_version": {"value": "3.15.1", "source": "python_image"},
+      "env_var": {"set": {"LANG": "C.UTF-8", "PYTHON_VERSION": "3.15.1", "PYTHON_SHA256": null}, "source": ["python_image"]},
+      "installed_tool": {"present": ["python3", "python", "pip", "pip3"], "source": ["python_image"]}
+    }
+  }
+}

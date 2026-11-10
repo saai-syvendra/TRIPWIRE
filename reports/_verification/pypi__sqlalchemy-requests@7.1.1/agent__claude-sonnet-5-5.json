@@ -1,0 +1,165 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "sqlalchemy-requests",
+    "version": "7.1.1",
+    "archive_sha256": "51a983166778853322273f0336b970f3406b1bac6cf84cf2353b04f14679c7c8"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "0fffb74d803250db",
+      "packet_sha256": "24aa5cf3e425f1c8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "2aaf47adce7f0b44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test of the if statement at f1:24 is a direct call of os.path.exists on the plain literal path (the handle-based marker name), imported via `import os` at f1:23.",
+          "evidence_refs": [
+            "s1",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b3b6e63ee2e82de6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`if os.path.exists(marker): exit(0)` exits when the file exists, so the code after it (s3) runs only when the file does not exist: not_exists is the positive form.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:24",
+            "f1:25"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "dd67913f1e6267fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads whether a file path exists on disk, which fits file_or_dir_exists.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "013e1da7e6f03198",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single early-exit guard with one condition (c1) and the rest of the module (s3) is its then region, so the expression c1 with min_conditions 1 is right.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4d0ef5a96dae18d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The marker check only decides whether the single exec payload runs; there is no per-branch payload and no changed target, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e7f051572fe10f9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the marker is absent and the code does not back off on analysis, CI or a sandbox, so activate fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "effba51e7f5a161c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks for a leftover marker file by name so the code does not run twice (a re-entry guard). It does not select a victim or environment, so targeting does not fit. I would label it unclear.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bbf51c2f309da1f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exec(base64.b64decode(code)) call at f1:38 lies inside the s3 region, which is the rest of the module after the early exit, so the empty witness is correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4a1ffc04545b878c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The exec is at module top level in setup.py after the guard. There are no functions, other callers, exports or timers that reach it elsewhere.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "8b221878c10fac2f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is exec of base64-decoded data, which is an eval-kind sink that can run arbitrary code, so the behaviour 'other' rests on a sink that can do it.",
+          "evidence_refs": [
+            "s4",
+            "f1:38"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "4a61fd4fe23129fd",
+      "packet_sha256": "7e78a46a4c9b49fb",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b4bd5d8e8d6b3288",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The packet has no slices or code files, so there is no code to read. The claim fields show only an os.path.exists not_exists test on a marker-like name, and that does not decide whether the purpose is unclear.",
+          "evidence_refs": []
+        }
+      ]
+    }
+  ]
+}

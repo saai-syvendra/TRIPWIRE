@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@cap-js/db-service",
+    "version": "2.10.1",
+    "archive_sha256": "893729fbd285d0278850bd48f818d83a86be215bceb0c7f62922772e98c4b834"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "26dc371c18d15aa5",
+      "record_sha256_after": "6ff4362c1df8335c",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "17b7bb1c209d2303",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "aA0 in execution.js (d2) returns false only when the lock file mP exists AND lZh(pid) finds the stored pid alive via process.kill(pid, 0); a stale lock is unlinked and the own pid written, then it returns true. The test is not plain lock absence, so c3 operator changed from not_exists to other, with"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "64a9fc537c3b5798",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.mjs:123 `if (hasCommand(\"bun\")) return;` returns from main() before anything else, and setup.mjs has no other path that runs execution.js (the only execFileSync of ENTRY_SCRIPT, line 141, uses the downloaded binPath). With bun already installed the payload never runs under any runtime, so the "
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "ef6985cf33158149",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "jZh calls process.exit(0) when !aA0() (live lock holder), and kZh awaits jZh before running the dZh collectors and senders, so the lock check does gate collection and exfil and effect enables is right. The record's empty then.behaviours was the defect: g3.then now lists recon, cred_read and exfil wi"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Reasons remain that the code cannot settle: c6's GITHUB_WORKFLOW_REF needle and J30's extra locale prefixes stay encoded (passed by member access to the cipher, not substituted in d2); the g2/g3 payload path runs through wrapper-object dynamic dispatch (unresolved dynamic_dispatch); g2 locale en-US "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "6ff4362c1df8335c",
+      "record_sha256_after": "37668eb422c65cd4",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "b791123d512214cf",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right that the cited execSync gh auth token sink sends nothing and that the payload had no exfil sink. The behaviours were correct but unsupported, so I added the sinks. exfil: octokit createOrUpdateFileContents in Fc.commitToRepo, with hops from kZh al.run through finalize, flush"
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "90189c1a3e3975f2",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same code path and same fix as g2.then.L5: g3 guards the same kZh collection and send, and its payload only cited the gh auth token exec. Added the exfil sink (octokit createOrUpdateFileContents in Fc.commitToRepo, hops from al.run, keeps unresolved dynamic_dispatch at the send receiver), the recon "
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "e893a4bdbcee767a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The read at readFile sits after two early returns on the same stat result: !isFile() and size > Ya1 (0x500000, 5 MiB), and the record cited only the first. Added the size if as a second guard and its test as a c9 site, and rewrote c9 from exists to a regular file of at most 5 MiB (operator other). T"
+        },
+        {
+          "claim_id": "k_5fcf090a4e.L6.drop",
+          "claim_sha256": "2c0254ff82422dbb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.mjs line 96 tests process.platform === \"win32\" && hasCommand(\"powershell\") only after hasCommand(\"unzip\") at line 88 has failed, so it is the second step of a fallback chain of extractors. Both steps extract the same Bun binary and main() then runs the same execution.js, so flipping the test c"
+        },
+        {
+          "claim_id": "q_30fe1bc14f.L6.drop",
+          "claim_sha256": "18027d1f934b72d1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement at setup.mjs line 96 around the same test as k_5fcf090a4e. Its body runs PowerShell Expand-Archive and moves the binary to the path the unzip branch would have produced, then returns to the same fs.unlinkSync, chmod and execFileSync of execution.js in main(). It only prepare"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "37668eb422c65cd4",
+      "record_sha256_after": "7e53b3e18bf6d76d",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed: c6 needle recovered as release-please.yml (value_recovered decoded, site moved to the includes call, g4 recipe and purpose_reason updated); both extra J30 prefixes decode to ru; g6 file_present is no longer guessed because all three paths are literal entries in the Na1 LINUX list. The 'condit"
+        }
+      ]
+    }
+  ]
+}

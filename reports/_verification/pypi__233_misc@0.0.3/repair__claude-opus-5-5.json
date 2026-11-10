@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "233_misc",
+    "version": "0.0.3",
+    "archive_sha256": "0e69b855dc909aac147bb9b8480c312dd4726f250fa65f998995673eac2ada04"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "63ebd07e7f327a2d",
+      "record_sha256_after": "63ebd07e7f327a2d",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_98daeaf776.L6.drop",
+          "claim_sha256": "02f541d5039b92da",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:89-90 only reassigns dest from ~ to ~/Documents when sys.platform is win32. Both sides then run the same statements: os.rename of remote-access.py into dest (setup.py:92, write_file) and the same subprocess.Popen(['python3', dest+'/remote-access.py']) (setup.py:97, spawn_process), which sta"
+        },
+        {
+          "claim_id": "q_c15162e6fc.L6.drop",
+          "claim_sha256": "00c4ff504255cbc6",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement at setup.py:89 around the same win32 test as k_98daeaf776. Its body is the single assignment dest = os.path.expanduser('~/Documents') (setup.py:90); there is no else. The rename at setup.py:92 and the Popen launch at setup.py:97 run unconditionally after it with the same fil"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The inner sys.platform == 'win32' branch (windows(sock) running cmd /K vs linux(sock) running /bin/bash -i, both reverse_shell, a portability split) sits inside the Code string literal at setup.py:6-80. cite.py refuses it (no syntax node on line 67 contains the test), and there is no derivation for "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "63ebd07e7f327a2d",
+      "record_sha256_after": "63ebd07e7f327a2d",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "k_98daeaf776.L6.drop",
+          "claim_sha256": "02f541d5039b92da",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The test sys.platform == \"win32\" at setup.py:89 has one effect: line 90 reassigns dest from ~ to ~/Documents. The code after it is outside the if and is the same on both sides: os.rename into dest (setup.py:92, with the FileExistsError retry at 93-95) and subprocess.Popen of python3 on that file (se"
+        },
+        {
+          "claim_id": "q_c15162e6fc.L6.drop",
+          "claim_sha256": "00c4ff504255cbc6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement at setup.py:89-90 that holds the same test. Its body is the single assignment dest = os.path.expanduser('~/Documents'), and there is no else. dest does feed the move (setup.py:92) and the Popen launch (setup.py:97), as the refutation says, but those statements sit after the "
+        }
+      ]
+    }
+  ]
+}

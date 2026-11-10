@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "xpack-video-submission",
+    "version": "1.0.6",
+    "archive_sha256": "cab507bc6306c32019d4daa68eba2eadd1912c9b8f284512f1a39bb60ec484e8"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "365a75dc1b1e19ed",
+      "record_sha256_after": "1d1bb0ec989ec727",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "389554c8d9a1f22a",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The write_file payload cited execSync(\"npm init -y\") at preinstall.js:163, a process-creation sink. installInDirectory (line 158) calls only fs.existsSync and execSync, no file-write API. Removed the write_file payload and behaviour from g3 (and from behaviours.gated); g3 keeps spawn_process on the "
+        },
+        {
+          "claim_id": "k_fab89e0c8c.L6.drop",
+          "claim_sha256": "31424299848783b4",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "fs.existsSync(packageJsonPath) at preinstall.js:161 only decides whether execSync(\"npm init -y\") runs to create a package.json in targetDir. The execSync npm install at line 172, the behaviour g3 records, runs whether or not the check succeeds. The check only changes how that spawn starts, so it is "
+        },
+        {
+          "claim_id": "q_3de2653ab9.L6.drop",
+          "claim_sha256": "23beb1f94c1bcffd",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if (!fs.existsSync(packageJsonPath)) statement at preinstall.js:161-167 wraps only the npm init -y step, which prepares targetDir. The npm install --ignore-scripts spawn at line 172 runs in both arms, so the statement only changes how that spawn starts. It is plumbing under the L6 definition, no"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed the 'payload path not fully traced' reason. In g1 and g4 the witness reaches the exec sink at line 49: the call to openInBrowser at line 72 sits in a setTimeout closure inside waitForEnterThenOpenUrl (the readline handler at line 86 calls it the same way), so I removed the dynamic_dispatch mar"
+        }
+      ]
+    }
+  ]
+}

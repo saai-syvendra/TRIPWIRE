@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifullSoop",
+    "version": "1.0.0",
+    "archive_sha256": "4108e0a81430fac7a8a5bf1ea199802b9000da9cf129651a4555eba1213b84b7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "4c78ba9f1fe7f85e",
+      "packet_sha256": "bbbf5ba700088144",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b358ebe9ae1be3e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 tests os.name directly in the if condition, and f1:12 binds os through an import in the same function.",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "bb1d6978c2216545",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 compares os.name to the literal nt using equality. The guarded statements occupy the then arm without any intervening negation (s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads the operating system identifier os.name, so the os category fits (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "390e7a7937bcf0c0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The block in s3 has one enclosing conditional, whose sole test is c1 in s1. Thus c1 alone satisfies the guard and the minimum is one condition (s2).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS condition enables the conditional execution block, with no alternative payload branch (s2). The supplied derived code places the download and execution together inside that block (f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "f2:13",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The payload block runs when os.name equals nt, selecting an operating system target rather than checking for analysis infrastructure (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test restricts the execution block to nt systems while ordinary installation follows outside the conditional (f1:13-18). This supports targeting because it decides whether the payload runs rather than choosing a platform-specific implementation.",
+          "evidence_refs": [
+            "f1:13",
+            "f1:16",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "227415c65d1c4e9b",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "s5 is directly inside the then region s3, but the network sink s4 is in the separate derived file f2. The packet supplies no decode specification linking that readable network call to the encrypted argument in f1:16, so the complete claimed path cannot be confirmed.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "f1:16",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6a7ec9e6fd22b618",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The visible exec site is conditional on c1, and the supplied derived network site is likewise conditional (f1:13-16, f2:13-16). Without a checked link between the encrypted code and f2, exclusive reachability of the entire claimed payload cannot be established.",
+          "evidence_refs": [
+            "f1:13",
+            "f1:16",
+            "f2:13",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b68939dec5ac0bdd",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "s4 resolves to requests.get and can download, but s5 executes decrypted bytes whose contents are not visible at that site. The supplied derived file shows execution of a response, but the packet provides no checked decoding link proving that s5 executes that downloaded code.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:16"
+          ]
+        }
+      ]
+    }
+  ]
+}

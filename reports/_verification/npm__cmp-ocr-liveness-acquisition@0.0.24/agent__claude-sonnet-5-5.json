@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "cmp-ocr-liveness-acquisition",
+    "version": "0.0.24",
+    "archive_sha256": "cae2e2bf394e0e0d856384476205986e2ae6c8d1058bd9f29e3470d586117224"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "8ae7eb68f9e2db14",
+      "packet_sha256": "e95922b0b3473cfa",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_6c914314b2.L6.drop",
+          "claim_sha256": "ddbdf31485540cc9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `npm whoami` call at f1:31 is unconditional data collection. Its result, or 'Unknown' on error, is put into the payload at f1:68 and sent by pingBack at f1:78. It does not decide whether anything runs.",
+          "evidence_refs": [
+            "s1",
+            "f1:31",
+            "f1:68",
+            "f1:106"
+          ]
+        },
+        {
+          "claim_id": "k_d1ce47b8d9.L6.drop",
+          "claim_sha256": "a3b95cbc1069ac53",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `whoami` call at f1:40 only supplies the value for the whoamiUser field (f1:67). Nothing branches on it, and the send at f1:102 runs regardless.",
+          "evidence_refs": [
+            "s2",
+            "f1:40",
+            "f1:67",
+            "f1:102"
+          ]
+        },
+        {
+          "claim_id": "q_e92c5d9c28.L6.drop",
+          "claim_sha256": "b92615ae26d1fac0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/catch at f1:39-43 is error handling that returns 'Unknown' on failure. Both paths return a string to the same payload, so it gates no behaviour and checks no environment property.",
+          "evidence_refs": [
+            "s3",
+            "f1:39",
+            "f1:67"
+          ]
+        },
+        {
+          "claim_id": "q_f63b45765a.L6.drop",
+          "claim_sha256": "03cce1894f8d8786",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/catch at f1:30-34 is error handling that returns 'Unknown' on failure. Both paths feed the npmUser field (f1:68), and the pingback is sent either way, so it is not an environment gate.",
+          "evidence_refs": [
+            "s4",
+            "f1:30",
+            "f1:68"
+          ]
+        }
+      ]
+    }
+  ]
+}

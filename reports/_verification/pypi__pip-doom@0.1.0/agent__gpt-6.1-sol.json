@@ -1,0 +1,695 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pip-doom",
+    "version": "0.1.0",
+    "archive_sha256": "a6f80674d75dfcbff92cb330845211a0e4c292dfe8325bcbd415b94a5033986d"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "ed491bec5de93820",
+      "packet_sha256": "f0160ec578dad677",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "2319a8b65062ba61",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites directly compare sys.platform, whose sys binding is imported and never reassigned.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ae0012fccfa8bbe5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both then arms use unnegated equality to the literal 'win32'; no early exit reverses either comparison.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform distinguishes operating systems, so os fits this test.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d14d72e4533aa503",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Each separate guard tests c1 and controls its corresponding then and alternative regions. The expression reduces to c1, requiring one condition on either side.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "3bedd72689c48425",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test selects Windows executables versus macOS or default executables, and these distinct binaries feed the process calls.",
+          "evidence_refs": [
+            "s3",
+            "s10",
+            "s11",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d1097ad894d9895e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The match activates Windows-specific launching and console handling; the alternative also launches a process rather than backing off upon analysis.",
+          "evidence_refs": [
+            "s4",
+            "f1:28",
+            "s10",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "12cfacb192b07eb3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Operating-system-specific executable selection and Windows console handling support portability.",
+          "evidence_refs": [
+            "s3",
+            "f1:31",
+            "f1:93",
+            "s10",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "67c4bbe5513546d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The macOS and default assignments are on the first guard’s false side, and the direct sink is inside the second guard’s else block. Every region and guard has the required relationship.",
+          "evidence_refs": [
+            "s3",
+            "s7",
+            "s8",
+            "s4",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "e2ad59ed7b612ba4",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The direct sink lies inside the non-Windows else block; another caller of run_game must still pass that decision. No separately callable function exposes this sink outside that block.",
+          "evidence_refs": [
+            "f1:7",
+            "s4",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "7f546b4a3e1a20f0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The direct subprocess import binds call to a process-creation API receiving the selected executable and arguments.",
+          "evidence_refs": [
+            "f1:4",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "57202c1c5c25bd51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows assignments are in the first then arm, and both direct sinks are in the second then arm. Each guard controls a region and the sinks require no witness hops.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s4",
+            "s6",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6fe5999d4cf316f9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Both direct process calls are enclosed by the Windows then block, with neither exposed through a nested callable. Any caller of run_game must encounter this decision before reaching them.",
+          "evidence_refs": [
+            "f1:7",
+            "s4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "d9e0b406b86d947c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The direct subprocess import resolves Popen and call to process-creation APIs receiving the selected executable and arguments.",
+          "evidence_refs": [
+            "f1:4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_83e2e1dbc9.L6.drop",
+          "claim_sha256": "c17ebd43afc36601",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The darwin comparison selects the macOS executable over the default executable subsequently launched by subprocess.call; it is an OS portability gate selecting what runs.",
+          "evidence_refs": [
+            "s12",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "k_b56109009d.L6.drop",
+          "claim_sha256": "8ebef69452804969",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads platform.machine through machine and selects the 64-bit or 32-bit Windows executable used by the process calls; it is an architecture portability gate.",
+          "evidence_refs": [
+            "f1:13",
+            "s13",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "q_9ab299314a.L6.drop",
+          "claim_sha256": "b9adf381c9352db5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The conditional expression selects distinct Windows executables based on machine architecture, and binary feeds the process calls; it is an architecture portability gate.",
+          "evidence_refs": [
+            "f1:13",
+            "s14",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "q_a6103d6cf9.L6.drop",
+          "claim_sha256": "248af5fe00d83a2f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The elif tests the operating system and selects the macOS executable over the default executable subsequently launched by subprocess.call; it is an OS portability gate.",
+          "evidence_refs": [
+            "s15",
+            "s8",
+            "s9"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "9c16465c06857d0f",
+      "packet_sha256": "c51fd4cd79e8599a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "9fcf0230053f5b3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both decisions compare sys.platform directly with win32 using equality, and the cited then arms require that comparison to hold (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "6c9dbad30eaf5fb8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary tests machine, which is assigned platform.machine().lower() immediately beforehand in the same scope (f1:13, s5).",
+          "evidence_refs": [
+            "f1:13",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "645b846152d5fdee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The positive ternary arm is selected by the substring membership test for 64 in machine, with no intervening negation (s5, s6).",
+          "evidence_refs": [
+            "f1:13",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "7f7e8614d5c3345c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The machine architecture returned by platform.machine() determines the architecture category (f1:13, s5).",
+          "evidence_refs": [
+            "f1:13",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "ded6ac96a79079e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif decision directly tests sys.platform (s7).",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "e65211346f376097",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif then arm requires sys.platform to equal darwin (s7, s8).",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "907865d3f2adec59",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The sys.platform comparison reads the operating system platform, supporting the os category (s7).",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "1eb96db1b097c67e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The architecture ternary is nested in the Windows arm, so its two alternatives require c1 and respectively c2 or its negation; each needs two condition outcomes (s3, s6).",
+          "evidence_refs": [
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "05a677f8dd531144",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tests select different executable files for Windows architectures, and binary is passed as the executable to the process calls (f1:14, s11, s12).",
+          "evidence_refs": [
+            "f1:14",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "44a1417db68dc4b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The positive side selects an executable for the matching Windows architecture and proceeds to launch it, supporting activate (f1:12, f1:14, s11).",
+          "evidence_refs": [
+            "f1:14",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "c29997e593af8d74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows architecture check chooses a matching executable, while the subsequent Windows branch sets up native console handling, supporting portability (f1:12, f1:14, f1:22).",
+          "evidence_refs": [
+            "f1:14",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "f190b17b75fe5ddf",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The region is only a string arm of the architecture ternary; neither process call lies in it, and the empty witness supplies no call path from it (s6, s11, s12).",
+          "evidence_refs": [
+            "s6",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3.excl",
+          "claim_sha256": "88acc67c33e031da",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "Both Windows architecture alternatives converge on the same process calls, so those sinks are reachable from the opposite architecture side too (f1:14, f1:22, s11, s12).",
+          "evidence_refs": [
+            "f1:14",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L5",
+          "claim_sha256": "14175449ca49994b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The subprocess binding is imported directly, and the cited subprocess process creation calls can spawn the executable supplied in binary (f1:4).",
+          "evidence_refs": [
+            "f1:4",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "7c79ba9f7a95c4da",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The region is only a string arm of the architecture ternary; neither process call lies in it, and the empty witness supplies no call path from it (s6, s11, s12).",
+          "evidence_refs": [
+            "s6",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "5d212cc8798e149c",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "Both Windows architecture alternatives converge on the same process calls, so those sinks are reachable from the opposite architecture side too (f1:14, f1:22, s11, s12).",
+          "evidence_refs": [
+            "f1:14",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "9fca4f0718ea9304",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The subprocess binding is imported directly, and the cited subprocess process creation calls can spawn the executable supplied in binary (f1:4).",
+          "evidence_refs": [
+            "f1:4",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "6abd8a93bdbde5ed",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Within the cited elif decision, c3 alone chooses between the Mac assignment and the fallback assignment, requiring one condition outcome per side (s8, s13, s14).",
+          "evidence_refs": [
+            "s8",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "623b5dd95ab5f3b0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform decision selects the Mac executable or the fallback executable, which binary supplies to the process call (s13, s14, s15).",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "23eeca277bb1faea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The positive side selects the executable for the matching Mac platform and proceeds to launch it, supporting activate (s13, s15).",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "48facb5b06a816f3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision chooses the Mac executable versus the fallback executable for the same game arguments, supporting portability (s13, s14, s15).",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.else.L3",
+          "claim_sha256": "941ba7bcb68e53ba",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "broken_hop",
+          "evidence": "The cited bind assigns a path string to binary, not a function or object whose call reaches the sink; the later subprocess.call is outside that assignment region (s14, s15).",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.else.L3.excl",
+          "claim_sha256": "22ad026c4da170f8",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "Both the Mac and fallback assignments converge on the same non-Windows process call, so the sink is reachable from the opposite platform side too (s13, s14, s15).",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.else.L5",
+          "claim_sha256": "8dc14dcdb845481e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The subprocess binding is imported directly, and the cited subprocess process creation calls can spawn the executable supplied in binary (f1:4).",
+          "evidence_refs": [
+            "f1:4",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "06148478e6b272b5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "broken_hop",
+          "evidence": "The cited bind assigns a path string to binary, not a function or object whose call reaches the sink; the later subprocess.call is outside that assignment region (s13, s15).",
+          "evidence_refs": [
+            "s13",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "62fc6ff3ae193119",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "Both the Mac and fallback assignments converge on the same non-Windows process call, so the sink is reachable from the opposite platform side too (s13, s14, s15).",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "23b2d8f8c7016c93",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The subprocess binding is imported directly, and the cited subprocess process creation calls can spawn the executable supplied in binary (f1:4).",
+          "evidence_refs": [
+            "f1:4",
+            "s15"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "68d267e9061feeb8",
+      "packet_sha256": "1b9a505b72e688ab",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "0ad87239b1c5095f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "broken_hop",
+          "evidence": "The cited bind at s5 assigns an executable-path string, not a function or object whose later call reaches a definition, and it encloses rather than sits inside the selected string region. The sinks call the imported subprocess module later in run_game and use binary as an argument, so the cited witn",
+          "evidence_refs": [
+            "s5",
+            "f1:4",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3.excl",
+          "claim_sha256": "f55775c16de79202",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "Both outcomes of the architecture ternary assign binary and continue to the same subprocess.Popen and subprocess.call sites; neither sink requires this particular architecture side (f1:14, f1:22, f1:102, f1:128).",
+          "evidence_refs": [
+            "f1:14",
+            "f1:22",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L5",
+          "claim_sha256": "aade2a8c42447ba1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess is imported directly at f1:4, and the two cited sinks invoke subprocess.Popen and subprocess.call with binary as the executable argument; both APIs can create a process (s4, s6).",
+          "evidence_refs": [
+            "f1:4",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "80435a5b2ff261b6",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "broken_hop",
+          "evidence": "The cited bind at s5 assigns an executable-path string, not a function or object whose later call reaches a definition, and it encloses rather than sits inside the selected string region. The sinks call the imported subprocess module later in run_game and use binary as an argument, so the cited witn",
+          "evidence_refs": [
+            "s5",
+            "f1:4",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "6387902952825fe5",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "Both outcomes of the architecture ternary assign binary and continue to the same subprocess.Popen and subprocess.call sites; neither sink requires this particular architecture side (f1:14, f1:22, f1:102, f1:128).",
+          "evidence_refs": [
+            "f1:14",
+            "f1:22",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "8fdb1b9218c952e2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess is imported directly at f1:4, and the two cited sinks invoke subprocess.Popen and subprocess.call with binary as the executable argument; both APIs can create a process (s4, s6).",
+          "evidence_refs": [
+            "f1:4",
+            "s4",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

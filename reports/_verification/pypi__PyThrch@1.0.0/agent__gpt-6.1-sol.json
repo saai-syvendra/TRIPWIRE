@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "PyThrch",
+    "version": "1.0.0",
+    "archive_sha256": "06b0c126760a53709cbe2def8ea3c8380f2e90c9d7cb4eadf716adb80f1ae715"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "d717ee81e284a28f",
+      "packet_sha256": "dd7a2ab768831892",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "6fb0a7ec35090c60",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison tests os.name from the local import of os, with no intervening reassignment (f1:12-13).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "8be07d0ab597ee63",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm requires equality to the literal nt; no negation or early exit reverses this test (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested property is the operating system identifier os.name, fitting the os category (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f5dbf68ccbd8ba2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The readable derived region has exactly one enclosing condition, os.name == nt, so c1 alone and a minimum of one condition describe it (f2:13-16).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition enables the entire request and execution sequence in its then arm, with no alternate payload branch (f2:13-18).",
+          "evidence_refs": [
+            "f2:13",
+            "s3",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code activates the request and execution on the nt operating system value, without testing an analysis signal (f2:13-16).",
+          "evidence_refs": [
+            "f2:13",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition restricts the entire download and execution sequence to the nt operating system, supporting targeting (f2:13-18).",
+          "evidence_refs": [
+            "f2:13",
+            "s3",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "568cf479bf429799",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sinks occur directly inside the then region of the same operating system comparison in the readable derived file, requiring no intermediate witness hops (f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "2f6d57cd5ffc3bc4",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Both sinks are inline in the guarded run body, so another caller of run would still encounter the comparison (f2:11-16). Neither supplied file exposes an independent callable path to these sink sites (f1:10-38, f2:10-38).",
+          "evidence_refs": [
+            "f2:11",
+            "f2:13",
+            "s4",
+            "s5",
+            "f1:30",
+            "f2:30"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c4b6e0a4d7c0776a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The locally imported requests module supplies get, and the returned response text passes through tag removal into built-in exec, supporting download and execution of downloaded text (f2:14-16).",
+          "evidence_refs": [
+            "f2:14",
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

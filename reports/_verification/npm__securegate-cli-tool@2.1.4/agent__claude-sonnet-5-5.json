@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "securegate-cli-tool",
+    "version": "2.1.4",
+    "archive_sha256": "7e5e6dd9d37d8ecd13d1e610b483d8a91cd1ede0bd2ada2799ea4ae732003473"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "fe8d35a32e862e58",
+      "packet_sha256": "04cbc1da8a4d532f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "135727c7c68b0f7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition of the if at f1:16 is fs.existsSync(openClawPath), and openClawPath is path.join(os.homedir(), '.openclaw') (f1:9), so it probes ~/.openclaw.",
+          "evidence_refs": [
+            "s1",
+            "f1:9",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "4d66256e21065d5b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then block runs only when existsSync(~/.openclaw) is true, with no negation, so the positive form is 'exists'; the path is built from homedir and '.openclaw'.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:9",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "32fc252b3fb08372",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks for the presence of the OpenClaw config directory, a target software artifact on the host, so target_artifact fits.",
+          "evidence_refs": [
+            "s1",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d65bc91e37c14e45",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard (f1:16) with one condition and no else; the then block is the statement block in s3, so expression c1 with min 1 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "a704ab411a1980e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The copy of SKILL.md only runs if the directory exists, and there is no alternative payload, so the gate enables the behaviour.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "adff52751e389d36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the target artifact is present; it does not back off on any analysis, CI or sandbox signal, so activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "3f3b337865b7dd61",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The skill is installed only for hosts that already have OpenClaw (comment at f1:14 says 'implies usage'), which is selection of the intended target.",
+          "evidence_refs": [
+            "s1",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "2b2914c43f088b53",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs.copyFileSync at f1:29 sits directly inside the then block of the if at f1:16, so the empty witness is correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:29"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "2b255815237ad656",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file is a top-level script with no functions, exports, timers or handlers; the copy at f1:29 is reachable only through the existsSync gate.",
+          "evidence_refs": [
+            "f1:16",
+            "f1:29",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1dd6ec7dba77d1ff",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.copyFileSync from the fs module writes a file into ~/.openclaw/skills, which supports write_file; the dropped skill file in the agent's skills directory fits persistence.",
+          "evidence_refs": [
+            "s4",
+            "f1:29"
+          ]
+        },
+        {
+          "claim_id": "k_8263f63648.L6.drop",
+          "claim_sha256": "65dbf897790a3a8f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync(skillsDir) check only decides whether to mkdir a directory before the copy; it is plumbing and does not decide what runs.",
+          "evidence_refs": [
+            "s5",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "k_8ad84143e8.L6.drop",
+          "claim_sha256": "dacc4fac044a53d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync(targetDir) check only guards mkdir of the destination folder, which is plumbing and not an environment gate.",
+          "evidence_refs": [
+            "s6",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "q_94cd4b303f.L6.drop",
+          "claim_sha256": "e2744cb307b94fc5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This if only creates the target directory when missing and the copy at f1:29 runs either way, so it is not a gate.",
+          "evidence_refs": [
+            "s7",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "q_e88cc53dbe.L6.drop",
+          "claim_sha256": "26cacef39c1ff098",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This if only creates the skills directory when missing and the copy at f1:29 runs either way, so it is not a gate.",
+          "evidence_refs": [
+            "s8",
+            "f1:20"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "libminerandomosint",
+    "version": "2.54",
+    "archive_sha256": "41c9743e6510dcf1ff06acd63f8ff112603caa6d5ab2af87c6d743020e44d3d9"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "8e68911bb8d74e4a",
+      "packet_sha256": "bbccc9b7347aef14",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "00596324f5a12637",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly calls os.path.exists, with os imported in the same top-level scope and no intervening rebinding (f1:6-7).",
+          "evidence_refs": [
+            "s1",
+            "f1:6",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "8d6626ac80120293",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm runs under not os.path.exists('tahg'), so the literal operand is tahg and the required polarity is not_exists (f1:7-9).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "23e12015f45e8a9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition asks whether the relative filesystem entry tahg exists, fitting file_or_dir_exists (f1:7).",
+          "evidence_refs": [
+            "s1",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "b62a8a084a8dc103",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single if condition is c1, and its body contains the process call without any additional condition; the minimum satisfying set contains one condition (f1:7-9).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:7",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "862dc58bf64237e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence test enables the entire process invocation when tahg is absent, with no alternative payload arm or environment-selected argument (f1:7-10).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:7",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "9d0eb8f13479ae8b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test activates the process invocation on systems lacking tahg; the visible code does not associate that entry with analysis, CI, or a sandbox (f1:7-9).",
+          "evidence_refs": [
+            "s2",
+            "f1:7",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "35e10de02b13fd33",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file checks for tahg but supplies no visible explanation, creation, or use of that entry that establishes a more specific purpose, so unclear fits (f1:4-36).",
+          "evidence_refs": [
+            "f1:7",
+            "f1:9",
+            "f1:36"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d188985f36532efc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All three payload records cite the same subprocess.Popen call, which sits directly inside the then body of the cited if; no witness hops are needed (f1:7-9).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0cbabc8b3cc3a2f6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file contains one process invocation, directly in the guarded top-level body, with no helper, export, handler, or alternate caller reaching that invocation (f1:1-36).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:9",
+            "f1:36"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "624c8406648e4f81",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The subprocess binding and hidden-window options establish process creation and concealment, but the PowerShell command body is encoded and no readable derivation is supplied; download and execution of downloaded content remain unconfirmed (f1:5, f1:9).",
+          "evidence_refs": [
+            "s3",
+            "f1:5",
+            "f1:9"
+          ]
+        }
+      ]
+    }
+  ]
+}

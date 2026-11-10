@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "esqedencodeurl",
+    "version": "3.56",
+    "archive_sha256": "0ed0ebbd542f5f36453f3e30ff779f349dfe746427106e7e84290c4517d70fa4"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "0ac892a49529e901",
+      "packet_sha256": "34ce57aace197efc",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "00596324f5a12637",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly tests os.path.exists, bound by import os in the same scope (f1:6-7).",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "9725ae10cf66b9ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The explicit negation of existence for literal tahg leads to the then arm containing the launch (f1:7-9).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "23e12015f45e8a9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads whether a filesystem entry exists (f1:7).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9ffff905fbeebd73",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One condition directly controls the single then region, so c1 alone suffices and the minimum is one (f1:7-9).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "dd189fefa1c65d1a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition enables the guarded process launch, with no alternative branch or target selection (f1:7-10).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "dda56a656b446a64",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Absence of tahg activates the process launch; nothing identifies this entry as an analysis signal (f1:7-9).",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "8c6b865f330b5941",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The file gives no role for tahg beyond its absence enabling the launch, leaving the purpose unclear (f1:7-10).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "fafdd81af5d90aee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The subprocess.Popen call sits directly inside the cited then region, with no witness hops required (f1:7-9).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "8d898b600663d76d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete file has one process-launch site directly under this guard, with no wrapper, alternate caller, timer or handler reaching that site (f1:1-36).",
+          "evidence_refs": [
+            "f1:7",
+            "f1:9",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4ad16856de77a6a8",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The subprocess.Popen sink launches PowerShell with hidden-window options, but its command body is encoded without a readable derivation. The visible options do not establish downloading, file writing or execution of downloaded content (f1:5, f1:9).",
+          "evidence_refs": [
+            "f1:5",
+            "s3"
+          ]
+        }
+      ]
+    }
+  ]
+}

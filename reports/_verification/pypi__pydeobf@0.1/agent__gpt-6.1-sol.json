@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pydeobf",
+    "version": "0.1",
+    "archive_sha256": "91a38bc0e5379e3f6f13b61d4a9785b0855244aa726e7230a64089cfca86f6cf"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "39d18d2873b1c1b7",
+      "packet_sha256": "491b5b1d1da7ad19",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_9299f491be.L6.drop",
+          "claim_sha256": "a9d4623041ba0518",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The os.path.exists(output_file) test checks filesystem availability of the downloaded executable and, together with download success, gates the Start-Process invocation during the registered install command. This is a data_availability gate deciding whether the executable is launched (s1; f1:9; f1:1",
+          "evidence_refs": [
+            "s1",
+            "f1:9",
+            "f1:15",
+            "f1:19",
+            "f1:20",
+            "f1:39"
+          ]
+        },
+        {
+          "claim_id": "q_3575928f06.L6.drop",
+          "claim_sha256": "0db9ef6a249626a2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition requires both a successful download exit status and existence of the output file before running Start-Process; its else branch only prints a failure message. The filesystem availability check makes this a data_availability gate controlling executable launch in the registered install co",
+          "evidence_refs": [
+            "s2",
+            "f1:19",
+            "f1:20",
+            "f1:39"
+          ]
+        }
+      ]
+    }
+  ]
+}

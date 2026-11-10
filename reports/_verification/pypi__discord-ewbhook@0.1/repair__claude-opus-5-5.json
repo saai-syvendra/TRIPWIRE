@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "discord-ewbhook",
+    "version": "0.1",
+    "archive_sha256": "28933d04d674a1155eecd9c9b25a6494c83f755b7618e2e3f73859dcaa755dac"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "8684212ab7ddad7e",
+      "record_sha256_after": "602e2095b1c357b4",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "318e7ed3ca5b8822",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited sink at setup.py line 46 is list.append of the ProgramData Start Menu path, an in-memory update that writes nothing, so it cannot carry persistence. The persistence is the shortcut Save() at line 104 (state 60921 of the inner loop), which runs over that list after state 790593. g2's payloa"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2cba268135f4a0f9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The deterministic checker reads only lexical nesting: the append (state 362814 elif, line 46) is not inside the IsUserAnAdmin if (line 68). But in the decoded copy the only assignment of state 362814 is inside that if's then block (if ctypes.windll.shell32.IsUserAnAdmin(): state = 362814; continue),"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged: the guard-to-region link for g2 and the g2 payload path go through a flattened integer state machine that neither CFG nor witness hops can express (payload now marked unresolved), and c1's value is decoded from chr-map bytes on the raw site. These need a person to accept the state-mac"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "602e2095b1c357b4",
+      "record_sha256_after": "d4c01aec11792800",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "33b7875487c68d05",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited region (setup.py:46, the ProgramData Start Menu append in state 362814) is a separate elif of the flattened dispatch loop, not inside the IsUserAnAdmin then arm. The guard at setup.py:68 encloses only setup.py:69-70, which set the state to 362814 and continue. Re-cited g2.then.regions to t"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d4c01aec11792800",
+      "record_sha256_after": "18f7c39aefa7aa41",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "6c6908947c683004",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The verifier is right about the syntax: g2's region (setup.py:69-70) only sets the dispatcher state to 362814 and continues, and the Save() at setup.py:104 sits in another elif of the same while loop. In the decoded setup.py (d3) the Save is reached from that region only through state values: 362814"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Added the traced g2 dispatcher path (362814 to 790593 and Save at setup.py:104) to execution notes. The flag must stay: setup.py is heavily obfuscated and was recovered only with decoder d3, the c1 value 'win32' is decoded from chr-map bytes, and the g2 guard-to-sink dependence goes through a flatte"
+        }
+      ]
+    }
+  ]
+}

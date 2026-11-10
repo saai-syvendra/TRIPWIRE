@@ -1,0 +1,294 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/billing-sdk",
+    "version": "1.56.1",
+    "archive_sha256": "7d40906a1a197aaa75ddc9eb0ee127bdc8defe229aec3d1a279f6f482b6db36b"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "f8d5069f280588c1",
+      "packet_sha256": "17fa9b9fce2f67d9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "119ba24eddbb13a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The initializer reads `process.env.PAYLOAD` into `BASE64_PAYLOAD`, and the following `if` tests that variable, so this site feeds the decision (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a937923038676b69",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The decision tests `BASE64_PAYLOAD` for falsity and exits on that edge; reaching the later code means the combined value is truthy, but that value can come from `pkg.config.payload` rather than `process.env.PAYLOAD` (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "76238902786cf2ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The initializer reads the `PAYLOAD` property from `process.env`, an environment variable, and that value contributes to the tested payload (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f6a7636d3a55b10",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one early-exit guard: when `BASE64_PAYLOAD` is falsy execution exits, and the single later region runs on the truthy side, so its minimal condition set is `c1` (s2, s3).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7181d184f9290269",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the payload value is truthy, the code writes a decoded Python script and a systemd unit, then enables and starts that service; the gate therefore enables those behaviors (s2-s7).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "031cc21679fd2880",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A truthy supplied payload allows the install actions to run, while a missing payload exits immediately; this is activation based on a target-supplied value, not backing off from analysis (s1-s3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "31b6b4f939ce4cae",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test determines whether a payload is available: if `process.env.PAYLOAD` or the package configuration payload supplies a truthy value, installation proceeds; otherwise it exits. The purpose fits `data_availability`, not `unclear` (s1-s3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bf7f7c861ad0580d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early exit on a falsy payload leaves the remainder of the `try` block on its truthy side, including both file writes and the service control calls; the sinks are directly in that region (s2-s7).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d630caf65582b9c3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The guarded work and all listed sinks are directly in the top-level `try` block after the exit; the file contains no other caller, export, timer, or handler that reaches these sinks (f1:8-47).",
+          "evidence_refs": [
+            "f1:8",
+            "f1:47"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4242ec7971130d16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`fs.writeFileSync` writes the decoded script and the systemd unit, while imported `execSync` runs `systemctl` commands to reload, enable, and start the service; these support the listed file-writing, persistence, and process-spawn behaviors (s4-s7).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "f8d5069f280588c1",
+      "packet_sha256": "17fa9b9fce2f67d9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "119ba24eddbb13a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment value is assigned into BASE64_PAYLOAD and participates in its truthy OR expression; the following if tests that variable before continuing (f1:12-14).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a937923038676b69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.env.PAYLOAD is an operand of the truthy || expression assigning BASE64_PAYLOAD, and execution continues only when that variable is truthy because its falsy case exits (f1:12-14).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "76238902786cf2ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads process.env.PAYLOAD, an environment variable, as one source of the payload value (f1:12-14).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f6a7636d3a55b10",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole early-exit decision tests BASE64_PAYLOAD and the code after it is reached when the value is truthy; there is one condition and no additional guard (f1:14-44).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7181d184f9290269",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When BASE64_PAYLOAD is truthy, the code writes it as a script, creates a systemd unit, and enables and starts that unit; the gate enables these behaviours (f1:14-44).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "031cc21679fd2880",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code proceeds with installation when a payload is available and exits when it is absent, with no analysis or sandbox detection (f1:12-14).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "31b6b4f939ce4cae",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This gate checks whether a payload was supplied through the environment or package configuration before installing it, so its purpose is data_availability rather than unclear (f1:12-14).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bf7f7c861ad0580d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All four listed sinks occur after the early exit in the same try block, so the then-side remainder reaches the script and unit writes and both systemctl calls (f1:14-44).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d630caf65582b9c3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file runs the guarded installation at top level and contains no alternate caller, export, timer, or handler that reaches these sinks; each is in the sole post-exit path (f1:8-47).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4242ec7971130d16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.writeFileSync writes the decoded script and the systemd unit, supporting file writing and persistence; execSync enables and starts the service, supporting persistence and process spawning (f1:23-44).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        }
+      ]
+    }
+  ]
+}

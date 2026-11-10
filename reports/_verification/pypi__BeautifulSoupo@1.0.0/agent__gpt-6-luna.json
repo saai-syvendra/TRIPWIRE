@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifulSoupo",
+    "version": "1.0.0",
+    "archive_sha256": "05733685a21291b06354a7a3fca27c36fe77d9d2628897064ea1fe0735174884"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "9d51b7cc9a54473b",
+      "packet_sha256": "e943466080b8570b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f9d63ddc88c079fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly compares `os.name` to a string at the cited site.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "5022cb99e2367fc1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm is entered when `os.name == \"nt\"`; there is no intervening negation.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads Python's `os.name` property, so the `os` category fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "efd5df1d34e58071",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single then region is controlled by the one cited condition, `os.name == \"nt\"`, so its combination is `c1` and its minimum is one condition.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows condition enables the guarded download and execution statements to run.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded actions run when the environment identifies as Windows (`os.name == \"nt\"`), which is activation on that target.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition selects Windows as the environment on which the guarded behavior runs, which is targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a14e6b5b6d871987",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the network request and the `exec` of its response text occur inside the `os.name == \"nt\"` then block.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "12477c91a19515a0",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The request and execution are inline in the guarded install `run` method, and the package registers that class as its install command; the shown code provides no other path to these statements.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "f2:10",
+            "f2:29"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "e394c02376e9c6cd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get` performs the network request, and `exec` evaluates the returned response text after the tag replacements.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "node-core-libs",
+    "version": "1.0.0",
+    "archive_sha256": "fed0f5b410cf6d312f0e5c40be26e00deb3278477a3757814a2dfc437e22fdbe"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f72342af27f3a761",
+      "record_sha256_after": "b443e0852cd81591",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Removed the analyst's out-of-set reason for c4/g4: postinstall.js line 40 `if(!d||d.length<16){_tidy();process.exit(0);return;}` is an early exit inside the async IIFE, so the drop and wscript launch on lines 41-48 run only when the /nl body has at least 16 bytes, matching c4 (>= 16) and g4 (c1 && c"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "b443e0852cd81591",
+      "record_sha256_after": "b443e0852cd81591",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "5d5b4ee97033fb09",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "scripts/postinstall.js line 2 exits with process.exit(0) on every platform except win32, and nothing after it offers a version for another OS: the only launcher is the VBS and wscript.exe pair at lines 44-45. The gate-analysis definition gives portability when each branch runs a platform-specific ve"
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "4997d87742a2eb11",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "scripts/postinstall.js line 17 tests f.existsSync(up), where up is the fixed path node_modules/node-fetch-utils/package.json from line 16, and the read and write at lines 18-22 sit only inside that if with no else. Flipping c2 turns the write on or off. modifies means the same behaviour acts on a di"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "2e5fc89d49c15a72",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "scripts/postinstall.js line 27 tests f.existsSync(op) on the package's own package.json (path from line 26), then line 28 reads that same file, line 29 deletes scripts.postinstall and scripts.install, and line 30 writes it back. The test checks that the exact file the block goes on to use exists, wh"
+        }
+      ]
+    }
+  ]
+}

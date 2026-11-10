@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "Matplkotlib",
+    "version": "1.0.0",
+    "archive_sha256": "2820fc63e6fe0f4b516c267c8cdb918dd8239d395d16de2378cf16e1b36c2099"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "ebfdf69067e340a1",
+      "packet_sha256": "9ef0b33e0811c908",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "903cc8d00ecd41da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Inside the install command's run method, the if decision directly compares os.name (f1:10-13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "6c1541c203a29345",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition is os.name == \"nt\", and its then block contains the guarded statements (f1:13-16).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads os.name, the operating-system name property (f1:12-13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "fdcbbf9787304ffe",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole cited guard is the if testing c1, and the then region is its body, so the region requires exactly c1 (f1:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch the code fetches remote text and passes it to exec; the condition enables these behaviors (f2:13-16).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fetch and execution occur when os.name equals \"nt\", activating the behavior on that platform (f2:13-16).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS-name check selects Windows as the environment in which the remote fetch and execution run, which is targeting (f2:13-16).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0dee4fb0530bd515",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the requests.get call and exec of its returned text are directly inside the then block controlled by the os.name check (f2:13-16).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6b18e48410cb5d5e",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The package file defines the fetch and exec only as statements inside the install command's Windows then block; no alternate caller or path to these sink calls is present in the recorded code (f2:10-18).",
+          "evidence_refs": [
+            "f2:10",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1610f0436a1c3ee9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get performs the network request, and exec receives the fetched response text, supporting download and exec_downloaded respectively (f2:16).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

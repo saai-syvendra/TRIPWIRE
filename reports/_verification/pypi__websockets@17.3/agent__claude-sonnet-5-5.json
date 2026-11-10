@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "websockets",
+    "version": "17.3",
+    "archive_sha256": "1c7dd93a1c9f89297471493674b1fc1d9467cafd45374f2172213046bdb3a329"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "a87771b9661a3b35",
+      "packet_sha256": "d951240583fb4e9f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "4820eafa00bd69da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if test at f1:22 compares os.environ.get(\"BUILD_EXTENSION\") directly, so it is a decision on the API.",
+          "evidence_refs": [
+            "s1",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "f5266c75f00f6bf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm (ext_modules = []) is reached when os.environ.get(\"BUILD_EXTENSION\") == \"no\"; there is no negation, so the positive form is == no.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:22"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e3584dc934143a16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the BUILD_EXTENSION process environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c1049a8b074004ae",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if/else on one condition with no other guards. The then region is f1:23 and the else region is f1:25-31, so the expression c1 with min 1 on each side is right.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "11e211024c50e777",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The then branch does nothing (an empty extension list) and the else branch builds the extension. Both branches run the same setup call, so this is a switch that enables or skips a build step, not a different payload per branch. I would label the effect enables.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f1:34"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "04bb08f7e442a139",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate does not back off on analysis or CI. The default (unset) path builds the extension and only an explicit \"no\" skips it, so activate is the closer label than evade.",
+          "evidence_refs": [
+            "s2",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "25970526afe7af73",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "It is a user build option to force or skip the optional C speedups extension, per the comment. It does not target a platform, victim or data, and it does not evade analysis, so unclear is acceptable.",
+          "evidence_refs": [
+            "s1",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "786aeeabbeb0eca4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The setuptools.Extension call (s5) sits inside the else-block assignment (s4), and the empty witness is correct because the sink is in the region itself.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "354670d992053ace",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The Extension call appears once, at f1:26 inside the else branch. setup.py is a flat script with no functions, other callers, exports or timers, so there is no other path to it.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f1:22-31"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "a4fb9fcbfac81bf2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is setuptools.Extension for the local source src/websockets/speedups.c, which declares an ordinary optional C extension build. That fits benign_build with sink kind other, and there is no network, process or file-write sink.",
+          "evidence_refs": [
+            "s5",
+            "f1:26-30"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "e081db1212728933",
+      "packet_sha256": "2e1960dc96793b3c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "89c664209a697738",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "The packet lists no slices and no files, and code/ has no files, so there is no code to tie the os.environ.get == 'no' gate or its effect label to.",
+          "evidence_refs": []
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "8cc273248036063a",
+      "packet_sha256": "c54abc2d740936ce",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "cf63fa251168d12e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "The packet lists no slices or files and code/ is empty, so the claimed os.environ.get == 'no' test cannot be tied to any code.",
+          "evidence_refs": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifilSoup",
+    "version": "1.0.0",
+    "archive_sha256": "0c27d85bf5a4215879b77260b910272686d2ff4014620130c3188d767df53a3a"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "8ca3b07c19bfe00a",
+      "packet_sha256": "8a28565e4b0d9451",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "41679bb58a5409a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The local os import supplies os.name to the decision directly (f1:12-13).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "11e2172876cfd381",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then side requires equality with the literal nt, without negation (s1-s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the operating-system property os.name, fitting category os (f1:13).",
+          "evidence_refs": [
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a6f232ce3db3cc34",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single enclosing decision tests c1 alone, so the minimum satisfying set contains one condition (s1-s3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS decision enables the extra execution block with no alternative payload branch (f1:13-18; f2:13-18).",
+          "evidence_refs": [
+            "f1:13",
+            "f1:16",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The equality test activates execution for the nt OS target rather than checking an analysis marker (f1:13-16).",
+          "evidence_refs": [
+            "f1:13",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition restricts extra execution to the nt OS target while normal installation follows outside it, supporting targeting (f1:13-18).",
+          "evidence_refs": [
+            "f1:13",
+            "f1:16",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "8dc10a8eebd5ca87",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The cited region executes decrypted bytes in f1, while the sinks are in derived f2. No decode specification or checked derivation links those bytes to f2, leaving the empty cross-file witnesses unproven (s3-s5).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4b0719798377d550",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The readable sinks occur under the OS test in f2, but no checked derivation establishes their connection to the encrypted execution in the cited f1 region, preventing proof of the claimed exclusive path (s3-s5).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "245329ef2f9ce425",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The supplied readable f2 imports requests, retrieves response text with requests.get, and passes the text after tag removal to built-in exec, supporting both behaviours (f2:14-16).",
+          "evidence_refs": [
+            "f2:14",
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

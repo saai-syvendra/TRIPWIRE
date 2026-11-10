@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "libminerandomosint",
+    "version": "2.54",
+    "archive_sha256": "41c9743e6510dcf1ff06acd63f8ff112603caa6d5ab2af87c6d743020e44d3d9"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "8e68911bb8d74e4a",
+      "packet_sha256": "bbccc9b7347aef14",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "00596324f5a12637",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:7 is `if not os.path.exists('tahg')`, a direct decision on os.path.exists.",
+          "evidence_refs": [
+            "s1",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "8d6626ac80120293",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Popen call at f1:9 runs only when `not os.path.exists('tahg')` is true, so the positive form is not_exists with value 'tahg'. There is no else branch.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "23e12015f45e8a9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads whether a file or directory named tahg exists in the working directory, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "b62a8a084a8dc103",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard with one condition, c1. Its then block (s3) holds the only region, so the expression c1 and then_min 1 are correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "862dc58bf64237e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs only when the tahg path is absent, and nothing else is selected or retargeted, so the gate enables the payload.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "9d0eb8f13479ae8b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the marker is absent. This is not a check for analysis or a sandbox, so the polarity is activate.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "35e10de02b13fd33",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check on a local marker named tahg does not clearly serve portability, targeting or anti-analysis. It reads as a run-once style guard, so unclear is reasonable.",
+          "evidence_refs": [
+            "s1",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d188985f36532efc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sink, subprocess.Popen of a hidden powershell -EncodedCommand, sits directly in the then block of the if at f1:7. The witness is empty, which is correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0cbabc8b3cc3a2f6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The Popen call appears once, at module level in setup.py, inside this guard. There are no functions, other callers, exports or handlers that reach it.",
+          "evidence_refs": [
+            "f1:7",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "624c8406648e4f81",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.Popen creates a process. The powershell command carries a base64 (UTF-16LE) payload that reads as Invoke-WebRequest to a github raw .exe, saved to a file and then run with Invoke-Expression, which is download plus exec. The -WindowStyle Hidden flag and CREATE_NO_WINDOW hide the window, wh",
+          "evidence_refs": [
+            "s3",
+            "f1:9"
+          ]
+        }
+      ]
+    }
+  ]
+}

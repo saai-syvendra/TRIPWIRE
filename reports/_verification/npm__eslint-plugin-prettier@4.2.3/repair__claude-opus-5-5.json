@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "eslint-plugin-prettier",
+    "version": "4.2.3",
+    "archive_sha256": "087219661b4a36c342452700c9631fd056d1451339a9813f5a888958c06da9bd"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "98954627e7a04e7d",
+      "record_sha256_after": "98954627e7a04e7d",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "install.js lines 152-167 match the record: on os.platform() === 'win32', logDiskSpace spawns rundll32 on <pkg>/node-gyp.dll,main, and the top level calls only ensureDir and logDiskSpace. The real payload is the 1.3 MB compiled node-gyp.dll. The static text tools cannot disassemble it, so its behavio"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "98954627e7a04e7d",
+      "record_sha256_after": "98954627e7a04e7d",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ce4c1dc4eff5b74f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js line 154 tests os.platform() === 'win32' and the if has no else. Its then block (lines 155-160) is the only place that spawns rundll32 on the shipped node-gyp.dll,main, and logDiskSpace does nothing else on other platforms. The gate-analysis definition gives portability only when each bra"
+        },
+        {
+          "claim_id": "q_53e1523f20.L6.drop",
+          "claim_sha256": "43dabf1f4c42a0fb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The cited node is the try statement at install.js lines 153-165. Its try body opens with the if at line 154, not with a probe whose success or failure picks a path, and its catch only runs summary.errors++ and a log line (lines 163-164), so no behaviour depends on the try/catch and it reads no envir"
+        }
+      ]
+    }
+  ]
+}

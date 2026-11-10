@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "builderknower",
+    "version": "0.1.10",
+    "archive_sha256": "cd18dd0d42fc519c172d28bb0675bbf1727303383dde272ca5887bd97f895ab0"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "8c58970ca4b924a7",
+      "packet_sha256": "cbe27c6be5c62c54",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_15b3645825.L6.drop",
+          "claim_sha256": "b66b9c13c3f9767e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call in s1 sends environment data through a shell command but does not test that data or use its return status to decide what runs. It is attempted directly in the registered install command (f1:32, f1:48, f1:65).",
+          "evidence_refs": [
+            "s1",
+            "f1:32",
+            "f1:48",
+            "f1:65"
+          ]
+        },
+        {
+          "claim_id": "q_b645ea0bb3.L6.drop",
+          "claim_sha256": "7b321f39b3c8ea7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try statement in s2 attempts the shell command without an environment condition; its handler only prints an exception. The command's return status is unused, and execution then continues to the standard installer (f1:54).",
+          "evidence_refs": [
+            "s2",
+            "f1:54"
+          ]
+        }
+      ]
+    }
+  ]
+}

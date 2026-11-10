@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pytz",
+    "version": "2026.5",
+    "archive_sha256": "fa23724b9c486543b9ff54a327ee7569ac83ade54bb9afd0fc18676620401c86"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "961974f81bdfad26",
+      "packet_sha256": "e754771db871918a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_41422e65cf.L6.drop",
+          "claim_sha256": "81f1c9b22fc2eb05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`resource_exists` checks `PYTZ_SKIPEXISTSCHECK` when called, then either returns true or opens a timezone resource; this is ordinary resource lookup logic, not an install-time decision (s1, f1:121-133).",
+          "evidence_refs": [
+            "s1",
+            "f1:121",
+            "f1:133"
+          ]
+        },
+        {
+          "claim_id": "k_45a2122dd8.L6.drop",
+          "claim_sha256": "6fd896532dd58eac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`open_resource` checks whether its computed timezone filename exists to choose a resource-loading fallback; this is runtime resource access, not install-time behavior (s2, f1:78-118).",
+          "evidence_refs": [
+            "s2",
+            "f1:78",
+            "f1:118"
+          ]
+        },
+        {
+          "claim_id": "k_71f79590ba.L6.drop",
+          "claim_sha256": "47c77b420e31c268",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Python major-version check selects the compatibility definitions (`unicode` and `ascii`) while the module is imported; it does not decide install-time execution (s3, f1:41-75).",
+          "evidence_refs": [
+            "s3",
+            "f1:41",
+            "f1:75"
+          ]
+        },
+        {
+          "claim_id": "q_5470fda323.L6.drop",
+          "claim_sha256": "4cabc3b3dce05cd7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence test selects how `open_resource` obtains a timezone file, using importlib or pkg_resources when the local path is absent; this is runtime resource lookup rather than an install-time gate (s4, f1:94-118).",
+          "evidence_refs": [
+            "s4",
+            "f1:94",
+            "f1:118"
+          ]
+        },
+        {
+          "claim_id": "q_6d4c8eb44c.L6.drop",
+          "claim_sha256": "4b7dcbdd1cf4c1bc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`resource_exists` checks `PYTZ_SKIPEXISTSCHECK` to skip an existence check for timezone files, affecting later resource enumeration; it does not gate installation (s5, f1:121-133).",
+          "evidence_refs": [
+            "s5",
+            "f1:121",
+            "f1:133"
+          ]
+        },
+        {
+          "claim_id": "q_d129f724e9.L6.drop",
+          "claim_sha256": "ddc9cfbeba17eb7a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Python major-version test chooses the module's Python 3 or Python 2 compatibility implementation, a runtime portability choice rather than an install-time gate (s6, f1:41-75).",
+          "evidence_refs": [
+            "s6",
+            "f1:41",
+            "f1:75"
+          ]
+        }
+      ]
+    }
+  ]
+}

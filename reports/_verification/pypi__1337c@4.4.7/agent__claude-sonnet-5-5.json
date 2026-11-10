@@ -1,0 +1,276 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "1337c",
+    "version": "4.4.7",
+    "archive_sha256": "b0deb6c2403b2229825946bac127dc4a51f4dba29c39892e463dd41b8a15a6df"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "2d7b4aa7bd190188",
+      "packet_sha256": "2f04d5d6a32b431a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b3faed55a6616f5c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:5 binds `platform` via `from sys import platform`, and f1:11 tests `platform == 'win32'` in an if condition (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:5",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "8f8d71f151155c36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:11 is `platform == 'win32'` with no negation, and the guarded code runs when it is true.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform identifies the operating system, so `os` is the right category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "895b809de208e42f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single if at f1:11 is the only decision around the download/write/exec block and has one condition, so the expression `c1` and then_min 1 are right.",
+          "evidence_refs": [
+            "s2",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f6aa85277dbbe738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate only turns on the download/write/execute block when the platform is win32. There is no else branch and no alternative payload, so `enables` fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b5a9fcad9d291bb7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs on Windows targets and nothing backs off on analysis or sandbox signals, so the polarity is `activate`.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "786034a64e7ef93f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code downloads a Windows executable (.scr saved as .exe) and runs it with `start` only on win32. That is OS targeting for the payload, not portability of a legitimate install step.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "2b45aac21c01f74f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The requests.get (f1:14), open().write (f1:15) and os.system (f1:16) calls all sit directly in the then block of the win32 if (s3), so empty witnesses are correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "9bc8378aea1ac02b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks are only in send(), inside the win32 if. send() is called only from PostInstallCommand.run (f1:23), and no other caller, export or timer reaches the sinks.",
+          "evidence_refs": [
+            "f1:7",
+            "f1:11",
+            "f1:23"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1aa4263cabf678b2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get downloads over the network (s4). open(filename,'wb').write writes the file (s5). os.system('start '+filename) executes the file just written (s6).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "a0b005a054a5e089",
+      "packet_sha256": "3d7645d95694c466",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ddf7db719a43811c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:11 compares `platform`, which f1:5 binds via `from sys import platform`, so it is sys.platform, and the comparison is the if-condition.",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "928e455996fa3740",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then-arm of `if platform == 'win32'` holds the download and exec code, with no negation between test and guarded code, so the positive form is `== win32`.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating-system platform string (sys.platform), so os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "62235f9720b06280",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard on platform == 'win32' with no other conditions, so the expression c1 and then_min 1 match. The COMPUTERNAME lookup at f1:9 is not a branch condition on this region.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f6aa85277dbbe738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The download, write and execute run only when the platform is win32 and there is no else branch, so the gate enables the payload rather than selecting between payloads.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b5a9fcad9d291bb7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the host is Windows; the gate does not back off on analysis, CI or a sandbox, so it is activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "786034a64e7ef93f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A Windows-only executable (.exe/.scr) is fetched and started only on win32, so the gate targets Windows hosts. Portability is a weaker fit because nothing runs on other platforms.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "2b45aac21c01f74f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The requests.get (f1:14), open().write (f1:15) and os.system (f1:16) calls all sit directly inside the then block of the platform if, so the empty witnesses are correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "f65ecbbaccb3db78",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks are inline in send() and only the win32 branch reaches them. send() is called only from PostInstallCommand.run (f1:23), and there are no other callers, exports or timers.",
+          "evidence_refs": [
+            "f1:11",
+            "f1:23",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1aa4263cabf678b2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get downloads over the network (s4), open(...,'wb').write writes a file (s5), and os.system('start '+filename) executes the downloaded file (s6).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

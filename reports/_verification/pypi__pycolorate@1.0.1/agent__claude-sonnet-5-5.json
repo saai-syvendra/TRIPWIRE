@@ -1,0 +1,455 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pycolorate",
+    "version": "1.0.1",
+    "archive_sha256": "366bd7e6e4a3e9d0d11e2e965ab365b0776879912e0e165b7dbbf28018070c6c"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "bebedb521aebb3fd",
+      "packet_sha256": "90a6bc25d0383736",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "e905ab5dc1fd9ffd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:19-20 binds getenv as ge and calls ge('APPDATA') inside the try body (s2); a None result makes the following string concatenation raise and sends control to the except. The decoded stage is plain readable code.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "09e2bf6e8b1d0e92",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try body can only continue if ge('APPDATA') returns a string. A None value makes loc+'...' raise TypeError and jump to the except, so reaching the guarded code needs a non-None value, which is close to truthy.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:20",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "0df43a1ee22ceb86",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the APPDATA environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c128e2d62aea1caa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one condition, c1, and one try/except guard over the try body (s3 region). The expression c1 and min 1 match.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "8efff26ea4868b2d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate does not enable the behaviour. The except branch runs exec(fl), the downloaded payload, when APPDATA is missing or anything in the try fails, so the payload runs on both sides. The then side runs a local file instead (exec(open(p2))). I would label it selects, or plumbing around where the p",
+          "evidence_refs": [
+            "s2",
+            "f1:28",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "595d25f725690c02",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code does the dropping and executing when the Windows APPDATA path exists. Nothing backs off when it spots analysis, so evade does not fit and activate does.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "d2122d3de5058023",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "APPDATA is a Windows-specific location. The test decides whether the Windows file paths can be built, and the except fallback still runs the payload, which makes it portability rather than targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "f8bcc4685bb5141f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sinks sit directly in the try body (region s3, lines 22-28): remove(p1) at line 23, remove(p2) at line 25 and open(p3,'w') at line 27. Each is inside the try, so empty witnesses are correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ce123de17b1fa75a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The three sinks appear only in the try body. setup.py has no other function, caller, export or timer that reaches them.",
+          "evidence_refs": [
+            "s3",
+            "f1:20-28"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "12170a6350dd83b1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(p3,'w').write is a file write. remove is imported from os and deletes files. Both sinks match their behaviours.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f1:19"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "e687090e4631d487",
+      "packet_sha256": "02402f2817f88583",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "eb0062cb2a90fedc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:20 reads getenv('APPDATA') into loc and concatenates it with strings; if it is unset (None) the concatenation raises inside the try (s2), so the file writes and removes in s3 are reached only when the variable exists.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "b1ddc581bab73c21",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable (APPDATA) through os.getenv.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5324a0cb29113a19",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single condition, the implicit APPDATA presence check at f1:20, guarding the try body that holds s3. Expression c1 with min 1 matches.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "32fb84c6abe3cd76",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The variable only decides where the downloaded payload is cached (an APPDATA temp path). If it is missing, the except branch at f1:31 runs exec(fl) on the same downloaded content. That is plumbing, not an enabling gate, so the effect is not 'enables'.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b5efb49d18e17a5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test does not back off on analysis or sandbox signals. The code proceeds when the Windows APPDATA variable is present, so activate is the closer label.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b9cf1dfaa87b8b32",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "APPDATA is a Windows-specific location used to build cache file paths, which fits portability. Nothing in the code points to targeting or anti-analysis.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d94b252353ac9552",
+      "packet_sha256": "a29d91b9fbb14850",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2dcc65919122b6e1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:20 reads getenv('APPDATA') inside the try body; if it returns None, the string concatenation raises and control goes to the except, so the try-body code needs the variable to exist.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "29342126a9418961",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:22 compares ex(p1)==True, where ex is os.path.exists imported by alias at f1:18, and the comparison is the if test.",
+          "evidence_refs": [
+            "s3",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c09a581d2efc639f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "p1 is APPDATA plus aes.txt, and the then arm of the if at f1:22 runs remove(p1) only when ex(p1)==True, a positive exists test.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "ced6c7cb8d6cffd6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a file exists on disk, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "1f54708c79db7496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:28 calls open(p2) inside the try body, with p2 equal to APPDATA plus rsa.txt. A missing file raises and sends control to the except, so the open acts as an existence probe that throws.",
+          "evidence_refs": [
+            "s5",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "653a93469acc0edf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try-body code at f1:28 is reached only if open(p2) succeeds, which needs the rsa.txt file to exist. Otherwise the except runs.",
+          "evidence_refs": [
+            "s5",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "188e34af7bd6f27b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The open call is used as a file-existence probe by way of the exception it throws, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6e345e93125a0f12",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The exec(open(p2).read()) region (s7) lies only under the try guard (c1, c3) and is not inside the if on c2. Only remove(p1) (s6) needs c2, so the then side is not a plain c1 && c2 && c3 and then_min of 3 is wrong, since s7 needs just 2.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "bceb7109b610912e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then side runs a locally stored payload (exec of the rsa.txt contents), while the else side execs the downloaded text. That is a different payload per branch, so selects fits.",
+          "evidence_refs": [
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "3383ef2fc10b6a99",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "No check backs off on analysis, CI or a sandbox. The code runs on both paths, executing local or downloaded code, so activate fits.",
+          "evidence_refs": [
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e35b2bb4c442b9ad",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks look like a cache and fallback on whether APPDATA and the local files are available, which would suggest data_availability or portability. The code does not rule out unclear.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "c94ae0ee53b03d6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "exec(fl) in the except (s9) is on the else side of the try guard, and remove(p2) in the elif (s8) is on the else side of the if guard. Both sinks sit in their regions, and the witnesses are empty.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3.excl",
+          "claim_sha256": "9c8c0b6a99281e27",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "setup.py is the only file in the packet and holds module-level code with no functions, exports or timers. The exec(fl) and remove(p2) sinks are reached only through their own branches.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "f1:31"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L5",
+          "claim_sha256": "702ff0ba9285e76c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "exec(fl) runs text fetched by requests.get (f1:16), which is exec_downloaded via an eval-kind sink. remove is os.remove, imported at f1:19, which is a file deletion.",
+          "evidence_refs": [
+            "s9",
+            "s8",
+            "f1:16",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "655e3356f9e37f6e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "remove(p1) (s6) sits in the then arm of the if inside the try, and exec(open(p2).read()) (s7) sits in the try body. Both sinks are directly in their regions.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "0ed4dca8d7b72a7f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "There are no other callers, functions, exports or handlers in the file. The sinks are straight-line module code reached only via the try and if paths.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:17"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "c1fff8c0fa4f4adc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "remove is os.remove, a file deletion. exec of the local file contents is an eval-kind sink that can execute arbitrary code, so the behaviour 'other' rests on it.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:19"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@hybridaione/hybridclaw",
+    "version": "0.28.6",
+    "archive_sha256": "e901c69a9dfafbb927ecb60b998dedfca36cb94a66433ba023a8001f9f755307"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "378f7c219493e0b2",
+      "packet_sha256": "aab74800f9a325a3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "a913865e66cb6264",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The return expression directly calls `fs.existsSync` on the path formed from `packageRoot` and `src` (f1:22-23).",
+          "evidence_refs": [
+            "s1",
+            "f1:22-23"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "c8589cab4ffe04aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`isSourceCheckout` is true when `fs.existsSync(packageRoot/src)` is true; `inspectContainerBootstrap` then returns `needed: false`, and `runPostinstall` returns when `needed` is false. The install code after that return therefore runs only when the source path does not exist and bootstrap is needed ",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:22-23",
+            "f1:73-80",
+            "f1:171-182"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "732146527a71b871",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test asks whether the `src` path under the package root exists, so `file_or_dir_exists` fits (f1:22-23).",
+          "evidence_refs": [
+            "s1",
+            "f1:22-23"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "ff4245aaad7a1de2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `prepare` script includes the shell test `test -w .git/config` in its short-circuit command chain (f2:113).",
+          "evidence_refs": [
+            "s4",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "dfb11d2111181f59",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "operator_mismatch",
+          "evidence": "`test -w .git/config` tests whether `.git/config` is writable, not whether it merely exists (f2:113).",
+          "evidence_refs": [
+            "s4",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "34bc667574a08ac2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The `-w` test checks write permission on `.git/config`, a permission/capability property rather than file or directory existence (f2:113).",
+          "evidence_refs": [
+            "s4",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "fc7aa90b56e0388b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The source-checkout early return prevents subsequent inspection, while the `!inspection.needed` early return prevents the bootstrap block; the cited install path is reached only after both return conditions are avoided. Both guards include the absence of the source `src` path (f1:73-97, 171-182).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s6",
+            "s7",
+            "f1:73-97",
+            "f1:171-182"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "430918bb5ffebbff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the source checkout gate is passed and packaged dependencies are missing, `inspection.needed` is true and the postinstall code calls the dependency bootstrap routine (f1:82-97, 173-182).",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:82-97",
+            "f1:173-182"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d2cea56a770c6737",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The path without a `src` checkout can trigger the packaged dependency installation, while a source checkout returns `needed: false` (f1:73-80, 173-180).",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "f1:73-80",
+            "f1:173-180"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6118953307f918c3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test explicitly distinguishes a source checkout from the packaged layout, skipping this bootstrap for source trees while enabling it for packaged installs; this is a portability/install-layout purpose rather than an unclear one (f1:73-80, 82-97).",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "f1:73-97"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "9c1f35c72b63d29f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded postinstall block calls `bootstrapContainerDependencies`, whose definition calls `spawnSync`; the dependency inspection also marks the path needed only after the cited source-checkout early return is avoided (f1:73-97, 171-182, 158-168).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "f1:73-97",
+            "f1:158-182"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "b6e406fc79c25c98",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "`runPostinstall` and `bootstrapContainerDependencies` are exported functions, so callers can invoke the bootstrap path outside the cited gate-controlled call in the script entrypoint (f1:158-182).",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "s10",
+            "f1:158-182"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "999f345157bd9c3b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The bootstrap wrapper resolves an npm command and passes it to `spawnSync` with install arguments for the container directory, which can install the missing runtime dependencies (f1:100-136, 158-168).",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "f1:100-136",
+            "f1:158-168"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "013098c0d072a390",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The `&&` chain runs `husky` only if `command -v git` succeeds and `test -w .git/config` succeeds; the cited writeability test is therefore part of the single short-circuit condition (f2:113).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "fd6e16067075835d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the command chain succeeds, its final command is `husky`, allowing the package preparation behavior to run (f2:113).",
+          "evidence_refs": [
+            "s4",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "b3e6312fe1d4fe38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `husky` command is attempted only when the environment supplies `git` and `.git/config` is writable (f2:113).",
+          "evidence_refs": [
+            "s4",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "90547469dc63fd8e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The command guards Husky setup on whether this is a Git-capable checkout with writable Git configuration, indicating portability of repository setup rather than an unclear purpose (f2:113).",
+          "evidence_refs": [
+            "s4",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "eb5e2022a81adde6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The successful short-circuit chain reaches the `husky` command at the cited region itself (f2:113).",
+          "evidence_refs": [
+            "s5",
+            "s11",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "19e060273998c1b7",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The package lifecycle script contains this single `husky` command, and the cited region is the command itself with no wrapper function or alternate caller shown in either record file (f2:113).",
+          "evidence_refs": [
+            "s5",
+            "s11",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3c4a29a5b7ac4121",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The final command in the guarded chain invokes `husky`, which is a process execution sink for the guarded repository setup behavior (f2:113).",
+          "evidence_refs": [
+            "s5",
+            "s11",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "k_0216a9a545.L6.drop",
+          "claim_sha256": "5ca51362f3a7efb3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence of the container package manifest decides whether postinstall bootstrap inspection proceeds, so this filesystem check is part of an install-time environment gate (f1:61-71, 171-173).",
+          "evidence_refs": [
+            "s12",
+            "f1:61-71",
+            "f1:171-173"
+          ]
+        },
+        {
+          "claim_id": "k_376abbfe30.L6.drop",
+          "claim_sha256": "7dc617aaa6c71bae",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence check on `npm_execpath` helps select between invoking npm through Node and falling back to the `npm` command, so it affects install-time command selection (f1:119-133).",
+          "evidence_refs": [
+            "s13",
+            "f1:119-133"
+          ]
+        },
+        {
+          "claim_id": "k_44aa320d56.L6.drop",
+          "claim_sha256": "3fab7c4fe440c2f9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Each missing dependency manifest causes that dependency to be added to the missing list, which later determines whether bootstrap installation is needed (f1:39-57, 82-97).",
+          "evidence_refs": [
+            "s14",
+            "f1:39-57",
+            "f1:82-97"
+          ]
+        },
+        {
+          "claim_id": "k_d6c5f47944.L6.drop",
+          "claim_sha256": "16ff907b8365fd6d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "If the container manifest is absent, dependency names are read as an empty list, changing the subsequent dependency inspection and bootstrap decision (f1:26-31, 39-57, 82-97).",
+          "evidence_refs": [
+            "s15",
+            "f1:26-31",
+            "f1:39-57",
+            "f1:82-97"
+          ]
+        },
+        {
+          "claim_id": "q_21315b5903.L6.drop",
+          "claim_sha256": "47465e51f3cc02e7",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The cited test returns early with no dependency names when the container manifest does not exist, affecting the later install decision (f1:26-31, 39-57, 82-97).",
+          "evidence_refs": [
+            "s16",
+            "f1:26-31",
+            "f1:39-57",
+            "f1:82-97"
+          ]
+        },
+        {
+          "claim_id": "q_a9ebd1fa2c.L6.drop",
+          "claim_sha256": "8576b498ad1bcef9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The container manifest existence check gates all later source-checkout and missing-dependency inspection, and thus can decide whether postinstall work runs (f1:61-97, 171-180).",
+          "evidence_refs": [
+            "s17",
+            "f1:61-97",
+            "f1:171-180"
+          ]
+        },
+        {
+          "claim_id": "q_c46978f0c9.L6.drop",
+          "claim_sha256": "3fad6b5488a97521",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The npm invocation check uses `npm_execpath`, its absolute-path property, and the existence of that path to choose the child command (f1:119-133).",
+          "evidence_refs": [
+            "s18",
+            "f1:119-133"
+          ]
+        },
+        {
+          "claim_id": "q_f21dafdab3.L6.drop",
+          "claim_sha256": "c7d229db71c48d54",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "A dependency manifest missing from container `node_modules` is appended to `missing`, which later makes the postinstall bootstrap necessary (f1:39-57, 82-97).",
+          "evidence_refs": [
+            "s19",
+            "f1:39-57",
+            "f1:82-97"
+          ]
+        }
+      ]
+    }
+  ]
+}

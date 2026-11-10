@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "websockets",
+    "version": "17.3",
+    "archive_sha256": "1c7dd93a1c9f89297471493674b1fc1d9467cafd45374f2172213046bdb3a329"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "a87771b9661a3b35",
+      "record_sha256_after": "e081db1212728933",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "11e211024c50e777",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "setup.py line 22: when BUILD_EXTENSION == no the then block only sets ext_modules = [] and has no payload; the else block builds the speedups Extension, and both reach the same setuptools.setup call. The gate switches the build step on or off, it does not pick a different payload per branch, so effe"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The only review reason was the guessed installed_tool cc in the else recipe. setup.py line 29 sets optional=os.environ.get('BUILD_EXTENSION') != 'yes', so with the variable unset the else branch runs and the compile is attempted whether or not a compiler exists. The compiler is not a condition of th"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "e081db1212728933",
+      "record_sha256_after": "8cc273248036063a",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "a4fb9fcbfac81bf2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refutation says setuptools.Extension (setup.py:26) only builds a configuration object and the compile happens later in setuptools.setup. That is true, but the claim does not say otherwise: its sink kind is other, not exec, and the summary notes already state that the sink is the declaration and "
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "25970526afe7af73",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed purpose from unclear to portability and updated purpose_reason. The test at setup.py:22 has a concrete purpose: the comment at setup.py:20-21 describes forcing or skipping the speedups extension, built only if possible when unset. With BUILD_EXTENSION=no, ext_modules is empty and the package"
+        }
+      ]
+    }
+  ]
+}

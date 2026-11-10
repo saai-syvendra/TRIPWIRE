@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "3web",
+    "version": "1.0.0",
+    "archive_sha256": "9481ac53c634fec9d75d943aaeee72d9a64dc8e24e28ec2433b547925158e8d1"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "23451d13fa295805",
+      "packet_sha256": "0e2c82a878c28ec4",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "0029da73dfbfffb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The run method imports os and tests os.name directly in its if condition.",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b2d1907ee744f1c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm requires os.name to equal the literal \"nt\", without a negation or early exit.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads the operating system property os.name, supporting the os category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "523806f5e9e15695",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both regions are the body of the single os.name == \"nt\" condition in the original and supplied derived files. That condition alone suffices, matching c1 and a minimum of one.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition enables the request and execution in its then body, with no alternative payload branch.",
+          "evidence_refs": [
+            "f2:13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition activates the request and execution on the \"nt\" operating system; it does not check an analysis environment.",
+          "evidence_refs": [
+            "f2:13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition restricts downloading and executing the response to the \"nt\" operating system, supporting targeting. The method has no alternative implementation for other operating systems.",
+          "evidence_refs": [
+            "f2:13",
+            "s4",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0e374fc492e05589",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The request and exec sinks occur directly in the supplied derived then region under os.name == \"nt\". The original then region contains the encrypted execution replaced in the derived file.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4481ce8e815618a7",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Both supplied files place the execution directly inside the guarded run body, and the derived request has no other call site. Registering the class as the install command still enters the method through its operating system check.",
+          "evidence_refs": [
+            "f1:13",
+            "f1:16",
+            "f2:13",
+            "f2:16",
+            "f2:29",
+            "f2:30"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "0bb0ae28427cbabf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The locally imported requests module supplies get, whose response text flows through tag removal into exec. These sinks support downloading and executing the downloaded text.",
+          "evidence_refs": [
+            "f2:14",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

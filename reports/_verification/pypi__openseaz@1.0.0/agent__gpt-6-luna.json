@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "openseaz",
+    "version": "1.0.0",
+    "archive_sha256": "02b5130d9265cba6d0f2cf1244e96b42e5500beb48b511b1760a061d6f2100fb"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "8a78d19811036a3f",
+      "packet_sha256": "460f1e51486e2a8d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "41c47deb54bd6d81",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly compares `os.name` to a string, so the cited site tests that API.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "56726fd2425d7b03",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition is `os.name == \"nt\"`, and the then block runs when that equality holds.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the `name` attribute of the imported `os` module, which is an operating system property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "6a701a0aba10b54c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one cited `if` guard and one condition, and the then region is exactly its body; the minimum condition count is one.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code fetches response text and executes it, enabling the download and execution behaviours.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then block carrying the download and execution runs when `os.name` equals `nt`, so the gate activates on that target platform.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test selects the Windows platform, and that platform check determines whether the download and execution code runs, which is targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "8f97e6623ee3a84e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both cited calls occur directly inside the then block: the request obtains response text and `exec` executes that text.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "b2d680f6478d6d9d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete setup.py source defines these calls only in the installer `run` method's `os.name == \"nt\"` then block, with no other caller or duplicate sink path in the file.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "f2:10",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "69e9bb963c1af34f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` performs the network request and supplies response text, while the built-in `exec(...)` evaluates that returned text.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

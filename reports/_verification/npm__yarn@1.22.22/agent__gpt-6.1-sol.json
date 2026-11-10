@@ -1,0 +1,315 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "yarn",
+    "version": "1.22.22",
+    "archive_sha256": "c17d3797fb9a9115bf375e31bfd30058cac6bc9c3b8807a3d8cb2094794b51ca"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "d3f2a011830df1e8",
+      "packet_sha256": "f289eb9ee70247c7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "fe5b1b918a865acc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly reads process.env.npm_config_global at f1:21.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "da998cfe7c42486d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch runs when process.env.npm_config_global is truthy, with no negation at f1:21.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "a4b2ee39078591d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the npm global-install configuration from the environment at f1:21, fitting package_manager.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "78003ab9933109db",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "unresolved_binding",
+          "evidence": "The try block calls fs.readlinkSync, but binName comes from the unavailable package manifest at f1:32-40. The code does not establish that the probed names are yarn and yarnpkg.",
+          "evidence_refs": [
+            "s3",
+            "f1:32",
+            "f1:39",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "0285ebe3fd1f7c57",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readlinkSync catch returns from the callback, so subsequent guarded code requires the read to succeed without an error at f1:43-49.",
+          "evidence_refs": [
+            "s4",
+            "f1:49"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "d49e00357aa063a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readlinkSync try/catch checks whether a readable symbolic link is present before proceeding at f1:43-49, fitting file_or_dir_exists.",
+          "evidence_refs": [
+            "s4",
+            "f1:49"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "43882f6ba8f9a132",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "unresolved_binding",
+          "evidence": "The tested binTarget is assigned from fs.readlinkSync at f1:44, but the unavailable manifest supplies the probed names at f1:32-40. The claimed yarn and yarnpkg targets cannot be established.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "f1:32",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "a0e45e05c9f516dc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The unnegated startsWith test compares binTarget against the stated Corepack prefix and reaches deletion on its then side at f1:49-51.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "4d646d323f8b5b7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test inspects the symbolic-link target returned by readlinkSync, rather than just its presence, fitting file_content at f1:44-49.",
+          "evidence_refs": [
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5a478b0955874d5e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The region s7 is the then body of the single npm_config_global condition, so c1 alone is required and the minimum is one.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "59dbaaea89d02bc2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The global-install condition enables the execFileSync call in its then body at f1:21-30.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "94ead2d17190c2c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition activates the process call for global installs at f1:21-27; it does not test an analysis environment.",
+          "evidence_refs": [
+            "s1",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "141497dac6e40227",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Portability fits better: the gated process queries the global binary directory, then the code removes matching Corepack links for package binaries at f1:27-51. This implements installation compatibility rather than selecting victims.",
+          "evidence_refs": [
+            "s8",
+            "f1:32",
+            "f1:40",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c4d2a4fde74925ae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The execFileSync sink sits directly within s7, the then body of the global-install guard.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "a0193df4a12a88b2",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The process call is inline under the global-install condition, and the complete file has no alternate caller, export, or handler reaching that call.",
+          "evidence_refs": [
+            "f1:21",
+            "s8",
+            "f1:60"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "25d0a04026637e2a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "cp is bound to child_process at f1:22 and its execFileSync method creates the process at f1:27.",
+          "evidence_refs": [
+            "f1:22",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "e098026c74e08815",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Deletion requires the global-install branch, a successful readlinkSync because its catch returns, and a matching Corepack prefix. These combine as c1 && c2 && c3 with three required conditions.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2df91fcf6138e318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The combined guards enable unlinkSync; there is no alternative deletion branch at f1:43-55.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "a288e2e42963a414",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Deletion activates for a successfully read Corepack link during a global install at f1:21-51, with no analysis-environment check.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "c1a2a8035a131f59",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Portability fits better: the code obtains the global binary directory and deletes only package-bin symlinks whose targets have the Corepack prefix at f1:27-51. This is installation compatibility rather than checking for input data to consume.",
+          "evidence_refs": [
+            "s8",
+            "f1:32",
+            "f1:40",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "0b0dd8ba88ed529a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The unlinkSync call is directly inside s9 under the prefix test and global-install branch; the earlier readlinkSync catch returns before this region.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "cec6df6ed6a563a0",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only unlinkSync call is in the inline forEach callback under all three guards; the callback is neither exported nor registered elsewhere in the complete file.",
+          "evidence_refs": [
+            "f1:39",
+            "s4",
+            "s6",
+            "s10",
+            "f1:60"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "ff5762d32dacddf6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs is bound to the fs module at f1:23, and fs.unlinkSync removes the binPath directory entry at f1:51.",
+          "evidence_refs": [
+            "f1:23",
+            "s10"
+          ]
+        }
+      ]
+    }
+  ]
+}

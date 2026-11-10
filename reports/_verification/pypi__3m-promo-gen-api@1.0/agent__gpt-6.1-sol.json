@@ -1,0 +1,2777 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "3m-promo-gen-api",
+    "version": "1.0",
+    "archive_sha256": "6fcda7ccf5f80bc6ec0a404ca9ba60ffcd08628f1204df207816614e60362f75"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "1a8b6b5e8fa7aef3",
+      "packet_sha256": "38f1563424fb1fb1",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "f43c743e592f57d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each helper returns when its base profile path is absent; GatherAll supplies browser paths built from APPDATA and LOCALAPPDATA (f1:41, f1:519, f1:542, f1:550, f1:555).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:519",
+            "f1:550"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "726757089fc57dda",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks read the presence of browser profile directories, which are target artifacts.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "d7b4c1741e52c724",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GetDiscord returns when the Local State file under its client directory is absent; its caller supplies the Discord-family directories.",
+          "evidence_refs": [
+            "s7",
+            "f1:529",
+            "f1:546"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "01ab87e69f1ac3d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check reads the presence of a client Local State file, a target artifact.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "81bdea3c6eaee443",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZipThings checks pathC before proceeding; pathC is the supplied wallet or Steam directory, or the browser path plus the extension settings suffix.",
+          "evidence_refs": [
+            "s9",
+            "f1:490",
+            "f1:535",
+            "f1:562",
+            "f1:564"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "a84eda7d7c8b51ef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check reads the presence of wallet, extension or Steam storage directories, which are target artifacts.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "ebae17f8b73631f1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Inside the Steam arm, absence of loginusers.vdf causes a return, so continuing requires that file.",
+          "evidence_refs": [
+            "s11",
+            "f1:501",
+            "f1:503"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "f729d950b5ac5c32",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check reads the presence of the Steam loginusers.vdf artifact.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "9612406f1a26adbe",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The third cited site calls os.path.isdir, a different resolved API from the claimed os.path.isfile.",
+          "evidence_refs": [
+            "s15",
+            "f1:605"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "0e953035d99ddfb4",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The third cited site calls os.path.isdir, a different resolved API from the claimed os.path.isfile.",
+          "evidence_refs": [
+            "s15",
+            "f1:605"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "1dc48f8edc2a5526",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The file and directory checks read the presence and type of target artifacts.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "e160b551d8bc2d12",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The membership test reads lines obtained through open and readlines on the Steam loginusers.vdf file.",
+          "evidence_refs": [
+            "s19",
+            "f1:503",
+            "f1:504"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "d74e755babff16d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A matching RememberPassword marker sets found to True, and the later return occurs only when found remains False; continuing therefore requires the claimed substring.",
+          "evidence_refs": [
+            "s19",
+            "s20",
+            "f1:505"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "1f3f00d1cec48047",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads a marker in the contents of loginusers.vdf.",
+          "evidence_refs": [
+            "s19",
+            "f1:503"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9179c31079772485",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The three independent helpers each require the same profile-presence condition before their corresponding region; one such condition suffices for each alternative region.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s21",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "79ade2cd53f6c7d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Browser profile presence permits the credential collection helpers to proceed. This fits enables.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f1:404",
+            "f1:419",
+            "f1:449"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "15b22ff9edcb08cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Browser profile presence permits the credential collection helpers to proceed. This activates collection on available targets, fitting activate.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f1:404",
+            "f1:419",
+            "f1:449"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "43c5b31b709623fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Browser profile presence permits the credential collection helpers to proceed. The checks establish availability of the data to collect, fitting data_availability.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f1:404",
+            "f1:419",
+            "f1:449"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "8f3a4edb62bdd95c",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "GetDiscord also calls uploadToken, and upload calls LoadUrlib independently of the browser-profile checks; the shared network function is not exclusive to this gate.",
+          "evidence_refs": [
+            "f1:488",
+            "f1:328",
+            "f1:88"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "09f308370d17689d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "shutil.copy2 copies the credential database for subsequent SQL reads, and urlopen with Request is a network sink capable of transmitting supplied data.",
+          "evidence_refs": [
+            "s24",
+            "f1:420",
+            "f1:422",
+            "s25",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "aac2437278910a1f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Client Local State presence permits key recovery and token collection to proceed. This fits enables.",
+          "evidence_refs": [
+            "s8",
+            "f1:476",
+            "f1:484",
+            "f1:488"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "e0f64f5fb58b818e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Client Local State presence permits key recovery and token collection to proceed. This activates collection on available targets, fitting activate.",
+          "evidence_refs": [
+            "s8",
+            "f1:476",
+            "f1:484",
+            "f1:488"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "ce3086b9983ee66f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Client Local State presence permits key recovery and token collection to proceed. The checks establish availability of the data to collect, fitting data_availability.",
+          "evidence_refs": [
+            "s8",
+            "f1:476",
+            "f1:484",
+            "f1:488"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "aaff0ca3fd6182f1",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "getToken also calls uploadToken, and upload calls LoadUrlib without passing the Discord Local State check.",
+          "evidence_refs": [
+            "f1:411",
+            "f1:328",
+            "f1:88"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "46d77aafe82ae9a8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The decoded key is unprotected and used to decrypt stored tokens; the cited urlopen Request call is a network sink capable of transmitting data.",
+          "evidence_refs": [
+            "s31",
+            "f1:478",
+            "f1:484",
+            "s25",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "04c76e751fcc81ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Target directory presence permits process termination and archive upload to proceed. This fits enables.",
+          "evidence_refs": [
+            "s10",
+            "f1:497",
+            "f1:511",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "a254f63e4083bd5b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Target directory presence permits process termination and archive upload to proceed. This activates collection on available targets, fitting activate.",
+          "evidence_refs": [
+            "s10",
+            "f1:497",
+            "f1:511",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "98c88359596a4d6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Target directory presence permits process termination and archive upload to proceed. The checks establish availability of the data to collect, fitting data_availability.",
+          "evidence_refs": [
+            "s10",
+            "f1:497",
+            "f1:511",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "21f596f82021c112",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "GatherAll calls upload directly for password and cookie files, reaching LoadRequests and its file POST without passing the cited ZipThings guards.",
+          "evidence_refs": [
+            "f1:569",
+            "f1:570",
+            "f1:390",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "e760e4b21e09d577",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "other",
+          "evidence": "The process command terminates the wallet, browser or Steam application associated with the files being archived, rather than a defensive tool; the supported behavior is termination to facilitate collection, while the POST supports exfiltration.",
+          "evidence_refs": [
+            "s34",
+            "f1:520",
+            "f1:535",
+            "f1:562",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "c88a2b4be848e399",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The loginusers.vdf and remembered-password checks occur only in the Steam elif arm; wallet and extension calls can reach the shared archive region without either check, so its minimum is one claimed condition.",
+          "evidence_refs": [
+            "f1:498",
+            "f1:501",
+            "s40",
+            "f1:535"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "6b6c3ffe2a616559",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "For Steam calls, the configuration file and remembered-password marker permit archive upload to proceed. This fits enables.",
+          "evidence_refs": [
+            "f1:501",
+            "f1:502",
+            "f1:507",
+            "f1:509",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "8bcae9db1daff117",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "For Steam calls, the configuration file and remembered-password marker permit archive upload to proceed. This activates collection on available targets, fitting activate.",
+          "evidence_refs": [
+            "f1:501",
+            "f1:502",
+            "f1:507",
+            "f1:509",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "d456e73f24604d49",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "For Steam calls, the configuration file and remembered-password marker permit archive upload to proceed. The checks establish availability of the data to collect, fitting data_availability.",
+          "evidence_refs": [
+            "f1:501",
+            "f1:502",
+            "f1:507",
+            "f1:509",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "4a075110fe517f41",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The early returns at 502 and 509 are confined to the Steam elif block; their remaining block ends at name=arg, while the claimed region starts outside that block and also runs for wallets.",
+          "evidence_refs": [
+            "s12",
+            "s20",
+            "s40",
+            "f1:498",
+            "f1:510"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "de2c32d9ec32b4e7",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "GatherAll calls upload directly for password and cookie files, reaching LoadRequests and its file POST without passing the cited ZipThings guards.",
+          "evidence_refs": [
+            "f1:569",
+            "f1:570",
+            "f1:390",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "18c279305b14fd1c",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The alternatives test regular files, regular files with a .txt substring, and directories; a single os.path.isfile condition does not express the directory arm or the additional suffix test.",
+          "evidence_refs": [
+            "s16",
+            "s17",
+            "s18",
+            "s41",
+            "s42",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "8c665f51330564c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "File and directory availability permits uploads of matching local artifacts to proceed. This fits enables.",
+          "evidence_refs": [
+            "f1:586",
+            "f1:589",
+            "f1:602",
+            "f1:603",
+            "f1:605",
+            "f1:607"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "580a47cb377ea205",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "File and directory availability permits uploads of matching local artifacts to proceed. This activates collection on available targets, fitting activate.",
+          "evidence_refs": [
+            "f1:586",
+            "f1:589",
+            "f1:602",
+            "f1:603",
+            "f1:605",
+            "f1:607"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "3d54f104acb91fda",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "File and directory availability permits uploads of matching local artifacts to proceed. The checks establish availability of the data to collect, fitting data_availability.",
+          "evidence_refs": [
+            "f1:586",
+            "f1:589",
+            "f1:602",
+            "f1:603",
+            "f1:605",
+            "f1:607"
+          ]
+        },
+        {
+          "claim_id": "k_ee61418539.L6.drop",
+          "claim_sha256": "0d8cc723e9a082cb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The import attempt probes whether a dependency is available, and failure launches pip installation through subprocess.Popen at module scope; this is an environmental availability gate for dependency installation.",
+          "evidence_refs": [
+            "s44",
+            "s45",
+            "f1:30",
+            "f1:37"
+          ]
+        },
+        {
+          "claim_id": "q_51818e9113.L6.drop",
+          "claim_sha256": "a150dd542604347c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The import attempt probes whether a dependency is available, and failure launches pip installation through subprocess.Popen at module scope; this is an environmental availability gate for dependency installation.",
+          "evidence_refs": [
+            "s44",
+            "s45",
+            "f1:30",
+            "f1:37"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "1a8b6b5e8fa7aef3",
+      "packet_sha256": "6e81693205ba711b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "e160b551d8bc2d12",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The membership decision tests each line read from the file opened as pathC plus loginusers.vdf (f1:503-507). The imported built-in open supplies the file content directly through readlines and the loop variable.",
+          "evidence_refs": [
+            "s1",
+            "f1:503",
+            "f1:504",
+            "f1:506"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "d74e755babff16d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The literal membership test sets found to True, and found starts False before the loop (f1:505-508). The return when found equals False means continuation requires a line containing the claimed literal, including its two tab characters (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:505",
+            "f1:508"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "1f3f00d1cec48047",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested value is a line of loginusers.vdf obtained by open and readlines, so file_content describes the property read (f1:503-507).",
+          "evidence_refs": [
+            "f1:503",
+            "f1:504",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "6b6c3ffe2a616559",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "For Steam, missing directory, missing loginusers.vdf, or absence of the remembered-password marker returns before archiving and uploading (f1:496-515). These checks enable the upload rather than choose an alternative payload or change its target.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "8bcae9db1daff117",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Steam path continues to archive and upload when the directory, file, and remembered-password marker are present (f1:496-515). This activates collection on available target data and does not test for an analysis environment.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "d456e73f24604d49",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks establish that the collection directory and Steam login file exist and that the latter contains the remembered-password marker before its directory is archived and uploaded (f1:496-515). This supports data_availability as the purpose.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "4a075110fe517f41",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The s4 and s2 early exits are inside the Steam elif block, while region s5 is after that block and also runs for non-Steam arguments without those decisions (f1:498-515). Their claimed continuation sides therefore do not control the cited region, although the upload-to-LoadRequests-to-requests.post ",
+          "evidence_refs": [
+            "s4",
+            "s2",
+            "s5",
+            "f1:498",
+            "f1:501",
+            "f1:299",
+            "s9",
+            "s10",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "de2c32d9ec32b4e7",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "GatherAll separately calls upload for password and cookie files at f1:569-570, reaching LoadRequests at f1:390 and the same requests.post sink at f1:83 without any of the cited ZipThings guards. Non-Steam ZipThings calls also bypass the two Steam-specific decisions (f1:498-515, f1:561-564).",
+          "evidence_refs": [
+            "f1:569",
+            "f1:570",
+            "s9",
+            "s6",
+            "f1:498",
+            "f1:501",
+            "f1:561",
+            "f1:564"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "1a8b6b5e8fa7aef3",
+      "packet_sha256": "f36bd41184e46407",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "c78a30b2cdd1bf2f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each cited early return directly negates os.path.exists(path) (s1, s2, s3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "f43c743e592f57d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The functions continue only when their base browser path exists; GatherAll supplies the APPDATA and LOCALAPPDATA browser paths before the profile suffix is appended (f1:400, f1:415, f1:445, f1:519-555).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:519",
+            "f1:542",
+            "f1:550",
+            "f1:555"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "726757089fc57dda",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tests inspect browser data directories used for token, password and cookie collection (f1:399-445, f1:519-555).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:519"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "b2683d56f22fd68b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return directly tests os.path.exists on the Local State path (s7).",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "d7b4c1741e52c724",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GetDiscord continues when its Local State file exists, and its thread callers supply Discord client directories (f1:473, f1:529-547).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:529",
+            "f1:546"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "01ab87e69f1ac3d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Local State is an application artifact whose key is read for Discord token decryption (f1:473-484).",
+          "evidence_refs": [
+            "s7",
+            "f1:476",
+            "f1:484"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "3ed89aa2d0f6d8c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision directly negates os.path.exists(pathC) (s9).",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "81bdea3c6eaee443",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZipThings continues when pathC exists; its callers supply wallet, Steam and browser extension paths, with the extension suffix appended at f1:495.",
+          "evidence_refs": [
+            "s9",
+            "f1:489",
+            "f1:495",
+            "f1:535",
+            "f1:562",
+            "f1:564"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "a84eda7d7c8b51ef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence test checks the application data directory subsequently archived and uploaded (f1:496-516).",
+          "evidence_refs": [
+            "s9",
+            "f1:511",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "9815374a640a6cda",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Steam branch directly tests os.path.isfile on loginusers.vdf (s11).",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "ebae17f8b73631f1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Within the Steam branch the function returns if loginusers.vdf is not a file, so continuation requires its presence (f1:501-503).",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "f1:501"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "f729d950b5ac5c32",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks the Steam login configuration file subsequently opened for collection decisions (f1:502-509).",
+          "evidence_refs": [
+            "s11",
+            "f1:503"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "9612406f1a26adbe",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The third cited site calls os.path.isdir, a different known API from os.path.isfile (s15); only s13 and s14 use isfile.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "0e953035d99ddfb4",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The combined claim names os.path.isfile at all sites, but s15 checks os.path.isdir; the successful directory branch does not require that path to be a file.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "1dc48f8edc2a5526",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "These tests inspect candidate files and directories whose contents may be uploaded (f1:586-607).",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15",
+            "f1:589",
+            "f1:603"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "e160b551d8bc2d12",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The membership test reads lines obtained from open on the Steam loginusers.vdf path (f1:503-507).",
+          "evidence_refs": [
+            "s19",
+            "f1:503",
+            "f1:504",
+            "f1:506"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "d74e755babff16d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A line containing the claimed RememberPassword marker sets found to True; the subsequent early return rejects only found == False (f1:505-509).",
+          "evidence_refs": [
+            "s19",
+            "s20",
+            "f1:505",
+            "f1:508"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "1f3f00d1cec48047",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision depends on a marker in the contents read from loginusers.vdf (f1:503-509).",
+          "evidence_refs": [
+            "s19",
+            "f1:503",
+            "f1:504"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9179c31079772485",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Each separate collection region follows its own missing-path return, so one positive c2 test permits the corresponding region (s4-s6, s21-s23).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s21",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "79ade2cd53f6c7d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Browser directory presence permits collection of tokens, passwords and cookies; this enables the collection path ( f1:400, f1:415, f1:445, f1:411, f1:419).",
+          "evidence_refs": [
+            "f1:400",
+            "f1:415",
+            "f1:445",
+            "f1:411",
+            "f1:419"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "15b22ff9edcb08cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Browser directory presence permits collection of tokens, passwords and cookies; these checks activate collection on target artifacts rather than detect analysis ( f1:400, f1:415, f1:445, f1:411, f1:419).",
+          "evidence_refs": [
+            "f1:400",
+            "f1:415",
+            "f1:445",
+            "f1:411",
+            "f1:419"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "43c5b31b709623fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Browser directory presence permits collection of tokens, passwords and cookies; the checks establish availability of the data to collect ( f1:400, f1:415, f1:445, f1:411, f1:419).",
+          "evidence_refs": [
+            "f1:400",
+            "f1:415",
+            "f1:445",
+            "f1:411",
+            "f1:419"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "87fd76b66c553222",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "broken_hop",
+          "evidence": "uploadToken passes its nonempty headers dictionary to LoadUrlib, forcing the request at f1:92 and bypassing the claimed sink at f1:95 (f1:218-221, f1:292, f1:91-95).",
+          "evidence_refs": [
+            "f1:411",
+            "f1:218",
+            "s28",
+            "s29",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "8f3a4edb62bdd95c",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "broken_hop",
+          "evidence": "The shared uploadToken and LoadUrlib functions have callers outside this gate, including the other token collector and upload; moreover uploadToken always selects f1:92 rather than the cited f1:95 sink (f1:292, f1:328, f1:411, f1:488).",
+          "evidence_refs": [
+            "f1:292",
+            "f1:328",
+            "f1:411",
+            "f1:488",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "09f308370d17689d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "shutil.copy2 reads and copies the login database before SQL credential extraction; urlopen(Request(..., data=data)) is a network transmission sink (f1:419-440, f1:12, f1:95).",
+          "evidence_refs": [
+            "s24",
+            "s25",
+            "f1:12",
+            "f1:422",
+            "f1:440"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "6054c3ea624a1ba1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single missing-Local-State return controls the remainder of GetDiscord, requiring one positive c3 condition (s8, s30).",
+          "evidence_refs": [
+            "s8",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "aac2437278910a1f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Local State presence permits key extraction, token decryption and upload; this enables the collection path ( f1:473, f1:476, f1:484, f1:488).",
+          "evidence_refs": [
+            "f1:473",
+            "f1:476",
+            "f1:484",
+            "f1:488"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "e0f64f5fb58b818e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Local State presence permits key extraction, token decryption and upload; these checks activate collection on target artifacts rather than detect analysis ( f1:473, f1:476, f1:484, f1:488).",
+          "evidence_refs": [
+            "f1:473",
+            "f1:476",
+            "f1:484",
+            "f1:488"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "ce3086b9983ee66f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Local State presence permits key extraction, token decryption and upload; the checks establish availability of the data to collect ( f1:473, f1:476, f1:484, f1:488).",
+          "evidence_refs": [
+            "f1:473",
+            "f1:476",
+            "f1:484",
+            "f1:488"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "89362248b623e927",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "broken_hop",
+          "evidence": "uploadToken passes its nonempty headers dictionary to LoadUrlib, forcing the request at f1:92 and bypassing the claimed sink at f1:95 (f1:218-221, f1:292, f1:91-95).",
+          "evidence_refs": [
+            "f1:488",
+            "f1:218",
+            "s28",
+            "s29",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "aaff0ca3fd6182f1",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "broken_hop",
+          "evidence": "The shared uploadToken and LoadUrlib functions have callers outside this gate, including the other token collector and upload; moreover uploadToken always selects f1:92 rather than the cited f1:95 sink (f1:292, f1:328, f1:411, f1:488).",
+          "evidence_refs": [
+            "f1:292",
+            "f1:328",
+            "f1:411",
+            "f1:488",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "46d77aafe82ae9a8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The decoded key comes from the opened Local State file and is used for token decryption; the cited urlopen request can transmit data (f1:476-488, f1:12, f1:95).",
+          "evidence_refs": [
+            "s31",
+            "s25",
+            "f1:476",
+            "f1:484",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "d161d8b7f3f2e2a8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The missing-path return precedes the whole cited ZipThings region, so its positive c4 test is necessary and sufficient among the cited conditions (s10, s33).",
+          "evidence_refs": [
+            "s10",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "04c76e751fcc81ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Application directory presence permits process termination, archiving and upload; this enables the collection path ( f1:496, f1:497, f1:511, f1:515).",
+          "evidence_refs": [
+            "f1:496",
+            "f1:497",
+            "f1:511",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "a254f63e4083bd5b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Application directory presence permits process termination, archiving and upload; these checks activate collection on target artifacts rather than detect analysis ( f1:496, f1:497, f1:511, f1:515).",
+          "evidence_refs": [
+            "f1:496",
+            "f1:497",
+            "f1:511",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "98c88359596a4d6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Application directory presence permits process termination, archiving and upload; the checks establish availability of the data to collect ( f1:496, f1:497, f1:511, f1:515).",
+          "evidence_refs": [
+            "f1:496",
+            "f1:497",
+            "f1:511",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "2b67c677babdeb66",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The process call lies directly after the existence guard, and the archive upload resolves through upload, LoadRequests and requests.post with files supplied (f1:497, f1:515, f1:331, f1:390, f1:74-83).",
+          "evidence_refs": [
+            "s10",
+            "s33",
+            "s34",
+            "s36",
+            "s37",
+            "s38",
+            "s39",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "21f596f82021c112",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "GatherAll also calls upload directly for password and cookie files, reaching the same LoadRequests and requests.post sink without passing the ZipThings existence guard (f1:569-570, f1:390, f1:83).",
+          "evidence_refs": [
+            "f1:569",
+            "f1:570",
+            "s38",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "e760e4b21e09d577",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The command terminates the browser, wallet or Steam process associated with the data being archived, rather than disabling a defensive or analysis process; process execution and upload are shown, but the defense_evasion label does not fit (f1:497, f1:519-539, f1:511-515).",
+          "evidence_refs": [
+            "s34",
+            "f1:519",
+            "f1:535",
+            "f1:511",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "c88a2b4be848e399",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The archive region lies after the Steam-only elif block; wallet and extension calls reach it with c4 true without testing c5 or c7, so the claimed three-condition minimum is false (f1:498-515).",
+          "evidence_refs": [
+            "s40",
+            "f1:498",
+            "f1:501",
+            "f1:511"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "6b6c3ffe2a616559",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Within the Steam branch, login configuration presence and its remembered-password marker permit archiving and upload; this enables the collection path ( f1:501, f1:502, f1:507, f1:509, f1:515).",
+          "evidence_refs": [
+            "f1:501",
+            "f1:502",
+            "f1:507",
+            "f1:509",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "8bcae9db1daff117",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Within the Steam branch, login configuration presence and its remembered-password marker permit archiving and upload; these checks activate collection on target artifacts rather than detect analysis ( f1:501, f1:502, f1:507, f1:509, f1:515).",
+          "evidence_refs": [
+            "f1:501",
+            "f1:502",
+            "f1:507",
+            "f1:509",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "d456e73f24604d49",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Within the Steam branch, login configuration presence and its remembered-password marker permit archiving and upload; the checks establish availability of the data to collect ( f1:501, f1:502, f1:507, f1:509, f1:515).",
+          "evidence_refs": [
+            "f1:501",
+            "f1:502",
+            "f1:507",
+            "f1:509",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "4a075110fe517f41",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The c5 and c7 early returns are inside the Steam elif block, whose remaining statement is name=arg; the cited archive region starts outside that block and is also reached by non-Steam branches (f1:501-515).",
+          "evidence_refs": [
+            "s12",
+            "s20",
+            "s40",
+            "f1:501",
+            "f1:510",
+            "f1:511"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "de2c32d9ec32b4e7",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "Wallet and extension ZipThings calls bypass the Steam-only file and content tests, and GatherAll directly uploads password and cookie files through the same requests.post sink (f1:498-515, f1:562-570, f1:390, f1:83).",
+          "evidence_refs": [
+            "f1:498",
+            "f1:501",
+            "f1:562",
+            "f1:570",
+            "s38",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "b5ea1cd9fce6f788",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "upload opens the archive as a file and supplies it to LoadRequests, which calls requests.post with files (f1:331, f1:390, f1:77-83).",
+          "evidence_refs": [
+            "s35",
+            "f1:331",
+            "s38",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "18c279305b14fd1c",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The sites test different properties: a file in KiwiFolder, a keyword-matching .txt file, or a keyword-matching directory; the latter also needs a child-file test before upload, rather than one interchangeable c6 (f1:586-607).",
+          "evidence_refs": [
+            "s16",
+            "s17",
+            "s18",
+            "s41",
+            "s42",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "8c665f51330564c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Candidate file and directory checks permit upload of available matching artifacts; this enables the collection path ( f1:586, f1:589, f1:602, f1:603, f1:605, f1:607).",
+          "evidence_refs": [
+            "f1:586",
+            "f1:589",
+            "f1:602",
+            "f1:603",
+            "f1:605",
+            "f1:607"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "580a47cb377ea205",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Candidate file and directory checks permit upload of available matching artifacts; these checks activate collection on target artifacts rather than detect analysis ( f1:586, f1:589, f1:602, f1:603, f1:605, f1:607).",
+          "evidence_refs": [
+            "f1:586",
+            "f1:589",
+            "f1:602",
+            "f1:603",
+            "f1:605",
+            "f1:607"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "3d54f104acb91fda",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Candidate file and directory checks permit upload of available matching artifacts; the checks establish availability of the data to collect ( f1:586, f1:589, f1:602, f1:603, f1:605, f1:607).",
+          "evidence_refs": [
+            "f1:586",
+            "f1:589",
+            "f1:602",
+            "f1:603",
+            "f1:605",
+            "f1:607"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "dda7d1ba6b5a34dd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited first hop is within s41 and resolves to uploadToAnonfiles, whose requests.post sends the opened file; s42 and s43 are respectively controlled by their file and directory decisions (f1:589, f1:571-574, f1:602-608).",
+          "evidence_refs": [
+            "s41",
+            "s42",
+            "s43",
+            "s45",
+            "s46",
+            "s44"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "f9d32c74ce6ff825",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only calls to uploadToAnonfiles are the guarded file upload in KiwiFolder and the guarded matching-text-file upload in KiwiFile, both within the cited regions (f1:589, f1:603).",
+          "evidence_refs": [
+            "s41",
+            "s42",
+            "f1:589",
+            "f1:603",
+            "s44"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "29a0480ed678079e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "uploadToAnonfiles opens the victim file in binary mode and submits it with requests.post as multipart file data (f1:573-574).",
+          "evidence_refs": [
+            "s44",
+            "s46",
+            "f1:39"
+          ]
+        },
+        {
+          "claim_id": "k_ee61418539.L6.drop",
+          "claim_sha256": "0d8cc723e9a082cb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The import attempt probes installed dependency availability; an import failure enters the except arm and launches pip installation, making this an environment gate for portability and process spawning (f1:30-38).",
+          "evidence_refs": [
+            "s47",
+            "f1:30",
+            "f1:35",
+            "f1:37"
+          ]
+        },
+        {
+          "claim_id": "q_51818e9113.L6.drop",
+          "claim_sha256": "a150dd542604347c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The import attempt probes installed dependency availability; an import failure enters the except arm and launches pip installation, making this an environment gate for portability and process spawning (f1:30-38).",
+          "evidence_refs": [
+            "s48",
+            "f1:30",
+            "f1:35",
+            "f1:37"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "f15aa20434071ac3",
+      "packet_sha256": "373ab8dc8be795bc",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "52eebe3fef09b743",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return requires pathC to exist before continuing; pathC is the wallet directory or the browser path plus the extension suffix supplied by GatherAll (f1:489-496, f1:520-539, f1:562-564).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:520",
+            "f1:536",
+            "f1:562"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "28ce006489c238d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the presence or type of a local artifact path, which fits target_artifact (f1:496).",
+          "evidence_refs": [
+            "f1:496"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "c33378eb5bc4510b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision directly calls os.path.isfile on the candidate path (f1:602).",
+          "evidence_refs": [
+            "s3",
+            "f1:602"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "611fe3db6c7f9b6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "KiwiFile tests a keyword-matching name with isfile and the .txt substring before uploading; Kiwi supplies Desktop, Downloads and Documents paths (f1:601-603, f1:612-615, f1:654).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:612",
+            "f1:654"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "eba3b41c4d7562ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the presence or type of a local artifact path, which fits target_artifact (f1:602).",
+          "evidence_refs": [
+            "f1:602"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "aad1ae67823387fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision directly calls os.path.isdir on the candidate path (f1:605).",
+          "evidence_refs": [
+            "s5",
+            "f1:605"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "60221078d721b390",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Within the keyword-matching branch, isdir tests the candidate directory and passes that same path to KiwiFolder; Kiwi supplies the three user folders (f1:601-607, f1:612-615, f1:654).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:612",
+            "f1:654"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "db0947603d80e7f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the presence or type of a local artifact path, which fits target_artifact (f1:605).",
+          "evidence_refs": [
+            "f1:605"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "94e98366fac6ab72",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision directly calls os.path.isfile on the candidate path (f1:586).",
+          "evidence_refs": [
+            "s7",
+            "f1:586"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "e0d48deb530e6c0e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "KiwiFolder tests each entry with isfile and returns immediately on its negation, so continuation requires a file (f1:583-589); the caller supplies the keyword-matching directory (f1:605-607).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:605"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "3903c7a964bcea93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the presence or type of a local artifact path, which fits target_artifact (f1:586).",
+          "evidence_refs": [
+            "f1:586"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "2bdc5d9407fa11e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision directly calls os.path.exists on the candidate path (f1:496).",
+          "evidence_refs": [
+            "s1",
+            "f1:496"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "ae2443d112104270",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GatherAll supplies the Steam config constant to ZipThings, where pathC remains path and the negative existence test returns before the guarded work (f1:490-496, f1:538, f1:564).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:538",
+            "f1:564"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "d17c17f5c0eda6d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the presence or type of a local artifact path, which fits target_artifact (f1:496).",
+          "evidence_refs": [
+            "f1:496"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "cdf9df2040eb03e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each region follows its own missing-path return; the copy lies in getPassw and the token-upload call reaches uploadToken, LoadUrlib and urlopen through the cited definitions (f1:399-419, f1:216, f1:292, f1:88-92).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "s15",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "2adc27e1500632cc",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "LoadUrlib and its urlopen sink are also reached from uploadToken via GetDiscord and from upload, without the three cited browser-path tests (f1:488, f1:328, f1:92).",
+          "evidence_refs": [
+            "f1:488",
+            "f1:328",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "0a61915667d0d404",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "shutil.copy2 copies the credential database for SQL extraction, and LoadUrlib sends the collected token data through urllib.request.urlopen (f1:419-422, f1:234-292, f1:12, f1:92).",
+          "evidence_refs": [
+            "s15",
+            "f1:422",
+            "s19",
+            "s16",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "64557fafa4501a19",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decode and token-upload call follow the Local State existence return; uploadToken calls LoadUrlib, whose header branch reaches the cited urlopen (f1:473-488, f1:292, f1:88-92).",
+          "evidence_refs": [
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s18",
+            "s19",
+            "s20",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "e62c6f8d5709a3d4",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "getToken calls the same uploadToken and LoadUrlib path without the GetDiscord Local State guard (f1:411, f1:292, f1:92).",
+          "evidence_refs": [
+            "s17",
+            "s19",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "e3772c56d7c766eb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The local state key is read, decoded and unprotected for token decryption, and the extracted token reaches the network request through uploadToken (f1:476-488, f1:292, f1:92).",
+          "evidence_refs": [
+            "s23",
+            "f1:478",
+            "f1:484",
+            "s24",
+            "s19",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "6ef6cc95e2d788b9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One missing-path early return controls the common archive region, so the single positive existence condition suffices for this combination (f1:496-516).",
+          "evidence_refs": [
+            "s2",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "a596dbddd3b1d8c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The artifact checks enable the corresponding collection/upload path when they pass (f1:496-515).",
+          "evidence_refs": [
+            "s2",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "cba57b01d9589545",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks activate collection for available victim artifacts, with no analysis-environment test in this path (f1:496-515).",
+          "evidence_refs": [
+            "s2",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "366e70a35010e892",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks establish that the candidate data is available for collection, fitting data_availability (f1:496-515).",
+          "evidence_refs": [
+            "s2",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "90db06dc7a9e96c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The process creation and archive-upload call follow the missing-path return; upload calls LoadRequests with POST and files, reaching requests.post (f1:496-515, f1:330-390, f1:74-83).",
+          "evidence_refs": [
+            "s2",
+            "s25",
+            "s26",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "69a2271ee0c0cb17",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "GatherAll directly calls upload for password and cookie files, reaching the same LoadRequests network sink without entering ZipThings (f1:569-570, f1:390, f1:83).",
+          "evidence_refs": [
+            "f1:570",
+            "s30",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "0816cee3d347f9fa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.Popen creates the taskkill process, and requests.post sends the opened archive file through LoadRequests (f1:19, f1:497, f1:331, f1:390, f1:83).",
+          "evidence_refs": [
+            "s26",
+            "f1:19",
+            "f1:331",
+            "s30",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "84096181f731fdc2",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The Steam file and content checks are confined to the Steam elif arm; wallet and extension paths reach the common archive region without them, so that region is not governed by the claimed three-way conjunction (f1:498-515).",
+          "evidence_refs": [
+            "s32",
+            "s33",
+            "s36",
+            "s37",
+            "f1:498"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "456fd1d3be9aa959",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The artifact checks enable the corresponding collection/upload path when they pass (f1:501-515).",
+          "evidence_refs": [
+            "s32",
+            "s33",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "b5454d7afdea0862",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks activate collection for available victim artifacts, with no analysis-environment test in this path (f1:501-515).",
+          "evidence_refs": [
+            "s32",
+            "s33",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "7f121d86d4a53325",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks establish that the candidate data is available for collection, fitting data_availability (f1:501-515).",
+          "evidence_refs": [
+            "s32",
+            "s33",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "b691344288f2a7b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The name assignment is after the Steam returns, and the common archive region is after the outer missing-path return; its upload call resolves through upload and LoadRequests to requests.post (f1:496-515, f1:390, f1:83).",
+          "evidence_refs": [
+            "s2",
+            "s32",
+            "s33",
+            "s36",
+            "s37",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "485de4c92380862b",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "Wallet and extension calls reach the common archive upload without the Steam checks, and GatherAll also calls upload directly (f1:498-515, f1:562-570).",
+          "evidence_refs": [
+            "f1:498",
+            "s28",
+            "f1:562",
+            "f1:570"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "b5803575f9f48600",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "upload opens the archive and passes it as files to LoadRequests, whose requests.post sends it over the network (f1:331, f1:390, f1:83).",
+          "evidence_refs": [
+            "f1:331",
+            "s30",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "2a898687554d829d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited file decision controls the upload block directly; its keyword context and .txt restriction describe the candidate in c6 (f1:601-604).",
+          "evidence_refs": [
+            "s4",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "d2e693415164f3a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The artifact checks enable the corresponding collection/upload path when they pass (f1:601-603).",
+          "evidence_refs": [
+            "s4",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "b107555091e63b89",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks activate collection for available victim artifacts, with no analysis-environment test in this path (f1:601-603).",
+          "evidence_refs": [
+            "s4",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "5c74081314f047ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks establish that the candidate data is available for collection, fitting data_availability (f1:601-603).",
+          "evidence_refs": [
+            "s4",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "05d7d19a86a3595a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call inside the file-test branch resolves to uploadToAnonfiles, whose body posts the opened file using requests (f1:602-603, f1:571-574).",
+          "evidence_refs": [
+            "s4",
+            "s38",
+            "s40",
+            "s41",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "c7c14e4780a09953",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "KiwiFolder also calls uploadToAnonfiles and reaches the same requests.post without the keyword-matching .txt file branch (f1:586-589, f1:574).",
+          "evidence_refs": [
+            "s46",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "500409e3db65cd4c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "uploadToAnonfiles opens the candidate file and supplies it to requests.post as multipart file data (f1:573-574).",
+          "evidence_refs": [
+            "s41",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "8870c0b777548ea3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The directory decision calls KiwiFolder, whose entry-file decision must also pass before the entry upload; the upload path therefore requires both conditions (f1:605-607, f1:586-589).",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s42",
+            "s43",
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.effect",
+          "claim_sha256": "3007998ee4a1e261",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The artifact checks enable the corresponding collection/upload path when they pass (f1:586-589 and f1:605-607).",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.polarity",
+          "claim_sha256": "f7da3abfd46acc68",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks activate collection for available victim artifacts, with no analysis-environment test in this path (f1:586-589 and f1:605-607).",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.purpose",
+          "claim_sha256": "aaef69675f2a4765",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks establish that the candidate data is available for collection, fitting data_availability (f1:586-589 and f1:605-607).",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3",
+          "claim_sha256": "51a14c18efd6930b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The directory branch calls KiwiFolder; its post-return region calls uploadToAnonfiles, which reaches the cited requests.post (f1:605-607, f1:579-589, f1:571-574).",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s42",
+            "s43",
+            "s44",
+            "s45",
+            "s46",
+            "s41",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3.excl",
+          "claim_sha256": "a8becf21410d64af",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The direct .txt file branch also calls uploadToAnonfiles and reaches requests.post without the directory and folder-entry guards (f1:602-603, f1:574).",
+          "evidence_refs": [
+            "s40",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L5",
+          "claim_sha256": "ca94cd6c97f05258",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "KiwiFolder supplies an entry path to uploadToAnonfiles, which opens that file and sends it with requests.post (f1:589, f1:573-574).",
+          "evidence_refs": [
+            "s46",
+            "s41",
+            "s39"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "7bc9ff16af891060",
+      "packet_sha256": "485785c740731b78",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "a8bbb4ca3dc2b573",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The three decisions return when the supplied browser directory does not exist; the caller supplies the listed browser roots from APPDATA and LOCALAPPDATA (f1:400, f1:415, f1:445, f1:519-555).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:41",
+            "f1:519",
+            "f1:542",
+            "f1:550",
+            "f1:555"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c196d986919d4f5e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The three decisions return when the supplied browser directory does not exist; the caller supplies the listed browser roots from APPDATA and LOCALAPPDATA (f1:400, f1:415, f1:445, f1:519-555).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:41",
+            "f1:519",
+            "f1:542",
+            "f1:550",
+            "f1:555"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "46bd724f27e52ede",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The three decisions return when the supplied browser directory does not exist; the caller supplies the listed browser roots from APPDATA and LOCALAPPDATA (f1:400, f1:415, f1:445, f1:519-555). The checked filesystem object is a target artifact.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:41",
+            "f1:519",
+            "f1:542",
+            "f1:550",
+            "f1:555"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "43eeec09f037f32e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GetDiscord returns when its Local State file is absent, and its thread arguments come from the four listed roaming application directories (f1:473, f1:529-547).",
+          "evidence_refs": [
+            "s7",
+            "f1:529",
+            "f1:546"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "8ed44f42ace28a29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GetDiscord returns when its Local State file is absent, and its thread arguments come from the four listed roaming application directories (f1:473, f1:529-547).",
+          "evidence_refs": [
+            "s7",
+            "f1:529",
+            "f1:546"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "4bc749a9046476ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "GetDiscord returns when its Local State file is absent, and its thread arguments come from the four listed roaming application directories (f1:473, f1:529-547). The checked filesystem object is a target artifact.",
+          "evidence_refs": [
+            "s7",
+            "f1:529",
+            "f1:546"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "c69f4788d4179a3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZipThings tests pathC and returns on absence; pathC is the supplied wallet directory or the browser root plus its extension suffix, matching the listed paths (f1:489-496, f1:519-539, f1:561-564).",
+          "evidence_refs": [
+            "s9",
+            "f1:489",
+            "f1:519",
+            "f1:535",
+            "f1:562",
+            "f1:564"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "3128526384169ba2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZipThings tests pathC and returns on absence; pathC is the supplied wallet directory or the browser root plus its extension suffix, matching the listed paths (f1:489-496, f1:519-539, f1:561-564).",
+          "evidence_refs": [
+            "s9",
+            "f1:489",
+            "f1:519",
+            "f1:535",
+            "f1:562",
+            "f1:564"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "1c68b71c3d60a957",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "ZipThings tests pathC and returns on absence; pathC is the supplied wallet directory or the browser root plus its extension suffix, matching the listed paths (f1:489-496, f1:519-539, f1:561-564). The checked filesystem object is a target artifact.",
+          "evidence_refs": [
+            "s9",
+            "f1:489",
+            "f1:519",
+            "f1:535",
+            "f1:562",
+            "f1:564"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "63fb6b5d2339867d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Steam call supplies the fixed config directory, and its branch returns unless loginusers.vdf is a file (f1:501-503, f1:538, f1:564).",
+          "evidence_refs": [
+            "s11",
+            "f1:538",
+            "f1:564"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "c0f2d2bf99564475",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Steam call supplies the fixed config directory, and its branch returns unless loginusers.vdf is a file (f1:501-503, f1:538, f1:564).",
+          "evidence_refs": [
+            "s11",
+            "f1:538",
+            "f1:564"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "0711cc516258ba3a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Steam call supplies the fixed config directory, and its branch returns unless loginusers.vdf is a file (f1:501-503, f1:538, f1:564). The checked filesystem object is a target artifact.",
+          "evidence_refs": [
+            "s11",
+            "f1:538",
+            "f1:564"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "59c349f23efe762a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "KiwiFile checks that the keyword-matching entry is a file and its name contains .txt; Kiwi supplies the three user directories and the stated keyword list, including the adjacent concatenated string literals (f1:599-603, f1:610-654).",
+          "evidence_refs": [
+            "s13",
+            "f1:601",
+            "f1:610",
+            "f1:623",
+            "f1:647",
+            "f1:654"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "0e12deb373049550",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "KiwiFile checks that the keyword-matching entry is a file and its name contains .txt; Kiwi supplies the three user directories and the stated keyword list, including the adjacent concatenated string literals (f1:599-603, f1:610-654). The checked filesystem object is a target artifact.",
+          "evidence_refs": [
+            "s13",
+            "f1:601",
+            "f1:610",
+            "f1:623",
+            "f1:647",
+            "f1:654"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "84765f11d18c1276",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "KiwiFile checks that a keyword-matching entry is a directory before passing it to KiwiFolder; Kiwi supplies the three user directories and the stated keywords (f1:599-607, f1:610-654).",
+          "evidence_refs": [
+            "s15",
+            "f1:601",
+            "f1:610",
+            "f1:623",
+            "f1:654"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "08d35a836a998670",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "KiwiFile checks that a keyword-matching entry is a directory before passing it to KiwiFolder; Kiwi supplies the three user directories and the stated keywords (f1:599-607, f1:610-654). The checked filesystem object is a target artifact.",
+          "evidence_refs": [
+            "s15",
+            "f1:601",
+            "f1:610",
+            "f1:623",
+            "f1:654"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6b2d1aa598c85e6d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Each browser-root absence check returns before its corresponding collection region, so each alternative region requires the single condition c2 (f1:400-471).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s17",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "a5bd1514d30af0ce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The directory checks enable reading browser credentials or tokens when their source directories exist; collected tokens are uploaded and saved credential files are uploaded by GatherAll (f1:400-471, f1:569-570).",
+          "evidence_refs": [
+            "f1:400",
+            "f1:411",
+            "f1:415",
+            "f1:445",
+            "f1:569"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "e1127492e49769a0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The directory checks enable reading browser credentials or tokens when their source directories exist; collected tokens are uploaded and saved credential files are uploaded by GatherAll (f1:400-471, f1:569-570).",
+          "evidence_refs": [
+            "f1:400",
+            "f1:411",
+            "f1:415",
+            "f1:445",
+            "f1:569"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "f946a8bc7dbcd350",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The directory checks enable reading browser credentials or tokens when their source directories exist; collected tokens are uploaded and saved credential files are uploaded by GatherAll (f1:400-471, f1:569-570).",
+          "evidence_refs": [
+            "f1:400",
+            "f1:411",
+            "f1:415",
+            "f1:445",
+            "f1:569"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "c874e720f88e8b9e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The Local State absence check returns before the sole token decryption and upload region, leaving one required condition (f1:473-488).",
+          "evidence_refs": [
+            "s8",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "4e10e96e8593bdcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Local State check enables key recovery, token reading and upload for the present application data, indicating activation based on data availability (f1:473-488).",
+          "evidence_refs": [
+            "f1:473",
+            "f1:476",
+            "f1:488"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "f0e9a86feeaa207b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Local State check enables key recovery, token reading and upload for the present application data, indicating activation based on data availability (f1:473-488).",
+          "evidence_refs": [
+            "f1:473",
+            "f1:476",
+            "f1:488"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "590c15255a2c7a5b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Local State check enables key recovery, token reading and upload for the present application data, indicating activation based on data availability (f1:473-488).",
+          "evidence_refs": [
+            "f1:473",
+            "f1:476",
+            "f1:488"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "b464f3a685b2ca53",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The pathC absence check returns before process creation and the archive/upload region, leaving the single listed condition (f1:496-516).",
+          "evidence_refs": [
+            "s10",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "303b6c0390e890fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The source-directory check enables process termination and archive upload for existing wallet or extension data, indicating activation based on data availability (f1:496-516).",
+          "evidence_refs": [
+            "f1:496",
+            "f1:497",
+            "f1:511",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "24ae170dbb74d89d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The source-directory check enables process termination and archive upload for existing wallet or extension data, indicating activation based on data availability (f1:496-516).",
+          "evidence_refs": [
+            "f1:496",
+            "f1:497",
+            "f1:511",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "f5c6d4b9ba848b61",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The source-directory check enables process termination and archive upload for existing wallet or extension data, indicating activation based on data availability (f1:496-516).",
+          "evidence_refs": [
+            "f1:496",
+            "f1:497",
+            "f1:511",
+            "f1:515"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "a5f274e380761603",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The shared archive/upload region s25 can run for wallet and extension calls without testing c5 or c7; those checks occur only inside the Steam branch, so the minimum for all cited regions is not three (f1:498-515, f1:562-564).",
+          "evidence_refs": [
+            "s24",
+            "s25",
+            "f1:501",
+            "f1:562",
+            "f1:564"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "c764d93a07a0fa6b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "For Steam, the config directory, loginusers file and remembered-password content permit archiving and uploading the config; failed checks return, indicating activation based on available account data (f1:496-515, f1:538).",
+          "evidence_refs": [
+            "f1:496",
+            "f1:502",
+            "f1:507",
+            "f1:509",
+            "f1:515",
+            "f1:538"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "0cb516f3ef681ecf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "For Steam, the config directory, loginusers file and remembered-password content permit archiving and uploading the config; failed checks return, indicating activation based on available account data (f1:496-515, f1:538).",
+          "evidence_refs": [
+            "f1:496",
+            "f1:502",
+            "f1:507",
+            "f1:509",
+            "f1:515",
+            "f1:538"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "f08e264f2648ba3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "For Steam, the config directory, loginusers file and remembered-password content permit archiving and uploading the config; failed checks return, indicating activation based on available account data (f1:496-515, f1:538).",
+          "evidence_refs": [
+            "f1:496",
+            "f1:502",
+            "f1:507",
+            "f1:509",
+            "f1:515",
+            "f1:538"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "59d5c449291a8d82",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The listed file test controls the upload block directly, so the cited region requires its one condition (f1:602-604).",
+          "evidence_refs": [
+            "s14",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "857ff3bf27879b46",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The matching text-file check enables uploading the existing file through uploadToAnonfiles, indicating activation based on available source data (f1:571-574, f1:601-603).",
+          "evidence_refs": [
+            "f1:574",
+            "f1:601",
+            "f1:603"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "3fb1fec0d1846333",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The matching text-file check enables uploading the existing file through uploadToAnonfiles, indicating activation based on available source data (f1:571-574, f1:601-603).",
+          "evidence_refs": [
+            "f1:574",
+            "f1:601",
+            "f1:603"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "aa08437891a42f1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The matching text-file check enables uploading the existing file through uploadToAnonfiles, indicating activation based on available source data (f1:571-574, f1:601-603).",
+          "evidence_refs": [
+            "f1:574",
+            "f1:601",
+            "f1:603"
+          ]
+        },
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "f43880fbb34559a3",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "Region s29 assigns the target and calls KiwiFolder under c8 before c9 is tested inside that function; only s30 requires the additional per-entry c9 check, so the minimum over the cited regions is one rather than two (f1:586-589, f1:605-607).",
+          "evidence_refs": [
+            "s29",
+            "s30",
+            "f1:586",
+            "f1:605",
+            "f1:607"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.effect",
+          "claim_sha256": "ee434b92a080591b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The matching-directory check calls KiwiFolder, which uploads file entries until a non-file causes return; these checks enable collection of available data (f1:585-592, f1:605-607).",
+          "evidence_refs": [
+            "f1:586",
+            "f1:589",
+            "f1:605",
+            "f1:607"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.polarity",
+          "claim_sha256": "fa0bd45b05b4cecf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The matching-directory check calls KiwiFolder, which uploads file entries until a non-file causes return; these checks enable collection of available data (f1:585-592, f1:605-607).",
+          "evidence_refs": [
+            "f1:586",
+            "f1:589",
+            "f1:605",
+            "f1:607"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.purpose",
+          "claim_sha256": "eab0e870ec57cff7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The matching-directory check calls KiwiFolder, which uploads file entries until a non-file causes return; these checks enable collection of available data (f1:585-592, f1:605-607).",
+          "evidence_refs": [
+            "f1:586",
+            "f1:589",
+            "f1:605",
+            "f1:607"
+          ]
+        }
+      ]
+    }
+  ]
+}

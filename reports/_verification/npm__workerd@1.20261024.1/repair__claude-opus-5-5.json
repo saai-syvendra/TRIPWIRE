@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "workerd",
+    "version": "1.20261024.1",
+    "archive_sha256": "50d52f7bc717a111bbeacf6cf6573bc7676531e1a64e5f9eedee690542dfbe02"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "cbc99dbf71df512e",
+      "record_sha256_after": "67ee758d56dace3d",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2a4933960bdb46ef",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The guard at install.js:40 tests platformKey, which line 39 builds from process.platform, os.arch() and os.endianness(), and every knownPackages key (lines 28-33) ends in LE. Added c3 (os.endianness() == LE, anchored on the call at line 39), added it to the guard's conditions, and changed the expres"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "67ee758d56dace3d",
+      "record_sha256_after": "67ee758d56dace3d",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The only review reason is 'out-of-set claim pending verification' for out-of-set conditions c1, c2, c3 and their gate. No verifier evidence disputes them and nothing in the record needs fixing; the flag clears only once a reviewer verifies those out-of-set claims, which a repair session cannot do."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "67ee758d56dace3d",
+      "record_sha256_after": "67ee758d56dace3d",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "1bb100c8ab19f98e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:39 assigns platformKey once, from process.platform, os.arch() and os.endianness(), and install.js:40 tests platformKey in knownPackages, so the decision reads process.platform through that variable; the site is anchored where the value is computed, as the gate-analysis condition rule requ"
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9beb8516be690981",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "os.arch() is the second part of the single assignment of platformKey at install.js:39, which the membership test at install.js:40 reads. The architecture part of all six keys at install.js:28-33 is arm64 or x64, and each of darwin, linux and win32 has both, so the composite test is equivalent to c1 "
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1aeb37c7afdbf5a3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "os.endianness() is the third part of platformKey at install.js:39, and all six keys at install.js:28-33 end in LE, so the then arm of the test at install.js:40 is reached only when endianness is LE; BE produces a key not in the table and throws at line 44. The code's literal operator is in on the jo"
+        },
+        {
+          "claim_id": "k_1178b3dada.L6.drop",
+          "claim_sha256": "ed2bb9168be82fe5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The npm_config_user_agent presence test at install.js:108 only protects the yarn regex at line 109 and feeds isYarn, whose sole caller is maybeOptimizePackage at line 188. That branch only hardlinks the binary over bin/workerd (lines 191-194) and sets isToPathJS. Both sides then still run the same b"
+        },
+        {
+          "claim_id": "q_1613c4bb62.L6.drop",
+          "claim_sha256": "43a5344b3a2c756f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if at install.js:108-110 around the same user agent test. Its result only reaches isYarn's return value, used only at install.js:188 to choose whether the binary is hardlinked over the bin/workerd shim. With or without the hardlink, the install has already placed the binary and lines 247"
+        }
+      ]
+    }
+  ]
+}

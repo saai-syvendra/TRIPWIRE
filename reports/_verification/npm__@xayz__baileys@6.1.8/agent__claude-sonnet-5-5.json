@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@xayz/baileys",
+    "version": "6.1.8",
+    "archive_sha256": "9505f372ff51c1136dfb03ca5309a95f46dd08017e5aaee307cee700c9a261ac"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "57db7f1bfbbcfffc",
+      "packet_sha256": "9ba8c07bfa8fa434",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "26a0f60fd354fe42",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:124 compares process.env.BAILEYS_SKIP_SELFTEST to '1' in an if condition.",
+          "evidence_refs": [
+            "s1",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "5497ecff1399f8c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if tests === '1' and exits; the code after it (s3) runs only when the variable != '1', so != is the positive form.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "63280a54e018a5d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads a process environment variable.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d2a4eeeb361bae25",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single early-exit guard on c1 controls the rest of the block (s3); min_conditions 1 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "5b4ead7e91b0b871",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The variable decides whether the self-test (banner, checks, network probe) runs at all, so it enables it.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "ba3f7fadf952d335",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is a user opt-out switch for a benign self-test, not a check for analysis or sandboxes; the test runs by default, so activate fits.",
+          "evidence_refs": [
+            "s2",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "edd8e3ced39239db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The skip flag does not target or evade anything and fits none of the other purposes cleanly, so unclear is acceptable.",
+          "evidence_refs": [
+            "s2",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d83edc91e2986a93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 line 131 calls testNetworkReachability, which is defined at f1:58, and that function constructs the WebSocket at f1:66.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "920167a561283396",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "testNetworkReachability is called only at f1:131, inside the gated block. The file has no exports, timers or other callers.",
+          "evidence_refs": [
+            "f1:131",
+            "f1:58"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "9996b96981f48134",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is a WebSocket client connection (ws import, f1:24) to a WhatsApp endpoint, so it is a network sink. The behaviour is a connectivity check.",
+          "evidence_refs": [
+            "s4",
+            "f1:24",
+            "f1:66"
+          ]
+        }
+      ]
+    }
+  ]
+}

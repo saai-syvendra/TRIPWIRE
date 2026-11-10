@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@cheqplease/structured-logger",
+    "version": "2.2.5",
+    "archive_sha256": "3d7a73d851699f7bf5a1205d5a5add6da617cedfe713d4d246b74cdba7aa66ff"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "6ab35ba8996d9b75",
+      "packet_sha256": "beb048ca710da2de",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_99dccb102f.L6.drop",
+          "claim_sha256": "ddc4ed5475aa692a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This call writes a JSON evidence log containing a timestamp, hostname, and username; no environment condition controls whether the install behavior runs. The surrounding try/catch only suppresses logging errors (s1, s3).",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "k_f6bea5bfc3.L6.drop",
+          "claim_sha256": "a36e4b1f45475e5f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "`os.platform() === 'win32'` selects `cmd.exe` on Windows and `/bin/bash` otherwise, so this environment check changes the shell that the reverse-shell behavior spawns (s2; f1:34-36).",
+          "evidence_refs": [
+            "s2",
+            "f1:34-36"
+          ]
+        },
+        {
+          "claim_id": "q_0e1342d7e2.L6.drop",
+          "claim_sha256": "a45daa89a11cdccc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try block writes an evidence log with a timestamp, hostname, and username after `establishReverseShell()` has already run; this error-handling block does not check the environment to decide what install behavior runs (s3; f1:59-69).",
+          "evidence_refs": [
+            "s3",
+            "f1:59-69"
+          ]
+        },
+        {
+          "claim_id": "q_b471e690fd.L6.drop",
+          "claim_sha256": "31c91905bd3394b1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ternary tests whether the platform is Windows and chooses `cmd.exe` or `/bin/bash` accordingly, so the test selects which shell is spawned as part of the reverse-shell behavior (s4; f1:34-36).",
+          "evidence_refs": [
+            "s4",
+            "f1:34-36"
+          ]
+        }
+      ]
+    }
+  ]
+}

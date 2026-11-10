@@ -1,0 +1,671 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "medusa-plugin-momo",
+    "version": "0.0.68",
+    "archive_sha256": "501bb62923ebec70efc926f8ada7bf60242d2d98bd01c12f50a3ab0c9f761058"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "2bfcc71d00e0dae2",
+      "packet_sha256": "ab97b64aa51c621e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "12682eec966e9b23",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch condition reads process.env.GITHUB_ACTIONS directly.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "cca6463105e0a2a7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is used directly as a truthy condition, and the if then side calls cQ0, pQ0 and gQ0.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "97e9a400dd7ea723",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the GitHub Actions environment marker, so ci_marker fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "f62e36eaca3970ce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads process.env.RUNNER_OS directly.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c4eb645a0b8a3380",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "RUNNER_OS is compared with the literal Linux using strict equality.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "46f120ac25326def",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "RUNNER_OS is an environment variable, matching env_var.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "33f53578bb7ebeaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "cQ0 calls Bun.$ with the ps and grep command, then reads text; its caller awaits the boolean result.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "3cc7f76c7d55ee76",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "cQ0 returns true when trimmed command output is nonempty; that returned truthy value is tested in the enclosing if.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "206f6496513eb71b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "cQ0 probes the process list using ps and grep, matching process_list.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "99049975c48be62e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pQ0 invokes Bun.$ with sudo -n true; its result is accessed through nothrow and exitCode.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "c079b85c74475afb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pQ0 tests whether sudo -n true exits with status 0, which is the positive privilege check.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "4c9f987773cef609",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sudo command and its exit status check privilege availability.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "67e6255b39731389",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The cited site calls dq.fetchToken; it does not invoke gh auth token.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "82377f8b123127e6",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The site tests the falsiness of fetchToken() output, not a gh auth token call.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "85b05a920bbc7328",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is an authentication token lookup, so the category is authentication availability rather than target_artifact.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "7208d7cfeae5b06d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The cited call is dq.fetchToken(), not octokit.rest.search.repos.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "cd4f998826c0863b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The if tests whether fetchToken() returned a falsy value; it does not test octokit repository search.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "6d859d40deddadcc",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The site concerns the result of fetching an authentication token, not a server search response.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "46d8859d9245c355",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The assignment reads process.env.NPM_TOKEN directly.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "2f0a2d467853036a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The resulting NPM_TOKEN value is tested for falsiness in the if condition.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "b21ea93a381b4a6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested value is the NPM_TOKEN environment variable.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "e9f0d9029ffdf714",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition invokes dq.repoExists directly.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "3b9abdad972fb745",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "repoExists() is negated, so its falsy result contributes to the then branch.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "73034dee1bcf3ec1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "repoExists() reports repository availability, matching server_response.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "301ba2371896a7c7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The nested tests combine by conjunction: the outer CI and Linux checks enclose the process and privilege probes before gQ0.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "d01701439d8fe4cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gated code changes resolver configuration and flushes output firewall rules; this enables defense evasion.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "56b066be3132294b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The behavior runs when CI/Linux and process/privilege probes are positive, identifying a detected target environment.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "14eccaaa9bfda550",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The branch acts on detected CI runner and privilege conditions to evade analysis controls.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "3f770e16349c0773",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded region calls gQ0, whose definition contains systemctl and iptables commands.",
+          "evidence_refs": [
+            "s14",
+            "s16",
+            "s17",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "2231d8c937fed464",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file has one gQ0 definition and one call site, which is inside the cited guarded region.",
+          "evidence_refs": [
+            "s14",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "a2ebd80d13bf36b1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "gQ0 executes commands that change resolver configuration and flush firewall rules, supporting defense evasion.",
+          "evidence_refs": [
+            "s15",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "edec49229d12b422",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The repository/authentication test encloses fetchToken; a falsy token then branches on NPM_TOKEN, and only its falsy side reaches destructive code.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "b539d18016416aeb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The branch reaches commands that delete or shred user files, so the gate enables destructive behavior.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "52f15a71ab4a2239",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Destructive behavior is reached when the token and NPM_TOKEN are unavailable, activating on that condition.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "8d4f6bfd8a1d1302",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks concern available GitHub and npm credentials; purpose is data_availability, not the stated label.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "170a8ccab2f891b9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The destructive commands sit in the nested region reached after missing authentication/token and missing NPM_TOKEN; the Windows sink is inline there.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "fd5579589411bedc",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The destructive shell and Windows commands are inline in this guarded region; no separate callable sink function appears in the code.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "52e759caa718fcb4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink invokes platform shells with file deletion and shredding commands, which can destroy files.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "k_50e0566ba2.L6.drop",
+          "claim_sha256": "8c1129e84c6aab04",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition only adds the existing Bun bin directory to PATH; it changes executable lookup plumbing.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "k_7f3e4e84a7.L6.drop",
+          "claim_sha256": "68e4f195d70beb9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition only adds the existing Bun bin directory to PATH; it changes executable lookup plumbing.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "k_8243b60281.L6.drop",
+          "claim_sha256": "16875e932fed703e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform test chooses Windows registry PATH reload versus Unix profile loading; it selects portability behavior.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "aa9aca5126e0d5c0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence check decides whether bun_environment.js is launched or the process exits.",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "k_997be1f6bc.L6.drop",
+          "claim_sha256": "20979157792fefc2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This existence check selects a Bun executable path from candidates and only resolves executable location.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "a45a59034e957015",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform test chooses the Windows installer command or the Unix curl installer command.",
+          "evidence_refs": [
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "k_d36ad8d600.L6.drop",
+          "claim_sha256": "9ca269446b82e7dc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The profile-file existence test reloads PATH and does not select package behavior.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "k_e0dfd8b59b.L6.drop",
+          "claim_sha256": "6b5d6429c8edb138",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform test constructs candidate executable paths; it is executable-location plumbing.",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "2bbc76b45ee4f017",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform-dependent which/where command checks whether Bun is available, deciding whether installation is needed.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "q_53e1d98b0c.L6.drop",
+          "claim_sha256": "3142e4ac8a6e7897",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform test selects registry reload on Windows versus profile-based PATH reload on Unix.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "ceba4eccabf7a425",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform-dependent command checks Bun availability using where or which.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "q_98259f004c.L6.drop",
+          "claim_sha256": "d3d7248b11f8f7ec",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform test selects registry reload on Windows versus profile-based PATH reload on Unix.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "q_af02d7c460.L6.drop",
+          "claim_sha256": "d57fc47b7b546d84",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence test selects a candidate executable location and returns that path.",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "abca9fedc31d47c9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence check decides whether to launch the environment script or exit.",
+          "evidence_refs": [
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "q_d012987235.L6.drop",
+          "claim_sha256": "fcf5b43479bd721f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The profile existence check only controls attempts to refresh PATH from shell profiles.",
+          "evidence_refs": [
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "7cbfbef635f902f9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform check chooses between the Windows and Unix Bun installation commands.",
+          "evidence_refs": [
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "q_e8c9ed15f1.L6.drop",
+          "claim_sha256": "85b718cccba9be6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition only adds an existing Bun bin directory to PATH, which is setup plumbing.",
+          "evidence_refs": [
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "q_fd4553b6fa.L6.drop",
+          "claim_sha256": "cb26c386fee9fe0c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform check constructs OS-specific candidate paths for locating Bun; it changes executable lookup plumbing.",
+          "evidence_refs": [
+            "s36"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,637 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "3m-promo-gen-api",
+    "version": "1.0",
+    "archive_sha256": "6fcda7ccf5f80bc6ec0a404ca9ba60ffcd08628f1204df207816614e60362f75"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "f15aa20434071ac3",
+      "packet_sha256": "373ab8dc8be795bc",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "52eebe3fef09b743",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZipThings returns early unless os.path.exists(pathC) holds (f1:496); pathC is the wallet/extension dir passed in from the Atomic, Exodus, NationsGlory and browser extension entries (f1:520-539).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:536"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "28ce006489c238d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a wallet or extension directory that would be taken is present, so target_artifact fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "c33378eb5bc4510b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:602 tests os.path.isfile(path+'/'+file) directly in an if condition.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "611fe3db6c7f9b6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm needs isfile and '.txt' in file, inside a loop where a credential keyword is in file.lower(); the paths searched are Desktop, Downloads and Documents (f1:612-616).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:612"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "eba3b41c4d7562ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is on the existence of a specific user file, so target_artifact fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "aad1ae67823387fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:605 tests os.path.isdir(path+'/'+file) directly in an if condition.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "60221078d721b390",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm runs when isdir is true for an entry whose lowercased name contains a keyword; it then calls KiwiFolder (f1:605-607).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "db0947603d80e7f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is on the existence of a matching user directory, so target_artifact fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "94e98366fac6ab72",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:586 negates os.path.isfile in an early-exit if condition.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "e0d48deb530e6c0e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Code after f1:586 runs only when isfile is true; the function returns at the first non-file entry.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "3903c7a964bcea93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks entry type in a target folder, which is a target_artifact check.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "2bdc5d9407fa11e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:496 uses os.path.exists(pathC) as an early-exit condition.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "ae2443d112104270",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Steam entry in PathsToZip is the Steam config dir under Program Files (x86) (f1:538). With arg 'Steam', pathC stays equal to path, so the exists test runs on it.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:538"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "d17c17f5c0eda6d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Existence of the Steam config directory is a target_artifact check.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "cdf9df2040eb03e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each early exit (f1:400, 415, 445) guards its function body (s12-s14). shutil.copy2 at f1:419 sits in the getPassw region. getToken calls uploadToken (f1:411), which calls LoadUrlib (f1:292), which calls urlopen (f1:92).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "2adc27e1500632cc",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "uploadToken is also called from GetDiscord (f1:488), and LoadUrlib is called from upload and uploadToken. The network sink is therefore reachable without passing these guards.",
+          "evidence_refs": [
+            "s24",
+            "s19",
+            "f1:488"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "0a61915667d0d404",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "shutil.copy2 copies the browser Login Data file, which supports a credential read. urlopen in LoadUrlib is a network call that supports exfil.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "64557fafa4501a19",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The f1:473 early exit guards the rest of GetDiscord (s22). The b64decode at f1:477 is in that region. uploadToken at f1:488 leads to LoadUrlib (f1:292) and urlopen (f1:92).",
+          "evidence_refs": [
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s18",
+            "s19",
+            "s20",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "e62c6f8d5709a3d4",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "uploadToken is also called from getToken (f1:411) behind a different guard, and LoadUrlib has other callers.",
+          "evidence_refs": [
+            "s17",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "e3772c56d7c766eb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The region reads the Local State file and decodes and unprotects the master key (f1:476-478), which is a credential read. The network sink is urlopen.",
+          "evidence_refs": [
+            "s22",
+            "s23",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "6ef6cc95e2d788b9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single early-exit guard on the exists test, so the expression is just c4.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "a596dbddd3b1d8c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only allows the process kill and zip upload to run; it does not pick between payloads or change the target.",
+          "evidence_refs": [
+            "s2",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "cba57b01d9589545",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the target artifact exists. It does not back off on analysis.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "366e70a35010e892",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only checks that the data to take is present, which is data_availability.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "90db06dc7a9e96c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Popen (f1:497) and upload (f1:515) sit after the f1:496 early exit. upload calls LoadRequests (f1:390), which calls requests.post with files (f1:83).",
+          "evidence_refs": [
+            "s2",
+            "s25",
+            "s26",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "69a2271ee0c0cb17",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "upload is also called from GatherAll (f1:570) and at module level (f1:681), so the network sink is reachable without this gate.",
+          "evidence_refs": [
+            "s28",
+            "s29",
+            "f1:570",
+            "f1:681"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "0816cee3d347f9fa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.Popen starts a process, and requests.post in LoadRequests is a network call.",
+          "evidence_refs": [
+            "s26",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "84096181f731fdc2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Three sequential early exits (exists, isfile on the Steam branch, RememberPassword found) all have to pass to reach the zip and upload code, so they join with and.",
+          "evidence_refs": [
+            "s2",
+            "s32",
+            "s33",
+            "s34",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "456fd1d3be9aa959",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tests only allow the Steam zip and upload to run; they do not select between payloads.",
+          "evidence_refs": [
+            "s32",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "b5454d7afdea0862",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the Steam artifact exists with a remembered login. It does not back off.",
+          "evidence_refs": [
+            "s32",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "7f121d86d4a53325",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks confirm that usable Steam login data is present before the zip is taken.",
+          "evidence_refs": [
+            "s34",
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "b691344288f2a7b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The name assignment and the zip and upload block (f1:510-516) come after all three early exits. upload leads to LoadRequests and requests.post with files.",
+          "evidence_refs": [
+            "s2",
+            "s32",
+            "s33",
+            "s36",
+            "s37",
+            "s28",
+            "s29",
+            "s30",
+            "s31",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "485de4c92380862b",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "upload is also called from GatherAll and at module level, and ZipThings is also called for browser paths, so the sink is reachable without these guards.",
+          "evidence_refs": [
+            "s28",
+            "f1:570",
+            "f1:681"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "b5803575f9f48600",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.post in LoadRequests is a network upload that supports exfil.",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "2a898687554d829d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One if guard on isfile and '.txt' in file leads to the then region, so the expression is c6.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "d2e693415164f3a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only allows the file upload; it does not choose between payloads.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "b107555091e63b89",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The upload runs when a matching file exists. There is no evasion.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "5c74081314f047ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check confirms a matching file exists before it is uploaded.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "05d7d19a86a3595a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Line f1:603 is inside the guarded block and calls uploadToAnonfiles, which calls requests.post to an external host (f1:574).",
+          "evidence_refs": [
+            "s4",
+            "s38",
+            "s40",
+            "s41",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "c7c14e4780a09953",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "uploadToAnonfiles is also called from KiwiFolder (f1:589), which has a different guard.",
+          "evidence_refs": [
+            "s46",
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "500409e3db65cd4c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.post with the opened file is a network upload that supports exfil.",
+          "evidence_refs": [
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "8870c0b777548ea3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The isdir branch calls KiwiFolder, whose per-entry isfile early exit guards the upload loop, so the two conditions nest and join with and.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s42",
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.effect",
+          "claim_sha256": "3007998ee4a1e261",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tests only allow the folder upload; they do not select between payloads.",
+          "evidence_refs": [
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.polarity",
+          "claim_sha256": "f7da3abfd46acc68",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when matching folder contents exist. There is no evasion.",
+          "evidence_refs": [
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.purpose",
+          "claim_sha256": "aaef69675f2a4765",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks confirm that matching files exist before they are uploaded.",
+          "evidence_refs": [
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3",
+          "claim_sha256": "51a14c18efd6930b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "KiwiFolder is called inside the isdir block (f1:607). The loop in it calls uploadToAnonfiles (f1:589), which calls requests.post.",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s42",
+            "s43",
+            "s44",
+            "s45",
+            "s46",
+            "s41",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3.excl",
+          "claim_sha256": "a8becf21410d64af",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "uploadToAnonfiles is also called directly from KiwiFile (f1:603) without the KiwiFolder guards.",
+          "evidence_refs": [
+            "s40",
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L5",
+          "claim_sha256": "ca94cd6c97f05258",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.post in uploadToAnonfiles is a network upload that supports exfil.",
+          "evidence_refs": [
+            "s39"
+          ]
+        }
+      ]
+    }
+  ]
+}

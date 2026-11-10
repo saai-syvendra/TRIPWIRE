@@ -1,0 +1,277 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@scarf/scarf",
+    "version": "1.4.0",
+    "archive_sha256": "d5b13758ca8f84c0e050bbe4b4b36247cba55871d0b7ef9c8bc8c42c6b52ae14"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d19de7a34abf303a",
+      "record_sha256_after": "37d1c7e8923c4e06",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed 'payload path not fully traced': the five exfil payloads (g1, g3, g6, g8, g10) were marked dynamic_dispatch, but report.js line 5 binds https = localDevPort ? require('http') : require('https'), both core modules, and the request at line 406 runs inside reportPostInstall (line 259), reached af"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "37d1c7e8923c4e06",
+      "record_sha256_after": "0d657ca9c4bac9af",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "0c2111be01284f88",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The guarded code is return resolve(dependencyToReport) at report.js:190, inside the exec callback of processDependencyTreeOutput. It settles the getDependencyInfo promise, which reportPostInstall awaits at line 262 before the POST at line 406. The old witness put the line 262 call after the resolve "
+        },
+        {
+          "claim_id": "g10.then.L3",
+          "claim_sha256": "e29955d44f523fda",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The c6 block at report.js:400-403 only assigns reqOptions.headers.Authorization. https.request(reqOptions, ...) at line 406 sits after the block and runs whether or not SCARF_API_TOKEN is set; it reads reqOptions as data rather than being called from the region. The module-level bind of https at lin"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "0d657ca9c4bac9af",
+      "record_sha256_after": "0d657ca9c4bac9af",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Remaining reason 'payload path not fully traced' is accurate and cannot be removed from the code. g3: resolve(dependencyToReport) at report.js:190 settles the promise awaited at line 262 in reportPostInstall before the https.request at line 406; a promise continuation has no call, def or bind hop to"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "0d657ca9c4bac9af",
+      "record_sha256_after": "7e59873b92e3c085",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "caf768c4637a05a5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the ternary arms at lines 5 and 10 do not call reportPostInstall, so a def hop to it does not follow from the region. The witness now starts in the region with an import hop on require('http'), then the bind on https at line 5, and is marked unresolved because the arms only "
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "7e17c2e26423f457",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 5 and line 10 switch the report to plain http on localhost when SCARF_LOCAL_PORT is set. Portability means a platform-specific version of the same behaviour, and no OS, arch or runtime is involved here. Nothing is checked for availability either, so data_availability does not fit. It is a devel"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "70ad4949ded8af1d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refutation needs an exception after a truthy skipTraversal at line 221. Lines 222-236 only call logIfVerbose, spread already parsed JSON, build plain objects, call util.inspect and return, so none of them throws in practice and the catch at line 238 is not reached from that side. If the require "
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "973df33c3b445cae",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "skipTraversal at line 221 only chooses a shallow report from package.json over the npm ls walk, and a report is produced on both sides. It is not a platform variant and it does not test that anything to collect exists, so portability and data_availability do not fit. The consuming project's setting "
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "2766320ccaa30c63",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the payload has no recon sink, and the npm ls exec at line 243 runs before this gate. Removed recon from the branch. The os.platform() and os.arch() reads at lines 379-380 only fill the POST body, so they count under exfil, which rests on https.request at line 406. A note re"
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "c17026d35b21b706",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: userHasOptedIn at line 62 also returns true on a truthy root scarfSettings.enabled. Added condition c17 on that test and to the guard at line 182. The expression is now (c10 || c2 || c17) && (c16 || c8 || c12); the minimum stays 2."
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "9e863f2939d27d16",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed because the gate's expression gained c17 and recon left its behaviours. The label stands: the guards at lines 182 and 186 check consent and install context and do not detect analysis, CI or a sandbox, so activate fits rather than evade."
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "83f7041351cd9e4b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed because the gate's expression gained c17 and recon left its behaviours. The label stands: the guards decide which kinds of install get reported (consent, dependency, global or allowTopLevel), which is targeting. No platform variant or data check is involved."
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "07cb8204c116eb6c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 268 tests parentIsRoot and allowTopLevel, a project configuration check that turns on the git sha lookup when true. It does not back off from analysis, CI or a sandbox, so activate fits. The refutation describes a back-off at global or top-level installs, which is the line 186 check and not thi"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "f43499c0f3e90b29",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 268 limits git rev-parse HEAD to a root package that set allowTopLevel, which picks one kind of install. It is not a platform variant, and it does not test that a git repository exists, because failure of the command is tolerated at line 253. Targeting stands."
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "9395de140c2f9aba",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The checker is right that the witness reached a definition with no call before it. Added a call hop on new Promise at line 405, which sits in the region and runs its executor at once, before the def hop on that executor holding https.request at line 406. That is the network Promise, not the consent "
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "e0ac35e3a5a4fde9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the payload has no recon sink and the region from line 280 has no exec call. Removed recon from the branch. The platform reads at lines 379-381 fill the POST body and count under exfil at line 406."
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "c1c6597526ecf93b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the exit at line 276 is also passed when root scarfSettings.enabled is truthy (line 62). Added c17 to the guard. The expression is now c2 || c17 || c7; the minimum stays 1."
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "d05e909a96f9e39c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the payload has no recon sink. Removed recon from the branch. The platform reads at lines 379-381 only fill the POST body, so the branch is exfil at line 406."
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "8eb49f1b2953f112",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right on both helpers: line 62 also opts in on root scarfSettings.enabled, and line 57 also opts out when it is false. Added c17 to the line 276 guard and c19 (enabled not false) to the line 282 guard. The minimum goes from 5 to 6."
+        },
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "0c7ce36480cec092",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. Added c17 to the line 276 guard, c19 to the line 282 guard, and c18 (enabled falsy) to the line 286 guard, because !userHasOptedIn needs both enabled falsy and SCARF_ANALYTICS not true. The minimum goes from 6 to 8."
+        },
+        {
+          "claim_id": "g8.then.L5",
+          "claim_sha256": "0b68f571f1cbfea5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the payload has no recon sink. Removed recon from the branch. The platform and arch reads only fill the POST body, so the branch is exfil at line 406."
+        },
+        {
+          "claim_id": "g8.L4",
+          "claim_sha256": "a2c5ae6af8b42e2d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Both refutations are right: the region at line 370 is the else of !userHasOptedIn, reached by either form of opt-in, and c2 alone left out enabled. Added c17 to the line 276 and line 299 guards. The expression is now (c2 || c17 || c7) && c15 && (c2 || c17); the minimum stays 2."
+        },
+        {
+          "claim_id": "g9.L4",
+          "claim_sha256": "59fbd40cedb96d4f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. Added c17 to the line 276 guard, c18 to the line 299 guard and c19 to the line 300 guard, so the not-opted-in and not-opted-out tests carry the enabled setting as well as the env vars. The minimum goes from 6 to 8."
+        },
+        {
+          "claim_id": "g9.L6.purpose",
+          "claim_sha256": "cd4b98710100a175",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed because the gate's expression gained c17, c18 and c19. The label stands: the branch shows a notice, writes a rate-limit timestamp and asks on stdin. That is no platform variant and no check for data to take, so unclear still fits."
+        },
+        {
+          "claim_id": "g10.then.L3",
+          "claim_sha256": "aa4e0ca28c315a91",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The code is clear but the record format cannot state it. Line 402 sets a header on reqOptions, and https.request at line 406 runs after the if on both sides and reads reqOptions as data. The sink is not on the guard's then side, and no hop type expresses a data dependency, so bind is the closest fit"
+        },
+        {
+          "claim_id": "g10.L4",
+          "claim_sha256": "204d3fbb89a34769",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the line 276 exit is also passed on a truthy root scarfSettings.enabled. Added c17 to that guard. The expression is now (c2 || c17 || c7) && c6; the minimum stays 2."
+        },
+        {
+          "claim_id": "g10.L6.effect",
+          "claim_sha256": "f90c0c303ad77d5f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed because the gate's expression gained c17. The label stands: the upload runs with or without the token, so the gate does not enable it. Lines 401-402 only set the account it is sent under, and the account used is what modifies covers."
+        },
+        {
+          "claim_id": "k_61dc9b65f9.L6.drop",
+          "claim_sha256": "bfd857f8fa2ea546",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The require('crypto') at line 94 only sets the crypto variable. Line 99 then returns a sha256 hash or the placeholder default, and that value only fills a field of the same POST. The same behaviour runs on the same host either way and no behaviour decides on it, so by the gate test it is not a gate."
+        },
+        {
+          "claim_id": "q_bdf1484c2b.L6.drop",
+          "claim_sha256": "e554b8e18bea8a52",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The try at line 93 is the same crypto probe. Its catch only logs under SCARF_VERBOSE and hashWithDefault still returns a string at line 102, so redactSensitivePackageInfo and the POST run either way. Only hashed identifiers change to a placeholder. No behaviour class differs, so the drop stands."
+        }
+      ]
+    }
+  ]
+}

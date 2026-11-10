@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "eslint-plugin-prettier",
+    "version": "4.2.3",
+    "archive_sha256": "087219661b4a36c342452700c9631fd056d1451339a9813f5a888958c06da9bd"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "98954627e7a04e7d",
+      "packet_sha256": "672e57d89732a924",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "6f224b3e81e727d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition directly calls `os.platform()` and compares its result to a string, making it a decision on the named API.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "5b79f18401e6ee6e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm is entered when `os.platform() === 'win32'`; the equality and value are explicit in the condition.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e9f7e4ead656086a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads `os.platform()`, so the checked property is the operating system platform.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "4a2d829f8a889c9c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited then region is controlled by the single `os.platform() === 'win32'` condition, so its condition set is just `c1`.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "fef4ef4cb187e074",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code launches `rundll32` with the adjacent `node-gyp.dll,main` argument; this gate enables that process-spawn behavior.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "a4975fee68b59a1e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch launches the process when the platform equals `win32`, which is activation on the selected platform.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ce4c1dc4eff5b74f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform check selects Windows-specific process-launch code, which is a portability choice for platform-specific behavior rather than victim targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "61832896970187bc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `spawn` call is directly inside the then block of the cited `win32` condition, so the sink lies in the guarded region without an intervening hop.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "636f9e7646c9e013",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file shows `logDiskSpace` called once at top level after its definition, and the spawn call exists only inside that function's Windows branch; no other callers, exports, timers, or handlers are present.",
+          "evidence_refs": [
+            "f1:152",
+            "f1:154",
+            "f1:178"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "28a6872e71f02a0f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code resolves the concatenated module and method names to `child_process.spawn`, which launches `rundll32` with the DLL argument and therefore can spawn a process.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "k_0f7f344e61.L6.drop",
+          "claim_sha256": "06f06dc400a5b3fe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This `existsSync(dirPath)` check is a filesystem-state check in the `ensureDir` helper, deciding whether to create the requested directory or report it already exists, rather than an environment gate selecting install behavior.",
+          "evidence_refs": [
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "k_8a4bbd2e33.L6.drop",
+          "claim_sha256": "adb39fe52e49200a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited node is a `child_process.spawn` call, not an environment test; it is an action inside the platform branch rather than a gate itself.",
+          "evidence_refs": [
+            "s6",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "q_0c60980057.L6.drop",
+          "claim_sha256": "e4757770286bdf69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check only chooses whether `ensureDir` creates the requested directory or logs that it already exists; it does not select an environment-specific install behavior.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "q_53e1523f20.L6.drop",
+          "claim_sha256": "43dabf1f4c42a0fb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The `try` body contains the `os.platform() === 'win32'` environment gate, which decides whether the `rundll32` process is launched, so this is an environmental gate rather than a non-environmental test.",
+          "evidence_refs": [
+            "s8",
+            "s1",
+            "s4"
+          ]
+        }
+      ]
+    }
+  ]
+}

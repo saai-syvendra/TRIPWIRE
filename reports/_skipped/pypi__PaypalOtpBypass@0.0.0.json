@@ -1,0 +1,20 @@
+{
+  "schema_version": "3.2",
+  "record_type": "skip",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "PaypalOtpBypass",
+    "version": "0.0.0",
+    "archive_sha256": "e37725e52e1dcf467e8f43e925594aed5d0de4a386fdd3bf5cb992320faf5c64",
+    "source_dataset": "pypi_malregistry",
+    "source_label": "malicious",
+    "released_at": null,
+    "released_at_source": null,
+    "sample_path": "pypi_malregistry/pypi/malicious_intent/paypalotpbypass-0.0.0.tar.gz",
+    "package_root": "layer0/PaypalOtpBypass-0.0.0",
+    "analysis_type": "ai",
+    "model_name": "claude-opus-5-5"
+  },
+  "reason": "import_time_only",
+  "note": "Backend is poetry-core so setup.py (plain setup() with deps browser_cookie3, discordwebhook, robloxpy, requests) never runs. PaypalOtpBypass/__init__.py is escape-encoded code that calls eval/compile/exec on a decoded blob at module top level, so it runs only on import."
+}

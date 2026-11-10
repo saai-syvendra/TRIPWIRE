@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifolSoup",
+    "version": "1.0.0",
+    "archive_sha256": "498dd59690195f6c272c56a9849d0c41d3a500fa0337e406c426910aa390c28f"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "a12ae8121c580373",
+      "packet_sha256": "21c25fdf42ae2262",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f130e463f6c3c710",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly reads `os.name` at the cited site (f1:13).",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "68c86c06fe0bbd7a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch condition is `os.name == \"nt\"`, so the positive comparison leading into the guarded code matches the claim (f1:13).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads Python's `os.name` property to distinguish the operating system (f1:12-13).",
+          "evidence_refs": [
+            "s1",
+            "f1:12-13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "54ef22a46cace918",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both listed regions lie in the single then branch controlled by the one condition `os.name == \"nt\"`; the minimal condition set is one (f1:13-18; f2:13-18).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f1:13-18",
+            "f2:13-18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code fetches response text and executes it, so the gate enables the listed download and execution behavior (f2:13-18).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f2:13-18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fetch and execution occur when `os.name == \"nt\"`, making this an activate-on-target gate (f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f2:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The operating-system check restricts the download and execution behavior to Windows, which is platform targeting (f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f2:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "380e39cc6d4cd30f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The network call and `exec` call are both in the then block controlled by the Windows check, and `exec` receives the fetched response text after tag removal (f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "f2:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ff323e8cf39c121f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only displayed `requests.get` and `exec` calls are inside the custom install command's Windows branch, with no other call sites for these sinks in the packet files (f2:10-18).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f2:10-18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c95dce16164fc057",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` performs the download, and `exec` executes the returned response text after the surrounding replacements (f2:16).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f2:16"
+          ]
+        }
+      ]
+    }
+  ]
+}

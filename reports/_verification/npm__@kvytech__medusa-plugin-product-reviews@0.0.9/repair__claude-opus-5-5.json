@@ -1,0 +1,269 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@kvytech/medusa-plugin-product-reviews",
+    "version": "0.0.9",
+    "archive_sha256": "0072d2ea50a2835ee1c6138bbac2230310eebd11c6be2cf8f750b922c7fd43f7"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "cb7c700abbe4bad7",
+      "record_sha256_after": "cb7c700abbe4bad7",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e2938d26f0fc91f4",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The guard at bun_environment.js (d1) bytes 9403705-9404054 runs gQ0() only when GITHUB_ACTIONS is set, RUNNER_OS is Linux, cQ0() finds a running process matching \"/home/agent/agent\" (ps -axco command | grep) and pQ0() gets passwordless sudo. gQ0() (bytes 8920010-8920407) stops systemd-resolved, repl"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "15c69e1880f791e8",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same code as g1.L6.polarity: the decisive condition c3 is a probe for a running /home/agent/agent process on a GitHub Actions Linux runner, and the only thing gQ0() does on that side is disable DNS resolution control and flush the iptables OUTPUT and DOCKER-USER chains, i.e. remove the network monit"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Nothing can be cleared from the code. The g2 credential check c5 (bytes 9405413-9405472) is !dq.isAuthenticated() || !dq.repoExists(), where the token comes from any env value with a ghp_/gho_ prefix or `gh auth token`, so no fixed env var name exists and env_var_absent GITHUB_TOKEN/GH_TOKEN stays g"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "cb7c700abbe4bad7",
+      "record_sha256_after": "db73a3aaeacc19c9",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "7257f6759632fc3b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The old api was prose and the old site was the whole !isAuthenticated()||!repoExists() test, which shows neither source. dq.getToken takes a process.env value starting ghp_/gho_, else gh auth token output, and isAuthenticated() is !!token. Per the one-condition-per-source rule c5 is now process.env,"
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "e6a35a052a56fe0f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "c5 moved to the prefix test in findGitHubTokenEnvVars, so the operator is now not_startswith with value ghp_/gho_: no env value may match for the token to stay empty and !isAuthenticated() to hold. The tested operand is now the env value itself."
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "e432e8a5b30129b1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The site tests the result of dq.fetchToken, and search.repos is only one call inside it. api is now dq.fetchToken, and the site moved to the fetchToken call, where the value tested by !_0x441f22 is computed."
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "683eab5537235606",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "api and site changed to dq.fetchToken (see c6.L1). The falsy operator stands: if(!_0x441f22) leads to the destructive path, and fetchToken returns null when no valid token is recovered."
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "6d859d40deddadcc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "api and site changed to dq.fetchToken. The server_response label stands: the result depends on the GitHub search response status, a fetch of contents.json from raw.githubusercontent.com with status 200, and a GET /user check returning 200 for the recovered token, so a server decides it."
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "344d5fb34b318a70",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "pQ0 has two true returns: exit status 0 from sudo -n true, and, in the catch, the docker fallback when it does not throw. Added c8 for the fallback and changed the expression to c1 && c2 && c3 && (c4 || c8); the inner guard now lists c3, c4, c8. min_conditions stays 4."
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e2938d26f0fc91f4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The expression changed (c8 added), so the claim changed; the evade label stands. The gate definition counts disabling monitoring it detects as evade. cQ0 looks for a /home/agent/agent process on a CI runner, and gQ0 then stops systemd-resolved, replaces its config and flushes the OUTPUT and DOCKER-U"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "15c69e1880f791e8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The expression changed (c8 added), so the claim changed; the anti_analysis label stands. The only thing behind the gate is gQ0, whose DNS and iptables changes strip network controls from the runner, so the checks exist to remove that monitoring, not to pick a victim for a payload."
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6164d8408d0e61e1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right on both points. The outer test is an or of !isAuthenticated() and !repoExists(), and repoExists can be false with a token when createRepo fails, so c9 was added with (c5 && c11) || c9. The npm binding falls back to oL0(), so both sources must be empty: c10 was added beside c"
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "773e21213b9db5c2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:9 only picks where or which for the same bun lookup inside isBunOnPath. Both sides answer whether bun is on PATH and lead to the same result, so flipping it changes no behaviour class. Finding a runtime is plumbing under the gate definition. The refuting verifier restates the selection "
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "3b5afce7b67f71f8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:69 picks powershell or curl|bash to fetch the same runtime; line 77 then runs the chosen command on every OS, and both sides end at the same bun launch. Flipping it changes no behaviour class, and the bun.sh download is already a requirement. The refuting verifier names no behaviour it "
+        },
+        {
+          "claim_id": "k_8243b60281.L6.drop",
+          "claim_sha256": "470c2c46a091ad27",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:19 picks how reloadPath refreshes PATH (registry read on Windows, shell profiles on Unix). Both sides only update process.env.PATH so bun can be found; refreshing PATH is listed plumbing. The refuting verifier names no payload behaviour it decides."
+        },
+        {
+          "claim_id": "k_e0dfd8b59b.L6.drop",
+          "claim_sha256": "80f8b77f4e0e6692",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:101 only fills possiblePaths with per-OS bun locations for findBunExecutable. Locating a runtime is plumbing and both sides end in the same launch. The refuting verifier names no behaviour it decides."
+        },
+        {
+          "claim_id": "k_d36ad8d600.L6.drop",
+          "claim_sha256": "1fe93838e409124d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:41 tests a shell profile only to source it and read an updated PATH, with failures ignored. Reading shell profiles to refresh PATH is listed plumbing, and no payload behaviour depends on it directly. The refuting verifier names none."
+        },
+        {
+          "claim_id": "k_997be1f6bc.L6.drop",
+          "claim_sha256": "01dc74b34476e2eb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:125 returns the first bun path that exists, so it only changes which binary path starts the same script. If none exists the bootstrap stops, which is a tool the payload simply needs, not a gate. The refuting verifier names no behaviour it decides."
+        },
+        {
+          "claim_id": "k_50e0566ba2.L6.drop",
+          "claim_sha256": "8182e6cbf8b30d6b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:59 tests ~/.bun/bin only to prepend it to PATH when missing. That is PATH plumbing for finding bun and selects no payload behaviour. The refuting verifier names none."
+        },
+        {
+          "claim_id": "k_7f3e4e84a7.L6.drop",
+          "claim_sha256": "b7889d6d9ad941f9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The PATH.includes test at setup_bun.js:59 only avoids adding ~/.bun/bin twice. Either way the same PATH value is usable, so no behaviour changes. The refuting verifier names none."
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "a9c75dd2b11598f2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:180-181 tests path.join(__dirname, 'bun_environment.js'), the package's own file, which ships in the same tarball next to setup_bun.js. It is true on every install and no machine property changes it, so Phase 2 has no environment to set; the existence check does not fit the gate definit"
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "7129f3c0f50c6d58",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same decision as k_fb9a5db8df: the ternary at setup_bun.js:9 only picks where or which for the same bun lookup, so flipping it changes no behaviour class. The refuting verifier names no behaviour it decides."
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "5313c1b70ee07d2f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same decision as k_9f2314f1be: the if at setup_bun.js:69 only assigns the install command, and line 77 runs it on every OS, so both sides fetch and run the same runtime. The refuting verifier names no behaviour it decides."
+        },
+        {
+          "claim_id": "q_53e1d98b0c.L6.drop",
+          "claim_sha256": "4a5b908c2c4918fc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same decision as k_8243b60281: the win32 side at setup_bun.js:19 reads PATH from the registry, and its only effect is on process.env.PATH. Refreshing PATH is plumbing."
+        },
+        {
+          "claim_id": "q_fd4553b6fa.L6.drop",
+          "claim_sha256": "b05e43359e790e19",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same decision as k_e0dfd8b59b: the if at setup_bun.js:101 only chooses which candidate bun paths are pushed. Locating a runtime is plumbing and both sides reach the same launch."
+        },
+        {
+          "claim_id": "q_98259f004c.L6.drop",
+          "claim_sha256": "07e27e66bf7bb37c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the non-win32 side of the reloadPath decision at setup_bun.js:19: it sources profiles and adjusts PATH, with errors swallowed, and has no other effect. Refreshing PATH is plumbing."
+        },
+        {
+          "claim_id": "q_d012987235.L6.drop",
+          "claim_sha256": "24af5923927b66a9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same decision as k_d36ad8d600: the if at setup_bun.js:41 only sources an existing profile to read PATH, so it is PATH plumbing with no payload behaviour of its own."
+        },
+        {
+          "claim_id": "q_e8c9ed15f1.L6.drop",
+          "claim_sha256": "31466a78a15e4bf6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same decision as k_50e0566ba2 and k_7f3e4e84a7: the if at setup_bun.js:59 only prepends ~/.bun/bin to PATH. It selects no payload behaviour."
+        },
+        {
+          "claim_id": "q_af02d7c460.L6.drop",
+          "claim_sha256": "14a7b88f62887a45",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same decision as k_997be1f6bc: the if at setup_bun.js:125 returns the first bun path found, which changes only the binary path used to start the same script."
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "8cf5c0531080ac22",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same decision as k_8f3faff9a0: the if at setup_bun.js:181 tests the package's own bun_environment.js, shipped in the same tarball beside setup_bun.js, so its true side runs on every install and the else exit is unreachable from any machine environment. It is not an environment decision that Phase 2 "
+        }
+      ]
+    }
+  ]
+}

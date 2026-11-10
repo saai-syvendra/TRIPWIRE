@@ -1,0 +1,327 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/billing-sdk",
+    "version": "1.56.1",
+    "archive_sha256": "7d40906a1a197aaa75ddc9eb0ee127bdc8defe229aec3d1a279f6f482b6db36b"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "f8d5069f280588c1",
+      "packet_sha256": "17fa9b9fce2f67d9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "119ba24eddbb13a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 directly tests process.env.PAYLOAD as the left operand of a short-circuit OR, and its result feeds the decision at s2.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a937923038676b69",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "At f1:12-14 the positive continuation tests BASE64_PAYLOAD, which can come from either process.env.PAYLOAD or pkg.config.payload. The fallback prevents establishing the claimed environment-variable truthiness requirement without establishing its opposite polarity.",
+          "evidence_refs": [
+            "f1:12",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "76238902786cf2ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s1 reads process.env.PAYLOAD directly, so env_var correctly describes that input to the test.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f6a7636d3a55b10",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "f1:12-14 allows continuation when either process.env.PAYLOAD or pkg.config.payload is truthy. The expression c1 alone omits the configuration fallback that can satisfy the gate with c1 false.",
+          "evidence_refs": [
+            "f1:12",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7181d184f9290269",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 exits when no payload is available, enabling the file writes and service setup in s3 only when a payload is present. This is an enables effect.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "031cc21679fd2880",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:12-14 permits service setup when payload data is available and exits otherwise. This activates the behaviour and does not test for an analysis environment.",
+          "evidence_refs": [
+            "f1:12",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "31b6b4f939ce4cae",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The appropriate purpose is data_availability: f1:12-14 checks whether either payload source supplies data before s4 decodes and writes that same data.",
+          "evidence_refs": [
+            "f1:12",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bf7f7c861ad0580d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 is the remainder of the try block after the process-exiting guard in s2. All four cited sink calls at s4-s7 occur directly within that region, so no witness hops are needed.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d630caf65582b9c3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "All cited sinks are direct top-level calls following s2 in the same try block, and f1:1-47 contains no alternate callers, exports, timers or handlers reaching them. The configuration fallback still passes through the same guard.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:1",
+            "f1:47"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4242ec7971130d16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The bindings at f1:3-4 resolve s4-s5 to filesystem writes and s6-s7 to child_process.execSync. The code writes the payload and a user service unit, enables the service for persistence, and invokes systemctl to start it.",
+          "evidence_refs": [
+            "f1:3",
+            "f1:4",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "93f846ff4b52ddda",
+      "packet_sha256": "0c1e3255691f89ed",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "2c943ccda04882a6",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The packet contains no files or slices, and no code files are supplied, so the claimed process.env.PAYLOAD gate and its purpose cannot be anchored to package code.",
+          "evidence_refs": []
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "93f846ff4b52ddda",
+      "packet_sha256": "0c1e3255691f89ed",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "2c943ccda04882a6",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The packet contains no files, slices, or code references, and no code sample is present to establish what process.env.PAYLOAD controls or why it is checked.",
+          "evidence_refs": []
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "93f846ff4b52ddda",
+      "packet_sha256": "4a297625f3aeef12",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "119ba24eddbb13a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The short-circuit OR tests process.env.PAYLOAD and supplies a value to the variable tested by the early exit (f1:12-14).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a937923038676b69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OR tests process.env.PAYLOAD for truthiness; a truthy value supplies BASE64_PAYLOAD and avoids the negated early exit (f1:12-14).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "76238902786cf2ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The operand reads PAYLOAD from process.env, so env_var fits this test (f1:12).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f6a7636d3a55b10",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "BASE64_PAYLOAD can be truthy from either process.env.PAYLOAD or pkg.config.payload, so c1 alone omits a configuration alternative that also reaches the region (f1:12-14).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7181d184f9290269",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Payload availability enables the file writes and service commands: an empty combined payload exits before them (f1:12-44).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "031cc21679fd2880",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Supplying payload data activates installation and startup, with no analysis-environment test in this condition (f1:12-44).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "2c943ccda04882a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checked value contains the data subsequently decoded for the script write, making data_availability appropriate (f1:12-23).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bf7f7c861ad0580d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All cited sinks sit directly in s3 after the process-exiting guard, on its continuation side; no witness hops are required (f1:14-44).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d630caf65582b9c3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete file contains these sinks directly after the early exit in one top-level try block, with no alternate callers, exports or handlers reaching them (f1:1-47).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:1",
+            "f1:47"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4242ec7971130d16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The fs binding writes the script and a user systemd unit with restart and default.target settings; child_process.execSync enables and starts the service (f1:3-4, f1:23-44).",
+          "evidence_refs": [
+            "f1:3",
+            "f1:4",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        }
+      ]
+    }
+  ]
+}

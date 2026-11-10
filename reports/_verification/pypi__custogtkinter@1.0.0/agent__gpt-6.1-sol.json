@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "custogtkinter",
+    "version": "1.0.0",
+    "archive_sha256": "b9c86ca05442b762ad4c38156f57d5da89b7b8d31b8c3abcc92e2d7e57de9ed7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "4f89b38aa555ee37",
+      "packet_sha256": "b955f3a4e484056c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b809fa698da121c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison reads os.name from the os import in the same run method (f1:12-13).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "74b5525d49a3d8e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm requires os.name equal to the literal nt, without negation or an early exit reversing the test (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating system property os.name, supporting the os category (f1:13).",
+          "evidence_refs": [
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "23a298a93cf401cf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The region has one enclosing condition, c1, with no alternatives or additional nested guards; its minimum is one condition (s1-s3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition controls whether the execution call runs at all, with no alternate payload or environment-selected destination (f1:13-18). This supports enables.",
+          "evidence_refs": [
+            "f1:13",
+            "f1:16",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The equality activates execution on the nt operating system and does not test for analysis infrastructure (f1:13-16).",
+          "evidence_refs": [
+            "f1:13",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test restricts the entire guarded execution to nt while normal installation follows outside the branch, supporting targeting (f1:13-18).",
+          "evidence_refs": [
+            "f1:13",
+            "f1:16",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "766de760b70c71e7",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The region s3 is in f1 and contains execution of decrypted opaque bytes, while sinks s4 and s5 are in derived file f2. The packet provides no decode specification or checked derivation connecting f1:16 to f2:16.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "f1:16",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "861caff72fa688e8",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The readable sinks occur only under the OS test in f2, but the cited guard and region are in f1 (s2, s3). Without a checked derivation connecting f1:16 to f2:16, exclusivity of the claimed cross-file path cannot be established.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:16",
+            "f2:13",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4f7e0e798a672452",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The imported requests module supplies response text through its get call to the built-in exec after text replacements, supporting download and execution of downloaded code (f2:14-16).",
+          "evidence_refs": [
+            "f2:14",
+            "f2:16",
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

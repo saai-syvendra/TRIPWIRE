@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@rspack/cli",
+    "version": "1.1.7",
+    "archive_sha256": "f77f3b9068bb0478b3f005249370489038bef26fd9de6c5978d7a3a1dc997646"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "3cf2a0bd375b7aec",
+      "record_sha256_after": "10ffe1d21e050302",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "d9e2f57ea66fbdab",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "At the guard (bytes 300082-300359) the code maps process.platform to LINUX, MAC_OS, WINDOWS or UNKNOWN and calls process.exit(0) for anything but LINUX. No branch runs any version of the payload on darwin or win32. The skill defines portability as each branch running a platform-specific version of t"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed the reason this item was opened for: 'payload path not fully traced'. The payload path runs through the TypeScript __awaiter helper _0x4a8553, which gets each async body as a generator argument. I added a call hop on each _0x4a8553(...) call and a bind hop on its generator argument, for g1's i"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "10ffe1d21e050302",
+      "record_sha256_after": "10ffe1d21e050302",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "d9e2f57ea66fbdab",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The code at the guard (d1 bytes 300082-300359) maps process.platform to an enum and calls process.exit(0) on anything but LINUX; the darwin and win32 cases lead to no other code. The gate-analysis definition gives portability only when each branch runs a platform-specific version of the same behavio"
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "cb39d762704a626c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Not a confirmed refutation: the deterministic pass said cannot_tell (incomplete_cfg) and two of three agents verified. The code maps the three paths through existsSync(p) ? yield readFile(p, 'utf8') : null inside a try whose catch returns null (d1 bytes 299002-299099), filters out nulls, and if (0 ="
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "ansi-universal-ui",
+    "version": "1.4.0",
+    "archive_sha256": "ed13ba42adfe25d89e70f3df47faa2d39243a928985131f4bd703e819026d982"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "d091170c9edcc07b",
+      "packet_sha256": "743f7df905569dd6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "7507fafffb47d3a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "PLATFORM is bound once to process.platform and used in the asset lookup decision (f1:27, s1).",
+          "evidence_refs": [
+            "f1:27",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2d506886cc5b9a87",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ASSETS has win32 and darwin entries, and the missing-entry branch exits, leaving continuation for supported platforms (f1:16, s2).",
+          "evidence_refs": [
+            "f1:16",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "9f2c1f90542e4f13",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The decision reads the operating system through process.platform (f1:27, s1).",
+          "evidence_refs": [
+            "f1:27",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c06b993e9ca15f7c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single platform guard controls continuation into the remaining top-level region, requiring one condition (s2, s3).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "19494f0ab3580773",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform exit prevents the later setup, download and execution, so the gate enables those operations (s2, s5).",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1e963a8671adb08e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate activates execution for supported platforms, with no analysis-environment check (f1:16, s2).",
+          "evidence_refs": [
+            "f1:16",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6a04ce2259b2160c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Portability fits: the lookup checks platform-specific Python distributions and executable paths used to execute the same downloaded code (f1:16, f1:30, s12).",
+          "evidence_refs": [
+            "f1:16",
+            "f1:30",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "f4206773f0fe4c09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gated IIFE calls the cited helper definitions, reaching https.get and mkdirSync, and directly calls spawn; each witness hop resolves to the shown definition (s5, s7, s8, s10, s11, s12).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s10",
+            "s11",
+            "s4",
+            "s9",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6851f95e0a67f5aa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file has only the gated IIFE and recursive redirects as callers of the helpers, with no exports or independent entry points; spawn is inside the IIFE (f1:33, f1:47, s5).",
+          "evidence_refs": [
+            "s2",
+            "f1:33",
+            "f1:47",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "aca9a07f00d6e6d4",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The cited write_file sink is mkdirSync, which creates a directory rather than writing a file (s9). The other sinks download content and execute it through Python stdin (s4, s7, s12, f1:82).",
+          "evidence_refs": [
+            "s9",
+            "s4",
+            "s7",
+            "s12",
+            "f1:82"
+          ]
+        },
+        {
+          "claim_id": "k_25c096b203.L6.drop",
+          "claim_sha256": "e9852356c4636168",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The cache-directory check only prepares the extraction destination; download and extraction follow either way, making this storage plumbing (s13, f1:50, f1:56).",
+          "evidence_refs": [
+            "s13",
+            "f1:50",
+            "f1:56"
+          ]
+        },
+        {
+          "claim_id": "k_a28ccb09c3.L6.drop",
+          "claim_sha256": "ee0b72ade3126e7e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The executable-existence test gates setupPython, deciding whether a runtime is downloaded and extracted based on filesystem availability (s14, s10, f1:50, f1:56).",
+          "evidence_refs": [
+            "s14",
+            "s10",
+            "f1:50",
+            "f1:56"
+          ]
+        },
+        {
+          "claim_id": "q_67c9a2b5b4.L6.drop",
+          "claim_sha256": "224270c6a185d4f2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The branch calls setupPython only when the local interpreter is missing, gating runtime download and extraction on filesystem state (s15, f1:50, f1:56).",
+          "evidence_refs": [
+            "s15",
+            "f1:50",
+            "f1:56"
+          ]
+        },
+        {
+          "claim_id": "q_914e5a9395.L6.drop",
+          "claim_sha256": "e9fa788144851528",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The directory check only prepares an extraction destination and does not decide whether download or extraction runs; it is storage plumbing (s16, f1:50, f1:56).",
+          "evidence_refs": [
+            "s16",
+            "f1:50",
+            "f1:56"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "b24c18739a80aa52",
+      "packet_sha256": "152ab393b0d3f96c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "6f9818c1ab92301e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "Slices s1–s11 contain only sample-missing placeholders, and code/f1.unavailable.txt likewise reports that the code is unavailable. No code bytes establish the guard, region, witness hops or sinks.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "13e3975682960c3c",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The cited guard and payload slices s1–s11 contain only sample-missing placeholders, as does code/f1.unavailable.txt. The missing file prevents anchoring the claimed path or examining alternative callers for exclusivity.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "cd2786f42854b11c",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The sink slices s3, s8 and s11 contain only sample-missing placeholders, and code/f1.unavailable.txt supplies no code. No sink bindings or implementations are available to establish the claimed behaviours.",
+          "evidence_refs": [
+            "s3",
+            "s8",
+            "s11"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "0a7b711df0ad5006",
+      "packet_sha256": "4436b600582a72f8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "55de6fbef0e1eea6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exit at f1:28 leaves the region beginning at f1:30 reachable on its else side, and the IIFE calls downloadString and setupPython through the cited definitions and Promise executors. The HTTPS response callback in setupPython reaches the tar spawn, while the IIFE directly reaches the Python spawn",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s3",
+            "s10",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "dea9a42982b36ac3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file contains only the post-exit IIFE as the initial caller of downloadString and setupPython; their other calls are redirect recursion within those same paths (f1:33-91). There are no exports or independent callers, and all three sinks require execution to pass the process exit at f1:28.",
+          "evidence_refs": [
+            "f1:28",
+            "f1:33",
+            "f1:37",
+            "f1:47",
+            "f1:52",
+            "f1:66",
+            "f1:69",
+            "f1:72",
+            "f1:78",
+            "f1:91"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4e935a8cdace774d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "https is bound to the HTTPS module and downloadString collects its response body, while spawn is bound to child_process and invokes tar with extraction arguments and the downloaded archive piped to stdin (f1:5-6, f1:33-57). The IIFE decodes the downloaded string and writes it to the spawned Python i",
+          "evidence_refs": [
+            "f1:5",
+            "f1:6",
+            "s3",
+            "s10",
+            "f1:57",
+            "s6",
+            "f1:73",
+            "f1:76",
+            "s17",
+            "f1:82",
+            "f1:84"
+          ]
+        }
+      ]
+    }
+  ]
+}

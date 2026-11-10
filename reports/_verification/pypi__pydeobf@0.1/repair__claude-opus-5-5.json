@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pydeobf",
+    "version": "0.1",
+    "archive_sha256": "91a38bc0e5379e3f6f13b61d4a9785b0855244aa726e7230a64089cfca86f6cf"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "c3d3b55bc1b51e27",
+      "record_sha256_after": "39d18d2873b1c1b7",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Settled one of the two reasons from the code. In setup.py, CustomInstallCommand.run downloads CBLines.exe with powershell Invoke-WebRequest. The line 15 check (download_result.returncode == 0 and os.path.exists(output_file)) only tests that this download worked before Start-Process launches the file"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "39d18d2873b1c1b7",
+      "record_sha256_after": "39d18d2873b1c1b7",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_9299f491be.L6.drop",
+          "claim_sha256": "a9d4623041ba0518",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:15 os.path.exists(output_file) tests the path the package itself built at line 9 and passed as -OutFile to its own Invoke-WebRequest at lines 12-13, right before the test. It is not a read of something the host already has: nothing in the code looks for a pre-existing file or marker, and th"
+        },
+        {
+          "claim_id": "q_3575928f06.L6.drop",
+          "claim_sha256": "0db9ef6a249626a2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at setup.py:15-25 has only two tests: download_result.returncode == 0, the exit status of the package's own download at line 13, and os.path.exists on that download's own output path. Neither is a deliberate environment test. It is a success check on the step before it, so it is a prerequisit"
+        }
+      ]
+    }
+  ]
+}

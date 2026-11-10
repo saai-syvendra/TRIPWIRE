@@ -1,0 +1,276 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "1337c",
+    "version": "4.4.7",
+    "archive_sha256": "b0deb6c2403b2229825946bac127dc4a51f4dba29c39892e463dd41b8a15a6df"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "53636334dc6a7953",
+      "packet_sha256": "abf74493212ae76c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares the imported `sys.platform` value with `win32`, so the tested environment property is the operating system/platform. (f1:5, f1:11)",
+          "evidence_refs": [
+            "f1:5",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f6aa85277dbbe738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `win32` branch performs the download, file write, and execution, while there is no corresponding `else` branch; the condition enables these actions. (f1:11-16)",
+          "evidence_refs": [
+            "f1:11",
+            "f1:14",
+            "f1:15",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b5a9fcad9d291bb7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When `platform == 'win32'`, the branch downloads a file, writes it, and starts it, so the gate activates the behavior on that platform. (f1:11-16)",
+          "evidence_refs": [
+            "f1:11",
+            "f1:14",
+            "f1:15",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "786034a64e7ef93f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate restricts the download, write, and start sequence to Windows (`win32`), which is platform targeting. (f1:11-16)",
+          "evidence_refs": [
+            "f1:11",
+            "f1:14",
+            "f1:15",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1aa4263cabf678b2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get` retrieves the URL response, `open(..., 'wb').write(...)` writes its content to a file, and `os.system('start '+filename)` starts that file. (f1:14-16)",
+          "evidence_refs": [
+            "f1:14",
+            "f1:15",
+            "f1:16"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "a0b005a054a5e089",
+      "packet_sha256": "abf74493212ae76c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test compares the imported `sys.platform` value with `win32`, so it classifies the operating system. (f1:5, f1:11)",
+          "evidence_refs": [
+            "f1:5",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f6aa85277dbbe738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the `win32` branch, the code downloads a file, writes it, and starts it; these actions are enabled by the gate. (s4)",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b5a9fcad9d291bb7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch performs the download, write, and execution when `platform == 'win32'`, activating those actions on that target. (s4)",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "786034a64e7ef93f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check selects Windows as the environment on which the download and execution run, which is targeting. (s4)",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1aa4263cabf678b2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The branch calls `requests.get` to download the response, writes `rq.content` through `open(..., 'wb')`, and passes `start` plus the filename to `os.system`, supporting the network, file-write, and execution sinks. (s1, s2, s3)",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "a0b005a054a5e089",
+      "packet_sha256": "3d7645d95694c466",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ddf7db719a43811c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`platform` is imported from `sys` and is tested in the `if` decision, so this site tests `sys.platform` (f1:5, f1:11).",
+          "evidence_refs": [
+            "f1:5",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "928e455996fa3740",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is entered when the imported `sys.platform` value equals `'win32'` (f1:5, f1:11).",
+          "evidence_refs": [
+            "f1:5",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads `platform`, imported from Python's `sys` module, so the `os` category fits (f1:5, f1:11).",
+          "evidence_refs": [
+            "f1:5",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "62235f9720b06280",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single cited `if` guard directly controls the region, so its one condition is the complete conjunction (f1:11-16).",
+          "evidence_refs": [
+            "f1:11-16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f6aa85277dbbe738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code downloads a remote file, writes it locally, and starts it, so the gate enables those behaviours (f1:11-16).",
+          "evidence_refs": [
+            "f1:11-16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b5a9fcad9d291bb7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch carrying out the download, write, and execution runs when the platform is `win32`, making this an activating gate (f1:11-16).",
+          "evidence_refs": [
+            "f1:11-16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "786034a64e7ef93f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check restricts this payload to Windows; it targets a particular operating system (f1:11-16).",
+          "evidence_refs": [
+            "f1:11-16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "2b45aac21c01f74f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The three cited calls are all inside the then block: `requests.get` downloads the file, `open(...).write` writes it, and `os.system` starts it (f1:11-16).",
+          "evidence_refs": [
+            "f1:11-16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "f65ecbbaccb3db78",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "All three payload sinks are structurally inside the `platform == 'win32'` branch, and `send()` is called by the install command's `run` method (f1:11-16, f1:20-23).",
+          "evidence_refs": [
+            "f1:11-16",
+            "f1:20-23"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1aa4263cabf678b2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get` fetches the remote file, `open(filename, 'wb').write` writes its contents, and `os.system` launches the downloaded filename (f1:14-16).",
+          "evidence_refs": [
+            "f1:14-16"
+          ]
+        }
+      ]
+    }
+  ]
+}

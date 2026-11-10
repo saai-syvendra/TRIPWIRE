@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "propt-toolkit",
+    "version": "0.1",
+    "archive_sha256": "ff2cbfec50bcb2531e29c02eb0ea9e8f74bed84abdfd4b203b32586671ae8292"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "78e8ee7178d851f6",
+      "record_sha256_after": "707340815af1fe51",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "5d12eaec9b238327",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited sink was list.append of 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu' (d4 line 45), which only extends the folder list and persists nothing. The shortcut is rewritten by .Save() at d4 line 100 in state 790593, which walks that list; it is reached from the admin state by state-machine dispa"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0dc20a87f8622ea5",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "In state 383984 IsUserAnAdmin() only decides whether the all-users Start Menu is added to the folders whose shortcuts get rewritten. Save() is not wrapped in try, so without admin rights writing there would fail. The same hijack runs either way and the check adapts it to the privilege level, so purp"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Resolved the analyst reasons: spot-checked the decode against the original bytes (line 6 chr arithmetic gives 'win32', the argv list gives 'egg_info', getattr builds 'chr'); c1's value can be read in d4 line 6; traced the g3 path in d4 (CreateShortcut, basename(TargetPath), browser test, Arguments, "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "707340815af1fe51",
+      "record_sha256_after": "707340815af1fe51",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "254fd962fd73b970",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The refutation is right about the bytes: g2's region (d4:45, state 362814) only appends 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu' to the folder list, then sets the state to 18005, which is the same state the non-admin side sets at d4:67. The cited sink, Save() at d4:100, sits in state 790593, ou"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "707340815af1fe51",
+      "record_sha256_after": "a9833b6f486b131e",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "60dcd2cc1617986d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Region s7 is the whole if/elif statement in d4 (bytes 89-10044, line 7 to the end of the last state at line 126), so it includes the bdist_wheel/install elif at line 34, not only the egg_info/build arm. The sinks at lines 13, 55, 69 and 125 (bytes 335-9982) all fall inside that range, directly in mo"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The sys.platform test at line 6 has no else branch: in both d4 and the original setup.py the next statement after it is the plain setup() call, so no other platform gets its own version of the behaviour. The skill defines portability as each branch running a platform-specific version of the same beh"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "e890110a8a14a605",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the while loop at d4 line 84 is entered before the c4 test at line 90 and also runs for non-browser shortcuts, so it is not on that guard's then side. The region is now the then block of the test (lines 91-93: Arguments set, jump to state 60921). Save() at line 100 is outsid"
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "a049e8f5b8e9d7de",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right about the cited region: c1 && c4 does not describe entry to the whole while loop, which is entered before the c4 test. The region is now the then block of the c4 test at d4 lines 91-93, which needs both the win32 test at line 6 and the browser test at line 90, so the expressi"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "a9833b6f486b131e",
+      "record_sha256_after": "1fb3dd61da4d1769",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "1989d9288f7ec2fe",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right about the record: the empty witness claimed Save() sat in the region, but the only region was d4 lines 91-93 (Arguments set, state = 60921, continue) and Save() is at d4 line 100 in a separate dispatch arm. The path itself holds: in d4 the only assignment of 60921 is line 92"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "needs_manual_review is still true after write_report.py, with two reasons. out-of-set claim pending verification: c4 and g3 are out of set and only a reviewer can remove this. payload path not fully traced: g3 no longer contributes, but g2 keeps unresolved dynamic_dispatch. g2's guard only appends t"
+        }
+      ]
+    }
+  ]
+}

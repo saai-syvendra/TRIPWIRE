@@ -1,0 +1,1100 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@kvytech/medusa-plugin-product-reviews",
+    "version": "0.0.9",
+    "archive_sha256": "0072d2ea50a2835ee1c6138bbac2230310eebd11c6be2cf8f750b922c7fd43f7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "cb7c700abbe4bad7",
+      "packet_sha256": "d92df2612a50299a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "12682eec966e9b23",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 and s2 directly test GITHUB_ACTIONS for truthiness on the side that calls the guarded helper.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "cca6463105e0a2a7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 and s2 directly test GITHUB_ACTIONS for truthiness on the side that calls the guarded helper.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "97e9a400dd7ea723",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 reads the GitHub Actions environment marker, so ci_marker fits.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "7e90ab7089ffaef2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 compares RUNNER_OS strictly against Linux, without negation, in the then-side condition.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9738a4d0c7133f74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 compares RUNNER_OS strictly against Linux, without negation, in the then-side condition.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "90b460a94cd5334f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s3 reads the CI runner operating-system marker, so ci_marker fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "3a3198a83e6d81b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Bun.$ probe in s4 runs the claimed process-list command and returns whether its trimmed text is nonempty; s5 awaits that result positively.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "dad59cb7f7b01625",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Bun.$ probe in s4 runs the claimed process-list command and returns whether its trimmed text is nonempty; s5 awaits that result positively.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "206f6496513eb71b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 inspects process-list output for the agent process, supporting process_list.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "73c9be291dd1d9ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 runs the claimed sudo probe and compares its exitCode to zero before s5 consumes the helper result. The helper also has an exception fallback that can return true.",
+          "evidence_refs": [
+            "s6",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "358db29617232bf1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 runs the claimed sudo probe and compares its exitCode to zero before s5 consumes the helper result. The helper also has an exception fallback that can return true.",
+          "evidence_refs": [
+            "s6",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "4c9f987773cef609",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s6 tests passwordless sudo and attempts a privileged-container fallback, so privilege fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "7257f6759632fc3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 negates isAuthenticated(), whose resolved dq method returns the truthiness of the token obtained from matching environment values or the CLI. The same decision also independently tests repoExists().",
+          "evidence_refs": [
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "e6a35a052a56fe0f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 negates isAuthenticated(), whose resolved dq method returns the truthiness of the token obtained from matching environment values or the CLI. The same decision also independently tests repoExists().",
+          "evidence_refs": [
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "ca57b4c2b27e1998",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The dq constructor obtains its initial token by scanning environment values, with a CLI fallback, so env_var describes an actual source of this test.",
+          "evidence_refs": [
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "e432e8a5b30129b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 negates the result of the resolved dq.fetchToken method, which searches repositories and returns a recovered validated token or null. Its falsy result reaches the destructive branch.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "683eab5537235606",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 negates the result of the resolved dq.fetchToken method, which searches repositories and returns a recovered validated token or null. Its falsy result reaches the destructive branch.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "6d859d40deddadcc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The fetchToken result depends on repository-search responses and subsequent network retrieval and validation, supporting server_response.",
+          "evidence_refs": [
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "46d8859d9245c355",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s11 initializes the tested binding from NPM_TOKEN, and s12 reaches destruction on its falsy side. Before that decision the same binding may instead receive the oL0 fallback result.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "2f0a2d467853036a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s11 initializes the tested binding from NPM_TOKEN, and s12 reaches destruction on its falsy side. Before that decision the same binding may instead receive the oL0 fallback result.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "b21ea93a381b4a6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s11 reads NPM_TOKEN into the binding used by s12, supporting env_var even though a file-based fallback can also supply it.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "344d5fb34b318a70",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "s2 and s5 nest conjunctively, but pQ0 can return true through its exception fallback without a successful sudo probe. Thus the claimed conjunction of four specified probe conditions is not required on every path to s13.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "5b4c17ab6c417322",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 and s5 determine whether gQ0 runs the defense-changing commands, supporting enables.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e2938d26f0fc91f4",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 and s5 activate gQ0 when the CI markers and agent check match; they do not back off on detecting that environment. The fitting polarity is activate.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "15c69e1880f791e8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The detected agent and privilege checks lead to DNS configuration changes and firewall-rule flushing in gQ0, supporting anti_analysis.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "8dcd52b99ddc407b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s13 is inside the claimed sides of s2 and s5 and calls the uniquely bound gQ0 definition in s15, which contains s14.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "f5dec06821f21f98",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete f1 text contains one gQ0 definition and one call, s13, under both cited guards; no other reference exposes or invokes it.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s13",
+            "s15",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ae48e0d28ca63762",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s14 is a Bun shell execution inside gQ0, whose surrounding commands replace DNS configuration and flush firewall chains, supporting defense_evasion.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6164d8408d0e61e1",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "s8 permits entry when either authentication is absent or the repository is absent, so destruction does not require c5 alone to hold. Also s12 tests a binding that can receive an npmrc fallback rather than only NPM_TOKEN.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s10",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "cf1e5721108d5487",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s8, s10 and the else side of s12 determine whether the destructive block executes, supporting enables.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "ecc2782cdb52f1f1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The missing-token and unavailable-repository paths activate destruction, supporting activate.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "8291df82bc81e16a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Destruction depends on failure to obtain usable GitHub recovery credentials and absence of the NPM token binding, supporting data_availability.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "d993a2f26593512c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s16 lies on the then sides of s8 and s10 and the else side of s12; the direct call s17 is inside s16.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "059e2cfe8df875af",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "s17 is a direct statement nested under every cited guard, with no function reference or alternate entry that bypasses them. Re-entering aL0 still passes those decisions.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s16",
+            "s17",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "4006a1ceac25037c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s17 executes a command shell with deletion and wiping operations against user files, so the process-creation sink can cause destruction.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_50e0566ba2.L6.drop",
+          "claim_sha256": "8182e6cbf8b30d6b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s18 only decides whether to prepend the Bun executable directory to PATH, which is launch plumbing rather than an environment gate on payload behavior.",
+          "evidence_refs": [
+            "s18",
+            "f2:58",
+            "f2:60"
+          ]
+        },
+        {
+          "claim_id": "k_7f3e4e84a7.L6.drop",
+          "claim_sha256": "b7889d6d9ad941f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s19 only decides whether to prepend the Bun executable directory to PATH, which is launch plumbing rather than an environment gate on payload behavior.",
+          "evidence_refs": [
+            "s19",
+            "f2:58",
+            "f2:60"
+          ]
+        },
+        {
+          "claim_id": "k_8243b60281.L6.drop",
+          "claim_sha256": "470c2c46a091ad27",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s20 chooses the platform-specific method of reloading PATH; both sides serve executable discovery rather than selecting payload behavior.",
+          "evidence_refs": [
+            "s20",
+            "f2:19",
+            "f2:25",
+            "f2:47"
+          ]
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "a9c75dd2b11598f2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s21 tests whether the environment script exists and launches it only when present; this file-availability gate enables the payload execution, rather than merely choosing its launch path.",
+          "evidence_refs": [
+            "s21",
+            "f2:180",
+            "f2:181",
+            "f2:182"
+          ]
+        },
+        {
+          "claim_id": "k_997be1f6bc.L6.drop",
+          "claim_sha256": "01dc74b34476e2eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s22 returns an existing Bun executable path, changing how the same environment script is launched; this is executable-discovery plumbing.",
+          "evidence_refs": [
+            "s22",
+            "f2:125",
+            "f2:182"
+          ]
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "3b5afce7b67f71f8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s23 selects the platform-appropriate Bun installer to prepare the runtime for the same script, so the test is portability plumbing rather than a payload gate.",
+          "evidence_refs": [
+            "s23",
+            "f2:69",
+            "f2:77",
+            "f2:182"
+          ]
+        },
+        {
+          "claim_id": "k_d36ad8d600.L6.drop",
+          "claim_sha256": "1fe93838e409124d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s24 tests for shell profile files solely to source an updated PATH used for Bun discovery; it is runtime-launch plumbing.",
+          "evidence_refs": [
+            "s24",
+            "f2:41",
+            "f2:43",
+            "f2:47"
+          ]
+        },
+        {
+          "claim_id": "k_e0dfd8b59b.L6.drop",
+          "claim_sha256": "80f8b77f4e0e6692",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s25 selects platform-specific candidate Bun executable locations, which only changes runtime discovery and launch plumbing.",
+          "evidence_refs": [
+            "s25",
+            "f2:101",
+            "f2:125"
+          ]
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "773e21213b9db5c2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s26 selects the platform-specific command used to locate Bun; both branches answer the same executable-discovery question.",
+          "evidence_refs": [
+            "s26",
+            "f2:9",
+            "f2:10"
+          ]
+        },
+        {
+          "claim_id": "q_53e1d98b0c.L6.drop",
+          "claim_sha256": "4a5b908c2c4918fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s27 chooses the platform-specific method of reloading PATH; both sides serve executable discovery rather than selecting payload behavior.",
+          "evidence_refs": [
+            "s27",
+            "f2:19",
+            "f2:25",
+            "f2:47"
+          ]
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "7129f3c0f50c6d58",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s28 selects the platform-specific command used to locate Bun; both branches answer the same executable-discovery question.",
+          "evidence_refs": [
+            "s28",
+            "f2:9",
+            "f2:10"
+          ]
+        },
+        {
+          "claim_id": "q_98259f004c.L6.drop",
+          "claim_sha256": "07e27e66bf7bb37c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s27 chooses the platform-specific method of reloading PATH; both sides serve executable discovery rather than selecting payload behavior.",
+          "evidence_refs": [
+            "s27",
+            "f2:19",
+            "f2:25",
+            "f2:47"
+          ]
+        },
+        {
+          "claim_id": "q_af02d7c460.L6.drop",
+          "claim_sha256": "14a7b88f62887a45",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s29 returns an existing Bun executable path, changing how the same environment script is launched; this is executable-discovery plumbing.",
+          "evidence_refs": [
+            "s29",
+            "f2:125",
+            "f2:182"
+          ]
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "8cf5c0531080ac22",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s30 tests whether the environment script exists and launches it only when present; this file-availability gate enables the payload execution, rather than merely choosing its launch path.",
+          "evidence_refs": [
+            "s30",
+            "f2:180",
+            "f2:181",
+            "f2:182"
+          ]
+        },
+        {
+          "claim_id": "q_d012987235.L6.drop",
+          "claim_sha256": "24af5923927b66a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s31 tests for shell profile files solely to source an updated PATH used for Bun discovery; it is runtime-launch plumbing.",
+          "evidence_refs": [
+            "s31",
+            "f2:41",
+            "f2:43",
+            "f2:47"
+          ]
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "5313c1b70ee07d2f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s32 selects the platform-appropriate Bun installer to prepare the runtime for the same script, so the test is portability plumbing rather than a payload gate.",
+          "evidence_refs": [
+            "s32",
+            "f2:69",
+            "f2:77",
+            "f2:182"
+          ]
+        },
+        {
+          "claim_id": "q_e8c9ed15f1.L6.drop",
+          "claim_sha256": "31466a78a15e4bf6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s33 only decides whether to prepend the Bun executable directory to PATH, which is launch plumbing rather than an environment gate on payload behavior.",
+          "evidence_refs": [
+            "s33",
+            "f2:58",
+            "f2:60"
+          ]
+        },
+        {
+          "claim_id": "q_fd4553b6fa.L6.drop",
+          "claim_sha256": "b05e43359e790e19",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s34 selects platform-specific candidate Bun executable locations, which only changes runtime discovery and launch plumbing.",
+          "evidence_refs": [
+            "s34",
+            "f2:101",
+            "f2:125"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "db73a3aaeacc19c9",
+      "packet_sha256": "8bb5f9467d9f8662",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "e28576cc326685eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loop destructures values from Object.entries(process.env) and tests each nonempty value with startsWith (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "9e8d4f9d25d6380c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The two prefixes are ghp_ and gho_; finding either returns a token, while their absence contributes to the unauthenticated side of s2 through getToken and isAuthenticated (s1, f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "f8e06dff1f33bf7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checked strings are values enumerated from process.env (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "ca60d9efc34d37b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The receiver is constructed as new dq, and its awaited fetchToken result is tested by the following negation (s3, s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "4760171d8a34d37b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch enters when the awaited fetchToken result is falsy (s3, s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "077b41362974ed16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fetchToken searches repositories, fetches their contents and validates recovered tokens with a user request before returning a token or null (f1:1).",
+          "evidence_refs": [
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "9815c5cb95612ef1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pQ0 awaits the cited Docker command in a try block and returns false if that await throws, otherwise true (s5).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "12f19b15162dd493",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Docker fallback path, an absent exception returns true and an exception returns false; that boolean feeds the positive pQ0 test (s5, s6).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "30ce27e9067833d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fallback attempts privileged Docker access to place a file in the host sudoers configuration, so privilege is the property being probed (s5).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "92b773902f0aa4d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The new dq instance has repoExists called under negation in the branch test (s7, s2).",
+          "evidence_refs": [
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "91c4e7ee54f32604",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The explicit negation of repoExists selects the then arm when the method returns false (s7).",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "6c47bd4efb74859d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "repoExists tests stored gitRepo state, which createRepo populates from the repository creation response (f1:1).",
+          "evidence_refs": [
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "bc844d1ff3cdd516",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "oL0 reads working-directory and home .npmrc candidates through mL0, whose resolved implementation uses fs/promises.readFile; its returned token feeds the later branch (f1:1, s8).",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "a417df855d7234e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the environment token is absent, oL0 supplies the fallback value; the else arm is entered only if that value is also falsy (s8, s9).",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "9502d044b1340afd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "oL0 extracts an authentication token from .npmrc file contents, so target_artifact fits the source being checked (f1:1).",
+          "evidence_refs": [
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "fb5cf294cf26086b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested string is trimmed stdout from Bun.spawnSync running gh auth token (s10).",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "87cc1cd9db2cc895",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "getToken returns stdout only for the gho_ or ghp_ prefixes; failure of both contributes to the unauthenticated side of s2 (s10, f1:1).",
+          "evidence_refs": [
+            "s10",
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "592761d3fec901f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The probe retrieves a locally available CLI credential and tests its prefix, fitting target_artifact (s10).",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "aa55a4923540345c",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "pQ0 returns immediately on a nonzero sudo exit status; Docker is attempted only when the sudo try throws, so it is not a plain c4 || c8 alternative (s15, s5).",
+          "evidence_refs": [
+            "s15",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "a141f1c7db23562f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The CI, operating-system, process and privilege checks control whether gQ0 performs resolver and firewall changes (s11, s6, s18).",
+          "evidence_refs": [
+            "s11",
+            "s6",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "6fb6b7b40d5c4ba0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks activate resolver and firewall changes when the CI and agent markers are present; the fitting polarity is activate (s11, s14, s18).",
+          "evidence_refs": [
+            "s11",
+            "s14",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "a287763358be0497",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The agent-specific process check gates commands that alter DNS configuration and flush outbound firewall rules, supporting anti_analysis as their purpose (s14, s18).",
+          "evidence_refs": [
+            "s14",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "e984953d12bbcf0d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gQ0 call is inside both cited then arms and resolves to the function containing the cited Bun shell sink (s11, s6, s16, s18).",
+          "evidence_refs": [
+            "s11",
+            "s6",
+            "s16",
+            "s18",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "b46f03bc8e46d598",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file contains only the gQ0 definition and its gated call in Ry1, with no other reference reaching that function (f1:1).",
+          "evidence_refs": [
+            "s16",
+            "s18",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "260308c8442f6f75",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Authentication fails when neither environment nor CLI yields a token; that failure or missing repository is followed by fetchToken failure and failure of both NPM token sources, with a minimum of four conditions (s1, s10, s2, s4, s9).",
+          "evidence_refs": [
+            "s1",
+            "s10",
+            "s2",
+            "s4",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "049072e809cb6985",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The failed credential and repository checks enable the branch that launches destructive home-directory commands (s2, s4, s9, s20).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s9",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "4898429769f84ba8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch activates destructive commands when usable credential and repository fallbacks are unavailable (s2, s4, s9, s20).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s9",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "ddfaad7d6df2f11a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks determine availability of credentials and a repository before selecting the destructive fallback, supporting data_availability (s2, s4, s8, s9).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "000f2dff3e8be3a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited spawnSync call lies directly in s20, nested under the then arms of s2 and s4 and the else arm of s9 (s21).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s9",
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "0356e0c581b5aa97",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited destructive spawnSync site is lexically inside all three guard arms, with no alternate entry into its enclosing block (s2, s4, s9, s21).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s9",
+            "s21"
+          ]
+        }
+      ]
+    }
+  ]
+}

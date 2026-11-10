@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "parser_scrapper",
+    "version": "7.2",
+    "archive_sha256": "d5979f658d80ce7c4d91dfb2d60f11c49c12ae477cf81a0db59cf6103eb752dd"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "b0581b72fed88555",
+      "record_sha256_after": "d5ce4366585162db",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed what the decoded setup.py supports. g4's ISP check runs in m(), called at line 123, after the top-level `if 'linux' not in platform().lower(): exit(1)` at line 62, so g4 now has expression c2 && c4 && c5 and lists the line 62 guard. That guard is an early exit (exit(1) with the payload after i"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d5ce4366585162db",
+      "record_sha256_after": "d5ce4366585162db",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "569d19edf4456cf7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py line 27 (name == 'nt') gives each OS family its own payload, so the skill's targeting test (the payload only exists for one OS) does not fit; limiting the non-Windows arm to Linux is a separate check, already recorded as g3 with purpose targeting (line 62). The refutation contrasts an exe d"
+        }
+      ]
+    }
+  ]
+}

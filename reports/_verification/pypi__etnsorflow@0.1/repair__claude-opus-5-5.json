@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "etnsorflow",
+    "version": "0.1",
+    "archive_sha256": "b87e996b2f18dedc872c84462b5190233807f84d16ac6c48af4d3a78ce7efa73"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d990764947f42017",
+      "record_sha256_after": "43fd864735fd5426",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "a4b54eb315f75d47",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The c1 check (sys.platform == 'win32', setup.py line 6) has no else branch. Off Windows nothing runs; only setup() at d1 line 129 does. Under the gate-analysis rule, portability means each branch runs a platform-specific version of the same behaviour. Here the payload exists only for Windows, which "
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "71080eed3a064cdc",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The verifier is right that the cited if block (d1 lines 66-67) only sets state 362814. The code that runs only for admins is the state 362814 block at d1 line 46, which appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the scanned folders. I added that block as a second region. Save() at d1 lin"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "3ef49aa4f7976bf0",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c5 (.lnk endswith, d1 line 82) and c4 (TargetPath basename in chrome/msedge/launcher/brave, d1 line 91) are run on every file found by os.walk over the Desktop, Start Menu and Taskbar folders. They test whether a usable artifact exists: a shortcut to a Chromium browser that can take --load-extension"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged. (1) The pip<10 requirement is a Phase 2 provisioning call for a person. pip.main at d1 line 13 is missing from pip 10 and later, so the egg_info branch aborts the install. (2) The candidate decoder chr_shift_join still needs human review. I hand-checked only the c1 value 'win32', the "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "43fd864735fd5426",
+      "record_sha256_after": "a64ab7b71ae3ddb3",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "bc6fb1ff2e7e4486",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the Save() sink at d1 line 101 sits in state 790593, not in the then regions (the admin if block at lines 65-67 and state 362814 at lines 46-47), so an empty witness wrongly claimed it was in the region. The then side reaches Save() only through the flattened state dispatche"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "a64ab7b71ae3ddb3",
+      "record_sha256_after": "c29936644f43294f",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed the guessed recipe field: g4 file_present named a guessed 'Google Chrome.lnk', but d1 lines 79-91 walk the Desktop (expanduser ~\\Desktop), the APPDATA Start Menu and the TaskBar pinned folders for any .lnk whose TargetPath basename is chrome.exe, msedge.exe, launcher.exe or brave.exe, so the r"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "c29936644f43294f",
+      "record_sha256_after": "c29936644f43294f",
+      "round": 3,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "4eea32c484747fd3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Round 3, so only escalation is accepted; the claim is unchanged. By hand the path holds: d1 line 47 sets state 18005, then 37668, 382664, 12768, 162346, 4030, 145239, 186387, 790593, and state 790593 runs the walk and Save at d1 line 101. But the refutation of the hop is right: the bind hop at d1 li"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "529548a98d8596cc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "IsUserAnAdmin at d1 line 65 sends the run to state 362814, which appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the folder list (d1 line 46); otherwise state 18005 is set directly (d1 line 68). Both sides run the same patching code, so this is not portability, which the gate-analysis skill d"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "f78f6efea44bf04a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The sys.platform == win32 test at d1 line 6 has no else side and the argv test at d1 line 35 has no non-Windows counterpart: off Windows only the plain setup() call at d1 line 129 runs, so there is no other platform version of the behaviour. The gate-analysis skill calls that targeting (the payload "
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "57202c7366f1b237",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "modifies means the same behaviour still runs on a different target. Here the false side has no other target: a file that fails endswith('.lnk') at d1 line 82 is skipped, and a shortcut outside the list at d1 line 91 goes to state 0 at d1 line 96 with no Arguments change and no Save. With no matching"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "3ef49aa4f7976bf0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c5 and c4 test whether a shortcut exists that the payload can use: a .lnk (d1 line 82) whose TargetPath basename is one of four browsers (d1 line 91), which then gets --load-extension and Save (d1 lines 92 and 101). The list names the shortcuts that can load the dropped extension, whose code at d1 l"
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "a88c8be8984584fe",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "At d1 line 117 (raw setup.py line 120), a missing %APPDATA%\\Extension folder sends the run to state 29059, which calls os.makedirs (d1 line 59) and sets 37668; an existing folder sets 37668 directly (d1 line 121). State 37668 opens background.js at d1 line 123 on both paths, so flipping the test cha"
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "cdc24e392df1f347",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement around the same os.path.exists test (d1 lines 117 to 121, raw setup.py line 120). Its then side only moves to state 29059 for os.makedirs, and both sides reach state 37668 and write the same extension files (d1 lines 123, 70, 73, 126). No behaviour depends on it, so the drop"
+        }
+      ]
+    }
+  ]
+}

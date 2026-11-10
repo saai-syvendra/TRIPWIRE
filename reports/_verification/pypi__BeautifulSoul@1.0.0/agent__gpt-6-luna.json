@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifulSoul",
+    "version": "1.0.0",
+    "archive_sha256": "630d8152bae3323546ca5b94b97f9d356cd8d1bfa54ce13a463728df518e04e2"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "ae4041ae80556a94",
+      "packet_sha256": "08341b4aa037eeb8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "fc1217256b779b35",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly compares `os.name` to a value (f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "96f7e64be877a23b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then block is guarded by `os.name == \"nt\"`, so the positive comparison and value match (f1:13).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads `os.name`, an operating system property (f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "b5df6421c8c899c5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one guard, `if os.name == \"nt\"`, and its then block contains both cited regions; the minimal condition set is the single condition c1 (f1:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code fetches remote text and passes it to `exec`, enabling the download and execution behaviours (f2:13-16).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate runs the remote fetch and execution when `os.name` equals `nt`, activating that behavior on the target platform (f2:13-16).",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition selects Windows by checking `os.name == \"nt\"` before running the branch payload, which is platform targeting (f2:13-16).",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ac247c7b4ccceb04",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sinks are calls directly inside the then block: `requests.get(...)` and `exec(...)` (f2:16), so the empty witness correctly places them in the guarded regions.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "5e890f1cc3fd9b78",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only payload calls in the install command's `run` method are inside the `os.name == \"nt\"` branch; the full setup.py shows no other call site or handler reaching these sinks (f1:10-19; f2:10-19).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "5daaebb2a4402c95",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` retrieves remote text, and that text after the replacements is passed to `exec(...)`, supporting the download and exec_downloaded sink kinds (f2:16).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

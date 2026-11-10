@@ -1,0 +1,592 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-opus-4-8",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "matpplotlib",
+    "version": "0.1",
+    "archive_sha256": "7d120516e562fb2fc08d823c24fd88bbdfaef3132b864039f998042622c3c419"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-4-8",
+      "record_sha256": "6796a177bdce51a6",
+      "packet_sha256": "cf271d9bbf86c301",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 is the comparison `sys.platform == <decoded>`; the chr-map decodes to 'win32' (registered decode f2:6), so the site is a decision on sys.platform.",
+          "evidence_refs": [
+            "s1",
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "49e7803b55613936",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Decoded, the test is `sys.platform == 'win32'` in positive then-form (f2:6); operator == and value win32 match.",
+          "evidence_refs": [
+            "s1",
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform reads the operating-system platform, so `os` is the correct category.",
+          "evidence_refs": [
+            "s1",
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 is `if ctypes.windll.shell32.IsUserAnAdmin():` (f1:68, f2:64), a direct decision on that API.",
+          "evidence_refs": [
+            "s3",
+            "f2:64"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call is used as a bare truthy if-condition with no negation; truthy with no value is the positive form leading to the guarded code (f2:64).",
+          "evidence_refs": [
+            "s3",
+            "f2:64"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin() tests whether the process has administrator privilege, so `privilege` is correct.",
+          "evidence_refs": [
+            "s3",
+            "f2:64"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "af51f4cde8d010e6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 is `if sys.argv[1] in ['egg_info', 'build']:` (f2:7), a membership decision on sys.argv[1].",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "b3a12538c317513f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:7 tests `sys.argv[1] in ['egg_info', 'build']` in positive then-form; operator `in` and the value list match.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "b2fcce69e2348a82",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "'egg_info' and 'build' are setuptools/pip install-lifecycle subcommands, so `package_manager` is correct.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "fd2ca48f4b78b6ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 is `elif sys.argv[1] in ['bdist_wheel', 'install']:` (f2:34), a membership decision on sys.argv[1].",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "fbe484b24c8b9ab8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:34 tests `sys.argv[1] in ['bdist_wheel', 'install']` in positive form; operator `in` and the value list match.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "2bec1fbef30b0563",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "'bdist_wheel' and 'install' are packaging subcommands, so `package_manager` is correct.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "d8673dec6540d2e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 is `if <file>.endswith('.lnk'):` (f2:81) where <file> is a filename from os.walk over the Start Menu/TaskBar/Desktop folders (f2:78-80).",
+          "evidence_refs": [
+            "s7",
+            "f2:79"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "87942839737f889c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The positive test `.endswith('.lnk')` (f2:81) is exactly the end-anchored regex `\\.lnk$`; same polarity and faithful value.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "85c524b2ca81bba1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test picks shortcut (.lnk) files that are the victim artifacts to be weaponized, so `target_artifact` is correct.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "f05d4d0419838d83",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8 tests a variable bound once (f2:97) to `os.path.basename(shortcut.TargetPath)`, where shortcut=Dispatch('WScript.Shell').CreateShortcut(lnk) (f2:61,86); it is a decision on that API through that binding.",
+          "evidence_refs": [
+            "s8",
+            "f2:97",
+            "f2:86"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "f4ea7557a3c3383a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:90 tests `... in ['chrome.exe', 'msedge.exe', 'launcher.exe', 'brave.exe']` in positive form; operator `in` and the value list match.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "ad10ca5a6766b892",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test selects shortcuts whose target is a browser executable to infect, so `target_artifact` is correct.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "780fd20a8f6e877e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "c3's if (f2:7) is nested inside c1's if (f2:6); nested guards join with and, so c1 && c3 with min 2 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "301966418ac3b3bf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sys.argv if/elif runs a distinct payload per branch (download pypiwin32 vs the hijack), so this branch `selects` a payload.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "49dab0142c22ef86",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate runs the payload when on Windows during the build phase; it does not back off on analysis, so `activate` is correct.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "9504ee4d2a4804c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "win32 restricts the attack to Windows victims and the argv command to a specific install phase; `targeting` fits.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "925c6c7f74bbd3fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sink pip.main(['install','pypiwin32']) (s10, f2:13) sits directly in region s9, on the then side of c1&&c3; empty witness.",
+          "evidence_refs": [
+            "s10",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "a141dd241dd970e6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "pip.main runs only at the initial state inside win32 && egg_info/build; this is top-level script code with no other caller, export or timer.",
+          "evidence_refs": [
+            "s10",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c870849860b21f4c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "download rests on pip.main(['install','pypiwin32']) (s10), which fetches a package over the network — a network sink supports the download behaviour.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "01356bfb20b1c2ad",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "c4's elif (f2:34) is nested inside c1's if (f2:6); nested guards join with and, so c1 && c4 with min 2 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "14b70d8cc68581d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The install branch is the sibling payload to the egg_info/build branch; the sys.argv gate `selects` which payload runs.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "a4e9fa273a445e31",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate runs the hijack when on Windows during install; it does not back off on analysis, so `activate` is correct.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e3858361e3cd7da8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "win32 restricts to Windows victims and argv to the install phase; `targeting` fits.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "dd669da3e2178872",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both open(...,'w+') sinks for background.js (s12, f2:122) and manifest.json (s13, f2:72) sit in region s11 on the then side of c1&&c4; empty witnesses.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "4e886a38adfd183a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The open() calls are reachable only via states inside win32 && install; top-level script with no other caller or export.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "b7a783e0883a7ff0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "write_file rests on open(path,'w+') sinks (s12,s13) that create/truncate files on disk — fs_write sinks support the write_file behaviour.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "bde9ca1d2fc185c0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "c2's if (f2:64) is nested inside c4's elif (f2:34) inside c1's if (f2:6); its then-block (s14) and state 362814 (s15) run only when admin, so c1 && c4 && c2 with min 3 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s4",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "f0384a9ef6166ab8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When admin, the code appends the all-users Start Menu to the folder list (f2:45,65); it adds a target location to the same persistence behaviour, so `modifies` fits.",
+          "evidence_refs": [
+            "s4",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "18edc7a610481a42",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The admin branch runs the payload more broadly; it does not back off on analysis, so `activate` is correct.",
+          "evidence_refs": [
+            "s4",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "ea38fdc5c23d73ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The admin check extends the attack to the system-wide Start Menu location, broadening victim coverage, so `targeting` fits.",
+          "evidence_refs": [
+            "s4",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "82bad30a7cbc7386",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited sink s15 (append at f2:45, state 362814) is reached only via the admin then-block (f2:65), on the then side of c1&&c4&&c2; empty witness, sink sits in its region.",
+          "evidence_refs": [
+            "s15",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "ee3a38bebbe116b5",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "State 362814 (the append) is set only inside the IsUserAnAdmin then-block (f2:65); no other caller reaches it in this top-level script.",
+          "evidence_refs": [
+            "s15",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "1b410537d6d3bf01",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The cited sink s15 is `<list>.append('C:\\\\ProgramData\\\\...Start Menu')` (f2:45), an in-memory list append (sink_kind 'other'); it cannot accomplish persistence, so the behaviour does not rest on a capable sink.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "e0370cc248a2fed6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "c5's if (f2:81) is nested in the install branch (c1&&c4) and c6's if (f2:90) is nested inside c5's block; all join with and, so c1 && c4 && c5 && c6 with min 4 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "4d0d1dc2e85e3e35",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The browser-exe check turns the shortcut weaponization (set Arguments + Save) on or off (f2:90-93); it `enables` the behaviour.",
+          "evidence_refs": [
+            "s8",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "7ac1e0d384068164",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate acts on matching browser shortcuts; it does not back off on analysis, so `activate` is correct.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "3c6f14342eeb58bf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "c5/c6 proceed only when a browser shortcut (.lnk pointing to chrome/edge/brave/launcher) is actually present to weaponize, i.e. the needed victim artifact is available; `data_availability` fits.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "64f0089ca5db2519",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sink shortcut.Save() (s18, f2:100, state 60921) is reached only via the c6 browser then-block (f2:92) setting state 60921, on the then side of all four guards; empty witness.",
+          "evidence_refs": [
+            "s18",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "b3e6953649901485",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "State 60921 (Save) is set only in the browser-match then-block (f2:92); no other caller reaches the Save in this top-level script.",
+          "evidence_refs": [
+            "s18",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "b98bd4bc075d246b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "persistence rests on shortcut.Save() (s18), which writes the modified .lnk (carrying --load-extension) to disk; an fs_write sink supports persistence.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "0d3bf58727a50479",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s19 is `if not os.path.exists(APPDATA + '\\\\Extension')` which only decides whether to makedirs the attacker's own output folder (f2:116-117); it is plumbing/a re-entry guard, not an environment gate, so dropping it is correct.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "2d8fc23b3c305704",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s20 is the same `if not os.path.exists(...Extension)` if-statement; it only guards creation of the attacker's own Extension directory (f2:116-117), plumbing rather than an environment gate, so dropping it is correct.",
+          "evidence_refs": [
+            "s20"
+          ]
+        }
+      ]
+    }
+  ]
+}

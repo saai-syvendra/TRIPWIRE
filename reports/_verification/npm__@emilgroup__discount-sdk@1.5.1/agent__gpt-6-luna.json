@@ -1,0 +1,872 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/discount-sdk",
+    "version": "1.5.1",
+    "archive_sha256": "7812ba81af2c2139b4ff186e75d5fb583834a3d28226a9f562d5aac842c7991b"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "aeeae9c939f84851",
+      "packet_sha256": "86ce78211b5e61f3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "72c95c0c87a4f1fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `tokens` array is assigned from `findNpmTokens()`, and its `length` is compared with zero in the `if` condition.",
+          "evidence_refs": [
+            "s1",
+            "f1:87"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2ac308bc5ca667c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then side requires `tokens.length > 0`, with no negation between the comparison and the guarded code.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6936f89666c95b18",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This condition checks whether npm tokens were found, a data availability/credential check; it does not test a target artifact.",
+          "evidence_refs": [
+            "s1",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "5f7fe2eaee52ebb9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`fs.existsSync(deployScript)` appears directly as the second `if` condition.",
+          "evidence_refs": [
+            "s3",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "4499b69ada870eaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then side follows when `fs.existsSync` returns true for the path assembled from `__dirname`, `scripts`, and `deploy.js`.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "70666cc937b7a5c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test asks whether the computed deploy script path exists on disk.",
+          "evidence_refs": [
+            "s3",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "cd01144353524b44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`whoami` receives the awaited result of `fetchJson`; the subsequent `if` branches on that response and its `username` property.",
+          "evidence_refs": [
+            "s5",
+            "f2:93"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0e051b5593c9f087",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return occurs when `whoami` or its `username` is falsy, so reaching the remaining code requires a truthy response object with a truthy username.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f2:93-98"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "4a64f43a886435fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checked value is the response returned by the whoami request, including its username field.",
+          "evidence_refs": [
+            "s5",
+            "f2:93"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "4d9f4501358e19c4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The spawn lies in nested then branches: first `tokens.length > 0`, then the deploy script existence check.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "be8b54ef08af9edf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The two conditions allow the process-spawn behavior to run; they do not select another payload or modify its target.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7c147060e36349ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A nonempty token list and an existing deploy script enable the spawn, so the gate activates when its conditions hold.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "478cf70d07f7ae71",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate requires available npm tokens and the deploy script before starting the deploy process.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7a68b97e4e175345",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `spawn` call is inside the then block of both cited `if` statements.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "edd633f679d81b8c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "In the complete `index.js`, the sole `spawn` call is this one, and it is inside both cited guards.",
+          "evidence_refs": [
+            "f1:91",
+            "s2",
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c83fc74e9cf8ee5a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`spawn` is destructured from `child_process` and called with the Node executable and deploy script, which creates a process.",
+          "evidence_refs": [
+            "s8",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9a0376cf28986748",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The deploy operation follows the nested token-count and file-existence guards, then continues past the early return unless the whoami response or username is falsy.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s5",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "188f7559598babb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions permit publishing and modifying package files; they do not choose a different payload branch or environment-selected destination.",
+          "evidence_refs": [
+            "s9",
+            "s11",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "ad3c57b320756387",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Valid token response and username allow the deployment behavior to proceed, which is activate polarity.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "996d033291503f93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The response check establishes that the npm token is usable before package enumeration and publication.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "121423fe8c30e0e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code calls `run` for publication, whose definition reaches `execSync`; the package metadata write is also in the shown body. The early return makes the remaining body run only when the response has a username.",
+          "evidence_refs": [
+            "s6",
+            "s9",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "e3c16db7761fc6e6",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The deployment script has its own top-level token handling and invokes `deployWithToken` without checking whether the parent `index.js` found an existing deploy script; direct execution can therefore reach the publishing and file-write behavior outside the cited parent guards.",
+          "evidence_refs": [
+            "f2:182-212",
+            "f2:83-98",
+            "s11",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3237e41b8a4d6e39",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`run` reaches `execSync` to publish packages, and `fs.writeFileSync` writes the temporary package metadata; these support process execution and file writing, while the publishing process performs package propagation/modification.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "f2:155"
+          ]
+        },
+        {
+          "claim_id": "k_40b927fb03.L6.drop",
+          "claim_sha256": "5119beaec856bb85",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The token lookup condition controls whether a discovered npm config token is added; that token can make the install-time token-count gate pass and trigger the deploy spawn.",
+          "evidence_refs": [
+            "s14",
+            "s22",
+            "f1:41",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "k_7f3aae8bfb.L6.drop",
+          "claim_sha256": "d68aea7bb1b99589",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition filters the config token before adding it to the token set, so it contributes to the later token-count gate.",
+          "evidence_refs": [
+            "s15",
+            "s22",
+            "f1:41-45",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "k_b09f29b842.L6.drop",
+          "claim_sha256": "a30ba66129fc1e00",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The npm config command reads a configured token that is then tested and added to the set used by the install-time spawn gate.",
+          "evidence_refs": [
+            "s16",
+            "s22",
+            "f1:41",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "k_de022e6195.L6.drop",
+          "claim_sha256": "f633c8deb3fab43b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This existence check runs in cleanup to decide whether to delete a temporary README; it does not gate install-time behavior.",
+          "evidence_refs": [
+            "s17",
+            "f2:170"
+          ]
+        },
+        {
+          "claim_id": "k_edf177b7ff.L6.drop",
+          "claim_sha256": "3a15f44a5d89c746",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This check only decides whether to read and preserve the local README during each package deployment.",
+          "evidence_refs": [
+            "s18",
+            "s20",
+            "f2:127"
+          ]
+        },
+        {
+          "claim_id": "k_fa8a4fbbf3.L6.drop",
+          "claim_sha256": "0338f7bba11426cb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The config-token condition decides whether to add that token to `tokens`, which is later checked to start the deploy process.",
+          "evidence_refs": [
+            "s19",
+            "s22",
+            "f1:41",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "q_a78b614bc0.L6.drop",
+          "claim_sha256": "2fa24a6a5827e096",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary uses file existence only to save the current README contents or `null` for later restoration.",
+          "evidence_refs": [
+            "s20",
+            "f2:127",
+            "f2:170"
+          ]
+        },
+        {
+          "claim_id": "q_ae5269520e.L6.drop",
+          "claim_sha256": "b30c62c6036180a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditional in the `finally` block restores the README or removes the temporary copy; it does not decide whether install-time code runs.",
+          "evidence_refs": [
+            "s21",
+            "f2:170"
+          ]
+        },
+        {
+          "claim_id": "q_b30584949f.L6.drop",
+          "claim_sha256": "a585863055c73edb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This token validation decides whether a config token enters the set that controls the token-count gate and deploy spawn.",
+          "evidence_refs": [
+            "s22",
+            "f1:41",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "q_c6a7742791.L6.drop",
+          "claim_sha256": "39b3592fdf78c4f9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The config-token lookup and validation add an available credential to the token set, which feeds the later spawn condition.",
+          "evidence_refs": [
+            "s23",
+            "f1:41",
+            "s1"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "aeeae9c939f84851",
+      "packet_sha256": "011eeb9c16b3de25",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "72c95c0c87a4f1fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly reads `tokens.length` in an `if` decision.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2ac308bc5ca667c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch requires `tokens.length > 0`; the nested file check further restricts that branch.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6936f89666c95b18",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks whether npm credentials were found, a data availability condition rather than a target artifact property.",
+          "evidence_refs": [
+            "f1:29"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "5f7fe2eaee52ebb9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`fs.existsSync(deployScript)` is the condition of the cited `if`.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "4499b69ada870eaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` takes its then branch when `deployScript` exists, and `deployScript` is joined from `__dirname`, `scripts`, and `deploy.js`.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "70666cc937b7a5c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition asks whether the deploy script path exists on disk.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "cd01144353524b44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`whoami` is assigned the awaited result of `fetchJson` in this function, and the cited decision tests that result and its `username` property.",
+          "evidence_refs": [
+            "f2:86",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0e051b5593c9f087",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "expression_mismatch",
+          "evidence": "The early return occurs when `whoami` or `whoami.username` is falsy; subsequent code therefore requires a truthy username, rather than merely a truthy `fetchJson` result.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "4a64f43a886435fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision examines the response returned by the registry request and validates its username field.",
+          "evidence_refs": [
+            "s5",
+            "f2:86"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "4d9f4501358e19c4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `tokens.length > 0` test encloses the `existsSync` test, so both conditions must hold to reach the spawn region.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "be8b54ef08af9edf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The two checks enable the guarded process launch.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7c147060e36349ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The process is launched when tokens exist and the deploy script exists.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "478cf70d07f7ae71",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks establish availability of credentials and the deploy script needed for the deployment behavior.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7a68b97e4e175345",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn call is directly inside the region controlled by both cited then branches.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "edd633f679d81b8c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn call appears only in the guarded installer block; the deploy script itself has no caller path back to this spawn site.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c83fc74e9cf8ee5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded `child_process.spawn` call creates a detached process running the deploy script.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9a0376cf28986748",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The deploy-script region is reached after the two nested installer checks and after `deployWithToken` returns past its early-exit validation, making the conditions conjunctive.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "188f7559598babb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions allow token-driven publishing and package modifications to proceed.",
+          "evidence_refs": [
+            "s6",
+            "s9",
+            "s11",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "ad3c57b320756387",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Valid token response leads into package discovery and publish operations.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "996d033291503f93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A valid response makes account-owned package data available for the publishing workflow.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "121423fe8c30e0e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded launch reaches the deploy script; its main loop calls `deployWithToken`, whose validation permits the subsequent package loop, publish call, and write.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "e3c16db7761fc6e6",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The deploy script has a top-level main routine that can enter the same publishing and file-write operations when invoked directly, without the installer guards.",
+          "evidence_refs": [
+            "f2:179",
+            "s9",
+            "s11",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3237e41b8a4d6e39",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`execSync` runs the `npm publish` command through `run`, and `fs.writeFileSync` rewrites the package file; these support the claimed behaviors.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_40b927fb03.L6.drop",
+          "claim_sha256": "5119beaec856bb85",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The config token is added only when the value is nonempty and differs from the two sentinel strings; that affects whether deployment tokens are available to later guarded behavior.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "k_7f3aae8bfb.L6.drop",
+          "claim_sha256": "d68aea7bb1b99589",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The same token validity test decides whether the discovered config token is retained for later deployment.",
+          "evidence_refs": [
+            "s15",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "k_b09f29b842.L6.drop",
+          "claim_sha256": "a30ba66129fc1e00",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "This is the token lookup command inside a try block; the cited slice does not show a test decision, and the catch behavior alone does not establish an environment gate.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_de022e6195.L6.drop",
+          "claim_sha256": "f633c8deb3fab43b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This existence check is part of cleanup: it removes a temporary README only when one exists after remote README handling.",
+          "evidence_refs": [
+            "s17",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "k_edf177b7ff.L6.drop",
+          "claim_sha256": "3a15f44a5d89c746",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This check chooses whether to preserve a local README for restoration; it does not decide whether the publishing workflow runs.",
+          "evidence_refs": [
+            "s18",
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "k_fa8a4fbbf3.L6.drop",
+          "claim_sha256": "0338f7bba11426cb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The config token is conditionally added only when present and not equal to the sentinel values, affecting credentials used by deployment.",
+          "evidence_refs": [
+            "s19",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "q_a78b614bc0.L6.drop",
+          "claim_sha256": "2fa24a6a5827e096",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This existence check only chooses whether to read the local README before later restoring it.",
+          "evidence_refs": [
+            "s18",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "q_ae5269520e.L6.drop",
+          "claim_sha256": "b30c62c6036180a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This cleanup check controls removal of a temporary README, not whether install-time behavior runs.",
+          "evidence_refs": [
+            "s17",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "q_b30584949f.L6.drop",
+          "claim_sha256": "a585863055c73edb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This decision conditionally accepts a discovered npm config token for the later deployment path.",
+          "evidence_refs": [
+            "s19",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "q_c6a7742791.L6.drop",
+          "claim_sha256": "39b3592fdf78c4f9",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The slice is a try statement around token lookup and validation; it is not itself a decision test, and its shown contents do not establish that the lookup is an environment gate.",
+          "evidence_refs": [
+            "s23"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "libminerandomosint",
+    "version": "2.54",
+    "archive_sha256": "41c9743e6510dcf1ff06acd63f8ff112603caa6d5ab2af87c6d743020e44d3d9"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "8e68911bb8d74e4a",
+      "packet_sha256": "bbccc9b7347aef14",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "00596324f5a12637",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly calls os.path.exists with the literal path 'tahg', so the cited site tests the named API. (s1)",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "8d6626ac80120293",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `not os.path.exists('tahg')`, and that true condition enters the branch containing Popen. (s1, s2)",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "23e12015f45e8a9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition calls os.path.exists on the path 'tahg', which checks whether that file or directory exists. (s1)",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "b62a8a084a8dc103",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole then region is controlled by one if condition, `not os.path.exists('tahg')`; its minimum condition set is therefore c1. (s2, s3)",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "862dc58bf64237e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the marker path is absent, the branch invokes a PowerShell command through Popen; the gate therefore enables that behavior. (s1, s3)",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "9d0eb8f13479ae8b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The command runs when the path 'tahg' does not exist, so this is an activating condition rather than a check for analysis or a sandbox. (s1, s3)",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "35e10de02b13fd33",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code only shows an existence check for 'tahg' followed by a PowerShell launch; it does not establish why that marker is used. (s1, s3)",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d188985f36532efc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Popen call is directly inside the if body, so each cited sink is reached from the then region without an intervening hop. (s2, s3)",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0cbabc8b3cc3a2f6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only Popen sink is the call inside the guarded if body; the rest of setup.py contains the setup call and no other caller or route to that sink. (s2, s3; f1:1-26)",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:7-9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "624c8406648e4f81",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "Popen positively supports process execution, but the command text carrying the alleged download and downloaded execution is an encoded PowerShell argument whose behavior is not readable in this code. The hidden-window option suggests evasion but does not by itself establish the claimed defense-evasi",
+          "evidence_refs": [
+            "s3",
+            "f1:9"
+          ]
+        }
+      ]
+    }
+  ]
+}

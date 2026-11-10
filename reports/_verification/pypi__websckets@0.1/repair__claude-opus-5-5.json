@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "websckets",
+    "version": "0.1",
+    "archive_sha256": "db1db47f000f9242e74ebf742da007caa20e9327b288bb05ae0d4c2b8f31f4e6"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2a48fc884dbda2e7",
+      "record_sha256_after": "3759bc1a9abc7fe7",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "c4285655032f0c28",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited sink (d1 line 45) only appends the all-users Start Menu path to a list and writes nothing. The persistence is the shortcut Save() at d1 line 100, which the admin path feeds through the folder list. Re-cited the sink to that Save() call with sink_kind fs_write, and marked the payload unreso"
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "ae4738d8aa85c2df",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The .lnk test (d1 line 81) and the basename(TargetPath) in [chrome.exe, msedge.exe, launcher.exe, brave.exe] test (d1 line 90) decide which existing shortcut gets the --load-extension argument and is saved; the behaviour is the same, the victim artifact differs. Changed effect to modifies."
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "ed7fccfd520b1ecc",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Those tests choose which browser shortcuts are patched, which is targeting a kind of victim artifact, not checking that data to steal exists. Changed purpose to targeting and rewrote purpose_reason."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The guessed recipe fields cannot be read from the code: package_manager pip is inferred from the sys.argv[1] values (egg_info/build, bdist_wheel/install) since no frontend is named, and g4's file_present needs a concrete .lnk name, while the code accepts any .lnk under the searched folders whose tar"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "3759bc1a9abc7fe7",
+      "record_sha256_after": "3759bc1a9abc7fe7",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "811eea780ea95f00",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The verifier is right about the code. In d1, state 383984 (line 64) tests IsUserAnAdmin(); the true side goes to state 362814 (lines 44-46), which only appends 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu' to the folder list and moves to 18005, the same state the false side goes to (line 67). The sh"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "3759bc1a9abc7fe7",
+      "record_sha256_after": "ec1769bbd5137236",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "9e52e33981256fc3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that unclear was the wrong label, but portability is not the fix. setup.py line 6 and d1 lines 7 and 13 run pip.main(['install','pypiwin32']) only under win32 and egg_info/build, and no branch runs another platform's version of it, so the portability definition (each branch r"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e3858361e3cd7da8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The claim holds. Portability needs each branch to run a platform-specific version of the same behaviour, and this code has no other version: when sys.platform is not win32 the whole if at line 6 is skipped and setup() is all that runs (d1 line 128). Under win32, c4 (d1 line 34) leads to the extensio"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "f0384a9ef6166ab8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The claim holds. In d1 state 383984 (lines 63-67) IsUserAnAdmin() true goes to state 362814, which appends the all-users Start Menu to the folder list (line 45) and moves to 18005; false moves straight to 18005. Both sides then run the same shortcut patching in state 790593 over the list (lines 77-1"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "ea38fdc5c23d73ab",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The claim holds. The admin check at d1 line 64 does not choose a persistence path or a platform-specific setup: both sides reach the same state 790593 code, and there is no alternative version of the behaviour, so portability does not fit. Its only effect is adding C:\\ProgramData\\Microsoft\\Windows\\S"
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "91620771f8753d03",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The drop holds. The refuter says the check controls whether the state machine continues, but it continues on both sides. At setup.py line 120 (d1 line 116) a missing %APPDATA%\\Extension goes to state 29059, which runs os.makedirs and then sets state 37668 (d1 lines 54-56); an existing folder sets st"
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "ebc01b38ef636bd0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The drop holds for the same reason as k_648bbff21c: this candidate is the if statement around that same os.path.exists test (setup.py line 120, d1 lines 116-120). Its then side only sets state 29059, which creates the folder and sets state 37668, and falling through sets state 37668 directly, by an "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ec1769bbd5137236",
+      "record_sha256_after": "3506cf2f58358644",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged after write_report.py, with two reasons left. (1) guessed recipe fields: package_manager pip stays guessed on g1 to g4, because c3 and c4 test only sys.argv[1] and no code names the frontend that supplies it. (2) out-of-set claim pending verification: c3 to c6 and g1 to g4 stay out of "
+        }
+      ]
+    }
+  ]
+}

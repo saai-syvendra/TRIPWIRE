@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@rspack/core",
+    "version": "1.1.7",
+    "archive_sha256": "ccb55d450eef5dec8732fbe4d9df92b31511198ab38b00ab1c50dbb83bdcd34d"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "23451d3c49c057f8",
+      "record_sha256_after": "23451d3c49c057f8",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Re-read d1 bytes 300050-300800: the platform switch exits unless linux, the ipinfo helper returns data.country on status 200 and 'UNK' on non-200 or a thrown request, and cases CN, RU, HK, UNK, BY, IR fall through to yield _0x490324() (the payload) with default exiting, so c1, c2, c3 and the switch_"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "23451d3c49c057f8",
+      "record_sha256_after": "33093c97275fcfa7",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "32936d1c92667a90",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The switch on the helper result has six cases: CN, RU, HK, UNK, BY, IR. On status 200 the helper returns data.country unchanged, so a response with country 'UNK' reaches the UNK case. That is a tested value of data.country, not only the helper's failure value. Added UNK to c2's value list, in code o"
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2345c9eaa77106fc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right that status 200 with country 'UNK' satisfied neither c2 nor c3 as recorded. The gap was in c2's value, not in how the conditions join: platform exit first, then one switch, so c1 && (c2 || c3) is the correct shape. c2 now includes UNK, so the expression covers that input. Ex"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "19e69394713bb9c2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The UNK part is fixed through c2, as for g1. The read-failure part does not change the expression: existsSync is the deliberate test, and a failed readFile is caught, returns null and is removed by the null filter. That is swallowed error handling, not a condition, so (c4 || c5 || c6) stays; a note "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "33093c97275fcfa7",
+      "record_sha256_after": "33093c97275fcfa7",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Re-read dist/util/support.js (d1) at bytes 300462-300724; the record needed no edit and stays flagged, with both listed reasons remaining. Reason 1: the helper does a plain axios GET of the ipinfo.io/json URL and only reads status and data.country, so it is a public geolocation lookup, not attacker "
+        }
+      ]
+    }
+  ]
+}

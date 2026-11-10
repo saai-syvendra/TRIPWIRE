@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "dfdfdfdfhhh",
+    "version": "1.0.0",
+    "archive_sha256": "3d60ebe5c1c0daaaca3c534ec45755a0b319f6eaf9594b4fffb783d55d793db4"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "044eee1fcfe4896d",
+      "packet_sha256": "223a5aa265a887a0",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "312af74abec7d8c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly tests os.path.exists on the user-specific directory, using login assigned from os.getlogin() (f1:15, f1:18, f1:19).",
+          "evidence_refs": [
+            "s1",
+            "f1:15",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "8ef1989d80382871",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence result is compared to False, so the then body requires absence of the claimed directory; login is assigned from os.getlogin() (f1:18, f1:19).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "45ed37b3c79ea25f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks directory existence through os.path.exists, supporting file_or_dir_exists (f1:19).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "7f61a3aa92c7dfcd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Only c1 controls the then region, with no additional nested decisions, so one condition is necessary and sufficient (f1:19, f1:21, f1:26).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "3a4919f16d7877ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The missing-directory test enables the writes and launch, while the else arm only passes (f1:19, f1:21, f1:26, f1:28).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c505d38bb10f9b6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch activates payload setup when its own directory is absent; the condition checks no analysis-environment property (f1:19, f1:21).",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "50d0c70a9aa38acb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test prevents repeating setup when its destination directory already exists, supporting unclear among the offered purposes (f1:19, f1:21, f1:28).",
+          "evidence_refs": [
+            "s1",
+            "f1:21",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "1f51ce83a67f4a66",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All cited write calls and the subprocess.run call sit directly inside the then body, requiring no intervening witness hops (f1:22, f1:23, f1:25, f1:26).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "da884401517c25e1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Each cited sink appears only inside this conditional body; install-command registration enters run through the same test (f1:12, f1:19, f1:22, f1:26, f1:51). The full file contains no alternate path to those sink sites.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:12",
+            "f1:19",
+            "f1:26",
+            "f1:51"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ee59c1dbb9a933a6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The writes create scripts, including a Startup entry for persistence and a launcher requesting a hidden window (f1:22, f1:23, f1:25). The imported subprocess.run launches that written launcher, which invokes the written batch commands to download and start artifacts, supporting spawning, download an",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "f1:17",
+            "f1:24",
+            "f1:25",
+            "f1:26"
+          ]
+        }
+      ]
+    }
+  ]
+}

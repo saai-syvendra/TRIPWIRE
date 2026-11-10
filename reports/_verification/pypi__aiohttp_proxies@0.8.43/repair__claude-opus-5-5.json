@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp_proxies",
+    "version": "0.8.43",
+    "archive_sha256": "b940a05937917e602453daf93e388ffa113e62b30ebab078fccef2e776cec331"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "e412486432e7e670",
+      "record_sha256_after": "e412486432e7e670",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Re-read setup.py lines 23-47: the gate, payload sinks and anchors match the code. Every flag reason still holds. (1) The base64 literal aagfdc on line 1 decodes to a Windows PE that the install writes to %TEMP% and starts with subprocess.Popen. Its logic is compiled code that this static pass cannot"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "e412486432e7e670",
+      "record_sha256_after": "e412486432e7e670",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "cd77730bdd771850",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:23 compares sys.argv[1] with install and bdist, and the whole beacon, exe drop and launch block (lines 24-48) sits behind it. So the payload runs only on a setup.py call that installs or builds the package on the machine, and not on egg_info, sdist or other commands. That limits it to one k"
+        },
+        {
+          "claim_id": "k_f5f2ceb2d0.L6.drop",
+          "claim_sha256": "0c2875aa5c411b0d",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The drop reason dead_branch holds, and the verifiers did not address its basis. setup.py is compiled as a whole before any line runs, and it has f-strings at lines 9, 20, 25, 26, 32, 34, 46 and 48, with no coding cookie on lines 1-2 (line 1 is the aagfdc literal). On any Python below 3.6 the file st"
+        },
+        {
+          "claim_id": "q_62c293d311.L6.drop",
+          "claim_sha256": "1b4bed34763cdd2e",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement around the same test (setup.py:71-72), so the reasoning for k_f5f2ceb2d0 applies. The f-strings from line 9 onward make the file fail to parse on Python below 3.6, so the statement never runs there, and on 3.6 and later its test is false, so the then side with the raise is d"
+        }
+      ]
+    }
+  ]
+}

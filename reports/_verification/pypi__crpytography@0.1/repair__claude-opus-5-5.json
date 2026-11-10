@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "crpytography",
+    "version": "0.1",
+    "archive_sha256": "28e8d2773d43945f5eb665f0d7afa759a9dae4284aab32dfbd908477240730ba"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "470475da9159ed02",
+      "record_sha256_after": "f9a97b5017c6cd36",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "e55f9aeda6217e54",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c6 (file.endswith('.lnk'), setup.py:43) and c7 (os.path.basename(shortcut.TargetPath) in ['chrome.exe','msedge.exe','launcher.exe','brave.exe'], setup.py:46) test, for each file found by os.walk over the shortcut folders, whether a browser shortcut exists to rewrite; shortcut.Save() at setup.py:50 r"
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "7bd3af1065ffb3a7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The deterministic refutation is right about the witness as written: its last hop is a bind on the string literal 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu' inside paths.append(...) at setup.py:27, which stores no function or object that a later call reaches, so shortcut.Save() at setup.py:50 is n"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed the guessed recipe fields: package_manager in g1 to g4 now states what setup.py compares (sys.argv[1] in egg_info/build or bdist_wheel/install, setup.py:6 and :13) instead of an assumed pip step, and g3 file_present now states the shortcut test the code makes (a .lnk under the three walked fol"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f9a97b5017c6cd36",
+      "record_sha256_after": "f9a97b5017c6cd36",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "87c89bfcfca8f351",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:6 and setup.py:13 are an if/elif on the same value, sys.argv[1], inside the win32 block. The line 6 side runs pip main(['install','pypiwin32']) at line 11 (download); the line 13 side writes the extension and rewrites shortcuts (lines 32-50). Flipping c4 changes which behaviour class runs, "
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "03530df6d393f922",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The skill defines portability as each branch running a platform-specific version of the same behaviour. setup.py has no such branch: the if at line 5 has no else, so non-Windows hosts run nothing but setup() at line 54, and the line 6 and line 13 arms are different behaviours split by setup step, no"
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "68084f5d32718fc6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same decision as g1 seen from the other arm: the elif at setup.py:13 is the alternative to the if at line 6 on sys.argv[1]. Its side writes background.js and manifest.json (lines 32 and 35), while the line 6 side runs a pip download (line 11). The two arms run different behaviour classes, so selects"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0ea32c7e6493cb31",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The line 5 check has no else, so no other platform gets any version of the extension drop in lines 32-36; portability as defined (a platform-specific version of the same behaviour per branch) does not apply. Line 13 picks the setup step, not a platform. The code under the guards depends on Windows-o"
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "b73069521a95cb6f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The claim is about the region at setup.py:27, paths.append of the all-users Start Menu. That line sits inside the if at line 26 (c2), inside the elif at line 13 (c5), inside the if at line 5 (c1), so all three must hold and c1 && c5 && c2 with min_conditions 3 is what the code does; the deterministi"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "6028c4531be5eb03",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "IsUserAnAdmin at setup.py:26 adds C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the paths walked at line 40, widening which victim shortcuts get rewritten at lines 48-50 to those of all users. That is the choice of victim artifact by privilege, which is targeting, with effect modifies. The refuting"
+        }
+      ]
+    }
+  ]
+}

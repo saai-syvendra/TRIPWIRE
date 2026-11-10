@@ -1,0 +1,263 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "nodepaysafesdk",
+    "version": "20.1.5",
+    "archive_sha256": "f5052c7e65490cce243746e661ee2bda95ad69ceec059de93f77d8bebe4100fa"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "2f1eed5bbcf857f2",
+      "packet_sha256": "684102b78f18b253",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "67cd7ab3f2b30ae2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The shell string at f1:5 contains `[ -r /etc/shadow ] && cat /etc/shadow || echo ...`, a test -r readability check on the shadow file used as the decision.",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "465c4859275381ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`[ -r /etc/shadow ] && cat ...` runs the guarded cat only when the test succeeds, so the positive form (exists/readable, no value) is correct.",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "34f5028a395d04c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks whether the process has read permission on /etc/shadow, which reflects the privilege level of the running user.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "580ce7b07fc4e72d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single test, `[ -r /etc/shadow ]`, guarding `cat /etc/shadow`, so expression c1 with min_conditions 1 matches.",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "653b744a71c35e77",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate does not enable the exfil: curl and the passwd/hosts/id collection run regardless, and the else arm only echoes 'No shadow access'. The gate only decides whether shadow content is added to the data, so `modifies` fits better than `enables`.",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "de7af6e9e818d178",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The shadow read happens when the file is readable, i.e. on a privileged target, and nothing backs off on analysis; this is activate.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "d9a4d843a480bb16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check only decides whether shadow data is available to read, falling back to an echo otherwise; this is data_availability.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "732bc56caf44aa4e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "Only `cat /etc/shadow` lies in the then side of the test. The exfil sink (curl run by exec at f1:9) is outside that region and runs whether or not the test succeeds.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:5",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "2f2d6d6944c32d76",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The exec call at f1:9 runs unconditionally at module load and the curl exfil is reached without the gate; only the shadow part is gated.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "544ccd99a197b0f4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "exec from child_process (f1:1) runs a shell command that cats credential files and posts them with curl, so it can do both cred_read and exfil.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:1"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "8ad5c399937453e9",
+      "packet_sha256": "e118ee7f578c984a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4583945813bc53e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The shell test [ -r /etc/shadow ] decides whether /etc/shadow is read and added to the data sent; without it only an 'No shadow access' echo is added. It enables that read and does not select a payload or change the target (s1, f1:5).",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e5a88d6b95ddf091",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The shadow file is read only when the readability test succeeds, so the code runs on a target that has the access. Nothing backs off on analysis or CI (s1, f1:5).",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "e1c411db7680fa59",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether /etc/shadow can be read and falls back to an echo when it cannot. This is a check on whether the data is available, not a targeting or anti-analysis check (s1, f1:5).",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7496be5a2719aea5",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The guard and its cat region sit inside the template string at f1:3-7, but the claimed exec sink (s2, f1:9) lies outside that region. The witness is empty, so nothing ties the exec call to the region; the data reaches exec only through the variable `command`. exec does run the string, but the witnes",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1c07fb1a6ec26728",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file has a single top-level exec(command) call (f1:9) and no exports, other callers, timers or handlers. The only way to read /etc/shadow is the shell branch guarded by [ -r ] in the command string (f1:5).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:5",
+            "f1:9"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "e5b816cc944ff215",
+      "packet_sha256": "63f22090368a8781",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a9212dbdc620c856",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The cited guard site s1 is a template-string fragment holding a shell command, not a JS decision. The exec call at f1:9 runs unconditionally at module load, with no branch, loop, or ternary around it. The only test in the string is the shell's `[ -r /etc/shadow ]`, which covers only the shadow read,",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0ff0ac3ce11b6156",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "There is no gate. The exec at f1:9 runs on every load of index.js, so the payload is not reachable only through a guarded then side.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c62616baeec2eb55",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "exec comes from a destructured require of child_process (f1:1) and runs a shell command that cats /etc/passwd and /etc/shadow and sends the base64 output via curl. Process creation can carry out this credential read.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:1",
+            "f1:9"
+          ]
+        }
+      ]
+    }
+  ]
+}

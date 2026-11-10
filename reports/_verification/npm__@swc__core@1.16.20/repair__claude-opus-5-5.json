@@ -1,0 +1,789 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@swc/core",
+    "version": "1.16.20",
+    "archive_sha256": "c7081a10cb4bedbf936763d7bc010452cf76e5d8f6915fb26f80aeaae4b524c6"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "235717999110db0b",
+      "record_sha256_after": "7c348d3a0a348ad9",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Resolved the guessed recipe field: postinstall.js line 69 does require(path.resolve(process.env.INIT_CWD, \"package.json\")) inside a try whose catch returns, so the code itself requires INIT_CWD to be set to a directory holding a package.json. Kept env_var INIT_CWD: null, added file_present [\"$INIT_C"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "7c348d3a0a348ad9",
+      "record_sha256_after": "0a09d8be62b80b60",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "1e02f49c82c0afc0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "postinstall.js:107 assigns require.resolve('@swc/wasm') to wasmBinding, the only assignment of that let. existsSync(wasmBinding) at line 110 tests that same value, so the site uses the API through a variable bound to it in the same scope, which L1 accepts. The existsSync call is part of the test of "
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "6a287a375fa485ce",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the region started at line 105, before the c5 early exit at line 110, so lines 105-109 run before c5 is decided. Those lines compute the c5 test and are not gated code. Re-cited the region as the statements after that exit, lines 113-143. All sinks and the removeRecursive ca"
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "814d5c89b74899e1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation objected only that the region began before the c5 decision. The expression c1 && c2 && c3 && c4 && c5 is unchanged and correct: the catch return at line 75 and the returns at lines 71, 97, 102 and 111 are sequential, so all five must hold. With the region now at lines 113-143, the who"
+        },
+        {
+          "claim_id": "k_6063d6486a.L6.drop",
+          "claim_sha256": "9ce5d337dfb1f0bc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:60 process.platform === 'android' only picks which addon file requireNative tries. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postins"
+        },
+        {
+          "claim_id": "k_7279e5af9a.L6.drop",
+          "claim_sha256": "e2dcc5fa32e52066",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:61 process.arch === 'arm64' only picks which Android addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:8"
+        },
+        {
+          "claim_id": "k_eba4691ef6.L6.drop",
+          "claim_sha256": "d2a0cec9e69e1db0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:113 process.arch === 'arm64' only picks which Windows addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:"
+        },
+        {
+          "claim_id": "k_be4d282e19.L6.drop",
+          "claim_sha256": "aea9d43945507a89",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:152 process.arch === 'arm64' only picks which macOS addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81"
+        },
+        {
+          "claim_id": "k_4083d042e5.L6.drop",
+          "claim_sha256": "b262eceb2a6a3e5a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:180 process.arch === 'arm64' only picks which FreeBSD addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:"
+        },
+        {
+          "claim_id": "k_dfcf046170.L6.drop",
+          "claim_sha256": "9822aedd134523d8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:222 process.arch === 'arm64' only picks which Linux addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81"
+        },
+        {
+          "claim_id": "k_51936c7c12.L6.drop",
+          "claim_sha256": "7545c2e9024e4bc1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:68 requires @swc/core-android-arm64 in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the recor"
+        },
+        {
+          "claim_id": "k_3f9d93f161.L6.drop",
+          "claim_sha256": "caf0ef976f3a3c28",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:73 process.arch === 'arm' only picks which Android addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81)"
+        },
+        {
+          "claim_id": "k_d3825fda5c.L6.drop",
+          "claim_sha256": "fdf95e783145ccaf",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:248 process.arch === 'arm' only picks which Linux addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81),"
+        },
+        {
+          "claim_id": "k_f2e2a06f09.L6.drop",
+          "claim_sha256": "cc1898376be00420",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:80 requires @swc/core-android-arm-eabi in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the re"
+        },
+        {
+          "claim_id": "k_a26f75e203.L6.drop",
+          "claim_sha256": "bf86925c088f7bd3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:88 process.platform === 'win32' only picks which addon file requireNative tries. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinsta"
+        },
+        {
+          "claim_id": "k_00c293dcba.L6.drop",
+          "claim_sha256": "c6f3992ac1774646",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:89 process.arch === 'x64' only picks which Windows addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81)"
+        },
+        {
+          "claim_id": "k_ce4c309a46.L6.drop",
+          "claim_sha256": "2168a719e1817924",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:140 process.arch === 'x64' only picks which macOS addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81),"
+        },
+        {
+          "claim_id": "k_70700f11bf.L6.drop",
+          "claim_sha256": "02477138927dde8e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:168 process.arch === 'x64' only picks which FreeBSD addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81"
+        },
+        {
+          "claim_id": "k_a0d24ca414.L6.drop",
+          "claim_sha256": "b0042b9305086de5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:196 process.arch === 'x64' only picks which Linux addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81),"
+        },
+        {
+          "claim_id": "k_3c58ebd645.L6.drop",
+          "claim_sha256": "8cf035dcbdff213a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:96 requires @swc/core-win32-x64-msvc in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the reco"
+        },
+        {
+          "claim_id": "k_d25c30cab3.L6.drop",
+          "claim_sha256": "6f308c6559d24e6d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:101 process.arch === 'ia32' only picks which Windows addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:8"
+        },
+        {
+          "claim_id": "k_4dbff90628.L6.drop",
+          "claim_sha256": "3bf7eacf0c5c2342",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:108 requires @swc/core-win32-ia32-msvc in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the re"
+        },
+        {
+          "claim_id": "k_928ad6504a.L6.drop",
+          "claim_sha256": "bf5cc43ec1a6c206",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:120 requires @swc/core-win32-arm64-msvc in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the r"
+        },
+        {
+          "claim_id": "k_e9a5386e0b.L6.drop",
+          "claim_sha256": "d2ab30e60db17f70",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:128 process.platform === 'darwin' only picks which addon file requireNative tries. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postins"
+        },
+        {
+          "claim_id": "k_a8cff79eac.L6.drop",
+          "claim_sha256": "a921969d56747892",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:135 requires @swc/core-darwin-universal in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the r"
+        },
+        {
+          "claim_id": "k_dc5c8ca781.L6.drop",
+          "claim_sha256": "8ef3a051fb6b5a5d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:147 requires @swc/core-darwin-x64 in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the record "
+        },
+        {
+          "claim_id": "k_dde47a0100.L6.drop",
+          "claim_sha256": "3266c4f4fc937b3c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:159 requires @swc/core-darwin-arm64 in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the recor"
+        },
+        {
+          "claim_id": "k_9f351fe240.L6.drop",
+          "claim_sha256": "0f9aefc9508e799f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:167 process.platform === 'freebsd' only picks which addon file requireNative tries. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postin"
+        },
+        {
+          "claim_id": "k_f0ef1f0f76.L6.drop",
+          "claim_sha256": "358a278cdc1f9020",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:175 requires @swc/core-freebsd-x64 in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the record"
+        },
+        {
+          "claim_id": "k_ac6c34a66c.L6.drop",
+          "claim_sha256": "3a6bf1d6c5346d7d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:187 requires @swc/core-freebsd-arm64 in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the reco"
+        },
+        {
+          "claim_id": "k_92a8e358be.L6.drop",
+          "claim_sha256": "fc1a99154c13fc0d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:195 process.platform === 'linux' only picks which addon file requireNative tries. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinst"
+        },
+        {
+          "claim_id": "k_e62c6ffe1a.L6.drop",
+          "claim_sha256": "7b159b8ffbc03917",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:12 process.platform === 'linux' inside isMusl only decides whether libc detection runs. isMusl is called only at lines 197, 223 and 261, all under the linux branch at line 195, so the test is always true there and repeats that plumbing check. It decides no behaviour."
+        },
+        {
+          "claim_id": "k_d187c8623b.L6.drop",
+          "claim_sha256": "47544c69bb8d6ae1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:28 reads /usr/bin/ldd to detect musl. The result only picks the musl or gnu addon file name at lines 197, 223 and 261, and both sides are the same load step, so flipping it starts no different behaviour class. It locates the binary, which is plumbing, and its effect on install behaviour i"
+        },
+        {
+          "claim_id": "k_c668f8d674.L6.drop",
+          "claim_sha256": "11356fda49a7679a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:52 runs ldd --version to detect musl. The result only picks the musl or gnu addon file name at lines 197, 223 and 261, and both sides are the same load step, so flipping it starts no different behaviour class. It locates the binary, which is plumbing, and its effect on install behaviour i"
+        },
+        {
+          "claim_id": "k_1a1a5b2f0a.L6.drop",
+          "claim_sha256": "95d88a706b92c556",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:204 requires @swc/core-linux-x64-musl in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the rec"
+        },
+        {
+          "claim_id": "k_d5aed10b83.L6.drop",
+          "claim_sha256": "c019a1fca673d0b9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:216 requires @swc/core-linux-x64-gnu in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the reco"
+        },
+        {
+          "claim_id": "k_e0d2694ea2.L6.drop",
+          "claim_sha256": "55d596fb4ff289ed",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:230 requires @swc/core-linux-arm64-musl in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the r"
+        },
+        {
+          "claim_id": "k_18f78e5436.L6.drop",
+          "claim_sha256": "c88de5e2893fd1ca",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:242 requires @swc/core-linux-arm64-gnu in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the re"
+        },
+        {
+          "claim_id": "k_c27658a1de.L6.drop",
+          "claim_sha256": "0a0e267ac288dbd5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:255 requires @swc/core-linux-arm-gnueabihf in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which th"
+        },
+        {
+          "claim_id": "k_329a94aaa6.L6.drop",
+          "claim_sha256": "edb4becd24db80c0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:260 process.arch === 'riscv64' only picks which Linux addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:"
+        },
+        {
+          "claim_id": "k_f3aa456f09.L6.drop",
+          "claim_sha256": "17312240296bf51b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:268 requires @swc/core-linux-riscv64-musl in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the"
+        },
+        {
+          "claim_id": "k_33ec9e5fee.L6.drop",
+          "claim_sha256": "6c4f0b5aed544a55",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:280 requires @swc/core-linux-riscv64-gnu in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the "
+        },
+        {
+          "claim_id": "k_6bc371d31e.L6.drop",
+          "claim_sha256": "81f3eda96da63404",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:286 process.arch === 'ppc64' only picks which Linux addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81"
+        },
+        {
+          "claim_id": "k_4a597ccb0f.L6.drop",
+          "claim_sha256": "cad36fc09172808d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:293 requires @swc/core-linux-ppc64-gnu in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the re"
+        },
+        {
+          "claim_id": "k_df9bec187d.L6.drop",
+          "claim_sha256": "a8d6d5c146a361dc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:298 process.arch === 's390x' only picks which Linux addon file is tried. Both sides are the same load step with a different file name, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81"
+        },
+        {
+          "claim_id": "k_75faf830d4.L6.drop",
+          "claim_sha256": "9000e206efdc95e5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:305 requires @swc/core-linux-s390x-gnu in a try. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which the re"
+        },
+        {
+          "claim_id": "k_fb762a24cf.L6.drop",
+          "claim_sha256": "c838ee2d7de0e22d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:320 NAPI_RS_FORCE_WASI cannot change c3. If a native binding loaded, it stays in nativeBinding even when the wasi loads fail, so require('./binding.js') still succeeds. If none loaded, !nativeBinding enters the block anyway. Flipping the variable only swaps which binary is bound, so no in"
+        },
+        {
+          "claim_id": "k_e12e039475.L6.drop",
+          "claim_sha256": "f2937d5dfbb5fa63",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:330 requires @swc/core-wasm32-wasi in a try, the last load attempt. Its failure leads to the throw at lines 345-347, which is exactly what c3 records at postinstall.js:81. It is part of that one dependency_tree condition, not a separate gate."
+        },
+        {
+          "claim_id": "q_796dcb54bb.L6.drop",
+          "claim_sha256": "87f454567c2cfb53",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:60 is the android if of the requireNative chain. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lin"
+        },
+        {
+          "claim_id": "q_8c5cd98767.L6.drop",
+          "claim_sha256": "af980f5e1ea9eede",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:61 is the arm64 if in the android branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-"
+        },
+        {
+          "claim_id": "q_3aa6e21091.L6.drop",
+          "claim_sha256": "19ea01896c28828c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:67 is the try around the @swc/core-android-arm64 require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), whi"
+        },
+        {
+          "claim_id": "q_00edcad60b.L6.drop",
+          "claim_sha256": "c37c4a71240adb58",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:73 is the arm if in the android branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-33"
+        },
+        {
+          "claim_id": "q_53649c10d5.L6.drop",
+          "claim_sha256": "db9b3fc889b8446f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:79 is the try around the @swc/core-android-arm-eabi require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), "
+        },
+        {
+          "claim_id": "q_1763b91786.L6.drop",
+          "claim_sha256": "803474a2429e6935",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:88 is the win32 if of the requireNative chain. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines"
+        },
+        {
+          "claim_id": "q_018fbad750.L6.drop",
+          "claim_sha256": "a6b3220d301e0e2e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:89 is the x64 if in the win32 branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-337 "
+        },
+        {
+          "claim_id": "q_5842bdbe87.L6.drop",
+          "claim_sha256": "71354c2c074bab20",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:95 is the try around the @swc/core-win32-x64-msvc require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), wh"
+        },
+        {
+          "claim_id": "q_05f8ec6836.L6.drop",
+          "claim_sha256": "6057199a3a7eb4dc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:101 is the ia32 if in the win32 branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-33"
+        },
+        {
+          "claim_id": "q_20be3afa90.L6.drop",
+          "claim_sha256": "c51059585dc5a0af",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:107 is the try around the @swc/core-win32-ia32-msvc require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), "
+        },
+        {
+          "claim_id": "q_f904047160.L6.drop",
+          "claim_sha256": "6013da3c319a03d3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:113 is the arm64 if in the win32 branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-3"
+        },
+        {
+          "claim_id": "q_a645227989.L6.drop",
+          "claim_sha256": "c9bf809ab2efa1e6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:119 is the try around the @swc/core-win32-arm64-msvc require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96),"
+        },
+        {
+          "claim_id": "q_94e69c86be.L6.drop",
+          "claim_sha256": "4436a2b13fd9a28e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:128 is the darwin if of the requireNative chain. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lin"
+        },
+        {
+          "claim_id": "q_e3e94cf12d.L6.drop",
+          "claim_sha256": "9c3d20dfeb92adcb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:134 is the try around the @swc/core-darwin-universal require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96),"
+        },
+        {
+          "claim_id": "q_e857b19977.L6.drop",
+          "claim_sha256": "0c3c605ea244fa14",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:140 is the x64 if in the darwin branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-33"
+        },
+        {
+          "claim_id": "q_ed9b41416c.L6.drop",
+          "claim_sha256": "992db38ab893b17c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:146 is the try around the @swc/core-darwin-x64 require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), which"
+        },
+        {
+          "claim_id": "q_b8c36f10aa.L6.drop",
+          "claim_sha256": "bd4e4ad5101e9323",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:152 is the arm64 if in the darwin branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-"
+        },
+        {
+          "claim_id": "q_973405e115.L6.drop",
+          "claim_sha256": "23cbd9fd7f927463",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:158 is the try around the @swc/core-darwin-arm64 require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), whi"
+        },
+        {
+          "claim_id": "q_1b14a0a147.L6.drop",
+          "claim_sha256": "4717b12da9134607",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:167 is the freebsd if of the requireNative chain. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and li"
+        },
+        {
+          "claim_id": "q_1b60f1f487.L6.drop",
+          "claim_sha256": "7329d956835a5329",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:168 is the x64 if in the freebsd branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-3"
+        },
+        {
+          "claim_id": "q_ff5510d8b0.L6.drop",
+          "claim_sha256": "8a749e5486bd615b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:174 is the try around the @swc/core-freebsd-x64 require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), whic"
+        },
+        {
+          "claim_id": "q_3baabd46e7.L6.drop",
+          "claim_sha256": "2cc93b935f6f697e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:180 is the arm64 if in the freebsd branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320"
+        },
+        {
+          "claim_id": "q_90c0829d96.L6.drop",
+          "claim_sha256": "cd6d2421f01ae5de",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:186 is the try around the @swc/core-freebsd-arm64 require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), wh"
+        },
+        {
+          "claim_id": "q_fdf7ff64fa.L6.drop",
+          "claim_sha256": "7cab7702483ffa2a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:195 is the linux if of the requireNative chain. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and line"
+        },
+        {
+          "claim_id": "q_53685bf219.L6.drop",
+          "claim_sha256": "894a33914a41dd94",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:196 is the x64 if in the linux branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-337"
+        },
+        {
+          "claim_id": "q_ee6b2c9738.L6.drop",
+          "claim_sha256": "c664a49bb93653cd",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:12 is the linux if inside isMusl. isMusl is called only at lines 197, 223 and 261, all under the linux branch at line 195, so the decision always takes its then side. It only runs libc detection to pick an addon file name and decides no behaviour."
+        },
+        {
+          "claim_id": "q_0fbc783c52.L6.drop",
+          "claim_sha256": "f19d2b4140de2cb3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:27 is the try around reading /usr/bin/ldd. Its catch returns null so the next libc detection method runs. The final answer only picks the musl or gnu addon file name at lines 197, 223 and 261, the same load step on both sides, so this is plumbing that locates the binary."
+        },
+        {
+          "claim_id": "q_283362ff57.L6.drop",
+          "claim_sha256": "8fad7f1380ec49e2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:51 is the try around ldd --version. Its catch returns false, the default of gnu. The answer only picks the musl or gnu addon file name at lines 197, 223 and 261, the same load step on both sides, so this is plumbing that locates the binary."
+        },
+        {
+          "claim_id": "q_34eb303a8b.L6.drop",
+          "claim_sha256": "10561756354d3ecf",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:203 is the try around the @swc/core-linux-x64-musl require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), w"
+        },
+        {
+          "claim_id": "q_2370e246fd.L6.drop",
+          "claim_sha256": "7b8f41d467e8165d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:215 is the try around the @swc/core-linux-x64-gnu require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), wh"
+        },
+        {
+          "claim_id": "q_fbf01e6947.L6.drop",
+          "claim_sha256": "3edc3971f2a0b804",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:222 is the arm64 if in the linux branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-3"
+        },
+        {
+          "claim_id": "q_d97dfa2d6c.L6.drop",
+          "claim_sha256": "75b231b6ba369169",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:229 is the try around the @swc/core-linux-arm64-musl require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96),"
+        },
+        {
+          "claim_id": "q_cb9e446199.L6.drop",
+          "claim_sha256": "32fbb965d4f65faf",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:241 is the try around the @swc/core-linux-arm64-gnu require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), "
+        },
+        {
+          "claim_id": "q_d1bbd6809a.L6.drop",
+          "claim_sha256": "0db01466212494e1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:248 is the arm if in the linux branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-337"
+        },
+        {
+          "claim_id": "q_c57837e99d.L6.drop",
+          "claim_sha256": "edbc7bb029e74ffd",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:254 is the try around the @swc/core-linux-arm-gnueabihf require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 9"
+        },
+        {
+          "claim_id": "q_6b1a70a6ab.L6.drop",
+          "claim_sha256": "606d1e69d49a59dc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:260 is the riscv64 if in the linux branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320"
+        },
+        {
+          "claim_id": "q_b80d30c06a.L6.drop",
+          "claim_sha256": "5ba89449460b2606",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:267 is the try around the @swc/core-linux-riscv64-musl require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96"
+        },
+        {
+          "claim_id": "q_4744ca4880.L6.drop",
+          "claim_sha256": "3614304d842acc3d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:279 is the try around the @swc/core-linux-riscv64-gnu require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96)"
+        },
+        {
+          "claim_id": "q_f59b8aad35.L6.drop",
+          "claim_sha256": "e753d5a7e33c3150",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:286 is the ppc64 if in the linux branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-3"
+        },
+        {
+          "claim_id": "q_67498c6271.L6.drop",
+          "claim_sha256": "a0d4d59c75560abc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:292 is the try around the @swc/core-linux-ppc64-gnu require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), "
+        },
+        {
+          "claim_id": "q_17b138f320.L6.drop",
+          "claim_sha256": "7a2ba1af1a3fc924",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:298 is the s390x if in the linux branch. Its branches only choose addon file names, the same load step on each side, so flipping it starts no different behaviour class (plumbing). Install behaviour follows only from require('./binding.js') throwing (c3, postinstall.js:81), and lines 320-3"
+        },
+        {
+          "claim_id": "q_463350089c.L6.drop",
+          "claim_sha256": "2a07d88ceff2b8db",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:304 is the try around the @swc/core-linux-s390x-gnu require. Success returns the binding, failure falls through to the next load. That is one attempt inside the binding load, not a behaviour of its own, and its outcome reaches install behaviour only through c3 (postinstall.js:81 and 96), "
+        },
+        {
+          "claim_id": "q_442a33545e.L6.drop",
+          "claim_sha256": "004d5e5f749bec66",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:320 if (!nativeBinding || NAPI_RS_FORCE_WASI) only tries the wasi builds. The !nativeBinding side is the last step of the load that c3 records. The env var side cannot change c3: a loaded native binding stays in nativeBinding when the wasi loads fail, so require('./binding.js') still succ"
+        },
+        {
+          "claim_id": "q_3caecf74f1.L6.drop",
+          "claim_sha256": "42420c9be875b480",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:324 if (process.env.NAPI_RS_FORCE_WASI) has console.error(err) as its whole body and no else. It is not a binding selection as the refutation says: flipping it changes only whether an error is printed, so log_only fits."
+        },
+        {
+          "claim_id": "q_9da4935ce3.L6.drop",
+          "claim_sha256": "1c70fa129188ddc1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:329 is the try around the @swc/core-wasm32-wasi require, the last load attempt. Its failure leads to the throw at lines 345-347, which is exactly what c3 records at postinstall.js:81. It is part of that one dependency_tree condition, not a separate gate."
+        },
+        {
+          "claim_id": "q_9094380b68.L6.drop",
+          "claim_sha256": "73d0e1623b045527",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This candidate is the catch side of the try at binding.js:329. That handler holds only the if at line 332 that may call console.error, so log_only fits. The load outcome the refutation points to is the check at line 339 leading to the throw, which c3 records at postinstall.js:81, so nothing is misse"
+        },
+        {
+          "claim_id": "q_179c54488d.L6.drop",
+          "claim_sha256": "335bcea645545146",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "binding.js:332 if (process.env.NAPI_RS_FORCE_WASI) has console.error(err) as its whole body and no else. It is not a binding selection as the refutation says: flipping it changes only whether an error is printed, so log_only fits."
+        }
+      ]
+    }
+  ]
+}

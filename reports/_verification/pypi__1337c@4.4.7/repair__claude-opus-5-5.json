@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "1337c",
+    "version": "4.4.7",
+    "archive_sha256": "b0deb6c2403b2229825946bac127dc4a51f4dba29c39892e463dd41b8a15a6df"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2d7b4aa7bd190188",
+      "record_sha256_after": "a0b005a054a5e089",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "cleared",
+          "reason": "setup.py line 9 reads os.environ['COMPUTERNAME'] unconditionally and line 10 sends that value in the beacon, so this is data collection (recon/exfil), not a check. The bare 'except: pass' on lines 17-18 only swallows the KeyError and never changes course. Under the gate-analysis rules, an unconditio"
+        }
+      ]
+    }
+  ]
+}

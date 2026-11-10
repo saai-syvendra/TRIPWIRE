@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@antv/data-samples",
+    "version": "1.2.1",
+    "archive_sha256": "a9eec26852057d910e8a407b941be4be4450b76a6ae2ce85efc49a4c38b7f8cd"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ee4a8b0ea796b704",
+      "record_sha256_after": "ff56be60bda42b5f",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed what the code supports: registered decode d1 (obfio_objprop, rotation checksum matched) and d2 (scramble_feistel with key e6 and salt t6 from index.js) and recovered every flagged value: c2 lock %TMP%/tmp.0987654321.lock, c3 GITHUB_TOKEN prefix ghp_decoyGitHubToken, c4 'ru' on the Intl locale "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ff56be60bda42b5f",
+      "record_sha256_after": "30ff6c13b21e4a57",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "da824229751554cb",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "In jg() (d2 bytes 173778-173876) the first check is Intl.DateTimeFormat().resolvedOptions().locale.toLowerCase().startsWith('ru'), not an env var; only the second site (173899-174037) reads LC_ALL||LC_MESSAGES||LANGUAGE||LANG. Split c4 into c4 (Intl locale, first site) and new c6 (env chain, second "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "30ff6c13b21e4a57",
+      "record_sha256_after": "02af9f2ed6b8a187",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed one reason and added two the code shows. DP's M9 branch is now gate g6 (c7 GITHUB_ACTIONS truthy, c8 GITHUB_WORKFLOW_REF includes 'release.yml', c9 GITHUB_REPOSITORY includes '/somerepository'), with the M9.execute OIDC token fetch (cred_read) and the publishPackage _n call (self_propagation) "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "02af9f2ed6b8a187",
+      "record_sha256_after": "593aa899dfeab3f3",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "a1e5798ec9e9a84c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right: the region cited the top-level IP() call, which runs before YP. The region is now the 11 statements after 'await YP()' in IP's try block, the code the via call puts on the guard's side. The witness starts at the finalize call inside that region, so the IP def hop is gone, a"
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "92ad63a3d24856be",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same fix as g3.then.L3: the region moved from the top-level IP() call to the statements after 'await YP()' in IP's try block, and the witness now starts at the finalize call in that region. N6, DP and jg all exit the process inside YP, so that code is on the guard's side. unresolved dynamic_dispatch"
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "749b9d0f7d319cad",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right: jg has a third test, (SystemRoot ? LANG||LANGUAGE||LC_ALL||'' : '').toLowerCase().startsWith('ru'), which returns true and exits. It can differ from c6 because LANG comes first there. Added c14 at that test, the expression is now c4 && c6 && c14, the guard lists c14 and min"
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "b4f70bb0472169b6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The claim changed because c14 joined the expression. The label evade stands: jg exits when it sees a Russian locale, and the gate-analysis skill lists 'if the locale starts with ru, return' under evade gates. The reviewer's case for activate is a fair reading of the definition, so this stays a judge"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "f04fa8b805c8b673",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The claim changed because c14 joined the expression and purpose_reason now describes it. The label targeting stands: the refuting reviewer's own evidence says the locale checks indicate targeting, and jg excludes machines with a Russian locale."
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "c6e2a33c18d76016",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same region fix as g3.then.L3: the region is now the statements after 'await YP()' in IP's try block, and the witness starts at the finalize call there. The guard site moved to the outer if in DP with via unchanged (DP call, then YP call). process.exit runs in DP, so via applies. unresolved dynamic_"
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "e9ab74e7cfe50a12",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right: DP tests the repository only inside if(process.env.GITHUB_ACTIONS), so the run also continues when GITHUB_ACTIONS is unset and the repository matches. Added c15 (GITHUB_ACTIONS falsy), the expression is now c15 || c5, and the guard is the whole outer if at 434000, which hol"
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "73c17e23d8cee280",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The claim changed because the expression is now c15 || c5. The label evade stands: DP exits inside a GitHub Actions run of the named repository, so it backs off when it spots that CI. The reviewer's case for activate is a fair judgement call, but the code does not contradict evade, and the evidence "
+        },
+        {
+          "claim_id": "q_13b92544b9.L6.drop",
+          "claim_sha256": "cfc244b784eaca3d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "z6 runs if(process.env.__DAEMONIZED)return!1 and then spawns process.execPath detached with env {...process.env,__DAEMONIZED:'1'}. The variable is set by the payload for its own child in the same run and stops that child spawning again, which is the skill's definition of a re-entry guard. The refuti"
+        }
+      ]
+    }
+  ]
+}

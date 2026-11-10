@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifullSoop",
+    "version": "1.0.0",
+    "archive_sha256": "4108e0a81430fac7a8a5bf1ea199802b9000da9cf129651a4555eba1213b84b7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "4c78ba9f1fe7f85e",
+      "packet_sha256": "bbbf5ba700088144",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b358ebe9ae1be3e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly compares `os.name` to a string, so the cited site tests that API (s1; f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "bb1d6978c2216545",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is entered when `os.name == \"nt\"`; no negation reverses the test (s1, s2; f1:13).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads Python's `os.name` property directly, making `os` the category (s1; f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "390e7a7937bcf0c0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one guard and its sole condition is `os.name == \"nt\"`; the then region is exactly the body of that `if`, so the minimum condition set is one (s1-s3; f1:13-18).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the guarded path the code obtains response text and executes it, so the gate enables the payload behaviors (s3-s5; f1:13-16, f2:13-16).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload code runs on the `nt` branch, identifying Windows as the target environment (s1-s3; f1:13-16).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS-name check selects whether the install-time payload runs, which targets a particular operating system (s1-s3; f1:13-16).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "227415c65d1c4e9b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited body is controlled by the `if os.name == \"nt\"` then branch, and both cited calls occur directly in that body (s2-s5; f1:13-16, f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6a7ec9e6fd22b618",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Both calls are inline in the custom install command's guarded `run` method, and the setup configuration registers that class as the install command; there is no separate path to either inline sink in the file (s2-s5; f1:10-19, f2:10-19).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "f1:10",
+            "f2:10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b68939dec5ac0bdd",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The `requests.get(...).text` expression is a network download (s4), but the other sink executes the result of decrypting a literal ciphertext; the readable code does not establish that this executed content was downloaded (s5; f1:16).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

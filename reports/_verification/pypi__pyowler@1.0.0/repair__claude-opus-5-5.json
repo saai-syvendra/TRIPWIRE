@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pyowler",
+    "version": "1.0.0",
+    "archive_sha256": "56e5884d24e97508aeaea82cd5b257dfc2e75eb62451480138008b226e5a6918"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f6164df1990e56f0",
+      "record_sha256_after": "f6164df1990e56f0",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Both remaining reasons are real limits of static analysis, not errors. (1) c1 at d1 line 4 tests os.path.exists(f'C:\\Users\\{login}\\...\\Start Menu\\Programs\\System64\\'), where login = os.getlogin() at d1 line 3 is the account name read at run time, so the path can only be recovered with the login left"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f6164df1990e56f0",
+      "record_sha256_after": "f6164df1990e56f0",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "d42acb01c54c7e43",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The only behaviour gpt-6-luna disputes is defense_evasion; its evidence accepts the other listed behaviours. That behaviour is in the code. d1 line 7 writes WIN32.vbs with `WshShell.Run chr(34) & \"...WIN32.bat\" & Chr(34), 0`, where the second Run argument is window style 0, a hidden window. The sink"
+        }
+      ]
+    }
+  ]
+}

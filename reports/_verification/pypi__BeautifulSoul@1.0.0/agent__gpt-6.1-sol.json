@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifulSoul",
+    "version": "1.0.0",
+    "archive_sha256": "630d8152bae3323546ca5b94b97f9d356cd8d1bfa54ce13a463728df518e04e2"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "ae4041ae80556a94",
+      "packet_sha256": "08341b4aa037eeb8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "fc1217256b779b35",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly tests os.name, imported in the same function immediately beforehand (s1; f1:12).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "96f7e64be877a23b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm uses direct equality with \"nt\", with no negation or early exit reversing its polarity (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested os.name value identifies the operating system family, supporting the os category (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "b5df6421c8c899c5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single OS equality condition controls both versions of the guarded block; no additional condition or alternative exists, so the minimum is one (s2, s3, s4).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS condition enables retrieval and execution in its then arm, with no alternate payload arm (f2:13; s4).",
+          "evidence_refs": [
+            "f2:13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition activates retrieval and execution when os.name equals nt, without testing for analysis or sandbox indicators (s1, s4).",
+          "evidence_refs": [
+            "s1",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition restricts remote code retrieval and execution to the nt OS family, supporting targeting; the visible code offers no alternate portability implementation (f2:13; s4).",
+          "evidence_refs": [
+            "f2:13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ac247c7b4ccceb04",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both files place their payload statement in the OS check; the derived network and exec calls sit directly in the cited then region and need no witness hops (f1:13; f2:13; s4, s5, s6).",
+          "evidence_refs": [
+            "f1:13",
+            "f2:13",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "5e890f1cc3fd9b78",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete files show the payload statement only inside run under its OS condition; the install command registration reaches that method without bypassing the condition (f1:11; f1:13; f1:31; f2:11; f2:13; f2:31).",
+          "evidence_refs": [
+            "f1:11",
+            "f1:13",
+            "f1:31",
+            "f2:11",
+            "f2:13",
+            "f2:31"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "5daaebb2a4402c95",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The imported requests module supplies the network get call, and the returned response text is stripped of markup delimiters and passed to exec (f2:14; s5, s6).",
+          "evidence_refs": [
+            "f2:14",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

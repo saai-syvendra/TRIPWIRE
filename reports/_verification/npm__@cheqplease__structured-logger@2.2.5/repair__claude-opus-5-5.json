@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@cheqplease/structured-logger",
+    "version": "2.2.5",
+    "archive_sha256": "3d7a73d851699f7bf5a1205d5a5add6da617cedfe713d4d246b74cdba7aa66ff"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "0bca5600b8d25f74",
+      "record_sha256_after": "6ab35ba8996d9b75",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "9304ebc33089665d",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "preinstall-hook.js:34-36 is a ternary that only picks spawn('cmd.exe') or spawn('/bin/bash', ['-i']); both arms feed the same shell into the socket at lines 39-41. Choosing the shell is plumbing under the gate definition, so c1 and g1 are removed, k_f6bea5bfc3 and q_b471e690fd are dropped as plumbin"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "cleared",
+          "reason": "With g1 removed, both reasons are gone. The guessed os recipe field belonged to g1's else arm. The review question was whether to keep g1, and it is now dropped as plumbing. The URL-string host that makes the connect callback probably unreachable stays documented in execution.notes and in the networ"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "6ab35ba8996d9b75",
+      "record_sha256_after": "6ab35ba8996d9b75",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_f6bea5bfc3.L6.drop",
+          "claim_sha256": "a36e4b1f45475e5f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "preinstall-hook.js:34 compares os.platform() to 'win32' only to pick the executable for the local const shell: spawn(\"cmd.exe\") or spawn(\"/bin/bash\", [\"-i\"]). Both results get identical handling at lines 39-43 (socket piped to stdin, stdout and stderr piped to the socket, destroy on exit), and the b"
+        },
+        {
+          "claim_id": "q_b471e690fd.L6.drop",
+          "claim_sha256": "31c91905bd3394b1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the ternary at preinstall-hook.js:34-36 around the same win32 test as k_f6bea5bfc3. Its two arms are spawn(\"cmd.exe\") and spawn(\"/bin/bash\", [\"-i\"]), and its only output is the shell variable, which lines 39-43 treat the same way on either arm: an interactive shell wired to the same socket. "
+        }
+      ]
+    }
+  ]
+}

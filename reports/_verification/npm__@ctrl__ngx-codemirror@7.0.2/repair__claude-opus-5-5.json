@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@ctrl/ngx-codemirror",
+    "version": "7.0.2",
+    "archive_sha256": "6c0ae59058abfbe99a58a57435bd801c69576372b2d7a70a18debe7d51476c50"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "c58569fb89d4dc78",
+      "record_sha256_after": "2d2470fd08152b18",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "g4 file_present is no longer marked guessed: AWSModule.parseAwsProfiles reads ~/.aws/credentials and ~/.aws/config, and initialize() builds STS credentials only through fromIni({profile}), so a shared credentials file is what the code uses. Two reasons remain. First, g5 file_present (~/.config/gclou"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2d2470fd08152b18",
+      "record_sha256_after": "5aa21f5199ff24e6",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "d5b8953631b660a9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The three cited sinks hold: te.isAvailable() reaches install, downloadFile and fetch (download), and te.scanFilesystem() spawns the downloaded trufflehog binary over the home directory (exec_downloaded, cred_read). But the branch listed write_file and delete_file with no sink behind them. Added writ"
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "9f3fc56614fe28ee",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The claim is cred_read on a network sink, not exfiltration, so the objection does not apply. The cited n.getAllSecretValues() is the package's AWSModule method, and it calls F.send with ListSecretsCommand and GetSecretValueCommand on a SecretsManagerClient for each region. Those are remote API calls"
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "625d4374cd3a07c8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The claim is cred_read on a network sink, not exfiltration, so the objection does not apply. The cited F.getAllSecretValues() is the package's GCPModule method, which calls listSecrets and getSecretValue, and these call secretsClient.listSecrets and accessSecretVersion on a SecretManagerServiceClien"
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "a9975ef736863291",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "GCPModule.initialize sets isValidCredentials only inside if(t&&r), where t is auth.getProjectId() and r is auth.getClient(), and F.isValid() returns that flag. The two are separate tests: getProductionProjectId can return a project ID from GCLOUD_PROJECT alone, while getClient goes through getApplic"
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "6f9f1d6c6deaa9cc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The guard r.isAuthenticated() is !!this.token, and the constructor sets this.token from getToken(). getToken returns process.env.GITHUB_TOKEN when it is truthy, otherwise the trimmed gh auth token output when non-empty, otherwise null. A decision on a helper is read through what it holds, so the sho"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "5aa21f5199ff24e6",
+      "record_sha256_after": "b519047de6c92b79",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed the guessed reason: g5.then file_present is no longer guessed, because google-auth's _tryGetApplicationCredentialsFromWellKnownFile joins HOME/.config with gcloud/application_default_credentials.json and tests it with existsSync. The recipe was also incomplete. initialize() calls getProjectId "
+        }
+      ]
+    }
+  ]
+}

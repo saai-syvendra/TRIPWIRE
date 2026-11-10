@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "elf-stats-caroling-sled-530",
+    "version": "999.0.1",
+    "archive_sha256": "ebdce1979cbc1c0b792d6cb4d400b568260ac134a3aada914bdd10e402c2e9c4"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "1c43a13c8303d160",
+      "packet_sha256": "7469a49e20fd59fc",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_bdca1b3460.L6.drop",
+          "claim_sha256": "0579d7c692754c79",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The cited fs.readdirSync(dir) is a plain directory read that feeds the collected data, not a comparison or branch; the code that sends it (f1:29-53) runs unconditionally, so this is not an environment gate.",
+          "evidence_refs": [
+            "s1",
+            "f1:7",
+            "f1:29"
+          ]
+        },
+        {
+          "claim_id": "q_ae5fefc3c1.L6.drop",
+          "claim_sha256": "84204cc83399e51e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The cited try statement only wraps the directory read and returns an error string in its catch; it tests no environment property and does not decide whether the later POST runs (f1:29-53 are unconditional).",
+          "evidence_refs": [
+            "s2",
+            "f1:6",
+            "f1:24",
+            "f1:29"
+          ]
+        }
+      ]
+    }
+  ]
+}

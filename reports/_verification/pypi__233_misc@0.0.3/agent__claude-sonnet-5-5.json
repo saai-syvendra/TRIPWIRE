@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "233_misc",
+    "version": "0.0.3",
+    "archive_sha256": "0e69b855dc909aac147bb9b8480c312dd4726f250fa65f998995673eac2ada04"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "63ebd07e7f327a2d",
+      "packet_sha256": "861ea4be804d158c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_98daeaf776.L6.drop",
+          "claim_sha256": "02f541d5039b92da",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The sys.platform == win32 test at f1:89 is an environment check that changes dest, the directory where remote-access.py is moved (f1:92) and then launched via subprocess.Popen (f1:97). It is a gate the record misses: it decides the target path of the dropped file and the spawn (effect modifies, purp",
+          "evidence_refs": [
+            "s1",
+            "f1:89",
+            "f1:92",
+            "f1:97"
+          ]
+        },
+        {
+          "claim_id": "q_c15162e6fc.L6.drop",
+          "claim_sha256": "00c4ff504255cbc6",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The if statement at f1:89 branches on sys.platform and reassigns dest to ~/Documents on Windows. That dest feeds the file move (f1:92) and the Popen launch (f1:97), so it is an environment gate the record misses and not log text or dead code.",
+          "evidence_refs": [
+            "s2",
+            "f1:89",
+            "f1:90",
+            "f1:92",
+            "f1:97"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "63ebd07e7f327a2d",
+      "packet_sha256": "861ea4be804d158c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_98daeaf776.L6.drop",
+          "claim_sha256": "02f541d5039b92da",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The sys.platform == win32 test at f1:89 is an environment check that changes dest, the directory where remote-access.py is moved (f1:92) and then launched via subprocess.Popen (f1:97). It is a gate the record misses: it decides the target path of the dropped file and the spawn (effect modifies, purp",
+          "evidence_refs": [
+            "s1",
+            "f1:89",
+            "f1:92",
+            "f1:97"
+          ]
+        },
+        {
+          "claim_id": "q_c15162e6fc.L6.drop",
+          "claim_sha256": "00c4ff504255cbc6",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The if statement at f1:89 branches on sys.platform and reassigns dest to ~/Documents on Windows. That dest feeds the file move (f1:92) and the Popen launch (f1:97), so it is an environment gate the record misses and not log text or dead code.",
+          "evidence_refs": [
+            "s2",
+            "f1:89",
+            "f1:90",
+            "f1:92",
+            "f1:97"
+          ]
+        }
+      ]
+    }
+  ]
+}

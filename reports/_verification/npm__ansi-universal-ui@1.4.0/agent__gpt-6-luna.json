@@ -1,0 +1,193 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "ansi-universal-ui",
+    "version": "1.4.0",
+    "archive_sha256": "ed13ba42adfe25d89e70f3df47faa2d39243a928985131f4bd703e819026d982"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "d091170c9edcc07b",
+      "packet_sha256": "743f7df905569dd6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "7507fafffb47d3a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`PLATFORM` is assigned `process.platform`, and the `ASSETS[PLATFORM]` lookup determines whether execution exits (f1:27-28).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2d506886cc5b9a87",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The only asset keys are `win32` and `darwin`; the negated missing-entry check exits, so subsequent code runs only when `PLATFORM` matches one of those keys (f1:17-28).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "9f2c1f90542e4f13",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads `process.platform`, which selects the asset entry and binary for the operating system (f1:17-30).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c06b993e9ca15f7c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one guard: the early exit on a missing asset entry leaves one condition, `c1`, for the remaining code (f1:27-30).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "19494f0ab3580773",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On a supported platform the code can set up the platform-specific Python runtime, retrieve remote content, and execute it; the gate enables this behavior (f1:17-30, 66-89).",
+          "evidence_refs": [
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1e963a8671adb08e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code proceeds for the two platforms with configured assets and exits for other platform values, so the gate activates on its target platforms (f1:17-28).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6a04ce2259b2160c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform selects which runtime URL and binary path to use from the platform-specific asset table, which supports portability rather than targeting (f1:17-30).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "f4206773f0fe4c09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After the platform guard, the IIFE calls `setupPython` when needed and calls `downloadString`; those functions perform the HTTPS request, create the cache directory, extract the runtime, and pass downloaded code to `spawn` (f1:47-62, 66-84).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6851f95e0a67f5aa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only invocation of the async entry function is its immediate call, and the setup/download helpers are called from that function (with `downloadString` also recursing for redirects); no other caller appears in the file (f1:33-45, 47-64, 66-91).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s8",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "aca9a07f00d6e6d4",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The network request supports downloading and `spawn` executes the downloaded Python code, but the cited filesystem call is `fs.existsSync(CACHE_DIR)` and `fs.mkdirSync(CACHE_DIR)`, which only checks or creates a directory and does not establish the claimed file-write behavior (f1:48-49, 78-84).",
+          "evidence_refs": [
+            "s4",
+            "s9",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "k_25c096b203.L6.drop",
+          "claim_sha256": "e9852356c4636168",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The `CACHE_DIR` existence test controls whether the directory is created, so it is a filesystem-state check that gates install-time setup work (f1:47-49).",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_a28ccb09c3.L6.drop",
+          "claim_sha256": "ee0b72ade3126e7e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The local Python binary existence test controls whether the runtime is downloaded and extracted, so it gates install-time behavior (f1:66-70).",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_67c9a2b5b4.L6.drop",
+          "claim_sha256": "224270c6a185d4f2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The local Python binary existence test decides whether `setupPython` downloads and extracts the runtime; it is an install-time filesystem-state gate (f1:66-70).",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_914e5a9395.L6.drop",
+          "claim_sha256": "e9fa788144851528",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The cache-directory existence check decides whether `mkdirSync` runs during setup, so it is an install-time filesystem-state gate (f1:47-49).",
+          "evidence_refs": [
+            "s16"
+          ]
+        }
+      ]
+    }
+  ]
+}

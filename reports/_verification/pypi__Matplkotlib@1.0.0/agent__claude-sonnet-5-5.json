@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "Matplkotlib",
+    "version": "1.0.0",
+    "archive_sha256": "2820fc63e6fe0f4b516c267c8cdb918dd8239d395d16de2378cf16e1b36c2099"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ebfdf69067e340a1",
+      "packet_sha256": "9ef0b33e0811c908",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "903cc8d00ecd41da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition of the if at f1:13 compares os.name to a string; os is imported inside run at f1:12.",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "6c1541c203a29345",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if at f1:13 is entered when os.name == \"nt\", with no negation or early exit between the test and the guarded block.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.name identifies the operating system family (nt = Windows), so the category os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "fdcbbf9787304ffe",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard on os.name == \"nt\" with no other conditions, so the expression c1 and a minimum of 1 condition are correct. The then region is the block at f1:14-16.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The download and exec only run when os.name is nt, and there is no else payload, so the gate enables the behaviour rather than selecting or retargeting it.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the host is Windows. The test does not look for analysis, CI or a sandbox, so it activates.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload is limited to Windows hosts, and the setup classifiers also list Microsoft Windows only, so this is targeting rather than portability.",
+          "evidence_refs": [
+            "s2",
+            "f1:36"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0dee4fb0530bd515",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The requests.get call and the exec wrapping it (f2:16) sit directly inside the then block of the nt guard, so the empty witness is correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6b18e48410cb5d5e",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The exec/download code is in run(), which is registered only as the install cmdclass. No other caller, export or timer reaches it, and the only code outside the guard is install.run(self).",
+          "evidence_refs": [
+            "s3",
+            "f1:30",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1610f0436a1c3ee9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get is an HTTP network download (requests is imported at f2:14), and exec() on the response text runs the downloaded content.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:14",
+            "f2:16"
+          ]
+        }
+      ]
+    }
+  ]
+}

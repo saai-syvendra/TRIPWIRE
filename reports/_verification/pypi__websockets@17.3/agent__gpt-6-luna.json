@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "websockets",
+    "version": "17.3",
+    "archive_sha256": "1c7dd93a1c9f89297471493674b1fc1d9467cafd45374f2172213046bdb3a329"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "e081db1212728933",
+      "packet_sha256": "15e327924fbb3a8a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "4820eafa00bd69da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if comparison calls os.environ.get(\"BUILD_EXTENSION\") as its test, so the cited site tests the named API. (s1)",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "f5266c75f00f6bf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if test compares the result of os.environ.get(\"BUILD_EXTENSION\") with the string \"no\" using ==; this is the positive condition for the then branch. (s1, s2)",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e3584dc934143a16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads BUILD_EXTENSION from os.environ, so env_var is the correct category. (s1)",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c1049a8b074004ae",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single if condition controls the then assignment and its else alternative, with no additional guard or condition; the expression is c1 and the minimum condition count is one on either side. (s2, s3, s4)",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "89c664209a697738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When BUILD_EXTENSION is not \"no\", the else branch supplies an Extension object in ext_modules, enabling the speedups extension to be included in the setup configuration; the no branch disables it. (s2, s3, s4)",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "04bb08f7e442a139",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment variable selects whether the optional speedups extension is included; the code does not inspect analysis, CI, or sandbox conditions or back off from them, so activate fits. (s1, s2)",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "25970526afe7af73",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The comments say the extension is built only if possible when the variable is unset, and mark the extension optional unless explicitly forced with \"yes\"; this makes the gate's purpose portability rather than unclear. (f1:20-21, s2)",
+          "evidence_refs": [
+            "f1:20",
+            "f1:21",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "786aeeabbeb0eca4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Extension constructor call is directly inside the else branch controlled by the cited if, and s4 is that branch region. (s2, s4, s5)",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "354670d992053ace",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The Extension constructor call appears only in the else branch; the full setup.py also shows no other call site for this constructor or route that reaches this same sink outside the gate. (s4, s5, f1:1-39)",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "a4fb9fcbfac81bf2",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The cited setuptools.Extension call constructs an extension configuration object; the build is delegated later to setuptools.setup, so this constructor itself is not a sink that performs the benign build. (s5, f1:34-39)",
+          "evidence_refs": [
+            "s5",
+            "f1:34"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "requests",
+    "version": "2.34.2",
+    "archive_sha256": "f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "e0a51b6c6a7ebf03",
+      "packet_sha256": "1eac78238637af17",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "9a20e65bb06443d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison at f1:3 tests sys.version_info against (3, 10) and is the condition of an if statement (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "c88613847b67dfce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code tests `sys.version_info < (3, 10)` and calls sys.exit(1) in the then block, so the code after it runs only when version_info >= (3, 10).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "df4e47b8edfb78a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the Python interpreter version, which fits runtime_version.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9282c37168e9e289",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single early-exit guard on one condition, and the setup code after it (s3) is on its then side, so the expression c1 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "851285c845d4baf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check only decides whether the ordinary setuptools setup() runs. It selects no payload and no target, so `enables` fits.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e54886d56219c740",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The build runs when the interpreter is new enough. The gate does not back off because of analysis or a sandbox, so `activate` fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "11c93e3b2b8bd612",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate is a minimum Python version check, with an error message saying Requests requires Python 3.10 or later. That is portability.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "55278daa31aba6f6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The setup() call at f1:9 (s4) sits inside the region after the early exit (s3), so the empty witness is correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4c284d2af1b746d2",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "setup.py is a short top-level script. setup() is called once, after the exit guard, and there are no other callers, exports or handlers.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b21191c6bd5c7ed4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The only behaviour is setuptools setup(), an ordinary build call labelled benign_build with sink kind other. The code shows no network, process-creation or file-write payload.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        }
+      ]
+    }
+  ]
+}

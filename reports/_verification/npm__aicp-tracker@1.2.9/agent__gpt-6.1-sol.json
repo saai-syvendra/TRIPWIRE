@@ -1,0 +1,697 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "aicp-tracker",
+    "version": "1.2.9",
+    "archive_sha256": "69f07b17dc085678c06da0d033ac4bd728ce25b83eedc9d7eaf4b27ba0760db0"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "1360d0716ea7f9b6",
+      "packet_sha256": "c7beffa26d90bdc1",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "782b78d01e4ec6e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads process.env.CI directly in the disjunction tested by the early exit at f1:5.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "e3f8c6b2ddb737b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The truthy CI arm exits at f1:5, so reaching the later config write requires process.env.CI to be falsy.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "f4e9e1b79dc4f134",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested process.env.CI value is a CI environment marker at f1:5.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "b6204d9339d82641",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 reads process.env.npm_config_yes directly in the early-exit condition at f1:5.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "8fd526e36b223cdd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A truthy npm_config_yes exits at f1:5, so the later config write requires that value to be falsy.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "553f4097e5be3d28",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The npm_config_yes setting tested at f1:5 is a package-manager environment setting.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "7271b9f478792079",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison at f1:10 reads process.env.npm_lifecycle_event into isPostinstall, which is tested at f1:11.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "00eaaf93696a8053",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:10 compares the lifecycle event strictly equal to postinstall, and f1:11 enters the saving branch when that comparison is true.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "66f7c7437a8994b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The npm lifecycle event compared at f1:10 identifies a package-manager lifecycle phase.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "a7512b657257bb8c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "projectPath is bound once to process.env.INIT_CWD at f1:16 and tested immediately at f1:17.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "c7c93b8d66119c8c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The truthy projectPath arm at f1:17 calls config.save at f1:20; its value comes directly from INIT_CWD.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "bab0cbd4373fe1d2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:16 reads the npm-provided initial working directory setting INIT_CWD, fitting package_manager.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "6c9ae42e7974688b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Continuing after f1:5 requires both environment values to be falsy; the write is further nested under the postinstall and projectPath tests at f1:11 and f1:17. All four conditions are required.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "1b79c77f88344184",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tests determine whether f1:20 calls config.save and reaches the file write at f2:21, with no alternative payload in the other arms.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7",
+            "s11",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c15bdacbcf030b3f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The initial CI test exits before configuration saving at f1:5, backing off in a CI environment; the remaining conditions restrict the saving path further.",
+          "evidence_refs": [
+            "s2",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "531770278d91dfd7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:5 skips CI and automatic-yes contexts, while f1:10-30 handles postinstall by recording the npm project directory and exiting before interactive setup. This supports compatibility with package-manager execution contexts, fitting portability.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "f1:30",
+            "f1:136"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "1d89eeda39da1895",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The nested region imports config at f1:18 and calls its exported save at f1:20; f2:19-21 defines save and reaches fs.writeFileSync. The region follows the early exit and is inside both positive branches.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7",
+            "s8",
+            "s10",
+            "s11",
+            "s12",
+            "s9",
+            "f2:30"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4baa2edcd4c51178",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "save is exported at f2:30 and is also called by main at f1:178 and daemon.start at f4:44, without the postinstall and INIT_CWD branch. Those callers reach the same f2:21 sink.",
+          "evidence_refs": [
+            "f2:30",
+            "f1:178",
+            "f4:44",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "fd344eb4a1acff26",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs is bound to the fs module at f2:3, and save calls fs.writeFileSync at f2:21 to serialize configuration to a file.",
+          "evidence_refs": [
+            "f2:3",
+            "s9",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "k_01a7667ff5.L6.drop",
+          "claim_sha256": "2349a61b9c8cda96",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited test belongs to log-scanner helpers used by daemon tick or status at f4:20 and f4:85-86. Postinstall exits at f1:30 before the daemon import at f1:40, so these helpers are outside the install path.",
+          "evidence_refs": [
+            "s13",
+            "f4:20",
+            "f4:85",
+            "f4:86",
+            "f1:30",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "k_094ced4256.L6.drop",
+          "claim_sha256": "0a91cd7515fec199",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The project check is inside daemon.start and controls its saved project path or worker path. Its setup caller at f1:196 is in main, which the postinstall exit at f1:30 prevents from running.",
+          "evidence_refs": [
+            "s14",
+            "f4:37",
+            "f1:30",
+            "f1:196"
+          ]
+        },
+        {
+          "claim_id": "k_09d70ceb8d.L6.drop",
+          "claim_sha256": "ba3cade275db7d5c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The earlier postinstall block always exits at f1:26 or f1:30, so the postinstall alternative at f1:203 cannot run during that lifecycle. The direct-invocation alternative can still run outside postinstall.",
+          "evidence_refs": [
+            "s15",
+            "f1:10",
+            "f1:26",
+            "f1:30",
+            "f1:203"
+          ]
+        },
+        {
+          "claim_id": "k_1239834643.L6.drop",
+          "claim_sha256": "0c1a8c3de2866e4c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "readPid is called by daemon start, stop and status at f4:51, f4:70 and f4:82, not by the postinstall configuration-saving path. f1:30 exits before setup can call daemon.start.",
+          "evidence_refs": [
+            "s16",
+            "f4:51",
+            "f4:70",
+            "f4:82",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "k_1d50ce13c4.L6.drop",
+          "claim_sha256": "7bc5ae5e99359967",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The stat check is inside parseNewLines, reached from daemon.tick at f4:23. The postinstall path exits at f1:30 before requiring the daemon at f1:40 or calling its runtime functions.",
+          "evidence_refs": [
+            "s17",
+            "f4:23",
+            "f1:30",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "k_41c233e6d4.L6.drop",
+          "claim_sha256": "a96caa24d20a9cc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited test belongs to log-scanner helpers used by daemon tick or status at f4:20 and f4:85-86. Postinstall exits at f1:30 before the daemon import at f1:40, so these helpers are outside the install path.",
+          "evidence_refs": [
+            "s18",
+            "f4:20",
+            "f4:85",
+            "f4:86",
+            "f1:30",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "k_6c61e5ee5f.L6.drop",
+          "claim_sha256": "9550380cf68f840d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited test belongs to log-scanner helpers used by daemon tick or status at f4:20 and f4:85-86. Postinstall exits at f1:30 before the daemon import at f1:40, so these helpers are outside the install path.",
+          "evidence_refs": [
+            "s19",
+            "f4:20",
+            "f4:85",
+            "f4:86",
+            "f1:30",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "k_77a2b5ffdc.L6.drop",
+          "claim_sha256": "8b77934be51fc17b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:11 only creates the configuration directory when absent; save proceeds to the same configuration write at f2:21 either way. This is destination-directory plumbing rather than an environment gate on the recorded behaviour.",
+          "evidence_refs": [
+            "s20",
+            "f2:19",
+            "f2:21"
+          ]
+        },
+        {
+          "claim_id": "k_95f3a42a5d.L6.drop",
+          "claim_sha256": "e1a3776c576006f6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The project check is inside daemon.start and controls its saved project path or worker path. Its setup caller at f1:196 is in main, which the postinstall exit at f1:30 prevents from running.",
+          "evidence_refs": [
+            "s21",
+            "f4:37",
+            "f1:30",
+            "f1:196"
+          ]
+        },
+        {
+          "claim_id": "k_a1cea2dea1.L6.drop",
+          "claim_sha256": "aa16319c8bbd71ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited test belongs to log-scanner helpers used by daemon tick or status at f4:20 and f4:85-86. Postinstall exits at f1:30 before the daemon import at f1:40, so these helpers are outside the install path.",
+          "evidence_refs": [
+            "s22",
+            "f4:20",
+            "f4:85",
+            "f4:86",
+            "f1:30",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "k_a51868ffb8.L6.drop",
+          "claim_sha256": "c70aae8931bd1f7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The WAL read is inside load and is reached through runtime WAL operations such as append and getPending at f6:25 and f6:34. Postinstall exits at f1:30 before loading the daemon that uses those operations.",
+          "evidence_refs": [
+            "s23",
+            "f6:25",
+            "f6:34",
+            "f4:25",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "k_c9d1468013.L6.drop",
+          "claim_sha256": "b75559603fcc6508",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:15 returns null when the config file is missing, and f1:19 substitutes an empty object before the same save call at f1:20. The later load only affects the install message before exiting at f1:26-30.",
+          "evidence_refs": [
+            "s24",
+            "f1:19",
+            "f1:20",
+            "f1:25",
+            "f1:26",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "k_de74ee80c0.L6.drop",
+          "claim_sha256": "848e43fc14de9506",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test is inside installAutoStart, called only from main at f1:189. The postinstall branch exits at f1:30 before reaching main or its auto-start setup.",
+          "evidence_refs": [
+            "s25",
+            "f1:30",
+            "f1:189",
+            "f1:203"
+          ]
+        },
+        {
+          "claim_id": "k_eeb70bae91.L6.drop",
+          "claim_sha256": "e1c3404a6869b982",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test is inside installAutoStart, called only from main at f1:189. The postinstall branch exits at f1:30 before reaching main or its auto-start setup.",
+          "evidence_refs": [
+            "s26",
+            "f1:30",
+            "f1:189",
+            "f1:203"
+          ]
+        },
+        {
+          "claim_id": "q_018c488651.L6.drop",
+          "claim_sha256": "22b72cfa9237d315",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The project check is inside daemon.start and controls its saved project path or worker path. Its setup caller at f1:196 is in main, which the postinstall exit at f1:30 prevents from running.",
+          "evidence_refs": [
+            "s27",
+            "f4:37",
+            "f1:30",
+            "f1:196"
+          ]
+        },
+        {
+          "claim_id": "q_11613f3d70.L6.drop",
+          "claim_sha256": "b44abea987123fae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The project check is inside daemon.start and controls its saved project path or worker path. Its setup caller at f1:196 is in main, which the postinstall exit at f1:30 prevents from running.",
+          "evidence_refs": [
+            "s28",
+            "f4:37",
+            "f1:30",
+            "f1:196"
+          ]
+        },
+        {
+          "claim_id": "q_270eb2b29e.L6.drop",
+          "claim_sha256": "a10af79eeadc1eab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited test belongs to log-scanner helpers used by daemon tick or status at f4:20 and f4:85-86. Postinstall exits at f1:30 before the daemon import at f1:40, so these helpers are outside the install path.",
+          "evidence_refs": [
+            "s29",
+            "f4:20",
+            "f4:85",
+            "f4:86",
+            "f1:30",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "q_539d6597a2.L6.drop",
+          "claim_sha256": "7fddb8531152caea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:11 only creates the configuration directory when absent; save proceeds to the same configuration write at f2:21 either way. This is destination-directory plumbing rather than an environment gate on the recorded behaviour.",
+          "evidence_refs": [
+            "s30",
+            "f2:19",
+            "f2:21"
+          ]
+        },
+        {
+          "claim_id": "q_69d3315884.L6.drop",
+          "claim_sha256": "2bad9897b1773dd9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The WAL read is inside load and is reached through runtime WAL operations such as append and getPending at f6:25 and f6:34. Postinstall exits at f1:30 before loading the daemon that uses those operations.",
+          "evidence_refs": [
+            "s31",
+            "f6:25",
+            "f6:34",
+            "f4:25",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "q_73d2312bfc.L6.drop",
+          "claim_sha256": "3bb93fe2d9010369",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The earlier postinstall block always exits at f1:26 or f1:30, so the postinstall alternative at f1:203 cannot run during that lifecycle. The direct-invocation alternative can still run outside postinstall.",
+          "evidence_refs": [
+            "s32",
+            "f1:10",
+            "f1:26",
+            "f1:30",
+            "f1:203"
+          ]
+        },
+        {
+          "claim_id": "q_7b364f84c1.L6.drop",
+          "claim_sha256": "2eee7ba944af1679",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The stat check is inside parseNewLines, reached from daemon.tick at f4:23. The postinstall path exits at f1:30 before requiring the daemon at f1:40 or calling its runtime functions.",
+          "evidence_refs": [
+            "s33",
+            "f4:23",
+            "f1:30",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "q_7c8153f5c8.L6.drop",
+          "claim_sha256": "650e54160e6af5ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test is inside installAutoStart, called only from main at f1:189. The postinstall branch exits at f1:30 before reaching main or its auto-start setup.",
+          "evidence_refs": [
+            "s34",
+            "f1:30",
+            "f1:189",
+            "f1:203"
+          ]
+        },
+        {
+          "claim_id": "q_8075be8f65.L6.drop",
+          "claim_sha256": "f8b77ea73863829d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited test belongs to log-scanner helpers used by daemon tick or status at f4:20 and f4:85-86. Postinstall exits at f1:30 before the daemon import at f1:40, so these helpers are outside the install path.",
+          "evidence_refs": [
+            "s35",
+            "f4:20",
+            "f4:85",
+            "f4:86",
+            "f1:30",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "q_85acc468ea.L6.drop",
+          "claim_sha256": "579b85a5d6c0d5c8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The postinstall branch at f1:11 is reachable when the lifecycle event equals postinstall and CI/yes are falsy; it conditionally saves INIT_CWD at f1:20 before exiting. It is an install-time gate, not a dead branch.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s7",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "q_a8a6f576a5.L6.drop",
+          "claim_sha256": "56273770ec743a69",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited test belongs to log-scanner helpers used by daemon tick or status at f4:20 and f4:85-86. Postinstall exits at f1:30 before the daemon import at f1:40, so these helpers are outside the install path.",
+          "evidence_refs": [
+            "s36",
+            "f4:20",
+            "f4:85",
+            "f4:86",
+            "f1:30",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "q_bad001f289.L6.drop",
+          "claim_sha256": "c2efa873e3517641",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited test belongs to log-scanner helpers used by daemon tick or status at f4:20 and f4:85-86. Postinstall exits at f1:30 before the daemon import at f1:40, so these helpers are outside the install path.",
+          "evidence_refs": [
+            "s37",
+            "f4:20",
+            "f4:85",
+            "f4:86",
+            "f1:30",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "q_c6102e1049.L6.drop",
+          "claim_sha256": "c3ca567b21795b3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "readPid is called by daemon start, stop and status at f4:51, f4:70 and f4:82, not by the postinstall configuration-saving path. f1:30 exits before setup can call daemon.start.",
+          "evidence_refs": [
+            "s38",
+            "f4:51",
+            "f4:70",
+            "f4:82",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "q_d3354ce534.L6.drop",
+          "claim_sha256": "9f70534ddb971958",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test is inside installAutoStart, called only from main at f1:189. The postinstall branch exits at f1:30 before reaching main or its auto-start setup.",
+          "evidence_refs": [
+            "s39",
+            "f1:30",
+            "f1:189",
+            "f1:203"
+          ]
+        },
+        {
+          "claim_id": "q_f6ccd36f95.L6.drop",
+          "claim_sha256": "bb95aeb17aacb20e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:15 returns null when the config file is missing, and f1:19 substitutes an empty object before the same save call at f1:20. The later load only affects the install message before exiting at f1:26-30.",
+          "evidence_refs": [
+            "s40",
+            "f1:19",
+            "f1:20",
+            "f1:25",
+            "f1:26",
+            "f1:30"
+          ]
+        }
+      ]
+    }
+  ]
+}

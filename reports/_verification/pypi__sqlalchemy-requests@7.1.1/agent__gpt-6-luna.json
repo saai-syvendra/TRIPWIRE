@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "sqlalchemy-requests",
+    "version": "7.1.1",
+    "archive_sha256": "51a983166778853322273f0336b970f3406b1bac6cf84cf2353b04f14679c7c8"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "4a61fd4fe23129fd",
+      "packet_sha256": "ce577c09b804383e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "2aaf47adce7f0b44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly calls os.path.exists with the string \"hifromDreamyOak\" (s1, f1:24).",
+          "evidence_refs": [
+            "s1",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b3b6e63ee2e82de6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When os.path.exists returns true, the branch exits; subsequent code therefore runs when the path does not exist (s2, f1:24-25).",
+          "evidence_refs": [
+            "s2",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "dd67913f1e6267fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition calls os.path.exists on a path string, so the category is file_or_dir_exists (s1, f1:24).",
+          "evidence_refs": [
+            "s1",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "013e1da7e6f03198",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one guard, and the code after its early exit is reached when the single condition is false; no additional condition is joined (s2-s3, f1:24-40).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4d0ef5a96dae18d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "When the marker is absent, the guarded code reaches exec(base64.b64decode(code)), enabling execution of the embedded code (s3-s4, f1:38).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e7f051572fe10f9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code exits when the marker exists and otherwise proceeds to the payload, so the gate activates that code when the marker is absent (s2-s3, f1:24-38).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b4bd5d8e8d6b3288",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The visible code only checks a marker path and exits if it exists; it does not establish whether the marker represents targeting, portability, anti-analysis, or data availability (s1-s3, f1:24-38).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bbf51c2f309da1f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard exits the process only when the path exists, and the remaining top-level block contains the exec call (s2-s4, f1:24-40).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4a1ffc04545b878c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The exec call occurs once in the top-level setup.py flow after the early-exit guard, with no other caller or alternate entry point shown in the file (s2-s4, f1:24-40).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "8b221878c10fac2f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guarded region calls exec on the decoded code object, which executes code and supports the recorded other behavior (s3-s4, f1:38).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        }
+      ]
+    }
+  ]
+}

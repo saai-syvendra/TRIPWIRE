@@ -1,0 +1,412 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pcyodestyle",
+    "version": "0.1",
+    "archive_sha256": "98163d2df511c6a82e37f27bd770729965d57201c5b14203a16029aff20e9bf7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "ecd9707daef33883",
+      "packet_sha256": "11f438612e08f46f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly compares sys.platform with an opaque constructed string, so the cited site is a decision on that API.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "38c63effe7ba4b54",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The comparison operator is ==, but its right operand is built by an opaque join(map(...)) expression and no registered decode makes the claimed value readable.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate reads sys.platform, which identifies the operating system environment.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "b8be373fd1188342",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The basename call assigns its result to a variable that the later membership test in the same scope reads.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "e6510b16fbf6cc1f",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The basename result is tested for membership, but the list entries are opaque constructed strings and the claimed executable names are not readable in the source.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "ca284f6349e635e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate tests the basename of a shortcut target path, so it categorizes a target artifact.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "f16f30df155ccebb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call to IsUserAnAdmin() is the condition of an if statement.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "50484a03f030ba05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call is tested directly for truthiness, and the then arm is the arm containing the continue.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "3cff72d71a37076b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin() checks whether the process has administrator privilege.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "52f1535ddeb0eb16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The outer platform condition is the only claimed guard on this region, so its minimum condition set is one condition.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6d27bd959d872be2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Inside the platform branch, pip.main is invoked and a file is opened, enabling the reported install and file activity.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "820afc2b20c5e461",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The reported activity is inside the then branch of the platform condition.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform condition restricts this branch to a particular operating system, selecting the environment for the activity.",
+          "evidence_refs": [
+            "s1",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4a86df8eeb0cba9b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both cited calls occur within the outer platform branch, and their sink statements are directly present in that region.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "da3f89c9b8200068",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The pip.main call and open call appear only inside the outer if body in this file, with no alternate caller or handler.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "aef0344e1e8e4dfe",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "pip.main can initiate package retrieval, but the open call’s mode and the pip arguments are opaque constructed strings, so the claimed download and write sinks cannot both be confirmed from readable operands.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "87fe6c19e74ffded",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The basename assignment is tested inside the platform branch, but its membership constants are opaque, so the claimed c4 condition is not fully readable for the combined expression.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "87c47a7dcfc1e364",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The nested conditions guard shortcut creation and Save operations that enable persistence behavior.",
+          "evidence_refs": [
+            "s4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d5a1754e4f432494",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The artifact check is in a then branch inside the platform branch, and the shortcut operations follow on that path.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "18ac4d3eb9c3481e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code checks the target basename before creating a shortcut for that artifact.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "86ee3b71ffebeaa9",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The Save() call is located in the claimed nested branch, but its dynamic COM dispatch is unresolved, so the sink path and kind are not established.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "5bac36ddb6ca47d6",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The cited Save() is under both guards, but dynamic COM dispatch prevents confirming whether this is the claimed payload sink whose alternate reachability must be checked.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "47108317bbfae084",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Save() is invoked on a dynamically dispatched COM object, so the code shown does not resolve its effect as a file write.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "d46830e3bbde6c9b",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "outside_region",
+          "evidence": "The admin then arm immediately continues the loop, while the later shortcut Save() is outside that arm and is reached after the non-admin path.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "64b88d24c2c0e43b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The administrator test does not modify a persistence target; its true arm skips the remaining loop body, while persistence follows on the false path.",
+          "evidence_refs": [
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8aa3ffedd1d9fe44",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "A true administrator result executes continue and backs away from the later persistence code, so the test’s polarity is evade rather than activate.",
+          "evidence_refs": [
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "79a87476318a1541",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The administrator check makes the code back off when elevated privilege is present, an anti-analysis or execution-avoidance purpose rather than target selection.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "820c532765718070",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The claimed admin then branch assigns a state and continues the loop; the Save() sink lies later outside that branch and is not reached from its then side.",
+          "evidence_refs": [
+            "s6",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "2410b26640fdba35",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The Save() sink is reached after the admin test’s false arm, so it is not reached only through the claimed then side.",
+          "evidence_refs": [
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "6df2fdb01170f741",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The Save() call is on a dynamically dispatched COM object, so the code does not establish the sink as a file write for persistence.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "fad4ec32ca2af31a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The not-exists check controls a continue: when the constructed path is absent the loop skips ahead, making file existence a gate on subsequent execution.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "4d351b376fc12360",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The enclosing if tests whether the constructed path does not exist and continues on that side, so this is an environment-dependent gate on subsequent execution.",
+          "evidence_refs": [
+            "s14"
+          ]
+        }
+      ]
+    }
+  ]
+}

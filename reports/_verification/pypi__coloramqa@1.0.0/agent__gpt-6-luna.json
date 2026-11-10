@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "coloramqa",
+    "version": "1.0.0",
+    "archive_sha256": "ece0c58b3bee6dc47454482de7e76db1668921074bde61fe828add48f62060cf"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "80625095060bf514",
+      "packet_sha256": "2adfdd17ea08ac99",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "6b5ab4ec2d91517d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly compares `os.name` with a value at the cited decision site.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "88a8c4588488bf8d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` test is `os.name == \"nt\"`, and its then arm is the guarded code.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads Python's `os.name` property, so the `os` category fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "b57db879c3d41dac",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited regions are controlled by the single `if os.name == \"nt\"` condition, so the combination is `c1` and its minimum condition count is one.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code fetches response text and executes it; the gate enables those behaviors.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs when `os.name` equals `nt`, activating the behavior on that target environment.",
+          "evidence_refs": [
+            "s1",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The operating system name selects whether the install-time payload runs, which is environment targeting.",
+          "evidence_refs": [
+            "s1",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "1336ba28615d3b03",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sinks are inline in the then region: `requests.get(...)` fetches the content, and `exec(...)` executes the returned text after stripping the wrapper tags.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1961843760238422",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The fetch and execution calls are inline inside `GruppeInstall.run`'s `if os.name == \"nt\"` block, with no separately callable sink function shown in either file version.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "f1:10",
+            "f1:20",
+            "f2:10",
+            "f2:20"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "d89a8a3bbe8e02f7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The `requests.get` call can download response content, and `exec` receives that response text after string replacement, supporting the download and downloaded-code execution behaviors.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

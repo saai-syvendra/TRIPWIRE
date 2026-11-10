@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "paypalad",
+    "version": "8.27",
+    "archive_sha256": "6bd4680d70b1fdac303019d01355fdd72b4dff2bf80d5d5db549702bc73bb63a"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "fd615e03bb12b84c",
+      "packet_sha256": "52220e2aa3a6de34",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ef456bf7d85c12b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly tests os.path.exists, using the os import in the same scope (f1:5-6).",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2858fa249818b3d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch runs when not os.path.exists('tahg') holds, matching the literal and not_exists polarity (f1:6-7).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "23e12015f45e8a9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition checks filesystem entry existence through os.path.exists, fitting file_or_dir_exists (f1:6).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f03e9e1c21e81e7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One condition c1 controls the sole then region, with no additional Boolean conditions; the minimum is one (f1:6-7).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "862dc58bf64237e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check enables the subprocess call when the entry is absent, with no alternate payload or environment-selected target (f1:6-8).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "9d0eb8f13479ae8b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Entry absence activates the subprocess call; the visible code does not identify that entry as an analysis, CI or sandbox indicator (f1:3-8).",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "35e10de02b13fd33",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checked entry has no other use or established role in the full file, leaving the purpose of this absence check unclear (f1:6).",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4d343398131e8376",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited subprocess.Popen sink lies directly inside the then region of the cited if; no witness hops are needed (f1:6-7).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1bb5a59e01f11634",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file has a single subprocess.Popen call directly under this guard, with no wrapper, alternate caller or handler reaching it (f1:6-7).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "a36430a10747ad5d",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The subprocess call visibly requests hidden PowerShell and no console window, supporting defense evasion. Its command body is encoded with no readable derivation supplied, so download and execution of downloaded content cannot be established (f1:7).",
+          "evidence_refs": [
+            "s3",
+            "f1:7"
+          ]
+        }
+      ]
+    }
+  ]
+}

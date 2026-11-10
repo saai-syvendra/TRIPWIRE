@@ -1,0 +1,333 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp_socks_connector",
+    "version": "0.1.11",
+    "archive_sha256": "183decb0bec9e159ff575058c6474063d8c55791cd471fd90872f1f6a78c2aab"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "2d910a5f7551a108",
+      "packet_sha256": "420ba89b48d4fc29",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "34477d04f7c950d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison decision directly reads `sys.version_info` at s1.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ed08a52adefa7d3e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `sys.version_info < (3, 5, 3)` and the early exit raises on that side, so the continuing side requires the version to be at least that tuple.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "803a386414de1790",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the interpreter's `sys.version_info` against a minimum supported version, which is a runtime version category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "b59de925fdaa76f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision expression reads `sys.argv[1]` in its equality and membership tests at s3.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "f235375f9a4fd469",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The continuing side after the early exit requires the disjunction to be true; its first alternative is `\"install\" == sys.argv[1]`.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "d1fe29fb89ab8ae0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the setup command in `sys.argv`, identifying the package manager invocation context.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "e3c5beff4a43c407",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `in` decision at s5 reads `sys.argv[1]`.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "76ccd8a21eb23967",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The continuing side after the early exit requires the disjunction to be true; its second alternative checks whether `bdist` is in `sys.argv[1]`.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "2787758ef3f46882",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the setup command in `sys.argv`, identifying the package manager invocation context.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "81c24425345faab9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The version check exits for versions below the threshold, and the subsequent `args.txt` write is on the continuing side of that single guard.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "0b43b19ce03ec765",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On supported runtimes, execution proceeds to the guarded file write, so the gate enables that behavior.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7292349f298efec2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version threshold permits execution on supported runtimes and is not a check for analysis or sandbox conditions.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b8d8f780d2b41649",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The minimum interpreter version is a compatibility constraint, so the purpose is portability.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bc19b4e0dfcc0b8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `args.txt` open and write occur after the version check in the continuing top-level flow, so the sink lies on the guard's then side.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "dbcefac4b9460d2a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The write is a top-level statement reached only after the version check; there is no separate caller or alternate entry to this statement in the file.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "27d3a75b3460b484",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code opens `args.txt` in append mode and calls `f.write`, which is a file write sink.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "4dba9b22286f0a03",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The version guard encloses the later argv guard; continuing past the latter requires either the install equality or the bdist membership test, yielding `c1 && (c3 || c4)` with two minimum conditions.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "f530818d4c92f058",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The combined gate permits the subsequent file creation and process launch to run.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "826f711a3f7f0997",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions select supported runtime and install/build invocation contexts, rather than backing off from analysis.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "d255a1a0626992a2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The argv check specifically limits the behavior to install or build operations, so its purpose is targeting the package installation context.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "502b6ed802721400",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The two file opens/writes and the `os.system` launch occur inside the try body after both early-exit checks, so both sinks are on the continuing side of the guards.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "abc085c177d4cf1a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file creation and launch are top-level statements in the gated try body, with no separate caller or alternate entry shown in the file.",
+          "evidence_refs": [
+            "s4",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "4a2feafd26616159",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The `open(..., 'w')` calls followed by `f.write` create and write files, and `os.system('start ...')` launches a command through the operating system.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "k_282f990700.L6.drop",
+          "claim_sha256": "2713afba1403e559",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This directory existence check only decides whether to create the temp directory; it does not determine whether the gated payload runs.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "q_8feea40970.L6.drop",
+          "claim_sha256": "ffe113461be24bef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This directory existence check only decides whether to create the temp directory; it does not determine whether the gated payload runs.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        }
+      ]
+    }
+  ]
+}

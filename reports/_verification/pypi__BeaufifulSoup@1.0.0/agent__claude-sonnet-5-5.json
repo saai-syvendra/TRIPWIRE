@@ -1,0 +1,312 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeaufifulSoup",
+    "version": "1.0.0",
+    "archive_sha256": "c6d2c95ade7310592d63ef3a449e0c78d8ddbddcbb3901cef750e49f217767c5"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d76dc34664272539",
+      "packet_sha256": "4c2a0cb4c5976814",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "c75de3900085816a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13 is the if-test `os.name == \"nt\"`, with os imported locally in run() at f1:12; it is a comparison deciding a branch.",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "027020b4131bf4f1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code is reached when `os.name == \"nt\"` is true; no negation is involved and the literal \"nt\" is plain in the code.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.name identifies the operating system family (Windows), so category os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "4ccea7261e07c5a8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard on os.name == \"nt\" with no else and no other conditions, so the expression c1 with then_min 1 is correct.",
+          "evidence_refs": [
+            "s2",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The download and exec only run inside the Windows branch and there is no alternative payload, so the gate enables the behaviour.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the platform is Windows; it does not back off on analysis or sandbox signals, so activate fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The remote code is fetched and executed only on Windows (the classifiers also list Windows), which selects a target platform rather than providing portability.",
+          "evidence_refs": [
+            "s2",
+            "f2:36"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4f3f20b996cb1e62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sinks, requests.get (s4) and the enclosing exec call (s5), sit on f2:16 inside the then block of the os.name == \"nt\" if, within region s3, so empty witnesses are right.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "923a3d1af2bb8c96",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks occur only once, inside run() under the os.name check; there are no other callers, exports, timers or handlers reaching them (setup.py only registers the install cmdclass).",
+          "evidence_refs": [
+            "f2:13",
+            "f2:16",
+            "f2:29"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "0e11cfc36769bed9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get of a remote URL is a network download, and exec of its response text executes the downloaded content (eval sink).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:16"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d76dc34664272539",
+      "packet_sha256": "a3b06d7360b10b37",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3dac24ad3ee71229",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The only guard is the single `if os.name == \"nt\"` at f1:13 (s1/s2), in positive form with no other nested or joined condition, so the expression is just c1. The derived copy f2:13-16 holds the guarded code (s3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:13",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "275c6a88cf47677a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The network fetch and the exec of its text (s4, s5) sit at f2:16 inside the `os.name == \"nt\"` branch of `run`, and the file has no other caller, export, timer or handler that reaches them. The class is only wired in through cmdclass['install'] at f2:29-31, so the payload is reached only through this",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "f2:13",
+            "f2:16",
+            "f2:29"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d76dc34664272539",
+      "packet_sha256": "e0f184d3649095b9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "7bc5521bd1b7b29f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:13 compares os.name with a string literal; os is imported at f1:12.",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "61977928cd2cd98f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if is entered when os.name == \"nt\", with no negation. The guarded code is the download and exec in the body.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.name reads the operating system family, so the category os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3dac24ad3ee71229",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if with one condition and no else block, so the expression c1 and then_min of 1 are correct.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The download and exec run only when the gate passes, and nothing else runs on the other branch, so the gate enables the payload.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the host is Windows (nt). The gate does not back off on analysis, so the polarity is activate.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs only on Windows hosts, and the classifiers list Windows. That restricts the payload to a target OS rather than adapting for portability, so targeting fits.",
+          "evidence_refs": [
+            "s2",
+            "f2:36"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4f3f20b996cb1e62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The requests.get call and the exec wrapping it sit directly in the then body of the os.name check (f2:14-16), so the witnesses are empty and the sinks are in the region itself.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "275c6a88cf47677a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only code that reaches the download and exec is the run method of the install command class, inside the os.name check. No other caller, export or handler exists in setup.py. The f2 file is the derived, decrypted form of the same f1 site.",
+          "evidence_refs": [
+            "f2:13",
+            "f2:16",
+            "f2:29-31"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "0e11cfc36769bed9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get is a network download, and exec of its text is evaluation of the downloaded content.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

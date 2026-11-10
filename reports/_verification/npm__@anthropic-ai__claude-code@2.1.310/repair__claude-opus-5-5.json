@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@anthropic-ai/claude-code",
+    "version": "2.1.310",
+    "archive_sha256": "d696314076114df499ba88e117000a24a9d7ab4f502dcaefba52c83fd22acfbd"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f42446365517810e",
+      "record_sha256_after": "b191d68dbb0cd4a0",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "30e34e23bf410526",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The g2 guard at install.cjs line 183 (bytes 6215-6592) is `if (!optionalDeps[info.pkg]) { ...; return }`, which tests the package's own optionalDependencies, not process.platform. On android, getPlatformKey returns a linux-*-android key that PLATFORMS has, so the c1 test only picks the key. Added c2"
+        },
+        {
+          "claim_id": "q_52c06eb181.L6.drop",
+          "claim_sha256": "85ac1f2ecc3a4fc2",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "q_52c06eb181 is the then arm (c3, platform === 'linux') of the line 89 if statement. It is not the else arm early exit q_69d515e51a, which is already cited for c2 in g1. The then arm only calls detectMusl, which reads process.report, and returns the linux key string. No behaviour sink is reached the"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The guessed os in g2 came from c1 (!= android) on top of c17. With c1 replaced by c20 and c17 a list, the recipe takes os linux from c17 and arch x64 from c18 without guessing, so that reason is gone. The record stays flagged for 'out-of-set claim pending verification' (c17, c18, c19, c20, g2), whic"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "b191d68dbb0cd4a0",
+      "record_sha256_after": "b191d68dbb0cd4a0",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9b3f17e7c71cb2df",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "In main() (install.cjs lines 165-248) the placeBinary call at line 239 sits after three early exits on one straight path, so all must pass and they join with and. Line 167 looks up PLATFORMS[getPlatformKey()], and line 169 returns when the lookup fails. getPlatformKey builds the key from process.pla"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "b191d68dbb0cd4a0",
+      "record_sha256_after": "b191d68dbb0cd4a0",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "q_52c06eb181.L6.drop",
+          "claim_sha256": "85ac1f2ecc3a4fc2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The drop holds. q_52c06eb181 is only the then side (kind if, arm then) of `if (platform === 'linux')` at install.cjs:89, which returns 'linux-' + cpu plus an optional '-musl'. That side and detectMusl have no sink (prepared.json lists sinks [] for the candidate gate; detectMusl only calls process.re"
+        }
+      ]
+    }
+  ]
+}

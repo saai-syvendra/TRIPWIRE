@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifilSoup",
+    "version": "1.0.0",
+    "archive_sha256": "0c27d85bf5a4215879b77260b910272686d2ff4014620130c3188d767df53a3a"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "8ca3b07c19bfe00a",
+      "packet_sha256": "8a28565e4b0d9451",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "41679bb58a5409a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly compares `os.name` with the string `nt` (s1; f1:13).",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "11e2172876cfd381",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is entered when `os.name == \"nt\"`, so the stated operator and value hold in the positive form that reaches the guarded code (s1, s2; f1:13).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads Python's `os.name` property, so `os` is the category indicated by this test (s1; f1:13).",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a6f232ce3db3cc34",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited then region is controlled by the single `os.name == \"nt\"` condition, making the combination `c1` with a minimum of one condition (s2, s3; f1:13-18).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:13-18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code downloads response text and executes it, so this gate enables those behaviors (s4, s5; f2:13-18).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:13-18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The download and execution occur when the platform name equals `nt`, which activates the behavior on that target (s2, s4, s5; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "f2:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check selects whether the download and execution run, so its purpose is targeting (s2, s4, s5; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "f2:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "8dc10a8eebd5ca87",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the request that fetches the response and the `exec` call are directly inside the `os.name == \"nt\"` then block in the derived readable code (s2-s5; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "f2:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4b0719798377d550",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The recorded install command class assigns this `run` method, and both payload calls are inside its `os.name == \"nt\"` branch; the file shows no other call path to either sink (s2-s5; f2:13-16, 25-30).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "f2:13-16",
+            "f2:25-30"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "245329ef2f9ce425",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` provides a network download, and `exec(...)` evaluates the fetched response text (s4, s5; f2:16).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:16"
+          ]
+        }
+      ]
+    }
+  ]
+}

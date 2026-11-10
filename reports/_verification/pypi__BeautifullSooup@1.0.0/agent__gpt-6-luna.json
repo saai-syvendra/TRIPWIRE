@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifullSooup",
+    "version": "1.0.0",
+    "archive_sha256": "b2a6e5d9a92c8870b973c391a608b4132bb45cfae1dd6b5a9c5eb1f0a4835fa7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "3c48443fcb078e33",
+      "packet_sha256": "0e11b6a5f69d4f50",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "90f762ed7aa5cd47",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition in `run` directly compares `os.name` with `\"nt\"`, so the cited site tests the claimed API (s1; f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "308dee44294e1170",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is selected by the positive comparison `os.name == \"nt\"`; no negation or early exit changes the condition (s1, s2; f1:13).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate reads Python's `os.name` property, so `os` is the fitting category (s1; f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2d78a8c2f1500113",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one cited `if` condition, and the listed then regions are within its body; the minimum condition set is the single condition `c1` (s2, s3, s4; f2:13-18).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code fetches response text and passes the transformed text to `exec`; the gate enables these behaviors (s4-s6; f2:13-16).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code performs the fetch and execution when `os.name` equals `\"nt\"`, which activates on the target platform (s1, s4-s6; f2:13-16).",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check selects whether the install-time fetch and execution occur, making this a platform targeting gate (s1, s4-s6; f2:13-16).",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ea633b9d99fd54a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the `requests.get` call and the `exec` call are directly in the `if os.name == \"nt\"` body, so each sink lies on the then side of the cited guard (s2-s6; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "e886095974cdbab1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The fetch and execution calls are both inside the guarded branch, and the `run` method contains no alternate path to either sink; its only other statement is the install superclass call (s4-s6; f2:11-18).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "2c3bac8559c43e30",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` performs the network request, and `exec(...)` evaluates the returned response text after tag replacement, supporting download and exec_downloaded respectively (s5, s6; f2:16).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

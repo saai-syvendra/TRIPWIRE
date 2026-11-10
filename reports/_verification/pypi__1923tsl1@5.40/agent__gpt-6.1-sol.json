@@ -1,0 +1,220 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "1923tsl1",
+    "version": "5.40",
+    "archive_sha256": "20260b275af5ffd4a04b9d2fe704bf53cb960861273537c5dfb5329e8ae88f73"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "a822a687e1eafc9c",
+      "packet_sha256": "c2b5ead471409133",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e50e943e37418a7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition compares os.getlogin() with a fixed account name, so username is the environment property it reads (f1:11).",
+          "evidence_refs": [
+            "f1:11",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "decfdf09c5243f75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The username condition encloses the registry command, download command and execution of the downloaded path; there is no else payload (f1:11–18). It enables these operations rather than choosing another payload or changing their target.",
+          "evidence_refs": [
+            "s4",
+            "f1:11",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "10f433680a9ee275",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The guarded operations run for usernames other than the excluded account (f1:11–17). This is an activation criterion for eligible accounts; the code supplies no analysis, CI or sandbox test.",
+          "evidence_refs": [
+            "f1:11",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c05ed8fb7fa31214",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The fixed username exclusion decides which accounts receive the registry, download and execution operations (f1:11–17). Targeting fits this account-based restriction; it does not test platform compatibility, data availability or an analysis facility.",
+          "evidence_refs": [
+            "f1:11",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "26a3f32acaf6dd3c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The imported subprocess module launches a registry command adding the executable path to the current user's RunOnce key, then invokes curl with a remote URL and that path as its output (f1:8–16). os.system executes the same path afterward, supporting persistence, download and execution of the downlo",
+          "evidence_refs": [
+            "f1:8",
+            "f1:9",
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "a822a687e1eafc9c",
+      "packet_sha256": "fca7ac6a4853ac37",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ef7b03df9f2d5f16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly compares os.getlogin() with a string, and os is imported directly without rebinding in the file (f1:8, f1:11).",
+          "evidence_refs": [
+            "s1",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "6e1e8ba901e2a828",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "value_redacted",
+          "evidence": "The then branch uses the != comparison directly, but the claim redacts the compared handle, preventing confirmation that its value matches the literal in the code (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e50e943e37418a7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads the login name through os.getlogin(), so username fits the environmental property tested (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "eba17c15dfb635fb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single if comparison is the sole decision enclosing the cited region, so its combination is c1 with a minimum of one condition (s1–s3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "decfdf09c5243f75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The username comparison enables the registry command, download and execution together; there is no alternative payload branch or environment-selected target (s2).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "10f433680a9ee275",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code activates the guarded operations for login names other than one excluded account; the comparison does not identify an analysis, CI or sandbox property (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c05ed8fb7fa31214",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The comparison excludes a particular login name from the payload operations, making targeting the fitting purpose rather than a platform or data-availability check (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7266ebb74377caeb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All three sink calls are directly inside the try block within the if's then region, so the empty witnesses require no intervening call resolution (s2–s6).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "9f5eea01e4d2eeee",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited sinks occur only as direct top-level statements within the then branch; the remaining file contains setup metadata and no alternate calls or handlers reaching these operations (f1:1–46).",
+          "evidence_refs": [
+            "s2",
+            "f1:21",
+            "f1:46"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "26a3f32acaf6dd3c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The imported subprocess calls launch a registry RunOnce write and curl with an output path, supporting persistence and download (f1:9, s4, s5). The subsequent os.system call executes that same output path, supporting exec_downloaded (s3, s6).",
+          "evidence_refs": [
+            "f1:9",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

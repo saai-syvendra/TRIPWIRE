@@ -1,0 +1,839 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "medusa-plugin-momo",
+    "version": "0.0.68",
+    "archive_sha256": "501bb62923ebec70efc926f8ada7bf60242d2d98bd01c12f50a3ab0c9f761058"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d3f883adfe9445a0",
+      "packet_sha256": "968c46c0b936e0a6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "12682eec966e9b23",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Ry1 opens with if(process.env.GITHUB_ACTIONS && ...), so the env var is read directly in an if test (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "cca6463105e0a2a7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The bare env value is the first operand of && in the if test, so the guarded code runs only when it is truthy; no negation sits in between.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "97e9a400dd7ea723",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is the standard CI marker variable.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "f62e36eaca3970ce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.env.RUNNER_OS is compared with === 'Linux' in the same if condition.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c4eb645a0b8a3380",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is RUNNER_OS==='Linux', in positive form, and it is anded with the guard that leads to the inner code.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "46f120ac25326def",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable value, RUNNER_OS.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "33f53578bb7ebeaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "cQ0 runs Bun.$ with exactly `ps -axco command | grep \"/home/agent/agent\"`. The trimmed output is compared !=='' and the result is used in the if test (await cQ0() && ...).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "3cc7f76c7d55ee76",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The probe output compared unequal to empty means something was found, so exists is the positive form. A throw gives false. The guard is the then arm of the if.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "206f6496513eb71b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test lists processes for a named agent path.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "99049975c48be62e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pQ0 runs Bun.$ with `sudo -n true` and returns exitCode===0. The result is used in the if test.",
+          "evidence_refs": [
+            "s6",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "c079b85c74475afb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Exit status equal to 0 counts as exists, and the result is anded into the guard on the then arm. The catch fallback tries a docker sudoers copy and returns true, which does not change the polarity.",
+          "evidence_refs": [
+            "s6",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "4c9f987773cef609",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks for passwordless sudo, which is a privilege check.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "67e6255b39731389",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "name_only_link",
+          "evidence": "The cited site tests !isAuthenticated() on the client object, not a gh auth token call. A gh auth token spawn exists elsewhere in f1 but is not tied to this decision by the shown code.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "82377f8b123127e6",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "name_only_link",
+          "evidence": "The cited test is !isAuthenticated() joined by || to !repoExists(). Whether the gh auth token value feeds isAuthenticated is not shown, so the falsy reading cannot be settled.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "85b05a920bbc7328",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The cited test reads whether the client already holds a GitHub credential, which is not clearly a target artifact.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "7208d7cfeae5b06d",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "name_only_link",
+          "evidence": "The cited site is the call _0x1b7dd4.fetchToken(). Its body does call octokit.rest.search.repos, but fetchToken is a multi-line method, not a one-line helper, and the site itself is not that API.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "cd4f998826c0863b",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "name_only_link",
+          "evidence": "The decision is !fetchToken() result, which is an indirect reading of the search call and not directly of octokit.rest.search.repos.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "6d859d40deddadcc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch depends on what a GitHub API search returns via fetchToken.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "46d8859d9245c355",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "_0x4692e0 is assigned process.env.NPM_TOKEN, with a fallback from oL0(), and if(_0x4692e0) is the decision.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "2f0a2d467853036a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The destructive code is in the else arm of if(_0x4692e0), so the token being falsy leads to it.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "b21ea93a381b4a6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the NPM_TOKEN environment variable.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "301ba2371896a7c7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The conditions c1 and c2 are anded in one if. The nested if (await cQ0() && await pQ0()) joins c3 and c4 with and, and it is nested inside the first if, so all four are required. The 'kOIJC' dead branch always takes the else.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "d01701439d8fe4cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code is a single routine (gQ0), so the gate enables it rather than choosing between payloads.",
+          "evidence_refs": [
+            "s13",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "56b066be3132294b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs only when a monitoring agent process is present and sudo works. It then stops the DNS resolver and flushes the iptables OUTPUT and DOCKER-USER chains. This is evasion.",
+          "evidence_refs": [
+            "s4",
+            "s14",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "14eccaaa9bfda550",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The agent-process check together with disabling network filtering fits anti_analysis.",
+          "evidence_refs": [
+            "s4",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "3f770e16349c0773",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The region `await gQ0();` sits inside both guards. The call (s15) reaches the gQ0 definition (s16), whose first statement is the Bun.$ sudo systemctl call (s14).",
+          "evidence_refs": [
+            "s13",
+            "s15",
+            "s16",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "2231d8c937fed464",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "gQ0 is defined once and called once, at s15, inside the gated block. cQ0 and pQ0 each appear in only that definition and that use.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "a2ebd80d13bf36b1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "gQ0 runs system commands through Bun.$ that stop the resolver and flush the firewall chains. This is process creation used to weaken defenses.",
+          "evidence_refs": [
+            "s14",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2bb2d7251a0c2b2d",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The outer test is !isAuthenticated() || !repoExists(), so c5 alone is not required; the repoExists alternative also reaches the inner code. The expression c5 && c6 && c7 therefore omits an or alternative.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2f805561fc15285e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch holds only the wipe-and-exit code and has no alternative payload.",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "7db8e2be4b3db0d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs the destructive wipe when no token source is available; it does not back off on analysis.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "3e36959f3d5b66de",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The wipe runs only when no GitHub or npm credential could be obtained. That depends on credential availability, so I would label the purpose data_availability, not unclear.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s12",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "ff815e7a114366cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else block s17 lies inside the then arm of s8, the then arm of s10 and the else arm of s12. It holds the spawnSync sink (s18) directly, so the empty witness is right.",
+          "evidence_refs": [
+            "s17",
+            "s18",
+            "s8",
+            "s10",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "1112eca721fa7a26",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sink sits inline in the gated else block and not in a separate function, so no other caller can reach it.",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "52e759caa718fcb4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Bun.spawnSync launches cmd.exe with del and rd, or bash with shred and find -delete. This is process creation whose payload is file deletion.",
+          "evidence_refs": [
+            "s18",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_50e0566ba2.L6.drop",
+          "claim_sha256": "8c1129e84c6aab04",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync(bunBinDir) check only adds the bun directory to PATH, which is plumbing.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "k_7f3e4e84a7.L6.drop",
+          "claim_sha256": "68e4f195d70beb9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The PATH.includes(bunBinDir) test only avoids a duplicate PATH entry, which is plumbing.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "k_8243b60281.L6.drop",
+          "claim_sha256": "16875e932fed703e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32 check in reloadPath only picks how to refresh PATH.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "aa9aca5126e0d5c0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This checks that the package's own bundled bun_environment.js exists before launching it. It is not an environment property.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "k_997be1f6bc.L6.drop",
+          "claim_sha256": "20979157792fefc2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This searches for the bun binary in candidate paths, which is installer plumbing.",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "a45a59034e957015",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test only picks the bun install command, and both arms do the same thing, so it is portability plumbing.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "k_d36ad8d600.L6.drop",
+          "claim_sha256": "9ca269446b82e7dc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This checks that a shell profile exists before sourcing it to refresh PATH, which is plumbing.",
+          "evidence_refs": [
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "k_e0dfd8b59b.L6.drop",
+          "claim_sha256": "6b5d6429c8edb138",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test only builds the list of candidate bun paths.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "2bbc76b45ee4f017",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This chooses between `where bun` and `which bun` to check that bun is on PATH, which is plumbing.",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "q_53e1d98b0c.L6.drop",
+          "claim_sha256": "3142e4ac8a6e7897",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the win32 branch of reloadPath; it only refreshes PATH.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "ceba4eccabf7a425",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary selects where or which, which is portability plumbing.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "q_98259f004c.L6.drop",
+          "claim_sha256": "d3d7248b11f8f7ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the same reloadPath platform branch as s28 and only refreshes PATH.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "q_af02d7c460.L6.drop",
+          "claim_sha256": "d57fc47b7b546d84",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loop returns the first existing candidate bun path, which is plumbing.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "abca9fedc31d47c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This checks that the bundled script file exists, otherwise it exits. It is not an environment gate.",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "q_d012987235.L6.drop",
+          "claim_sha256": "fcf5b43479bd721f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This checks that a profile file exists before sourcing it to refresh PATH, which is plumbing.",
+          "evidence_refs": [
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "7cbfbef635f902f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branch only chooses the bun install command, which is plumbing.",
+          "evidence_refs": [
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "q_e8c9ed15f1.L6.drop",
+          "claim_sha256": "85b718cccba9be6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This PATH tweak for ~/.bun/bin is plumbing.",
+          "evidence_refs": [
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "q_fd4553b6fa.L6.drop",
+          "claim_sha256": "cb26c386fee9fe0c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branch only builds the candidate bun path list, which is plumbing.",
+          "evidence_refs": [
+            "s35"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "2bfcc71d00e0dae2",
+      "packet_sha256": "a81cf6f1de80f42d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "3b9abdad972fb745",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition `!isAuthenticated() || !repoExists()` in s2 negates repoExists once, and the guarded block runs when that call is falsy (s1).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "73034dee1bcf3ec1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "repoExists is a method on the GitHub-client object and tells whether the repo is present on the remote service, so it reads a service response rather than local state.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "edec49229d12b422",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The outer if (s2) joins `!isAuthenticated() || !repoExists()` with or. Nested inside it are the then arm of `if(!token)` (s3) and the else arm of `if(NPM_TOKEN)` (s4), which holds the wipe (s8). That gives (c5||c8) && c6 && c7 with a minimum of 3 conditions.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s1",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "b539d18016416aeb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The destructive wipe runs only when all the conditions hold and there is no else alternative, so the gate enables a single behaviour.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "52f15a71ab4a2239",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The destructive branch runs on the target when no auth, token or NPM token is found. Nothing in it checks for analysis or sandbox, so it activates rather than evades.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "8d4f6bfd8a1d1302",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Every condition tests whether a credential or repo is available (no GitHub auth, no fetched token, no NPM_TOKEN). The wipe is the fallback when none is, so data_availability fits.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s8"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "fce3bb4dce0867c0",
+      "packet_sha256": "bccc91e8d02bf665",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "82ac44b1611fe3c0",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The then-side expression is right: s1 tests !isAuthenticated() (token empty, c5 and c9 on s4 and s5) or !repoExists() (c8), s2 nests c6, and s3's else side nests c7 and c10 through the NPM_TOKEN variable (s8, s9). then_min 4 is correct. else_min 5 is not: the else side needs only c8, c6 and a truthy",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "8cc86d712d99abd9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate picks a different payload per branch: with no GitHub or npm token the code wipes the home directory (s10), and with an npm token it runs El, which republishes packages (s11).",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "c3134b0dedf7f19b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both branches run something harmful (wipe or republish) depending on which credentials exist. Nothing here backs off when it detects analysis, CI or a sandbox, so the polarity is activate.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "b28b1feca8eb32ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Every condition tests whether a credential is available (gh token, repo, fetched token, NPM_TOKEN or an .npmrc _authToken), which is data availability.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "6c1f27934f316890",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s11 (El call, s13) sits inside s1's then block, s2's then block and the then arm of the s3 npm-token test, which is the else side of the claimed guards. El (s14) calls updatePackage (s15), and updatePackage (s16) contains the Bun.$ `npm publish` sink (s12).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3.excl",
+          "claim_sha256": "797eb9ff7766e105",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "El is also called outside this gate: `El(_0x402786)` runs on any npm_-prefixed string found in a scanned object, and there is a second `El(_0x4692e0)` call after the gate (f1, near s1). So updatePackage and the publish sink are reachable without passing this else side.",
+          "evidence_refs": [
+            "f1:1",
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L5",
+          "claim_sha256": "748cb1a10d1c73b9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink in s12 runs `npm publish` on a re-packed tarball of each of the maintainer's packages, fetched in s16. That is process creation that can republish other packages (modify_other_packages) and spread the payload (self_propagation).",
+          "evidence_refs": [
+            "s12",
+            "s16",
+            "s14"
+          ]
+        }
+      ]
+    }
+  ]
+}

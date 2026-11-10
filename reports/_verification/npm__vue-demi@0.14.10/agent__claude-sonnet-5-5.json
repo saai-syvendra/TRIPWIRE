@@ -1,0 +1,577 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "vue-demi",
+    "version": "0.14.10",
+    "archive_sha256": "b239890af0797bac06350b2e78d9030aff37824b03f74711130bd9dcf3198e19"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "67b55bc83a07b3fa",
+      "packet_sha256": "55b40ba20a70224d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "03f8853f8ce6b50a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "loadModule calls require(name) inside a try whose catch returns undefined; postinstall.js tests the result at f2:5 with loadModule('vue') at f2:3.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f2:3"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ff07f724d166c932",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code after the else of `!Vue || typeof Vue.version !== 'string'` runs only when require('vue') returned a module with a string version, which is an exists test on vue.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f2:3",
+            "f2:5"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "a2d0f9a5fc4e0a2e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the vue dependency is installed, so dependency_tree fits.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "d465c39f58b7f490",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Line 8 uses Vue.version.startsWith('2.7.') as the condition of an else-if.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "267efa7227ce9212",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if is entered when Vue.version.startsWith('2.7.') is true, with no negation.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "795098fce71b966b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It compares the installed vue version, so dependency_tree fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "4fb592e5d6a55167",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Line 11 uses Vue.version.startsWith('2.') as the condition of an else-if.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "fad64b484aa556c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if at line 11 is entered when startsWith('2.') is true, with no negation. The earlier 2.7. branch takes precedence, which the combination layer accounts for.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "01af976762ceacf4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It compares the installed vue version, so dependency_tree fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "d0d99f23b211676b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Line 14 uses Vue.version.startsWith('3.') as the condition of an else-if.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d76882e355d9ea4e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if at line 14 is entered when startsWith('3.') is true.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "13cf60fdaac4cb51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It compares the installed vue version, so dependency_tree fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "7da187b5f2c4f1a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "loadModule('@vue/composition-api') calls require inside a try, and the result VCA is tested by `if (!VCA)` on the next line.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "f51bc7ccfd169ab4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`if (!VCA) { warn; return }` is an early exit, so the code after it runs only when require of @vue/composition-api succeeded, which is an exists test.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "30558694d2522653",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It checks whether the @vue/composition-api dependency is installed, so dependency_tree fits.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "6febb235c2e065a4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The else arm of the missing-Vue check encloses the chain, so c1 is anded with it. The three then arms (2.7., 2., 3.) lead to separate switchVersion calls, so they are ored, and the minimum is 2 conditions.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s8",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "1f9beb079cc3b894",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Whether the build step runs at all depends on a supported Vue being present; otherwise the code only warns. The gate enables the copy.",
+          "evidence_refs": [
+            "s2",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "f7243d5fe8b63d51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs the file copy when a supported Vue is found and backs off with a warning only when it is missing. It does not look for analysis or sandboxes.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b63624c36db56393",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It picks the library build that matches the installed Vue major version, which is compatibility handling.",
+          "evidence_refs": [
+            "s2",
+            "s16",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c9752cff1aa8cd34",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each region (switchVersion at f2:9, 12 and 15) sits inside a then arm under the else arm of s2. switchVersion is imported at f2:1, defined at f1:51 and calls copy at f1:52. copy is defined at f1:14 and reaches fs.writeFileSync at f1:24.",
+          "evidence_refs": [
+            "s11",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "adfd7793a5d75f5f",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "other",
+          "evidence": "Within the two packet files only postinstall.js calls switchVersion, inside the gate. But utils.js exports switchVersion (f1:62), so callers outside the packet could reach copy without the gate, and the code shown does not rule that out.",
+          "evidence_refs": [
+            "f1:62",
+            "s16",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "667d56d65642c35e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is fs.writeFileSync of the copied file content, a file write, which fits benign_build.",
+          "evidence_refs": [
+            "s14",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9bb766ff014a3be8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The write at f1:47 is reached only through the vue-found guard, the '2.' branch (switchVersion(2), then `version === 2`) and the composition-api early exit. These are nested, so all three join with and and the minimum is 3.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s10",
+            "s19",
+            "s12",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2c22ec4bc5468fd5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The export rewrite happens only when all three conditions hold; otherwise the code warns or returns. The gate enables the write.",
+          "evidence_refs": [
+            "s10",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "1dbe1b65b784d4bb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code does the work when the dependencies are present and backs off with a warning when they are absent. It does not look for analysis or sandboxes.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "30bfc5eaf015bbde",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It re-exports the @vue/composition-api names for Vue 2, which is compatibility handling.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "dbbd37d417d09043",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The s19 region and its sink at f1:47 are on the continue side of the s10 early exit. The guards s2 and s6 are in postinstall.js and control no region (s19) lexically, and the witness is empty. The link runs through f2:12, switchVersion and updateVue2API (f1:57), which the record does not cite.",
+          "evidence_refs": [
+            "s19",
+            "s20",
+            "s10",
+            "s12",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "8b30949c64ae10f6",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "other",
+          "evidence": "updateVue2API is called only from switchVersion when version === 2, and switchVersion is exported (f1:62), so callers outside the packet could reach the write without the gates. The code shown does not decide that.",
+          "evidence_refs": [
+            "f1:57",
+            "f1:62",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "fb01009756fd784f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink at f1:47 is fs.writeFileSync, a file write, rewriting index.mjs with the export list.",
+          "evidence_refs": [
+            "s20",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "q_252e2ae770.L6.drop",
+          "claim_sha256": "fa42d38d653f6239",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/catch in loadModule is the mechanism of the require-exists test already recorded as c1 and c5. It is not a separate environment check, so leaving it out is a duplicate.",
+          "evidence_refs": [
+            "s21",
+            "s1"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "2b3292a1266a75a7",
+      "packet_sha256": "fe19a77bbc60c0c8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "fbd7296906e2ba4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The switchVersion calls at f1:9, f1:12 and f1:15 sit in the then arms of the else-if chain (s2, s3, s4), which is the else arm of s1. switchVersion (s9) calls copy (s10, defined at s11), and copy reaches fs.writeFileSync at f2:24 (s8).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d4024c9824765041",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "Within the packet files, copy is called only from switchVersion, and switchVersion is called only from the three gated sites in f1. However, f2 exports switchVersion (f2:62), so a caller outside the packet could reach the write without the gate. The packet does not show whether one exists.",
+          "evidence_refs": [
+            "f2:62",
+            "f1:9",
+            "f1:12",
+            "f1:15",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "cfd96f3d7f88008d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is fs.writeFileSync, with fs bound to the fs module at f2:1, and it writes the copied index files into lib. That is a file write, which supports a benign_build behaviour.",
+          "evidence_refs": [
+            "s8",
+            "s11",
+            "f2:1"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "e94c26b589b96814",
+      "packet_sha256": "a49dc292cd66f442",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "532ef4db38ac0347",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:8 tests Vue.version.startsWith('2.7.') as the condition of an else-if, directly in a decision.",
+          "evidence_refs": [
+            "s1",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "b5f6795d7991cc12",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The 2.x/3.x branches and switchVersion(2) sit in the else arm of the startsWith('2.7.') test (f1:8-11), so reaching them requires not_startswith '2.7.'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "29299ce07123a4ef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the version of the installed vue dependency, so dependency_tree fits.",
+          "evidence_refs": [
+            "s1",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "f4f66990e4fc1694",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Nested guards: vue loads (else of the !Vue test), version is not 2.7., version starts with 2., and @vue/composition-api loads (the early return at f2:30-33 is skipped). They join with and, so 4 conditions are needed.",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "s4",
+            "s5",
+            "f2:56"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "3e1a5cb9de374219",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate only enables rewriting the local index.mjs exports for Vue 2 with the composition-api plugin. It selects no payload and changes no target.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "49f4b6692e72a56f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the expected dependencies are present. Nothing backs off on analysis, CI or a sandbox, so activate fits.",
+          "evidence_refs": [
+            "s3",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "1942f643f4dfa6cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate adapts the library files to the installed Vue version (vue-demi), which is portability.",
+          "evidence_refs": [
+            "s9",
+            "f1:8-16"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "7c60ab2c1f59c45d",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The sink f2:47 (fs.writeFileSync) is in s9, after the s5 early exit. Reaching it from the f1 guards goes switchVersion(2) at f1:12, then updateVue2API at f2:56-57. The claim cites an empty witness and no via calls, so the cross-file hops are not recorded, although the code does support them.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s9",
+            "s10",
+            "f2:51-58"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "6682e0b29a8e99be",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "switchVersion is exported (f2:62), and updateVue2API runs for any caller passing version 2, not only through the postinstall gates. The only caller in the packet is the gated one at f1:12.",
+          "evidence_refs": [
+            "f2:56",
+            "f2:62",
+            "f1:12"
+          ]
+        }
+      ]
+    }
+  ]
+}

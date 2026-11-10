@@ -1,0 +1,1610 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@redhat-cloud-services/hcc-feo-mcp",
+    "version": "0.3.1",
+    "archive_sha256": "73dfde3dc5ac8f3d69e1847499f7b214ec8464f323d207d5f51355be61cde0d6"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "8590bd1dd3a836c6",
+      "packet_sha256": "49f31d0128a36234",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "68068db04bc38c2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "i7 reads process.env[envVar] into a variable and tests it with startsWith(prefix); the result decides the early exit in kq (s1, s7).",
+          "evidence_refs": [
+            "s1",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "2a11f661d87cbcd1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads environment variables (GITHUB_TOKEN, NPM_TOKEN, ...) compared with a prefix, so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "a136bdce13e3d8ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ tests Intl.DateTimeFormat().resolvedOptions().locale lowercased with startsWith inside an if whose true result makes ZZ return true (s2). The compared value is encoded but the API is plainly visible.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "09e8aa92ffb79c91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the resolved Intl locale, a locale/language property.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "577698f85e5feffb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if in ZZ tests (process.env[a]||process.env[b]||...).toLowerCase().startsWith('ru'); process.env is read directly in the condition.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "ad0777298723cfc2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "startsWith('ru') returns true from ZZ, and kq exits on ZZ() true, so the code after it runs only when the env value does not start with 'ru' (not_startswith ru).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "a3d777ec8cf54e75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment value is tested against the language code 'ru', so locale_language fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "e606b33ff003a92a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition is a ternary over process.env values followed by toLowerCase().startsWith(...), read directly in the if.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "d2aaa564e21ba6c8",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The env var names and the compared value are all f4abccab2-encoded, so the code shown does not say whether this reads a timezone or something else locale-like.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "4d0865a53506017b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "W9 tests existsSync (imported alias of fs.existsSync) on N1 = join(os.tmpdir(), encoded name) in an if, matching the probe.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "65e5db1f9e72e051",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a lock file exists, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "ec7a0d2625d81eb2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "kq exits if i7() is true, so the rest runs only on the single condition c1. bq awaits kq before the regions.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "aa5c8ad6ca21a8f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate only allows or stops the single payload path, so it enables.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "3e25d25f5868c7e8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when GITHUB_TOKEN/NPM_TOKEN-style env values start with specific prefixes, which is backing off on a probable canary/analysis credential.",
+          "evidence_refs": [
+            "s1",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "e8a5421f921aa1e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Exiting on specific token prefixes fits anti_analysis (canary tokens); the prefixes themselves are encoded, so this is an interpretation.",
+          "evidence_refs": [
+            "s1",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "5b72861b371fa222",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In bq, after await kq() (which holds the guard), the regions fq() and r(token) are called directly in the same function.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "990a49ce1e17d913",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "fq and kq are each defined once and called once, both from bq, which is invoked once at top level.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "566b999c5d415bed",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The payload cites sinks only for cred_read and recon; exfil, self_propagation, modify_other_packages and persistence have no cited sink.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6caafcd5e7fc0b79",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "kq exits if ZZ() is true, and ZZ returns true when any of the three tests holds, so the rest needs all three negated: c2 && c3 && c4.",
+          "evidence_refs": [
+            "s4",
+            "s2",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "473bcffefe7b0779",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate only allows or stops the payload.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "c0bdf11d873e6b13",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate excludes machines with a ru locale (and a timezone check), so it is targeting and the polarity is activate, not evasion of analysis or sandboxes.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "2b41bf58742485a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Locale/language-based exclusion decides which victims are hit, so targeting.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "2505ced1f3d87c09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The regions fq() and r(token) follow await kq() in bq, and kq holds the ZZ() exit.",
+          "evidence_refs": [
+            "s4",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "af59334416adec37",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "fq is called once, from bq after kq, with no other caller found.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "9e4e5412adcb9ab7",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only cred_read and recon have cited sinks; the other four behaviours have none.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "7edb70261a8f8434",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "kq exits if !W9(), so the rest runs only when the lock check passes, a single condition c5. A stale lock is removed and also passes.",
+          "evidence_refs": [
+            "s11",
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "c3abe1fe2ad4b4cc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock check allows or stops the payload path.",
+          "evidence_refs": [
+            "s11",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "60dd59c56e0b2f14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock file is a single-instance guard, not an analysis check, so it is not evasion; activate fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "4e6d5193d55da4b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock only prevents a second concurrent run and has no environment-targeting purpose, so unclear is acceptable.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "54367dea9f1ae12a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The regions fq() and r(token) follow await kq() in bq, and kq contains the !W9() exit.",
+          "evidence_refs": [
+            "s11",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "9d1e80b9bd152c16",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "fq is called once, from bq after kq, with no other caller found.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "9dfedcc5b146e2b2",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only cred_read and recon have cited sinks; the other four behaviours have none.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "7883a9d51a92ee2c",
+      "packet_sha256": "9602ed2c84b3fb6d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "37893a8b2dd8d4e6",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "The packet has no slices or files and the code folder is empty, so the claim cannot be tied to any code.",
+          "evidence_refs": []
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "83bd9cd0aacdc576",
+      "packet_sha256": "8455545adb1755eb",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "d374fcc5fbd48ed5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "i7() reads process.env[envVar] through a variable and tests startsWith(prefix) on it (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "dd12a620562e9741",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Gq table in f1 holds exactly these four prefixes. kq exits when i7() is true (s2), so the guarded code needs not_startswith.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "bd6468bb1c70a5a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads named environment variables (GITHUB_TOKEN, NPM_TOKEN and similar) and compares their values, so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "8cbba6916c399926",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ() takes the locale from Intl.DateTimeFormat().resolvedOptions().locale and tests startsWith('ru').",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "d4bb2e9c2296ff94",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ() returns true for an ru locale and kq exits when ZZ() is true (s4), so the guarded code needs not_startswith ru.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "b2ca6369bc957846",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the system locale, so locale_language fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "99018cd419722ec8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads LC_ALL, LC_MESSAGES, LANGUAGE and LANG from process.env and tests startsWith('ru').",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0a62241b3c871ae2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ZZ() returns true on a match and kq exits on that, so the guarded code needs not_startswith ru.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "cbdf5c0fa3ab6ab3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary on process.env.SystemRoot selects the LANG, LANGUAGE or LC_ALL fallback chain, and the result is tested with startsWith('ru').",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "8f03b838723ebce8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ru match returns true from ZZ(), which makes kq exit, so the guarded code needs not_startswith ru.",
+          "evidence_refs": [
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "2227af204cc96a99",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads language environment variables, so locale_language fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "bd568ce942a96e80",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "W9() calls existsSync(N1), where N1 is join(tmpdir(), 'tmp.0987654321.lock').",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "f07808ad2ede91f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the lock file is absent, W9 returns true and kq continues, so not_exists is one of the two OR alternatives (the other is c6, a stale lock). kq exits when W9() is false (s8).",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "26b983aae6c46f3d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "mq() calls process.kill(pid, 0) inside try/catch and returns true or false. W9 branches on that result.",
+          "evidence_refs": [
+            "s9",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "f662a4ce495aad4c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "If the lock file exists and the pid is alive, W9 returns false and kq exits (s8). The process must not exist, so the lock is stale, for execution to continue.",
+          "evidence_refs": [
+            "s9",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "f4746b51d4ca2304",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute tests os.cpus().length < 4 and returns false.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "b9b479de390f11ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "cpus().length < 4 returns false, and execute returns early on false (s11), so the guarded code needs >= 4.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "11c6c70367c6596b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the CPU count, which is hardware.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "a5ff3a7c54a038ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "x1() loops over hQ and calls existsSync on each path, and the f1 list matches the claimed values.",
+          "evidence_refs": [
+            "s12",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "9c9df37ec9718ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "x1() returns true if any path exists, and shouldExecute returns false when x1() is true, so the guarded code needs none of the paths to exist.",
+          "evidence_refs": [
+            "s12",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "c71b9603a4bc5885",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The paths are install folders of endpoint security products, not VM or sandbox artifacts. I would label this file_or_dir_exists, or security-tool presence.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "84f34a27907f8c53",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "x1() runs execSync on 'ps aux' (or tasklist on win32), lowercases the output and tests includes() on it.",
+          "evidence_refs": [
+            "s13",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "2cde6ad3aba9d058",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fQ list in f1 matches the claimed 17 names. A match makes x1() true, which makes shouldExecute return false.",
+          "evidence_refs": [
+            "s13",
+            "s11",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "1b6bf9f9347c5f26",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code scans the running process list for names.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "94e079e51d318a4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute tests process.env.CI === 'true'.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "098de9a0edd29c38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CI === 'true' makes shouldExecute return false, so the guarded code needs CI != 'true'.",
+          "evidence_refs": [
+            "s14",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "55476ed5902c9809",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CI is the standard CI marker variable.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "eb7dc5e28f9e5546",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute tests process.env.GITHUB_ACTIONS === 'true'.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "db9e31677390ec17",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS === 'true' returns false from shouldExecute, so the guarded code needs != 'true'.",
+          "evidence_refs": [
+            "s15",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "e7b5556f4cd79f16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI marker.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "c3ad6ed546701265",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute tests process.env.JENKINS_HOME !== undefined.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "910363e95bb96dfe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "JENKINS_HOME being defined returns false from shouldExecute, so the guarded code needs it to be absent.",
+          "evidence_refs": [
+            "s14",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "be06803117694a8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "JENKINS_HOME is a CI marker.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "93afcd3717f7bcd2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "R8.execute tests ['darwin','linux'].includes(process.platform).",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "cb070b7f53eae2cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is a positive if whose then branch holds the guarded code, and the value list matches.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "1bd3680a3bf16679",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating system platform.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c14.L1",
+          "claim_sha256": "37076beef5a71a81",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The constructor stores isGitHubActions = (process.env.GITHUB_ACTIONS === 'true'), and execute branches on that property.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "4f07e037022bd707",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execute returns failure when !isGitHubActions, so the guarded code needs GITHUB_ACTIONS == 'true'.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c14.L6.category",
+          "claim_sha256": "7189e12a38831ad7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI marker.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c15.L1",
+          "claim_sha256": "65050881890ada51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The constructor stores isLinuxRunner = (process.env.RUNNER_OS === 'Linux'), and execute branches on it.",
+          "evidence_refs": [
+            "s20",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c15.L2",
+          "claim_sha256": "beaaaf11211ed673",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execute returns failure when !isLinuxRunner, so the guarded code needs RUNNER_OS == 'Linux'.",
+          "evidence_refs": [
+            "s20",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c15.L6.category",
+          "claim_sha256": "8c50fad41c1ed4f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "RUNNER_OS is set by the CI runner, so ci_marker fits.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c16.L1",
+          "claim_sha256": "5f35cd3fc081e38a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq() reads process.env.WORKFLOW_ID into a variable that decides the early return and the includes test.",
+          "evidence_refs": [
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "c16.L2",
+          "claim_sha256": "8720f2192572392c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq returns when both WORKFLOW_ID and REPO_ID_SUFFIX are falsy, so at least one must be truthy to continue (the two are OR alternatives).",
+          "evidence_refs": [
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "c16.L6.category",
+          "claim_sha256": "841634eab7312a83",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "WORKFLOW_ID is a custom environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "c17.L1",
+          "claim_sha256": "5d950c41549a3e1f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq() reads process.env.REPO_ID_SUFFIX into a variable that decides the early return and the includes test.",
+          "evidence_refs": [
+            "s23",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "c17.L2",
+          "claim_sha256": "8be8996f56dc7095",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq returns when both variables are falsy, so REPO_ID_SUFFIX truthy is one of the two alternatives that continue.",
+          "evidence_refs": [
+            "s23",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "c17.L6.category",
+          "claim_sha256": "98ad47c15fc4b648",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "REPO_ID_SUFFIX is a custom environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "c18.L1",
+          "claim_sha256": "4cfffd419345c44f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hq tests process.env.GITHUB_ACTIONS in an if.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "c18.L2",
+          "claim_sha256": "08c72866dad6a218",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if has a truthy test and the guarded block is its then side.",
+          "evidence_refs": [
+            "s24",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "c18.L6.category",
+          "claim_sha256": "b27bad0a8749bbab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI marker.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "c19.L1",
+          "claim_sha256": "4e5e8046f9f2564d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_WORKFLOW_REF is destructured from process.env and tested with includes(WORKFLOW_ID).",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "c19.L2",
+          "claim_sha256": "6a062065030ebcb4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is workflowRef?.includes(WORKFLOW_ID) inside the if whose then side is the guarded code.",
+          "evidence_refs": [
+            "s26",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "c19.L6.category",
+          "claim_sha256": "860a4ebaae23f143",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_WORKFLOW_REF is a variable set by the CI runner, so ci_marker fits.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "c20.L1",
+          "claim_sha256": "da59d0d80e5bca62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_REPOSITORY is destructured from process.env and tested with includes(REPO_ID_SUFFIX).",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "c20.L2",
+          "claim_sha256": "e880b6d6ef0036c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is repository?.includes(REPO_ID_SUFFIX) inside the if whose then side is the guarded code.",
+          "evidence_refs": [
+            "s28",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "c20.L6.category",
+          "claim_sha256": "7ef1a5784005c6c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_REPOSITORY is a variable set by the CI runner, so ci_marker fits.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "86b0c51cbf957d6d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single early exit on i7() in kq, and the regions after the kq call in bq are on the not-i7 side. One condition, so c1 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s29",
+            "s30",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "638d76381caf52fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The whole collect, exfil and propagate flow runs only if the check passes, so it enables.",
+          "evidence_refs": [
+            "s2",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "4cca6e8a677f2116",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when planted fake credential values are present in the environment (honeypot or analysis detection), so it is evade.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b017a5daff4fcfef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Backing off on decoy credentials is an anti-analysis purpose.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "7719b3ae732c579d",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "bq calls kq inside a try, and its catch block pushes new s4() and new t4() and then runs them through cq. If kq throws (for example W9 cannot write the lock file), the persistence classes run without passing the i7 gate. The s4 class is the one that writes the hook entries (s59).",
+          "evidence_refs": [
+            "s31",
+            "s29",
+            "s59",
+            "s61"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "8f93ca02c1a0fcab",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "ZZ() returns true if any of the three locale checks matches ru, and kq exits then. All three must fail, so the join is and, and then_min is 3.",
+          "evidence_refs": [
+            "s4",
+            "s3",
+            "s5",
+            "s6",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "b0270eab5180bb3f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs only on non-ru locales, so it enables.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "de204dfe30cbe560",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The locale check excludes a victim population rather than detecting analysis, so it is activate.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "fddf51c5b7a72b0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Skipping Russian-language hosts is geographic targeting.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "3e273b586d061f06",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "Same bypass as g1: if kq throws, the catch in bq still runs the s4 and t4 persistence classes without the locale check.",
+          "evidence_refs": [
+            "s31",
+            "s29",
+            "s59"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "11f169ff87ee4b05",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "W9 continues if the lock file is absent (c5) or if the recorded pid is dead (c6, after the file is removed). It returns false only if the file exists and the pid is alive, so the join is or.",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "ec5d8602a82cfaa0",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "A throw from W9 (a failed lock write) lands in bq's catch, which runs s4 and t4 without the lock check. The persistence class is reachable that way.",
+          "evidence_refs": [
+            "s31",
+            "s7",
+            "s59"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "3a3876d6662d004c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "shouldExecute returns false on any of: cpus < 4, x1() (c8 or c9 hit), CI true, GITHUB_ACTIONS true, or JENKINS_HOME set. All six negations must hold, so the join is and and then_min is 6. The fZ re-entry flag is an extra non-environment condition.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "4d9dcd85cb046f2d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The dropped script and its spawn run only if the checks pass, so it enables.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "f241a3409d2cad35",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It backs off on low CPU count, security products and CI systems, which is evade.",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "14c4c7a8b3598f9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks are sandbox, EDR and CI detection, which is anti_analysis.",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "4563742a1289e3c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execute returns early when shouldExecute() is false (s11). The writeFileSync (s62) and Bun.spawn (s63) calls sit directly in the rest of execute, so the witness is empty.",
+          "evidence_refs": [
+            "s11",
+            "s62",
+            "s63"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "7c60f001600ecaea",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sink lies inside t4.execute, which re-checks shouldExecute itself. cq also calls shouldExecute and the catch path in bq goes through cq, so no route skips the gate.",
+          "evidence_refs": [
+            "s11",
+            "s62",
+            "s63",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "bc4faba3d602a35f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code writes a helper script file (s62) and spawns bash with an installer script on stdin (s63). That script installs a user-level service named kitty-monitor, which is persistence through file writes and process creation.",
+          "evidence_refs": [
+            "s62",
+            "s63"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "06b0bad0f9098543",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single if on the platform test, with the regions in its then side.",
+          "evidence_refs": [
+            "s17",
+            "s16",
+            "s53",
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "e886e95adea49038",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The publish and tamper flow runs only inside the platform if, so it enables.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "d6b0a81b37ae2b8d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It runs on supported hosts and does not back off on analysis, so it is activate.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "9ee5ff6f8a30c22b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The guarded code depends on unix tooling (downloadPackages runs mktemp -d through a shell), so the platform check ensures it can run at all. I would label this portability.",
+          "evidence_refs": [
+            "s54",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "aa9d2bc6a4b3967c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Self-propagation: the publishPackage arrow function (s46, s47) calls publishPackage (s48, def s49), which calls e1 (s50, def s51), whose fetch PUT is the sink. Tampering: downloadPackages (s53, def s54) maps the downloader (s55, s56) and calls updateTarball (s57, def s58), whose Bun.write is the sin",
+          "evidence_refs": [
+            "s46",
+            "s47",
+            "s48",
+            "s49",
+            "s50",
+            "s51",
+            "s53",
+            "s54",
+            "s55",
+            "s56",
+            "s57",
+            "s58",
+            "s40",
+            "s52"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "c44ea07d7ae438f8",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "The e1 publish function holding the network sink is also reached from the u8 class (publishPackage calls e1 after the OIDC exchange), which is gated by the workflow-variable checks and not by the platform test. So the self-propagation sink is not reachable only through this branch.",
+          "evidence_refs": [
+            "s40",
+            "s51",
+            "s71",
+            "s70"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "b11832bf492ae3b5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The self-propagation sink is a fetch PUT to the registry (network). The tamper sink is Bun.write of a modified package.json (file write).",
+          "evidence_refs": [
+            "s40",
+            "s52"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "a52aa10ff3d7cc35",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "execute returns failure if either flag is false, so both must hold and the join is and.",
+          "evidence_refs": [
+            "s19",
+            "s18",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "2924ba0caba054d5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The memory dump and secret extraction run only past this check, so it enables.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "7504440cc99056ae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It runs only on GitHub Actions Linux runners, which is activate.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "e1f8f24f78df70d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It targets the CI runner process to read secrets, so targeting fits.",
+          "evidence_refs": [
+            "s19",
+            "s64"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "b418d0923b79482d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "dumpMemory() is called after the guard (s64) and defined at s66. It calls runPrivilegedStdin (s67), defined at s68, whose execSync('sudo ...') call (s65) is the sink, imported from child_process.",
+          "evidence_refs": [
+            "s64",
+            "s66",
+            "s67",
+            "s68",
+            "s65",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "1f9474f2783cdbcd",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The gate is inside execute itself, and dumpMemory and runPrivilegedStdin are called only from execute in the visible code.",
+          "evidence_refs": [
+            "s19",
+            "s64",
+            "s67"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "4068333f24f93f7b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is a privileged process spawn that runs a script to read the runner process memory, and secrets are then extracted from the output, so exec can do cred_read.",
+          "evidence_refs": [
+            "s65",
+            "s64"
+          ]
+        },
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "7514da7dd13335fe",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The code requires (!WORKFLOW_ID || ref.includes(WORKFLOW_ID)) AND (!REPO_ID_SUFFIX || repo.includes(REPO_ID_SUFFIX)), with at least one variable set. When both are set, both includes tests must pass. The claimed (c16&&c19)||(c17&&c20) would accept a match on only one.",
+          "evidence_refs": [
+            "s22",
+            "s25",
+            "s27",
+            "s26",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.effect",
+          "claim_sha256": "5a5b911825391d15",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OIDC publish flow runs only if the checks pass, so it enables.",
+          "evidence_refs": [
+            "s27",
+            "s69"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.polarity",
+          "claim_sha256": "4286342a482e25cc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It runs only on matching workflows or repositories and does not back off on analysis, so it is activate.",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.purpose",
+          "claim_sha256": "19eab42bc9190d62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It matches a specific workflow or repository identifier, which is targeting.",
+          "evidence_refs": [
+            "s26",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3",
+          "claim_sha256": "81a394bfb821693b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "new u8().execute() (s69) leads to execute (s71), whose downloadPackages call (s72) reaches its definition (s73). That definition calls publishPackage (s70), whose body does the registry OIDC exchange with fetch and then calls e1. The guards nest as s22, then s25, then s27, with s69 inside.",
+          "evidence_refs": [
+            "s69",
+            "s71",
+            "s72",
+            "s73",
+            "s70",
+            "s22",
+            "s25",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3.excl",
+          "claim_sha256": "0f03fa3f6678cde7",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "new u8() appears only in hq, which is called only from kq. No other caller reaches u8.execute.",
+          "evidence_refs": [
+            "s69",
+            "s60"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L5",
+          "claim_sha256": "3836f489cf31ccf7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "u8.publishPackage does a fetch POST for the OIDC token exchange and then publishes through e1 (fetch PUT), which is a network sink for publishing.",
+          "evidence_refs": [
+            "s71",
+            "s70"
+          ]
+        }
+      ]
+    }
+  ]
+}

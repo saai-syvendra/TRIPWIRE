@@ -1,0 +1,511 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "cffi",
+    "version": "2.1.1",
+    "archive_sha256": "dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "2fa91e31e5f30438",
+      "packet_sha256": "cfb1aac2b45ce88d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "fdb7a7f1de23c559",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads `sys.version_info` directly at the cited comparison.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "35b04459c3f1a9b5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "operator_mismatch",
+          "evidence": "The source compares `sys.version_info < (3, 14)` and then raises, so the continuing path has the opposite `>=` relation.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "aa3a47477f55fdd7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`sys.version_info` is the Python runtime version property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "2512a681fb594b91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads `sys.platform` directly.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9c8151e62dfba67d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares `sys.platform == \"win32\"` and executes the branch when true.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "0382003d852e4b0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`sys.platform` identifies the operating system platform.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "7b491ec8497922d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The assigned value is `bool(sysconfig.get_config_var(...))`, and that variable is read in the condition.",
+          "evidence_refs": [
+            "s5",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "3c5cc12a03593bf9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "operator_mismatch",
+          "evidence": "The guard requires `FREE_THREADED_BUILD` truthy, which is the boolean result of `get_config_var`; the claim says falsy.",
+          "evidence_refs": [
+            "s5",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "5897b584204ab476",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The queried config variable is `Py_GIL_DISABLED`, which marks the interpreter build mode rather than its runtime version.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "1bf2d2935f5417f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`uses_msvc()` returns the result of `config.try_compile` on a source that errors unless `_MSC_VER` is defined, and the call is used as the `if` condition.",
+          "evidence_refs": [
+            "s6",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "79075f90ed235d3a",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The condition tests the boolean result of `try_compile`; that is a success/truth test, and the record’s `exists` operator does not describe that operator exactly.",
+          "evidence_refs": [
+            "s6",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "c1a12f77c52934f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The compile probe asks whether the configured compiler accepts an MSVC-only test source.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "7066960fd28788e5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The early exit raises only when the free-threaded flag is true and the version is below 3.14; continuation is therefore `not free_threaded || version >= 3.14`.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6be7c375caf23b6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version/build-mode guard rejects an unsupported runtime before the build setup can run, so it enables the benign build on supported configurations.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "221810e678f00a56",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard permits supported configurations to continue into setup and raises for the unsupported target.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "808fef4ba8ccaf9e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check prevents a build on unsupported free-threaded Python versions, which is a compatibility/portability decision.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d2829cf8e69250a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After the early-exit condition is false, execution continues through the module to the `setup(...)` call in the main block.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4c8ee1ab7b6ec8a1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The setup call is after the raising guard, and this file has no alternate call path to that setup invocation.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "daa2eddf958f9230",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`setup(...)` invokes setuptools to build/install the package extension and is a suitable benign-build sink.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "48f7002d9abc5e43",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guarded Windows path requires the outer continuation condition, `sys.platform == \"win32\"`, and a successful `uses_msvc()` probe; these combine as `(c3 || c1) && c2 && c4`.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "6b4cae3e9a44add1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows/MSVC branch supplies Windows-specific libffi inputs while the other branch uses pkg-config and compiler probes, selecting build configuration.",
+          "evidence_refs": [
+            "s4",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "428aafe55a5c5074",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions select the Windows/MSVC build path when that target configuration is present.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "349f72fb31f61285",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch selects platform/compiler-specific inputs needed to build across environments, a portability purpose.",
+          "evidence_refs": [
+            "s4",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "1a14a2de1afaa9ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `else` block calls `use_pkg_config()`, which calls `_ask_pkg_config()`; that helper reaches the cited `subprocess.Popen` call.",
+          "evidence_refs": [
+            "s4",
+            "s10",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L3.excl",
+          "claim_sha256": "696d6e1f44b83002",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "`use_pkg_config()` is called only in this `else` block, and `_ask_pkg_config()` is only called from that helper in this file.",
+          "evidence_refs": [
+            "s4",
+            "s10",
+            "s12",
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.else.L5",
+          "claim_sha256": "2e14f68aab4c67e7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`subprocess.Popen` launches the configured pkg-config command used to obtain libffi build flags, supporting the benign build behavior.",
+          "evidence_refs": [
+            "s11",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "7cdcb31a3560982b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `os.listdir(COMPILE_LIBFFI)` call is textually inside the Windows/MSVC non-ARM64 branch.",
+          "evidence_refs": [
+            "s4",
+            "s9",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "2bc53e840ee4156e",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The directory listing is executed only inside this Windows/MSVC non-ARM64 branch in the file.",
+          "evidence_refs": [
+            "s4",
+            "s9",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "c0a584665aba4126",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The directory listing discovers bundled C source files that are then added to the extension build, supporting the benign build.",
+          "evidence_refs": [
+            "s9",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_06dbf40e32.L6.drop",
+          "claim_sha256": "decc227ffa7d5544",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This check only rewrites include/library paths or compiler arguments for the build; it does not decide whether a build action runs.",
+          "evidence_refs": [
+            "f1:45",
+            "f1:157"
+          ]
+        },
+        {
+          "claim_id": "k_08532a1afc.L6.drop",
+          "claim_sha256": "56fa6113193cac9c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The FreeBSD platform condition selects platform-specific include and library paths for the build.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "k_12296761eb.L6.drop",
+          "claim_sha256": "f4d717b784c17543",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform/compiler-state condition returns early and decides whether the sync capability compile/link probe runs.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "k_2ca02ae20e.L6.drop",
+          "claim_sha256": "8fb8e0c19e18239a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The machine architecture test selects the ARM64 or x86/x64 build inputs.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "k_ebbf1e28d8.L6.drop",
+          "claim_sha256": "3c0bf923e8c8c0ba",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Darwin and Homebrew-existence condition decides whether Homebrew configuration runs.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "k_fc00e71976.L6.drop",
+          "claim_sha256": "9063fe58badac04b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The `os.path.exists` result is part of the Darwin/Homebrew condition that selects and runs Homebrew configuration.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "q_0192d69bfb.L6.drop",
+          "claim_sha256": "8ecf904cbc92d3b5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition returns early on Windows or when no compiler was found, deciding whether the sync capability test runs.",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "q_04d77445f6.L6.drop",
+          "claim_sha256": "9ee1094b90ee3591",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Darwin and Homebrew-existence condition decides whether `use_homebrew_for_libffi()` runs.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "q_43e3d93e00.L6.drop",
+          "claim_sha256": "f0d198a920d108d9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The FreeBSD platform test chooses to append platform-specific include and library paths for the build.",
+          "evidence_refs": [
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "q_8c105d1eeb.L6.drop",
+          "claim_sha256": "9a6a5ac38b2528a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sysroot check only prefixes pkg-config paths before using them as build inputs; it does not decide whether code runs.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "q_98517bab29.L6.drop",
+          "claim_sha256": "c3fa0ba3613a1b93",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The cited branch test combines platform and compiler detection; it is a gate selecting the Windows/MSVC build path, not a duplicate of the earlier runtime check.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "q_cebb00cafe.L6.drop",
+          "claim_sha256": "a87071c0c73415e7",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The cited region contains the ARM64 versus x86/x64 platform-machine decision, which selects different build inputs.",
+          "evidence_refs": [
+            "s9"
+          ]
+        }
+      ]
+    }
+  ]
+}

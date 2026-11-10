@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/changelog-sdk-node",
+    "version": "1.0.3",
+    "archive_sha256": "9f6b69a0e89749375c67df59c67435be4a33249c9a1e3d198dd05945d4b2a00c"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "9b991725c5c061cc",
+      "record_sha256_after": "9b991725c5c061cc",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The code confirms the nesting: index.js:88 (tokens.length > 0, g1) is the only path to the spawn of scripts/deploy.js at index.js:91, and the whoami.username and owned.length early returns at deploy.js:52 and :55 (g2) run only inside that child, before npm publish at deploy.js:66. So the real condit"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "9b991725c5c061cc",
+      "record_sha256_after": "04d6332fab96c9f9",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "87fe901bf85d16a8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The regex at index.js:20 reads content from fs.readFileSync(rcPath) at index.js:18, and rcPath loops over ~/.npmrc, ./.npmrc and /etc/npmrc (index.js:11-16), so a probe target of ~/.npmrc alone was too narrow. Changed probe.target to *npmrc, which covers all three paths, and added a note listing the"
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "032f2bea52dd641b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The startsWith test at index.js:21 reads the regex capture from the same looped fs.readFileSync(rcPath) at index.js:18, so it covers all three files in npmrcPaths, not just ~/.npmrc. Changed probe.target to *npmrc, as for c7. Site, operator and value are unchanged."
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d7f23fe694dc77b5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The guards at deploy.js:52 and deploy.js:55 are bare early returns. They test only whether whoami.username is set and whether owned is non-empty, and when either fails nothing is published. No branch picks another target. The package names come from the for loop at deploy.js:57, which is data the pa"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "cf65213a08570e2d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "deploy.js:52 tests that the token resolves to an account and deploy.js:55 tests that the account has any packages. Neither compares the account or package names to a value, so no kind of victim is selected or excluded. They check that the thing the worm needs to use exists, which is data_availabilit"
+        },
+        {
+          "claim_id": "k_4023412a83.L6.drop",
+          "claim_sha256": "802ae44dc08f45e7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "index.js:89-90 tests path.join(__dirname, 'scripts', 'deploy.js'), a path relative to the package itself, and the archive ships scripts/deploy.js. The result depends on the package contents, not the machine environment, so it is always true on a real install and no VM setting can flip it. Nothing in"
+        },
+        {
+          "claim_id": "q_7a5d11e5ee.L6.drop",
+          "claim_sha256": "0068388746fac903",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This candidate is the if at index.js:90 on existsSync of the package's own scripts/deploy.js, which the archive ships, so it is always true and not environmental. The refuting evidence describes README cleanup, which is a different decision (deploy.js:71, q_505f4df0cc) and does not apply to this anc"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "04d6332fab96c9f9",
+      "record_sha256_after": "d27f091b61353418",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed the listed reason: index.js:88-91 spawns scripts/deploy.js only when tokens.length > 0, and no other install hook launches it (the deploy npm script is not a hook), so g2 now nests g1's conditions in its expression, lists the index.js:88 guard, adds the index.js region and run_file witness, an"
+        }
+      ]
+    }
+  ]
+}

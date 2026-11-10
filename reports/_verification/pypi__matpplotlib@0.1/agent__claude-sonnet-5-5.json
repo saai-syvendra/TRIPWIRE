@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "matpplotlib",
+    "version": "0.1",
+    "archive_sha256": "7d120516e562fb2fc08d823c24fd88bbdfaef3132b864039f998042622c3c419"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ee8a4a384e195458",
+      "packet_sha256": "1b16d0d1f6f5ccdd",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "1441b5093c66ee1b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The claimed sink, the shortcut Save() at f2:100, is not inside the regions s4/s5, and the empty witness says it should be. s4 only sets the state to 362814 and s5 only appends the ProgramData path. Save() sits in the separate 790593 state handler, which runs whether or not IsUserAnAdmin() was true (",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f2:63",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "615e68f5e719ed46",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The shortcut Save() at f2:100 is reached without the IsUserAnAdmin() then-side. When the check is false, f2:67 moves on to state 18005 and the 790593 loop still modifies and saves shortcuts from the APPDATA and Desktop paths. The sink is also not within the cited regions.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "f2:64",
+            "f2:67",
+            "f2:78",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "7115f405088947ad",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s6 calls Save() on a shortcut object created by WScript.Shell CreateShortcut (f2:86). This writes the .lnk file back to disk after adding a --load-extension argument for browser launchers (f2:91). That is a file-write sink that can implement persistence.",
+          "evidence_refs": [
+            "s6",
+            "f2:86",
+            "f2:91",
+            "f2:100"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "97c8ee5ee1050d64",
+      "packet_sha256": "cb52f89d6c133e2a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "92fc55dcff5d8663",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "c1 (win32) and c4 (install/bdist_wheel elif) nest correctly, but the IsUserAnAdmin test (f2:64) only decides whether the ProgramData Start Menu path is appended (f2:65 to 45); both branches continue to state 18005, so the shortcut-rewriting loop in s8 (f2:78 to 101) runs without c2. The combination ",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s8",
+            "f2:64",
+            "f2:65",
+            "f2:67",
+            "f2:115"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "2f807ab3ae9672bf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s9 (f2:100) calls Save() on a shortcut object inside the s8 loop region. Beforehand the code sets the .lnk's Arguments to --load-extension for the dropped Extension folder (f2:91), so Save() writes the modified shortcut back to disk. The sink lies in the region itself, so the empty witness is fine, ",
+          "evidence_refs": [
+            "s9",
+            "s8",
+            "f2:91",
+            "f2:100"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "1b1cf698e71fb056",
+      "packet_sha256": "84f653837d25a2e9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "3686a96440bea6ce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32 platform check, the install/bdist_wheel elif (f2:34) and the IsUserAnAdmin then-arm (f2:64-66) nest, and that arm sets the state to the ProgramData append (f2:45, s5). The state machine then goes to 18005, then 37668, 382664 and 790593. The 790593 state walks every directory in that list (",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "f2:45",
+            "f2:78",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "2b68f3b5472af53e",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "The Save() sink at f2:100 is also reached when IsUserAnAdmin is false. The else path sets state 18005 (f2:67), which proceeds to the same shortcut walk over the APPDATA Start Menu and Desktop folders. The admin then-side only adds the ProgramData Start Menu folder to the list.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "f2:64",
+            "f2:67",
+            "f2:78",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "01b5bc2d63b6b1df",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Save() on the WScript.Shell shortcut object writes the modified .lnk to disk. Before that, the code sets Arguments to --load-extension pointing at a dropped extension, but only for browser launchers (f2:90-91). Together with the dropped extension files (f2:72, f2:122) this is file-write persistence ",
+          "evidence_refs": [
+            "s6",
+            "f2:61",
+            "f2:90",
+            "f2:91",
+            "f2:100"
+          ]
+        }
+      ]
+    }
+  ]
+}

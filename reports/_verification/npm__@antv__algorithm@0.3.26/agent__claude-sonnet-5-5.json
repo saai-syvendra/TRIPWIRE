@@ -1,0 +1,1497 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@antv/algorithm",
+    "version": "0.3.26",
+    "archive_sha256": "5b7a16dcd1fb5dad4426bb96eca6d530ac7a804bd4c995509e9ee666c1ce4ffa"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "882323fca7254981",
+      "packet_sha256": "09408cddf4360f93",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "bdae67a3b18af479",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 is the branch test on a lock path using the fs existsSync import; f6 branches on it.",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "f35cd65d46a1fa83",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f6 only reaches the lock write when the lock is absent (or holds a dead PID); the path is tmpdir joined with tmp.0987654321.lock, and the caller exits when f6 is false (s2).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "ba2257786ab7ad52",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads whether a file exists.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "7cb2998987027772",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "N6 reads process.env[envVar] over a table whose only entry is GITHUB_TOKEN and tests startsWith on it.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "446b64211721587b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The table prefix is the decoy token string; YP exits when N6() is true, so the later code needs not_startswith.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "77db82eebc662249",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "7707811c08530722",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "jg tests Intl.DateTimeFormat().resolvedOptions().locale lowercased startsWith ru.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "7d12153b17a2a096",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "jg returns true on ru and YP exits when jg() is true, so the rest needs not_startswith ru.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "e974412cc4f633dd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads the runtime locale.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "cb176a409837dbbc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested string is LC_ALL||LC_MESSAGES||LANGUAGE||LANG; LANG is one of the values it may hold.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "061d8f7b93e02b2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The startsWith ru test returns true from jg, and YP exits on that, so the later code needs not_startswith ru.",
+          "evidence_refs": [
+            "s7",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "49e4bbeb463012a8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads locale environment variables.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "2a2b6814653e8db4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Pw compares the length of the os cpus() result with 4.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "ff76cb12fae82af1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Pw returns false when length < 4, and the caller returns when Pw is false, so length >= 4 is required.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "c93c946ffa0b2d67",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CPU count is a hardware property.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "4db511c9d6f91c32",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited condition compares process.env.CI to the string true.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "b0115b5295436f67",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The code checks CI !== 'true', which is not the same as falsy: CI set to 'false' is truthy yet still passes.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "de508a1274bf1c6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CI environment marker.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "6c754d1b01d04c03",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The constructor stores GITHUB_ACTIONS === 'true' in isGitHubActions, which execute tests.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "6342f391d3dbf20e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execute returns early when !isGitHubActions, so equality with true is needed.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "fc6c69f87537e070",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI marker.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "fcdf9363c4474e85",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The constructor stores RUNNER_OS === 'Linux' in isLinuxRunner, which execute tests.",
+          "evidence_refs": [
+            "s13",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "b1b5ec56d2b149b8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execute returns early when !isLinuxRunner, so RUNNER_OS == Linux is needed.",
+          "evidence_refs": [
+            "s13",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "3ccd328053ed2b4c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Plain environment variable read.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "0bfcfb9c034a21ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GP calls process kill with signal 0 in a try and f6 branches on the result.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "82c1f44db0678473",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f6 returns false when GP(pid from lock) is true, so continuing needs the recorded PID to be dead (kill throws).",
+          "evidence_refs": [
+            "s14",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "f992bd6984e88bc9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It checks whether a process is alive.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "586615aa722a46a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A variable is assigned from process.env.SKIP_DOMAIN === 'true' and tested in an if.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "dea726263d50ef60",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if runs when SKIP_DOMAIN equals true.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "257a4aed40530db0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Environment variable.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "476f82cc2a585744",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f6 returns true when the lock is absent or holds a dead PID, so the two conditions are alternatives under one exit guard.",
+          "evidence_refs": [
+            "s2",
+            "s1",
+            "s14",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d0c2fe010c88c2e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code runs only if the check passes; nothing else is selected.",
+          "evidence_refs": [
+            "s2",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "785b9fea8d7a1ebc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Single-instance lock check; it does not back off on analysis.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "4778d4866cd5f682",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A lock file guards against concurrent runs; no clear portability or targeting purpose.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "b4dbde4c1880a56b",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The send method with fetch (s19) is reached through sender objects built at run time, and the witness is empty; the path from the region to it is not traceable from the cited slices.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "267789ae27913211",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "IP() is the only visible entry and runs YP first, but other users of the sender class could not be ruled out.",
+          "evidence_refs": [
+            "s17",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "a98cd6e6f0c7b983",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only a network exfil sink is cited; the other listed behaviours (recon, cred_read, download, write_file, self_propagation, spawn_process) have no sink in the payload.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "98fa137a6eae83fa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single condition under one early-exit guard.",
+          "evidence_refs": [
+            "s4",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "f9ab31792fd19e56",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The later code runs only if the check passes.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "52222a23fe6a964e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when the token has the decoy prefix, which backs off on a honeypot.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "999f3c561a35d9ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A decoy-token check is an analysis-detection test.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "f1e9f72214069c15",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Same unresolved path to the send method as in g2.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "7a0478f455c657b4",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Other users of the sender could not be ruled out.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "dedc65ddee716cb5",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only exfil has a cited sink.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "822cef685783f9d5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "jg is true if either locale test matches ru, and YP exits then, so both not_startswith must hold: an and.",
+          "evidence_refs": [
+            "s6",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "bef65845b5c4bd49",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Later code runs only if no ru locale.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "258034c56138a6d5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off on a ru locale.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "d8e9eaac6ba8d7c4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Excluding one language region is targeting.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "7043f2815e12f6ac",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Same unresolved path to the send method.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "04b5cd7f70383a93",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Other users of the sender could not be ruled out.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "9350d73292a9f31a",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only exfil has a cited sink.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "483dc71e7b28322c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Pw returns false on low CPU count or CI markers; all must pass, so the conditions are joined by and.",
+          "evidence_refs": [
+            "s9",
+            "s8",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "2d358683694bb4ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The step runs only if the check passes.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "344c1c164dba5cd5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Backs off on few CPUs and CI environments, typical sandbox signs.",
+          "evidence_refs": [
+            "s8",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "9255f6214d945a11",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Sandbox and CI avoidance.",
+          "evidence_refs": [
+            "s8",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "74dfa2a5672bc8cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file write and process spawn sit in $g right after the `if(!Pw())return`, and $g is called once, from the finally block in IP.",
+          "evidence_refs": [
+            "s9",
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "cd1000e97d3b49bc",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "$g is called from one place and only after the Pw guard.",
+          "evidence_refs": [
+            "s9",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "1fb625d6fabd2adb",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The sink is a process spawn and a file write, but the cited code does not show that it persists anything.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "61537582ba177b6e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "execute returns when either flag is false, so both are needed.",
+          "evidence_refs": [
+            "s12",
+            "s11",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "87e355d71ad8db55",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The body runs only on a GitHub Linux runner.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "18654e8179dd82fe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Runs on the intended target environment.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "c196da52325b54a0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Restricts to one platform for a platform-specific job.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "8a1531f80b96fa76",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execute calls dumpMemory (s22), which calls runPrivilegedStdin (s25), which runs the sudo process call (s23).",
+          "evidence_refs": [
+            "s22",
+            "s24",
+            "s25",
+            "s26",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "8b6c27bb33856448",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "dumpMemory is reached only from execute, which returns first unless both checks pass; other callers of execute still go through that check.",
+          "evidence_refs": [
+            "s12",
+            "s22",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "d428e3e927cdaf11",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink runs a sudo command from a process-execution call, which can spawn processes and read process memory.",
+          "evidence_refs": [
+            "s23",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "a51122a391bbeefc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One if on the SKIP_DOMAIN flag with a then and an else arm.",
+          "evidence_refs": [
+            "s16",
+            "s27",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.effect",
+          "claim_sha256": "b29ca8ada7283093",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both arms create a sender and the flag picks which one, so the target changes.",
+          "evidence_refs": [
+            "s16",
+            "s27",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.polarity",
+          "claim_sha256": "082e11ce308d7624",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The flag does not back off on analysis.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g7.L6.purpose",
+          "claim_sha256": "bd6d25311267ca47",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The purpose of the override is not stated in the code.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g7.else.L3",
+          "claim_sha256": "22a9878115706431",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "name_only_link",
+          "evidence": "s29 is a tryCreate call on a sender class; the network call itself is not in the cited slice and the witness is empty.",
+          "evidence_refs": [
+            "s28",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g7.else.L3.excl",
+          "claim_sha256": "55d33b688bb02353",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "name_only_link",
+          "evidence": "Not decided without the sender class.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g7.else.L5",
+          "claim_sha256": "2f299c2adfc4b8d0",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "name_only_link",
+          "evidence": "The cited call is tryCreate, not a network API.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3",
+          "claim_sha256": "d1a72578cac5ce57",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "name_only_link",
+          "evidence": "s30 is a tryCreate call; the network call is not in the cited slice and the witness is empty.",
+          "evidence_refs": [
+            "s27",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3.excl",
+          "claim_sha256": "dd095aa24578b28e",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "name_only_link",
+          "evidence": "Not decided without the sender class.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L5",
+          "claim_sha256": "ff13987585fa37cb",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "name_only_link",
+          "evidence": "The cited call is tryCreate, not a network API.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "k_c3d4066646.L6.drop",
+          "claim_sha256": "ad26ea00b373b583",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The __DAEMONIZED flag is set by the program itself on its re-launched child, so it is a re-entry guard.",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "k_d8a35f6c4e.L6.drop",
+          "claim_sha256": "d73533aded4e10d6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is cleanup of the program's own lock file, not an environment property.",
+          "evidence_refs": [
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "q_13b92544b9.L6.drop",
+          "claim_sha256": "e3f0affd6bdd5738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same __DAEMONIZED re-entry guard.",
+          "evidence_refs": [
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "q_a503be1583.L6.drop",
+          "claim_sha256": "1230d2e9baf32639",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The same lock-file existence test as c2, in the other copy of the code.",
+          "evidence_refs": [
+            "s34",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "q_ccad5d9036.L6.drop",
+          "claim_sha256": "7cdf18b8b73c5662",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Lock-file cleanup in _9, not an environment gate.",
+          "evidence_refs": [
+            "s35"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "47f8b8a185f5674b",
+      "packet_sha256": "8100308cdcead389",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "4b8993fc0625ce64",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In jg() the condition reads process.env LC_ALL||LC_MESSAGES||LANGUAGE||LANG, lowercases it and tests startsWith('ru').",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "e7c373b9b4717aef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "jg() returns true when the env locale starts with 'ru', and YP exits the process when jg() is true, so the code after the exit runs only when the locale does not start with 'ru'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "4a5bc865c52d8149",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the locale/language environment variables, so locale_language fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "d78e4ae7a777b98b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Pw() compares process.env.CI to \"true\" in an if condition.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "98cb789aad4a527d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Pw() returns false when CI==='true', and $g returns early on !Pw(), so the code after the guard runs only when CI is not 'true'.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "4ca0478bf55ed7df",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CI is a CI-environment marker.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "c4f2ed6980164723",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Third test in jg() reads LANG||LANGUAGE||LC_ALL (when SystemRoot is set) and tests startsWith('ru') in an if condition.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "a684aa4029d6338f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When that startsWith('ru') test is true jg() returns true and YP exits, so guarded code needs not_startswith 'ru'.",
+          "evidence_refs": [
+            "s5",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "57c5da3991adda67",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads locale environment variables.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "7ca9d05e987bccaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Pw() compares process.env.GITHUB_ACTIONS to \"true\" in an if condition.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "2900e44bd39949af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Pw() returns false when GITHUB_ACTIONS==='true'; $g returns on !Pw(), so guarded code needs it to be not 'true'.",
+          "evidence_refs": [
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "0f4d17678e020d92",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI marker.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c14.L1",
+          "claim_sha256": "a3a1380a1d84713f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Pw() tests process.env.JENKINS_HOME!==undefined in an if condition.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "c959c348518c83fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Pw() returns false when JENKINS_HOME is defined, so guarded code runs only when it is not set (not_exists).",
+          "evidence_refs": [
+            "s7",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c14.L6.category",
+          "claim_sha256": "3ba1916f94e295be",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "JENKINS_HOME is a CI marker.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "b6eb85440d26574f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "IP exits on !f6(); f6() is true when the lock file does not exist (c2) or when it exists but the recorded pid is not alive (c10), so the conditions are alternatives joined with or; one condition suffices.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "7a2e7a4b57d92052",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The regions follow the YP() call in IP. finalize calls flush, flush calls this.dispatch (bound to the dispatcher's dispatch), and dispatch calls sender.send; the domain sender's send does a fetch POST (s15). I followed the dynamic sender dispatch: the au instance is placed in the senders list.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "14e5a5ce48d23b81",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "IP() is invoked once at top level and it calls YP() first; the sender classes are instantiated only inside IP, and au is created only in p9.tryCreate.",
+          "evidence_refs": [
+            "s9",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "2127c22ff35d536a",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only the exfil behaviour has a cited sink (a fetch POST); the other listed behaviours (recon, cred_read, download, write_file, self_propagation, spawn_process) have no cited payload sink.",
+          "evidence_refs": [
+            "s15",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "5cabbca396208757",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "uP holds {GITHUB_TOKEN, prefix ghp_decoyGitHubToken}; N6 returns true when the env var is defined and starts with the prefix, and YP exits then, so a single not_startswith condition guards the code.",
+          "evidence_refs": [
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "0c204774871fbf1e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same sink chain as g2: the regions after YP() reach finalize, flush, dispatch, sender.send, then fetch POST.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "e6c9d6dab349636a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "YP() and IP() each have a single call site, and the payload is built only in IP after YP().",
+          "evidence_refs": [
+            "s9",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "25d44d8ae314b671",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only exfil has a cited sink; the other listed behaviours have no cited sink.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "8b4915b1e71a1284",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "jg() returns true if any of the three locale tests starts with 'ru' and YP exits then, so guarded code needs all three to be false: an and of three conditions, then_min 3.",
+          "evidence_refs": [
+            "s2",
+            "s27",
+            "s1",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "d56da8c38d7028b0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The locale test only decides whether the payload runs at all, so the effect is enables.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "e0c0ef783ef9d92b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The payload runs when the locale is not Russian, so it activates on a target population rather than backing off from analysis.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "e1d9d158445407d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Excluding Russian-language hosts is victim selection, so targeting.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "d232c667ef545a72",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same chain: regions after YP() reach finalize, flush, dispatch, sender.send, then the fetch POST.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "002ae5265a036a73",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Single call sites for YP and IP; the payload objects are created only in IP.",
+          "evidence_refs": [
+            "s9",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "6399ef6da28ab1b0",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only exfil has a cited sink; the other listed behaviours have no cited sink.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "87738e75f9f970cf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Pw() returns false on cpus<4, CI==='true', GITHUB_ACTIONS==='true' or JENKINS_HOME defined, and $g returns on !Pw(), so all four must hold: an and of four conditions.",
+          "evidence_refs": [
+            "s4",
+            "s28",
+            "s3",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "e2a2c7ce986066ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks only decide whether the temp-file write and bash spawn run, so the effect is enables.",
+          "evidence_refs": [
+            "s4",
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "bfb20a598f7abdc7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Low CPU count and CI markers make it back off, which is evade.",
+          "evidence_refs": [
+            "s4",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "b3c34e22e4af5b9c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Skipping on <4 CPUs and CI environments is sandbox/analysis avoidance.",
+          "evidence_refs": [
+            "s4",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "eb6f5d844bdec9db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After the 'if(!Pw()) return' guard in $g, the same block writes a temp file (s29) and calls Bun.spawn of bash (s30), so the sink sits in the region itself.",
+          "evidence_refs": [
+            "s4",
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "d3629c084d20b6b0",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "$g has one call site, in IP's finally block, and the spawn is inside $g after the Pw() guard.",
+          "evidence_refs": [
+            "s4",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g7.else.L3",
+          "claim_sha256": "e94fbb60b48e8f6a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else statement builds p9 and calls tryCreate (s33), which returns the domain sender au, whose send does the fetch POST; the sender goes into the senders list used by dispatch.",
+          "evidence_refs": [
+            "s31",
+            "s32",
+            "s33",
+            "s34",
+            "s24",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g7.else.L3.excl",
+          "claim_sha256": "8f2467021336e023",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The au sender is constructed only inside p9.tryCreate, and p9 is instantiated only in the else statement.",
+          "evidence_refs": [
+            "s32",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "g7.else.L5",
+          "claim_sha256": "15ed628a6c7ad916",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is a fetch with method POST and a JSON body, which is network exfiltration.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3",
+          "claim_sha256": "d58ee0686b066e37",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then statement calls a9.tryCreate(undefined, token) (s37), which calls setupGitHubSender (s39) and returns a GitHub sender; its commitFileWithRetry does a PUT through the fetch wrapper X (s36).",
+          "evidence_refs": [
+            "s35",
+            "s37",
+            "s38",
+            "s39",
+            "s40",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L3.excl",
+          "claim_sha256": "a956a2cd0c8617e9",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "When SKIP_DOMAIN is not 'true' and the domain sender is unhealthy, a later statement calls the same a9.tryCreate(undefined, token), so the GitHub sender is reached without the then side.",
+          "evidence_refs": [
+            "s13",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g7.then.L5",
+          "claim_sha256": "5b8f964199633694",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is a PUT via X, which wraps fetch to the GitHub API, so it can send data over the network.",
+          "evidence_refs": [
+            "s36"
+          ]
+        }
+      ]
+    }
+  ]
+}

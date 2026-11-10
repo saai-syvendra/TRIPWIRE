@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "groq_ppe_pkg",
+    "version": "1.0.0",
+    "archive_sha256": "ae4348f083837508ca29b36923301099a4e554da1bf9d905a6b95723def567ec"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "fcf98699e0203abd",
+      "packet_sha256": "52106f585fc13494",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "50fa4984fa00877c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Line 30 tests `\"install\" in sys.argv` as part of the if condition.",
+          "evidence_refs": [
+            "s1",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "81b90f28ea4bf5e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm runs send_ip() when \"install\" in sys.argv is true, with no negation. The test is an `or` alternative, so it is a positive includes.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "172d4f5fde9eceaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the setup.py command line to see which package-manager command is running, so package_manager fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "f4e8cd1aa9321efb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Line 30 tests `\"bdist_wheel\" in sys.argv` as the second alternative of the if condition.",
+          "evidence_refs": [
+            "s3",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "4b726c44f3eaca7e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm runs send_ip() when \"bdist_wheel\" in sys.argv is true, with no negation.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "12a9235af25efb01",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the setup.py command line for the bdist_wheel build command, so package_manager fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9d7ab259c462c083",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single if joins the two includes tests with `or`, so the expression is c1 || c2. There is no else arm, and one condition is enough, so then_min is 1.",
+          "evidence_refs": [
+            "s2",
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "481c142f7248ca9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "send_ip() runs only when the gate passes and there is no alternative payload, so the gate enables the behaviour.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "35afdafd737ee99b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The payload runs when an install or wheel build is detected. Nothing backs off on analysis, CI or sandbox signals, so the polarity is activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "2dc572ca0097ebc5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate limits the payload to real installs and builds, not metadata-only commands, so it runs on installing victims. Targeting is the closest purpose label, though it is a loose fit.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "558b0bab44950270",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then block at line 31 calls send_ip(), defined at lines 4-27. That function holds the ipify urlopen at line 7 and the POST urlopen at line 23.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "de34afaaf7b414b0",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "send_ip is called only at line 31, inside the gate. setup.py has no other callers, exports, timers or handlers.",
+          "evidence_refs": [
+            "f1:31",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "f22bc4a084eeca45",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Recon rests on urllib.request.urlopen fetching the public IP, a network sink. Exfil rests on a POST of that IP to a webhook URL via urlopen, also a network sink.",
+          "evidence_refs": [
+            "s5",
+            "s7"
+          ]
+        }
+      ]
+    }
+  ]
+}

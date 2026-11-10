@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "xlsxwriteer",
+    "version": "0.1",
+    "archive_sha256": "c4b346e95b8c26f69c53b9bdfe8a956267cf37ffc45862310cfe33aca0e381c9"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "887ac7ced12d0c3d",
+      "record_sha256_after": "85cc9a49f2f62ad3",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1b044a0224d78fc7",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The suffix at line 120 decodes to 92,69,120,116,101,110,115,105,111,110 = \\Extension (no trailing s), the same suffix used by makedirs at line 59. On re-reading, the check only guards makedirs (see g3.L6.effect), so c3 was removed and its candidate k_648bbff21c dropped; the corrected %APPDATA%\\Exten"
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "c821f1db704aff8a",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Computed the transitions by hand: IsUserAnAdmin() true sets state 362814 (line 69), which appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the shortcut folder list (line 46) and then sets 18005; false sets 18005 directly (line 71, the same expression). Both reach the shortcut walk that sets --"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e58948cd15dcc4ea",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The admin branch adds the machine-wide Start Menu folder, so it decides which victim shortcuts the persistence rewrites. Purpose changed from unclear to targeting with a purpose_reason that names the states and folder."
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "a96a17f40d4b3836",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Computed by hand: not-exists at line 120 sets 29059 (os.makedirs at line 59), which then sets 37668; exists sets 37668 directly (line 124, the same expression). 37668 opens %APPDATA%\\Extension\\background.js for writing, so the drop runs either way and the test only creates the folder. Plumbing, not "
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Resolved the c2/c3 routing and the partial value (c3 removed), but g2's path from the admin branch to the CreateShortcut sink runs through state-machine transitions that a witness hop cannot express, so the payload stays unresolved and 'payload path not fully traced' remains. The sys.argv[1] build-p"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "85cc9a49f2f62ad3",
+      "record_sha256_after": "bae5315750adae0c",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6e696c33094cc5c0",
+          "final_seen": "refuted",
+          "confirmed": true,
+          "decision": "fixed",
+          "reason": "The stmt_range region at setup.py:46 (state 362814, the append of the ProgramData Start Menu folder) sits inside the sys.platform if but not inside the IsUserAnAdmin if at line 68, so the guards combined as (c1 && c2) || c1. Removed that region; the remaining region (line 69, the then block of the I"
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "ddc45624b5a73045",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The agent is right that the CreateShortcut sink at setup.py:90 is not inside the then block at line 69 and that the non-admin path also reaches it: line 68 sends True to state 362814, which only appends the machine-wide Start Menu folder to the shortcut list, and both paths continue at state 18005 t"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "bae5315750adae0c",
+      "record_sha256_after": "bae5315750adae0c",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Re-read setup.py: the IsUserAnAdmin() if at line 68 only assigns the loop B state variable and continues, and the CreateShortcut sink at line 90 sits in loop C nested in loop B, so the path from the g2 region to the sink exists only through integer state dispatch (while loops at lines 10, 38, 88). N"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "bae5315750adae0c",
+      "record_sha256_after": "50b2ee6829c2fbbc",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bffa50649625a977",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 6 tests sys.platform == 'win32' (char codes 119,105,110,51,50) and its block holds the whole payload: pywin32 install, extension drop, .lnk rewrite. There is no else side and no version of the payload for another OS; only the setup() metadata at line 132 sits outside. Portability needs each bra"
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "fca333cb60d66634",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refuters are right that the sink at line 90 is not inside region s10, so the empty witness wrongly claimed it was. The path does exist, through state dispatch: line 69 sets 362814 (436*833+1-375), line 46 appends the ProgramData Start Menu folder, line 48 sets 18005, then 37668, 382664, 12768, 1"
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d14263a49e9ac562",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The admin test does not decide whether the rest runs. True: line 69 computes 362814, line 46 appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the folder list, line 48 computes 18005. False: line 71 computes 18005 directly (102*192+0-1579, or-ed with 1). Both paths then reach the same walk at l"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0dc20a87f8622ea5",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refutation says the privilege check decides whether execution continues into the remaining payload, so the purpose is unclear. Lines 69 to 71 show both outcomes reach state 18005 and the same payload; the continue at line 70 only re-enters the dispatch loop with state 362814. The sole difference"
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "c902145e4e5160c8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The test at line 120 is not a gate. Path missing: line 121 computes 29059, line 59 runs os.makedirs on the same base + Extension path (identical char-code list), line 60 computes 37668. Path present: line 124 computes 37668 with the identical expression. Both sides write the extension files from sta"
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "f599a783a9e0bcf4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement around the same line 120 test. Its then side (lines 121 and 122) goes to state 29059, which makes the folder at line 59 and rejoins at 37668 on line 60; falling through, line 124 sets 37668 directly with the same expression. The continue only returns to the dispatcher, so la"
+        }
+      ]
+    }
+  ]
+}

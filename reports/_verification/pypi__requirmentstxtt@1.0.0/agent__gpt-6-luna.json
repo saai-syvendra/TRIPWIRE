@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "requirmentstxtt",
+    "version": "1.0.0",
+    "archive_sha256": "9c39a0211345e649a50948832d9b719a7b912f5de029840bb3efe60e09a9e9cd"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "7515d3884b10fe5e",
+      "packet_sha256": "e9eb9869b9ac5fb7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "771f9121eda05ec7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition directly compares `os.name` to a string, so the cited site tests the named API (f1:13).",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "bf802815d9941072",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is controlled by `os.name == \"nt\"`; there is no inversion between the comparison and the guarded block (f1:13-17).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads `os.name`, the operating system name property, so the `os` category fits (f1:13).",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "f277aab382bf1a48",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one cited `if` guard, and its sole condition (`os.name == \"nt\"`) directly controls the then region; the minimum condition set is one condition (f1:13-17).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code retrieves remote text and passes it to `exec`, making those behaviors available only when the gate holds (f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code proceeds with the remote fetch and execution when `os.name` equals `nt`, so the gate activates on its target condition (f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The operating system value selects Windows hosts for the remote fetch and execution, which is targeting (f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "413dafa89cc62d11",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the network call and `exec` are in the `if os.name == \"nt\"` block, so each cited sink lies directly in the then region (f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "88000fb9542d04a9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The fetched text and its execution occur only inside the custom install command's `run` method under the Windows condition; the setup configuration registers that class as the install handler, with no other call path shown for these sinks (f2:10-16, 29-32).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "f2:10-16",
+            "f2:29-32"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1439acb232d2e904",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` is a network request that can download the response text, and `exec(...)` executes that text (f2:16).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:16"
+          ]
+        }
+      ]
+    }
+  ]
+}

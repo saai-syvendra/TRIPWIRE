@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "3web.py",
+    "version": "1.0.0",
+    "archive_sha256": "d5d208fb7bcd8b2408865952da37d9a47d76579bb4257f1d061469b1a272f5e0"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "025b4d29b2bae821",
+      "packet_sha256": "a0fa713810ac003c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ddaa84b3d2c9e375",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly compares `os.name` in the `if` decision (s1; f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a395b0f52686f00f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` tests `os.name == \"nt\"`, and the guarded block is the then arm (s1-s2; f1:13).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads `os.name`, an operating system property (s1; f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "254758b701346217",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one `if os.name == \"nt\"` guard, and its then block contains both cited regions; the expression is the single condition `c1` (s2-s4; f1:13-18, f2:13-18).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows arm the code retrieves response text from a remote URL and executes the transformed text, enabling those behaviors under the gate (s4-s6; f2:13-18).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded download and execution run when `os.name` equals `nt`, activating on the targeted operating system (s2, s4-s6; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test selects the Windows environment (`os.name == \"nt\"`) for the remote retrieval and execution (s1-s6; f2:13-16).",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "cfe59845594787ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the requests call and `exec(...)` call are statements directly inside the then block of the cited `if`; the empty witnesses therefore reach their sinks in the guarded regions (s2-s6; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1f570dd94e9b76a2",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sink calls occur only in the `run` method's then block; the remainder of `run` calls `install.run(self)`, and no other call site of these sink statements appears in the provided files (s2-s6; f1:10-19, f2:10-19).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "f1:10",
+            "f2:10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "27b89fc05e1cfee3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` retrieves response content from the specified remote URL, supporting download, and `exec(...)` evaluates the resulting text, supporting execution of downloaded code (s5-s6; f2:16).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

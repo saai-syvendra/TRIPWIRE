@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "13Cent",
+    "version": "999.0.2",
+    "archive_sha256": "86f1df6643a915c6b759a0beef64dcb0b81716dae0739928a8c5dca19d3b7658"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e7e0066e9834ee17",
+      "packet_sha256": "efbaac97a45bf674",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_7c0fcef421.L6.drop",
+          "claim_sha256": "e3c1f8358c167d57",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The file open in s1 gates the POST at f1:59: only a successful open supplies the file for upload, while failure skips it through the exception handler. This is a data_availability gate in CustomInstall.run, registered as the install command at f1:79.",
+          "evidence_refs": [
+            "s1",
+            "f1:59",
+            "f1:60",
+            "f1:79"
+          ]
+        },
+        {
+          "claim_id": "q_59f427ce70.L6.drop",
+          "claim_sha256": "6fcfd204be7b21d1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The try block in s2 uploads the file only when its open succeeds; an open failure reaches the bare exception handler and bypasses the POST. This is a data_availability gate deciding file exfiltration in the registered install command (f1:79).",
+          "evidence_refs": [
+            "s2",
+            "f1:79"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "aicp-tracker",
+    "version": "1.2.9",
+    "archive_sha256": "69f07b17dc085678c06da0d033ac4bd728ce25b83eedc9d7eaf4b27ba0760db0"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "c7856b8199997da1",
+      "record_sha256_after": "1360d0716ea7f9b6",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "a197f869f801614c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "setup.js:5 exits when CI or npm_config_yes is set (commented as a CI skip), and the only gated action is config.save of INIT_CWD into ~/.aicp-tracker/config.json (config.js:21). No harmful behaviour is withheld from CI, so anti_analysis is not supported; purpose changed to portability (adapting to n"
+        },
+        {
+          "claim_id": "q_85acc468ea.L6.drop",
+          "claim_sha256": "579b85a5d6c0d5c8",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "q_85acc468ea is the early_exit reading of the if at setup.js:11 (arm else), whose protected code is lines 35-207 after the block. The then block always ends in process.exit(0) at line 26 or 30, and c3 (npm_lifecycle_event == postinstall) is always true under the postinstall hook, so that else side n"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Install-time code only writes the local config (setup.js:17-20); the Claude Code log upload to a duckdns host and login auto-start sit in the bin command and wizard (main() and src/ daemon files), unreachable at install. Whether that runtime behaviour makes the package malicious, against the benign "
+        }
+      ]
+    }
+  ]
+}

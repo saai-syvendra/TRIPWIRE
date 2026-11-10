@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@cheqplease/structured-logger",
+    "version": "2.2.5",
+    "archive_sha256": "3d7a73d851699f7bf5a1205d5a5add6da617cedfe713d4d246b74cdba7aa66ff"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "6ab35ba8996d9b75",
+      "packet_sha256": "beb048ca710da2de",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_99dccb102f.L6.drop",
+          "claim_sha256": "ddc4ed5475aa692a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The write at f1:63 records host and user values as data without testing them or deciding whether any payload runs. The shell connection is invoked separately at f1:59.",
+          "evidence_refs": [
+            "s1",
+            "f1:59",
+            "f1:63"
+          ]
+        },
+        {
+          "claim_id": "k_f6bea5bfc3.L6.drop",
+          "claim_sha256": "a36e4b1f45475e5f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform comparison selects the shell executable used for the same network-connected shell behaviour on either branch. This changes how the payload starts and is plumbing rather than a gate under the stated definition.",
+          "evidence_refs": [
+            "s2",
+            "f1:34",
+            "f1:39",
+            "f1:40",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "q_0e1342d7e2.L6.drop",
+          "claim_sha256": "a45daa89a11cdccc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The try block unconditionally attempts the evidence-file write and merely swallows any exception; it contains no environmental decision. Hostname and username are serialized as data, while the shell connection is invoked before this block.",
+          "evidence_refs": [
+            "s3",
+            "f1:59",
+            "f1:62",
+            "f1:69"
+          ]
+        },
+        {
+          "claim_id": "q_b471e690fd.L6.drop",
+          "claim_sha256": "31c91905bd3394b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Both arms of the ternary spawn a shell, and the resulting process receives the same network piping at f1:39-41. Selecting the executable by platform only changes how the payload starts, which the gate definition excludes as plumbing.",
+          "evidence_refs": [
+            "s4",
+            "f1:34",
+            "f1:39",
+            "f1:40",
+            "f1:41"
+          ]
+        }
+      ]
+    }
+  ]
+}

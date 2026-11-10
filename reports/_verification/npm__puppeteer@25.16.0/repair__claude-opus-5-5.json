@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "puppeteer",
+    "version": "25.16.0",
+    "archive_sha256": "08568210e4f2c972d25499d06f215f39fcc2112b7bf167437cfc4f8d5f70676d"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ef1edfd908bb4e27",
+      "record_sha256_after": "ef1edfd908bb4e27",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The only remaining reason is 'out-of-set claim pending verification' for c1, c2, c3 and g1 (PUPPETEER_SKIP_DOWNLOAD, PUPPETEER_EXECUTABLE_PATH and the lilconfig puppeteer config gating the browser download in lib/puppeteer/node/install.js). It clears only when a reviewer verifies those claims, so th"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ef1edfd908bb4e27",
+      "record_sha256_after": "408942e8e8436db3",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "635b159f50ef5ea2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that the config need not be absent: getConfiguration.js:115-116 lets a false PUPPETEER_SKIP_DOWNLOAD override it. c3 now applies only on the (c1 && c2 && c3) alternative of g1. Its value also said 'setting' skipDownload or executablePath, but install.js:37 and getConfiguratio"
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "92aa76ece65618a0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: getConfiguration.js:108-116 merges by precedence, not conjunction. getBooleanEnvVar returns false for '', '0', 'false' and 'off', and ?? keeps that false over a skipDownload set by executablePath or config, so install.js:37 falls through with c2 and c3 both false. Added c4 ("
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "168b03dbdc07d8dd",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Claim changed because it carries g1's expression and the conditions, which the L4 fix edited; the label unclear stands and the portability suggestion is not adopted. Portability means each branch runs a platform-specific version of the same behaviour, but here install.js:37-40 logs and returns on on"
+        }
+      ]
+    }
+  ]
+}

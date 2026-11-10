@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "ssh2",
+    "version": "1.17.0",
+    "archive_sha256": "8bf2fff9c148973ed24a95087c0b4cea9b8f07a61621c8ab3ded453e3cbcd7d7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "2e341ece29107fb8",
+      "packet_sha256": "6ac9a71bb1e52369",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_0306aded0e.L6.drop",
+          "claim_sha256": "8d772816c2aafcdd",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The environment comparison in s1 sets forceFailOnNonZero, which controls process.exit(1) when the build fails at f1:20-23. This is an environment gate deciding whether a failed optional build terminates installation with failure instead of reaching process.exit(0) at f1:27.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:20",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "q_3b6a3f1960.L6.drop",
+          "claim_sha256": "8daf3afe15dfcd30",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test in s2 reads forceFailOnNonZero, bound at f1:5 to whether process.env.CI_CHECK_FAIL equals 'ssh2'. On build failure it gates process.exit(1); otherwise execution reaches process.exit(0) at f1:27, so it is part of an environment gate controlling installation failure.",
+          "evidence_refs": [
+            "s2",
+            "s1",
+            "f1:20",
+            "f1:27"
+          ]
+        }
+      ]
+    }
+  ]
+}

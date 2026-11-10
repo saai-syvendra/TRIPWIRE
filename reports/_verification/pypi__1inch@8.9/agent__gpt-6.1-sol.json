@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "1inch",
+    "version": "8.9",
+    "archive_sha256": "23915c9434509cfb98ac61235b9592deddbb2d23dc420fd79a35b0e116dbe502"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "b00e57bbb04cd3bd",
+      "packet_sha256": "bed52d393b099e84",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "2091b75635362752",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os import at f1:2 resolves the os.path.exists call used directly in the if condition at f1:12 (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "96dcb82ea635e531",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition at f1:12 negates os.path.exists on the exact claimed literal, so the then block runs when that path does not exist (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "c0c7f32986f2a291",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition checks filesystem path existence through os.path.exists at f1:12, which fits file_or_dir_exists.",
+          "evidence_refs": [
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "acecd0ffc63c70c7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole guard at f1:12 tests c1 directly and controls the block at f1:13-14, with no additional conditions or alternatives. The minimum satisfying set therefore contains one condition (s2, s3).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "498e4e1af28959b7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence check at f1:12 controls whether the entire download and execution command is submitted at f1:14. There is no alternative payload or environment-selected target, so enables fits.",
+          "evidence_refs": [
+            "f1:12",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "879b73016550f15a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The absent-path condition at f1:12 activates the command at f1:14; it does not test an analysis, CI or sandbox marker. This fits activate.",
+          "evidence_refs": [
+            "f1:12",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c50b499c655a30b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The directory checked at f1:12 is also the destination used by the extraction and launch command at f1:14, supporting an existing-installation check. That does not establish portability, targeting, anti_analysis or data_availability, so unclear fits the available purpose labels.",
+          "evidence_refs": [
+            "f1:12",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "08c32d8136526318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call at f1:14 lies inside the then region and resolves to the unreassigned run definition at f1:7. That definition directly reaches subprocess.Popen at f1:8, confirming the s5-to-s6-to-s4 witness.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d1d3f5c3318588ba",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "In the full file f1:1-29, run has exactly one call, at f1:14 under the claimed then guard. There are no aliases, callback registrations or explicit exports providing another invocation path to its subprocess.Popen sink.",
+          "evidence_refs": [
+            "f1:7",
+            "f1:12",
+            "f1:14",
+            "f1:29"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "66b4a682da248260",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The command passed at f1:14 to the subprocess.Popen sink at f1:8 downloads an archive, writes and extracts files, deletes the archive, and launches scripts from the extraction destination. Its hidden-window process launches and background script invocation also support defense_evasion.",
+          "evidence_refs": [
+            "f1:2",
+            "f1:8",
+            "f1:14"
+          ]
+        }
+      ]
+    }
+  ]
+}

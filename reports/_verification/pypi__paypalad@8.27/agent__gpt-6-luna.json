@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "paypalad",
+    "version": "8.27",
+    "archive_sha256": "6bd4680d70b1fdac303019d01355fdd72b4dff2bf80d5d5db549702bc73bb63a"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "fd615e03bb12b84c",
+      "packet_sha256": "52220e2aa3a6de34",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ef456bf7d85c12b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly calls `os.path.exists('tahg')`, so the cited site tests the named API.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2858fa249818b3d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `not os.path.exists('tahg')`; its then branch runs when the path does not exist.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "23e12015f45e8a9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition calls `os.path.exists` on the relative path `tahg`, so the category is file or directory existence.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f03e9e1c21e81e7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single then region is controlled by the one cited condition, `not os.path.exists('tahg')`; there are no additional conditions to combine.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "862dc58bf64237e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the path is absent, the branch starts a PowerShell process with `subprocess.Popen`; the gate enables that branch action.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "9d0eb8f13479ae8b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The process launch occurs when the tested path does not exist, and the condition does not check for analysis, CI, or a sandbox.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "35e10de02b13fd33",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code only tests for the existence of `tahg` before launching the process; it does not explain the marker's purpose, so the purpose is unclear.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4d343398131e8376",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `subprocess.Popen` call is directly inside the then block controlled by the cited `if`, so the cited sink is reached from that guarded region.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1bb5a59e01f11634",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file contains one `subprocess.Popen` call, inside the cited then block, and no other call site or export reaching that sink.",
+          "evidence_refs": [
+            "f1:6",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "a36430a10747ad5d",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "`subprocess.Popen` establishes process creation, but the command's encoded payload is not readable here, so the code shown does not establish that it downloads or executes a downloaded file or performs defense evasion.",
+          "evidence_refs": [
+            "s3",
+            "f1:7"
+          ]
+        }
+      ]
+    }
+  ]
+}

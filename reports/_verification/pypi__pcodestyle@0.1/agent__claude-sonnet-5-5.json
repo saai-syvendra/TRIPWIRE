@@ -1,0 +1,222 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pcodestyle",
+    "version": "0.1",
+    "archive_sha256": "9e988bcffda9c7ef1868a5eb1cc3755be9e66c8bdc90631ea969f1c65a868658"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d090df0f883936e2",
+      "packet_sha256": "c235af9057396ab7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "49e7803b55613936",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The chr-index list at f1:6 decodes to 119,105,110,51,50 = 'win32', compared with == to sys.platform; the nested code runs on the true side.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "e066fb17f802b6ce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition at f1:7 is `sys.argv[1] in [...]`, a direct membership decision on sys.argv[1].",
+          "evidence_refs": [
+            "s3",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "560b93a9901821a7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The two list items decode to 'egg_info' and 'build'; the operator is positive `in` and the guarded body is its then-arm.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "7d4046c700985a66",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif at f1:35 tests `sys.argv[1] in [...]`, a direct decision on sys.argv[1].",
+          "evidence_refs": [
+            "s5",
+            "f1:35"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "dc9203024e0de75b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The list items decode to 'bdist_wheel' and 'install'; the operator is positive `in` and the elif then-arm is the guarded code.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "6557be9f035987e1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition at f1:85 is a call of .endswith on the file name from os.walk.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "3f3c1c8fd9358b3f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The argument decodes to 46,108,110,107 = '.lnk'; endswith('.lnk') is semantically the same as the regex \\.lnk$ and is in positive form, guarding the then-arm.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "f08177cb3df722a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested variable at f1:94 is assigned at f1:101 from os.path.basename(<CreateShortcut object>.TargetPath), where the object comes from CreateShortcut(path) at f1:90.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:101"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "bfdfececa10a934b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The four list items decode to 'chrome.exe', 'msedge.exe', 'launcher.exe' and 'brave.exe'; the operator is positive `in` and the then-arm sets the shortcut Arguments.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:94"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "5883388aa6d6dc02",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The cited region s12 (f1:69-70) only reassigns the state variable and continues; the sink .Save() is at f1:104 in a different state-machine branch, and the witness is empty, so the sink is not in the region.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "af614da691a5713e",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The code is a flattened state machine with computed state values, so which paths reach the Save at f1:104 cannot be settled from the text; the code has no functions, so the only other caller question is the state dispatch.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "36cf6d65dc3230b9",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The sink is .Save() on a win32com Dispatch object (f1:65, f1:104); the checker cannot resolve a method on a dynamic COM object to a file-write kind.",
+          "evidence_refs": [
+            "s13",
+            "f1:65"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "b5d6db100206d990",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The region s14 (f1:95) sets Arguments, and .Save() at f1:104 sits in a separate branch of the flattened state loop that is reached only through computed state values, so the path from region to sink cannot be confirmed from the text.",
+          "evidence_refs": [
+            "s14",
+            "s13",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "ace7a42323d02fc8",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The computed state transitions in the flattened loop prevent deciding whether the Save at f1:104 is reachable without these guards.",
+          "evidence_refs": [
+            "s14",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "368a4fa7dce0ef64",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The sink is .Save() on a COM shortcut object from win32com Dispatch; its file-write kind is not resolvable from the text.",
+          "evidence_refs": [
+            "s13",
+            "f1:65"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "077eeafe30ceaf00",
+      "packet_sha256": "4fc1febb9df5ef6e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "44314b734fc08753",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "The packet lists no slices and no files, and code/ has no files, so the claim cites no code to check. The effect label cannot be tied to any bytes in the package.",
+          "evidence_refs": []
+        }
+      ]
+    }
+  ]
+}

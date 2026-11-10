@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-opus-4-8",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "charset-normalizer",
+    "version": "3.5.2",
+    "archive_sha256": "39de2a259fc954455c57274dc94c79d5842774e1247a016aff30bc0efed0f4ef"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-4-8",
+      "record_sha256": "16c02da89852c191",
+      "packet_sha256": "d7d5097094814286",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "8496858c32c89255",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both cited sites are comparisons on the named API: s1 (f1:8) `USE_CYTHON = os.getenv(\"CHARSET_NORMALIZER_USE_CYTHON\", \"0\") == \"1\"` and s2 (f2:8) `USE_CYTHON = os.getenv(\"CHARSET_NORMALIZER_USE_CYTHON\") == \"1\"`, each read by `if USE_CYTHON:`.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:8",
+            "f2:8"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2b7d605e22c17894",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites compare the env var with `== \"1\"` and feed `USE_CYTHON`, which the `if USE_CYTHON` guard (s3) enters on truth; no negation lies between the test and the guarded code, so the positive form is `== 1`.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3639e56075177415",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads process environment via `os.getenv(\"CHARSET_NORMALIZER_USE_CYTHON\")` (f1:8, f2:8), so `env_var` is the correct category.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "6fa5a818e033431e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single guard `if USE_CYTHON` (s3, f2:13) controls region s4 with the single condition c1; there is nothing to join, matching the stated expression `c1` and then_min 1.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "154fe336cdf2c371",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When set, the then branch compiles native extensions via cythonize (f2:32) while otherwise CYTHON_MODULES stays None; it turns the optimized build on rather than picking a different payload or target, so `enables` fits.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:59"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "505be1af75f6feb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate runs extra build work when the env var is explicitly set to 1 (opt-in), rather than backing off on analysis/CI/sandbox, so polarity is `activate`.",
+          "evidence_refs": [
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "8906d6d4233ef117",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The flag is a benign developer opt-in to a Cython-optimized build; it fits none of portability/targeting/anti_analysis/data_availability, so `unclear` is appropriate.",
+          "evidence_refs": [
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "346a63b61377dac8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sink cythonize(...) (s5, f2:32) sits lexically within region s4, the then body of `if USE_CYTHON` (s3); the empty witness correctly claims the sink is in the region itself.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "9bbb6a067b7e73fb",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "cythonize is called only inside the `if USE_CYTHON` block and its result assigned to CYTHON_MODULES only there (f2:32); no other caller, export or handler reaches it.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:59"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "986ea7d1374a7df7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink cythonize(...) (s5) compiles the package's .pyx sources into extension modules, a benign build action consistent with behaviour `benign_build` and sink_kind `other`.",
+          "evidence_refs": [
+            "s5",
+            "f2:34",
+            "f2:39"
+          ]
+        },
+        {
+          "claim_id": "k_41491787d8.L6.drop",
+          "claim_sha256": "8167013f147ab614",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s6 (f1:12) only selects the Cython version-constraint string in the CYTHON_SPEC ternary; it changes a build-requirement string, not what code runs at install, so it is plumbing rather than a gate.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "q_3e9940ddc1.L6.drop",
+          "claim_sha256": "e3fae903db0850c6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s7 (f1:11-13) is the CYTHON_SPEC ternary choosing between two Cython version specs; it only picks a requirement string and decides no install-time behaviour, so dropping it is correct.",
+          "evidence_refs": [
+            "s7",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "q_6af4dcdffe.L6.drop",
+          "claim_sha256": "fcb5d8314dc3c3ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s8 (f1:47) `if USE_CYTHON` in build_wheel only validates Cython is importable (raising on absence); both arms fall through to `_orig.build_wheel` (f1:54), so it is a precondition check/duplicate of c1, not a separate gate.",
+          "evidence_refs": [
+            "s8",
+            "f1:47",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "q_7a9d5d6836.L6.drop",
+          "claim_sha256": "03ae51f5517faf25",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s9 (f1:28) `if USE_CYTHON and CYTHON_SPEC not in requires` only appends the Cython build requirement to the requires list (f1:30); it is the same opt-in condition as c1 adjusting build metadata, not a distinct install gate.",
+          "evidence_refs": [
+            "s9",
+            "f1:28",
+            "f1:30"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,360 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "reqyest3",
+    "version": "2.19.0",
+    "archive_sha256": "d82108f00567a979619df59f6a42f98c2dd753f37111b4ef94280dd7b408eed7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "7ee71f35800ebcbb",
+      "packet_sha256": "e126eba04004f762",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "307e736fc197105f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CURRENT_PYTHON is assigned from sys.version_info[:2] and the if condition compares that value.",
+          "evidence_refs": [
+            "s1",
+            "f1:13-16"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "3d6d975be6742f49",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early exit tests CURRENT_PYTHON < REQUIRED_PYTHON, so the subsequent code is reached when the version is at least (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:13-16",
+            "f1:32"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "d55c153c7eb0dee1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares the running interpreter version with the minimum supported Python version.",
+          "evidence_refs": [
+            "s1",
+            "f1:13-16"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "f36647d09fb876f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly calls platform.machine().",
+          "evidence_refs": [
+            "s3",
+            "f1:81"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9342ffe20a87e280",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is selected when platform.machine() equals the literal \"x86\".",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:81-82"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "ccbc0f5950c0f974",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the machine architecture and compares it with \"x86\".",
+          "evidence_refs": [
+            "s3",
+            "f1:81"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "2dac21ec53c2cb7d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CURRENT_PYTHON is assigned from sys.version_info[:2] and the if condition compares that value.",
+          "evidence_refs": [
+            "s1",
+            "f1:13-16"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "e1b2b3fa291df755",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early exit tests CURRENT_PYTHON < REQUIRED_PYTHON, so the subsequent code is reached when the version is at least (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:13-16",
+            "f1:32"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "d58720a2a9f7ca9e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares the running interpreter version with the minimum supported Python version.",
+          "evidence_refs": [
+            "s1",
+            "f1:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2a44841e4dc7a977",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check exits on older interpreters before PostInstall.run can reach the architecture branch; its x86 and other-architecture paths each call a separate function.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6",
+            "f1:16-32",
+            "f1:81-85"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ba3ee016b1731f67",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The architecture test selects f1() for x86 and f2() for other architectures, choosing between separate payload calls.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f1:81-84"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b3eb6d01647955a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code selects a platform-specific function according to the detected architecture, with no analysis or sandbox check.",
+          "evidence_refs": [
+            "s4",
+            "f1:81-84"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ac13c4ad66a32195",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The architecture branch chooses between platform-specific code paths, which serves compatibility across architectures.",
+          "evidence_refs": [
+            "s4",
+            "f1:81-84"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "d85bcaefa3a62f2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The corresponding branch calls its local function, whose body contains the opaque __pyarmor__ call; the version exit and architecture branch control entry to that call.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s8",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "ff498eb3287f5647",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The called function is defined locally inside PostInstall.run and is invoked only by its corresponding architecture branch; no other reference to that local function appears.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "dc04fbd269f7d99c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The __pyarmor__ call is an eval-like execution sink, capable of executing the opaque payload described as other behavior.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "5823f965693fc841",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The corresponding branch calls its local function, whose body contains the opaque __pyarmor__ call; the version exit and architecture branch control entry to that call.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s10",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "935ea5efc5fa7c8a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The called function is defined locally inside PostInstall.run and is invoked only by its corresponding architecture branch; no other reference to that local function appears.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "851f8f416c010974",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The __pyarmor__ call is an eval-like execution sink, capable of executing the opaque payload described as other behavior.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g16.L4",
+          "claim_sha256": "48d8f702ecbda8da",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early-exit version check has a single continuation, and the later top-level statement lies in that continuation.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g16.L6.effect",
+          "claim_sha256": "e705568e4498261d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check exits on unsupported interpreters and permits the subsequent setup statements, including the claimed action, on supported interpreters.",
+          "evidence_refs": [
+            "s2",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g16.L6.polarity",
+          "claim_sha256": "3aedb897b81c79b9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition enforces a minimum runtime version and contains no analysis or sandbox detection.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g16.L6.purpose",
+          "claim_sha256": "8f8f8e590f38bc75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check rejects interpreters older than the package minimum, serving runtime compatibility.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g16.then.L3",
+          "claim_sha256": "c64131cfeb792495",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The top-level early exit ends execution for an older runtime; the later os.system call is in the remaining module statements reached on the supported-version path.",
+          "evidence_refs": [
+            "s2",
+            "s11",
+            "s12",
+            "f1:16-32",
+            "f1:108-112"
+          ]
+        },
+        {
+          "claim_id": "g16.then.L3.excl",
+          "claim_sha256": "d47b54c997b783d5",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The os.system call is a top-level statement after the early-exit check, with no other definition or caller for this site.",
+          "evidence_refs": [
+            "s2",
+            "s12",
+            "f1:16-32",
+            "f1:112"
+          ]
+        },
+        {
+          "claim_id": "g16.then.L5",
+          "claim_sha256": "93d991ffbd674e5b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "os.system launches the shell command `touch /tmp/license.py`, which creates the named file.",
+          "evidence_refs": [
+            "s12",
+            "f1:112"
+          ]
+        }
+      ]
+    }
+  ]
+}

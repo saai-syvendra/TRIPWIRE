@@ -1,0 +1,197 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "groq_ppe_pkg",
+    "version": "1.0.0",
+    "archive_sha256": "ae4348f083837508ca29b36923301099a4e554da1bf9d905a6b95723def567ec"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "d619f25bcd9bb1f3",
+      "packet_sha256": "ad35e0be5d52e0df",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "50fa4984fa00877c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 directly tests membership in sys.argv, which is imported at f1:2.",
+          "evidence_refs": [
+            "s1",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "81b90f28ea4bf5e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 compares the literal install with membership in sys.argv, without negation, on the then side of s2.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "172d4f5fde9eceaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:30 tests for the setuptools install command in the argument list, supporting the package_manager category.",
+          "evidence_refs": [
+            "f1:1",
+            "f1:30",
+            "f1:33"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "f4e8cd1aa9321efb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 directly tests membership in sys.argv, which is imported at f1:2.",
+          "evidence_refs": [
+            "s3",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "4b726c44f3eaca7e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 compares the literal bdist_wheel with membership in sys.argv, without negation, on the then side of s2.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "12a9235af25efb01",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:30 tests for the setuptools bdist_wheel command in the argument list, supporting the package_manager category.",
+          "evidence_refs": [
+            "f1:1",
+            "f1:30",
+            "f1:33"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9d7ab259c462c083",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 joins c1 and c2 with or; either alone suffices to reach s4, so the minimum is one condition.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "481c142f7248ca9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 enables the call that collects and transmits the IP, with no alternate payload or environment-selected target.",
+          "evidence_refs": [
+            "s2",
+            "f1:7",
+            "f1:16",
+            "f1:23"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "35afdafd737ee99b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 activates send_ip for install or bdist_wheel commands; it does not test for an analysis environment.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "2dc572ca0097ebc5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:30 restricts IP collection and transmission to installation or wheel-building commands, supporting targeting of those package operations.",
+          "evidence_refs": [
+            "f1:30",
+            "f1:31",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "558b0bab44950270",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 is inside the then arm of s2 and calls the send_ip definition s6 with no intervening rebinding. Both s5 and s7 are inside that definition and reachable along this path.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "de34afaaf7b414b0",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete file f1:1 through f1:37 contains only one call to send_ip, at f1:31 under f1:30, and no alias, export, timer or handler providing another route to its sinks.",
+          "evidence_refs": [
+            "f1:4",
+            "f1:7",
+            "f1:23",
+            "f1:30",
+            "f1:31",
+            "f1:37"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "f22bc4a084eeca45",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The urllib.request import at f1:2 resolves both sinks to network calls. f1:7 reads the public-IP service response, and f1:10 through f1:23 serialize that IP into a POST request and send it.",
+          "evidence_refs": [
+            "f1:2",
+            "s5",
+            "f1:10",
+            "f1:12",
+            "f1:16",
+            "f1:20",
+            "s7"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "schubismomv3",
+    "version": "1.4.0",
+    "archive_sha256": "ad69b41870bac36f48682dd4fc5b5d43ac7515a3fb88c66c3972dd135d21c7f2"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ba4c5f7147301ca1",
+      "record_sha256_after": "ba4c5f7147301ca1",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "setup.py GruppeInstall.run (line 12 onward, under os.name == 'nt') writes gruppe.py whose whole content is exec(Fernet(key).decrypt(blob)). The key is inline but Fernet is AES-128-CBC with HMAC, and tools/common/decode.py only offers base64, hex, unescape, charcodes, xor, reverse, zlib and gzip, so "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ba4c5f7147301ca1",
+      "record_sha256_after": "ba4c5f7147301ca1",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "678cd5844b69618e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py line 12 `if os.name == \"nt\":` has no else side and no other platform branch. Everything malicious sits in its then block: writing the Fernet-wrapped script to %APPDATA%/gruppe.py (line 22) and starting it hidden and detached with subprocess.Popen (line 26). On any other OS the block is skip"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,854 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "selnium",
+    "version": "0.1",
+    "archive_sha256": "1f5b703a8a935b722767a8ba07aec248ea3bd0f7211506f62f0fbd7ef8c75edc"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "84920728602617ee",
+      "packet_sha256": "01048e1995650d92",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 is the comparison of sys.platform against a string built from integer char codes; the deobfuscated copy f2:6 reads `sys.platform == 'win32'` and the codes in s1 decode to the same text.",
+          "evidence_refs": [
+            "s1",
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "49e7803b55613936",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `==` against 'win32' (f2:6). The setup code sits in the then arm of that if, with no negation or early exit.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform is the operating system, so `os` is the right category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 is the condition of `if ctypes.windll.shell32.IsUserAnAdmin():` in plain text (f1:68, f2:64).",
+          "evidence_refs": [
+            "s3",
+            "f2:64"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call is used bare as the if condition and the then arm (s4) sets the state to the admin-only step and continues, so truthy is the positive form.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f2:64"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin reads the privilege level of the current process, so `privilege` fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "c9976a14ab7eea80",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:7 tests `sys.argv[1] in [...]` directly in an if condition.",
+          "evidence_refs": [
+            "s5",
+            "f2:7"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "413316f16191a127",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `sys.argv[1] in ['egg_info', 'build']` with no negation. The then arm (s6) holds the pip install step.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f2:7"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "344a106708157f88",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The setup.py command name (egg_info/build) shows which packaging action is running, so `package_manager` fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "1cacc919126c9186",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:34 is the elif condition `sys.argv[1] in [...]`.",
+          "evidence_refs": [
+            "s7",
+            "f2:34"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "245b4b6810eebe45",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif tests `sys.argv[1] in ['bdist_wheel', 'install']` in positive form, and the branch body is the install-time payload state machine.",
+          "evidence_refs": [
+            "s7",
+            "f2:34"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "de7fea655610f165",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same argv command test as c3: the packaging action, so `package_manager`.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "adb8ec46b4cd3857",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:81 is `if <filename>.endswith('.lnk'):`, a decision on str.endswith.",
+          "evidence_refs": [
+            "s8",
+            "f2:81"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "0bbda0242be365fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is a positive `endswith('.lnk')` on each filename from os.walk, which is equivalent to the regex \\.lnk$. The then arm (s9) creates the shortcut object.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "f2:81"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "881152052ed7806f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It selects the file artifacts (.lnk shortcuts) to act on, so `target_artifact` fits.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "8bb08a14b9a81200",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested variable is assigned `os.path.basename(shortcut.TargetPath)` at f2:97, and f2:90 tests it. The shortcut comes from CreateShortcut on the WScript.Shell dispatch object (f2:61, f2:86).",
+          "evidence_refs": [
+            "s10",
+            "f2:90",
+            "f2:97",
+            "f2:86"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "7728cbca366ed346",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `in ['chrome.exe','msedge.exe','launcher.exe','brave.exe']` without negation. The then arm (s11) sets the --load-extension argument and moves to the save step.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "f2:90"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "e525fcc7adcdcd02",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It tests which program the shortcut points to, which is the artifact being modified, so `target_artifact` fits.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "7ffe4856c94e6d41",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The argv if (f2:7) is nested inside the platform if (f2:6) and the pip step lies inside both, so the guards join with and. Minimum conditions are 2.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "1fcfe51421868359",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch only does the pip install of pypiwin32, and nothing else is chosen by the gate. The gate enables that step.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1404ec8acecb5c67",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The step runs when on Windows during egg_info/build. It does not back off on any analysis signal, so polarity is activate.",
+          "evidence_refs": [
+            "s5",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bf47ad853144295f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows-only branch installs pypiwin32 to prepare the Windows shortcut/extension payload in the same file, so the gate restricts the package to Windows victims.",
+          "evidence_refs": [
+            "s12",
+            "f2:6",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bd3d08a852c84d14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pip.main at f2:13 sits directly in region s12, which is inside both guards (f2:6 and f2:7). The witness is empty because the sink is in the region itself.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1fe4a0ab1e1876ae",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "pip.main is called only at f2:13. No function, export or other caller reaches it, and the elif branch at f2:34 does not call it.",
+          "evidence_refs": [
+            "s13",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c870849860b21f4c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "pip.main(['install','pypiwin32']) makes pip fetch and install a package from the network, which is a download.",
+          "evidence_refs": [
+            "s13",
+            "f2:12"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "1e2936acd108eefc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The elif argv test (f2:34) is nested in the platform if (f2:6), and its body holds the payload, so the guards join with and. It is the else of c3, and the two argv lists are disjoint, so no extra condition is needed. Minimum conditions are 2.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "8a6e1e4c725da7e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch's file writes (background.js, manifest.json) and shortcut edits run only if the gate passes, so the gate enables them.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "0ea74d60c683b51f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The payload runs on Windows during install/bdist_wheel, and there is no analysis-evasion check, so polarity is activate.",
+          "evidence_refs": [
+            "s7",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "7b6d04e2a984e019",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate restricts the payload to Windows installs of the package, which is victim targeting.",
+          "evidence_refs": [
+            "s1",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "9dd16bf0b9cc5bda",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "open(..., 'w+') at f2:122 lies in region s14 under both guards. The state machine reaches state 37668 from 18005 and 29059, both reachable from the start state 83520.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "f2:122"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "0d0f8b4d2467f99d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The open call at f2:122 is only reachable through the state machine inside the elif branch. No other caller exists in setup.py.",
+          "evidence_refs": [
+            "s15",
+            "f2:122"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "e68c7467c2ffd6cf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(<APPDATA>\\Extension\\background.js, 'w+') is a file write, and the following write() calls fill the file.",
+          "evidence_refs": [
+            "s15",
+            "f2:122",
+            "f2:69"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "ffd03efaa0bd9701",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The ProgramData Start Menu path is appended only in state 362814, which is set only in the then arm of the IsUserAnAdmin if (f2:64-66). That if sits inside the c4 elif, which sits inside the platform if, so the three join with and. Minimum conditions are 3.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s4",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "9b297cbfbfd34f9b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Without admin the same shortcut hijack still runs on the user's own folders. Admin only adds the system-wide Start Menu to the list of folders, which is a different target set for the same behaviour.",
+          "evidence_refs": [
+            "s17",
+            "s4",
+            "f2:45",
+            "f2:48"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8a073da499c873c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The admin branch extends the targets and does not back off for any analysis condition.",
+          "evidence_refs": [
+            "s4",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "13507b627366832a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The privilege check chooses which shortcut folders (user versus system-wide) are attacked, which is selection of targets.",
+          "evidence_refs": [
+            "s4",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "dcb7d5960f5765ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The append at f2:45 is in region s17. State 362814 is set only inside the admin then block (f2:65), so the append is reached only through all three guards.",
+          "evidence_refs": [
+            "s17",
+            "s18",
+            "s4",
+            "f2:45",
+            "f2:65"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "5b674fc0f0a89776",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "State 362814 is assigned only at f2:65, so the append is not reachable from any other path or caller.",
+          "evidence_refs": [
+            "s18",
+            "f2:65"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "33ea9711d51ff2da",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The cited sink is list.append of a folder path to the scan list, which creates no file, so it cannot be persistence by itself. The persistence write is the shortcut Save() at f2:100, not this call.",
+          "evidence_refs": [
+            "s18",
+            "f2:45",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "9e561848d068b3ad",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The endswith if (f2:81) and the browser-name if (f2:90) are nested inside the c4 elif, which is inside the platform if. The Arguments and Save steps lie inside all four, so they join with and. Minimum conditions are 4.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s9",
+            "s11",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "5f19fc71eb919181",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "If no browser shortcut matches, no shortcut is modified at all, so the gate enables the shortcut edit.",
+          "evidence_refs": [
+            "s19",
+            "s20",
+            "f2:90"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "4bd97ad3ce11a98f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The edit runs when a browser shortcut is found. There is no backing off on analysis signals.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "5d18a5952a30e319",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tests pick out Chromium-family browser shortcuts (chrome, msedge, brave, launcher) as the artifact to hijack with --load-extension. That is targeting, not a check on whether needed data is available.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "f2:90",
+            "f2:91"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "30807b60d2b61f71",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Save() at f2:100 is in region s20. State 60921 is set only inside the browser-name then block (f2:92), which is inside the endswith if. All four guards are on the path.",
+          "evidence_refs": [
+            "s20",
+            "s21",
+            "s19",
+            "f2:92",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "bf0960c1b0413d71",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "State 60921 is assigned only at f2:92, and Save() at f2:100 has no other caller.",
+          "evidence_refs": [
+            "s21",
+            "f2:92",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "b98bd4bc075d246b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Save() on the WScript.Shell shortcut object (from CreateShortcut) writes the modified .lnk back to disk, so a file write that makes the browser load the extension at each launch.",
+          "evidence_refs": [
+            "s21",
+            "f2:86",
+            "f2:91",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "f3fc2956fde15ae3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the Extension folder exists. If it does not, it makes the folder and then goes on. It only decides where the payload files are stored, so it is plumbing, not a gate.",
+          "evidence_refs": [
+            "s22",
+            "f2:116",
+            "f2:55"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "1c09ff37cee2c0d6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same os.path.exists check on the Extension folder with makedirs as the fallback. It is directory setup, not an environment gate.",
+          "evidence_refs": [
+            "s23",
+            "f2:116",
+            "f2:55"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "106a806b2ae12444",
+      "packet_sha256": "36127c7670842b52",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "0472e2fe7a0b355c",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The admin check (f2:64) only controls appending the ProgramData folder (f2:65, s7); when it is false the state moves to 18005 and the code carries on. The shortcut loop that ends in Save (f2:78-100, s8) therefore does not need c2, but it does need the unlisted .lnk and browser-name tests (f2:81, f2:",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "f2:64",
+            "f2:81",
+            "f2:90"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "f0eca4c1123e4c0b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The call at s9 (f2:100) is the Save() of a shortcut object from WScript.Shell CreateShortcut, after Arguments is set to load an extension. It writes the .lnk file back to disk and sits inside region s8. This is a file write that persists the change.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "f2:86",
+            "f2:91",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "3d46068a5c915add",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate requires win32 and an install or bdist_wheel command. It then acts only on .lnk files whose target is chrome.exe, msedge.exe, launcher.exe or brave.exe (f2:81, f2:90). That selects specific victim browser shortcuts to modify, so targeting fits.",
+          "evidence_refs": [
+            "f2:6",
+            "f2:34",
+            "f2:81",
+            "f2:90"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "88ba71e4387f3280",
+      "packet_sha256": "9f25cf768badcc9f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "1523abf4530888fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:97 assigns os.path.basename(shortcut.TargetPath) to the variable that f1:90 tests with `in ['chrome.exe','msedge.exe','launcher.exe','brave.exe']`; the Arguments edit and Save() run only when that test is true (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:97",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "e9ad840948965158",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The IsUserAnAdmin test (f1:64) only decides whether the ProgramData Start Menu path is appended (f1:65). When it is false, the flow continues to state 18005 and on to the shortcut walk and Save() (f1:67, f1:115-117, f1:77-101). So the shortcut-modifying region needs only c1, c4, c5 and c6, and the c",
+          "evidence_refs": [
+            "s5",
+            "s10",
+            "s11",
+            "s12",
+            "f1:64",
+            "f1:67",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "8a74e341a97a982f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The same behaviour (a shortcut edit that loads an extension) is applied only to shortcuts whose target is a browser executable. The environment decides which victim artifact is modified, so `modifies` fits (f1:90-100).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "86187c63609ac6f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code runs when the platform is win32, the command is install or bdist_wheel, and a browser shortcut is found. Nothing backs off for analysis or a sandbox, so the polarity is activate.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "562699df1347ac36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate selects shortcuts that point at chrome, msedge, brave or launcher, so that a clipboard-hijacking browser extension gets loaded. That selects a target, so `targeting` fits (f1:69, f1:90-91).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:69"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "7eb9a99bd0305238",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Save() call at f1:100 (s13) lies inside region s12. That region sits on the then side of the c5 and c6 guards and inside the c1 and c4 branches. The witness is empty, so the sink sits in the region itself.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s6",
+            "s2",
+            "f1:100"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "d75f57d64ea750bd",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "setup.py defines no functions, and Save() at f1:100 appears once, in the shortcut loop. No other caller, export or timer reaches it. The only way past c2 is the state-machine route already seen under L4.",
+          "evidence_refs": [
+            "s13",
+            "f1:100"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "9ad2335f5f2f7862",
+      "packet_sha256": "11be34b96dd8bf39",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "3ba4b29377b30410",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "In f2 the IsUserAnAdmin test (f2:64) only chooses whether the ProgramData Start Menu folder is appended; both outcomes go on to state 18005 and then to the shortcut walk at f2:78-101. The c2 admin check is therefore not a condition for the shortcut edit, so the expression should be c1 && c4 && c5 &&",
+          "evidence_refs": [
+            "s3",
+            "s10",
+            "s11",
+            "f2:64",
+            "f2:78"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "c4af85866d402cfc",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The Save() sink (s14, f2:100) is reached through the shortcut walk (f2:78-101), which runs whether or not IsUserAnAdmin is true (f2:64-67). Guard s3 controls only s10 and s11, which do not reach the sink. The sink is not on the then side of that guard.",
+          "evidence_refs": [
+            "s3",
+            "s10",
+            "s14",
+            "f2:64",
+            "f2:67",
+            "f2:78"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "1cd94bf2a75c43c4",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The shortcut walk that ends in Save() (f2:78-101) is also reached when IsUserAnAdmin is false (f2:67 goes to 18005). The payload does not depend on the admin guard. I found no other caller or export in the file.",
+          "evidence_refs": [
+            "s3",
+            "s14",
+            "f2:64",
+            "f2:67"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "8d88bfa897385bc9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is the COM Save() on a WScript.Shell shortcut at f2:100. It rewrites the .lnk files of chrome, edge, brave and launcher to add --load-extension (f2:91). That is a file write that persists a dropped extension, and background.js and manifest.json are also written to disk (f2:72, f2:122).",
+          "evidence_refs": [
+            "s14",
+            "s12",
+            "s13",
+            "f2:91",
+            "f2:122"
+          ]
+        }
+      ]
+    }
+  ]
+}

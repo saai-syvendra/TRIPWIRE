@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "ssh2",
+    "version": "1.17.0",
+    "archive_sha256": "8bf2fff9c148973ed24a95087c0b4cea9b8f07a61621c8ab3ded453e3cbcd7d7"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "2e341ece29107fb8",
+      "packet_sha256": "6ac9a71bb1e52369",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_0306aded0e.L6.drop",
+          "claim_sha256": "8d772816c2aafcdd",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:5 reads the CI_CHECK_FAIL environment variable and compares it to a fixed value. That value decides at f1:22-23 whether a failed build aborts the install with exit code 1 or lets it finish with exit 0, so this is an environment gate. The behaviour it decides is minor (install failure mode), not a",
+          "evidence_refs": [
+            "s1",
+            "f1:5"
+          ]
+        },
+        {
+          "claim_id": "q_3b6a3f1960.L6.drop",
+          "claim_sha256": "8daf3afe15dfcd30",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The if at f1:22 branches on the env-derived flag from f1:5, and only inside the build-failed branch. It decides between process.exit(1) and the unconditional process.exit(0) at f1:27, so it is a gate the record omits. It controls whether install aborts.",
+          "evidence_refs": [
+            "s2",
+            "f1:22",
+            "f1:27"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "social-checker",
+    "version": "7.2",
+    "archive_sha256": "a4519037d9000a51d448fdeadd26f2fd56a15b9efe29bbcd11fc11c6ca51197b"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f380e0a4db1b38ff",
+      "record_sha256_after": "1e092ab2d6cde8c4",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6bba9c4fcd2bb708",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "c1 (os.name == 'nt', setup.py line 27) picks between two different stages: the then side drops and starts the embedded PE, and the else side (d1 lines 36-125) runs the Linux stealer. That is a two-branch gate choosing a different payload per branch, so effect changed from enables to selects."
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "40b21ae1f5e6dc58",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The write_file sink at d1 line 68 is O(B,exist_ok=D), with O bound to os.makedirs at line 56; it only creates the random temp folder, which is plumbing, not a file write. The first real file write (open system.json, line 89) runs after the c4 ISP exit and is already under g3. Removed the write_file "
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Removed the guessed recipe fields: g4 file_present now lists only paths spelled out in the embedded XML command list at d1 line 66 (filezilla sitemanager.xml, purple accounts.xml, Exodus exodus.conf.json), with no inferred profile or wallet names. The flag stays because the Windows stage's embedded "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "1e092ab2d6cde8c4",
+      "record_sha256_after": "9199b7dc79e87f3d",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "0755e5160aef842a",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py line 27 is `if name == 'nt':` whose then side execs the base64 Windows stage (writes an embedded PE to %TEMP% and starts it with os.startfile) and whose else side (decoded d1, after o.startfile(p)) runs the Linux stealer stage that copies browser, chat and wallet files and posts them to Tel"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "860959a26c72ced8",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The Linux stage exits when platform.platform() lacks 'linux' (decoded line 62) and its artifact list holds only Linux paths (~/.mozilla, ~/.config, snap and flatpak folders); Windows is served by the other branch of os.name. The check keeps the stage on the OS its paths fit, so purpose changed from "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "9199b7dc79e87f3d",
+      "record_sha256_after": "9199b7dc79e87f3d",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The Windows stage (d1, line 34) writes an embedded compiled PE to %TEMP%\\X244d7bd2a3c377d6f17f.exe and starts it with os.startfile (line 35). Its own gates live in compiled code that cannot be read statically with the repo decoders, so 'Embedded Windows PE not analysed' and 'unrecovered code' still "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "9199b7dc79e87f3d",
+      "record_sha256_after": "9199b7dc79e87f3d",
+      "round": 3,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "0755e5160aef842a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Round 3, so only escalation is allowed; the record is unchanged. A person must choose the label. For enables: g1 is recorded as one branch (else null), and when c6 fails (exe already in %TEMP%) nothing runs, setup.py d1 lines 32-35. For selects: c1 at setup.py line 27 is a real if/else dispatch, Win"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "4a5d8bc0f6489049",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The code does not decide targeting against portability; the record is unchanged. Portability needs each branch to run a platform-specific version of the same behaviour, and the Windows behaviour lies inside the embedded .NET PE (d1 line 34), which is compiled and unread. The readable Windows stage o"
+        }
+      ]
+    }
+  ]
+}

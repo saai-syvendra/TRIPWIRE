@@ -1,0 +1,419 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "workerd",
+    "version": "1.20261024.1",
+    "archive_sha256": "50d52f7bc717a111bbeacf6cf6573bc7676531e1a64e5f9eedee690542dfbe02"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "cbc99dbf71df512e",
+      "packet_sha256": "ae3400499e4f7849",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "6b68506c75f74a4f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.platform is built into platformKey at f1:39, and the gate at f1:40 (`platformKey in knownPackages`) reads that variable.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:39",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "1bb100c8ab19f98e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `in` test only passes for keys in knownPackages (f1:27-34). Its platform parts are exactly darwin, linux and win32. The then arm is the positive form and the else arm throws.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:27",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "7ad6002d6f92bcc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.platform is an operating-system property, so os is the right category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "6a7be6cabc6a4a01",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.arch() is built into platformKey at f1:39, and the `in knownPackages` decision at f1:40 reads that variable.",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "f1:39",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9beb8516be690981",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The architecture parts of the keys in knownPackages (f1:27-34) are only arm64 and x64. The `in` test is positive, and the else arm throws.",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "f1:27",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "5384ab00df6b2fa5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.arch() reads the CPU architecture, so arch is the right category.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2a4933960bdb46ef",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The single guard at f1:40 tests a key built from three parts: platform, os.arch() and os.endianness() (f1:39). Every key in knownPackages ends in LE, so a third condition (endianness equals LE) is required. The expression `c1 && c2` leaves it out, and the smallest satisfying set is 3, not 2.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:39",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "e2c6044cd334013b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Unsupported platforms throw at f1:44, so the gate decides whether the install code runs at all. It does not choose between payloads or targets.",
+          "evidence_refs": [
+            "s2",
+            "f1:44"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "26afbb51dbe057bb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the platform is a supported one. It does not back off on signs of analysis or CI.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "86f438d6da356a07",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check picks the matching prebuilt workerd binary package for the OS and architecture. That is portability, not targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a8c320dcf4b86b5e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else arm at f1:44 throws, so checkAndPreparePackage (s4) and the .then callback (s5) run only after the gate passes. The witness hops hold. s7 reaches s8, which holds the fetch (s6) and writeFileSync (s9). s11 reaches s12, which holds execSync (s10), and through s14 reaches s15, which holds unli",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s7",
+            "s8",
+            "s11",
+            "s12",
+            "s14",
+            "s15",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ed133b89a0f3aa50",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The payload functions are called only from checkAndPreparePackage and its .then callback. The file has no exports, timers or other callers, and checkAndPreparePackage starts with the gated call at f1:217.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f1:217",
+            "f1:246"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7510b33e257745d3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Each sink matches its behaviour. The download uses the local fetch wrapper over https.get. The file writes use fs.writeFileSync. The spawns use child_process execSync and execFileSync. The deletion uses fs.unlinkSync. The final execFileSync runs the installed or downloaded binary (toPath).",
+          "evidence_refs": [
+            "s6",
+            "s9",
+            "s10",
+            "s13",
+            "s16",
+            "f1:113"
+          ]
+        },
+        {
+          "claim_id": "k_1178b3dada.L6.drop",
+          "claim_sha256": "ed2bb9168be82fe5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The npm_config_user_agent check is only used by isYarn, and isYarn only decides whether the binary is hard-linked into place in maybeOptimizePackage. That affects how the binary is stored, not what runs, so it is plumbing and not a gate.",
+          "evidence_refs": [
+            "s19",
+            "f1:188"
+          ]
+        },
+        {
+          "claim_id": "k_840d917e4b.L6.drop",
+          "claim_sha256": "644d34a98c882d84",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32 test only picks the `.exe` filename suffix. It does not change what runs.",
+          "evidence_refs": [
+            "s20",
+            "f1:35"
+          ]
+        },
+        {
+          "claim_id": "k_b568a7c63a.L6.drop",
+          "claim_sha256": "dc73db0d0dbbd751",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The linux test only appends a hint to the error message that is then logged.",
+          "evidence_refs": [
+            "s21",
+            "f1:92"
+          ]
+        },
+        {
+          "claim_id": "q_1613c4bb62.L6.drop",
+          "claim_sha256": "43a5344b3a2c756f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the same isYarn user-agent check as s19. It only changes how the binary is placed (hard link or not), so it is plumbing and not a gate.",
+          "evidence_refs": [
+            "s22",
+            "f1:188"
+          ]
+        },
+        {
+          "claim_id": "q_bc5330b571.L6.drop",
+          "claim_sha256": "aa1cec24f1423c4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary only chooses the `.exe` extension string, which is plumbing and not a gate.",
+          "evidence_refs": [
+            "s23",
+            "f1:35"
+          ]
+        },
+        {
+          "claim_id": "q_d42c314bc5.L6.drop",
+          "claim_sha256": "6acfff1eaf80eb08",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if only adds text to an error message that is then logged with console.error.",
+          "evidence_refs": [
+            "s24",
+            "f1:92"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "67ee758d56dace3d",
+      "packet_sha256": "cb94f6bdcfeb7ee1",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "addcda2121076a86",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.endianness() is interpolated into platformKey at f1:39, and that variable is the left operand of the `in knownPackages` test at f1:40, so the decision reads it.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:39",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1aeb37c7afdbf5a3",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The code never compares endianness to LE directly. It does `platformKey in knownPackages` on a composite string, and every table key ends in 'LE', so LE is effectively required. The operator is `in` on a joined key, not `==`.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:27",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "d2f0f026d2c3e27c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Byte order is a CPU architecture property, so `arch` fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "970914570d1dced3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One test, `platformKey in knownPackages`, joins platform, arch and endianness. The table holds exactly the 3 platforms x 2 archs, all LE, so it is equivalent to c1 && c2 && c3, which needs 3 conditions. The else branch throws, so the code after the call in checkAndPreparePackage and the .then at f1:",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s1",
+            "s5",
+            "s6",
+            "f1:27",
+            "f1:40",
+            "f1:44"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "37b0024e69a8c4af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A supported platform lets the install, binary-fetch and version-check code run. Otherwise the code throws 'Unsupported platform'. The gate enables the code rather than choosing between payloads or retargeting it.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "f1:43",
+            "f1:44"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "54680ad5d8db1c3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs on matching supported platforms and does not back off on analysis, CI or a sandbox, so the polarity is activate.",
+          "evidence_refs": [
+            "s2",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "0258542c15ebf537",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate maps platform, arch and endianness to the matching prebuilt workerd package, which is binary selection for portability. It does no targeting or anti-analysis.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "afeb73d673f8317c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each witness chain checks out. s8 sits in s5 and calls downloadDirectlyFromNPM (def s9), which holds the fetch (s7) and writeFileSync (s10). s12 sits in s5 and calls installUsingNPM (def s13), which holds the execSync (s11) and the removeRecursive call (s15, def s16) that reaches unlinkSync (s14). s",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "087bf9797b3a481b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "downloadDirectlyFromNPM, installUsingNPM, removeRecursive and validateBinaryVersion each have a single caller on the cited paths. pkgAndSubpathForCurrentPlatform is called only at f1:217. The file has no exports, timers or handlers, and the entry point is checkAndPreparePackage at f1:246.",
+          "evidence_refs": [
+            "f1:217",
+            "f1:232",
+            "f1:238",
+            "f1:246",
+            "f1:248",
+            "f1:250"
+          ]
+        }
+      ]
+    }
+  ]
+}

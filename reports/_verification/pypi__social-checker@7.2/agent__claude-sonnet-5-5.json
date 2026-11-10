@@ -1,0 +1,697 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "social-checker",
+    "version": "7.2",
+    "archive_sha256": "a4519037d9000a51d448fdeadd26f2fd56a15b9efe29bbcd11fc11c6ca51197b"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "f380e0a4db1b38ff",
+      "packet_sha256": "137b5d6b0b34a3b3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "4e7942878f4fbb06",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:27 compares the imported os name directly in an if test.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "3b22be2683ace04e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded block runs when name == 'nt'; no negation between the test and the block.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating system family.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "4482f2bafcdf0358",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:26 tests membership of 'sdist' in the imported sys.argv.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9ff9cf394bce57a8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs when 'sdist' is not in argv, i.e. not_includes.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "4b0c02709aa657d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "argv holds the build command line, not an environment property in the listed categories; other fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "f821038ab27606ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:62 tests the result of platform.platform (alias N) with an early exit; f2:55 shows the binding.",
+          "evidence_refs": [
+            "s5",
+            "f2:55"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "47493a43d45f1eac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U is 'linux' (f2:39); exit(1) fires when it is not in the lowercased platform string, so the rest runs when it is included.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f2:39"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "f2968edfa6986bdf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reads the OS platform string.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "b280b8c566b1d73c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "E comes from the response of the PoolManager request in l() (f2:78-81) and is tested in f2:83.",
+          "evidence_refs": [
+            "s7",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "a863954a5b9aa83b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "exit(5) fires when either listed term is in the ISP string, so continuing requires not_includes of both.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "230aac1107debb30",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads ISP data returned by an external IP lookup service.",
+          "evidence_refs": [
+            "s7",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "b472bf19c1efc379",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 filters configured paths with exists; s10 filters profile dirs by exists on a prefs file.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "37c3f1cc93e35f93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loops only act on paths that exist; the listed paths all appear in the command table at f2:66, plus the profile prefs check.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "f2:66"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "03e72ff327995f77",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks look for specific application data directories on the host.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "45c85e0deaec2dcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:31-32 builds a temp-dir path and tests os.path.exists on it.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "3cffa22272b4af8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs when the path does not exist (single negation).",
+          "evidence_refs": [
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "1f03db839f75a55f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A file existence check.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2c14c4b9578b3041",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The three ifs are nested (f2:26, 27, 32), so the conditions join with and.",
+          "evidence_refs": [
+            "s4",
+            "s2",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6bba9c4fcd2bb708",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The os test chooses between two different payloads (Windows branch vs the else branch at f2:36-125), so 'selects' fits better than 'enables'.",
+          "evidence_refs": [
+            "s2",
+            "f2:36"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "85c3b24c9c4315f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs on a matching Windows target; nothing backs off.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "4a5d8bc0f6489049",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Selects the Windows target for the dropped executable.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "30602adc517f6e91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write (f2:34) and startfile (f2:35) sit directly in the region under all three guards; empty witness is right.",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "f1d926f4a04d5be3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The code is inline at module level with no function, export or other caller.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b461cc2abe9b4bf1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(...,'wb').write writes a file; os.startfile launches it.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6e21ddb23d34363d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The else branch of the Windows test sits inside the argv if, then the exit guard precedes the rest; and-join.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "a17727af897f34cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Gates run of the whole Linux payload.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "731ee9892276962d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Runs only on Linux hosts.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "7797e2bfeea5d3b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Linux-only check targets the host OS for a Linux-specific collector.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "4b80f211a0b6c2ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "makedirs (f2:68) is in the region; the l() call at f2:122 reaches def l (f2:77) containing the request at f2:78.",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "s21",
+            "s22",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "4f8f8ab478540e6e",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "l() is only called at f2:122 in this region; no other callers.",
+          "evidence_refs": [
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "40b21ae1f5e6dc58",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The write_file sink is makedirs at f2:68, which creates a directory, not a file write; the network recon sink is fine.",
+          "evidence_refs": [
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "adee2e3e52343c83",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The argv if, platform exit and ISP exit (inside l(), called at f2:122) apply in sequence, so and-join.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s8",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "514ede7f0a6bd861",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Gates the collection and upload.",
+          "evidence_refs": [
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "b08041c79a3b9320",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ISP test backs off when the lookup names a listed provider, which is analysis-avoidance.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "4a94bd5592f18c29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Exits on cloud/hosting ISP names, an anti-analysis check.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "2a163daeda17800b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The system.json write at f2:89 follows the exit in l(); o(C) at f2:125 reaches def o (f2:121) whose request posts the data.",
+          "evidence_refs": [
+            "s23",
+            "s24",
+            "s25",
+            "s27",
+            "s28",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "4b2af06b36733557",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "o() is called only at f2:125; l() only at f2:122.",
+          "evidence_refs": [
+            "s27",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "0433e68a4f5db631",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(...,'w') with dump writes host info; the POST request in o() is a network sink.",
+          "evidence_refs": [
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "2dd925882c276b7f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The loops over existing paths sit after the earlier guards in m(), so and-join.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s4",
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "ae8fd127022af811",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loops enable collection only for present data.",
+          "evidence_refs": [
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "9c097d008318bcbc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Runs when data is present.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "a18d91708d595afc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check filters to applications whose data is present.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "97f67490a29223ae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loop at f2:112 calls H, defined at f2:90, whose copy at f2:101 reads files; s30 also calls H.",
+          "evidence_refs": [
+            "s29",
+            "s30",
+            "s32",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "505f03beaa122108",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "H is called only from m() branches and itself; m() is called once at f2:123.",
+          "evidence_refs": [
+            "s29",
+            "s30",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "8ac8a129c457c3a0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "H globs and copies source files, a file read.",
+          "evidence_refs": [
+            "s31",
+            "s32"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "1e092ab2d6cde8c4",
+      "packet_sha256": "9ea8518be7164037",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "0755e5160aef842a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate only decides whether the dropper runs: non-sdist, Windows, and the exe not yet written. It does not choose between payloads or targets, so the effect is `enables`, not `selects` (f1:26-27, s1).",
+          "evidence_refs": [
+            "s1",
+            "f2:26"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "10e812df389df843",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The non-sdist and linux checks only let the stealer and recon code run at all, with no alternative payload. The effect is `enables` (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "38aa3b6433535bac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits unless 'linux' is in platform(), so the payload runs on a Linux target. This test is not an analysis check, so polarity is `activate` (s2). The separate ISP-name exit inside l() is a different gate.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "860959a26c72ced8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The linux check keeps the payload on the OS its hard-coded Linux paths fit (~/.mozilla, ~/.config, ~/.thunderbird). The Windows case is handled in a separate branch. That makes the purpose `portability`, not victim targeting (s2, s3).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "e3e341b67611704b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Line 62 exits unless 'linux' is in the platform string, and the rest of the block is under the non-sdist if. The call l() at f2:122 lies in region s3. It reaches def l (s6), whose body makes the urllib3 request to ip-api (s4).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "7007dffd2743cd3c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only call of l() is at f2:122, inside the gated block. The def at f2:77 is nested in that block, and I found no export, timer or other caller.",
+          "evidence_refs": [
+            "f2:77",
+            "f2:122",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "710007a8479f4775",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The recon sink is a urllib3 PoolManager request to the ip-api line endpoint, which is a network sink. The function uses the result for IP and ISP discovery and a sandbox-ISP check (s4, s6).",
+          "evidence_refs": [
+            "s4",
+            "s6"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "9199b7dc79e87f3d",
+      "packet_sha256": "c61869258d39af9a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "a632e121fff2175f",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "The packet lists no slices and no files, and there is no code/ folder, so the cited tests (sys.argv sdist check, platform.platform linux check) and the recon behaviour cannot be tied to any code.",
+          "evidence_refs": []
+        }
+      ]
+    }
+  ]
+}

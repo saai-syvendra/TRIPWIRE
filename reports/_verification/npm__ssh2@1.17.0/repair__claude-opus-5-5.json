@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "ssh2",
+    "version": "1.17.0",
+    "archive_sha256": "8bf2fff9c148973ed24a95087c0b4cea9b8f07a61621c8ab3ded453e3cbcd7d7"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2e341ece29107fb8",
+      "record_sha256_after": "2e341ece29107fb8",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_0306aded0e.L6.drop",
+          "claim_sha256": "8d772816c2aafcdd",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:5 sets forceFailOnNonZero from CI_CHECK_FAIL === 'ssh2', and its only reader is install.js:22, inside the build-failed branch, after spawnSync of node-gyp rebuild (install.js:13-19) has already run unconditionally. Flipping the value changes nothing that runs: benign_build happens either "
+        },
+        {
+          "claim_id": "q_3b6a3f1960.L6.drop",
+          "claim_sha256": "8daf3afe15dfcd30",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at install.js:22-23 sits inside the failure branch of install.js:20, after the node-gyp build has finished. Its then side is process.exit(1) and its fall-through is process.exit(0) at install.js:27, so both paths end the script at once with no other statement, and the same behaviour (benign_b"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,460 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "ryptocompare",
+    "version": "0.1",
+    "archive_sha256": "6d17681b29a052aae383030b838984d1aa756a75752df68dcd62164aaf57f218"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "4a74bfe12af410f5",
+      "packet_sha256": "2d868bfce2103fd2",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The cited original condition constructs the attribute name and comparison string through computed built-in lookups and arithmetic, so the API is not readable at this site (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "38c63effe7ba4b54",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The original condition builds both the compared value and attribute name through computed lookups; the readable win32 comparison occurs in the derived file, not at the cited encoded site (s1; f2:6).",
+          "evidence_refs": [
+            "s1",
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readable derived condition tests sys.platform, an operating-system property (f2:6).",
+          "evidence_refs": [
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if decision directly calls ctypes.windll.shell32.IsUserAnAdmin() (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call is the direct condition of an if, so its truthy result enters the then arm (s3-s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin() tests whether the process has administrative privilege (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "c9976a14ab7eea80",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads sys.argv[1] in a membership decision (f2:7).",
+          "evidence_refs": [
+            "s5",
+            "f2:7"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "9a20eacf5d3e4fa2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition is sys.argv[1] in ['egg_info', 'build'] and enters its body when true (f2:7).",
+          "evidence_refs": [
+            "s5",
+            "f2:7"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "344a106708157f88",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the setup command from sys.argv (f2:7).",
+          "evidence_refs": [
+            "f2:7"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "1cacc919126c9186",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif condition reads sys.argv[1] in a membership decision (s6; f2:34).",
+          "evidence_refs": [
+            "s6",
+            "f2:34"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "4e4cae63d5f11fee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The elif condition compares sys.argv[1] against bdist_wheel and install, and its body follows when membership holds (s6; f2:34).",
+          "evidence_refs": [
+            "s6",
+            "f2:34"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "de7fea655610f165",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the setup command from sys.argv (f2:34).",
+          "evidence_refs": [
+            "f2:34"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "460a06d6c0dac95a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform if encloses the argv membership if, so both conditions must hold to reach its body (s2, s5, s7).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "1fcfe51421868359",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows egg_info/build path the code invokes pip.main with an install command, enabling that download/install behavior (f2:6-13).",
+          "evidence_refs": [
+            "f2:6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1404ec8acecb5c67",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code activates the install action when the Windows and egg_info/build conditions hold (f2:6-13).",
+          "evidence_refs": [
+            "f2:6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "71876aa340e76d05",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This branch installs pypiwin32 under the Windows build commands, which fits portability (providing a Windows dependency), rather than an unclear purpose (f2:6-13).",
+          "evidence_refs": [
+            "f2:6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "925c6c7f74bbd3fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The pip.main install call is inside the nested platform and argv then arms (s2, s5, s7-s8).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "a141dd241dd970e6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The install call is executed directly in this top-level guarded branch, with no separate callable sink or alternate caller shown in the complete setup file (f2:1-13).",
+          "evidence_refs": [
+            "f2:1-13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c870849860b21f4c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "pip.main receives an install command for pypiwin32, which can fetch and install a package (s8; f2:13).",
+          "evidence_refs": [
+            "s8",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "1e2936acd108eefc",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The cited elif runs only after the earlier egg_info/build if is false, so reaching its region requires c1 and not c3 and c4, not only c1 and c4 (s2, s5-s7, s9).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "641b9e44950ee0fe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch writes the extension files and configures browser shortcuts, enabling the payload/persistence behavior (s9-s11; f2:34-100).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "b099401ab11846ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file-writing and shortcut actions run when the Windows and bdist_wheel/install conditions select this branch (f2:6,34-100).",
+          "evidence_refs": [
+            "f2:6",
+            "f2:34",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "9bb65e898457dfa5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch selects Windows-specific setup behavior for the bdist_wheel/install commands (f2:6,34-100).",
+          "evidence_refs": [
+            "f2:6",
+            "f2:34",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "38fa6da26362ba00",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The background.js and manifest writes, and shortcut Save call, appear in the body of the Windows branch’s bdist_wheel/install elif region (s6, s9-s11).",
+          "evidence_refs": [
+            "s6",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "92a155944d04ec9a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "These sink operations are top-level statements within the selected elif branch and are not defined as separately callable functions elsewhere in the file (f2:34-100).",
+          "evidence_refs": [
+            "f2:34",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "aac6cb190f176e28",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The .write calls write the extension files, and the COM shortcut Save call persists modified browser shortcuts (s10-s11; f2:69-100).",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "ffd03efaa0bd9701",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The elif branch excludes the earlier egg_info/build case, so the full path condition includes not c3; the cited admin check is also followed by a continue on truthy and a distinct state transition on false (s2, s5-s6, s4, s12-s13).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s4",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "9b297cbfbfd34f9b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The admin/platform/command checks gate whether the extension and shortcut payload is carried out; they enable that behavior rather than changing its environment-selected target (f2:34-100).",
+          "evidence_refs": [
+            "s4",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8a073da499c873c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks select the Windows install path and its admin-dependent setup actions (f2:6,34-100).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "13507b627366832a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate selects a Windows-specific installation and browser-persistence path, which is targeting the Windows environment (f2:6,34-100).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "35c23ab08d60915f",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The state-machine transitions and the cited unresolved dispatch prevent confirming the full path from the admin branch to the Save sink, even though the sink itself is visible (s4, s11-s13; f2:34-100).",
+          "evidence_refs": [
+            "s4",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "90acfcd689dbd15a",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The sink lies in the state-machine path, whose complete dispatch and reachability are unresolved, so exclusivity cannot be established from these slices (s4, s11-s13).",
+          "evidence_refs": [
+            "s4",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "cfaca98e57a4cee2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is a COM shortcut Save call after assigning browser launch arguments, which can persist the shortcut change (s11; f2:95-101).",
+          "evidence_refs": [
+            "s11",
+            "f2:95-101"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "2640d07a080bb3e4",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The os.path.exists check on the extension directory chooses whether the code creates that directory, so it is an environment gate deciding install-time behavior (s14-s15; f2:120-122).",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "f2:120-122"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "3e0436c290d8f385",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "When the extension directory does not exist, the condition changes the state to create it and continue; this is an environment check that controls install-time behavior (s15; f2:120-122).",
+          "evidence_refs": [
+            "s15",
+            "f2:120-122"
+          ]
+        }
+      ]
+    }
+  ]
+}

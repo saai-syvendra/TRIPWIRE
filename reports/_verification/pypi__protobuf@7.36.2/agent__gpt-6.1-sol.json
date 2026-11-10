@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "protobuf",
+    "version": "7.36.2",
+    "archive_sha256": "497d0463ff3316681da6c0b9e8d06cb465d61abce00b613ab42226175644d1bb"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "841336e394606374",
+      "packet_sha256": "d81cc4682f7f639d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_8d2ba0020b.L6.drop",
+          "claim_sha256": "2b9244753725e619",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform test only selects static linking on Windows or hidden symbol visibility elsewhere (s1, s2). Both paths configure the same unconditionally declared extension, so this is build portability plumbing rather than a gate deciding whether a behaviour runs (f1:85, f1:91, f1:92).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:85",
+            "f1:91",
+            "f1:92"
+          ]
+        },
+        {
+          "claim_id": "q_0e16ace065.L6.drop",
+          "claim_sha256": "7fee9dfd851ac3a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The two branches set compiler or linker options without enabling, suppressing, or selecting a payload (s2). These options feed the same extension declaration on both platforms, making the test build portability plumbing (f1:85, f1:91, f1:92).",
+          "evidence_refs": [
+            "s2",
+            "f1:85",
+            "f1:91",
+            "f1:92"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "Ailynitro",
+    "version": "1.0",
+    "archive_sha256": "c663a9bb771d724e611613a422ab0ed374f401052dee62ffefb70d6784c2df2f"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "59a49798a83d1aaa",
+      "record_sha256_after": "bca022b6088f87b6",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "2993782e0e7a03c0",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited region (lines 511-516, zip and upload) is shared by every ZipThings call and runs for Wallet and NationsGlory folders without the loginusers.vdf test, so only c3 dominates it. The c4 early exit at line 502 sits inside the elif 'Steam' branch; the region now cites that branch's body after t"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Removed the guessed file_present marks on g1, g2 and g3: their recipe paths are built from code literals (local and roaming from LOCALAPPDATA and APPDATA at lines 41-42, Chrome at line 523, Discord at line 530, Exodus at line 537). The flag stays: g5's passwords.txt is a made-up name matching the ke"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "bca022b6088f87b6",
+      "record_sha256_after": "ca63d03f0eca6705",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "9dd9e1073ca589df",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "shutil.copy2 at line 419 only copies Login Data to a temp file, and fs_write described the temp copy, not a credential read. The sink is now cursor.execute at line 422, which selects username_value and password_value from the logins table, with sink_kind fs_read. That call sits directly in the first"
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "2764cbacc258dd2e",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited region stopped at line 510, before the upload call. Added lines 511-516 as a second region, which runs after the Steam branch passes the line 502 test and sits on c3's side, and gave the full witness: upload call at line 515, def upload at 299, LoadRequests call at 390, def LoadRequests at"
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "4eaf5a3ce66049dc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The sink at line 574 is in uploadToAnonfiles, outside every region, so the empty witness was wrong. The witness now goes from the uploadToAnonfiles call at line 603, inside the second region, to def uploadToAnonfiles at line 571, which holds requests.post. These are direct calls, so the unresolved m"
+        },
+        {
+          "claim_id": "k_ee61418539.L6.drop",
+          "claim_sha256": "5a6ea644a3b249f1",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "__import__ at line 35 only tests whether requests or Crypto.Cipher is already importable. The except side runs pip install for that module and sleeps, and both sides then continue to the unconditional imports at lines 39-40 and the same stealer. It prepares something the payload needs, which the gat"
+        },
+        {
+          "claim_id": "q_51818e9113.L6.drop",
+          "claim_sha256": "f433c86993308fbb",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The try/except at lines 35-38 is the decision around the same __import__ test. The handler only starts pip for the missing dependency and waits 3 seconds, then the loop and the imports at lines 39-40 carry on to the same stealer on both sides. The pip process is dependency bootstrap, not a behaviour"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ca63d03f0eca6705",
+      "record_sha256_after": "78831a61c5d6f6b2",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "986be8a180ed385e",
+          "final_seen": "refuted",
+          "confirmed": true,
+          "decision": "fixed",
+          "reason": "The c4 early exit at line 502 sits inside the Steam elif, so the shared zip and upload at lines 511-516 are also reached by wallet and Metamask callers with only c3. Removed the lines 511-516 region and the exfil payload from g4. g4 now covers only lines 503-510, where both guards hold, with a cred_"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed two of the three listed reasons. Payload path: g2 and g3 network sinks now have full call and def witnesses (lines 411, 216, 292, 88 and lines 515, 299, 390, 74), since the calls inside the thread targets are direct. Guessed recipe: g5 file name is now passw.txt, built from the literals at lin"
+        }
+      ]
+    }
+  ]
+}

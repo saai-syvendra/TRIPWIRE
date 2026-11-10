@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/insurance-sdk",
+    "version": "1.97.4",
+    "archive_sha256": "53e83534da0bf00d98afbcee0dce2dd84f085c0c86cd128c7f7a26a77daa4cba"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "e33c61c1123ca12f",
+      "record_sha256_after": "e33c61c1123ca12f",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Re-read index.js and scripts/deploy.js in full; the record matches the code (token harvest c1-c5 merged and tested at index.js:88, detached spawn of deploy.js at :91, whoami and owned-package early exits at deploy.js:52 and :55, npm publish at :65). No reason can be settled from the code alone: the "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "e33c61c1123ca12f",
+      "record_sha256_after": "75292e71090732ea",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "3943587042a7bd37",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "index.js:18 reads rcPath in a loop over ~/.npmrc, ./.npmrc and /etc/npmrc (index.js:11-16), and the regex at index.js:20 runs on each file's lines, so the probe target ~/.npmrc was too narrow. Probe target is now *npmrc, which covers all three paths; api and site stay, and a note says what the targe"
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "0f4a29b1286ad864",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "deploy.js:52 tests whoami, which is bound at deploy.js:51 to the awaited result of fetchJson. https.get is only called inside fetchJson (deploy.js:11), so it is not the API the tested variable is bound to. api is now fetchJson; a note records that it wraps https.get. Site unchanged."
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "b5257d8d4cbdc120",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was about the API, not the polarity: the early return on !whoami || !whoami.username means both must be truthy to continue, so operator truthy stands. The claim now names fetchJson instead of https.get, the value the test reads through whoami."
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "b6004ce91b609df3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "deploy.js:55 tests owned.length, and owned is bound at deploy.js:54 to the awaited result of getOwned (deploy.js:37-47), not to https.get. api is now getOwned; a note records that the list is built from fetchJson search responses. Site unchanged."
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "1d8fa7bf9400bad8",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The code is if (!owned.length) return at deploy.js:55: a truthiness test of the length, with no comparison against 0 and no test of https.get. Operator is now truthy with value null, in positive form for the early exit, and api is getOwned."
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "18ebc74effa0871f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The category label stays server_response and only the claim's api changed, to getOwned. The objection that this is not an https.get result was right about the API, so that part is fixed. The label holds because owned is filled only from r.objects of the registry search responses (deploy.js:40-42), s"
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "4a04d87aad4dbb08",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "index.js:21 adds an npmrc capture to tokens only when it does not start with ${, so a regex match alone (c4) can leave tokens empty and the guard at index.js:88 false. Added c8 (not_startswith ${, anchored on !m[1].startsWith('${')), added it to the guard, and the expression is now (c1 && c2 && c3) "
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "85191e8241d24d60",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Both refutations are addressed. The outer token disjunction now carries c8, giving ((c1 && c2 && c3) || (c4 && c8) || c5) && c6 && c7, with c8 added to the index.js:88 guard. c6 and c7 now name fetchJson and getOwned, the values the nested early exits at deploy.js:52 and :55 actually test. The nesti"
+        },
+        {
+          "claim_id": "k_b09f29b842.L6.drop",
+          "claim_sha256": "25cd587e07082277",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "index.js:38 only acquires the command output inside a try. It makes no decision of its own: the decision on that output is the test at index.js:41, already recorded as c1-c3 with this execSync call as their probe, and those feed the index.js:88 guard of g1 and g2. If the call throws, the empty catch"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "75292e71090732ea",
+      "record_sha256_after": "75292e71090732ea",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Record left unchanged and still flagged, all three reasons remain. I re-read index.js and scripts/deploy.js in full and found nothing to fix. (1) Family hint: the code shows the pgmon systemd user unit (index.js:51-84) and the npm token worm in deploy.js, but BASE64_PAYLOAD is the placeholder 'hello"
+        }
+      ]
+    }
+  ]
+}

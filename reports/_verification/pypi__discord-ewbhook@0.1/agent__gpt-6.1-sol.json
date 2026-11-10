@@ -1,0 +1,309 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "discord-ewbhook",
+    "version": "0.1",
+    "archive_sha256": "28933d04d674a1155eecd9c9b25a6494c83f755b7618e2e3f73859dcaa755dac"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "18f7c39aefa7aa41",
+      "packet_sha256": "f0a1a3380d804edd",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison at f1:6 directly reads sys.platform as the condition of the enclosing if statement.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "d7427d5832e56e16",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The equality operator and then arm are visible at f1:6, but the compared string is constructed through an obfuscated getattr and numeric expressions; no checked decode is supplied.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads sys.platform, an operating system property, at f1:6.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition at f1:68 directly calls ctypes.windll.shell32.IsUserAnAdmin; ctypes is imported at f1:117.",
+          "evidence_refs": [
+            "s3",
+            "f1:117"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The unnegated administrator call controls the then arm containing the state assignment and continue at f1:69-70.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The IsUserAnAdmin call at f1:68 tests administrator privilege.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "52f1535ddeb0eb16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single cited platform guard encloses the entire s5 region, so the cited conditions combine as c1 with minimum one.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ca1d2cec9c0342b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform if encloses the installation and filesystem operations, with no platform else payload; it enables that body.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "4d3bfdde81c5afa2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform comparison admits execution of the guarded installation and filesystem body on the matching platform, rather than checking for analysis activity.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bffa50649625a977",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform restriction surrounds Windows-specific COM shortcut manipulation and a Windows administrator API, supporting operating system targeting.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:89",
+            "f1:111"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c51dbc1bbbd7ffab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All four cited calls at f1:13, f1:59, f1:73 and f1:104 occur directly within the s5 body of the platform if; no function hop is needed.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "e9200df9ae80bfbf",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited sinks are top-level statements nested within the platform if, and the full file defines no alternative callable entry to those statements.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b0196be17888aaed",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The pip.main arguments at f1:13-14 and the COM class supplied to Dispatch at f1:65 remain encoded, so the claimed download and persistence capabilities are not fully established by resolved sink bindings.",
+          "evidence_refs": [
+            "s6",
+            "f1:65",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "4e06e63b364d50ea",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The administrator then region s10 is nested inside both the platform then arm and the administrator then arm, joining the two cited conditions with and and requiring both.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d14263a49e9ac562",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The administrator arm changes a dispatcher state, and f1:44 appends an encoded scan location, but the supplied code leaves the location and its relationship to the persistence targets encoded.",
+          "evidence_refs": [
+            "s4",
+            "f1:44",
+            "f1:81",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "041e967c8d80c71a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The administrator result chooses a state transition within the platform-specific body; neither condition checks for analysis or sandbox activity, fitting activation.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0dc20a87f8622ea5",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The administrator branch only visibly assigns a dispatcher state and continues; the encoded locations and flattened transitions do not establish whether its purpose is targeting or portability.",
+          "evidence_refs": [
+            "s4",
+            "f1:44",
+            "f1:52"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "6c6908947c683004",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The s10 region contains only a dispatcher assignment and continue, while Save is in a separate loop arm at f1:104; the intervening state-machine path has not been fully resolved.",
+          "evidence_refs": [
+            "s10",
+            "f1:81",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "acb271e41cc30199",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "Both administrator outcomes update the same loop dispatcher, and Save occurs in a later separate arm; without resolving all intervening transitions, exclusive administrator gating is not established.",
+          "evidence_refs": [
+            "s4",
+            "f1:71",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3c68b405effd67af",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "Save is called on an object returned by CreateShortcut, but its originating Dispatch class at f1:65 is encoded and the COM method binding is not resolved by the supplied text.",
+          "evidence_refs": [
+            "f1:65",
+            "f1:89",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "e61c879c7ecca87d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The missing-directory test at f1:120 routes through directory creation at f1:59, whose next state matches the existing-directory continuation at f1:124; this is destination-directory preparation rather than a payload gate.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "f1:59",
+            "f1:60",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "a6fd2db9a71fb493",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The missing-directory test at f1:120 routes through directory creation at f1:59, whose next state matches the existing-directory continuation at f1:124; this is destination-directory preparation rather than a payload gate.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "f1:59",
+            "f1:60",
+            "f1:124"
+          ]
+        }
+      ]
+    }
+  ]
+}

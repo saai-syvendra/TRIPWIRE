@@ -1,0 +1,1646 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "executable-stories-jest",
+    "version": "6.1.1",
+    "archive_sha256": "c14564535e12a4d790bc6dd864af05d2661d57f7b67f7a0b57f4d020759135f5"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "74ad553b496a3668",
+      "packet_sha256": "44f75808215b4ad1",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f38e226f6cf39e50",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z7 in s1 lowercases Intl.DateTimeFormat().resolvedOptions().locale and tests startsWith('ru') inside an if condition.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a3976c0239fff065",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z7 returns true on a 'ru' locale and s2 exits when z7() is true, so the guarded code is reached only when the locale does not start with 'ru'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e65fe4fe85acc0b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the runtime locale/language, so locale_language fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "ff1df77825752a0d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IX in s3 tests process.cwd().startsWith('/tmp/npm-safe/') in an if condition.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "3b5340532c35fd40",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IX returns true when cwd starts with the prefix and s4 exits when IX() is true, so the guarded code needs not_startswith.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "97dd0152bd40288e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A known sandbox working-directory prefix is a sandbox artifact check.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "0b2fc0587d624932",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 reads the file built from the home dir, '.aws' and 'credentials' with readFileSync and tests .includes('FAKE') in an if condition, after an existsSync check.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "187dfb35a8187704",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IX returns true when the credentials file includes 'FAKE' and s4 exits on IX(), so the guarded code needs not_includes.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "a42dda79b16227ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test inspects the content of a file, so file_content fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "b6e50b6f6e7c204e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "yX in s6 calls existsSync on f4, which is tmpdir joined with tmp.0144018410.lock, in an if condition.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "bf29738b49ad19aa",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "If the lock file exists, yX reads its pid and still proceeds when that process is dead, so absence of the file is not strictly required. The real condition is no live lock, which is neither plain exists nor not_exists.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "4b76a8bb5135d13b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a file exists, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "8fe30c63c1e67d31",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute in s8 tests os.cpus().length<4 in an if condition.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "c6ad92c95242a5c4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute returns false when cpus length is below 4, and s9 returns early when shouldExecute is false, so the guarded code needs >=4.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "009cfd9386846238",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CPU core count is a hardware property.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "ee08ea9038280c7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "w4 runs execSync('ps aux', or tasklist on win32), lowercases stdout and tests includes() against the DQ list in an if condition.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "3484b23e6ebd0ba4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "w4 returns true when ps output includes any DQ entry (the list contains crowdstrike) and shouldExecute then returns false, so the guarded code needs not_includes.",
+          "evidence_refs": [
+            "s10",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "8c761f4fd9dc7db3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test scans the running process list for security-product names.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "83f06c0f5f35df7e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "H9 in s11 tests process.env.CI against 'true' and '1' at the start of an if condition.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "61c7eed9759dc8a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "H9 returns true when CI is set, and shouldExecute returns false on H9(), so the guarded code needs CI unset. CI is compared only to 'true' and '1', which makes falsy an approximation of the same polarity.",
+          "evidence_refs": [
+            "s11",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "de508a1274bf1c6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CI is a CI environment marker.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "4c25b6ea19e0a792",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition in s12 is ['darwin','linux'].includes(process.platform).",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "26bfdd08b90d6177",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if in s13 runs only when the platform is darwin or linux.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "d367c36f43453b13",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating-system platform.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "1e6f92712a40607e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "bK in s14 reads process.env.WORKFLOW_ID into a variable that is used in the early-return test and in the includes test.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "ca8aa7fac1876317",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "bK returns when both WORKFLOW_ID and REPO_ID_SUFFIX are falsy, so reaching the guarded code needs WORKFLOW_ID truthy (or REPO_ID_SUFFIX).",
+          "evidence_refs": [
+            "s15",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "6eeed96598fdc2f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads a custom environment variable.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "1019874efb0c8edc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "bK in s16 reads process.env.REPO_ID_SUFFIX into a variable used in the early-return test and the includes test.",
+          "evidence_refs": [
+            "s16",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "50ae6086a59f3fba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return fires only when both variables are falsy, so the guarded code needs REPO_ID_SUFFIX truthy (or WORKFLOW_ID).",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "c8773bb3355b944f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads a custom environment variable.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "17cc323f8958baa4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition in s17 is process.env['GITHUB_ACTIONS'].",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "e820ff4c9f921b57",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The body of the if in s18 runs only when GITHUB_ACTIONS is truthy.",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "03ae0822196a8c0f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI marker.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "0c2d71a6f15ce65c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "uX exits when IX() (c2, c3) is true or when z7() (c1) is true, and only then reaches the code after the await uX() call, so the conditions are nested with and. IX has further uncited env and repo checks, but they are not among the cited conditions.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4bdb6c25457ba748",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code after uX() runs only if every check passes, so the gate enables the scan and exfil flow rather than choosing between payloads.",
+          "evidence_refs": [
+            "s19",
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "23fd05f76122bf1a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The process exits on a Russian locale, a known sandbox cwd, or fake AWS credentials, which is backing off from analysis or excluded targets.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "824ba31244c7e28c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Two of the three checks (sandbox cwd, fake-credential marker) are anti-analysis. The locale check is a geofence, but the gate as a whole fits anti_analysis.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "399ea04701fb7a60",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The regions after await uX() are inside the guards' continuation. The path from await _3() to the fetch in s22 runs through scan and handler dispatch that I could not follow to the sink.",
+          "evidence_refs": [
+            "s20",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "342e3649b7dd298b",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The sink function in s22 is reached through handler dispatch that could not be traced, so other callers cannot be ruled out.",
+          "evidence_refs": [
+            "s22",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "e2501e60132bf6f6",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The only cited sink is a fetch to the npm registry token endpoint with a bearer token. That fits network use, but it does not show recon or credential reading, and the path to it is unresolved.",
+          "evidence_refs": [
+            "s22",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6b573a63e0f1ae07",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single c4 guard is !yX() in uX, and its continuation after await uX() reaches the PX call in s21.",
+          "evidence_refs": [
+            "s7",
+            "s19",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "44a03689be2b94b9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock decides whether the main flow runs at all, so the effect is enables.",
+          "evidence_refs": [
+            "s7",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "24636b8c4f9793a8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The lock file under tmpdir holds a pid and only stops a second live instance, which is a re-entry guard and does not back off on analysis. I would label the polarity activate.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "ac38249a6d1d53e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A single-instance lock has no portability, targeting or anti-analysis purpose, so unclear fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "9291fec5e11fadf7",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The region s21 calls PX with the result of the scan. The fetch in s22 is a token-validation function that is not shown to be reached from PX or from this region.",
+          "evidence_refs": [
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "5717db33132a875d",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The sink path is unresolved, so other callers cannot be excluded.",
+          "evidence_refs": [
+            "s22",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3a9d798f71974b38",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The sink is a network fetch, but the cred_read and exfil behaviours are not tied to it through a resolved path.",
+          "evidence_refs": [
+            "s22",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "c6c42436f1a66c51",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "shouldExecute returns false on cpus<4, on w4() (process list) or on H9() (CI), and s9 exits when it is false, so all three conditions are joined with and. The GX re-entry flag is a further uncited check.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "03395ef3a66b46ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write and spawn in execute run only when shouldExecute passes, so the gate enables the code.",
+          "evidence_refs": [
+            "s9",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "e4fca9aceb041f97",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off on low CPU count, security-product processes and CI.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "990fb17f2add7eb0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks are a core count, EDR processes and CI, all anti_analysis.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "fe531c49ccaa0e39",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The writeFileSync in s24 and the Bun.spawn in s25 sit directly in execute after the early return on !shouldExecute, so the empty witness is correct.",
+          "evidence_refs": [
+            "s9",
+            "s23",
+            "s24",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "c9911d6bba0b6b87",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The check is inside execute itself, so any caller, including the t1() fallback list, passes the same shouldExecute gate before the write and spawn.",
+          "evidence_refs": [
+            "s9",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "5d49ca38a3f7fae5",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The write (s24) and the bash spawn (s25) back write_file and spawn_process. The written file sits in a temp dir that the finally block removes with a recursive rm, so no persistence sink exists.",
+          "evidence_refs": [
+            "s24",
+            "s25",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "756b616aed838eac",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single if on the platform array guards the then block, with no other conditions.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "b75660455da12ef2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs only on darwin or linux and does nothing otherwise, so it enables the behaviour.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "819df9aadc26303a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs on matching platforms and is not a back-off from analysis, so activate fits.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "2d7d6b4928da2109",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "A darwin/linux restriction could be portability or targeting, and the code shown does not decide which.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "0b95833c633ba601",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The this.downloadPackages(...) call in s26 sits inside the platform-if region itself, so the empty witness is correct.",
+          "evidence_refs": [
+            "s13",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "0ec05f4ac40c97ea",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The platform check is inside g1.execute, so every caller passes it before the downloadPackages call.",
+          "evidence_refs": [
+            "s13",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "6fd08934f4e92de3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink downloadPackages and the following publishPackage in the same block are the package's own wrappers, and publishPackage is seen to reach the npm registry. This is network use for propagation.",
+          "evidence_refs": [
+            "s26",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "6b280ab2d371ed3f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "bK returns unless WORKFLOW_ID or REPO_ID_SUFFIX is truthy, and the nested if on GITHUB_ACTIONS then guards the X6 call. The uncited workflow-ref and repo includes checks add further conditions.",
+          "evidence_refs": [
+            "s15",
+            "s18",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "f55a325530f99457",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The X6 execute call runs only when the checks pass, so the gate enables it.",
+          "evidence_refs": [
+            "s27",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "82523e6cbc832b29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the specific workflow or repo env vars are set on GitHub Actions, so activate fits.",
+          "evidence_refs": [
+            "s15",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "4234657f2743cc06",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The values are matched against GITHUB_WORKFLOW_REF and GITHUB_REPOSITORY, which selects specific victim repos, so targeting fits.",
+          "evidence_refs": [
+            "s27",
+            "s14",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "3d50ae7be676a12e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The new X6().execute() call in s28 sits directly in the guarded then region, so the empty witness is correct.",
+          "evidence_refs": [
+            "s27",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "527372c6c75ab884",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "X6 is constructed only at this site in bK, which is guarded by the cited conditions.",
+          "evidence_refs": [
+            "s27",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "4e54cbba601d2c48",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "X6 reads the Actions OIDC token variables and its publishPackage posts to the npm OIDC token-exchange endpoint with fetch, so network use for propagation holds.",
+          "evidence_refs": [
+            "s28",
+            "s27"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "74ad553b496a3668",
+      "packet_sha256": "b5fed604e9b7e4a6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a3976c0239fff065",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z7 returns true when the Intl locale starts with 'ru' (s1), and uX exits the process when z7() is true (s2), so the code after it runs only when the locale does not start with 'ru'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e65fe4fe85acc0b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the Intl locale and the LANG, LC_ALL and LANGUAGE variables, which is a locale/language property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "3b5340532c35fd40",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IX returns true when process.cwd() starts with '/tmp/npm-safe/' (s3), and uX exits when IX() is true (s4), so continuing needs cwd not to start with that prefix.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "97dd0152bd40288e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A cwd under /tmp/npm-safe/ is an analysis or scanning sandbox working directory, so vm_sandbox_artifact fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "0b2fc0587d624932",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IX calls readFileSync (imported as _0x344738) on join(homedir(), '.aws', 'credentials') and tests the content with includes('FAKE') inside an if, which matches the probe.",
+          "evidence_refs": [
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "187dfb35a8187704",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "If the credentials file content includes 'FAKE', IX returns true and uX exits (s4), so continuing needs the content not to include 'FAKE'.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "a42dda79b16227ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test inspects the contents of ~/.aws/credentials for a canary marker, which is file_content.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "b6e50b6f6e7c204e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "yX tests existsSync (imported as _0x54a899) on f4, which is join(tmpdir(), 'tmp.0144018410.lock'), in an if condition.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "bf29738b49ad19aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "uX exits when !yX() (s7), and yX returns false when the lock file exists and its pid is alive. One caveat: a stale lock whose pid is dead is deleted and the run continues, but the main reading is still not_exists.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "4b76a8bb5135d13b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is a file existence check on a lock file in the temp directory.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "c6ad92c95242a5c4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute returns false when cpus().length < 4 (s8), and execute returns early when shouldExecute is false (s9), so the run needs at least 4 CPUs.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "009cfd9386846238",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The CPU core count is a hardware property.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "ee08ea9038280c7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "w4 runs execSync (imported from child_process) with 'ps aux' on non-Windows, lowercases the output, and tests it with includes against the DQ list in a loop condition.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "3484b23e6ebd0ba4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "'crowdstrike' is in DQ. w4 returns true when the process output includes any DQ entry, and shouldExecute returns false when w4() is true, so the run needs the output not to include 'crowdstrike'.",
+          "evidence_refs": [
+            "s10",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "8c761f4fd9dc7db3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the running process list for security-product names.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "61c7eed9759dc8a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "H9 returns true when CI is 'true' or '1', and shouldExecute returns false when H9() is true, so the run needs CI to be unset.",
+          "evidence_refs": [
+            "s11",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "de508a1274bf1c6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CI is a CI environment marker, and H9 checks many other CI variables as well.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "26bfdd08b90d6177",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs only if ['darwin','linux'].includes(process.platform) is true.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "d367c36f43453b13",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.platform is the operating system.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "6eeed96598fdc2f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "WORKFLOW_ID is a custom environment variable read in bK, and a plain env_var fits it.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "c8773bb3355b944f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "REPO_ID_SUFFIX is a custom environment variable read in bK, and a plain env_var fits it.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "03ae0822196a8c0f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI marker.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "0c2d71a6f15ce65c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The locale exit in uX (s2) and the IX exit (s4, covering the cwd and FAKE tests) are sequential early exits, so their conditions join with and. The code after both runs only if all three conditions hold.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4bdb6c25457ba748",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The collectors and providers after uX run only when the guards pass, so the gate enables them.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "23fd05f76122bf1a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off on a Russian locale, a sandbox cwd and fake credentials, so the polarity is evade.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "824ba31244c7e28c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Two of the three conditions, the sandbox cwd and the FAKE credentials canary, are analysis checks. The locale test is a geofence, so the label fits mostly rather than fully.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "399ea04701fb7a60",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The guards and the via call to uX (s14) are right. The sink, the fetch in E7 (s17), is called only from an npm-token provider run through the dispatcher, not from _3 (s15). The cited call hop from s15 does not reach it visibly.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "342e3649b7dd298b",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "I found only one caller of E7, in a provider reached through the dispatcher, but the dispatch path is not traceable statically.",
+          "evidence_refs": [
+            "s17",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "e2501e60132bf6f6",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The only cited sink is a fetch to the npm tokens endpoint. That is a network call that validates a token; it is not a credential read, and no sink is cited for recon or exfil.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6b573a63e0f1ae07",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One lock condition is checked by the early exit on !yX() (s7), so the expression is c4.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "44a03689be2b94b9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The run continues only if the lock check passes, so it enables the later code.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "24636b8c4f9793a8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is a single-instance lock file that holds the current pid and is removed by W6 at exit. It is a re-entry guard, so it does not back off on analysis. I would label it activate.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "ac38249a6d1d53e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock file does not point at a target or at analysis, so unclear fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "9291fec5e11fadf7",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The s14 via and the s16 region are right. The step from PX(...) to the fetch in E7 (s17) goes through dynamic dispatch (providers' execute) and is not traceable.",
+          "evidence_refs": [
+            "s14",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "5717db33132a875d",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Exclusivity cannot be settled because the dispatch to the sink is dynamic.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3a9d798f71974b38",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The cited fetch (s17) validates a token over the network. It does not read credentials, and no exfil sink is cited.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "c6c42436f1a66c51",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "shouldExecute returns false on cpus < 4, on w4() and on H9(), and execute returns early otherwise (s9). The conditions combine with and.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "03395ef3a66b46ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file write and the bash spawn in execute run only after shouldExecute passes.",
+          "evidence_refs": [
+            "s9",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "e4fca9aceb041f97",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off on a low CPU count, security products and CI.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "990fb17f2add7eb0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CPU count, EDR process names and CI markers are all analysis or sandbox checks.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "fe531c49ccaa0e39",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "writeFileSync (s19) and Bun.spawn of bash (s20) sit directly in execute after the shouldExecute early exit (s9), inside region s18.",
+          "evidence_refs": [
+            "s9",
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "c9911d6bba0b6b87",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The write and spawn are inside execute, and execute re-checks shouldExecute itself, so any caller (PX included) passes the same gate.",
+          "evidence_refs": [
+            "s9",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "5d49ca38a3f7fae5",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "Writing updater.py (s19) and spawning bash (s20) support write_file and spawn_process. Persistence is not supported: the temp directory is removed in the finally block with rmSync.",
+          "evidence_refs": [
+            "s19",
+            "s20",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "756b616aed838eac",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single if on the platform list guards the block (s13).",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "b75660455da12ef2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The download and publish steps run only inside the platform branch.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "819df9aadc26303a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs on matching targets and does not back off from analysis.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "2d7d6b4928da2109",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform list only limits the code to Unix-like hosts and does not choose a victim, so I would label it portability.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "0b95833c633ba601",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "this.downloadPackages(...) (s21) is called directly inside the then block (s13). Its body calls fetch to the npm registry, so the sink is network.",
+          "evidence_refs": [
+            "s13",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "0ec05f4ac40c97ea",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The platform check is inside g1.execute, and I found `new g1(...).execute()` only in the npm-token provider. Other downloadPackages definitions belong to other classes.",
+          "evidence_refs": [
+            "s13",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "6fd08934f4e92de3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Self-propagation rests on downloadPackages, which fetches tarballs from the npm registry. publishPackage is called in the same block.",
+          "evidence_refs": [
+            "s13",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "f55a325530f99457",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "X6.execute() runs only when GITHUB_ACTIONS is set and the WORKFLOW_ID and REPO_ID_SUFFIX filters match, so the gate enables it.",
+          "evidence_refs": [
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "82523e6cbc832b29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs on the matching CI target rather than backing off.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "4234657f2743cc06",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The WORKFLOW_ID and REPO_ID_SUFFIX filters pick specific workflows or repositories, which is targeting.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "4e54cbba601d2c48",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "name_only_link",
+          "evidence": "The sink is new X6().execute() (s22). X6 defines updateTarball and downloadPackages, but execute is inherited from a base class that is not visible, so the sink kind is not settled.",
+          "evidence_refs": [
+            "s22",
+            "s23"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "c02415c640c5aa56",
+      "packet_sha256": "9d2e14550b0c898f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "f629d8eded9d153f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The IX() exit (s1) holds the cwd /tmp/npm-safe/ and FAKE-in-credentials tests (s5, s6), and the z7() exit (s3) holds the ru locale test (s4). Each exit is skipped only when its tests are false, and both precede the s7-s9 code in fL, so the three negated conditions join with and.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "81d7196ecd60e6b1",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The exec path holds: fL calls _3 (s7), _3 calls I6.execute (s12), and execute runs execSync 'gh auth token' (s10) and hostname() (s14). The exfil hop goes from finalize() (s8) straight to DomainSender.send (s16), but the code reaches send only through the dispatch callback and senders, which I could",
+          "evidence_refs": [
+            "s7",
+            "s11",
+            "s12",
+            "s13",
+            "s10",
+            "s14",
+            "s8",
+            "s16",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "7f7cb83f55be40ed",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "fL() is called once at the file end, but the exfil path through the dispatch callback is unresolved, and I did not rule out other callers of _3 or the sender classes.",
+          "evidence_refs": [
+            "s8",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ab608ce34103ac61",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "cred_read rests on execSync of 'gh auth token' from child_process (s10), recon on os.hostname() (s14), and exfil on a fetch POST of JSON (s15), which is a network call.",
+          "evidence_refs": [
+            "s10",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "4de05ef5c487625e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "uX exits when !yX() (s17). yX tests existsSync of the tmpdir lock file (s18), so c4 is the only condition and the expression 'c4' is right. A stale lock whose pid is dead is deleted and execution continues, so the lock is not a strict not_exists.",
+          "evidence_refs": [
+            "s17",
+            "s18",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "28333ce14098148e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock file is a single-instance re-entry guard and does not detect analysis, so it is not evade. Activate is the closest label.",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "3f0bb572ad4bb086",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The exec path is traced (s7, s11, s12, s13, s10). The exfil hop from finalize (s8) to send (s16) runs through the dispatch callback, which I could not follow.",
+          "evidence_refs": [
+            "s7",
+            "s11",
+            "s12",
+            "s13",
+            "s10",
+            "s8",
+            "s16",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "ceae82af07f05260",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The exfil path through dispatch is unresolved, and I did not rule out other callers of the payload functions.",
+          "evidence_refs": [
+            "s8",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "e478725307bc0492",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In class i1, shouldExecute returns false when os.cpus().length<4 (f1 line 1, near the mkdtempSync/cpus import). The block that follows decides whether the write/spawn behaviour runs at all, so the effect is enables. I did not read the CI or process-list checks.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8c8fdb5893b8261e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate backs off on a low CPU count, a security-product name list (crowdstrike, osquery and others) and a CI marker, which is evade polarity.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "c4a5ac2bbba2181e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions are a minimum CPU count, EDR and security tool names and CI, all sandbox and analysis checks, so the purpose is anti_analysis.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "15f0d3d610fe4ec5",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The packet cites no slice for this gate, and I did not locate the process.platform test or the self_propagation code, so the code I read does not decide the purpose.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        }
+      ]
+    }
+  ]
+}

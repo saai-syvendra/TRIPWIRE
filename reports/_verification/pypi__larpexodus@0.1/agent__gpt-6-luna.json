@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "larpexodus",
+    "version": "0.1",
+    "archive_sha256": "d6942ef7bff3c44886dc01ab155d0a40967974ed9c0b3e442ff6f451924fbf4d"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "c2ce311bceaeb042",
+      "packet_sha256": "ae3051a8e2dfa1b6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_9299f491be.L6.drop",
+          "claim_sha256": "114cb96c449d52e9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition checks whether the download command succeeded and whether the output file exists, and only then runs PowerShell Start-Process on that file; this is an install-time gate on file availability, so `not_environmental` does not fit (s1, f1:15-20).",
+          "evidence_refs": [
+            "s1",
+            "f1:15-20"
+          ]
+        },
+        {
+          "claim_id": "q_3575928f06.L6.drop",
+          "claim_sha256": "230cc6702e708ed6",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The if statement gates the Start-Process call on a successful download return code and the output file's existence, so it decides whether the downloaded executable is opened during install and is an environmental availability check (s2, f1:15-25).",
+          "evidence_refs": [
+            "s2",
+            "f1:15-25"
+          ]
+        }
+      ]
+    }
+  ]
+}

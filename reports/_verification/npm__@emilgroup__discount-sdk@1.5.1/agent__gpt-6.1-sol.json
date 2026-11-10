@@ -1,0 +1,1268 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/discount-sdk",
+    "version": "1.5.1",
+    "archive_sha256": "7812ba81af2c2139b4ff186e75d5fb583834a3d28226a9f562d5aac842c7991b"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "aeeae9c939f84851",
+      "packet_sha256": "011eeb9c16b3de25",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "72c95c0c87a4f1fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly tests tokens.length after assigning tokens from findNpmTokens (f1:87-88).",
+          "evidence_refs": [
+            "s1",
+            "f1:87"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2ac308bc5ca667c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch requires tokens.length > 0, with no intervening negation (s1-s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6936f89666c95b18",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The count measures collected npm credentials from configuration files and environment variables, so target_artifact fits the availability test (f1:8-45, f1:87-88).",
+          "evidence_refs": [
+            "f1:8",
+            "f1:27",
+            "f1:45",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "5f7fe2eaee52ebb9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs is bound to the filesystem module and its existsSync call supplies the if condition (f1:4, s3).",
+          "evidence_refs": [
+            "f1:4",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "4499b69ada870eaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "deployScript is assembled from the package directory, scripts and deploy.js, and the then branch requires that file to exist (f1:89-91).",
+          "evidence_refs": [
+            "f1:89",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "70666cc937b7a5c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks whether the deployment script exists on the filesystem (f1:89-90).",
+          "evidence_refs": [
+            "s3",
+            "f1:89"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "cd01144353524b44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "whoami receives the awaited fetchJson result in this function and the decision tests that result and its username property (f2:85-95).",
+          "evidence_refs": [
+            "f2:85",
+            "f2:87",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0e051b5593c9f087",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return rejects a falsy response or falsy username; continuation requires a truthy response with a truthy username (f2:87-98).",
+          "evidence_refs": [
+            "f2:87",
+            "s5",
+            "s6",
+            "f2:98"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "4a64f43a886435fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fetchJson resolves parsed HTTPS response data, and the condition checks the authentication response and username (f2:13-33, f2:87-95).",
+          "evidence_refs": [
+            "f2:13",
+            "f2:22",
+            "f2:27",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "4d9f4501358e19c4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The token-count and deployment-file existence conditions nest around the same spawn call; both conditions are required (f1:88-95).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "be8b54ef08af9edf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conjunction enables launching the deployment process when credentials and the script are available (f1:88-95).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7c147060e36349ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The process starts when credentials and the deployment file are present; these tests do not detect analysis environments (f1:87-95).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "478cf70d07f7ae71",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Launching deployment depends on available npm tokens and its script, fitting data_availability (f1:87-95).",
+          "evidence_refs": [
+            "f1:87",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7a68b97e4e175345",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn sink sits directly inside both cited then branches and inside the stated region (f1:88-95).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "edd633f679d81b8c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sole spawn call in the supplied files is directly enclosed by both conditions, with no alternate caller of this top-level statement (f1:88-95).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c83fc74e9cf8ee5a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawn is imported from child_process and launches the Node executable with the deployment script argument (f1:3, f1:91-95).",
+          "evidence_refs": [
+            "f1:3",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9a0376cf28986748",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The deployment file invokes its own main routine and deployWithToken from environment tokens without evaluating c1 or c2; those launcher guards do not nest around s9 (f2:182-211).",
+          "evidence_refs": [
+            "s9",
+            "f2:182",
+            "f2:184",
+            "f2:211"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "188f7559598babb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The launcher prerequisites and successful authentication enable the publishing workflow, with no alternative payload branch (f1:88-95, f2:93-155).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "ad3c57b320756387",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Available credentials and a usable authentication response activate publishing to packages associated with the authenticated user (f2:93-121, f2:155).",
+          "evidence_refs": [
+            "s6",
+            "f2:105",
+            "f2:121",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "996d033291503f93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The workflow requires available credentials, its deployment script and an authentication response before attempting package publication, fitting data_availability (f1:88-95, f2:87-105).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f2:87",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "121423fe8c30e0e3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The local run-to-execSync witness is valid, but the s9 region is in a separately entered deployment file and is not controlled by the launcher guards s2 and s4 (f2:182-211).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s9",
+            "s11",
+            "s12",
+            "f2:182",
+            "f2:211"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "e3c16db7761fc6e6",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The deployment file starts its own main routine using environment tokens and calls deployWithToken, reaching publication and writes without passing the index.js guards (f2:182-211).",
+          "evidence_refs": [
+            "f2:182",
+            "f2:184",
+            "f2:211",
+            "s11",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3237e41b8a4d6e39",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The workflow rewrites the local package metadata with owned package names and publishes it through run bound to child_process.execSync; fs.writeFileSync supplies the file-write sink (f2:3-10, f2:150-157).",
+          "evidence_refs": [
+            "f2:3",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "f2:151"
+          ]
+        },
+        {
+          "claim_id": "k_40b927fb03.L6.drop",
+          "claim_sha256": "5119beaec856bb85",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The npm configuration output is validated before adding a credential; when other sources yield none, this decides whether deployment is launched (f1:38-45, f1:87-95).",
+          "evidence_refs": [
+            "s14",
+            "f1:42",
+            "f1:45",
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "k_7f3aae8bfb.L6.drop",
+          "claim_sha256": "d68aea7bb1b99589",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The npm configuration output is validated before adding a credential; when other sources yield none, this decides whether deployment is launched (f1:38-45, f1:87-95).",
+          "evidence_refs": [
+            "s15",
+            "f1:42",
+            "f1:45",
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "k_b09f29b842.L6.drop",
+          "claim_sha256": "a30ba66129fc1e00",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The npm configuration probe and its catch determine whether its output can contribute a credential, which can decide deployment when no other token is found (f1:37-45, f1:87-95).",
+          "evidence_refs": [
+            "s16",
+            "f1:41",
+            "f1:44",
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "k_de022e6195.L6.drop",
+          "claim_sha256": "f633c8deb3fab43b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This existence check only removes a temporary README when there was no original to restore; publication has already been attempted, so this is cleanup plumbing (f2:155-172).",
+          "evidence_refs": [
+            "s17",
+            "f2:155",
+            "f2:168",
+            "f2:172"
+          ]
+        },
+        {
+          "claim_id": "k_edf177b7ff.L6.drop",
+          "claim_sha256": "3a15f44a5d89c746",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This check saves the original README or records its absence for restoration after publication; it does not decide whether to publish (f2:127-129, f2:155-172).",
+          "evidence_refs": [
+            "s18",
+            "f2:155",
+            "f2:168",
+            "f2:172"
+          ]
+        },
+        {
+          "claim_id": "k_fa8a4fbbf3.L6.drop",
+          "claim_sha256": "0338f7bba11426cb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The npm configuration output is validated before adding a credential; when other sources yield none, this decides whether deployment is launched (f1:38-45, f1:87-95).",
+          "evidence_refs": [
+            "s19",
+            "f1:42",
+            "f1:45",
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "q_a78b614bc0.L6.drop",
+          "claim_sha256": "2fa24a6a5827e096",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This check saves the original README or records its absence for restoration after publication; it does not decide whether to publish (f2:127-129, f2:155-172).",
+          "evidence_refs": [
+            "s20",
+            "f2:155",
+            "f2:168",
+            "f2:172"
+          ]
+        },
+        {
+          "claim_id": "q_ae5269520e.L6.drop",
+          "claim_sha256": "b30c62c6036180a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This existence check only removes a temporary README when there was no original to restore; publication has already been attempted, so this is cleanup plumbing (f2:155-172).",
+          "evidence_refs": [
+            "s21",
+            "f2:155",
+            "f2:168",
+            "f2:172"
+          ]
+        },
+        {
+          "claim_id": "q_b30584949f.L6.drop",
+          "claim_sha256": "a585863055c73edb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The npm configuration output is validated before adding a credential; when other sources yield none, this decides whether deployment is launched (f1:38-45, f1:87-95).",
+          "evidence_refs": [
+            "s22",
+            "f1:42",
+            "f1:45",
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "q_c6a7742791.L6.drop",
+          "claim_sha256": "39b3592fdf78c4f9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The npm configuration probe and its catch determine whether its output can contribute a credential, which can decide deployment when no other token is found (f1:37-45, f1:87-95).",
+          "evidence_refs": [
+            "s23",
+            "f1:41",
+            "f1:44",
+            "s2",
+            "s8"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "f3c520ba4a7528e3",
+      "packet_sha256": "2e4738273b06d4ab",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "efff04dd9b57f5fc",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ebb8d2ccbeb9a5c5",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "7b999cf5b87b8b36",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "70333d6c0d6e6d95",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s3) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1848b74f05f62fb7",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s3, s4) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "f1409379b89f353e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s3) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "dec9b753523796e0",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s5) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "f4042ff2c40b8eab",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s5, s2) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s5",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "034a596a5f266b5b",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s5) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "cbad13502350c98f",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s6, s7) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "e4dc72163b5ec058",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s6, s7, s2) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "030fde3b900a5a90",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s6, s7) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a18b013c1d82a6c5",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8, s1, s5, s6, s7, s9, s10) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s1",
+            "s5",
+            "s6",
+            "s7",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "b369fcaead49ecd9",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "5db4447e0bd8bd6c",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "48b7249095500853",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "b3a4729dbb19b617",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8, s10, s11) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "71b14b729e7f44ee",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8, s10, s11) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "64314f5c5a8c0166",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8, s4, s1, s5, s6, s7, s9, s3, s12, s10, s13) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4",
+            "s1",
+            "s5",
+            "s6",
+            "s7",
+            "s9",
+            "s3",
+            "s12",
+            "s10",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "aada621ce7a02dcd",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8, s4) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "9bb287b3cd443a73",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8, s4) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "4c82c69eb07b255d",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8, s4) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "71d9bc933d0a694f",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8, s4, s12, s10, s13, s14, s11, s15, s16, s17, s18, s19, s20) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4",
+            "s12",
+            "s10",
+            "s13",
+            "s14",
+            "s11",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "aabfc2eb5f0e19bc",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s8, s4, s12, s10, s13, s14, s11, s15, s16, s17, s18, s19, s20) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4",
+            "s12",
+            "s10",
+            "s13",
+            "s14",
+            "s11",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "60ed6cfebfc446fc",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s14, s11, s15, s16, s17, s18, s19, s20, s12, s10, s13) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s14",
+            "s11",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s12",
+            "s10",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_7f3aae8bfb.L6.drop",
+          "claim_sha256": "c4b21fa63aba2505",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s21) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "k_fa8a4fbbf3.L6.drop",
+          "claim_sha256": "0b20f062ff77c1bc",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s22) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "q_b30584949f.L6.drop",
+          "claim_sha256": "9ad804e9c1144611",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s23) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "q_c6a7742791.L6.drop",
+          "claim_sha256": "da05261fd2dace09",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s24) contain only sample-missing placeholders, and the corresponding files under code/ also contain only sample-missing placeholders. No source code is available to anchor this claim.",
+          "evidence_refs": [
+            "s24"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "7d9bdb8790d87038",
+      "packet_sha256": "780451eb7393af5d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "efff04dd9b57f5fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The home-directory .npmrc is among the paths read by fs.readFileSync, and each content line feeds the match whose result is tested (f1:10–22).",
+          "evidence_refs": [
+            "s1",
+            "f1:12",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ebb8d2ccbeb9a5c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The literal regular expression matches file-content lines, and a successful match is required before its captured token can be added (f1:20–22).",
+          "evidence_refs": [
+            "s1",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "7b999cf5b87b8b36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test examines credential-bearing configuration file contents, fitting target_artifact (f1:12–22).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "70333d6c0d6e6d95",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The return condition directly tests the negation of whoami.username (f2:93).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1848b74f05f62fb7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A falsy response or username returns immediately, so continuation requires a truthy username (f2:93–98).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "f1409379b89f353e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "whoami is the parsed result of the registry request, so server_response fits the tested username (f2:87–98).",
+          "evidence_refs": [
+            "f2:87",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "dec9b753523796e0",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "unresolved_binding",
+          "evidence": "The site reads process.env[key], where key ranges over NPM_TOKEN, NPM_TOKENS and other matching names; it cannot be bound specifically to process.env.NPM_TOKEN (f1:27–34).",
+          "evidence_refs": [
+            "s5",
+            "f1:27",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "f4042ff2c40b8eab",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "unresolved_binding",
+          "evidence": "The dynamically selected environment value is split and trimmed before testing each token, rather than directly testing a resolved NPM_TOKEN binding (f1:27–34).",
+          "evidence_refs": [
+            "s5",
+            "f1:32",
+            "f1:34"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "034a596a5f266b5b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The candidate credentials come from process.env, so env_var fits (f1:27–34).",
+          "evidence_refs": [
+            "s5",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "cbad13502350c98f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execSync is imported from child_process and its trimmed stdout is bound to configToken, which the conditional tests (f1:3,38–41).",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "e4dc72163b5ec058",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The command stdout is converted to a trimmed string and tested positively for truthiness before collection (f1:38–42).",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "030fde3b900a5a90",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The command queries a configured npm credential, fitting a target_artifact availability check (f1:38–42).",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a18b013c1d82a6c5",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The proposed expression admits regex captures beginning with the interpolation prefix and truthy config results equal to the sentinel strings, but the code rejects those before the token-count guard (f1:21,41,88).",
+          "evidence_refs": [
+            "f1:21",
+            "f1:41",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "b369fcaead49ecd9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks enable the guarded work by requiring usable credentials and the deployment script; failure skips the guarded continuation (f1:88–96; f2:93–95).",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "5db4447e0bd8bd6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code proceeds when credentials and required resources are available, with no analysis-environment avoidance in these checks (f1:88–96; f2:93–98).",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "48b7249095500853",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "These checks require credentials, deployment code and, for publishing, an authenticated username, fitting data_availability (f1:87–95; f2:87–98).",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "b3a4729dbb19b617",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn call sits directly inside the file-existence branch nested in the positive token-count branch (f1:88–95).",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "71b14b729e7f44ee",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sole spawn call in the supplied files is lexically inside both cited guards, with no alternate caller of that call site (f1:88–95).",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "64314f5c5a8c0166",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The proposed expression admits regex captures beginning with the interpolation prefix and truthy config results equal to the sentinel strings, but the code rejects those before the token-count guard (f1:21,41,88).",
+          "evidence_refs": [
+            "f1:21",
+            "f1:41",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "aada621ce7a02dcd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks enable the guarded work by requiring usable credentials and the deployment script; failure skips the guarded continuation (f1:88–96; f2:93–95).",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "9bb287b3cd443a73",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code proceeds when credentials and required resources are available, with no analysis-environment avoidance in these checks (f1:88–96; f2:93–98).",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "4c82c69eb07b255d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "These checks require credentials, deployment code and, for publishing, an authenticated username, fitting data_availability (f1:87–95; f2:87–98).",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "71d9bc933d0a694f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded spawn runs the joined deploy.js path, whose main routine calls deployWithToken; after its username early return, that function writes the manifest and calls run, which reaches execSync (f1:89–95; f2:93–155,182–211).",
+          "evidence_refs": [
+            "s11",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "aabfc2eb5f0e19bc",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "deploy.js has its own immediately invoked main routine that reads environment tokens and calls deployWithToken, reaching the same write and publish sinks without the index.js token and existence guards (f2:182–211).",
+          "evidence_refs": [
+            "f2:182",
+            "f2:184",
+            "s16",
+            "s18",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "60ed6cfebfc446fc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code rewrites the local manifest using each owned package name and publishes the current package through run and child_process.execSync; fs.writeFileSync supplies the file-writing sink (f2:3,10,121–157).",
+          "evidence_refs": [
+            "s14",
+            "s18",
+            "s20",
+            "f2:3",
+            "f2:151"
+          ]
+        },
+        {
+          "claim_id": "k_7f3aae8bfb.L6.drop",
+          "claim_sha256": "c4b21fa63aba2505",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The null-string comparison excludes a truthy command result that c5 truthiness alone would accept, so it is an additional credential-availability condition controlling deployment (f1:41–42,88).",
+          "evidence_refs": [
+            "s21",
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "k_fa8a4fbbf3.L6.drop",
+          "claim_sha256": "0b20f062ff77c1bc",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The undefined-string comparison excludes a truthy command result that c5 truthiness alone would accept, so it adds a credential-availability condition controlling deployment (f1:41–42,88).",
+          "evidence_refs": [
+            "s22",
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "q_b30584949f.L6.drop",
+          "claim_sha256": "9ad804e9c1144611",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This complete conditional includes two sentinel exclusions absent from the recorded truthiness condition, so dropping it as a duplicate misses constraints on credential collection and deployment (f1:41–42,88).",
+          "evidence_refs": [
+            "s23",
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "q_c6a7742791.L6.drop",
+          "claim_sha256": "da05261fd2dace09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The try body repeats the command probe and token-result test already represented by c5; its empty catch only discards failed attempts to obtain that same credential (f1:37–44).",
+          "evidence_refs": [
+            "s24",
+            "s6",
+            "s7"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "matpplotlib",
+    "version": "0.1",
+    "archive_sha256": "7d120516e562fb2fc08d823c24fd88bbdfaef3132b864039f998042622c3c419"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "6796a177bdce51a6",
+      "record_sha256_after": "ee8a4a384e195458",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "1b410537d6d3bf01",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited sink at d1:45 is a list.append that adds C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the folder list, which cannot persist anything by itself. The persistence happens when the WScript shortcut Save() at d1:100 (state 790593) rewrites shortcuts found by walking that list. Changed the sin"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Three reasons remain that need a person. setup.py is read only through the candidate decoder py_chr_shift_fold, which still needs review before it joins tools/common/decoders/. The category of the sys.argv[1] setup-command checks (c3 egg_info/build, c4 bdist_wheel/install) is a taxonomy call: the co"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ee8a4a384e195458",
+      "record_sha256_after": "97c8ee5ee1050d64",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "1441b5093c66ee1b",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that the shortcut Save() at d1:100 is not inside the admin case: state 362814 only appends the ProgramData Start Menu to the folder list, and Save() sits in the state 790593 loop over that list, which runs whether or not IsUserAnAdmin() is true. g3 is a modifies gate (admin c"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "97c8ee5ee1050d64",
+      "record_sha256_after": "97c8ee5ee1050d64",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "92fc55dcff5d8663",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "In d1 the bdist_wheel dispatcher case 383984 (d1:64) tests ctypes.windll.shell32.IsUserAnAdmin(); only when it is true does state 362814 run (d1:45), which appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the folder list; both sides then go to state 18005 and the shortcut loop (d1:78 to 101). "
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Three reasons remain and none can be settled from the code. (1) setup.py is read through the scratch candidate decoder py_chr_shift_fold (d1). It has to be reviewed before it joins tools/common/decoders/, and that is a person's job. (2) c3 and c4 test sys.argv[1] against setuptools command names (eg"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "97c8ee5ee1050d64",
+      "record_sha256_after": "1b1cf698e71fb056",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "301966418ac3b3bf",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "selects holds. d1:7 and d1:34 are one if/elif on sys.argv[1] with a different payload per arm: pip.main download at d1:13 on the egg_info/build arm, extension write at d1:72 and d1:122 on the bdist_wheel/install arm. The refutation reads the g1 arm alone and misses the elif, which is the alternate p"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "9504ee4d2a4804c9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "targeting holds. The win32 test at setup.py line 6 has no else, so off Windows only setup() runs and no other-OS version of the behaviour exists. Portability needs each branch to run a platform-specific version of the same behaviour. pypiwin32 is not such a variant: it provides the Dispatch import a"
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "14b70d8cc68581d9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "selects holds. The elif at d1:34 is the second arm of the sys.argv[1] dispatch begun at d1:7: this arm writes the extension (d1:72, d1:122), the sibling arm downloads pypiwin32 (d1:13). The refutation looks only inside this arm and does not count the sibling as the alternate payload."
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e3858361e3cd7da8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "targeting holds. The extension drop exists only under the win32 test at setup.py line 6, which has no else, so no other platform gets a version of it. That is a payload limited to one kind of victim, not a compatibility branch: the files written at d1:72 and d1:122 are a clipboard-swapping extension"
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "92fc55dcff5d8663",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right about the loop: IsUserAnAdmin at d1:64 only sends state to 362814, which appends the ProgramData folder (d1:45), and both sides reach 18005, so the loop at d1:78 runs without c2. Removed the for_statement region. Regions are now the c2 block and d1:45, which do need c1, c4 an"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "ea38fdc5c23d73ab",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "targeting holds. The list at d1:48 always holds the user folders, and admin adds the ProgramData Start Menu to it at d1:45. So this is not one location versus another for the same action, as the refutation says: the admin side reaches extra victim shortcuts and the other side has no variant of its o"
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "4d0d1dc2e85e3e35",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "enables holds. When the basename test at d1:90 fails, d1:95 sets the inner state to 0 and nothing is written for that file. When it passes, Arguments is set and Save() runs at d1:100. The false side has no other target, so the check turns the rewrite on or off. With no matching shortcut the behaviou"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "3c6f14342eeb58bf",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "data_availability holds. c5 (d1:81) and c6 (d1:90) are target_artifact tests over whatever os.walk finds, and they ask whether a browser shortcut the payload can use exists. The definition is the thing to steal or use exists, not only data to collect, as the refutation reads it. Nothing tests who th"
+        }
+      ]
+    }
+  ]
+}

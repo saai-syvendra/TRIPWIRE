@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "PyThrch",
+    "version": "1.0.0",
+    "archive_sha256": "06b0c126760a53709cbe2def8ea3c8380f2e90c9d7cb4eadf716adb80f1ae715"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "d717ee81e284a28f",
+      "packet_sha256": "dd7a2ab768831892",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "6fb0a7ec35090c60",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly reads `os.name` at the cited site (s1; f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "8be07d0ab597ee63",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm is entered when `os.name == \"nt\"` evaluates true; there is no intervening negation (s1, s2; f1:13).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads `os.name`, an operating system property (s1; f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f5dbf68ccbd8ba2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited region is under the sole `if os.name == \"nt\"` then guard, so its condition set is exactly c1 and the minimum is one (s2, s3; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows arm the code fetches remote text and executes it; the gate enables those behaviors (s3; f2:13-16).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload fetch and execution occur when the tested platform value is Windows, so the gate activates on its target (s2, s3; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check limits the remote payload behavior to Windows, which is environment targeting (s2, s3; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "568cf479bf429799",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the `requests.get(...)` fetch and `exec(...)` call are directly in the region controlled by the then arm, with no intervening helper path (s3, s4, s5; f2:13-16).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "2f6d57cd5ffc3bc4",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The fetch and execution calls occur only inside the overridden install `run` method's Windows then arm; the file registers that class as the install command and shows no other call path to either sink (s3-s5; f2:11-18, 28-31).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "f2:11",
+            "f2:28"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c4b6e0a4d7c0776a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get` can perform the claimed network fetch, and its response text is passed to `exec`, which executes the downloaded text (s4, s5; f2:16).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

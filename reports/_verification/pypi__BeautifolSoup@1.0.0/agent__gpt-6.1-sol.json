@@ -1,0 +1,156 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifolSoup",
+    "version": "1.0.0",
+    "archive_sha256": "498dd59690195f6c272c56a9849d0c41d3a500fa0337e406c426910aa390c28f"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "a12ae8121c580373",
+      "packet_sha256": "21c25fdf42ae2262",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f130e463f6c3c710",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The local import binds os to the operating system module, and the if condition directly compares os.name at f1:12-13 (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:12",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "68c86c06fe0bbd7a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition in s1 is equality against the literal nt, without negation, and s2 places the guarded code on its then side.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads os.name, an operating system property, so the os category fits (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "54ef22a46cace918",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The branch has one condition, os.name equal to nt, in both the original and derived code (f1:13, f2:13). The regions s3 and s4 are its then bodies, so c1 alone satisfies the combination and the minimum is one.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The derived code places the download and execution inside the OS condition, with no alternative payload branch (f2:13-18). The test enables those operations rather than changing their target.",
+          "evidence_refs": [
+            "f2:13",
+            "s4",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The then branch activates execution when os.name is nt; it does not test for analysis or sandbox tooling (f2:13-16).",
+          "evidence_refs": [
+            "f2:13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS equality check restricts the download and execution to the nt platform, while ordinary installation continues after the condition (f2:13-18). This supports targeting as the gate's purpose.",
+          "evidence_refs": [
+            "f2:13",
+            "s4",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "380e39cc6d4cd30f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The original guarded block is s3, and the corresponding derived block s4 remains inside the same OS equality then branch (f2:13-16). Both sink calls s5 and s6 occur directly inside s4, requiring no witness hops.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ff323e8cf39c121f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sink calls occur only inside the guarded run method body (f2:11-16); calling the method through its install registration still encounters the OS test (f2:29-30). Neither supplied file contains a separate caller or entry into those sink expressions that bypasses the condition.",
+          "evidence_refs": [
+            "f1:11",
+            "f1:13",
+            "f1:30",
+            "f2:11",
+            "f2:13",
+            "s5",
+            "s6",
+            "f2:30"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c95dce16164fc057",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The requests import at f2:14 binds the network client used by the get call in s5. The response text is stripped of pre tags and passed directly to the built-in exec in s6, supporting download and execution of downloaded code.",
+          "evidence_refs": [
+            "f2:14",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

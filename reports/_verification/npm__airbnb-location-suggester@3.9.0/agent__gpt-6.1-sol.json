@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "airbnb-location-suggester",
+    "version": "3.9.0",
+    "archive_sha256": "943f402acd284c05da479fc731affa17e9bb504bf6a00a37ce0a96f4c257291a"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "5937f6253501b14a",
+      "packet_sha256": "aab79cdb0c287cb3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_bb9a54b9bd.L6.drop",
+          "claim_sha256": "f3921d53219e8502",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison in s1 supplies isPreinstall, whose uses only suppress response and error logging at f1:80, f1:85, f1:99, f1:107 and f1:112. System information collection and the HTTP and WebSocket sends are outside those conditions.",
+          "evidence_refs": [
+            "s1",
+            "f1:13",
+            "f1:67",
+            "f1:70",
+            "f1:80",
+            "f1:85",
+            "f1:99",
+            "f1:102",
+            "f1:107",
+            "f1:112"
+          ]
+        },
+        {
+          "claim_id": "q_1005e3f207.L6.drop",
+          "claim_sha256": "804a304ffc422753",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition in s2 controls only console.error for a caught WebSocket import or setup failure. The import and connection creation precede this catch at f1:95-96.",
+          "evidence_refs": [
+            "s2",
+            "f1:95",
+            "f1:96"
+          ]
+        },
+        {
+          "claim_id": "q_6136c0e2bb.L6.drop",
+          "claim_sha256": "f2b916318dd50e9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition in s3 controls only console.error inside the WebSocket error callback. The send and close operations are in the separate open callback at f1:102-103.",
+          "evidence_refs": [
+            "s3",
+            "f1:102",
+            "f1:103"
+          ]
+        },
+        {
+          "claim_id": "q_c0dc4a9d4f.L6.drop",
+          "claim_sha256": "557714b8c906d06a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition in s4 controls response-body reads used as console.log arguments. Both HTTP requests have already been issued at f1:67 and f1:70, independently of this logging condition.",
+          "evidence_refs": [
+            "s4",
+            "f1:67",
+            "f1:70"
+          ]
+        },
+        {
+          "claim_id": "q_f7a50dc258.L6.drop",
+          "claim_sha256": "3a94d1d5702a5a1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition in s5 controls only the connection-established console.log. The callback sends the data and closes the socket after the conditional at f1:102-103 regardless of isPreinstall.",
+          "evidence_refs": [
+            "s5",
+            "f1:102",
+            "f1:103"
+          ]
+        },
+        {
+          "claim_id": "q_fa0a7e97ce.L6.drop",
+          "claim_sha256": "be06cef0b4ba1dbf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition in s6 controls only console.error for the HTTP failure. The WebSocket fallback call at f1:88 follows the conditional and runs regardless of isPreinstall whenever this catch is entered.",
+          "evidence_refs": [
+            "s6",
+            "f1:88"
+          ]
+        }
+      ]
+    }
+  ]
+}

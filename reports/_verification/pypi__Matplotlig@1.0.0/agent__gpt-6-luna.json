@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "Matplotlig",
+    "version": "1.0.0",
+    "archive_sha256": "f2cac3f07288cd836140354d1844fd0a185385ff912799213918cb6bc4760523"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "b22c0fef22a7db4f",
+      "packet_sha256": "f596da84a2aa3fdb",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "73207b8c4a86b467",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly tests `os.name` at the cited site (f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "dee58355ef7de315",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is entered when `os.name == \"nt\"` (f1:13).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the `name` property from the imported `os` module, so the category is `os` (f1:3,13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "593784090348f553",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single cited guard controls both listed then regions, and its sole condition is c1; the minimum condition set is one (f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In the guarded branch, a response body is fetched and passed to `exec`, so the gate enables downloaded code execution (f2:13-16).",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs when the platform name equals `nt`, activating the behavior on that target (f2:13-16).",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform-name check selects Windows as the environment where the downloaded code is run, which is targeting (f2:13-16).",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7b99ef90e008868e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sinks are calls directly in the then block: `requests.get(...)` provides the fetched text, and `exec(...)` evaluates it (f2:13-16).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "05e4f90a9c24b658",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The fetch and evaluation calls occur only in the `run` method's `os.name == \"nt\"` branch in the recorded setup.py; the surrounding setup configuration installs this class as the install command (f2:11-19,52-55).",
+          "evidence_refs": [
+            "s4",
+            "f2:11",
+            "f2:13",
+            "f2:16",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "9880e914bad91dd0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The `requests.get` call is a network fetch and its returned text is passed to `exec`, supporting download and execution of downloaded code (f2:14-16).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

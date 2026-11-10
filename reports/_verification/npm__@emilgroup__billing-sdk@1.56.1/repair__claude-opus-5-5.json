@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/billing-sdk",
+    "version": "1.56.1",
+    "archive_sha256": "7d40906a1a197aaa75ddc9eb0ee127bdc8defe229aec3d1a279f6f482b6db36b"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f8d5069f280588c1",
+      "record_sha256_after": "93f846ff4b52ddda",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f6a7636d3a55b10",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "index.js:12 is process.env.PAYLOAD || (pkg.config && pkg.config.payload) || '', and the guard at index.js:14 exits when that value is empty. pkg comes from index.js:9, which reads the package's own package.json next to the script. That manifest has no config key, so pkg.config is undefined on every "
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "31b6b4f939ce4cae",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The guard at index.js:14 tests whether the value from index.js:12 is present, and index.js:23 base64-decodes and writes that same value. The check is that the data the payload uses exists, which is data_availability, not unclear. Changed purpose to data_availability and updated purpose_reason."
+        }
+      ]
+    }
+  ]
+}

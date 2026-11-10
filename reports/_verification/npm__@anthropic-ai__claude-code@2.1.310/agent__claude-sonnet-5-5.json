@@ -1,0 +1,797 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@anthropic-ai/claude-code",
+    "version": "2.1.310",
+    "archive_sha256": "d696314076114df499ba88e117000a24a9d7ab4f502dcaefba52c83fd22acfbd"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "f42446365517810e",
+      "packet_sha256": "dff76097141c6838",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "7b74c422777a4c14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 compares the local `platform`, bound to process.platform at f1:84, with 'android' in an if.",
+          "evidence_refs": [
+            "s1",
+            "f1:84"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "84e8cf356fc3c043",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 returns early when platform === 'android', so the code after it runs only when platform != android. The other cited guard, s3, tests optionalDeps and not the platform.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "18a8583b30756a7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating-system name, so `os` fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "6a38cac0aebf6386",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 compares platform (process.platform) with 'linux' in an if.",
+          "evidence_refs": [
+            "s4",
+            "f1:84"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "2cdcfd890e6afcd9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 returns early when platform === 'linux', so the rest of the function is reached only when platform != linux.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "cc1b1ad84652aa96",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating-system name, so `os` fits.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "a4ee90167ad23230",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 compares platform (process.platform) with 'darwin' in an if condition.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "b2a254eef2ad0551",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block in s7 runs when platform === 'darwin' (positive form, then side).",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "b3e85c576420a912",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating-system name, so `os` fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "092a1499d1352fa6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8 compares cpu with 'x64'. cpu is bound to arch() from os (f1:85, f1:28) and is only reassigned inside the guarded block.",
+          "evidence_refs": [
+            "s8",
+            "f1:85",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "06d98f4ac9648b5c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block in s7 runs when cpu === 'x64' (positive form, then side), joined with the darwin test by &&.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "923d8c7cdca74787",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the CPU architecture, so `arch` fits.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c17.L1",
+          "claim_sha256": "70b034fcdcb0d09f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 looks up PLATFORMS[platformKey], and platformKey is built from process.platform in getPlatformKey (f1:84-102). The decision on that lookup is `!info` in s10.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:166"
+          ]
+        },
+        {
+          "claim_id": "c17.L2",
+          "claim_sha256": "1ab8191068455357",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Execution continues past s10 only if the key is in PLATFORMS. Those keys cover darwin, linux (android is mapped to linux-*-android) and win32, which matches the listed set.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:38-67"
+          ]
+        },
+        {
+          "claim_id": "c17.L6.category",
+          "claim_sha256": "9f6da32d48521c8d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lookup key is built from the operating-system name, so `os` fits.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c18.L1",
+          "claim_sha256": "0926a815a34792e6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The key looked up in s9 includes cpu from arch() (f1:85, f1:102), and s10 tests the result.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:85"
+          ]
+        },
+        {
+          "claim_id": "c18.L2",
+          "claim_sha256": "747cc5c856a8e8e3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Every PLATFORMS key ends in x64 or arm64, so a lookup that passes s10 implies arch is one of those.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:38-67"
+          ]
+        },
+        {
+          "claim_id": "c18.L6.category",
+          "claim_sha256": "82d4e25f20d041ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the CPU architecture, so `arch` fits.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c19.L1",
+          "claim_sha256": "2c5188afa40884f8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s11 calls require.resolve(info.pkg + '/package.json') inside a try whose catch reports the package missing and returns. The call matches the probe: it reads */package.json and the accessor is a throw.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c19.L2",
+          "claim_sha256": "193ccde0ab61fa5b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code after the try (s15) is reached only if require.resolve did not throw, because the catch returns on every path. That is an existence test.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c19.L6.category",
+          "claim_sha256": "44f3bb62c2926930",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check asks whether the platform's native package is installed in node_modules, which is a dependency-tree property.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "280d15094a11cf1f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The s13 block sits after the android return (s2) and the linux return (s5), then inside the single if (s7) that tests darwin && x64. That is c1 && c2 && c4 && c5, and four conditions are the minimum.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4c207c5215dbe73a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions decide whether the sysctl probe runs at all, so `enables` fits.",
+          "evidence_refs": [
+            "s7",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "9c6a4ece4771440d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs on a matching target (x64 Node on macOS) and does not back off from analysis environments, so `activate` fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "60028bb3d0c40d46",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block detects Rosetta so the native arm64 binary can be chosen (see the comment at f1:92-93), which is portability.",
+          "evidence_refs": [
+            "s7",
+            "f1:92"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "43758298bed21df5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawnSync call in s14 sits directly inside the s13 block, which lies after the s2 and s5 early returns and inside the s7 then side. The witness is empty, as claimed.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s7",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "2041b922c733efde",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The spawnSync at f1:95 is in getPlatformKey, which is called only from main (f1:166), and main is called once at f1:249. No exports or timers reach it.",
+          "evidence_refs": [
+            "f1:95",
+            "f1:166",
+            "f1:249"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "8fbbc17ccc219a0c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawnSync is destructured from child_process (f1:18), so s14 is a process-creation sink.",
+          "evidence_refs": [
+            "s14",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "30e34e23bf410526",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "c1 (platform != android) does not gate s15: the android branch returns a key that exists in PLATFORMS and execution continues to placeBinary. The s3 guard cited for c1 tests optionalDeps[info.pkg], not the platform. That optionalDependencies check is a real condition on s15 and is missing from the e",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s10",
+            "s15",
+            "f1:51-58"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "1c9dacc6225ae03b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks decide whether the native binary is placed at all, so `enables` fits.",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "8bcfe329694c0568",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The binary is placed when the platform is supported and the package is present. Nothing backs off for analysis or sandboxes.",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "2563173b58e59327",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks pick and install the platform-matched native binary of the package's own optional dependencies. That is portability.",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "f1:4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "9cb0bc58d083b39d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s15 follows the s10 and s3 early returns and the s12 try, whose catch returns. Its placeBinary call (s17) reaches the definition in s18, which contains the linkSync sink (s16).",
+          "evidence_refs": [
+            "s10",
+            "s3",
+            "s12",
+            "s15",
+            "s17",
+            "s18",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "118470d07c006a67",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "placeBinary has a single caller (f1:239) inside main, and main runs once at f1:249. The file has no exports or timers.",
+          "evidence_refs": [
+            "f1:239",
+            "f1:249",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "ec2555c93e0007e8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "linkSync is destructured from fs (f1:19-27). With copyFileSync, writeFileSync and chmodSync in the same function, it is a file-creating sink.",
+          "evidence_refs": [
+            "s16",
+            "s18",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "k_46fd690464.L6.drop",
+          "claim_sha256": "cbd10a1dd430f37b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "FAIL_ON_MISSING_NATIVE is `'false' === 'true'`, which is false (f1:35). `!FAIL_ON_MISSING_NATIVE` is therefore always true and the function returns before the npm_config_omit test is evaluated.",
+          "evidence_refs": [
+            "s19",
+            "f1:35"
+          ]
+        },
+        {
+          "claim_id": "k_7160e5b745.L6.drop",
+          "claim_sha256": "aaf8da7759859fdb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only picks which Rosetta hint to print in the catch block. The fallthrough path calls failInstallUnlessOptionalOmitted, which is a no-op. No install behaviour differs.",
+          "evidence_refs": [
+            "s20",
+            "s30",
+            "f1:35"
+          ]
+        },
+        {
+          "claim_id": "k_89a691a4be.L6.drop",
+          "claim_sha256": "4e0a9e1a2f8bafa2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The freebsd test only selects an extra console.error line before the return that happens either way.",
+          "evidence_refs": [
+            "s21",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "k_af8df88d92.L6.drop",
+          "claim_sha256": "c73d801f15300325",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The AUTHORIZED check exits with a 'Direct publishing is not allowed' message, so it looks like a publish-time guard. The slice is a bare script line with no lifecycle key, so the code does not show whether it runs at install.",
+          "evidence_refs": [
+            "s22",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "k_e4047fa2b3.L6.drop",
+          "claim_sha256": "ff1dc7a1039425a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "detectMusl is called only from the platform === 'linux' branch (f1:90), so its own non-linux check is a redundant guard that is never true there. The linux test itself is already recorded as c2.",
+          "evidence_refs": [
+            "s23",
+            "s29",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "k_e514ff693f.L6.drop",
+          "claim_sha256": "48244baa5fcba2ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only decides whether to chmod the placed file to 0o755. That is file-mode plumbing and does not change what runs or which binary is used.",
+          "evidence_refs": [
+            "s24",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "q_52c06eb181.L6.drop",
+          "claim_sha256": "85ac1f2ecc3a4fc2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s5 is the decision statement of the linux test already recorded as c2, and it is a guard in g1. It decides whether the musl-versus-glibc linux binary key is returned and the darwin Rosetta probe skipped, so it is not outside the gate.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f1:89"
+          ]
+        },
+        {
+          "claim_id": "q_699cd39b89.L6.drop",
+          "claim_sha256": "b2c4e91ce97697d0",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "This is the if statement for the same AUTHORIZED check as s22. Whether it runs at install depends on which lifecycle hook holds it, and the slice does not show that.",
+          "evidence_refs": [
+            "s25",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "q_7c42a5cc39.L6.drop",
+          "claim_sha256": "8c363d960f62b2c6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The freebsd if only prints an extra message. The return at f1:179 happens whether or not it is taken.",
+          "evidence_refs": [
+            "s26",
+            "f1:179"
+          ]
+        },
+        {
+          "claim_id": "q_91dc654eaf.L6.drop",
+          "claim_sha256": "93b2f93fec0d6aad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if only decides whether to chmod the placed file. That is file-mode plumbing, not a gate.",
+          "evidence_refs": [
+            "s27",
+            "f1:142"
+          ]
+        },
+        {
+          "claim_id": "q_ba51612188.L6.drop",
+          "claim_sha256": "b75f46fcd933c0de",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "FAIL_ON_MISSING_NATIVE is false (f1:35), so the if always returns and the code after it (the process.exitCode = 1 assignment) is dead.",
+          "evidence_refs": [
+            "s28",
+            "f1:35"
+          ]
+        },
+        {
+          "claim_id": "q_da765b690e.L6.drop",
+          "claim_sha256": "38354ed99c73b355",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if is detectMusl's own non-linux check. The only caller is the linux branch, so it never fires there. It duplicates the linux test recorded as c2.",
+          "evidence_refs": [
+            "s29",
+            "f1:89",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "q_e92342e67e.L6.drop",
+          "claim_sha256": "0bb1847b0cce1737",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both arms of the if only print diagnostics and then return. The failInstallUnlessOptionalOmitted call on the other path is a no-op because FAIL_ON_MISSING_NATIVE is false.",
+          "evidence_refs": [
+            "s30",
+            "f1:35"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b191d68dbb0cd4a0",
+      "packet_sha256": "1fa0566aa3f6ff69",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c17.L2",
+          "claim_sha256": "64bc1ebe8fc3fddd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "platformKey is built from process.platform (linux, android->linux-*-android, darwin, win32) and PLATFORMS[platformKey] is looked up at f1:167; `if (!info)` returns early at f1:169, so the guarded code runs only for those platforms.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:83",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "c17.L6.category",
+          "claim_sha256": "02e54f8f785885f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating system through process.platform, so os fits.",
+          "evidence_refs": [
+            "s1",
+            "f1:84"
+          ]
+        },
+        {
+          "claim_id": "c18.L2",
+          "claim_sha256": "64d6468d2d032ff2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The key uses os.arch() (cpu) and every PLATFORMS entry ends in x64 or arm64; the Rosetta branch only switches x64 to arm64. An unmatched key hits the early return at f1:169.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:85",
+            "f1:94"
+          ]
+        },
+        {
+          "claim_id": "c18.L6.category",
+          "claim_sha256": "de77db2b8625fb77",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the CPU architecture via os.arch(), so arch fits.",
+          "evidence_refs": [
+            "s1",
+            "f1:85"
+          ]
+        },
+        {
+          "claim_id": "c20.L1",
+          "claim_sha256": "0cb2d512a6d0627b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "optionalDeps is bound to require('./package.json').optionalDependencies || {} at f1:182 and `if (!optionalDeps[info.pkg])` at f1:183 decides on it.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:182"
+          ]
+        },
+        {
+          "claim_id": "c20.L2",
+          "claim_sha256": "15cbf323455021d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "info.pkg is PACKAGE_PREFIX ('@anthropic-ai/claude-code') + '-' + platformKey. A missing key in optionalDependencies returns early, so the guarded code needs the key to be present (membership, written positively).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:32",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "c20.L6.category",
+          "claim_sha256": "ddec8af33ffc53a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the platform package is declared in the package's own optionalDependencies, which is a dependency-tree property.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9b3f17e7c71cb2df",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guards are sequential early exits (s2, s4) and then a successful try body (s5) before the dest write in s7. All must pass, so they join with and; c17 and c18 both feed the one PLATFORMS lookup at s2.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "7bf8ef5da754de5d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Passing the checks lets the native binary be placed at bin/claude.exe. Failing them only prints messages, so the gate enables the write.",
+          "evidence_refs": [
+            "s7",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "f75c2cf3f5a5da14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the platform is supported and the native package is present. Nothing checks for analysis, CI or sandboxes, so activate fits.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "49b2e9384c185d56",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks pick the correct prebuilt binary for the OS and CPU and the installed optional package, which is portability.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "41a6695ac55ee632",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "placeBinary(src, dest) is called at f1:239 inside the region after all three guards. Its definition (s10) calls linkSync(src, dest) at f1:111, and copyFileSync is a further write.",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "3ab6f967c43b21f7",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "placeBinary has a single call site (f1:239) in main(), which is only invoked at top level (f1:249). The file has no exports, timers or other callers.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:249"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "tensorflwo",
+    "version": "0.1",
+    "archive_sha256": "b95b8fab074658aa132ae8aa5b2aaac402c81f96d179f10cb1c308ecc2e8ebc2"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "690bf5fe76cf76d0",
+      "record_sha256_after": "5324def2ca49e71a",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "aee576033f1d3234",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "In state 61499 the basename test lets only shortcuts whose TargetPath is chrome.exe, msedge.exe, launcher.exe or brave.exe reach the Arguments rewrite and Save(); every other .lnk goes to state 0 and nothing is written. The browser list is fixed in code, so the environment does not choose a differen"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "bc95dd40336f4969",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c6 and c7 test that a .lnk exists whose target is one of the listed browsers. That shortcut is the artifact the payload rewrites, so the test checks that the thing to use exists (data_availability, the usual purpose for target_artifact). The test does not exclude a kind of victim beyond that: the sa"
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "e292ba1677f5adf4",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited sink was the list .append of the ProgramData Start Menu path (state 362814), which writes nothing. Moved the sink to the shortcut Save() call in state 790593 (d1 line 100), which writes the patched .lnk and walks the list the admin branch extended. Set sink_kind fs_write. The path from 362"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Settled two reasons: argv[1] is the setup.py command pip passes (egg_info, bdist_wheel, install), so package_manager stays and a note explains it; the g4 sink now cites Save(). Still flagged: the getattr(__builtins__, 'chr') at line 6 and pip.main need run-time behaviour of the build frontend that t"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "5324def2ca49e71a",
+      "record_sha256_after": "ee3aedefe330f5c3",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "64b980499ee2f199",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Targeting holds. In d1 the sys.platform == 'win32' test at line 6 has no else and no other-OS version of anything: off Windows the code falls through to setup() at line 128. Portability needs each branch to run a platform-specific version of the same behaviour, and there is only one branch. The pip "
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e16ef8cd53d58b19",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Targeting holds. The extension drop and shortcut patching (d1 lines 34 to 126) use APPDATA, Windows paths and WScript.Shell and exist only behind sys.platform == 'win32' at line 6, with no else and no version for another OS. Portability would need a platform-specific variant of the same behaviour on"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "aee576033f1d3234",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Enables holds. Modifies means the same behaviour runs against a different target the environment decides. Here the false side of the tests has no alternative target: a file that is not .lnk (d1 line 81) is skipped, and a shortcut whose target is not one of the four browsers sets the state to 0 at li"
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "3f01fb5cf501c91a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right that Save (d1 line 100) was in neither cited region while the witness was empty. Every state value in d1 is a constant, so the path can be followed: line 45 sets 18005, then 37668 (through 29059 when the folder is missing), 382664, 12768, 162346, 4030, 145239, 186387 and 790"
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "712f5c21264d4af3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Modifies holds. The admin test at d1 line 64 only decides whether line 45 appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the folder list; both sides then reach the same shortcut patching at line 78. The behaviour is the same and the victim shortcuts differ, which is the modifies definition. "
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "d357919a5ac0012d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Targeting holds. The admin result at d1 line 64 widens the victim shortcut folders to the all-users Start Menu at line 45. It does not pick a platform variant (portability), test for analysis (anti_analysis) or test that an artifact exists (data_availability). The refuting evidence itself says the c"
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "fd5b1bdad0721ee6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The drop holds. os.path.exists on APPDATA\\Extension (d1 line 116, setup.py line 120) only decides whether os.makedirs at line 55 runs first. The true side sets 29059, which makes the folder and sets 37668 at line 56; the false side sets 37668 at line 120. Both then write background.js at line 122, s"
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "f40450b0270c2150",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The drop holds. This is the if around the same existence test (d1 lines 116 to 118, setup.py line 120). Its two sides differ only by os.makedirs at line 55 and both continue at state 37668, which writes background.js at line 122. Flipping the test changes no behaviour class and no victim target, so "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ee3aedefe330f5c3",
+      "record_sha256_after": "a98c02b21f1c548e",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "191fa0561ad165c2",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. In d1 state 383984 (lines 63-67) goes to 362814 when IsUserAnAdmin() is true and straight to 18005 otherwise, and 362814 only appends the ProgramData Start Menu (line 45) before going to 18005. Both paths reach the state 790593 walk (lines 77-103), so c2 does not control tha"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "needs_manual_review is still true after write_report. Three reasons remain. (1) The build frontend reason stays: the code confirms getattr(__builtins__, 'chr') at line 6 and pip.main at d1 line 13, but which pip and setuptools versions run setup.py with __builtins__ as a module, or still provide pip"
+        }
+      ]
+    }
+  ]
+}

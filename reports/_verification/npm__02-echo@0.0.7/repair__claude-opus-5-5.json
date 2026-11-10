@@ -1,0 +1,261 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "02-echo",
+    "version": "0.0.7",
+    "archive_sha256": "a3fb60c049272535735cde0df929c982e36b46c494d3e44809f7b4fae3b7059a"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2dff216eb1b0f93b",
+      "record_sha256_after": "2a0106593912cb00",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "6e172c0a94c1c094",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The old site was the _authToken regex literal and the api fs.readFileSync, which the code never calls. oL0 reads ./.npmrc then ~/.npmrc through mL0, which returns (await import('fs/promises')).readFile(path,'utf8'), and matches each line against /(?:_authToken|:_authToken)=([a-zA-Z0-9\\-._~+/]+=*)/. "
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "7d3cabb81019aa91",
+          "final_seen": "refuted",
+          "confirmed": true,
+          "decision": "fixed",
+          "reason": "Ry1 runs if(await cQ0()&&await pQ0()) await gQ0(). The docker --privileged copy of /tmp/runner into /etc/sudoers.d (the persistence sink) is in the catch handler of pQ0, the c8 sudo -n true probe. It runs while the test is being evaluated, outside the then region (await gQ0()), and does not depend o"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed what the code supports. The guessed recipe fields are gone: g2's privilege comes from the c8 sudo probe, and docker moved to g4, where the docker command names it. The flag must stay for these reasons. c11 (fetchToken server response) is not recovered. c9-c14, g2, g3 and g4 are out of set and "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2a0106593912cb00",
+      "record_sha256_after": "6e41ed17eb750039",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "df8a1319edef8428",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "In pQ0 the try body runs Bun.$`sudo -n true`.nothrow() and returns on success; g4's payload sink (the privileged docker run that copies /tmp/runner into /etc/sudoers.d) sits in the catch block, so it runs only when the try body throws. The try_except guard was recorded with arm then, which the gate "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "6e41ed17eb750039",
+      "record_sha256_after": "d8cebd115c7316f8",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "222afdcfaedeeba9",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Ry1 calls gQ0 only when cQ0 finds the /home/agent/agent process running (ps -axco command | grep) and pQ0 confirms passwordless sudo; gQ0 stops systemd-resolved, replaces resolved.conf and flushes the iptables OUTPUT and DOCKER-USER chains, which disables the DNS and egress controls of the detected "
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "1487a3ea43fc5ce0",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Each condition tests whether a credential is available: a GitHub token from env or gh auth token (isAuthenticated), a token recovered by fetchToken, and NPM_TOKEN or an _authToken line in .npmrc. The shred/del wipe in the inner else runs only when none of them is found, so the gate turns on credenti"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "c14 still needs a person: pQ0 runs sudo -n true with .nothrow(), so the code shows no reason for the try to throw and reach the docker sudoers write in the catch. c11 is a server_response check (fetchToken over GitHub) with no recoverable value, and the out-of-set conditions and gates c9-c14, g2, g3"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d8cebd115c7316f8",
+      "record_sha256_after": "e7bc4399f0daba4b",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "cfdd210fb41393ed",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "cQ0 returns (await Bun.$`ps -axco command | grep \"/home/agent/agent\"`.text()).trim()!=='' and its catch returns false. Probe output compared unequal to empty is the exists form with value null in layers.md L2, and probe.accessor stdout already records that the output is what gets tested. The refutat"
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "75594f8564a9ea9a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "pQ0's try runs Bun.$`sudo -n true`.nothrow() and returns exitCode===0. An exit status equal to 0 is the exists form with value null in layers.md L2, and probe.accessor returncode with target sudo -n true says what succeeded. The category is privilege, so the claim is not bare existence of Bun.$. c8 "
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "3b277297deb30987",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "findGitHubTokenEnvVars returns the env value on startsWith of ghp_ or gho_, and that value becomes this.token. The !isAuthenticated() side of the guard needs no env value with either prefix, so not_startswith is the positive form the skill requires for code reached when the positive test fails. The "
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "e7590ddbf2ae0428",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The cited code iterates Object.entries(process.env) and tests each value. The property read is environment variables, so env_var fits. The schema has no credential category, and target_artifact covers files or stores a CLI keeps, not process env, so the refutation names no better label."
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "3fb259bd0130f0dd",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "getToken keeps the trimmed gh auth token output only if it startsWith gho_ or ghp_, else returns null. That is a prefix test, not an absence test. Operator changed from not_exists to not_startswith with value gho_/ghp_; the same operator also holds when gh fails, since no token results."
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "5bbaa4656ed3ceae",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "This claim changed because c14 is now also tested by g2's if guard, so its guard list differs. Operator not_exists stands: pQ0's catch runs only when the try around sudo -n true throws, and a try body that completes is the exists form, so the catch side is not_exists with accessor throws. Why it wou"
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "461e737080045861",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Gate removed. jy1 awaits aL0 inline in CI; otherwise it re-spawns itself detached with POSTINSTALL_BG=1 and the child reaches the same await aL0. Both sides run the same worm, so the test only changes how it starts, which the skill defines as plumbing. The six candidates are in candidate_review.drop"
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "5f9a953a94b71780",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation accepted: enables is wrong because both sides of the jy1 test reach aL0, one inline and one through the detached child. Only the launch differs, which is plumbing rather than enables, selects or modifies. Gate removed, candidates dropped with that reason, and spawn_process stays in behavi"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "7bb38702bf2974e6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Gate removed for the same reason as g1.L6.effect, so no purpose label remains to settle. The jy1 test is launch plumbing: both sides run aL0. It is recorded in execution.notes and candidate_review.dropped."
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "688041f20757bc46",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "This claim changed because the second guard now lists c14 as well as c7 and c8. The path stands: await gQ0() sits on the then side of both ifs, the gQ0 call reaches its definition, and the definition holds the sudo systemctl stop sink. The refutation's objection to c8's operator is answered under c8"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "128b29d4852aa882",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation accepted. pQ0 has two routes to true: exitCode===0 in the try, and return !0x0 at the end of the catch after the docker call. The test if(await cQ0()&&await pQ0()) therefore passes without a zero sudo exit. Expression changed to c3 && c6 && c7 && (c8 || c14), with c14 added to the second "
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "af76b92dcc5f45f9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Polarity changed from activate to evade, and the expression changed too (g2.L4). The gate needs the /home/agent/agent process to be running, then stops systemd-resolved, swaps its config and flushes iptables OUTPUT and DOCKER-USER. The gate-analysis skill defines evade to include disabling monitorin"
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "643628e2f9c3e8ee",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation accepted. The first guard is !isAuthenticated()||!repoExists(), and repoExists is gitRepo!==null, which createRepo sets only after GitHub answers. A token holder whose repository creation failed also enters, so c9 && c10 is not required. Added c15 (repoExists falsy, server_response, out o"
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "514a5905ecf3a7a4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Refutation accepted on the region: await pQ0() in Ry1 sits outside the try in pQ0, so the c14 guard controlled no cited region. Added pQ0's catch clause as a second region, so the Ry1 guards control the call and the try guard controls the catch that holds the docker sink. The witness call and def ho"
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "4fdb6fcbf6e564c7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "This claim changed because the branch regions gained the catch clause. The persistence label stands: the sink is the docker call that copies /host/tmp/runner into /host/etc/sudoers.d/runner, a lasting privilege change on the host. The refutation cited gQ0's service and firewall commands, which belon"
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "68ddefad513e73bd",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "This claim changed because the then regions gained pQ0's catch clause, which answers the objection that c14 controlled no region. The expression c3 && c6 && c7 && c14 stands: the catch runs only inside pQ0, which is called only after both Ry1 tests and a true cQ0, and only when the sudo probe throws"
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "7a2bc60ed0836387",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The g4 sink is the docker copy into /etc/sudoers.d in pQ0's catch, which adds privilege on the runner and backs off from nothing. The refutation cites s26, gQ0's network commands, which belong to g2 and not to this gate. On the code g4 actually guards, activate holds."
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "6f82fe2f23f55119",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "g4's behaviour is a sudoers write, which gives privilege on a Linux Actions runner where the sudo probe failed. It does not hide from or disable analysis. The refutation again cites s26, gQ0's commands in g2. The conditions limit the write to one kind of victim machine, so targeting holds."
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "ee083484e6343791",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js line 180 builds environmentScript as path.join(__dirname, 'bun_environment.js') and line 181 tests it. The path is the package's own directory and the file ships in the package, so this tests the tarball, not the machine. It is not a target artifact: nothing is stolen from it and no env"
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "0492349c1c26810a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if around the k_8f3faff9a0 test at setup_bun.js line 181. It does decide whether runExecutable launches the payload, but its test only reads the package's own bundled bun_environment.js under __dirname, which ships in the package. A gate has to test the environment, so not_environmental "
+        }
+      ]
+    }
+  ]
+}

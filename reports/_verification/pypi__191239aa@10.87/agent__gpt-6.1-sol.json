@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "191239aa",
+    "version": "10.87",
+    "archive_sha256": "436dcc66a91b6c0529e55a82c9bba09e4c2c3dc1efacd56498ffd89a0dc36c18"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "9124f5dce6797cf9",
+      "packet_sha256": "f208ca5eeb43c030",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ef7b03df9f2d5f16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly compares os.getlogin() with a string, and os is imported without rebinding (f1:8, f1:11).",
+          "evidence_refs": [
+            "s1",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "79fdc6fe8bd95b14",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "value_redacted",
+          "evidence": "The then branch uses an unnegated != comparison, but the claim redacts its operand, preventing verification that it matches the literal in the code (f1:11).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e50e943e37418a7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads the login username through os.getlogin(), so username fits the property tested (f1:11).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c7eb9587b2bb2380",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One if condition controls the entire cited region, with no additional Boolean alternatives or nested environment conditions; c1 alone satisfies the guard (f1:11-18).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "53daa11d73035f29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The username comparison enables the block containing registry modification and the curl invocation, with no alternate payload or environment-selected target (f1:11-18).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1413a3aafb6ed74a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The block runs for login names other than one excluded literal; the code does not identify an analysis, CI, or sandbox environment, supporting activate (f1:11-18).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "be29cf27df1a7e74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check excludes a particular login name from the guarded operations, which supports username-based targeting rather than portability or data availability (f1:11-18).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0257c09045a945f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both cited subprocess calls sit directly inside the then region of the username check; their empty witnesses require no interprocedural hops (f1:11-18).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "3d2e214772f5b9d6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited calls occur only as top-level statements inside this if block, with no enclosing callable or alternate route to those sites in the full file (f1:1-46).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ce122b4f431bce62",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The imported subprocess API launches reg to add a RunOnce entry and requests CREATE_NO_WINDOW, supporting persistence and concealed execution (f1:9, f1:15). The next call invokes the constructed curl executable with a remote URL and output path; the erroneous trailing .wait() happens after subproces",
+          "evidence_refs": [
+            "f1:9",
+            "f1:14",
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

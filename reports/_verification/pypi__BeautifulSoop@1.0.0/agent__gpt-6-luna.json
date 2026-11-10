@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifulSoop",
+    "version": "1.0.0",
+    "archive_sha256": "7a8eaffdfca478edcb1c07902f5dc55f1a3eb9eb98e782958c65772b7a35a748"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "aa4a65b521d9f0d2",
+      "packet_sha256": "a11fcd8482f3e5d9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "dada312a26d92f12",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly compares `os.name` with a string value at the cited site.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ab8a82e6a69ae03d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is guarded by the positive comparison `os.name == \"nt\"`, with no intervening negation.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads `os.name`, an operating-system property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "89ecb47adaf1ffa2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single cited then-side guard tests condition c1, so its expression is c1 and the minimum condition count is one.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch, the code fetches response text and passes it to `exec`, enabling downloaded code to run.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch activates the fetch and execution when `os.name` equals `nt`.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The operating-system check selects Windows as the environment in which the fetch and execution occur.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "e3b369119d156182",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both `requests.get(...)` and the surrounding `exec(...)` call sit directly in the then block controlled by `os.name == \"nt\"`.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "7fb6f36a49022548",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file defines the install command's `run` method with both sinks inside the sole Windows conditional; there is no alternate call site or unguarded path to either sink in the file.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f1:11",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "26986638ea4e10a4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` performs the network request that obtains response text, and that text is supplied to Python's `exec` call.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

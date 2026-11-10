@@ -1,0 +1,591 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "xlsxwriteer",
+    "version": "0.1",
+    "archive_sha256": "c4b346e95b8c26f69c53b9bdfe8a956267cf37ffc45862310cfe33aca0e381c9"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "887ac7ced12d0c3d",
+      "packet_sha256": "4d66bbd18111bff7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:6 is an if on sys.platform compared with a chr-built string; the readable comparison is on sys.platform.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "38c63effe7ba4b54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Hand-decoding the chr list gives 119,105,110,51,50 = win32, and the guarded code runs when the == is true.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform is the operating system, so os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:68 is `if ctypes.windll.shell32.IsUserAnAdmin():` in plain code.",
+          "evidence_refs": [
+            "s3",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call is used directly as the if condition with no negation, so the then arm (f1:69-70) needs it truthy.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin reads the admin privilege level.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "3a9ca157829b4d0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:120 is `if not os.path.exists(<APPDATA prefix> + <decoded suffix>)`, a decision on os.path.exists.",
+          "evidence_refs": [
+            "s5",
+            "f1:120"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1b044a0224d78fc7",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "The operator not_exists is right. The suffix list at f1:120 decodes to 92,69,120,116,101,110,115,105,111,110 = \\Extension, with no trailing s. The prefix is os.getenv of APPDATA (f1:43). So the value is %APPDATA%\\Extension, not %APPDATA%\\Extensions. The same suffix is used at f1:59 for makedirs.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:120",
+            "f1:43",
+            "f1:59"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "652db2217fd94b24",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a directory exists, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "52f1535ddeb0eb16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single cited guard is the platform if at f1:6, and c1 is the only condition in its test. The inner sys.argv[1] in [...] tests (f1:7, f1:35) select which branch runs and are not part of the cited gate.",
+          "evidence_refs": [
+            "s2",
+            "s1",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ca1d2cec9c0342b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows check decides whether the pip install, file writes and shortcut changes run at all, with no alternative payload in an else, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "4d3bfdde81c5afa2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the host is win32 and nothing backs off on analysis, so this is activate.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bffa50649625a977",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload is Windows-only (win32com, ctypes.windll, .lnk shortcut edits), so the OS check is targeting.",
+          "evidence_refs": [
+            "s1",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "e659405a13abfe80",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All four sinks sit under the win32 if at f1:6. The pip.main install is at f1:13. The makedirs (f1:59), open (f1:76) and CreateShortcut (f1:90) calls are in the sibling elif at f1:35, still on the then side of the platform guard. The empty witnesses are consistent with sinks that sit directly in the ",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "f1:35"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "162da4ad3f4b4368",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks are inline in the module-level state-machine loops under the win32 if. There are no functions, exports or other callers that reach them.",
+          "evidence_refs": [
+            "s2",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7db261aeb4876d34",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Download rests on pip.main(['install','pypiwin32']) at f1:13. File writes rest on os.makedirs and open(..., 'w+') at f1:59 and f1:76. Persistence rests on the Dispatch object's CreateShortcut at f1:90, followed by setting Arguments and Save() at f1:95 and f1:104. makedirs only creates a directory.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "f062323b662e4151",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The IsUserAnAdmin if (f1:68) is nested inside the platform if, so the two conditions join with and.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "c821f1db704aff8a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The admin test does not enable persistence. In the admin case the code appends a shared Start Menu folder to the scan list (state 362814, f1:46) and then reaches state 18005. In the non-admin case f1:71 sets state 18005 directly. Both cases reach the shortcut walk, so I would label the effect modifi",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s12",
+            "f1:46",
+            "f1:71"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "041e967c8d80c71a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The admin branch extends the work done and does not back off, so it is activate.",
+          "evidence_refs": [
+            "s4",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e58948cd15dcc4ea",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The admin result decides whether the machine-wide Start Menu shortcuts are also scanned and modified, i.e. which victim artifacts are touched. I would label the purpose targeting, not unclear.",
+          "evidence_refs": [
+            "s4",
+            "s12",
+            "f1:46"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "fca333cb60d66634",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Following the state variable: f1:69 sets state 362814, which appends the extra directory (f1:46), then goes to 18005 and on to the shortcut walk at f1:90. The sink is reachable from the then region through the dispatch loop.",
+          "evidence_refs": [
+            "s12",
+            "s11",
+            "f1:46",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "0221c4993fc901ba",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "The non-admin path at f1:71 sets the same state 18005 and so reaches the same shortcut walk and CreateShortcut sink. The sink is not reached only through the admin side.",
+          "evidence_refs": [
+            "s4",
+            "s11",
+            "f1:71"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "ace7572bb032aa4b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The persistence sink is the Dispatch object's CreateShortcut at f1:90, followed by Arguments and Save() at f1:95 and f1:104, which rewrites .lnk files.",
+          "evidence_refs": [
+            "s11",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "af9bf94e3d1e5848",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The os.path.exists if (f1:120) is nested under the platform if, so the two conditions join with and.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "a96a17f40d4b3836",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test only guards makedirs. Both outcomes reach state 37668 (f1:60 and f1:124) and the file write continues, so it is plumbing and not a gate that enables the payload.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s13",
+            "f1:60",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "6e7fd72dde15e796",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The directory is created when it is missing, so this is activate and nothing backs off.",
+          "evidence_refs": [
+            "s6",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "466bbd6f05e50a0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It is an exists-before-mkdir check with no targeting or anti-analysis meaning, so unclear is acceptable.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "e30ded9e90b636cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:121 sets state 58*(731&536)+... = 29059 and continues, and the loop's 29059 branch at f1:58-59 runs os.makedirs. The state hop is traceable.",
+          "evidence_refs": [
+            "s13",
+            "s9",
+            "f1:58",
+            "f1:121"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "c901f937aced8a23",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "State 29059 is set only by the not-exists branch at f1:121 in the lines read. The else path goes to 37668 and skips makedirs. I did not exhaustively check every state constant.",
+          "evidence_refs": [
+            "s13",
+            "s9",
+            "f1:121",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "d1992ea5d03b4624",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is os.makedirs at f1:59, a filesystem write of a directory. The file contents are written separately at f1:73 and f1:76.",
+          "evidence_refs": [
+            "s9",
+            "f1:59"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "85cc9a49f2f62ad3",
+      "packet_sha256": "778630c924bfaf14",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "d7427d5832e56e16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The character list at f1:6 builds 119,105,110,51,50 = 'win32', compared with == to sys.platform, and the guarded block (f1:7 onward) runs only when it is true.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "6e696c33094cc5c0",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "Besides the platform and IsUserAnAdmin tests there is a third condition: f1:7 and f1:35 test sys.argv[1] against two lists, and the code at f1:36 onward only runs in the elif arm for the 'bdist_wheel'/'install' list. The IsUserAnAdmin test at f1:68 does not gate the CreateShortcut sink at all: admin",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:7",
+            "f1:35",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d14263a49e9ac562",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform and setup-command tests decide whether the persistence runs at all (enables), while the admin test only appends one more folder to the list of folders searched for .lnk files (modifies the target). The recorded gate expression mixes these, so a single 'modifies' label does not fit clean",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:46",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0dc20a87f8622ea5",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The win32 test mostly guards Windows-only APIs (ctypes.windll, win32com), which looks like portability. The admin test only extends the folders searched, which could count as targeting. The code does not settle a single purpose label.",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "ddc45624b5a73045",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The CreateShortcut sink (f1:90) sits in a separate state of the loop (state 790593) and is not inside the cited regions at f1:46-48 and f1:69-70. The witness is empty. Following the state values, the non-admin path also reaches that state (f1:68 falls through to state 18005), so the sink is not cont",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "f1:68",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "61b3032966afb610",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "The payload loop (f1:82-108) is reached whether or not IsUserAnAdmin() is true, because both outcomes go to state 18005. It is only the admin-specific path-append (f1:46) that depends on c2. It also depends on the unrecorded sys.argv[1] gate.",
+          "evidence_refs": [
+            "s3",
+            "s6",
+            "s7",
+            "f1:68",
+            "f1:120"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "466b5989a3f4b104",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The persistence sink is CreateShortcut on an object returned by Dispatch(...) (f1:65, f1:90), whose COM program id is built from computed characters. It changes the target and Arguments of .lnk files found by os.walk. The sink kind rests on a computed callee, so the code shown does not settle that i",
+          "evidence_refs": [
+            "s7",
+            "s4",
+            "f1:65",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "c902145e4e5160c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os.path.exists test at f1:120 only checks whether a folder under the environment-variable base exists. If it is missing, control goes to state 29059, which calls os.makedirs on the same path (f1:59). Otherwise the code writes a file there (f1:126). This is idempotent directory setup, not an envi",
+          "evidence_refs": [
+            "s8",
+            "f1:59",
+            "f1:120"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "f599a783a9e0bcf4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the same if_statement as the test at f1:120: a create-folder-if-missing check (os.makedirs at f1:59) before writing a file. It is a duplicate of the other drop claim and not an environment gate.",
+          "evidence_refs": [
+            "s9",
+            "f1:59",
+            "f1:120"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "50b2ee6829c2fbbc",
+      "packet_sha256": "f19568899a2734a1",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "b68c48f428641dce",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The code is a flattened state machine: s3 (f1:69-70) only sets the state variable and continues, and the CreateShortcut sink in s4 (f1:90) sits in a different state arm (f1:81-104). The s5 'bind' is a state-variable assignment, not a function or object stored under a name. Whether the admin-check ar",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "f1:68",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "59c83967a2ceb6c1",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The CreateShortcut arm (f1:81-104) is selected by a state value, and other arms of the same dispatch loop may set that state. Exclusivity to the admin-check arm cannot be decided without resolving the obfuscated state arithmetic.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f1:81",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "7dcb247d60afde9d",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The sink is CreateShortcut on an object from a COM Dispatch whose argument is built by an obfuscated expression (f1:65, f1:90). The binding of the Dispatch import is in a separate state arm (f1:111). The code does not show the sink writing files. The later Save() at f1:104 is not the cited sink. The",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f1:65",
+            "f1:90",
+            "f1:104",
+            "f1:111"
+          ]
+        }
+      ]
+    }
+  ]
+}

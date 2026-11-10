@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "3m-promo-gen-api",
+    "version": "1.0",
+    "archive_sha256": "6fcda7ccf5f80bc6ec0a404ca9ba60ffcd08628f1204df207816614e60362f75"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "cbf1e1ad2a2f70e0",
+      "record_sha256_after": "1a8b6b5e8fa7aef3",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "d4be5bb40798bffc",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "setup.py:507 tests 'RememberPassword\"<two tab characters>\"1\"' in l, with two literal tab bytes in the string. The record wrote the tabs as the placeholder text <TAB><TAB>, so the value did not match the compared constant. Value now holds the real string with two tab characters; value_recovered stays"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Narrowed guessed recipe fields: os win32 comes from the module-level `from ctypes import windll` and the DPAPI calls, and the file_present paths for g2-g5 come straight from the code (browserPaths line 523 with Login Data line 416 and Local State line 427, discordPaths line 530 with line 473, PathsT"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "1a8b6b5e8fa7aef3",
+      "record_sha256_after": "f15aa20434071ac3",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "9612406f1a26adbe",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: line 605 calls os.path.isdir, not os.path.isfile. c6 is now only the isfile test at line 602. Line 605 moved to new condition c8 (api os.path.isdir) and line 586 to new condition c9 (os.path.isfile), so each condition's api matches its site."
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "0e953035d99ddfb4",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the directory branch at line 605 does not need the path to be a file. c6's value now describes only what line 602 tests, a file with a keyword-matching name that contains .txt. The directory test is c8 and the child-file test in KiwiFolder is c9."
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "87fd76b66c553222",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: uploadToken builds a non-empty headers dict (lines 218-221) and passes it to LoadUrlib at line 292, so headers != '' at line 91 always holds and the request runs at line 92. Line 95 is not reached on this path. The exfil sink now cites line 92; the witness hops were already "
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "89362248b623e927",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same path as g2: GetDiscord calls uploadToken at line 488, and uploadToken always passes non-empty headers to LoadUrlib, so the request runs at line 92 and not line 95. The exfil sink now cites line 92."
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "e760e4b21e09d577",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: line 497 runs taskkill on procc, which the tables at lines 520-539 set to browser, wallet and Steam executables, not security or analysis tools. That does not meet defense_evasion. The behaviour is now spawn_process with sink kind exec on the same Popen call."
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "4a075110fe517f41",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that the c5 and c7 returns (lines 502, 509) sit in the elif block, so the archive region at line 511 is not on their side and those guards controlled no region. Added line 510 (name=arg), which is on the side of all three guards, as a region. The archive region stays because "
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "c88a2b4be848e399",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that wallet and extension calls reach the archive code on the line 496 test alone, so c4 could not stand in the Steam conjunction. c4 now covers only wallet and extension dirs, and the same test on the Steam config path (line 538) is new condition c10. g5 is c10 && c5 && c7, "
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "18c279305b14fd1c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: the three sites test different things and the folder path needs a second test. g6 is now c6 alone (matching .txt file, line 602, region at line 603, witness through the call on line 603). The folder path is new gate g7, c8 && c9: isdir at line 605, then KiwiFolder's early re"
+        },
+        {
+          "claim_id": "k_ee61418539.L6.drop",
+          "claim_sha256": "0d8cc723e9a082cb",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 35 tries __import__ of requests and Crypto.Cipher; the handler at lines 36-38 runs pip install for the missing one. Lines 39-40 then import both unconditionally and the same payload runs either way, so the test does not decide which stealer behaviour runs. Making a needed library available is p"
+        },
+        {
+          "claim_id": "q_51818e9113.L6.drop",
+          "claim_sha256": "a150dd542604347c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the try statement around the same import at line 35. Its handler (lines 36-38) only installs the missing library, and execution rejoins at lines 39-40 with the same imports and the same payload on both sides. It is dependency bootstrap plumbing, not a gate, and the need is recorded in requir"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f15aa20434071ac3",
+      "record_sha256_after": "7bc9ff16af891060",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "84096181f731fdc2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The claim changed because it carries c5's value: c5 is now the literal path C:\\Program Files (x86)\\Steam\\config/loginusers.vdf, plain instead of partial, since the only ZipThings call that reaches line 502 passes that table value (line 538). The expression c10 && c5 && c7, the guards and the regions"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "needs_manual_review is still true. Fixed: guessed recipe fields (g6 and g7 now use the passw keyword and .txt rule read from lines 601-602 and 624, recipe_guessed_fields empty), and c2, c3, c4 and c5 are plain with every path listed from lines 519-540. c6 and c8 now list the full keyword filter. Rem"
+        }
+      ]
+    }
+  ]
+}

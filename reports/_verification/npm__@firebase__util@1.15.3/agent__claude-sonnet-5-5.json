@@ -1,0 +1,555 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@firebase/util",
+    "version": "1.15.3",
+    "archive_sha256": "0a812b12ea0d186c2c864417140ef27954dc28bf9cbb6097dc5cb447a24be877"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "58ceedff8a1073c6",
+      "packet_sha256": "eb318c4fae374f51",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f8bde5c929cbf578",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 compares process.env.X_GOOGLE_TARGET_PLATFORM with 'fah' inside an if condition (f1:67).",
+          "evidence_refs": [
+            "s1",
+            "f1:67"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "3436f51f68d36025",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early exit at f1:67-69 returns when the value === 'fah', so the code after it runs only when the value != 'fah'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "da00e9cd88760537",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads a process environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "31fdc77d1ffc987b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "envVariable is const-bound to process.env[ENV_VARIABLE] (ENV_VARIABLE = 'FIREBASE_WEBAPP_CONFIG', f1:22,25) and is tested by if (!envVariable) at f1:27.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "f1:22",
+            "f1:25"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9fdb650baf937bf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The falsy case returns undefined at f1:27-29, and getFinalConfig exits early on !partialConfig (f1:62), so later code runs only when the env value is truthy.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "3d91c5a8a026f6cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the FIREBASE_WEBAPP_CONFIG environment variable.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "0ffb13af95e0306d",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "unresolved_binding",
+          "evidence": "s6 tests projectId.startsWith('demo-'). projectId is a field of the partialConfig parameter (f1:70), which is parsed JSON from the env value or a file. It is not the env variable itself or a same-scope variable bound to it.",
+          "evidence_refs": [
+            "s6",
+            "f1:70"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d902e36c19b49c8b",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "unresolved_binding",
+          "evidence": "The operator and value are right: the early exit on startsWith('demo-') means the guarded code needs not_startswith. But the operand is the parsed projectId field, not the env string, so the api attribution is not decided by this code.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "8dc5d8ef143ce351",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested projectId comes from the environment-supplied config, so env_var is a reasonable category.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "35773ff1639a3b3c",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "unresolved_binding",
+          "evidence": "s8 tests !appId || !apiKey, which are fields of the partialConfig parameter (f1:76-77), not the env variable itself or a variable bound to it in this scope.",
+          "evidence_refs": [
+            "s8",
+            "f1:76",
+            "f1:77"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "5c4300207e69f870",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "unresolved_binding",
+          "evidence": "The truthy polarity is right, since the early exit fires when appId or apiKey is falsy. The operands are config fields and not the env string, so the api attribution is not decided.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "6de75a2e3846a6e1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "appId and apiKey come from the environment-supplied config, so env_var is reasonable.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "015075811a0fca86",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The four early exits (f1:62, 67, 73, 78) are sequential in one function body, so their conditions nest and join with and. Four conditions are needed to reach the fetch.",
+          "evidence_refs": [
+            "s4",
+            "s2",
+            "s7",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "061eb4cd35c4de94",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guards decide whether the webConfig fetch happens at all, so the effect is enables.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e3daf7dc5e3b326d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded fetch runs when the config is present and incomplete. Nothing backs off on analysis or CI, so the polarity is activate.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bd4b3351a5073c5b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions decide whether config data exists and is complete enough to need refreshing, so the purpose is data_availability.",
+          "evidence_refs": [
+            "s1",
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "98c18706e364a551",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fetch call in s11 (f1:88) sits inside the region s10 (f1:85-111), after all four early exits. The witness is empty, which fits a sink in the region itself.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1918266cd2f8977c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "getFinalConfig is called only from the promise chain at f1:124, with nothing else calling it. The file has no exports, timers or other callers.",
+          "evidence_refs": [
+            "f1:61",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "6b335c5c1d034eb0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The global fetch call at f1:88 is a network sink, which fits a benign config download.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "5369dcaba3472faa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single guard (f1:27) on the env value, so the expression is just c2.",
+          "evidence_refs": [
+            "s5",
+            "s3",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "14b8b09364f7fe99",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The env value being present enables parsing the config or reading the config file.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d08facdbd4b62959",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs only when the variable is set, and nothing is evaded.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e3480e37259b8df6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the config data is available.",
+          "evidence_refs": [
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "1ab300dc65ca80a8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "readFile at f1:50 is inside region s12 (f1:33-58), after the f1:27 early exit.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "f2bb645b954005f6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "getPartialConfig is called only once, at f1:122, and is not exported. The readFile is reachable only after the f1:27 check.",
+          "evidence_refs": [
+            "f1:24",
+            "f1:122",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "aae41931e4a6672e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "readFile from node:fs/promises (f1:18) is a file-read sink, which fits a config read.",
+          "evidence_refs": [
+            "s13",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "k_fe169d0b26.L6.drop",
+          "claim_sha256": "14a530ba1589feb2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "startsWith('{\"') only picks between inline JSON and a file path as the input format. It is parsing plumbing and not an environment gate.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_c0cb4022cc.L6.drop",
+          "claim_sha256": "d114d3ce1e0bcb91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if on the JSON-prefix check only chooses how to read the same config value, inline or from a file. It changes no behaviour by environment, so it is not a gate.",
+          "evidence_refs": [
+            "s15"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "e805a51b7ee49499",
+      "packet_sha256": "3349fd0d9a2c55a3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "752f1e8b2f4b1b84",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 (f1:73) calls startsWith on projectId, which is bound to partialConfig.projectId || '-' at f1:70 in the same function.",
+          "evidence_refs": [
+            "s1",
+            "f1:70"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "f81df4198a213598",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return fires when projectId.startsWith('demo-'), so the code after it runs only when the value does not start with 'demo-'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "987a300680e2bbcc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "partialConfig comes from the FIREBASE_WEBAPP_CONFIG environment variable (f1:25, f1:35), so env_var fits.",
+          "evidence_refs": [
+            "f1:25",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "3ca5e81b84bb813a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 tests !appId, and appId is assigned once from partialConfig.appId at f1:76.",
+          "evidence_refs": [
+            "s3",
+            "f1:76"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "a60605c3db84f54b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code returns early when !appId, so the later code requires appId to be truthy.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "c20732d8c50e5ce9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "appId is a field of the config read from the FIREBASE_WEBAPP_CONFIG environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s3",
+            "f1:25"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "4afd231385a7c0b6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 tests !apiKey, and apiKey is assigned once from partialConfig.apiKey at f1:77.",
+          "evidence_refs": [
+            "s5",
+            "f1:77"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "a3683333a960d2ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code returns early when !apiKey, so the later code requires apiKey to be truthy.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "9f5e82a2082ac26b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "apiKey is a field of the config read from the FIREBASE_WEBAPP_CONFIG environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s5",
+            "f1:25"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "bc1f15a59f5c967b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Sequential early exits for no config, platform 'fah', a demo- projectId, and missing appId or apiKey all have to pass before the fetch. The nested guards join with and, and the (!appId || !apiKey) exit gives both truthy conditions c5 and c6.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "290eb80b8938e3a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate only decides whether the Firebase webConfig fetch runs at all, so enables fits. It does not pick between payloads or change a target.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "107d08c4e6f4352a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the config is present and complete, and it is not an analysis or sandbox check, so activate fits.",
+          "evidence_refs": [
+            "s10",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "11a30f96adbf3ef5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks only test whether the needed config values (appId, apiKey, projectId) are available before fetching, so data_availability fits.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "59244a9abdcd8e8d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fetch at f1:88 (s11) is inside the s10 region, which is the rest of getFinalConfig after all the early exits. The witness is empty because the sink is in the region itself.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "f1:88"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ae575508b91ce4cb",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "getFinalConfig is not exported, and its only use is in the promise chain at f1:124. The fetch is not reachable from anywhere else in the file.",
+          "evidence_refs": [
+            "f1:124",
+            "s11"
+          ]
+        }
+      ]
+    }
+  ]
+}

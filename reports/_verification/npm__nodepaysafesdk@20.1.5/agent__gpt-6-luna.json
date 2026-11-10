@@ -1,0 +1,135 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "nodepaysafesdk",
+    "version": "20.1.5",
+    "archive_sha256": "f5052c7e65490cce243746e661ee2bda95ad69ceec059de93f77d8bebe4100fa"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "8ad5c399937453e9",
+      "packet_sha256": "c66d250b2061331e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "67cd7ab3f2b30ae2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The command string contains `[ -r /etc/shadow ]` as a conditional test, with the readable branch running `cat /etc/shadow`; that command is passed to `exec` (f1:3-5, s1-s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "465c4859275381ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The shell condition `[ -r /etc/shadow ]` is true when the file is readable, and its then-side command reads that file; the alternative prints `No shadow access` (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "34f5028a395d04c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether `/etc/shadow` is readable, so it determines access to a privilege-related credential file (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "580ce7b07fc4e72d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one relevant test, `[ -r /etc/shadow ]`, and it directly controls the conditional read; the single condition expression `c1` and minimum count of one match (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4583945813bc53e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readable-file branch adds `cat /etc/shadow` output to the data placed in the curl user-agent, enabling that credential read and transmission (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e5a88d6b95ddf091",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the target file is readable, the command includes its contents in the curl request; the test activates this additional behavior on that condition (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "e1c411db7680fa59",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test determines whether the command can obtain the contents of `/etc/shadow`, making data availability the purpose of the check (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7496be5a2719aea5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The claimed sink is the JavaScript `exec(command, ...)` call in s2, which is outside the shell test's then-side region; that call launches the whole command unconditionally (s1-s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1c07fb1a6ec26728",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The JavaScript `exec(command, ...)` call runs unconditionally, so reaching the payload sink does not require the shell's readable-file branch (s1-s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7c4169c79998de47",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The child-process `exec` sink runs the shell command, whose readable-file branch invokes `cat /etc/shadow`; that sink can perform the claimed credential read (s1-s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        }
+      ]
+    }
+  ]
+}

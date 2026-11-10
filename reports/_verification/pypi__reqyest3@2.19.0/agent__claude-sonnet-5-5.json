@@ -1,0 +1,344 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "reqyest3",
+    "version": "2.19.0",
+    "archive_sha256": "d82108f00567a979619df59f6a42f98c2dd753f37111b4ef94280dd7b408eed7"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "7ee71f35800ebcbb",
+      "packet_sha256": "e126eba04004f762",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "307e736fc197105f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13 binds CURRENT_PYTHON = sys.version_info[:2] and f1:16 compares it with REQUIRED_PYTHON in an if.",
+          "evidence_refs": [
+            "s1",
+            "f1:13",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "3d6d975be6742f49",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:16 exits via sys.exit(1) when CURRENT_PYTHON < (3, 7), so the code after it runs only when version >= (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:16",
+            "f1:32"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "d55c153c7eb0dee1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the interpreter version (sys.version_info), so runtime_version fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "f36647d09fb876f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:81 tests platform.machine() directly in an if condition.",
+          "evidence_refs": [
+            "s3",
+            "f1:81"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9342ffe20a87e280",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch (f1() at line 82) is reached when platform.machine() == \"x86\"; no negation is involved.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "ccbc0f5950c0f974",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "platform.machine() reports the CPU architecture, so arch fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "2dac21ec53c2cb7d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13 binds CURRENT_PYTHON = sys.version_info[:2] and f1:16 compares it with REQUIRED_PYTHON in an if.",
+          "evidence_refs": [
+            "s1",
+            "f1:13",
+            "f1:16"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "e1b2b3fa291df755",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:16 exits via sys.exit(1) when CURRENT_PYTHON < (3, 7), so the code after it runs only when version >= (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:16",
+            "f1:32"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "d58720a2a9f7ca9e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the interpreter version, so runtime_version fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2a44841e4dc7a977",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The module-level version exit (f1:16-32) encloses the later PostInstallCommand.run, whose arch if (f1:81) nests inside it; the then branch needs both and the else needs c1 and not c2, so min 2 each.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ba3ee016b1731f67",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The arch test picks f1 (one pyarmor runtime and blob) or f2 (a different runtime and blob), so it selects a payload per branch.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b3eb6d01647955a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both branches run an obfuscated payload on supported targets; nothing backs off on analysis or sandbox detection, so activate fits.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ac13c4ad66a32195",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks choose a runtime matching the Python version and CPU architecture, a compatibility choice, with no sign of targeting or anti-analysis.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "d85bcaefa3a62f2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2() is called in the else arm at f1:84, is defined at f1:75, and its body calls __pyarmor__ (the sink in s7); the version early exit also guards it.",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "ff498eb3287f5647",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "f2 is called only at f1:84 and is a local function inside run, with no other caller or export in setup.py.",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "f1:84"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "dc04fbd269f7d99c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The f2 sink passes __name__, __file__ and an encrypted byte blob to the imported pyarmor runtime function, which loads and executes obfuscated code; this fits the generic 'other' (eval-style) behaviour.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "5823f965693fc841",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1() is called in the then arm at f1:82, is defined at f1:67, and its body calls pyarmor_runtime() and __pyarmor__(...) (the sink in s9).",
+          "evidence_refs": [
+            "s5",
+            "s10",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "935ea5efc5fa7c8a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "f1 is called only at f1:82 and is local to PostInstallCommand.run, with no other caller in setup.py.",
+          "evidence_refs": [
+            "s5",
+            "s10",
+            "f1:82"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "851f8f416c010974",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1 calls pyarmor_runtime() and then __pyarmor__ with an encrypted blob, which loads and executes obfuscated code; this fits the 'other' (eval-style) behaviour.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g16.L4",
+          "claim_sha256": "48d8f702ecbda8da",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single early-exit guard on the version test controls the rest of the file (s11), so the expression is just c8 and the minimum is 1.",
+          "evidence_refs": [
+            "s2",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g16.L6.effect",
+          "claim_sha256": "e705568e4498261d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check only decides whether the rest of setup.py runs, with a single path and no alternative payload, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g16.L6.polarity",
+          "claim_sha256": "3aedb897b81c79b9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate lets execution continue on supported Python and exits otherwise; nothing evades analysis.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g16.L6.purpose",
+          "claim_sha256": "8f8f8e590f38bc75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exit message says Requests needs at least Python 3.7, which is a compatibility check.",
+          "evidence_refs": [
+            "s2",
+            "f1:17"
+          ]
+        },
+        {
+          "claim_id": "g16.then.L3",
+          "claim_sha256": "c64131cfeb792495",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os.system call at f1:112 sits at module level after the version early exit (f1:16-32), inside region s11, so the empty witness is valid.",
+          "evidence_refs": [
+            "s12",
+            "s11",
+            "f1:112"
+          ]
+        },
+        {
+          "claim_id": "g16.then.L3.excl",
+          "claim_sha256": "d47b54c997b783d5",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The call is top-level code in setup.py, reached only by running past the version exit; it is in no function and has no other caller.",
+          "evidence_refs": [
+            "s12",
+            "f1:112"
+          ]
+        },
+        {
+          "claim_id": "g16.then.L5",
+          "claim_sha256": "93d991ffbd674e5b",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The sink is os.system(\"touch /tmp/license.py\"), a process-creation (exec) call, not a file-write API; the behaviour 'write_file' does not rest on a file-writing sink.",
+          "evidence_refs": [
+            "s12",
+            "f1:112"
+          ]
+        }
+      ]
+    }
+  ]
+}

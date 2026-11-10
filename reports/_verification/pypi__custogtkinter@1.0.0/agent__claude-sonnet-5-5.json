@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "custogtkinter",
+    "version": "1.0.0",
+    "archive_sha256": "b9c86ca05442b762ad4c38156f57d5da89b7b8d31b8c3abcc92e2d7e57de9ed7"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "4f89b38aa555ee37",
+      "packet_sha256": "b955f3a4e484056c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b809fa698da121c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13 is `if os.name == \"nt\":`, a comparison on os.name; `os` is imported locally in run().",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "74b5525d49a3d8e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then-branch of the if runs when os.name == \"nt\"; no negation or early exit is involved.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.name reads the operating system family, so `os` fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "23a298a93cf401cf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guarding the block with one condition, os.name == \"nt\"; the expression c1 and then_min 1 match.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The only branch downloads and executes remote code, and there is no else payload. The gate enables the payload and does not select between payloads.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the host is Windows. Nothing backs off on analysis or sandbox signals, so the polarity is activate.",
+          "evidence_refs": [
+            "s2",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The remote payload runs only on Windows, and the classifiers also declare Windows. This restricts the payload to the Windows target, so targeting fits.",
+          "evidence_refs": [
+            "s2",
+            "f1:36"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "766de760b70c71e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The requests.get call and the exec at line 16 sit directly inside the then block of the os.name == \"nt\" if. The witness is empty, so each sink is in the region itself.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "861caff72fa688e8",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The fetch and exec appear only at line 16, inside the nt branch of run(). install.run(self) at line 18 is outside the gate and does not reach them, and there are no other callers, exports or timers.",
+          "evidence_refs": [
+            "f1:16",
+            "f2:16",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4f7e0e798a672452",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get, with requests imported at line 14, is a network download. exec() runs the fetched text, so exec_downloaded rests on an eval sink.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:14",
+            "f2:16"
+          ]
+        }
+      ]
+    }
+  ]
+}

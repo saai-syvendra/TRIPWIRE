@@ -1,0 +1,286 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "core-js-pure",
+    "version": "3.51.0",
+    "archive_sha256": "58e146de212fdaacdb1551fd1e0e0bdfda767cdefeff2cec91deadb79754ff04"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "27bec9a6013c920c",
+      "packet_sha256": "dc543a38c1a1a13d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "954a1c3cf1bbb6a7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`SILENT` is assigned from `env.npm_config_loglevel` and the membership comparison against -1 decides its value (f1:12).",
+          "evidence_refs": [
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "3942e129c55ac07a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`SILENT` is true exactly when the log level is one of the three listed strings; the early return runs when it is true, so execution past the guard requires it not to be in that list (f1:12,38).",
+          "evidence_refs": [
+            "f1:12",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3ad75e5e0552a518",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested setting is `npm_config_loglevel`, a package-manager configuration variable read from the environment (f1:12).",
+          "evidence_refs": [
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "f22c1efb66825065",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`ADBLOCK` is assigned by calling `is` on `env.ADBLOCK`, and that variable is read in the gate (f1:9,38).",
+          "evidence_refs": [
+            "f1:9",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "241ab46179849fa8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "expression_mismatch",
+          "evidence": "The gate requires `ADBLOCK` to be falsy, but `is` also treats the strings '0' and 'false' as false; therefore execution can continue for those truthy environment strings as well (f1:9,34,38).",
+          "evidence_refs": [
+            "f1:9",
+            "f1:34",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "1853e0423f8ccdba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`ADBLOCK` is an environment variable read through `process.env` (f1:8-9).",
+          "evidence_refs": [
+            "f1:8",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "da18d6321fe60b8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The CI check iterates the listed names and passes each `env[it]` value to `is`; `env` is bound to `process.env` (f1:8,17-23).",
+          "evidence_refs": [
+            "f1:8",
+            "f1:17-23"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "8e0dc620a7e7c9ae",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "expression_mismatch",
+          "evidence": "CI is set by `.some` when any named value passes `is`, which also regards strings '0' and 'false' as false; the gate continues only when none passes that helper, rather than on simple falsity of the environment object (f1:17-23,34,38).",
+          "evidence_refs": [
+            "f1:17-23",
+            "f1:34",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "e2e318c8b1d3b64e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The names checked are CI/build-run markers, including `CI`, `BUILD_NUMBER`, and `DRONE` (f1:17-23).",
+          "evidence_refs": [
+            "f1:17-23"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "4c4467f428ab7f4d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`DISABLE_OPENCOLLECTIVE` is assigned by calling `is` on `env.DISABLE_OPENCOLLECTIVE`, and that variable is read in the gate (f1:11,38).",
+          "evidence_refs": [
+            "f1:11",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "45ee16249bc2bc4a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "expression_mismatch",
+          "evidence": "The gate requires `DISABLE_OPENCOLLECTIVE` to be false according to `is`, but `is` also treats the strings '0' and 'false' as false (f1:11,34,38).",
+          "evidence_refs": [
+            "f1:11",
+            "f1:34",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "1fa4ae4547d9d2fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`DISABLE_OPENCOLLECTIVE` is an environment variable read through `process.env` (f1:8,11).",
+          "evidence_refs": [
+            "f1:8",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "483a288f62f3d9c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`OPEN_SOURCE_CONTRIBUTOR` is assigned by calling `is` on `env.OPEN_SOURCE_CONTRIBUTOR`, and that variable is read in the gate (f1:13,38).",
+          "evidence_refs": [
+            "f1:13",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "a17e750a3732d50f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "expression_mismatch",
+          "evidence": "The gate requires `OPEN_SOURCE_CONTRIBUTOR` to be false according to `is`, but `is` also treats the strings '0' and 'false' as false (f1:13,34,38).",
+          "evidence_refs": [
+            "f1:13",
+            "f1:34",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "2862879810d3c952",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`OPEN_SOURCE_CONTRIBUTOR` is an environment variable read through `process.env` (f1:8,13).",
+          "evidence_refs": [
+            "f1:8",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "24ce73f32053ace1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The early return occurs when any of `ADBLOCK`, `CI`, `DISABLE_OPENCOLLECTIVE`, `SILENT`, or `OPEN_SOURCE_CONTRIBUTOR` is true; reaching the following block therefore requires all five to be false (f1:38-39).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "d1e39ea1f2154534",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Passing the gate allows the banner path to write the banner JSON to the temporary file (f1:39,50-54).",
+          "evidence_refs": [
+            "f1:39",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "11533c669e04fe75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate backs off when ad blocking, CI, an opt-out setting, silent logging, or contributor status is detected (f1:38).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "4df4c5a8c3a6fb7f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The conditions suppress an optional support banner for muted, CI, ad-blocked, opted-out, or contributor environments, which indicates a data-availability purpose rather than an unclear purpose (f1:25-33,38,57-60).",
+          "evidence_refs": [
+            "f1:25-33",
+            "s2",
+            "f1:57-60"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a55ea3de2705e928",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After the early return, the remainder of `isBannerRequired` includes the `fs.writeFileSync` call, so the sink lies on the continuing side of the guard (f1:38-39,50-54).",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "601a879ff165e0c6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "`isBannerRequired` has one caller at the top level and is neither exported nor otherwise invoked; its write call is therefore reached only through the guarded call (f1:37-54,64).",
+          "evidence_refs": [
+            "f1:37-54",
+            "f1:64"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "96797c954130ce4b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink calls `fs.writeFileSync` with the temporary file path and serialized banner data, which writes a file (f1:39,50-52).",
+          "evidence_refs": [
+            "f1:39",
+            "s8"
+          ]
+        }
+      ]
+    }
+  ]
+}

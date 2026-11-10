@@ -1,0 +1,426 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/discount-sdk",
+    "version": "1.5.1",
+    "archive_sha256": "7812ba81af2c2139b4ff186e75d5fb583834a3d28226a9f562d5aac842c7991b"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "7223c8f935808498",
+      "packet_sha256": "86ce78211b5e61f3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "72c95c0c87a4f1fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:88 branches on tokens.length, and tokens is the result of findNpmTokens() assigned at f1:87.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2ac308bc5ca667c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block at f1:88-97 runs only when tokens.length > 0 is true. That is the positive form, with no negation or early exit.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6936f89666c95b18",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether any npm auth tokens were found on the host, which is a harvested artifact and fits target_artifact.",
+          "evidence_refs": [
+            "s1",
+            "f1:8-46"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "5f7fe2eaee52ebb9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:90 uses fs.existsSync(deployScript) directly as the if condition.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "4499b69ada870eaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn runs only if the file exists. deployScript is path.join(__dirname,'scripts','deploy.js') at f1:89, so every piece of the value is in the code.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:89"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "70666cc937b7a5c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is a plain file existence check, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "cd01144353524b44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test at f2:93 reads whoami, which is assigned from fetchJson(...) at f2:87 in the same function.",
+          "evidence_refs": [
+            "s5",
+            "f2:87"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0e051b5593c9f087",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:93-96 exits early when !whoami || !whoami.username. The code after it therefore runs only when whoami is truthy, which is the positive form.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "4a64f43a886435fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test depends on the registry's whoami response, so server_response fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "4d9f4501358e19c4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The existsSync if (f1:90) is nested inside the tokens.length if (f1:88), and both enclose the same spawn block, so the conditions join with and. Two conditions are needed.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "be8b54ef08af9edf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate only decides whether the single spawn of deploy.js happens, so it enables that behaviour. There is no alternative payload.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7c147060e36349ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs when tokens are present and the script exists. It does not back off on analysis, CI or a sandbox, so the polarity is activate.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "478cf70d07f7ae71",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate checks that the tokens the next stage needs exist, and that the script is present. That is data availability.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7a68b97e4e175345",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn at f1:91 sits directly inside the block that both guards control (f1:90-96). The witness is empty, which matches the sink being in the region itself.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "edd633f679d81b8c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only spawn of deploy.js in the packet is at f1:91, inside both guards. f2 never spawns anything, and index.js exports nothing.",
+          "evidence_refs": [
+            "s8",
+            "f1:48-99"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c83fc74e9cf8ee5a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawn is destructured from child_process at f1:3, so the sink at f1:91 does create a process.",
+          "evidence_refs": [
+            "s8",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9a0376cf28986748",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The c1 and c2 guards are in f1 and the c3 early exit is in f2. They are tied only by a spawn of deploy.js, and no cited hop covers that spawn, so I cannot confirm that all three guards enclose region s9.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "188f7559598babb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the publishing loop runs at all, so it enables. The branches do not select between different payloads.",
+          "evidence_refs": [
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "ad3c57b320756387",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code proceeds only when a token is valid, and there is no logic that evades analysis, so it is activate.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "996d033291503f93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks cover whether usable tokens are available and whether the registry identifies a user, so data_availability fits.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "121423fe8c30e0e3",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "Inside f2, region s9 reaches run (s11 calls s12, which reaches the execSync at s10) and the writeFileSync at s13. But the f1 guards do not lexically control f2, and no hop is cited for the spawn of deploy.js, so the full chain is not shown.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "e3c16db7761fc6e6",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "deploy.js has its own main block (f2:182) that reads NPM_TOKENS or NPM_TOKEN, so running it directly would bypass the f1 guards. The packet does not show whether anything else runs it.",
+          "evidence_refs": [
+            "s9",
+            "f2:182-190"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3237e41b8a4d6e39",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "run() calls execSync from child_process (f2:3, f2:10) with an npm publish command, and fs.writeFileSync at f2:152 writes package.json. Both sinks do what the behaviours say.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_40b927fb03.L6.drop",
+          "claim_sha256": "5119beaec856bb85",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is a value filter on the command output, which rejects the literal strings 'undefined' and 'null'. It sits inside the token collector and is not an environment gate. The decision it feeds is already recorded as c1.",
+          "evidence_refs": [
+            "s14",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "k_7f3aae8bfb.L6.drop",
+          "claim_sha256": "d68aea7bb1b99589",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the same value filter, comparing against the string 'null'. It is not an environment gate. The result feeds the tokens.length check.",
+          "evidence_refs": [
+            "s15",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "k_b09f29b842.L6.drop",
+          "claim_sha256": "a30ba66129fc1e00",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the execSync call that reads the npm config token. It is a data read and not a test, so it is not a gate.",
+          "evidence_refs": [
+            "s16",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "k_de022e6195.L6.drop",
+          "claim_sha256": "f633c8deb3fab43b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This else-if sits in a finally cleanup that restores or removes the README. It controls cleanup only and gates no behaviour.",
+          "evidence_refs": [
+            "s17",
+            "f2:163-174"
+          ]
+        },
+        {
+          "claim_id": "k_edf177b7ff.L6.drop",
+          "claim_sha256": "3a15f44a5d89c746",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync at f2:127 decides only whether to back up the README for later restore. That is plumbing, not a gate on what runs.",
+          "evidence_refs": [
+            "s18",
+            "f2:127-129"
+          ]
+        },
+        {
+          "claim_id": "k_fa8a4fbbf3.L6.drop",
+          "claim_sha256": "0338f7bba11426cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the truthiness test on configToken, a value filter inside the collector. It is not an environment gate, and the gating decision is the later tokens.length test.",
+          "evidence_refs": [
+            "s19",
+            "f1:41"
+          ]
+        },
+        {
+          "claim_id": "q_a78b614bc0.L6.drop",
+          "claim_sha256": "2fa24a6a5827e096",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary only chooses whether to read the local README for a backup. It does not decide what runs.",
+          "evidence_refs": [
+            "s20",
+            "f2:127-129"
+          ]
+        },
+        {
+          "claim_id": "q_ae5269520e.L6.drop",
+          "claim_sha256": "b30c62c6036180a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is cleanup logic that deletes the temporary README. It is not an environment gate.",
+          "evidence_refs": [
+            "s21",
+            "f2:170-173"
+          ]
+        },
+        {
+          "claim_id": "q_b30584949f.L6.drop",
+          "claim_sha256": "a585863055c73edb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if only filters a collected token value before it is added to the set. It is not an environment gate.",
+          "evidence_refs": [
+            "s22",
+            "f1:41-43"
+          ]
+        },
+        {
+          "claim_id": "q_c6a7742791.L6.drop",
+          "claim_sha256": "39b3592fdf78c4f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This try block only wraps the optional npm config read and swallows errors. It is not a test of the environment.",
+          "evidence_refs": [
+            "s23",
+            "f1:37-44"
+          ]
+        }
+      ]
+    }
+  ]
+}

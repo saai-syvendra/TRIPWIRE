@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "3web.py",
+    "version": "1.0.0",
+    "archive_sha256": "d5d208fb7bcd8b2408865952da37d9a47d76579bb4257f1d061469b1a272f5e0"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "025b4d29b2bae821",
+      "packet_sha256": "a0fa713810ac003c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ddaa84b3d2c9e375",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly reads os.name from the locally imported os module; there is no intervening reassignment (f1:12-13).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a395b0f52686f00f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition compares os.name to the literal nt using equality, and its then block executes on that positive comparison without negation (f1:13-16).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the operating-system property os.name, so the os category fits (f1:13).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "254758b701346217",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both supplied files place the cited then regions under the single os.name equality condition, with no additional condition or alternative; c1 alone satisfies the guard (f1:13-16; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In the supplied derived file, the operating-system test enables the request and execution in its then block, with no alternate payload branch (f2:13-18).",
+          "evidence_refs": [
+            "s4",
+            "f2:13",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then block activates the request and execution when os.name equals nt; the test does not inspect an analysis or sandbox signal (f2:13-16).",
+          "evidence_refs": [
+            "f2:13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition restricts the entire request-and-execution block to the nt operating-system target rather than selecting a platform-specific implementation (f2:13-18).",
+          "evidence_refs": [
+            "f2:13",
+            "s4",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "cfe59845594787ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each supplied file places its cited region on the equality guard's then side; both sink calls occur directly inside the derived region, requiring no witness hops (f1:13-16; f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1f570dd94e9b76a2",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The supplied files contain no alternate calls to these sinks outside the guarded run block; registering the install class still enters run through its os.name condition (f1:10-18,32-34; f2:10-18,32-34).",
+          "evidence_refs": [
+            "f1:10",
+            "f1:13",
+            "f1:32",
+            "f2:10",
+            "f2:13",
+            "f2:16",
+            "f2:32"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "27b89fc05e1cfee3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The derived file imports requests and calls its get method, then passes the response text through string replacements to built-in exec, supporting download and execution of downloaded code (f2:14-16).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

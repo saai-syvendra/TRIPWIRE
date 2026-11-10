@@ -1,0 +1,354 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "reqyest3",
+    "version": "2.19.0",
+    "archive_sha256": "d82108f00567a979619df59f6a42f98c2dd753f37111b4ef94280dd7b408eed7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "7ee71f35800ebcbb",
+      "packet_sha256": "e126eba04004f762",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "307e736fc197105f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13 binds CURRENT_PYTHON to sys.version_info[:2], and s1 compares that binding against REQUIRED_PYTHON.",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "3d6d975be6742f49",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:14 sets REQUIRED_PYTHON to (3, 7); s2 exits when CURRENT_PYTHON is smaller, so continuation requires a version greater than or equal to (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "d55c153c7eb0dee1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13 reads the Python interpreter version and s1 tests its first two components, which fits runtime_version.",
+          "evidence_refs": [
+            "f1:13",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "f36647d09fb876f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:4 imports platform, and s3 directly compares the result of platform.machine() in an if condition.",
+          "evidence_refs": [
+            "f1:4",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9342ffe20a87e280",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 tests platform.machine() == \"x86\", and the true arm calls f1 in s5 without an intervening negation.",
+          "evidence_refs": [
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "ccbc0f5950c0f974",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 reads the machine architecture with platform.machine(), so arch fits the property being tested.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "2dac21ec53c2cb7d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13 binds CURRENT_PYTHON to sys.version_info[:2], and s1 compares that binding against REQUIRED_PYTHON.",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "e1b2b3fa291df755",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:14 sets REQUIRED_PYTHON to (3, 7); s2 exits when CURRENT_PYTHON is smaller, so continuation requires a version greater than or equal to (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "d58720a2a9f7ca9e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13 reads the Python interpreter version and s1 tests its first two components, which fits runtime_version.",
+          "evidence_refs": [
+            "f1:13",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2a44841e4dc7a977",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 terminates the process below Python 3.7, and s4 selects f1 on x86 or f2 otherwise after that check. The then region requires c1 and c2; the else region requires c1 and the negation of c2, giving two required conditions on each path.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ba3ee016b1731f67",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 selects f1 or f2, whose bodies pass different byte literals to loader calls in s9 and s7, respectively; this fits selects.",
+          "evidence_refs": [
+            "s4",
+            "s9",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b3eb6d01647955a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 permits supported interpreter versions to continue and s4 dispatches by machine architecture; these are target environment checks with no visible analysis detection, fitting activate.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ac13c4ad66a32195",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 enforces a minimum interpreter version, while s4 chooses between distinct runtime loader implementations at f1:68 and f1:76 according to architecture, fitting portability.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f1:68",
+            "f1:76"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "d85bcaefa3a62f2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 lies after the process exit check in s2 and on the false side of s4; its f2 call resolves to s8, which contains the sink s7.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s8",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "ff498eb3287f5647",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "f2 is local to PostInstallCommand.run in s8 and its only caller in the supplied file is s6, on the non-x86 side of s4 after s2.",
+          "evidence_refs": [
+            "s8",
+            "s6",
+            "s4",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "dc04fbd269f7d99c",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "bundle_unresolved",
+          "evidence": "s7 calls __pyarmor__ imported at f1:76 from a runtime module whose implementation is not supplied. The visible call and opaque byte literal do not establish the claimed eval sink kind or its behaviour.",
+          "evidence_refs": [
+            "s7",
+            "f1:76"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "5823f965693fc841",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 lies after the process exit check in s2 and on the true side of s4; its f1 call resolves to s10, which contains the sink s9.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s10",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "935ea5efc5fa7c8a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "f1 is local to PostInstallCommand.run in s10 and its only caller in the supplied file is s5, on the x86 side of s4 after s2.",
+          "evidence_refs": [
+            "s10",
+            "s5",
+            "s4",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "851f8f416c010974",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "unresolved_binding",
+          "evidence": "s9 calls __pyarmor__, but s10 supplies no explicit binding for that name; the preceding imported pyarmor_runtime call has no supplied implementation. The claimed eval sink kind and behaviour cannot be established from this file.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:68",
+            "f1:70"
+          ]
+        },
+        {
+          "claim_id": "g16.L4",
+          "claim_sha256": "48d8f702ecbda8da",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 exits only when the interpreter version is below (3, 7), leaving s11 on the continuation side of this single condition; the minimum is one.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g16.L6.effect",
+          "claim_sha256": "e705568e4498261d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 stops the process on unsupported interpreter versions, so passing the check enables the later file creation command in s12.",
+          "evidence_refs": [
+            "s2",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g16.L6.polarity",
+          "claim_sha256": "3aedb897b81c79b9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 admits interpreter versions at least 3.7 to the subsequent code containing s12, fitting activate rather than analysis evasion.",
+          "evidence_refs": [
+            "s2",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g16.L6.purpose",
+          "claim_sha256": "8f8f8e590f38bc75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13-16 compares the interpreter version to a minimum supported version and f1:32 exits when it is too old, fitting portability.",
+          "evidence_refs": [
+            "f1:13",
+            "f1:14",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g16.then.L3",
+          "claim_sha256": "c64131cfeb792495",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s12 is a top-level call within the continuation region s11 after the terminating version check s2; no witness hops are needed.",
+          "evidence_refs": [
+            "s2",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g16.then.L3.excl",
+          "claim_sha256": "d47b54c997b783d5",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "s12 has one top-level occurrence after s2, whose sys.exit(1) prevents reaching it on the rejected version path; no alternative caller reaches that statement in the supplied file.",
+          "evidence_refs": [
+            "s2",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g16.then.L5",
+          "claim_sha256": "93d991ffbd674e5b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:1 binds os to the standard module, and s12 uses os.system to run a touch command, which can create the named file.",
+          "evidence_refs": [
+            "f1:1",
+            "s12"
+          ]
+        }
+      ]
+    }
+  ]
+}

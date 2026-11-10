@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "builderknower",
+    "version": "0.1.10",
+    "archive_sha256": "cd18dd0d42fc519c172d28bb0675bbf1727303383dde272ca5887bd97f895ab0"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "8c58970ca4b924a7",
+      "packet_sha256": "cbe27c6be5c62c54",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_15b3645825.L6.drop",
+          "claim_sha256": "b66b9c13c3f9767e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited `os.system` call runs an unconditional curl command whose URL includes the output of `env | base64 -w 0`; it does not test an environment value to decide what runs. The install method proceeds to `install.run(self)` afterward (f1:49, f1:54).",
+          "evidence_refs": [
+            "s1",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "q_b645ea0bb3.L6.drop",
+          "claim_sha256": "7b321f39b3c8ea7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited try block unconditionally invokes the same curl command with `env | base64 -w 0` in its URL; the try/except handles command errors and does not branch on an environment check. The standard install call follows the block (f1:48-54).",
+          "evidence_refs": [
+            "s2",
+            "f1:54"
+          ]
+        }
+      ]
+    }
+  ]
+}

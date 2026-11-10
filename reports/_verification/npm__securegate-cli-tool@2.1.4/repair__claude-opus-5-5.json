@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "securegate-cli-tool",
+    "version": "2.1.4",
+    "archive_sha256": "7e5e6dd9d37d8ecd13d1e610b483d8a91cd1ede0bd2ada2799ea4ae732003473"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "fe8d35a32e862e58",
+      "record_sha256_after": "fe8d35a32e862e58",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The code confirms the record as written: scripts/postinstall.js line 16 checks fs.existsSync(~/.openclaw), and only then (line 29) copies templates/SKILL.md to ~/.openclaw/skills/securegate/SKILL.md, inside a try/catch that hides any failure. The install makes no network calls. The planted skill tel"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "fe8d35a32e862e58",
+      "record_sha256_after": "fe8d35a32e862e58",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_8263f63648.L6.drop",
+          "claim_sha256": "65dbf897790a3a8f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "scripts/postinstall.js:20 tests fs.existsSync(skillsDir) and its only effect is the mkdirSync(skillsDir, {recursive: true}) at line 21. Control rejoins after the if, and the copyFileSync at line 29 runs whether the test is true or false, so flipping it does not change which behaviour runs or what it"
+        },
+        {
+          "claim_id": "q_e88cc53dbe.L6.drop",
+          "claim_sha256": "26cacef39c1ff098",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement at scripts/postinstall.js:20-22 around the same test. Its block holds only mkdirSync(skillsDir, {recursive: true}), it has no else and no early exit, and execution continues to the copyFileSync at line 29 on both sides. With the folder present or absent, the same file is cop"
+        },
+        {
+          "claim_id": "k_8ad84143e8.L6.drop",
+          "claim_sha256": "dacc4fac044a53d9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "scripts/postinstall.js:24 tests fs.existsSync(targetDir) and its only effect is the mkdirSync(targetDir, {recursive: true}) at line 25. The copyFileSync at line 29 follows on both outcomes and writes to path.join(targetDir, 'SKILL.md') either way, so the destination does not depend on the test. The "
+        },
+        {
+          "claim_id": "q_94cd4b303f.L6.drop",
+          "claim_sha256": "e2744cb307b94fc5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement at scripts/postinstall.js:24-26 around the same test. Its block holds only mkdirSync(targetDir, {recursive: true}), it has no else and no early exit, and it rejoins before the copyFileSync at line 29. Both sides end in the same copy to the same path, so this guard decides no"
+        }
+      ]
+    }
+  ]
+}

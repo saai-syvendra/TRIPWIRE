@@ -1,0 +1,710 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "eslint-plugin-executable-stories-jest",
+    "version": "2.1.8",
+    "archive_sha256": "881505cc4a1e40b8d8c1e9534e3a2aec4b7ecd06f4bfffdf86f18f716cd7a593"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "09be75a9172b00ed",
+      "packet_sha256": "be08d862c51abd3b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "be4ffb04f1c120e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z7 lowercases the LC_ALL/LC_MESSAGES/LANGUAGE/LANG chain and tests startsWith 'ru'; LANG is one of the chained values and the names are plain strings.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "8088f0c0ab5a788e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z7() returns true for a ru locale and uX does `if(z7()) process.exit(0)`, so the guarded code runs only when the locale does not start with 'ru'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "79cfcb3d844f7ca0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the system locale/language environment variables, so locale_language fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "c377c77bda33b982",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IX runs RK.some over {envVar,prefix} and tests process.env[envVar] !== undefined && startsWith(prefix); the env read is a decision in the return of the callback.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "a41cbea8f492e334",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IX returns true (and uX exits) when an env var starts with its RK decoy prefix (ghp_decoyGitHubToken, npm_F4k3NPMToken, sk-ant-api03-fake...), so the code runs only on not_startswith.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "5035c3eaecc37790",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads named environment variables (tokens), so env_var fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "a4c95a491bf4c163",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IX reads process.env.GITHUB_REPOSITORY into a variable and compares it with === against entries of yK in a some() callback.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "314d8ecbc8638a79",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "yK is [\"actions-security-demo/compromised-packages\"]; a match makes IX return true and uX exit, so the code runs only when the repository is not in that list.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "7296e0a8fdebcd65",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads the GITHUB_REPOSITORY environment variable.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "f963be8f5368b951",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IX tests process.cwd().startsWith('/tmp/npm-safe/') in an if condition.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "463a353479ac0bf8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A cwd starting with /tmp/npm-safe/ makes IX return true and uX exit, so the guarded code needs not_startswith.",
+          "evidence_refs": [
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "828e0e83ff584021",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test compares the working directory path.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "9a46c872d696cd5c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "readFileSync is imported from fs as _0x344738; it reads join(homedir(), '.aws', 'credentials') and its content is tested with includes('FAKE'). The probe target matches.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "53fb11da4f9fb575",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "If the file content includes 'FAKE', IX returns true and uX exits, so the guarded code needs not_includes.",
+          "evidence_refs": [
+            "s7",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "8d343f3d701e483b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It inspects the contents of the AWS credentials file for a decoy marker, which is the target artifact.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "2b762e85fa283251",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "g1.execute tests ['darwin','linux'].includes(process.platform) in an if.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "8760c8b5d7ac8683",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then block of that if holds the package download and publish, so the positive form is platform in [darwin, linux].",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "76d7d7f48fa3d71f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.platform is an OS check.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "cad5b2e10ef97934",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute tests cpus().length<4 with cpus imported from os.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "f7fda5e36affa534",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "cpus().length<4 returns false from shouldExecute, and execute returns early when it is false, so the payload needs length >= 4.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "11c6c70367c6596b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CPU core count is a hardware property.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "0f4dfb1e274b4fbe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "w4 runs execSync('ps aux ...') (execSync imported from child_process as _0x5ef3ff), lowercases stdout and tests includes(name) for each DQ entry, matching the probe.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "5f44b4552e6efaa6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "DQ lists falcon-sensor, sentinelone, crowdstrike, mdatp, cylance, trendmicro, osquery, tanium, qualys and others; a match makes w4 true, shouldExecute returns false, and execute exits. RQ paths are checked with existsSync in the same function.",
+          "evidence_refs": [
+            "s12",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "42c397c28a304256",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It reads the process list (ps aux).",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "8ea33d2c2bbe519c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "H9 tests process.env.CI === 'true' || === '1'; shouldExecute returns false when H9() is true.",
+          "evidence_refs": [
+            "s13",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "67de50768807d8f9",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The code compares CI to the strings 'true' and '1' rather than testing falsiness, so CI='0' or 'false' passes. The operator is not a plain falsy, though its polarity is the same.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "f19c239540a871c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CI is a CI marker.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "8e4126036950c9c8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single guard `if(z7()) exit` in uX holds only the locale condition, and the work in fL after `await uX()` runs only when it is false.",
+          "evidence_refs": [
+            "s2",
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "0b506bfcc0f03d1b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The locale check only lets the payload run or not (no alternative payload), so enables fits.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c3c8e872adab2cb8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Russian-locale exit excludes certain victims; it does not detect analysis, CI or a sandbox. I would label it activate (target filter).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "8f76697b389a37b0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "A locale check that skips ru systems selects who is targeted, not whether it is being analysed. I would label it targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "f9d24d6edf48ead8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fL calls uX (s14), whose guard s2 exits on the ru locale. The _3() call (s17, in s15) and the run(...) call (s18, in s16) both come after that call in fL.",
+          "evidence_refs": [
+            "s2",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "a1051939ba69a486",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "uX and _3 each have a single call site, in fL, which is invoked once at the end of the file.",
+          "evidence_refs": [
+            "s14",
+            "s17",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ea4493fbf2daac33",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "_3 runs filesystem, shell and CI-secret collectors, which supports cred_read. The run() call on the dispatcher instance is not resolved to a network sink, and recon and self_propagation have no payload entry.",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "40fb5937111296ad",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "IX returns true if any of the four tests matches, and uX exits on true, so reaching the code needs all four to be false (and of the negations).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "835a71d31eaa3d42",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decoy checks only allow or block the payload, so enables fits.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "f48b57bf5991cda2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks look for honeypot tokens, fake AWS credentials, a known demo repository and a sandbox cwd, so the code backs off when it sees analysis.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "719c06ea092079ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decoy and honeypot detection fits anti_analysis.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "c1880718ddb15849",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Guard s4 (`if(IX()) exit`) is in uX, which fL calls (s14) before _3() and run(), so both sinks lie on the then side.",
+          "evidence_refs": [
+            "s4",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "6f78e4df7f83b9ee",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The payload entry points uX and _3 are called only from fL.",
+          "evidence_refs": [
+            "s14",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "c64eb3afc883e076",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "The cred_read sink is supported by _3's collectors. The exfil sink is a method on a local class instance that is not resolved to a network call, and recon and self_propagation have no payload entry.",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "35594f36dbbd4a53",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One if guard on the platform list, with its then block holding the download and publish work.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "dc7d369fde671d10",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS check only lets the code run or not, so enables fits.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8ab473805a1c54ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs on darwin and linux and does not back off on analysis, so activate fits.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "fe362a7c26eae089",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check restricts the code to platforms it can work on and does not pick out victims, so I would label it portability.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "312e0e15c4a27d7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "this.downloadPackages(...) is called inside the then block, and that method fetches from the npm registry.",
+          "evidence_refs": [
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "3b50d2f6e2611477",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The platform check is inside execute itself, so any caller of execute passes it. The download call is in that block.",
+          "evidence_refs": [
+            "s9",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "6a80f8d8e49c8d85",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "download rests on a fetch from the npm registry in downloadPackages. self_propagation has no payload entry, and publishPackage was not traced.",
+          "evidence_refs": [
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "64e297e509e61ff9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "shouldExecute returns false on cpus<4, on w4 (EDR) and on H9 (CI), and execute returns early when it is false, so all three must pass (and).",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "75b805b1876e46be",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks only allow or block the single payload, so enables fits.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "a748bc92cbd2f189",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off when it sees few CPUs, EDR processes or CI, which is evade.",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "9a7b25ab1a2120cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Sandbox, EDR and CI detection fits anti_analysis.",
+          "evidence_refs": [
+            "s10",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "ccab76e7d204691f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The writeFileSync (s22) and Bun.spawn (s23) calls are in the try block after the early-exit guard `if(!await this.shouldExecute()) return false`.",
+          "evidence_refs": [
+            "s11",
+            "s21",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "a8c3893c9046ba29",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The guard is inside execute, directly before the sinks, so every caller of execute passes through it.",
+          "evidence_refs": [
+            "s11",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "a8142ce52591e7fb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "writeFileSync is imported from fs and writes updater.py, and Bun.spawn starts bash, so write_file and spawn_process each rest on a matching sink.",
+          "evidence_refs": [
+            "s22",
+            "s23"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "2a22658b6c50556d",
+      "packet_sha256": "dbaec142c6398a1c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "471232c7c61d5fee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The packet has no slices or code files, so this is judged from the claim fields alone. The payload (recon, credential read, exfiltration, self-propagation) runs when LANG does not start with 'ru', so it runs on non-Russian-locale targets and does not back off from analysis. That fits activate.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "1239523a1fb7b51a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The packet has no slices or code files, so this is judged from the claim fields alone. A locale check that skips Russian-language hosts before the malicious behaviours is victim selection, not portability or sandbox detection. That fits targeting.",
+          "evidence_refs": []
+        }
+      ]
+    }
+  ]
+}

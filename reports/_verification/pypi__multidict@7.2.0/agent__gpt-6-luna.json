@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "multidict",
+    "version": "7.2.0",
+    "archive_sha256": "f4110a13e264858eb00697751785cb2c58ee96707d8ded5ddb8239530d3b9ba4"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "41e92bca0b4ae951",
+      "packet_sha256": "83ff73be42ec3522",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_828d7521e2.L6.drop",
+          "claim_sha256": "c12077734039436f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The `platform.system() != \"Windows\"` test controls adding compiler flags, and on non-Windows builds it also controls the nested sanitizer-flag branch, so this is an install-time environment gate rather than an unrelated test (s1; f1:29-54).",
+          "evidence_refs": [
+            "s1",
+            "f1:29-54"
+          ]
+        },
+        {
+          "claim_id": "q_e71fe157bc.L6.drop",
+          "claim_sha256": "3abb203eef867419",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The `platform.system() != \"Windows\"` decision governs which compiler flags are appended, including the nested sanitizer flags, so it decides build behavior at install time and is part of a gate (s2; f1:29-54).",
+          "evidence_refs": [
+            "s2",
+            "f1:29-54"
+          ]
+        }
+      ]
+    }
+  ]
+}

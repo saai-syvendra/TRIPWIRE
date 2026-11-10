@@ -1,0 +1,1265 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@antv/data-set",
+    "version": "0.12.8",
+    "archive_sha256": "c25a05b1466b698cd38b42eae952aa828c30d4839af54968dcb91c20d128b80c"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "a59af23131ad8da9",
+      "packet_sha256": "767ff093f1c7e94d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "5e8bf586ef170da4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The u2 entry binds GITHUB_TOKEN and its prefix to the callback in j1, which reads that environment variable and tests startsWith (f1:1, s1).",
+          "evidence_refs": [
+            "f1:1",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b69852fc68dcf61f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1 tests the prefix supplied by u2, and x2 exits when j1 is true; continuation therefore requires not_startswith the stated prefix (f1:1, s1, s2).",
+          "evidence_refs": [
+            "f1:1",
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3b0b6b78c52f27a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1 reads the named process environment variable, so env_var fits (s1, f1:1).",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1bb0191fea28d028",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 directly tests the lowercased locale returned by Intl.DateTimeFormat().resolvedOptions() (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "b7084e731d66bd5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 returns true for a locale starting with ru, and x2 exits on that return, making continuation the negative prefix case (s3, s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "2f2d12f8cde06c6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested property is the runtime locale, which fits locale_language (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "29e841259fcd922a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites read language environment variables from the listed alternatives before applying their prefix tests; s6 additionally conditions its fallback on SystemRoot (s5, s6).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0fb07d2397362b47",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both language fallback tests return true on a lowercased ru prefix, and x2 exits when U7 is true, so their continuation polarity is not_startswith (s5, s6, s4).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "9fd4859993ca0bf6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fallback variables supply language settings, so locale_language fits (s5, s6).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d079971615b5da6b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sequential exits require j1 to be false and every U7 locale test to be false before J2 reaches the region; the three recorded conditions therefore join with and and require all three (s2, s4, s7, s8).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7b737a3d382469ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks terminate the process before J2 continues into collection and token processing, so they enable the downstream work (s2, s4, s7, s8).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "35fae1b760e391af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decoy-token match causes an exit, consistent with backing off in an analysis environment; the locale checks also suppress execution rather than selecting a payload (f1:1, s2, s4).",
+          "evidence_refs": [
+            "f1:1",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "26001610a9e138ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Exiting on a specific decoy-token prefix supports anti_analysis for the combined gate, although the ru exclusions alone do not establish that purpose (f1:1, s1, s2).",
+          "evidence_refs": [
+            "f1:1",
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7465e279a4cec52f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "J2 awaits x2 before the region, and its b call resolves to the declaration that calls X, whose declaration contains the fetch sink (s7, s8, s10, s11, s12, s13, s9).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "70514e14c553631f",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "X and b have additional callers in provider methods and network helpers; their complete reachability through dynamic method dispatch has not been resolved, so exclusivity is not established (f1:1).",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ed8938e4471dd2aa",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "The supplied sink sends the token in a network request and reads account metadata, but this witness contains no credential-read or process-creation sink to support all four behaviours (s9, s11, s13).",
+          "evidence_refs": [
+            "s9",
+            "s11",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_0873e77c0c.L6.drop",
+          "claim_sha256": "d639d5ce85e4dd36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test in _o checks whether the lock artifact exists before deleting it; the surrounding a1 implementation uses that artifact for duplicate-process suppression (s14, s19, f1:1).",
+          "evidence_refs": [
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "k_1cf3c7b7c4.L6.drop",
+          "claim_sha256": "7bf2c9de1deb77cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z1 returns before spawning when __DAEMONIZED is set and passes that flag to the spawned child, directly implementing a re-entry guard (s15, s17).",
+          "evidence_refs": [
+            "s15",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_b6b5ce918f.L6.drop",
+          "claim_sha256": "da952f785ec3a09e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "a1 reads a stored process id, checks whether that process is alive, and otherwise replaces the lock with its own id; this suppresses duplicate execution (s16, s18, f1:1).",
+          "evidence_refs": [
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "q_9ccf9f0f20.L6.drop",
+          "claim_sha256": "9ff6478bf9e1067e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z1 returns before spawning when __DAEMONIZED is set and passes that flag to the spawned child, directly implementing a re-entry guard (s15, s17).",
+          "evidence_refs": [
+            "s17",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "q_baa2dc756e.L6.drop",
+          "claim_sha256": "154169800c3d3318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "a1 reads a stored process id, checks whether that process is alive, and otherwise replaces the lock with its own id; this suppresses duplicate execution (s16, s18, f1:1).",
+          "evidence_refs": [
+            "s18",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "q_d568cfc6cc.L6.drop",
+          "claim_sha256": "9fbb00d84df36e7a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test in _o checks whether the lock artifact exists before deleting it; the surrounding a1 implementation uses that artifact for duplicate-process suppression (s14, s19, f1:1).",
+          "evidence_refs": [
+            "s19",
+            "f1:1"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e1fe955203e158a2",
+      "packet_sha256": "582737d4af27420f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3e848b8e32d59690",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "Guard slices s1 and s3 and condition slices s4–s7 contain only sample-missing placeholders. code/f1.unavailable.txt also reports sample_missing, leaving no source to establish the combination or minimum conditions.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "b3dc844865ba42e7",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The guard, witness and sink slices contain only sample-missing placeholders, and code/f1.unavailable.txt supplies no source. The claimed guarded paths cannot be anchored to package bytes.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s13",
+            "s23",
+            "s27",
+            "s30",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "73208e2af52a56b9",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The cited guards and payload sinks contain only sample-missing placeholders, and code/f1.unavailable.txt supplies no source. There is no code to inspect for the claimed paths or alternative callers.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s13",
+            "s23",
+            "s27",
+            "s30",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1f528929b8744221",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "Sink slices s13, s23, s27, s30 and s38 contain only sample-missing placeholders; code/f1.unavailable.txt also reports sample_missing. No source anchors the claimed sink kinds or behaviours.",
+          "evidence_refs": [
+            "s13",
+            "s23",
+            "s27",
+            "s30",
+            "s38"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "47f6ac8e39e2f534",
+      "packet_sha256": "c05c87cb1093b298",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "f56faeabe0d482a0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1 reads the configured GITHUB_TOKEN entry and prefix from u2, and s2 exits when startsWith succeeds; continuing therefore requires the negated prefix test (s1, s2; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "47df747c1b52ff04",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 returns true for a lowercased Intl locale starting with ru, and s4 exits on that result (s3, s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "cd8d0b7500c5ce8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both environment locale fallback expressions are lowercased and tested for the ru prefix; U7 returning true causes the early process exit (s5, s6, s4).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "d8ed278ed79d75b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The alias imported from os.cpus supplies the CPU array; CP rejects a length below four and f7 continues only when CP succeeds (s7, s8; f1:1).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "1b7cd1da70ba6205",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The alias imported from os.cpus supplies the CPU array; CP rejects a length below four and f7 continues only when CP succeeds (s7, s8; f1:1).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "afd39eb8fe00d549",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The alias imported from os.cpus supplies the CPU array; CP rejects a length below four and f7 continues only when CP succeeds (s7, s8; f1:1).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "b958cc2da18bc8e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP rejects the literal string true in process.env.CI, and s8 returns when CP fails (s9, s8).",
+          "evidence_refs": [
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "95a3d8a244a8b5e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP rejects the literal string true in process.env.CI, and s8 returns when CP fails (s9, s8).",
+          "evidence_refs": [
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "51616d1c5640849a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "CP rejects the literal string true in process.env.CI, and s8 returns when CP fails (s9, s8).",
+          "evidence_refs": [
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "f4a30fc85ad1cc9d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP rejects the literal string true in process.env.GITHUB_ACTIONS, and s8 returns when CP fails (s10, s8).",
+          "evidence_refs": [
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "bbc11cc2adf6e92d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP rejects the literal string true in process.env.GITHUB_ACTIONS, and s8 returns when CP fails (s10, s8).",
+          "evidence_refs": [
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "9ce45d6d4637bece",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "CP rejects the literal string true in process.env.GITHUB_ACTIONS, and s8 returns when CP fails (s10, s8).",
+          "evidence_refs": [
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "5f6958e0cfec8c55",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP rejects JENKINS_HOME when it differs from undefined, so continuation requires its absence (s11, s8).",
+          "evidence_refs": [
+            "s11",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "4808d5c3df1d9b4c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CP rejects JENKINS_HOME when it differs from undefined, so continuation requires its absence (s11, s8).",
+          "evidence_refs": [
+            "s11",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "fb9efd3d02811caa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "CP rejects JENKINS_HOME when it differs from undefined, so continuation requires its absence (s11, s8).",
+          "evidence_refs": [
+            "s11",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "5f1c7802f3081bcd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os namespace import supplies platform; checkAppleSilicon combines darwin with arm64 and its negation allows the non-darwin alternative (s12, s13, s14; f1:1).",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "2eaa2862b93276fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os namespace import supplies platform; checkAppleSilicon combines darwin with arm64 and its negation allows the non-darwin alternative (s12, s13, s14; f1:1).",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "24dc31211a3428d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The os namespace import supplies platform; checkAppleSilicon combines darwin with arm64 and its negation allows the non-darwin alternative (s12, s13, s14; f1:1).",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "531280072a102dac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os namespace import supplies arch; negating the darwin-and-arm64 early return allows the non-arm64 alternative (s12, s14, s13; f1:1).",
+          "evidence_refs": [
+            "s12",
+            "s14",
+            "s13",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "779af440060f803d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os namespace import supplies arch; negating the darwin-and-arm64 early return allows the non-arm64 alternative (s12, s14, s13; f1:1).",
+          "evidence_refs": [
+            "s12",
+            "s14",
+            "s13",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "ea7b828c129bb680",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The os namespace import supplies arch; negating the darwin-and-arm64 early return allows the non-arm64 alternative (s12, s14, s13; f1:1).",
+          "evidence_refs": [
+            "s12",
+            "s14",
+            "s13",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "e7a07c2d46c52016",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "settingsSearch tests lowercased paths yielded by Bun.Glob.scan against Qo, whose entries are claude and codex, and retains matching settings files for addHook (s15, s16; f1:1).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "3eec287aa70be786",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "settingsSearch tests lowercased paths yielded by Bun.Glob.scan against Qo, whose entries are claude and codex, and retains matching settings files for addHook (s15, s16; f1:1).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "a7a8878a37529f97",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "settingsSearch tests lowercased paths yielded by Bun.Glob.scan against Qo, whose entries are claude and codex, and retains matching settings files for addHook (s15, s16; f1:1).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "8ddebde1bbc874e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "q2 directly branches on the truthiness of process.env.GITHUB_ACTIONS (s17, s18).",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "d908db4e84c5cf58",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "q2 directly branches on the truthiness of process.env.GITHUB_ACTIONS (s17, s18).",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "03ae0822196a8c0f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "q2 directly branches on the truthiness of process.env.GITHUB_ACTIONS (s17, s18).",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "5d6ef351f6db4e7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "q2 destructures GITHUB_WORKFLOW_REF from process.env and tests includes against its first parameter, supplied as release.yml by x2 (s19, s77, s78).",
+          "evidence_refs": [
+            "s19",
+            "s77",
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "c7be9fa178475e17",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "q2 destructures GITHUB_WORKFLOW_REF from process.env and tests includes against its first parameter, supplied as release.yml by x2 (s19, s77, s78).",
+          "evidence_refs": [
+            "s19",
+            "s77",
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "c360fc7254429d31",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "q2 destructures GITHUB_WORKFLOW_REF from process.env and tests includes against its first parameter, supplied as release.yml by x2 (s19, s77, s78).",
+          "evidence_refs": [
+            "s19",
+            "s77",
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "412cfbd854ec4bd0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "q2 destructures GITHUB_REPOSITORY from process.env and tests includes against its second parameter, supplied by x2 as the claimed repository substring (s21, s77, s78).",
+          "evidence_refs": [
+            "s21",
+            "s77",
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "29028d9e22645383",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "q2 destructures GITHUB_REPOSITORY from process.env and tests includes against its second parameter, supplied by x2 as the claimed repository substring (s21, s77, s78).",
+          "evidence_refs": [
+            "s21",
+            "s77",
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "ca9ddfd4724c3c4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "q2 destructures GITHUB_REPOSITORY from process.env and tests includes against its second parameter, supplied by x2 as the claimed repository substring (s21, s77, s78).",
+          "evidence_refs": [
+            "s21",
+            "s77",
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3e848b8e32d59690",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sequential process exits require the token-prefix test and all locale-prefix tests to fail; these give the three claimed conditions joined by and (s1-s6, s22).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d1e673d528b1b7c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Z2 object bindings reach zo and vo, z1 reaches the imported spawn, and the bound Po/Co dispatch reaches the configured sender; b reaches X through the cited calls (s25-s59; f1:1).",
+          "evidence_refs": [
+            "s25",
+            "s30",
+            "s31",
+            "s39",
+            "s44",
+            "s46",
+            "s47",
+            "s52",
+            "s54",
+            "s57",
+            "s59",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "a6cd9befbfee4d1c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The collector and daemon call sites occur after the process-exit checks, and the other resolved callers of b and the senders are reached from the same gated execution (s22-s27; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c08e1f52d3cb06ab",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The fs.promises read and gh token command collect credentials, the child_process import spawns a process, and fetch sends the envelope and queries account metadata (s28, s38, s42, s45, s55, s57; f1:1).",
+          "evidence_refs": [
+            "s28",
+            "s38",
+            "s42",
+            "s45",
+            "s55",
+            "s57",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "b9db520e26c98b76",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The f7 and Vo entry calls are in J2’s finally block rather than the rest of the try block after x2; the cited via hop does not establish guard coverage through exceptional entry to finally (s22, s60, s66; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s60",
+            "s66",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "b8bd3aed7c5d7b98",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks permit or skip the claimed operation rather than choosing a separate payload; the local guarded operations are visible in s64, s70, s74 and s78.",
+          "evidence_refs": [
+            "s64",
+            "s70",
+            "s74",
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "edc9c90fa0cab76c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "CP backs off on fewer than four CPUs and explicit CI markers, supporting evasion of analysis environments and an anti_analysis purpose (s7-s11, s64).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s64"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "8d4af76b7329ef77",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "CP backs off on fewer than four CPUs and explicit CI markers, supporting evasion of analysis environments and an anti_analysis purpose (s7-s11, s64).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s64"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "26a8b2d6816b08a2",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The f7 and Vo entry calls are in J2’s finally block rather than the rest of the try block after x2; the cited via hop does not establish guard coverage through exceptional entry to finally (s22, s60, s66; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s60",
+            "s66",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "6bcb2bb1f3f25daa",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The f7 and Vo entry calls are in J2’s finally block rather than the rest of the try block after x2; the cited via hop does not establish guard coverage through exceptional entry to finally (s22, s60, s66; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s60",
+            "s66",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "6c026c267ab8b348",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The fs.writeFileSync alias writes the dropped file and Bun.spawn launches a shell, but its x7 input is produced by the encrypted-data decoder, so persistence cannot be established from the readable shell call alone (s62, s65; f1:1).",
+          "evidence_refs": [
+            "s62",
+            "s65",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "8f0bd9ead63d6af7",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The f7 and Vo entry calls are in J2’s finally block rather than the rest of the try block after x2; the cited via hop does not establish guard coverage through exceptional entry to finally (s22, s60, s66; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s60",
+            "s66",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "e8b5d8e8821d5934",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks permit or skip the claimed operation rather than choosing a separate payload; the local guarded operations are visible in s64, s70, s74 and s78.",
+          "evidence_refs": [
+            "s64",
+            "s70",
+            "s74",
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "7f4fd9f0479452ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The method skips Apple Silicon and otherwise copies the running file; the code establishes an activation restriction but does not explain the platform exclusion’s purpose (s12-s14, s70).",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s70"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "113f59659b9be771",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The method skips Apple Silicon and otherwise copies the running file; the code establishes an activation restriction but does not explain the platform exclusion’s purpose (s12-s14, s70).",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s70"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "e01ad16c3c79a22a",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The f7 and Vo entry calls are in J2’s finally block rather than the rest of the try block after x2; the cited via hop does not establish guard coverage through exceptional entry to finally (s22, s60, s66; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s60",
+            "s66",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "8f307ee3daa63c93",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The f7 and Vo entry calls are in J2’s finally block rather than the rest of the try block after x2; the cited via hop does not establish guard coverage through exceptional entry to finally (s22, s60, s66; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s60",
+            "s66",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "f476733a3025b27c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Bun.write copies the running file into the application package directories, directly supporting write_file (s67, s68).",
+          "evidence_refs": [
+            "s67",
+            "s68"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "34aba8794ac0242d",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The f7 and Vo entry calls are in J2’s finally block rather than the rest of the try block after x2; the cited via hop does not establish guard coverage through exceptional entry to finally (s22, s60, s66; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s60",
+            "s66",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "7cb3b17b90ea616e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks permit or skip the claimed operation rather than choosing a separate payload; the local guarded operations are visible in s64, s70, s74 and s78.",
+          "evidence_refs": [
+            "s64",
+            "s70",
+            "s74",
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "3e33528334924fc4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The retained matching settings files determine whether SessionStart hooks can be installed, supporting activation based on available target artifacts (s15, s16, s72).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s72"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "8bcc8a992be2d37b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The retained matching settings files determine whether SessionStart hooks can be installed, supporting activation based on available target artifacts (s15, s16, s72).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s72"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "e75b748fb9dbdc13",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The f7 and Vo entry calls are in J2’s finally block rather than the rest of the try block after x2; the cited via hop does not establish guard coverage through exceptional entry to finally (s22, s60, s66; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s60",
+            "s66",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "f91d06ad6ce33576",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The f7 and Vo entry calls are in J2’s finally block rather than the rest of the try block after x2; the cited via hop does not establish guard coverage through exceptional entry to finally (s22, s60, s66; f1:1).",
+          "evidence_refs": [
+            "s22",
+            "s60",
+            "s66",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "99699deccd460408",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "addHook inserts a SessionStart command into the parsed settings and persists that configuration with Bun.write (s72, s73, s74).",
+          "evidence_refs": [
+            "s72",
+            "s73",
+            "s74"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "107ebd023e704c90",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The token-prefix early exit precedes q2, whose truthy Actions check encloses the conjunction of workflow and repository substring tests; all four are needed for Lo execution (s2, s18, s20, s77).",
+          "evidence_refs": [
+            "s2",
+            "s18",
+            "s20",
+            "s77"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "6166745ba6b06917",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks permit or skip the claimed operation rather than choosing a separate payload; the local guarded operations are visible in s64, s70, s74 and s78.",
+          "evidence_refs": [
+            "s64",
+            "s70",
+            "s74",
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "b6fec1b8bdbd507b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Actions flag and workflow/repository substrings restrict package propagation to the selected CI context, supporting activation and targeting (s18, s20, s78, s79).",
+          "evidence_refs": [
+            "s18",
+            "s20",
+            "s78",
+            "s79"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "d3538c03e29a7454",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Actions flag and workflow/repository substrings restrict package propagation to the selected CI context, supporting activation and targeting (s18, s20, s78, s79).",
+          "evidence_refs": [
+            "s18",
+            "s20",
+            "s78",
+            "s79"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "741ec23afc7b3cf4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call in s4 reaches q2, whose nested checks reach the Lo execute method, and that method calls downloadPackages at s76 (s77-s79).",
+          "evidence_refs": [
+            "s4",
+            "s18",
+            "s20",
+            "s75",
+            "s76",
+            "s77",
+            "s78",
+            "s79"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "71bf3c5d67c2a039",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only Lo construction is inside q2 under the Actions, workflow and repository checks, and q2 is called after the token-prefix exit (s2, s77, s78; f1:1).",
+          "evidence_refs": [
+            "s2",
+            "s77",
+            "s78",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "757e5750167063fd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Lo.downloadPackages fetches registry metadata and tarballs, calls updateTarball to insert the package dependency, and calls publishPackage to publish the changed archive (s76, s79; f1:1).",
+          "evidence_refs": [
+            "s76",
+            "s79",
+            "f1:1"
+          ]
+        }
+      ]
+    }
+  ]
+}

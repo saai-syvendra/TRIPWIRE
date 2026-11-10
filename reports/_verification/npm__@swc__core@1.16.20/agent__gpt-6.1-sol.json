@@ -1,0 +1,1728 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@swc/core",
+    "version": "1.16.20",
+    "archive_sha256": "c7081a10cb4bedbf936763d7bc010452cf76e5d8f6915fb26f80aeaae4b524c6"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "7c348d3a0a348ad9",
+      "packet_sha256": "bbac443370b796ac",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ca861cc0fd58895a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 uses INIT_CWD to construct the package.json path passed to require inside the try; a thrown load returns from validation in s2.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "e4a9abbc0a9bb419",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try must successfully load the package.json reached through INIT_CWD; its catch returns before fallback installation, giving the file probe positive existence polarity.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "ccfe945bf3c3f74e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads the package-manager environment variable INIT_CWD to locate the initiating package, fitting package_manager.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "01ae59473cf25add",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The name destructured from the initiating package.json at f1:69 is compared against two package names at s3.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9f8c8d71000c2950",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 returns when either listed package name matches, so continuing to fallback requires name to be outside that pair.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "c51a5bee72f2ac6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison reads the consuming package name loaded from its package.json, fitting consuming_app.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "c347105423eab7a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 assigns the result of require to binding, which is tested by the early return in s6.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "f82c01c604d4f3cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Failure to load binding.js leaves binding unset and permits continuation; a truthy binding returns at s6 even if subsequent validation threw.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:89"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "a23e15418d33ab11",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Loading binding.js resolves the available native or WASI dependency through f2, making dependency_tree an appropriate category.",
+          "evidence_refs": [
+            "s5",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "a6d9988e62410db0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 directly reads SWC_BINARY_PATH in the double-negated condition of the early return at s8.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "1fbb097d66bf14cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8 returns for a truthy SWC_BINARY_PATH, so reaching fallback installation requires a falsy value.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "790eae6ebf328dbf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 directly tests an environment variable used to configure a manual binary override, fitting env_var.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "1e02f49c82c0afc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 binds require.resolve output to wasmBinding, and s10 tests that same binding for truthiness and filesystem existence.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "10a875a3d968bacf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s11 returns only when resolution produced a truthy wasmBinding whose file exists; fallback continues when the resolved dependency is absent or its path is missing.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "f944f176466de51d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 and s10 check whether the wasm dependency resolves to an existing file, fitting dependency_tree.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "814d5c89b74899e1",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "s12 begins at f1:105, before the c5 decision at f1:110, so that entire region is not controlled by the conjunction including c5; its dependency resolution runs before c5 is decided.",
+          "evidence_refs": [
+            "s12",
+            "s11",
+            "f1:105",
+            "f1:107"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "66bf9cff34654796",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early returns at f1:70, f1:96, f1:100 and f1:110 decide whether the npm fallback installation and its file operations run, fitting enables.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s8",
+            "s11",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c66db40c10e1c7a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks permit fallback installation when a usable dependency is unavailable and no manual override is set; they do not inspect analysis or sandbox indicators, fitting activate.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s8",
+            "s11",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "d51549c9efd9ae73",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Native binding loading is selected by platform, architecture and libc, and postinstall supplies a wasm fallback when binding loading fails, fitting portability.",
+          "evidence_refs": [
+            "f2:59",
+            "f2:197",
+            "s5",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "6a287a375fa485ce",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The s12 region starts with wasmBinding declaration and resolution at f1:105, before the s11 early exit; therefore the c5 guard does not control the entire claimed region, although the cited sinks occur after it.",
+          "evidence_refs": [
+            "s12",
+            "s11",
+            "f1:105",
+            "f1:107"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "e6e448ad61344471",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The exec and write sinks occur only after the validation exits, and removeRecursive is called only from that installation cleanup and its own recursion; no export or independent caller bypasses these gates in the supplied files.",
+          "evidence_refs": [
+            "f1:46",
+            "f1:56",
+            "s13",
+            "s14",
+            "s16",
+            "f1:145"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "fe0fa734970190d9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s13 invokes the imported child_process.execSync with npm install, which can spawn npm and download the fallback dependency; s14 writes a file and s15 removes a directory through the cleanup witness.",
+          "evidence_refs": [
+            "f1:44",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_00c293dcba.L6.drop",
+          "claim_sha256": "c6f3992ac1774646",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s18 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s18",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_18f78e5436.L6.drop",
+          "claim_sha256": "c88de5e2893fd1ca",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s19 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s19",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_1a1a5b2f0a.L6.drop",
+          "claim_sha256": "95d88a706b92c556",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s20 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s20",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_329a94aaa6.L6.drop",
+          "claim_sha256": "edb4becd24db80c0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s21 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s21",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_33ec9e5fee.L6.drop",
+          "claim_sha256": "6c4f0b5aed544a55",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s22 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s22",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_3c58ebd645.L6.drop",
+          "claim_sha256": "8cf035dcbdff213a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s23 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s23",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_3f9d93f161.L6.drop",
+          "claim_sha256": "caf0ef976f3a3c28",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s24 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s24",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_4083d042e5.L6.drop",
+          "claim_sha256": "b262eceb2a6a3e5a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s25 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s25",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_4a597ccb0f.L6.drop",
+          "claim_sha256": "cad36fc09172808d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s26 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s26",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_4dbff90628.L6.drop",
+          "claim_sha256": "3bf7eacf0c5c2342",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s27 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s27",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_51936c7c12.L6.drop",
+          "claim_sha256": "7545c2e9024e4bc1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s28 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s28",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_6063d6486a.L6.drop",
+          "claim_sha256": "9ce5d337dfb1f0bc",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s29 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s29",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_6bc371d31e.L6.drop",
+          "claim_sha256": "81f3eda96da63404",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s30 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s30",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_70700f11bf.L6.drop",
+          "claim_sha256": "02477138927dde8e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s31 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s31",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_7279e5af9a.L6.drop",
+          "claim_sha256": "e2dcc5fa32e52066",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s32 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s32",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_75faf830d4.L6.drop",
+          "claim_sha256": "9000e206efdc95e5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s33 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s33",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_86c6e8e167.L6.drop",
+          "claim_sha256": "c84e5d0376311930",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s34 tests NAPI_RS_FORCE_WASI only to emit console.error after a failed load; the cited decision controls logging alone.",
+          "evidence_refs": [
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "k_928ad6504a.L6.drop",
+          "claim_sha256": "bf5cc43ec1a6c206",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s35 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s35",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_92a8e358be.L6.drop",
+          "claim_sha256": "fc1a99154c13fc0d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s36 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s36",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_9f351fe240.L6.drop",
+          "claim_sha256": "0f9aefc9508e799f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s37 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s37",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_a0d24ca414.L6.drop",
+          "claim_sha256": "b0042b9305086de5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s38 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s38",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_a26f75e203.L6.drop",
+          "claim_sha256": "bf86925c088f7bd3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s39 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s39",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_a8cff79eac.L6.drop",
+          "claim_sha256": "a921969d56747892",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s40 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s40",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_ac6c34a66c.L6.drop",
+          "claim_sha256": "3a6bf1d6c5346d7d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s41 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s41",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_b8c7739a51.L6.drop",
+          "claim_sha256": "3a6c46bae98d94f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s42 tests NAPI_RS_FORCE_WASI only to emit console.error after a failed load; the cited decision controls logging alone.",
+          "evidence_refs": [
+            "s42"
+          ]
+        },
+        {
+          "claim_id": "k_be4d282e19.L6.drop",
+          "claim_sha256": "aea9d43945507a89",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s43 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s43",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_c27658a1de.L6.drop",
+          "claim_sha256": "0a0e267ac288dbd5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s44 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s44",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_c668f8d674.L6.drop",
+          "claim_sha256": "11356fda49a7679a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s45 probes libc and returns a musl decision through isMusl, which selects musl versus GNU bindings at f2:197; this is an omitted portability gate reached by postinstall.",
+          "evidence_refs": [
+            "s45",
+            "f1:81",
+            "f2:318",
+            "f2:13",
+            "f2:18",
+            "f2:197"
+          ]
+        },
+        {
+          "claim_id": "k_ce4c309a46.L6.drop",
+          "claim_sha256": "2168a719e1817924",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s46 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s46",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_d187c8623b.L6.drop",
+          "claim_sha256": "47544c69bb8d6ae1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s47 probes libc and returns a musl decision through isMusl, which selects musl versus GNU bindings at f2:197; this is an omitted portability gate reached by postinstall.",
+          "evidence_refs": [
+            "s47",
+            "f1:81",
+            "f2:318",
+            "f2:13",
+            "f2:18",
+            "f2:197"
+          ]
+        },
+        {
+          "claim_id": "k_d25c30cab3.L6.drop",
+          "claim_sha256": "6f308c6559d24e6d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s48 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s48",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_d3825fda5c.L6.drop",
+          "claim_sha256": "fdf95e783145ccaf",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s49 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s49",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_d5aed10b83.L6.drop",
+          "claim_sha256": "c019a1fca673d0b9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s50 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s50",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_dc5c8ca781.L6.drop",
+          "claim_sha256": "8ef3a051fb6b5a5d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s51 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s51",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_dde47a0100.L6.drop",
+          "claim_sha256": "3266c4f4fc937b3c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s52 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s52",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_df9bec187d.L6.drop",
+          "claim_sha256": "a8d6d5c146a361dc",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s53 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s53",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_dfcf046170.L6.drop",
+          "claim_sha256": "9822aedd134523d8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s54 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s54",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_e0d2694ea2.L6.drop",
+          "claim_sha256": "55d596fb4ff289ed",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s55 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s55",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_e12e039475.L6.drop",
+          "claim_sha256": "f2937d5dfbb5fa63",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s56 attempts the WASI dependency load and its success determines whether nativeBinding is available for exports or the failure throw at f2:339; this is a dependency-availability gate, not merely logging.",
+          "evidence_refs": [
+            "s56",
+            "f1:81",
+            "f2:318",
+            "f2:339"
+          ]
+        },
+        {
+          "claim_id": "k_e62c6ffe1a.L6.drop",
+          "claim_sha256": "7b159b8ffbc03917",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s57 repeats the Linux prerequisite inside isMusl; its only calls are already under the Linux platform branch, so this is a redundant platform test rather than an additional gate.",
+          "evidence_refs": [
+            "s57",
+            "f2:195",
+            "f2:197",
+            "f2:223",
+            "f2:261"
+          ]
+        },
+        {
+          "claim_id": "k_e9a5386e0b.L6.drop",
+          "claim_sha256": "d2ab30e60db17f70",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s58 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s58",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_eba4691ef6.L6.drop",
+          "claim_sha256": "d2a0cec9e69e1db0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s59 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s59",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "k_f0ef1f0f76.L6.drop",
+          "claim_sha256": "358a278cdc1f9020",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s60 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s60",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_f2e2a06f09.L6.drop",
+          "claim_sha256": "cc1898376be00420",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s61 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s61",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_f3aa456f09.L6.drop",
+          "claim_sha256": "17312240296bf51b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s62 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s62",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "k_fb762a24cf.L6.drop",
+          "claim_sha256": "c838ee2d7de0e22d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s63 tests binding availability or the force-WASI environment variable and controls the WASI load at f2:322 during the postinstall binding import; this is an omitted dependency/configuration gate.",
+          "evidence_refs": [
+            "s63",
+            "f1:81",
+            "f2:318",
+            "f2:322"
+          ]
+        },
+        {
+          "claim_id": "q_00edcad60b.L6.drop",
+          "claim_sha256": "c37c4a71240adb58",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s64 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s64",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_018fbad750.L6.drop",
+          "claim_sha256": "a6b3220d301e0e2e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s65 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s65",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_05f8ec6836.L6.drop",
+          "claim_sha256": "6057199a3a7eb4dc",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s66 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s66",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_0fbc783c52.L6.drop",
+          "claim_sha256": "f19d2b4140de2cb3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s67 probes libc and returns a musl decision through isMusl, which selects musl versus GNU bindings at f2:197; this is an omitted portability gate reached by postinstall.",
+          "evidence_refs": [
+            "s67",
+            "f1:81",
+            "f2:318",
+            "f2:13",
+            "f2:18",
+            "f2:197"
+          ]
+        },
+        {
+          "claim_id": "q_1763b91786.L6.drop",
+          "claim_sha256": "803474a2429e6935",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s68 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s68",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_179c54488d.L6.drop",
+          "claim_sha256": "335bcea645545146",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s69 tests NAPI_RS_FORCE_WASI only to emit console.error after a failed load; the cited decision controls logging alone.",
+          "evidence_refs": [
+            "s69"
+          ]
+        },
+        {
+          "claim_id": "q_17b138f320.L6.drop",
+          "claim_sha256": "7a2ba1af1a3fc924",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s70 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s70",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_1b14a0a147.L6.drop",
+          "claim_sha256": "4717b12da9134607",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s71 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s71",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_1b60f1f487.L6.drop",
+          "claim_sha256": "7329d956835a5329",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s72 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s72",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_20be3afa90.L6.drop",
+          "claim_sha256": "c51059585dc5a0af",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s73 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s73",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_2370e246fd.L6.drop",
+          "claim_sha256": "7b8f41d467e8165d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s74 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s74",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_283362ff57.L6.drop",
+          "claim_sha256": "8fad7f1380ec49e2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s75 probes libc and returns a musl decision through isMusl, which selects musl versus GNU bindings at f2:197; this is an omitted portability gate reached by postinstall.",
+          "evidence_refs": [
+            "s75",
+            "f1:81",
+            "f2:318",
+            "f2:13",
+            "f2:18",
+            "f2:197"
+          ]
+        },
+        {
+          "claim_id": "q_34eb303a8b.L6.drop",
+          "claim_sha256": "10561756354d3ecf",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s76 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s76",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_3aa6e21091.L6.drop",
+          "claim_sha256": "19ea01896c28828c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s77 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s77",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_3baabd46e7.L6.drop",
+          "claim_sha256": "2cc93b935f6f697e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s78 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s78",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_3caecf74f1.L6.drop",
+          "claim_sha256": "42420c9be875b480",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s79 tests NAPI_RS_FORCE_WASI only to emit console.error after a failed load; the cited decision controls logging alone.",
+          "evidence_refs": [
+            "s79"
+          ]
+        },
+        {
+          "claim_id": "q_442a33545e.L6.drop",
+          "claim_sha256": "004d5e5f749bec66",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s80 tests binding availability or the force-WASI environment variable and controls the WASI load at f2:322 during the postinstall binding import; this is an omitted dependency/configuration gate.",
+          "evidence_refs": [
+            "s80",
+            "f1:81",
+            "f2:318",
+            "f2:322"
+          ]
+        },
+        {
+          "claim_id": "q_463350089c.L6.drop",
+          "claim_sha256": "2a07d88ceff2b8db",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s81 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s81",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_4744ca4880.L6.drop",
+          "claim_sha256": "3614304d842acc3d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s82 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s82",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_53649c10d5.L6.drop",
+          "claim_sha256": "db9b3fc889b8446f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s83 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s83",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_53685bf219.L6.drop",
+          "claim_sha256": "894a33914a41dd94",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s84 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s84",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_5842bdbe87.L6.drop",
+          "claim_sha256": "71354c2c074bab20",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s85 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s85",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_67498c6271.L6.drop",
+          "claim_sha256": "a0d4d59c75560abc",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s86 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s86",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_6b1a70a6ab.L6.drop",
+          "claim_sha256": "606d1e69d49a59dc",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s87 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s87",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_796dcb54bb.L6.drop",
+          "claim_sha256": "87f454567c2cfb53",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s88 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s88",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_8c5cd98767.L6.drop",
+          "claim_sha256": "af980f5e1ea9eede",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s89 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s89",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_9094380b68.L6.drop",
+          "claim_sha256": "73d0e1623b045527",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s90 attempts the WASI dependency load and its success determines whether nativeBinding is available for exports or the failure throw at f2:339; this is a dependency-availability gate, not merely logging.",
+          "evidence_refs": [
+            "s90",
+            "f1:81",
+            "f2:318",
+            "f2:339"
+          ]
+        },
+        {
+          "claim_id": "q_90c0829d96.L6.drop",
+          "claim_sha256": "cd6d2421f01ae5de",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s91 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s91",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_94e69c86be.L6.drop",
+          "claim_sha256": "4436a2b13fd9a28e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s92 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s92",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_973405e115.L6.drop",
+          "claim_sha256": "23cbd9fd7f927463",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s93 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s93",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_9da4935ce3.L6.drop",
+          "claim_sha256": "1c70fa129188ddc1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s90 attempts the WASI dependency load and its success determines whether nativeBinding is available for exports or the failure throw at f2:339; this is a dependency-availability gate, not merely logging.",
+          "evidence_refs": [
+            "s90",
+            "f1:81",
+            "f2:318",
+            "f2:339"
+          ]
+        },
+        {
+          "claim_id": "q_a645227989.L6.drop",
+          "claim_sha256": "c9bf809ab2efa1e6",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s94 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s94",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_b80d30c06a.L6.drop",
+          "claim_sha256": "5ba89449460b2606",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s95 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s95",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_b8c36f10aa.L6.drop",
+          "claim_sha256": "bd4e4ad5101e9323",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s96 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s96",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_c57837e99d.L6.drop",
+          "claim_sha256": "edbc7bb029e74ffd",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s97 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s97",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_cb9e446199.L6.drop",
+          "claim_sha256": "32fbb965d4f65faf",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s98 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s98",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_d1bbd6809a.L6.drop",
+          "claim_sha256": "0db01466212494e1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s99 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s99",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_d97dfa2d6c.L6.drop",
+          "claim_sha256": "75b231b6ba369169",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s100 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s100",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_e3e94cf12d.L6.drop",
+          "claim_sha256": "9c3d20dfeb92adcb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s101 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s101",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_e857b19977.L6.drop",
+          "claim_sha256": "0c3c605ea244fa14",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s102 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s102",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_ed9b41416c.L6.drop",
+          "claim_sha256": "992db38ab893b17c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s103 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s103",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        },
+        {
+          "claim_id": "q_ee6b2c9738.L6.drop",
+          "claim_sha256": "c664a49bb93653cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s104 repeats the Linux prerequisite inside isMusl; its only calls are already under the Linux platform branch, so this is a redundant platform test rather than an additional gate.",
+          "evidence_refs": [
+            "s104",
+            "f2:195",
+            "f2:197",
+            "f2:223",
+            "f2:261"
+          ]
+        },
+        {
+          "claim_id": "q_f59b8aad35.L6.drop",
+          "claim_sha256": "e753d5a7e33c3150",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s105 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s105",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_f904047160.L6.drop",
+          "claim_sha256": "6013da3c319a03d3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s106 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s106",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_fbf01e6947.L6.drop",
+          "claim_sha256": "3edc3971f2a0b804",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s107 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s107",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_fdf7ff64fa.L6.drop",
+          "claim_sha256": "7cab7702483ffa2a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s108 compares the operating system or architecture and selects which native binding require is attempted; f1:81 imports this code during validation, so it is an omitted portability gate.",
+          "evidence_refs": [
+            "s108",
+            "f1:81",
+            "f2:318"
+          ]
+        },
+        {
+          "claim_id": "q_ff5510d8b0.L6.drop",
+          "claim_sha256": "8a749e5486bd615b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s109 attempts a platform binding require inside try/catch; success returns the binding while failure continues toward other loads or WASI fallback at f2:320, making it an omitted dependency-availability gate during postinstall.",
+          "evidence_refs": [
+            "s109",
+            "f1:81",
+            "f2:318",
+            "f2:320"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "0a09d8be62b80b60",
+      "packet_sha256": "7dc5bfcb4a7d2016",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "e2896921f8b8c951",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited guards and region in s1–s12 contain only sample-missing placeholders. code/f1.unavailable.txt likewise contains no source code, so the claimed combination cannot be anchored.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d74434131cbf3d9a",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The guard, region, sink and witness slices contain only sample-missing placeholders. code/f1.unavailable.txt supplies no source with which to anchor the claimed guarded paths.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0a9aa4dbb37f29a5",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The cited guards and payload paths are sample-missing placeholders, and code/f1.unavailable.txt contains no source code. There are no package bytes available to anchor or inspect the claimed exclusive reachability.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "55cd6abdd247a74e",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The sink and witness slices s13–s17 contain only sample-missing placeholders. code/f1.unavailable.txt provides no source code to anchor the claimed process, download, write or deletion behaviours.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "0a09d8be62b80b60",
+      "packet_sha256": "42556be03cf5b991",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "e2896921f8b8c951",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The final guard permits continuation when resolution fails OR when resolution succeeds but existsSync returns false, rather than requiring the claimed absence of require.resolve alone (f1:105–112). The first guard also requires successfully loading and destructuring the consuming package manifest, b",
+          "evidence_refs": [
+            "s1",
+            "s5",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d74434131cbf3d9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The catch return and four early returns must be bypassed to reach the installation and cleanup region (f1:68–113). The execSync and writeFileSync calls lie there directly, and the cleanup call resolves to removeRecursive, which reaches rmdirSync (f1:120–138, f1:46–62).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s12",
+            "s13",
+            "s14",
+            "s16",
+            "s17",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0a9aa4dbb37f29a5",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The installation sinks occur only after the cited guards in validateBinary, whose sole invocation is at f1:145. removeRecursive has only its recursive call and the guarded cleanup caller, with no exported function or alternate entry to these sinks in the file (f1:46–62, f1:136–148).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s13",
+            "s14",
+            "s17",
+            "s16",
+            "f1:145"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "55cd6abdd247a74e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "child_process.execSync invokes npm install, which can spawn a process and download the requested dependency; child_process is imported from the built-in module (f1:44, f1:125). The fs binding comes from the filesystem module and supplies writeFileSync and rmdirSync, with recursive cleanup also using",
+          "evidence_refs": [
+            "f1:44",
+            "f1:45",
+            "s13",
+            "s14",
+            "s15",
+            "s17"
+          ]
+        }
+      ]
+    }
+  ]
+}

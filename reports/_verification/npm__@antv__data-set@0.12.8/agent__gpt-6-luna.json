@@ -1,0 +1,586 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@antv/data-set",
+    "version": "0.12.8",
+    "archive_sha256": "c25a05b1466b698cd38b42eae952aa828c30d4839af54968dcb91c20d128b80c"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "a59af23131ad8da9",
+      "packet_sha256": "767ff093f1c7e94d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "5e8bf586ef170da4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1 reads process.env using envVar from u2, which contains GITHUB_TOKEN.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b69852fc68dcf61f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1 tests startsWith(\"ghp_decoyGitHubToken\"); x2 exits when j1 is true, so later guarded work runs when the prefix test is false.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3b0b6b78c52f27a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the GITHUB_TOKEN environment variable.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1bb0191fea28d028",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 reads Intl.DateTimeFormat().resolvedOptions().locale and tests its lowercased value.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "b7084e731d66bd5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 returns true when the locale starts with \"ru\", and x2 exits when U7 is true; guarded work therefore runs when it does not start with \"ru\".",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "2f2d12f8cde06c6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested property is the locale returned by Intl.DateTimeFormat().resolvedOptions().",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "29e841259fcd922a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 tests the fallback chain LC_ALL, LC_MESSAGES, LANGUAGE, then LANG at s5, and separately tests the SystemRoot-dependent locale chain at s6.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0fb07d2397362b47",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 returns true when either locale expression starts with \"ru\", and x2 exits on that result; the guarded work runs when this cited expression does not start with \"ru\".",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "9fd4859993ca0bf6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "These tests read locale-related environment variables.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d079971615b5da6b",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "U7 returns true on any matching locale check, so the two locale sources are alternatives in a backoff check and a third SystemRoot-dependent locale check also participates; the cited three-condition expression does not capture the full gate.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7b737a3d382469ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Passing the early exits permits the same recon, credential collection, network, and process behavior to proceed.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "35fae1b760e391af",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code exits for a token with the decoy prefix or a Russian locale, thereby allowing execution outside those target conditions; this is activation based on environment targeting, not backing off from analysis.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s5",
+            "s6",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "26001610a9e138ad",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks exclude a token prefix and Russian locale, which selects the environments in which the payload runs; the code does not identify an analysis or sandbox condition.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s5",
+            "s6",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7465e279a4cec52f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded block calls J2, which awaits x2 before continuing into collection and payload processing; x2 exits on either cited guard, so continuation is on their non-exit side.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "70514e14c553631f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file contains the single J2 invocation and J2 is the only caller of x2, placing the payload after the guarded x2 call.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ed8938e4471dd2aa",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The shown payload path demonstrates a network fetch through X, but these cited slices do not establish sinks for recon, credential reading, and process spawning.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_0873e77c0c.L6.drop",
+          "claim_sha256": "d639d5ce85e4dd36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This checks whether the lock file exists as part of the single-instance lock routine, consistent with a re-entry guard.",
+          "evidence_refs": [
+            "s14",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_1cf3c7b7c4.L6.drop",
+          "claim_sha256": "7bf2c9de1deb77cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The __DAEMONIZED environment flag prevents a spawned child from spawning again, which is a re-entry guard.",
+          "evidence_refs": [
+            "s15",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_b6b5ce918f.L6.drop",
+          "claim_sha256": "da952f785ec3a09e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock-file existence check is part of stale-lock handling in the single-instance guard.",
+          "evidence_refs": [
+            "s16",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_9ccf9f0f20.L6.drop",
+          "claim_sha256": "9ff6478bf9e1067e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The __DAEMONIZED check returns before another child is spawned, so it prevents re-entry.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "q_baa2dc756e.L6.drop",
+          "claim_sha256": "154169800c3d3318",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock-file test, stale PID check, and lock refresh implement a single-instance re-entry guard.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_d568cfc6cc.L6.drop",
+          "claim_sha256": "9fbb00d84df36e7a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This checks for the lock file before deleting it, a cleanup operation for the single-instance guard.",
+          "evidence_refs": [
+            "s19"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "a59af23131ad8da9",
+      "packet_sha256": "767ff093f1c7e94d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "5e8bf586ef170da4",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The decision calls j1(), which reads process.env[_0x352380] where the key comes from u2; the cited code does not expose that key as GITHUB_TOKEN (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b69852fc68dcf61f",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "j1() checks a dynamically selected environment key and prefix, so the cited bytes do not establish the claimed GITHUB_TOKEN operand or prefix (s1). The early exit means a matching result stops execution, but the hidden values cannot be checked here (s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3b0b6b78c52f27a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "j1 reads a property from process.env, making this an environment variable check, though the specific variable is unresolved (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1bb0191fea28d028",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 tests the result of Intl.DateTimeFormat().resolvedOptions().locale in an if condition (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "b7084e731d66bd5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 lowercases the locale and tests startsWith(\"ru\"); when true it returns true, and x2 exits on that true result, so the remaining code proceeds when this test is false (s3, s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "2f2d12f8cde06c6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested property is the locale returned by Intl.DateTimeFormat().resolvedOptions() (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "29e841259fcd922a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 tests startsWith on the fallback chain LC_ALL, LC_MESSAGES, LANGUAGE, then LANG; it also checks another LANG-based expression conditioned on SystemRoot (s5, s6).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0fb07d2397362b47",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment fallback chain is lowercased and tested with startsWith('ru'); U7 returns true on a match and x2 exits, so this locale condition must be false for later code to proceed (s5, s4).",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "9fd4859993ca0bf6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested values are process.env locale variables (s5, s6).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d079971615b5da6b",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The guards are sequential early exits before J2's work, and U7 backs off when locale checks match; however, c1's dynamic environment key and prefix are unresolved, so the claimed three-condition combination cannot be fully established (s1, s2, s4, s7, s8).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7b737a3d382469ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks gate entry to J2's subsequent recon, credential validation and network reporting work rather than selecting a different target (s2, s4, s7, s8).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "35fae1b760e391af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A Russian locale causes U7 to return true, after which x2 exits before the later work; this is a backoff on that environment (s3-s6).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "26001610a9e138ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U7 explicitly backs off for Russian locale indicators before the later reconnaissance and credential collection work, supporting an anti-analysis purpose (s3-s8).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7465e279a4cec52f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "x2 exits on the checks before J2 continues; J2 calls b() from the guarded loop, b() calls X(), and X() calls fetch (s2, s4, s7-s13).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "70514e14c553631f",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The b() validator is called from other code paths as well as the guarded loop, and each call reaches X() then fetch; therefore the network sink is reachable outside this gate (s10-s13; f1: approximately 7000).",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ed8938e4471dd2aa",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "The witness establishes a fetch network sink for exfiltration, but these cited slices do not establish sinks for recon, credential reading, or process spawning as each claimed behaviour requires (s8-s13).",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_0873e77c0c.L6.drop",
+          "claim_sha256": "d639d5ce85e4dd36",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The test calls _0x1d864c(wu), but its meaning and the resulting behavior are hidden behind obfuscated bindings in this excerpt, so whether it is an environment gate or re-entry guard is not decided (s14).",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "k_1cf3c7b7c4.L6.drop",
+          "claim_sha256": "7bf2c9de1deb77cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z1 returns false when process.env.__DAEMONIZED is set, and its caller otherwise spawns a detached child with __DAEMONIZED set, making this a re-entry guard (s15, s17).",
+          "evidence_refs": [
+            "s15",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_b6b5ce918f.L6.drop",
+          "claim_sha256": "da952f785ec3a09e",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "a1 branches on an obfuscated file check, then parses a hidden value and makes further obfuscated calls; this excerpt does not identify it as a re-entry guard (s16, s18).",
+          "evidence_refs": [
+            "s16",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_9ccf9f0f20.L6.drop",
+          "claim_sha256": "9ff6478bf9e1067e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z1's process.env.__DAEMONIZED check prevents the child from spawning itself again after the child inherits the flag (s17, s15).",
+          "evidence_refs": [
+            "s17",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_baa2dc756e.L6.drop",
+          "claim_sha256": "154169800c3d3318",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "a1 uses an obfuscated file test and hidden helper calls to parse/update a stored value, so the cited code does not decide whether it is a re-entry guard (s18).",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_d568cfc6cc.L6.drop",
+          "claim_sha256": "9fbb00d84df36e7a",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "_o() invokes an obfuscated file test and then an obfuscated helper; the excerpt does not establish whether this is a gate or re-entry guard (s19).",
+          "evidence_refs": [
+            "s19"
+          ]
+        }
+      ]
+    }
+  ]
+}

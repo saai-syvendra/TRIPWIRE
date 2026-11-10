@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp",
+    "version": "3.14.5",
+    "archive_sha256": "5558a7f5a05af9ecf744af91e5baefc436f93c9333e656c27ec253f9a6bbe178"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "81c9523a62f1bcfc",
+      "packet_sha256": "67171f9e9e7ca69d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "edb28547062a6761",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison directly tests sys.version_info, and sys is imported in the same module without reassignment (f1:3, s1).",
+          "evidence_refs": [
+            "f1:3",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "c5cceaa692333e97",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test compares sys.version_info with (3, 10) using <, and its true arm raises RuntimeError. Continuing into the guarded code therefore requires sys.version_info >= (3, 10) (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "df4e47b8edfb78a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads the Python interpreter version through sys.version_info, so runtime_version fits (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3ef1d8be059f37f0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole cited guard rejects versions below (3, 10), leaving the subsequent region on its continuation side (s2, s3). This guard's combination is c1, with one condition required; later checks within the region do not change that combination.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "851285c845d4baf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version check raises before build configuration and setup on unsupported versions; its continuation permits that build path (f1:8, f1:9, f1:108). This supports enables.",
+          "evidence_refs": [
+            "f1:8",
+            "f1:9",
+            "f1:108"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e54886d56219c740",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The continuation runs build setup for interpreters meeting the minimum version, so activate fits (s2, s4).",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "11c93e3b2b8bd612",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The minimum interpreter-version comparison aborts the package build on older Python versions, supporting portability as its purpose (s2, f1:108).",
+          "evidence_refs": [
+            "s2",
+            "f1:108"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0f7cdec9b1d40626",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The region consists of module statements after the version guard's raising arm (s2, s3). The setup call is directly inside that continuation region, so no witness hops are needed (f1:108).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:108"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "3faeb12698e6a615",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete module contains a single setup invocation at f1:108, after the unconditional version check and uncaught raise at f1:8–9. No alternate caller or handler in the supplied file bypasses that check to reach this sink.",
+          "evidence_refs": [
+            "f1:8",
+            "f1:9",
+            "f1:108"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ab461270dfa3988d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is setup imported from setuptools (f1:5, f1:108). Its arguments configure C extensions and a build_ext subclass or a pure build, supporting benign_build (f1:63, f1:91, f1:99).",
+          "evidence_refs": [
+            "f1:5",
+            "f1:63",
+            "f1:91",
+            "f1:99",
+            "f1:108"
+          ]
+        }
+      ]
+    }
+  ]
+}

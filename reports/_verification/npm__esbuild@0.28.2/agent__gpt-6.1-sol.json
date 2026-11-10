@@ -1,0 +1,673 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "esbuild",
+    "version": "0.28.2",
+    "archive_sha256": "e045f94c235c7adc50e77ba2a579c7bec41b496b6b47c3a7845f7c1e19959a88"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "63ae3c7324c81cd8",
+      "packet_sha256": "47fc18a9edc0393a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "efab949068e63aa1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment value assigned at f1:29 is passed at f1:258 to the helper whose parameter is tested at f1:30.",
+          "evidence_refs": [
+            "f1:29",
+            "f1:30",
+            "f1:258"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "20d5df2c92ffc77a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The helper requires a truthy parameter and excludes the literal shown in s3; its true result enters s2.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "00aad0de0c05c2fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested value originates in the ESBUILD_BINARY_PATH environment variable at f1:29.",
+          "evidence_refs": [
+            "f1:29",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "902a98f4edb5842a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment value assigned at f1:29 is passed at f1:258 to the helper whose parameter is tested at f1:30.",
+          "evidence_refs": [
+            "f1:29",
+            "f1:30",
+            "f1:258"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "741ee6e9e9e21ed1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The helper requires a truthy parameter and excludes the literal shown in s3; its true result enters s2.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "47198c9164d37406",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested value originates in the ESBUILD_BINARY_PATH environment variable at f1:29.",
+          "evidence_refs": [
+            "f1:29",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "d3aaba4bdba792ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fs2 is bound to fs at f1:89, and s4 tests existence of the configured binary path.",
+          "evidence_refs": [
+            "f1:89",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "ae3fb97934344df4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The negated existence test takes its else arm only when the configured path exists.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "1ee4705e2fe45bbb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition checks filesystem existence of the configured binary.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "6140c15e87ba91f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try body resolves the interpolated package and subpath; resolution failure enters the fallback catch.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "949e21fe1618eeaa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The catch arm runs when require.resolve throws instead of finding the requested dependency binary.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "fddfe6916f643c75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Resolution checks for the platform package binary in the installed dependency tree.",
+          "evidence_refs": [
+            "f1:266",
+            "f1:269"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "b1db20e7b74f2e64",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "platformKey incorporates process.platform and is tested against the fallback package map.",
+          "evidence_refs": [
+            "f1:67",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "e96b1d8af1bd09a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The map contains exactly the three stated platform keys; membership sets isWASM, whose negation permits fallback installation and optimization.",
+          "evidence_refs": [
+            "f1:58",
+            "f1:67",
+            "f1:77",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "79ab11af0bb20ac2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The key combines operating system, architecture and endianness to choose a platform binary.",
+          "evidence_refs": [
+            "f1:67",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "7257e9e4bd843099",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os2 is required from os and its platform method participates directly in the condition.",
+          "evidence_refs": [
+            "f1:90",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "3c343220a498bf14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm requires os2.platform() to be unequal to win32.",
+          "evidence_refs": [
+            "s11",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "394d4c33453143af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "os2.platform() reads the operating system platform.",
+          "evidence_refs": [
+            "f1:90",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "b0fbe8e261ad2d6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites read the local binding destructured from process.env.npm_config_user_agent.",
+          "evidence_refs": [
+            "f1:141",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "56ac75d5832177c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isYarn returns the stated regex result when the variable is present and false otherwise; s10 negates that result.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "737bc7a592e640a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The environment user agent is tested for the Yarn package manager marker.",
+          "evidence_refs": [
+            "f1:141",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d7aa74030d59abae",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The outer helper requires both c1 and c2, and the nested else requires c3 before the override call.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s2",
+            "s5",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "fb80218fa58a10d0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The override writes launch configuration for the chosen executable; this changes how the binary starts and is plumbing under the stated rule.",
+          "evidence_refs": [
+            "s17",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "5465fa106a711d70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks select a supported installation configuration rather than detecting analysis activity.",
+          "evidence_refs": [
+            "s2",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "76be52c09812a7c0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Portability fits better than unclear: the code installs launch configuration for an explicitly configured, existing binary.",
+          "evidence_refs": [
+            "s2",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "279e4839033cbd74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The override call is in the nested guarded region and resolves directly to the function containing the write sink.",
+          "evidence_refs": [
+            "s14",
+            "s16",
+            "s17",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "f6ac97b4b16f38e2",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The override call is in the nested guarded region and resolves directly to the function containing the write sink. The complete file shows no entry to these sinks that bypasses the cited guards.",
+          "evidence_refs": [
+            "s14",
+            "s16",
+            "s17",
+            "s15",
+            "f1:294"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "6505a7bce3fc7257",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs2 is the fs module and the cited writeFileSync call writes the launcher file.",
+          "evidence_refs": [
+            "f1:89",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "8836234e642afdb3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The fallback region is inside the failed-resolution catch and follows the throwing isWASM guard, requiring both conditions.",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "1535773ae9461862",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Failed resolution on a non-WASM platform enables npm installation and the direct download fallback.",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "bcbb15b7435d82a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks select a supported installation configuration rather than detecting analysis activity.",
+          "evidence_refs": [
+            "s2",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "5befa1dcf87de6b5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The fallback obtains the platform binary when the optional dependency cannot be resolved.",
+          "evidence_refs": [
+            "f1:266",
+            "s7",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "cca6915047946151",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The region calls the npm installer and download fallback; their definitions contain the cited sinks, including cleanup through removeRecursive.",
+          "evidence_refs": [
+            "s18",
+            "s20",
+            "s21",
+            "s23",
+            "s24",
+            "s27",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "ff03b308a1d58901",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The region calls the npm installer and download fallback; their definitions contain the cited sinks, including cleanup through removeRecursive. The complete file shows no entry to these sinks that bypasses the cited guards.",
+          "evidence_refs": [
+            "s18",
+            "s20",
+            "s21",
+            "s23",
+            "s24",
+            "s27",
+            "s28",
+            "f1:294"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "17546d49e014f73b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sinks resolve to child_process.execSync, a fetch wrapper using https.get, fs.writeFileSync and fs.unlinkSync.",
+          "evidence_refs": [
+            "f1:89",
+            "f1:93",
+            "f1:95",
+            "f1:149",
+            "s19",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "fae25e3ad88b6d88",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The optimization condition conjoins non-Windows, non-Yarn and non-WASM tests; isWASM is derived from the platform map.",
+          "evidence_refs": [
+            "s10",
+            "f1:67",
+            "f1:77",
+            "f1:266",
+            "f1:292"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "466ad7bb6456ed5f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The branch replaces the JavaScript launcher with a hard link to the binary, changing how it starts; this is plumbing under the stated rule.",
+          "evidence_refs": [
+            "s29",
+            "f1:295"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "93a494a1d275822d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks select a supported installation configuration rather than detecting analysis activity.",
+          "evidence_refs": [
+            "s2",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "879fc786f27fbe0d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The optimization is restricted by operating system, package manager and executable format compatibility.",
+          "evidence_refs": [
+            "s10",
+            "s29",
+            "f1:295"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "27a83b0f1774c500",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The rename sink is directly inside the guarded optimization block.",
+          "evidence_refs": [
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "1cd2a4c1c0f849d5",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The rename sink is directly inside the guarded optimization block. The complete file shows no entry to these sinks that bypasses the cited guards.",
+          "evidence_refs": [
+            "s29",
+            "s30",
+            "f1:294"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "6edb5052d5089720",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs2.renameSync replaces the launcher destination with the linked binary, providing the claimed filesystem write.",
+          "evidence_refs": [
+            "f1:89",
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "k_5ac6641f52.L6.drop",
+          "claim_sha256": "ff8f156786ee5c7e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The filesystem metadata probe decides whether cleanup skips an entry or reaches directory recursion and file deletion, so it is a data_availability gate.",
+          "evidence_refs": [
+            "s31",
+            "s35",
+            "f1:210",
+            "f1:211"
+          ]
+        },
+        {
+          "claim_id": "k_6a1ea602e7.L6.drop",
+          "claim_sha256": "9cde3dce2fe22224",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Darwin and error-pattern condition controls execution of the sw_vers child process during install validation, so it is a portability gate beyond log text.",
+          "evidence_refs": [
+            "s32",
+            "f1:121",
+            "f1:296"
+          ]
+        },
+        {
+          "claim_id": "k_bdbbaa74e6.L6.drop",
+          "claim_sha256": "e65214302c1ba0b0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version command output only supplies text for the diagnostic Error message; no branch compares its value.",
+          "evidence_refs": [
+            "s33",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "q_0b3cb0707a.L6.drop",
+          "claim_sha256": "a2315784972fd452",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Darwin and error-pattern condition controls execution of the sw_vers child process during install validation, so it is a portability gate beyond log text.",
+          "evidence_refs": [
+            "s32",
+            "f1:121",
+            "f1:296"
+          ]
+        },
+        {
+          "claim_id": "q_2a9ba8f897.L6.drop",
+          "claim_sha256": "b2f88225f53101df",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The filesystem metadata probe decides whether cleanup skips an entry or reaches directory recursion and file deletion, so it is a data_availability gate.",
+          "evidence_refs": [
+            "s31",
+            "s35",
+            "f1:210",
+            "f1:211"
+          ]
+        },
+        {
+          "claim_id": "q_7befdb7ee1.L6.drop",
+          "claim_sha256": "cf8e7ee37816c170",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Success or failure of this probe changes only the OS version wording in the diagnostic Error message.",
+          "evidence_refs": [
+            "s36",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "q_c53c402f86.L6.drop",
+          "claim_sha256": "0a134a2ca6ba53c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the same user-agent presence check already included in c7 and its regex helper, not a separate gate.",
+          "evidence_refs": [
+            "s37",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "q_d89d9e0aa2.L6.drop",
+          "claim_sha256": "05eb8dce6baf7bc6",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Darwin and error-pattern condition controls execution of the sw_vers child process during install validation, so it is a portability gate beyond log text.",
+          "evidence_refs": [
+            "s32",
+            "f1:121",
+            "f1:296"
+          ]
+        }
+      ]
+    }
+  ]
+}

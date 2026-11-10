@@ -1,0 +1,312 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/insurance-sdk",
+    "version": "1.97.4",
+    "archive_sha256": "53e83534da0bf00d98afbcee0dce2dd84f085c0c86cd128c7f7a26a77daa4cba"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "75292e71090732ea",
+      "packet_sha256": "66cf7f69ffe3bcf6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "c4ef51217c934c9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 matches a regex on lines of content, which is the result of fs.readFileSync(rcPath) at f1:18; the match result is tested at f1:21.",
+          "evidence_refs": [
+            "s1",
+            "f1:18",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "b0066685c03b4fb8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The regex at f1:20 is the same text as the claimed value, and its match result is tested at f1:21; the enclosing function result is tested by the if at f1:88 (s2).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "daa38f51cfad572a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "whoami is assigned from await fetchJson(...) at f2:51 and tested at f2:52.",
+          "evidence_refs": [
+            "s3",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "108eebcea58a5153",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:52 returns early when whoami is falsy or has no username, so the later code runs only when it is truthy.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "45dad4c0afa04319",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested value comes from an HTTP registry response.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "9f9fcd41a7a49f9c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "owned is assigned from await getOwned(...) at f2:54 and tested by !owned.length at f2:55.",
+          "evidence_refs": [
+            "s5",
+            "f2:54"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "f153b762d42e6f42",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:55 returns early on an empty list, so the later code runs only when the result is non-empty (truthy).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "292f29b3c154e768",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "getOwned builds its list from registry search responses.",
+          "evidence_refs": [
+            "s5",
+            "f2:40"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "aa50b4ced4134ca0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:21 calls startsWith on m[1], which comes from a line of the file read at f1:18.",
+          "evidence_refs": [
+            "s7",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "4d771e3943f3a326",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is negated (!m[1].startsWith('${')), so the positive form for reaching the guarded code is not_startswith.",
+          "evidence_refs": [
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "8bfd81abae10a111",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test filters the contents of a config file read from disk.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d6281db9fe86937b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The three checks on the command output (f1:41) are nested with and. The file test (regex plus not-startsWith) is a separate path, and the env-var loop is a third alternative. Each adds to the token set tested at f1:88, so the combination is or; the minimum is one condition.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s9",
+            "s10",
+            "s1",
+            "s7",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "2c8e1d7554bc79de",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tested tokens only decide whether the child process at f1:91 runs.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "47e3a8832f2f1e61",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The branch runs when data is found; nothing backs off on analysis.",
+          "evidence_refs": [
+            "s2",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "0dc8119406a825c2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate tests whether token data is present before continuing.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "03b80c4bda433e25",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawn at f1:91 sits inside the f1:88 then-block. It runs scripts/deploy.js, whose main function calls run (f2:80), which calls fetchJson (f2:51), which holds the https.get at f2:11.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "873b09ccf7d4f931",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "Within the packet, f1:91 is the only caller of scripts/deploy.js. That file is a standalone script with its own env-var check, and the packet does not show whether another entry point, such as a package.json bin or script, also runs it.",
+          "evidence_refs": [
+            "s13",
+            "f2:76"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "698771ef440d4cb7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The f2:52 and f2:55 early exits are sequential in run, so their conditions join with and. Together with the token gate that makes three conditions at minimum (an env token, c6, c7).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "83d44a7c11d268fd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks only decide whether the later code runs.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d98450724090f781",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code runs when the checks pass; nothing backs off on analysis.",
+          "evidence_refs": [
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "d681f38640f15de7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks test whether the required data is available.",
+          "evidence_refs": [
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "78a0309e97e3f840",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "Both sinks (s20, s21) lie in the s19 region after the s4 and s6 early exits. The s2 guard has no cited hop linking it to s19, which is in another file, although the spawn at f1:91 does run that file.",
+          "evidence_refs": [
+            "s19",
+            "s20",
+            "s21",
+            "s4",
+            "s6",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "9dc526119cbde8fa",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "Within the packet, f1:91 is the only caller of scripts/deploy.js. The packet does not show whether another entry point, such as a package.json bin or script, also runs it.",
+          "evidence_refs": [
+            "s13",
+            "s19"
+          ]
+        }
+      ]
+    }
+  ]
+}

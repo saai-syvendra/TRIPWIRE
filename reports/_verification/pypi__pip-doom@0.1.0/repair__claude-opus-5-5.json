@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pip-doom",
+    "version": "0.1.0",
+    "archive_sha256": "a6f80674d75dfcbff92cb330845211a0e4c292dfe8325bcbd415b94a5033986d"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "650396ce5b77c1d4",
+      "record_sha256_after": "ed491bec5de93820",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "78d487f490d45ada",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The verifier was right: the line-12 if's else side (elif at game.py:15-16 and else at :17-18) only assigns the darwin or linux binary path, and the line-141 subprocess.call sits in the else of the separate line-22 if, so the line-12 guard controlled no else region. Added the blocks at game.py:16 and"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Cleared the guessed recipe field: g1.else os linux reaches the final else at game.py:18 and the call at :141 for any platform other than win32 and darwin, so it is not a guess. The flag stays because install runs prebuilt binaries in doom/bin (ELF, Mach-O, two PE builds) whose logic cannot be read s"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ed491bec5de93820",
+      "record_sha256_after": "9c16465c06857d0f",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "67c4bbe5513546d8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The claim holds under the L3 rule: each region must lie on the claimed side of at least one guard, and each guard must control at least one region. The refutation only shows the line-141 sink is not on the else side of the line-12 guard, which the claim does not need. game.py:16 and :18 are on the e"
+        },
+        {
+          "claim_id": "k_b56109009d.L6.drop",
+          "claim_sha256": "8ebef69452804969",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. '64' in machine at game.py:14 decides whether doom-ascii_win64.exe or doom-ascii_win32.exe is launched at :102 and :128. These are separate executables with unread logic, so the drop note's 'same game binary' is not shown by the code, and a per-platform version of a behaviou"
+        },
+        {
+          "claim_id": "q_9ab299314a.L6.drop",
+          "claim_sha256": "b9adf381c9352db5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The ternary at game.py:14 is the decision that reads c2 and selects the win64 or win32 executable, which :102 and :128 then launch. For the reason given on k_b56109009d, the 'both run the same game' note rests on unread binaries. Now cited as g2's ternary guard, with the two strings as the then and "
+        },
+        {
+          "claim_id": "k_83e2e1dbc9.L6.drop",
+          "claim_sha256": "c17ebd43afc36601",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. sys.platform == 'darwin' at game.py:15 decides whether doom-ascii_mac or doom-ascii is launched at :141. The launch call is the same, but the executables are separate and unread, so the behaviour behind the check is not shown to be the same. Now cited as c3 in gate g3 (c3, s"
+        },
+        {
+          "claim_id": "q_a6103d6cf9.L6.drop",
+          "claim_sha256": "248af5fe00d83a2f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The elif at game.py:15 is the decision that reads c3: its block assigns doom-ascii_mac and the final else at :18 assigns doom-ascii, and :141 launches that value. Now cited as g3's guard, with :16 and :18 as the then and else regions. Each payload has a bind hop on the assignment and is marked unres"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "9c16465c06857d0f",
+      "record_sha256_after": "68d267e9061feeb8",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "6c9dbad30eaf5fb8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The site game.py:14 tests '64' in machine, and machine is bound once, on the line before in the same block, to platform.machine().lower() (game.py:13). It has no other assignment. L1 accepts a test that uses the API through a variable bound to it in the same scope, and .lower() only normalises the c"
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "7c79ba9f7a95c4da",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right that an empty witness claims the sink sits in the region: the sinks at game.py:102 and :128 are outside the string arm. Added a bind hop on the line-14 assignment, which stores the arm's value in binary, to both payloads. The sinks are still not in the region, so the payload"
+        },
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "f190b17b75fe5ddf",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same defect and fix as g2.then.L3: the empty witness implied the sinks at game.py:102 and :128 sit in the string arm. Added a bind hop on the line-14 assignment to both payloads and kept them unresolved (computed_callee). Without '64' in machine the win32 path is stored in binary, not reassigned, an"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "06148478e6b272b5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The hop at game.py:16 is the assignment to binary, the name the sink reads, and it is the only assignment on this path. On darwin control passes game.py:20, the line-22 test is false because sys.platform is darwin, and the else at game.py:141 runs subprocess.call([binary, ...]). The reviewer is righ"
+        },
+        {
+          "claim_id": "g3.else.L3",
+          "claim_sha256": "941ba7bcb68e53ba",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The hop at game.py:18 is the assignment to binary, the only assignment on this path. On a platform that is neither win32 nor darwin control passes game.py:20, the line-22 test is false, and the else at game.py:141 runs subprocess.call([binary, ...]). The reviewer's point that the value is a path str"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "write_report.py left needs_manual_review true with all four reasons. The four binaries in doom/bin stay unread: a text search of the win64, win32 and mac builds found game strings and no network or injection API names, with a _system symbol in the mac build whose caller is unread, but a search does "
+        }
+      ]
+    }
+  ]
+}

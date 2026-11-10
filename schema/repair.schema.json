@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "repair.schema.json",
+  "title": "Repair log: decisions the repair pass took on refuted or disputed claims and review flags",
+  "description": "reports/_verification/<key>/repair__<by>.json. Append-only runs. A decision on a claim counts only while its claim_sha256 is the record's current one; claim_id 'record' is a decision on the record's needs_manual_review reasons.",
+  "type": "object",
+  "required": ["schema_version", "method", "by_slug", "package", "runs"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "method": { "const": "repair" },
+    "by_slug": { "type": "string", "pattern": "^[a-z0-9._-]+$" },
+    "package": {
+      "type": "object",
+      "required": ["ecosystem", "name", "version", "archive_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "ecosystem": { "enum": ["npm", "pypi"] },
+        "name": { "type": "string" },
+        "version": { "type": ["string", "null"] },
+        "archive_sha256": { "type": ["string", "null"] }
+      }
+    },
+    "runs": { "type": "array", "items": { "$ref": "#/$defs/run" } }
+  },
+  "$defs": {
+    "run": {
+      "type": "object",
+      "required": ["by", "record_sha256_before", "record_sha256_after", "round", "decisions"],
+      "additionalProperties": false,
+      "properties": {
+        "by": { "type": "string", "minLength": 1 },
+        "record_sha256_before": { "type": "string" },
+        "record_sha256_after": { "type": "string" },
+        "round": { "type": "integer", "minimum": 1 },
+        "decisions": { "type": "array", "items": { "$ref": "#/$defs/decision" } }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": ["claim_id", "claim_sha256", "final_seen", "confirmed", "decision", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": { "type": "string", "pattern": "^(record|c\\d+\\.L[12]|c\\d+\\.L6\\.category|g\\d+\\.L4|g\\d+\\.L6\\.(polarity|effect|purpose)|g\\d+\\.(then|else)\\.L[35](\\.excl)?|[kq]_[0-9a-f]{10}\\.L6\\.drop)$" },
+        "claim_sha256": { "type": "string", "pattern": "^([0-9a-f]{16}|record)$" },
+        "final_seen": { "enum": ["refuted", "disputed", "flagged"] },
+        "confirmed": { "type": "boolean", "description": "the refutation was confirmed (the deterministic pass and an agent both refuted the claim)" },
+        "decision": { "enum": ["fixed", "rejected", "escalated", "cleared", "kept_flag"] },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 300 }
+      },
+      "allOf": [
+        { "if": { "properties": { "confirmed": { "const": true } } },
+          "then": { "properties": { "decision": { "enum": ["fixed", "escalated"] } } } },
+        { "if": { "properties": { "claim_id": { "const": "record" } } },
+          "then": { "properties": { "final_seen": { "const": "flagged" }, "decision": { "enum": ["cleared", "kept_flag", "fixed"] } } },
+          "else": { "properties": { "final_seen": { "enum": ["refuted", "disputed"] }, "decision": { "enum": ["fixed", "rejected", "escalated"] } } } }
+      ]
+    }
+  }
+}

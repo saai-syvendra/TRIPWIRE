@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "executable-stories-playwright",
+    "version": "7.0.3",
+    "archive_sha256": "f8382242e31c7b2174d65924fb316abd74b09986a8941b1b87d594e97ca989cc"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d4d60363641d15f0",
+      "record_sha256_after": "49b0454437138f3a",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "83936bfff8499d51",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "In z7 (d11) the first cited site tests Intl.DateTimeFormat().resolvedOptions().locale startsWith ru, but the second site (178290-178428) tests (LC_ALL||LC_MESSAGES||LANGUAGE||LANG) from process.env and never touches Intl. c1 now keeps only the Intl site; the env site moved to new condition c11 (proc"
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "19a4b687bbdfc691",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "z7 only checks whether the host locale or LANG/LC_* is Russian and uX exits if so. That excludes a victim population; it does not look for analysis, CI or a sandbox, which are checked separately (IX, H9, w4). Polarity changed to activate."
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "d869cfc9adbd72e2",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The ru-locale exit limits the payload to non-Russian-locale victims, which is targeting by the skill's definition, not anti-analysis. Purpose changed to targeting and purpose_reason reworded."
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "ebae92fcbfe4005d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The region cited only the writeFileSync call (288960-288998), so the Bun.spawn exec sink at 289013-289104 with an empty witness lay outside it. Both calls sit in the try body of i1.execute() after the early return on !shouldExecute() (288827-288872). The region is now that try body statement_block ("
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "f58f9d75d8df6845",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "At 545691 execute() returns failure('Not Linux.') when G9() is not LINUX, and there is no other-OS branch. The guarded reader is not Linux-bound: getKubeconfigToken (542133-542873) reads KUBECONFIG or HOME/USERPROFILE + .kube/config, which works on macOS and Windows too; only the in-cluster service-"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The record must stay flagged. The i1 dropper stage (d7/n7, written to /tmp/update-*/updater.py and run with bash) is still not decoded, so there is unrecovered code and the payload path is not fully traced. Every condition and gate is out of set and needs re-verification after this repair (c11 is ne"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "49b0454437138f3a",
+      "record_sha256_after": "49729d7ef839a038",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "168753dce6a61440",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that the probe target was not exact. w4 picks 'tasklist 2>/dev/null' on win32 and 'ps aux 2>/dev/null' otherwise, and passes that variable to execSync (imported as _0x5ef3ff). The target is now '* 2>/dev/null', with both commands named in execution.notes."
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "86e4171a8ae680f7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The operator stands: w4 returns true on a DQ match and the guarded code needs no match. The probe target is corrected as in c7.L1. The value listed only 8 of DQ's 17 names, so it now lists all 17."
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b69873489462672a",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Only exfil had a sink. Added recon (os.hostname in I6.execute) and cred_read (execSync 'gh auth token' in I6.execute), traced from _3() in the region. Added self_propagation on o1.execute's processRepo call, which commits an injected workflow and _index.js, with a new region on the PX statement. Tha"
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5e3562099fd5dac1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. z7 has a third test: when SystemRoot is set it reads LANG, then LANGUAGE, then LC_ALL, and returns true on ru. That order differs from c11, so it can exit when c1 and c11 both hold. Added it as c12; the expression is now c1 && c11 && c12 and min_conditions is 3."
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "ea8fd4d20f0e24f2",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same fix as g1.then.L5, since g2 guards the same fL code: added recon and cred_read sinks in I6.execute through _3(), and self_propagation on o1's processRepo call through PX with dynamic_dispatch, plus the PX region and a via hop on uX()."
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "b9407364156e4874",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The self_propagation label was wrong. Decoding d7 and n7 (registered as d12, aesgcm_gunzip) shows n7 installs Python monitor d7 as a systemd user service or LaunchAgent, and d7 polls GitHub commit search and runs signed downloads. Nothing copies or publishes the package. The Bun.spawn row is now per"
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "f60372ff1cbb371e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is partly right. H9 tests far more than CI falsiness, so c9 is now CI not_in true, 1, woodpecker, c13 holds the 27 presence markers and c14 the CI_NAME, NETLIFY and CF_PAGES value tests. The expression is c6 && c7 && c9 && c13 && c14 && c10, min_conditions 6. GX stays out as a re-entr"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "f58f9d75d8df6845",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The check at the anchor is if(G9()!==\"LINUX\") return failure, with no version for any other OS, which the skill defines as targeting and not portability. The refutations say the reader cannot work elsewhere, but only readServiceAccountToken uses the in-cluster path. getKubeconfigToken takes HOME or "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "49729d7ef839a038",
+      "record_sha256_after": "94cd7fa011cf60fa",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "ab1df3f77fc007b2",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Not confirmed: the agent verdict is unanchored (sample_missing), so only the deterministic pass refuted. In d11 function H9, the site at bytes 179050-179101 is process.env[\"CI\"]===\"true\"||process.env[\"CI\"]==='1' and the site at 180135-180167 is process.env[\"CI\"]===\"woodpecker\". Each one does return "
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "ebf2d8603c668f66",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Not confirmed: the agent verdict is unanchored (sample_missing), so only the deterministic pass refuted. All 26 cited sites in d11 function H9 (bytes 179116-180423) read process.env[\"NAME\"] for a name in the claim's api list, for example process.env[\"GITHUB_ACTIONS\"] at 179116-179145, and the site a"
+        },
+        {
+          "claim_id": "c14.L1",
+          "claim_sha256": "2a883ceace34c437",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Not confirmed: the agent verdict is unanchored (sample_missing), so only the deterministic pass refuted. The three cited sites in d11 function H9 are process.env[\"CI_NAME\"]===\"codeship\" (179819-179854), process.env[\"NETLIFY\"]===\"true\" (179869-179900) and process.env[\"CF_PAGES\"]==='1' (180348-180377)"
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "7a4c052eef18b984",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Not confirmed: the agent verdict is unanchored (sample_missing), so only the deterministic pass refuted. The value pairs each variable with its constant, and the code at the sites matches every pair: CI_NAME===\"codeship\" at 179819-179854, NETLIFY===\"true\" at 179869-179900, CF_PAGES==='1' at 180348-1"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "needs_manual_review stays true after write_report.py. Fixed: g2 file_absent replaces the invented path ~/.aws/credentials-with-FAKE with ~/.aws/credentials, which the code joins from home, .aws and credentials and only reads if it exists; g2 env_var_absent GITHUB_REPOSITORY is read from the code, wh"
+        }
+      ]
+    }
+  ]
+}

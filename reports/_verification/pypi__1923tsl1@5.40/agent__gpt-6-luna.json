@@ -1,0 +1,292 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "1923tsl1",
+    "version": "5.40",
+    "archive_sha256": "20260b275af5ffd4a04b9d2fe704bf53cb960861273537c5dfb5329e8ae88f73"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "b8e20fe113ff4999",
+      "packet_sha256": "c2b5ead471409133",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e50e943e37418a7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition calls `os.getlogin()` and compares the returned login name with the author handle, so the test concerns the username. The login comparison is visible at f1:11.",
+          "evidence_refs": [
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "decfdf09c5243f75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the login differs from the handle, the guarded block registers a RunOnce command, downloads a file, and runs it; there is no alternate payload branch. The gate enables those behaviors at f1:11-17.",
+          "evidence_refs": [
+            "f1:11",
+            "f1:15",
+            "f1:16",
+            "f1:17"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "10f433680a9ee275",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs when the login is not the named author handle and is skipped when it matches, which is an activation condition for other usernames. The comparison and guarded actions are at f1:11-17.",
+          "evidence_refs": [
+            "f1:11",
+            "f1:12",
+            "f1:17"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c05ed8fb7fa31214",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition selects whether the install-time actions run based on the current login name, excluding one specific handle; this is username-based targeting. The test and actions are at f1:11-17.",
+          "evidence_refs": [
+            "f1:11",
+            "f1:15",
+            "f1:16",
+            "f1:17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "26a3f32acaf6dd3c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guarded code invokes `reg add` to place the executable path in RunOnce, calls Windows curl with a URL and output path, and passes that path to `os.system`, supporting persistence, download, and execution respectively. These calls are in the region guarded by the username test at f1:11-17.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "f1:11"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "a822a687e1eafc9c",
+      "packet_sha256": "c2b5ead471409133",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e50e943e37418a7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares the value returned by `os.getlogin()` with the author handle, so it tests the logged-in username. (f1:11)",
+          "evidence_refs": [
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "decfdf09c5243f75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the username differs from `Tahg`, the branch registers a RunOnce command, downloads an executable, and runs it; the test enables those behaviors. (s4)",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "10f433680a9ee275",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload actions run when `os.getlogin() != \"Tahg\"`, so the gate activates on usernames other than the author handle. (f1:11-17)",
+          "evidence_refs": [
+            "f1:11",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c05ed8fb7fa31214",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code singles out the author account by skipping its username and performing the payload actions for other usernames, which is a targeting test. (f1:11-17)",
+          "evidence_refs": [
+            "f1:11",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "26a3f32acaf6dd3c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The branch launches `reg add` to write a RunOnce entry for persistence, calls curl with an output path to download the executable, then passes that path to `os.system` to execute it. (s1-s3)",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "a822a687e1eafc9c",
+      "packet_sha256": "fca7ac6a4853ac37",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ef7b03df9f2d5f16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if decision directly calls os.getlogin() in its comparison, so the cited site tests that API.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "6e1e8ba901e2a828",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is entered when os.getlogin() != \"Tahg\"; the code shows the literal although the claim redacts it.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e50e943e37418a7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.getlogin() supplies the current login name, so username is the category read by this condition.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "eba17c15dfb635fb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single if condition is c1 and directly controls the then block, so the combination is c1 with a minimum of one condition.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "decfdf09c5243f75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the username differs from Tahg, the branch adds a RunOnce registry entry, downloads an executable, and runs it, enabling those behaviours.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "10f433680a9ee275",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch carrying the persistence, download, and execution actions runs when the login name is not Tahg, consistent with activation on other usernames.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c05ed8fb7fa31214",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition distinguishes the named login from all other login names before enabling the payload actions, which is targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7266ebb74377caeb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each cited sink call appears directly inside the then block controlled by the if: registry command, curl download, and execution of malwPath.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "9f5eea01e4d2eeee",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The three sink calls are inline in the sole guarded block, with no separately defined callable sink or other call site in setup.py that reaches them.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "26a3f32acaf6dd3c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The Popen command writes the executable path under the user's RunOnce registry key, subprocess.call invokes curl with an output path, and os.system runs that downloaded path.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

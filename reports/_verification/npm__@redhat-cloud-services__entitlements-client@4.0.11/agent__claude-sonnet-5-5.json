@@ -1,0 +1,1426 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@redhat-cloud-services/entitlements-client",
+    "version": "4.0.11",
+    "archive_sha256": "2d687501e01b03709e0a5b206cca7cbd30651378d5c272aebcb8c6985024043f"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "6d9ac70e12c62ced",
+      "packet_sha256": "0b42188b98600f4d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "948c12f428d699a3",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slice s1 quotes text at offset ~506k, but f1 is a 22-line loader that does not contain it, so the site cannot be tied to the file.",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "60a4efdad559cdb8",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slices s1 and s2 quote text that is absent from f1, which is a short loader.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "d18c11fdf7a0a7a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The slice test reads named environment variables and compares each with a prefix, so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "613ee947210aa5b6",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slice s3 text (offset ~174k) is absent from f1, which is a 22-line loader.",
+          "evidence_refs": [
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c0c5f1c6bb5e160d",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slices s3 and s4 quote text that f1 does not contain.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "2f2d12f8cde06c6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The slice reads the runtime locale and tests it against a language prefix, so locale_language fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "75a8711d677c8be0",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slice s5 text is absent from f1, which is a 22-line loader.",
+          "evidence_refs": [
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0541bf12e51b60e0",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slices s4 and s5 quote text that f1 does not contain.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "96ca038d820547c4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The slice reads the locale environment variables (LC_ALL, LANG and similar) and tests a language prefix, so locale_language fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "4759c34a266f0bb8",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slice s6 text is absent from f1; f1 only calls existsSync on a downloaded binary path, not the cited lock file.",
+          "evidence_refs": [
+            "s6",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "4cf0f915bc6fd7e7",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slices s6 and s7 quote text that f1 does not contain.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "4a5616a05d45fa45",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The slice tests whether a lock file exists in the temp directory, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "57b5f324cf6e8478",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slice s8 text is absent from f1, which is a 22-line loader.",
+          "evidence_refs": [
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "bb9274487952b33a",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slices s8 and s9 quote text that f1 does not contain.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "009cfd9386846238",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The slice compares the CPU core count with a threshold, so hardware fits.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "715c5520102f448f",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slice s10 text is absent from f1, which is a 22-line loader.",
+          "evidence_refs": [
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "8d918add518ca64e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slices s9 and s10 quote text that f1 does not contain.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "fa04a19b435da828",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The slice checks for security-product install directories and running process names, so installed_tool fits.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "009c66085db26576",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slice s11 text is absent from f1, which is a 22-line loader.",
+          "evidence_refs": [
+            "s11",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "ac5c48aacbff4bc0",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slices s9 and s11 quote text that f1 does not contain.",
+          "evidence_refs": [
+            "s9",
+            "s11",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "c580cbe7ec46b50f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The slice tests CI, GITHUB_ACTIONS and JENKINS_HOME, which are CI markers.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "f3dcfb2f1cfddf15",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slice s12 text is absent from f1, which is a 22-line loader.",
+          "evidence_refs": [
+            "s12",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "b036ffb9d2fbb7ab",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slices s12 and s13 quote text that f1 does not contain.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "fc6c69f87537e070",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The slice compares GITHUB_ACTIONS with the string true, which is a CI marker.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "f0c9d0c9fecdc3d3",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slice s14 text is absent from f1, which is a 22-line loader.",
+          "evidence_refs": [
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "b90b93232b745a44",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Slices s13 and s14 quote text that f1 does not contain.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "806d28a0e9d08be2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The slice reads RUNNER_OS, a CI runner variable, so ci_marker fits.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "672742af91ed1a17",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The cited guard and region slices are not present in f1.",
+          "evidence_refs": [
+            "s2",
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "9a3d0d02ad260a05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard exits when its test holds and otherwise lets the guarded code run, so it enables that code.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b4ae0b78635ec3e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off when the environment holds placeholder token values, which looks like analysis or honeypot detection, so evade fits.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "4d6916aba12ff89c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decoy-token check exists to avoid analysis environments, so anti_analysis fits.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "3394fd71662b3a3a",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Guard, region and sink slices are not present in f1.",
+          "evidence_refs": [
+            "s2",
+            "s16",
+            "s17",
+            "s18",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1a3a33816fd7017c",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Callers and exports cannot be searched because the cited code is not in f1.",
+          "evidence_refs": [
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "05bddad47fed5ea1",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Sink slices s17 and s18 are not present in f1.",
+          "evidence_refs": [
+            "s17",
+            "s18",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "7c30b8989185bc2f",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The cited guard and region slices are not present in f1.",
+          "evidence_refs": [
+            "s4",
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "1da9c92cfdd8f4db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard exits on a matching locale and otherwise lets the guarded code run, so it enables that code.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "26a3d0960362de20",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The locale test excludes machines by language rather than spotting analysis or a sandbox, so I would label it activate.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "6cbc1e2aca36c9f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Selecting machines by locale is targeting.",
+          "evidence_refs": [
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "b0fb522766fb5e8c",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Guard, region and sink slices are not present in f1.",
+          "evidence_refs": [
+            "s4",
+            "s16",
+            "s17",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "adcad0f6122ff02c",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Callers and exports cannot be searched because the cited code is not in f1.",
+          "evidence_refs": [
+            "s4",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "828e58c0456d71ee",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Sink slice s17 is not present in f1.",
+          "evidence_refs": [
+            "s17",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "4a40ce11c7f51c30",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The cited guard and region slices are not present in f1.",
+          "evidence_refs": [
+            "s7",
+            "s16",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "365e2918ea728b1b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard exits when another process holds the lock and otherwise lets the guarded code run.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "089ec9cca2f72025",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock check does not look for analysis; it only stops a second instance, so activate fits.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "1e6c59c1ee0f5ca9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock file guards re-entry and decides nothing about the environment, so the purpose is unclear.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "130475f26b4527f7",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Guard, region and sink slices are not present in f1.",
+          "evidence_refs": [
+            "s7",
+            "s16",
+            "s17",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "b6f96d78806262a8",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Callers and exports cannot be searched because the cited code is not in f1.",
+          "evidence_refs": [
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "1a5e27d5b0c73e1b",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Sink slice s17 is not present in f1.",
+          "evidence_refs": [
+            "s17",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "4f9fab64c63f9467",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The cited guard and region slices are not present in f1.",
+          "evidence_refs": [
+            "s9",
+            "s19",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "dbb0cdfcdf5cae6a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard returns early unless all checks pass, so it enables the code after it.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "33a281e7779ae01e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off on low CPU counts, security products and CI markers, which is evade.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "5a4307123efb70d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks aim to avoid sandboxes, security tooling and CI, which is anti_analysis.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "ec80af831c5a4d14",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Guard, region and sink slices are not present in f1.",
+          "evidence_refs": [
+            "s9",
+            "s19",
+            "s20",
+            "s21",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "3ca5a421f678c9dd",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Callers and exports cannot be searched because the cited code is not in f1.",
+          "evidence_refs": [
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "9bb10cb51043c2d4",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Sink slices s20 and s21 are not present in f1.",
+          "evidence_refs": [
+            "s20",
+            "s21",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "66ae3fe5bc641ebc",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The cited guard and region slices are not present in f1.",
+          "evidence_refs": [
+            "s13",
+            "s22",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "71e38d7fe8b328b6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard returns a failure unless both conditions hold, so it enables the code after it.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "0a44faaae9477e17",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs only on a Linux GitHub Actions runner, so it activates on a target.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "8d722343849935f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Requiring a Linux GitHub Actions runner selects a specific target, which is targeting.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "34e4097b65f97c86",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Guard, region and sink slices are not present in f1.",
+          "evidence_refs": [
+            "s13",
+            "s22",
+            "s23",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "3c436cc0bb6c7154",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Callers and exports cannot be searched because the cited code is not in f1.",
+          "evidence_refs": [
+            "s13",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "cc2e947d538bc463",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "Sink slice s23 is not present in f1.",
+          "evidence_refs": [
+            "s23",
+            "f1:1"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "2e576a68f5574ac9",
+      "packet_sha256": "3c595877858f8d29",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "4031d972b470f747",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The slice text (s1, s2) does not appear in code/f1.js.txt, which has only 22 lines of a Bun downloader. It has no locale checks, so the slices cannot be tied to the packaged bytes.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "a3d777ec8cf54e75",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The cited test is not present in code/f1.js.txt (22 lines, no process.env locale reads), so the category cannot be judged against package code.",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "58a9aacceb3655e8",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The guard and condition slices (s1, s2, s3, s4, s5) are not found in code/f1.js.txt, which holds only a Bun download helper.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "84bc814072befdfc",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The gate code is not present in code/f1.js.txt, so its effect cannot be judged.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "ac735319f63495f1",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The gate code is not present in code/f1.js.txt, so its polarity cannot be judged.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "f03af7f46358d485",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The gate code is not present in code/f1.js.txt, so its purpose cannot be judged.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "09712a14c108082d",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The shouldExecute and execute slices (s6 to s11) are not in code/f1.js.txt. The file has no cpus, CI or EDR checks.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "b33bc8904db15d9e",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "anchor_hash_mismatch",
+          "evidence": "The sink slices s12 and s13 are not in code/f1.js.txt. The file has only a curl/unzip helper at f1:17-18 and no writeFileSync or Bun.spawn call.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "f1:17"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "5c09ac1896fc5237",
+      "packet_sha256": "12f456100be163f1",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "b052c6d88965e9bd",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The slice cites index.js at offset ~177581, but code/f1.js.txt is a 22-line loader with no existsSync security-tool path test; the cited text is not in the file.",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "51028ffa18596e87",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited path list and guard text appear only in the packet slices, not in code/f1.js.txt, which has only an existsSync check on a downloaded bun executable.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:14"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "1eb48f2122f4b061",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The tested code is not in the package file, so the category cannot be judged against bytes.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "05ee395f17eab4f8",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "No locale or process.env test exists in code/f1.js.txt; the cited offset is far beyond the 22-line file.",
+          "evidence_refs": [
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "c5c267147187bb72",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The startsWith('ru') test and its early-exit guard are not present in code/f1.js.txt.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "990dbd14f31b187e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited locale test is not in the package file, so it cannot be judged.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "25245f477db4bd37",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "No process.kill call exists in code/f1.js.txt.",
+          "evidence_refs": [
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "924a1d6e8e5e6a03",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The process.kill test and its guard are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "7afe6c4a39bf519a",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited code is not in the package file, so the category cannot be judged.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "cddde45fee86a29f",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "code/f1.js.txt calls execSync only for curl and unzip (f1:17-18); the cited ps aux probe is not in the file.",
+          "evidence_refs": [
+            "s7",
+            "f1:17",
+            "f1:18"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "03d388c0b4e93ab6",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The security-agent process-name list and includes test are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s7",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "6d161e68e1a9a0c6",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited code is not in the package file, so the category cannot be judged.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "b026522b5717bba9",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The guard at s8 and its via call at s9 are not in code/f1.js.txt, which has no gate or guard structure.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "39e848652dfe403e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "None of the cited regions, hops or sinks (s11-s47) are in code/f1.js.txt, so the witness cannot be followed.",
+          "evidence_refs": [
+            "s11",
+            "s15",
+            "s27",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "98fef93d58f1d428",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The payload code is not in the package file, so exclusivity cannot be assessed.",
+          "evidence_refs": [
+            "s11",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "bcdb3ff955e145e2",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited sinks (s15, s24, s27, s37) are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s15",
+            "s24",
+            "s27",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "5161ffdd87da7beb",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The guard at s4 and the three locale conditions (s48, s49, s3) are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s4",
+            "s48",
+            "s49",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "1c133f3ed3ad12d6",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code is not in the package file, so the effect cannot be judged.",
+          "evidence_refs": [
+            "s4",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "2f36b5d7c7fdf11b",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code is not in the package file, so the polarity cannot be judged.",
+          "evidence_refs": [
+            "s4",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "84d2122ce39ad984",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code is not in the package file, so the purpose cannot be judged.",
+          "evidence_refs": [
+            "s4",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "dff8fd64fcbe03e4",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The guard, regions and payload hops are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s4",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "1aacc47c7f336131",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The payload code is not in the package file, so exclusivity cannot be assessed.",
+          "evidence_refs": [
+            "s4",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "f7cc1f53ab37f4c2",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited sinks are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s15",
+            "s24",
+            "s27",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "932f784785b91ee8",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The lock-file guard at s6 and the conditions at s50 and s5 are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s6",
+            "s50",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "ee2f9630671f6941",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code is not in the package file, so the effect cannot be judged.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8c7cff2c118ab388",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code is not in the package file, so the polarity cannot be judged.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "a113cc0965fc0290",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code is not in the package file, so the purpose cannot be judged.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "3bdd3e6da936ece2",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The guard, regions and payload hops are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "d3d08c369b25ca39",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The payload code is not in the package file, so exclusivity cannot be assessed.",
+          "evidence_refs": [
+            "s6",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "8bf997c313a321da",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited sinks are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s15",
+            "s24",
+            "s27",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "a2f3618aef615c5a",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "shouldExecute, the os.cpus test and the CI markers (s51, s52, s1, s7) are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s2",
+            "s51",
+            "s52",
+            "s1",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "39698987df07153b",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code is not in the package file, so the effect cannot be judged.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "e6347282383acf64",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code is not in the package file, so the polarity cannot be judged.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "1b48e06fb8fb4417",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code is not in the package file, so the purpose cannot be judged.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "7bbec615dd0c0ff7",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The guard, regions (s53, s54) and sinks are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s2",
+            "s53",
+            "s54"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "9399fed6af549941",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The payload code is not in the package file, so exclusivity cannot be assessed.",
+          "evidence_refs": [
+            "s2",
+            "s53"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "49beb77404615981",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited sinks (s55, s56) are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s55",
+            "s56"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "fc865db6ab384161",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code (s57) is not in the package file, so the effect cannot be judged.",
+          "evidence_refs": [
+            "s57"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "61d840102e9306e6",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code (s57) is not in the package file, so the polarity cannot be judged.",
+          "evidence_refs": [
+            "s57"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "19a7a24431203011",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The gate code (s57) is not in the package file, so the purpose cannot be judged.",
+          "evidence_refs": [
+            "s57"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "ab0ca06b19ae209c",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The guard, regions and sinks (s57-s62) are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s57",
+            "s58"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "12689e1ab75ad2e2",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The payload code is not in the package file, so exclusivity cannot be assessed.",
+          "evidence_refs": [
+            "s57",
+            "s58"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "a9a31ca90a1bae09",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited sinks are not in code/f1.js.txt.",
+          "evidence_refs": [
+            "s59",
+            "s62"
+          ]
+        }
+      ]
+    }
+  ]
+}

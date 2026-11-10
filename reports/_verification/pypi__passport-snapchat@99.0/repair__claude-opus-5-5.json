@@ -1,0 +1,285 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "passport-snapchat",
+    "version": "99.0",
+    "archive_sha256": "8be2bd37d56006cc85f76bd8042cfbaa41f5efe64eeefab96f1f7263a1fae471"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "bbde484f0e8f5207",
+      "record_sha256_after": "da4d02251b5c9870",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed two of the three reasons. (1) The 'added by hand' reason is removed: setup.py line 269 tests \"index-url\" in each pip.conf line (c2) and line 302 tests \"bdist_wheel\" in sys.argv (c3), and the early exit at 284 and the if at 302 are the decisions, so the out-of-set claims match the code and are "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "da4d02251b5c9870",
+      "record_sha256_after": "158328ea3e127367",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "99f71817adc012a9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c1 && c2 holds. The early exit at line 284 tests the value get_index() returns, and that value comes from the same line c2 tests (line 271 returns the text after the last '=' of the line containing index-url). The reviewer is right that a line ending in '=' returns empty and exits, but that is a pre"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ba8562a3dde2711c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed purpose from targeting to data_availability. Lines 283-285 only test that a URL exists, and line 296 interpolates it into the pip install command. The code never compares the URL with anything, so it does not pick a kind of victim, it checks that the thing the step uses exists. purpose_reaso"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2ce0b3b8d8634b64",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c1 && c2 && c3 holds for the same reason as g1.L4: the emptiness test at line 284 is a presence check on the value read from the line c2 tests, not a separate condition. The region at line 304 sits after that exit and inside the then side of the bdist_wheel test at line 302, so the three conditions "
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "98d9859c800a7cb1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Portability means each branch runs a platform-specific version of the same behaviour. The test at line 302 has no alternative branch: when bdist_wheel is absent the download, the delete at line 319 and the moves at lines 313 and 321 do not run at all, and when it is present the built wheel is replac"
+        },
+        {
+          "claim_id": "k_49929842f8.L6.drop",
+          "claim_sha256": "96338c5924546b5f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The reviewer is right about the code: on Python 2 line 125 skips the ioctl and line 130 returns UNKNOWN, so the old note ('only changes how the IP is read') was wrong. Note corrected. The drop stands: only one field of the collected data changes, recon and the POST at line 242 run either way, so no "
+        },
+        {
+          "claim_id": "k_d50ab6d3b5.L6.drop",
+          "claim_sha256": "11ef09b42b056597",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The else side at line 113 sets an empty zone rather than picking another call, so the old note was wrong. Note corrected to say the check decides whether the time zone string is filled. The drop stands: get_time_zone still returns a value at line 117, and recon and exfil run either way."
+        },
+        {
+          "claim_id": "k_dff8dcc169.L6.drop",
+          "claim_sha256": "b18575c32013c092",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same correction as k_d50ab6d3b5 for the minor version half of the test at line 110: it decides whether the zone is filled or left empty, not which call runs. The drop stands because recon and exfil run either way."
+        },
+        {
+          "claim_id": "q_47990afd34.L6.drop",
+          "claim_sha256": "431e603266d139ae",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at line 125 decides whether getifip returns the address or UNKNOWN. The note ('recon either way') is what the code does: get_ip_addresses still appends the result at line 169 and collect_info still sends the data. Flipping the test changes one data field, not a behaviour class, so this is dat"
+        },
+        {
+          "claim_id": "q_c6834b6084.L6.drop",
+          "claim_sha256": "d7dc9bbadf8faae5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at line 110 only sets zone, which goes into the string built at line 114 on both sides. The note ('recon either way') holds. A missing time zone is a data field difference inside collection, recon and exfil still run, so it is not a gate."
+        },
+        {
+          "claim_id": "k_7694cc91ae.L6.drop",
+          "claim_sha256": "b83ebdf505ef1d30",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 142 picks /proc/net/dev for listing interfaces. The other branches list the same thing by another method, and get_net uses the list the same way at line 194. Every side is recon inside collection that run_me calls unconditionally, so flipping the OS changes no behaviour class. Reading a value t"
+        },
+        {
+          "claim_id": "k_ec73b446af.L6.drop",
+          "claim_sha256": "0892e2dab3ab93c4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 167 picks how IP and MAC are read on Linux. The darwin and windows branches read the same data another way for the same get_net loop at line 196. Every side is recon, the POST runs on all of them, so no behaviour class depends on the check."
+        },
+        {
+          "claim_id": "k_91f78649e6.L6.drop",
+          "claim_sha256": "6cf945e7a4fdcca5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 149 picks ifconfig parsing to list interfaces on darwin. The Popen at line 150 only reads data for the same list, so it is recon like the linux and windows branches. Flipping the OS changes the method, not the behaviour class."
+        },
+        {
+          "claim_id": "k_6898806f80.L6.drop",
+          "claim_sha256": "7ae63871d03aed3e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 173 picks ifconfig parsing to read addresses on darwin. The process only reads the data the other branches read another way, and all of it feeds the same output at line 198. Same behaviour class on every side, so it is data collection."
+        },
+        {
+          "claim_id": "k_b87d1c2f03.L6.drop",
+          "claim_sha256": "b27c42766526b655",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 157 picks socket.if_nameindex to list interfaces on Windows. It yields the same list as the other branches for the same loop, so recon runs on every side and no behaviour class changes."
+        },
+        {
+          "claim_id": "k_34a2ff9669.L6.drop",
+          "claim_sha256": "74b541a3d39d0a56",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 185 picks gethostbyname to read the host IP on Windows. It fills the same ips result as the other branches, and run_me collects and sends on every OS, so the check selects a method inside recon, not a behaviour."
+        },
+        {
+          "claim_id": "q_f45ae3a8f9.L6.drop",
+          "claim_sha256": "bb76ad6616f9352c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if/elif chain at line 142 only selects how interfaces are listed. Every branch feeds the list used at line 194, and an OS outside the chain gets an empty list while collection and the POST still run. Recon on every side, so it is data collection, not a gate."
+        },
+        {
+          "claim_id": "q_5ccc73db93.L6.drop",
+          "claim_sha256": "e00f42511c53e6a2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if/elif chain at line 167 only selects how IPs and MACs are read and returns them at line 188 on every side. Flipping the OS changes the method, not the behaviour class: recon and exfil run on all of them."
+        },
+        {
+          "claim_id": "q_e41f5c33d1.L6.drop",
+          "claim_sha256": "a8192cc669c6d859",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The darwin elif at line 149 is one arm of the interface listing chain. It produces the same list by ifconfig, so recon runs on either side and no behaviour class depends on it."
+        },
+        {
+          "claim_id": "q_7b6cfc3093.L6.drop",
+          "claim_sha256": "28bcdea7d46a2b05",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The darwin elif at line 173 is one arm of the address reading chain. It fills the same ips and macs by ifconfig, so recon runs on either side and no behaviour class depends on it."
+        },
+        {
+          "claim_id": "q_a36675be35.L6.drop",
+          "claim_sha256": "bbbfe1f854dd4a48",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The windows elif at line 157 is one arm of the interface listing chain. It fills the same list by socket.if_nameindex, so recon runs on either side and no behaviour class depends on it."
+        },
+        {
+          "claim_id": "q_b206121ffc.L6.drop",
+          "claim_sha256": "0fb054d581deda96",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The windows elif at line 185 is one arm of the address reading chain. It fills the same ips by gethostbyname, so recon runs on either side and no behaviour class depends on it."
+        },
+        {
+          "claim_id": "k_53a2a073c3.L6.drop",
+          "claim_sha256": "afbd4bac489763e0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The reviewer is right that the result reaches more than the key: detect_system at lines 75-79 is an if/elif, so a true result from mJdzrtzhMJ_1 skips the loopback GET and the env hash check. The old note ('only sets the key field') was wrong, and it is corrected. The drop stands: the skipped steps o"
+        },
+        {
+          "claim_id": "k_4bd66fc71c.L6.drop",
+          "claim_sha256": "4f3da8f328a5a1c9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same correction as k_53a2a073c3 for the isdir test at line 41: the note now says a match also makes detect_system skip the loopback GET and env hash check. The drop stands because recon and exfil run either way."
+        },
+        {
+          "claim_id": "q_256c150c65.L6.drop",
+          "claim_sha256": "15c24ad844e4ea0a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same correction as k_53a2a073c3 for the guard at line 39: the note now says the result decides the key and whether detect_system goes on to the loopback GET and env hash check. The drop stands because recon and exfil run either way."
+        },
+        {
+          "claim_id": "q_cc6042522e.L6.drop",
+          "claim_sha256": "da8630f8daf5fb5e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same correction as k_53a2a073c3 for the guard at line 41: the note now says the result decides the key and whether detect_system goes on to the loopback GET and env hash check. The drop stands because recon and exfil run either way."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "158328ea3e127367",
+      "record_sha256_after": "ddbcdeef9aafa9f2",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "k_53a2a073c3.L6.drop",
+          "claim_sha256": "f4d7a61a6812c6a1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:39 tests the OS only to decide whether mJdzrtzhMJ_1 lists home for a hashed folder. The refutation's control flow is correct: a true result at line 75 skips the loopback GET (line 77) and env hash check (line 79), and the drop note already says so. But no behaviour class changes when the te"
+        },
+        {
+          "claim_id": "k_4bd66fc71c.L6.drop",
+          "claim_sha256": "9af3c33b106c230d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:41 is os.path.isdir on the expanded home dir, a precondition for os.listdir in find_in_folder at line 42. A true result only lets the hashed-name lookup run. If it is false, k stays False (line 37) and detect_system goes on to the loopback GET and env hash check (lines 77, 79), which are al"
+        },
+        {
+          "claim_id": "q_256c150c65.L6.drop",
+          "claim_sha256": "409b38921c090156",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at setup.py:39-46 only computes the boolean k returned at line 50. Its sole consumer is the if/elif chain at lines 75-80, which sets the integer key and decides whether two more recon reads run. The refutation calls this gating of reconnaissance, but the false side of the guard does more reco"
+        },
+        {
+          "claim_id": "q_cc6042522e.L6.drop",
+          "claim_sha256": "1d623ec426b1b471",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The nested if at setup.py:41-46 lists home and the hashed folder and sets k from the result. Only k depends on it, and k decides the 'key' field and whether the loopback GET and env hash check at lines 77 and 79 run. The refutation's flow claim is accurate and already in the drop note, but all of th"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed the 'guessed recipe fields' reason: g2's recipe guessed package_manager pip, and the code only tests the literal bdist_wheel in sys.argv at setup.py:302, so the recipe now holds that value and recipe_guessed_fields is empty. write_report.py still sets needs_manual_review because of 'out-of-set"
+        }
+      ]
+    }
+  ]
+}

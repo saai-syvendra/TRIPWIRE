@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "protobuf",
+    "version": "7.36.2",
+    "archive_sha256": "497d0463ff3316681da6c0b9e8d06cb465d61abce00b613ab42226175644d1bb"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "841336e394606374",
+      "packet_sha256": "d81cc4682f7f639d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_8d2ba0020b.L6.drop",
+          "claim_sha256": "2b9244753725e619",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The sys.platform.startswith('win') test only picks compiler/linker flags (-static vs -fvisibility=hidden) for the same extension build. It selects no payload and runs no different code, so it is build plumbing, not a gate.",
+          "evidence_refs": [
+            "s1",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "q_0e16ace065.L6.drop",
+          "claim_sha256": "7fee9dfd851ac3a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The if/else at f1:38-41 only assigns extra_link_args or extra_compile_args for the Extension build. It spawns nothing, does no network or file operations, and decides no behaviour, so it is portability plumbing and not an environment gate.",
+          "evidence_refs": [
+            "s2",
+            "f1:38-41"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "esqgrandcandy",
+    "version": "1.19",
+    "archive_sha256": "a5899af7e1bda482e393a4b7763575dbe4920a6d0ab300410bc2b795ab556f31"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "c185e11036c0a9bb",
+      "packet_sha256": "c94af4e4d293438c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ef456bf7d85c12b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:6 tests `not os.path.exists('tahg')` directly as the condition of an if statement, with os imported at f1:5.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "d3520af362d55c20",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "value_redacted",
+          "evidence": "The code at f1:6 does negate os.path.exists, so not_exists is the positive form that reaches the Popen call, but the claimed value is redacted. I cannot compare it with the literal 'tahg'.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "dcdadf63afa2f264",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition is a filesystem existence check on a marker path, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "76f8a6ef2264f4dd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard whose then block (f1:8) is the only region, and its only condition is the os.path.exists negation, so the expression c1 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "647de990ee6d038d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check decides whether the single payload runs at all, with no alternative branch, so the effect is enables.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "ff4d2bf6e1647feb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the marker is absent, and nothing in the check looks for analysis or a sandbox, so the polarity is activate.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "9da4e9b2442dd450",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The marker-file check looks like a re-run guard and does not target a victim or detect analysis, so purpose unclear fits.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "22cf550dfa1b9ba2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The subprocess.Popen call at f1:8 sits directly inside the then block of the if at f1:6, so the empty witness is correct. The call runs a hidden powershell EncodedCommand.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "44aec81b2d962040",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The Popen call is at module level in setup.py, the only file in the packet. It is not in a function, so there are no other callers, exports or timers, and it is reached only through the if at f1:6.",
+          "evidence_refs": [
+            "f1:6",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "aa54fcbd9368a2d3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.Popen is process creation. It runs a hidden-window powershell with an encoded command that, read as text, appears to fetch a remote file and then run it, which covers download, exec_downloaded and the hidden-window defense_evasion.",
+          "evidence_refs": [
+            "s3",
+            "f1:8"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@ctrl/shared-torrent",
+    "version": "6.3.1",
+    "archive_sha256": "d2b1d42ae11f34b5e2e985c41429453c3e12e79e74c93e06ef62176a0d9b1935"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "352e332e60beefd2",
+      "record_sha256_after": "6611b6de3fbfb4f4",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Guessed recipe fields resolved from the code: g20 os/GITHUB_TOKEN follow main()'s isLinux()||isMac() and t.startsWith(\"ghp_\") checks; g22 NPM_TOKEN is read as process.env.NPM_TOKEN in main() and NpmModule.validateToken returns null without a token; g24 file_present is the path bundled google-auth ch"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "6611b6de3fbfb4f4",
+      "record_sha256_after": "9686da4f19bb4391",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g20.then.L5",
+          "claim_sha256": "1fb7ad90e26900dc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right about self_propagation. r.migration spawns migrate-repos.sh, which mirrors private org repos into the victim account, removes .github/workflows and makes the copies public; it copies neither this package nor the workflow. Relabelled that sink exfil. persistence had no sink: i"
+        },
+        {
+          "claim_id": "g20.L6.purpose",
+          "claim_sha256": "bbed883af35bbe3a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The claim changed because g20.then behaviours changed (self_propagation replaced by exfil, see g20.then.L5) and purpose_reason was reworded to match. The label targeting stands: the guards limit bash-only payloads to Linux or macOS and to hosts with a ghp_/gho_ token and a resolved user, and no othe"
+        },
+        {
+          "claim_id": "g23.L4",
+          "claim_sha256": "34ea91fb3cb0f6f9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. existsSync in parseAwsProfiles only adds profile names to the list, and initialize() tries AWS_PROFILE or default even with no file found, so file existence neither decides nor suffices. await n.isValid() is true only when GetCallerIdentity returns UserId, Account and Arn. c"
+        },
+        {
+          "claim_id": "g24.L4",
+          "claim_sha256": "85c8a2528cad75f4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. GCPModule.initialize sets isValidCredentials only inside if(t&&r), where t is getProjectId() and r is getClient(), so both must be truthy. Added c95 (google.auth.GoogleAuth.getProjectId, truthy) sited on the getProjectId call, added it to the guard, and changed the expressio"
+        }
+      ]
+    }
+  ]
+}

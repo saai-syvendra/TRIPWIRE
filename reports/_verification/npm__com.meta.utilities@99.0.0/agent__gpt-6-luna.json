@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "com.meta.utilities",
+    "version": "99.0.0",
+    "archive_sha256": "58911b5d5646b17538de8bd1875c3b38761b8eb9736131bd1587d83b58cb723a"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "b2fe605eee75a402",
+      "packet_sha256": "2e555b7d49e3ae59",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_c8c37a7229.L6.drop",
+          "claim_sha256": "d1ad6d358da7b506",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `uname -a` command is run unconditionally to populate metadata, and its output is added to `data`; this call does not decide what install-time code runs (f1:15, f1:20-31).",
+          "evidence_refs": [
+            "s1",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "q_65eaba9809.L6.drop",
+          "claim_sha256": "1c216008e08ac4d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/catch only handles failure of the unconditional metadata command by assigning `N/A`; it does not gate which install-time code runs (f1:14-18, f1:20-31).",
+          "evidence_refs": [
+            "s2",
+            "f1:14"
+          ]
+        }
+      ]
+    }
+  ]
+}

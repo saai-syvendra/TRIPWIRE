@@ -1,0 +1,1407 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@swc/core",
+    "version": "1.16.20",
+    "archive_sha256": "c7081a10cb4bedbf936763d7bc010452cf76e5d8f6915fb26f80aeaae4b524c6"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "235717999110db0b",
+      "packet_sha256": "f641a86a037f5018",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ca861cc0fd58895a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.env.INIT_CWD is passed to path.resolve inside require() in the try body, so the decision is whether INIT_CWD/package.json can be loaded (throws -> catch returns).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:69"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "e4a9abbc0a9bb419",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "If INIT_CWD is unset, path.resolve(undefined, ...) throws and the catch returns, so the rest of the function only runs when INIT_CWD exists (and its package.json loads).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:68-76"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "ccfe945bf3c3f74e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "INIT_CWD is set by npm to the directory where the install was invoked, so package_manager fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "01ae59473cf25add",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The destructured name from require(INIT_CWD/package.json) is compared with two strings in the if condition.",
+          "evidence_refs": [
+            "s3",
+            "f1:69-70"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9f8c8d71000c2950",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then side of the if returns when name equals either string, so the code after it runs only when name is in neither: not_in.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:70-72"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "c51a5bee72f2ac6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the name of the consuming project's package.json, so consuming_app fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "c347105423eab7a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "require('./binding.js') sits in a try body and its result variable `binding` is tested by `if (!!binding) return`, so the outcome of the require is the decision.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:80-98"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "f82c01c604d4f3cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`if (!!binding) return` exits when the binding loaded and passed the check, so the later code runs only when ./binding.js did not load: not_exists. The check also fails if the binding loads but the triple check throws, a minor looseness.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:81-98"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "a23e15418d33ab11",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test asks whether the package's own native binding is resolvable, which is installed-dependency state, so dependency_tree is acceptable.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "a6d9988e62410db0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.env['SWC_BINARY_PATH'] is the operand of the if condition at line 100.",
+          "evidence_refs": [
+            "s7",
+            "f1:100"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "1fbb097d66bf14cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`if (!!process.env.SWC_BINARY_PATH) return` exits when the variable is truthy, so the later code runs only when it is falsy.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:100-103"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "790eae6ebf328dbf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable override, so env_var fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "1e02f49c82c0afc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "require.resolve('@swc/wasm') is assigned to wasmBinding in a try body, and the if at line 110 tests that variable (with existsSync).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:107-110"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "10a875a3d968bacf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The function returns when wasmBinding resolves and exists, so the install code runs only when @swc/wasm cannot be resolved.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "f1:107-112"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "f944f176466de51d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether @swc/wasm is already installed in the dependency tree.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "814d5c89b74899e1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The try block and four early-exit ifs are sequential and each must pass to reach the install block, so they join with and. Five conditions are needed.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s8",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "66bf9cff34654796",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions only decide whether the fallback @swc/wasm install runs at all, with no alternative payload or target, so enables.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c66db40c10e1c7a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the native binding is missing and no override is present; it does not back off on analysis or CI, so activate.",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "d51549c9efd9ae73",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The install installs the @swc/wasm fallback when the platform's native binding cannot load, which is portability.",
+          "evidence_refs": [
+            "s5",
+            "s12",
+            "f1:94"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "6a287a375fa485ce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execSync (s13) and writeFileSync (s14) sit directly in the region after all guards. rmdirSync (s15) is reached via the removeRecursive call in the finally block (s16) to its definition (s17).",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "e6e448ad61344471",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "validateBinary is invoked only once at the bottom of postinstall.js and removeRecursive only from its finally block; neither is exported or scheduled elsewhere.",
+          "evidence_refs": [
+            "f1:66",
+            "f1:138",
+            "f1:145"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "fe0fa734970190d9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "child_process.execSync runs `npm install ... @swc/wasm@version`, which spawns a process that downloads a package. writeFileSync writes package.json, and rmdirSync/unlinkSync delete files.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_00c293dcba.L6.drop",
+          "claim_sha256": "c6f3992ac1774646",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform/arch dispatch in the generated NAPI-RS loader only picks which prebuilt addon to require; it gates no install-time behaviour.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "k_18f78e5436.L6.drop",
+          "claim_sha256": "c88de5e2893fd1ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "k_1a1a5b2f0a.L6.drop",
+          "claim_sha256": "95d88a706b92c556",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "k_329a94aaa6.L6.drop",
+          "claim_sha256": "edb4becd24db80c0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "k_33ec9e5fee.L6.drop",
+          "claim_sha256": "6c4f0b5aed544a55",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "k_3c58ebd645.L6.drop",
+          "claim_sha256": "8cf035dcbdff213a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "k_3f9d93f161.L6.drop",
+          "claim_sha256": "caf0ef976f3a3c28",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "k_4083d042e5.L6.drop",
+          "claim_sha256": "b262eceb2a6a3e5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "k_4a597ccb0f.L6.drop",
+          "claim_sha256": "cad36fc09172808d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "k_4dbff90628.L6.drop",
+          "claim_sha256": "3bf7eacf0c5c2342",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "k_51936c7c12.L6.drop",
+          "claim_sha256": "7545c2e9024e4bc1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "k_6063d6486a.L6.drop",
+          "claim_sha256": "9ce5d337dfb1f0bc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform dispatch at the top of requireNative in the generated loader only selects which addon to load.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "k_6bc371d31e.L6.drop",
+          "claim_sha256": "81f3eda96da63404",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "k_70700f11bf.L6.drop",
+          "claim_sha256": "02477138927dde8e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "k_7279e5af9a.L6.drop",
+          "claim_sha256": "e2dcc5fa32e52066",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "k_75faf830d4.L6.drop",
+          "claim_sha256": "9000e206efdc95e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "k_86c6e8e167.L6.drop",
+          "claim_sha256": "c84e5d0376311930",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "NAPI_RS_FORCE_WASI only decides whether console.error(err) is printed, so it is log text only.",
+          "evidence_refs": [
+            "s34",
+            "f2:332-334"
+          ]
+        },
+        {
+          "claim_id": "k_928ad6504a.L6.drop",
+          "claim_sha256": "bf5cc43ec1a6c206",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "k_92a8e358be.L6.drop",
+          "claim_sha256": "fc1a99154c13fc0d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform dispatch (linux) in the generated loader only selects which addon to load.",
+          "evidence_refs": [
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "k_9f351fe240.L6.drop",
+          "claim_sha256": "0f9aefc9508e799f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform dispatch (freebsd) in the generated loader only selects which addon to load.",
+          "evidence_refs": [
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "k_a0d24ca414.L6.drop",
+          "claim_sha256": "b0042b9305086de5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "k_a26f75e203.L6.drop",
+          "claim_sha256": "bf86925c088f7bd3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform dispatch (win32) in the generated loader only selects which addon to load.",
+          "evidence_refs": [
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "k_a8cff79eac.L6.drop",
+          "claim_sha256": "a921969d56747892",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s40"
+          ]
+        },
+        {
+          "claim_id": "k_ac6c34a66c.L6.drop",
+          "claim_sha256": "3a6bf1d6c5346d7d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "k_b8c7739a51.L6.drop",
+          "claim_sha256": "3a6c46bae98d94f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "NAPI_RS_FORCE_WASI only decides whether console.error(err) is printed, so it is log text only.",
+          "evidence_refs": [
+            "s42",
+            "f2:324-326"
+          ]
+        },
+        {
+          "claim_id": "k_be4d282e19.L6.drop",
+          "claim_sha256": "aea9d43945507a89",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s43"
+          ]
+        },
+        {
+          "claim_id": "k_c27658a1de.L6.drop",
+          "claim_sha256": "0a0e267ac288dbd5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s44"
+          ]
+        },
+        {
+          "claim_id": "k_c668f8d674.L6.drop",
+          "claim_sha256": "11356fda49a7679a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execSync('ldd --version') only detects musl versus glibc to pick which addon to load; it is library plumbing, not a gate.",
+          "evidence_refs": [
+            "s45",
+            "f2:50-57"
+          ]
+        },
+        {
+          "claim_id": "k_ce4c309a46.L6.drop",
+          "claim_sha256": "2168a719e1817924",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s46"
+          ]
+        },
+        {
+          "claim_id": "k_d187c8623b.L6.drop",
+          "claim_sha256": "47544c69bb8d6ae1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reading /usr/bin/ldd only detects musl to choose between addon variants; library plumbing.",
+          "evidence_refs": [
+            "s47",
+            "f2:26-32"
+          ]
+        },
+        {
+          "claim_id": "k_d25c30cab3.L6.drop",
+          "claim_sha256": "6f308c6559d24e6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s48"
+          ]
+        },
+        {
+          "claim_id": "k_d3825fda5c.L6.drop",
+          "claim_sha256": "fdf95e783145ccaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s49"
+          ]
+        },
+        {
+          "claim_id": "k_d5aed10b83.L6.drop",
+          "claim_sha256": "c019a1fca673d0b9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s50"
+          ]
+        },
+        {
+          "claim_id": "k_dc5c8ca781.L6.drop",
+          "claim_sha256": "8ef3a051fb6b5a5d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s51"
+          ]
+        },
+        {
+          "claim_id": "k_dde47a0100.L6.drop",
+          "claim_sha256": "3266c4f4fc937b3c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s52"
+          ]
+        },
+        {
+          "claim_id": "k_df9bec187d.L6.drop",
+          "claim_sha256": "a8d6d5c146a361dc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s53"
+          ]
+        },
+        {
+          "claim_id": "k_dfcf046170.L6.drop",
+          "claim_sha256": "9822aedd134523d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s54"
+          ]
+        },
+        {
+          "claim_id": "k_e0d2694ea2.L6.drop",
+          "claim_sha256": "55d596fb4ff289ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s55"
+          ]
+        },
+        {
+          "claim_id": "k_e12e039475.L6.drop",
+          "claim_sha256": "f2937d5dfbb5fa63",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of the wasm32-wasi fallback package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s56"
+          ]
+        },
+        {
+          "claim_id": "k_e62c6ffe1a.L6.drop",
+          "claim_sha256": "7b159b8ffbc03917",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The linux check inside isMusl only decides whether to run libc detection to choose the addon variant; plumbing.",
+          "evidence_refs": [
+            "s57",
+            "f2:10-22"
+          ]
+        },
+        {
+          "claim_id": "k_e9a5386e0b.L6.drop",
+          "claim_sha256": "d2ab30e60db17f70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform dispatch (darwin) in the generated loader only selects which addon to load.",
+          "evidence_refs": [
+            "s58"
+          ]
+        },
+        {
+          "claim_id": "k_eba4691ef6.L6.drop",
+          "claim_sha256": "d2a0cec9e69e1db0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s59"
+          ]
+        },
+        {
+          "claim_id": "k_f0ef1f0f76.L6.drop",
+          "claim_sha256": "358a278cdc1f9020",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s60"
+          ]
+        },
+        {
+          "claim_id": "k_f2e2a06f09.L6.drop",
+          "claim_sha256": "cc1898376be00420",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s61"
+          ]
+        },
+        {
+          "claim_id": "k_f3aa456f09.L6.drop",
+          "claim_sha256": "17312240296bf51b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A require of a platform addon package in the generated loader; library code with no gate.",
+          "evidence_refs": [
+            "s62"
+          ]
+        },
+        {
+          "claim_id": "k_fb762a24cf.L6.drop",
+          "claim_sha256": "c838ee2d7de0e22d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`!nativeBinding || NAPI_RS_FORCE_WASI` only chooses whether to try the wasi fallback loaders; library loader logic, not an install-time gate.",
+          "evidence_refs": [
+            "s63",
+            "f2:318-337"
+          ]
+        },
+        {
+          "claim_id": "q_00edcad60b.L6.drop",
+          "claim_sha256": "c37c4a71240adb58",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s64"
+          ]
+        },
+        {
+          "claim_id": "q_018fbad750.L6.drop",
+          "claim_sha256": "a6b3220d301e0e2e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s65"
+          ]
+        },
+        {
+          "claim_id": "q_05f8ec6836.L6.drop",
+          "claim_sha256": "6057199a3a7eb4dc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s66"
+          ]
+        },
+        {
+          "claim_id": "q_0fbc783c52.L6.drop",
+          "claim_sha256": "f19d2b4140de2cb3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "try/catch around reading /usr/bin/ldd returns null on failure so the next libc detection method runs; library plumbing.",
+          "evidence_refs": [
+            "s67"
+          ]
+        },
+        {
+          "claim_id": "q_1763b91786.L6.drop",
+          "claim_sha256": "803474a2429e6935",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform/arch dispatch chain in the generated loader; selects an addon, gates no install behaviour.",
+          "evidence_refs": [
+            "s68"
+          ]
+        },
+        {
+          "claim_id": "q_179c54488d.L6.drop",
+          "claim_sha256": "335bcea645545146",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if guards only console.error(err), so it is log text only.",
+          "evidence_refs": [
+            "s69",
+            "f2:332-334"
+          ]
+        },
+        {
+          "claim_id": "q_17b138f320.L6.drop",
+          "claim_sha256": "7a2ba1af1a3fc924",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s70"
+          ]
+        },
+        {
+          "claim_id": "q_1b14a0a147.L6.drop",
+          "claim_sha256": "4717b12da9134607",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform/arch dispatch chain in the generated loader; selects an addon, gates no install behaviour.",
+          "evidence_refs": [
+            "s71"
+          ]
+        },
+        {
+          "claim_id": "q_1b60f1f487.L6.drop",
+          "claim_sha256": "7329d956835a5329",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s72"
+          ]
+        },
+        {
+          "claim_id": "q_20be3afa90.L6.drop",
+          "claim_sha256": "c51059585dc5a0af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s73"
+          ]
+        },
+        {
+          "claim_id": "q_2370e246fd.L6.drop",
+          "claim_sha256": "7b8f41d467e8165d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s74"
+          ]
+        },
+        {
+          "claim_id": "q_283362ff57.L6.drop",
+          "claim_sha256": "8fad7f1380ec49e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around the ldd --version probe that falls back to false; libc detection plumbing, not a gate.",
+          "evidence_refs": [
+            "s75"
+          ]
+        },
+        {
+          "claim_id": "q_34eb303a8b.L6.drop",
+          "claim_sha256": "10561756354d3ecf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s76"
+          ]
+        },
+        {
+          "claim_id": "q_3aa6e21091.L6.drop",
+          "claim_sha256": "19ea01896c28828c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s77"
+          ]
+        },
+        {
+          "claim_id": "q_3baabd46e7.L6.drop",
+          "claim_sha256": "2cc93b935f6f697e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s78"
+          ]
+        },
+        {
+          "claim_id": "q_3caecf74f1.L6.drop",
+          "claim_sha256": "42420c9be875b480",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if guards only console.error(err), so it is log text only.",
+          "evidence_refs": [
+            "s79",
+            "f2:324-326"
+          ]
+        },
+        {
+          "claim_id": "q_442a33545e.L6.drop",
+          "claim_sha256": "004d5e5f749bec66",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if only chooses whether to try the wasi fallback loaders; library loader logic, not an install-time gate.",
+          "evidence_refs": [
+            "s80",
+            "f2:320-337"
+          ]
+        },
+        {
+          "claim_id": "q_463350089c.L6.drop",
+          "claim_sha256": "2a07d88ceff2b8db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s81"
+          ]
+        },
+        {
+          "claim_id": "q_4744ca4880.L6.drop",
+          "claim_sha256": "3614304d842acc3d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s82"
+          ]
+        },
+        {
+          "claim_id": "q_53649c10d5.L6.drop",
+          "claim_sha256": "db9b3fc889b8446f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s83"
+          ]
+        },
+        {
+          "claim_id": "q_53685bf219.L6.drop",
+          "claim_sha256": "894a33914a41dd94",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s84"
+          ]
+        },
+        {
+          "claim_id": "q_5842bdbe87.L6.drop",
+          "claim_sha256": "71354c2c074bab20",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s85"
+          ]
+        },
+        {
+          "claim_id": "q_67498c6271.L6.drop",
+          "claim_sha256": "a0d4d59c75560abc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s86"
+          ]
+        },
+        {
+          "claim_id": "q_6b1a70a6ab.L6.drop",
+          "claim_sha256": "606d1e69d49a59dc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s87"
+          ]
+        },
+        {
+          "claim_id": "q_796dcb54bb.L6.drop",
+          "claim_sha256": "87f454567c2cfb53",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform dispatch at the top of requireNative selects which addon to load; library code, not an install gate.",
+          "evidence_refs": [
+            "s88"
+          ]
+        },
+        {
+          "claim_id": "q_8c5cd98767.L6.drop",
+          "claim_sha256": "af980f5e1ea9eede",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s89"
+          ]
+        },
+        {
+          "claim_id": "q_9094380b68.L6.drop",
+          "claim_sha256": "73d0e1623b045527",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try wraps the wasi fallback require; its only use of NAPI_RS_FORCE_WASI is to print the error, so it is log text only.",
+          "evidence_refs": [
+            "s90",
+            "f2:329-335"
+          ]
+        },
+        {
+          "claim_id": "q_90c0829d96.L6.drop",
+          "claim_sha256": "cd6d2421f01ae5de",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s91"
+          ]
+        },
+        {
+          "claim_id": "q_94e69c86be.L6.drop",
+          "claim_sha256": "4436a2b13fd9a28e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform/arch dispatch chain in the generated loader; selects an addon, gates no install behaviour.",
+          "evidence_refs": [
+            "s92"
+          ]
+        },
+        {
+          "claim_id": "q_973405e115.L6.drop",
+          "claim_sha256": "23cbd9fd7f927463",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s93"
+          ]
+        },
+        {
+          "claim_id": "q_9da4935ce3.L6.drop",
+          "claim_sha256": "1c70fa129188ddc1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around the wasm32-wasi fallback require, library loader logic with no gate.",
+          "evidence_refs": [
+            "s90"
+          ]
+        },
+        {
+          "claim_id": "q_a645227989.L6.drop",
+          "claim_sha256": "c9bf809ab2efa1e6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s94"
+          ]
+        },
+        {
+          "claim_id": "q_b80d30c06a.L6.drop",
+          "claim_sha256": "5ba89449460b2606",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s95"
+          ]
+        },
+        {
+          "claim_id": "q_b8c36f10aa.L6.drop",
+          "claim_sha256": "bd4e4ad5101e9323",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s96"
+          ]
+        },
+        {
+          "claim_id": "q_c57837e99d.L6.drop",
+          "claim_sha256": "edbc7bb029e74ffd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s97"
+          ]
+        },
+        {
+          "claim_id": "q_cb9e446199.L6.drop",
+          "claim_sha256": "32fbb965d4f65faf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s98"
+          ]
+        },
+        {
+          "claim_id": "q_d1bbd6809a.L6.drop",
+          "claim_sha256": "0db01466212494e1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s99"
+          ]
+        },
+        {
+          "claim_id": "q_d97dfa2d6c.L6.drop",
+          "claim_sha256": "75b231b6ba369169",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s100"
+          ]
+        },
+        {
+          "claim_id": "q_e3e94cf12d.L6.drop",
+          "claim_sha256": "9c3d20dfeb92adcb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s101"
+          ]
+        },
+        {
+          "claim_id": "q_e857b19977.L6.drop",
+          "claim_sha256": "0c3c605ea244fa14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s102"
+          ]
+        },
+        {
+          "claim_id": "q_ed9b41416c.L6.drop",
+          "claim_sha256": "992db38ab893b17c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s103"
+          ]
+        },
+        {
+          "claim_id": "q_ee6b2c9738.L6.drop",
+          "claim_sha256": "c664a49bb93653cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The linux check inside isMusl only decides whether to run libc detection to choose the addon variant; plumbing.",
+          "evidence_refs": [
+            "s104",
+            "f2:10-22"
+          ]
+        },
+        {
+          "claim_id": "q_f59b8aad35.L6.drop",
+          "claim_sha256": "e753d5a7e33c3150",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s105"
+          ]
+        },
+        {
+          "claim_id": "q_f904047160.L6.drop",
+          "claim_sha256": "6013da3c319a03d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Architecture dispatch selecting a prebuilt addon in the generated loader; not an environment gate.",
+          "evidence_refs": [
+            "s106"
+          ]
+        },
+        {
+          "claim_id": "q_fbf01e6947.L6.drop",
+          "claim_sha256": "3edc3971f2a0b804",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform/arch dispatch chain in the generated loader; selects an addon, gates no install behaviour.",
+          "evidence_refs": [
+            "s107"
+          ]
+        },
+        {
+          "claim_id": "q_fdf7ff64fa.L6.drop",
+          "claim_sha256": "7cab7702483ffa2a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Platform dispatch (linux) in the generated loader only selects which addon to load.",
+          "evidence_refs": [
+            "s108"
+          ]
+        },
+        {
+          "claim_id": "q_ff5510d8b0.L6.drop",
+          "claim_sha256": "8a749e5486bd615b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A try around a require of a platform addon package; library code with no gate.",
+          "evidence_refs": [
+            "s109"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "0a09d8be62b80b60",
+      "packet_sha256": "42556be03cf5b991",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "e2896921f8b8c951",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The five guards are sequential early exits in one function, so they nest and join with and. The try at f1:68 throws and returns if INIT_CWD is unset (c1). Then f1:70 (name not one of the swc packages), f1:96 (binding not loaded), f1:100 (SWC_BINARY_PATH falsy) and f1:110 (@swc/wasm not resolvable) e",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d74434131cbf3d9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The execSync npm install (s13) and writeFileSync (s14) sit directly in the region after all five guards. The rmdirSync (s15) is reached through removeRecursive(installDir) at f1:138 (s16), which calls the definition at f1:46 (s17), and that call is in the same region's finally block.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0a9aa4dbb37f29a5",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "validateBinary is called only once, at f1:145. removeRecursive is called only at f1:57 (its own recursion) and f1:138. The file has no exports, timers or handlers that reach these sinks another way, so the payload is reached only past the gate.",
+          "evidence_refs": [
+            "f1:145",
+            "f1:138",
+            "f1:57"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "55cd6abdd247a74e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "child_process.execSync (s13, child_process imported at f1:44) runs the npm install, which covers both spawn_process and download. fs.writeFileSync (s14) writes a file. fs.rmdirSync (s15) in removeRecursive deletes, alongside the unlinkSync at f1:59.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15",
+            "f1:44",
+            "f1:59"
+          ]
+        }
+      ]
+    }
+  ]
+}

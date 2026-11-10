@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "openseaz",
+    "version": "1.0.0",
+    "archive_sha256": "02b5130d9265cba6d0f2cf1244e96b42e5500beb48b511b1760a061d6f2100fb"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "8a78d19811036a3f",
+      "packet_sha256": "460f1e51486e2a8d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "41c47deb54bd6d81",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:13 is an if statement whose condition compares os.name (os imported at f1:12) to a string.",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "56726fd2425d7b03",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded block at lines 14-16 runs only when os.name == \"nt\" is true. There is no negation and no else branch.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "os.name reads the operating system family, so the category os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "6a701a0aba10b54c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard on os.name == \"nt\" with one condition and no other decisions around it. The expression c1 and then_min 1 are correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows check only decides whether the download and exec payload runs. It does not choose between payloads or change a target, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The payload runs when the host is Windows. Nothing backs off on analysis or sandbox signals, so activate fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The package declares a Windows classifier and runs a remote payload only on Windows, which is OS targeting of the victim population.",
+          "evidence_refs": [
+            "s2",
+            "f1:36"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "8f97e6623ee3a84e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The requests.get download and the exec of its text both sit directly at f2:16, inside the then block of the os.name == \"nt\" if. The empty witness is correct because the sinks are in the region itself.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "b2d680f6478d6d9d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The download and exec calls appear only at line 16, inside the Windows branch of install.run. Neither file has another caller, export, timer or handler that reaches them. Only install.run(self) at line 18 runs on every platform.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f1:16",
+            "f2:16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "69e9bb963c1af34f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get (requests is imported at f2:14) is a network download. exec() evaluates the downloaded text, so it is an eval sink for exec_downloaded.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:14",
+            "f2:16"
+          ]
+        }
+      ]
+    }
+  ]
+}

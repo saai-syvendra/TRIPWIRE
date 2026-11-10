@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@prisma/engines",
+    "version": "7.10.1",
+    "archive_sha256": "d19ab01ea2f5fda4df81bd5bf0622f8966be5a6fa6724dd688d6e6485f292edf"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "a19b42e4f7cb4a2d",
+      "packet_sha256": "48aab921585fea83",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_2b0b49b763.L6.drop",
+          "claim_sha256": "5e98e3aa2b4aac95",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The environment test selects whether binaryTargets is populated from PRISMA_CLI_BINARY_TARGETS, and that value is passed to the engine download call (s1, f1:47). This is an environment gate modifying the requested binary artifacts, rather than merely their storage location or launch method.",
+          "evidence_refs": [
+            "s1",
+            "f1:47",
+            "f1:52"
+          ]
+        },
+        {
+          "claim_id": "q_13dfe7c570.L6.drop",
+          "claim_sha256": "bda2a9906f29e539",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The conditional assigns comma-separated environment values to binaryTargets when the variable is truthy, otherwise leaving it undefined (s2). Passing binaryTargets to the engine download call makes this a gate modifying the requested binary artifacts (f1:47, f1:52).",
+          "evidence_refs": [
+            "s2",
+            "f1:47",
+            "f1:52"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp",
+    "version": "3.14.5",
+    "archive_sha256": "5558a7f5a05af9ecf744af91e5baefc436f93c9333e656c27ec253f9a6bbe178"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "81c9523a62f1bcfc",
+      "packet_sha256": "67171f9e9e7ca69d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "edb28547062a6761",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition directly compares `sys.version_info` with `(3, 10)`.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "c5cceaa692333e97",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Versions below `(3, 10)` raise and stop execution; the remaining code, including setup, therefore runs when `sys.version_info >= (3, 10)`. The tuple is the code's written threshold corresponding to `[3, 10]` in the claim.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "df4e47b8edfb78a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads `sys.version_info` and compares it to the minimum Python version `(3, 10)`, so `runtime_version` fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "3ef1d8be059f37f0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole cited guard rejects versions below `(3, 10)`; its fallthrough side contains the claimed region, with no additional condition to combine. Thus the expression is `c1` and the minimum is one condition.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "851285c845d4baf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check prevents setup from proceeding on Python versions below 3.10, while the fallthrough reaches `setup(**setup_kwargs)`. The gate enables the build on supported runtimes.",
+          "evidence_refs": [
+            "s1",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e54886d56219c740",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the supported runtime side, execution proceeds to the setup call; the version gate activates the build path there.",
+          "evidence_refs": [
+            "s1",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "11c93e3b2b8bd612",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code explicitly requires Python 3.10 or newer before setup proceeds, which is a runtime compatibility requirement and therefore serves portability.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0f7cdec9b1d40626",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early exit for Python versions below 3.10 leaves the subsequent top-level code on its fallthrough side, and the `setup(**setup_kwargs)` call is in that code. The empty witness is satisfied because the sink call itself is in the guarded region.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "3faeb12698e6a615",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "In the complete `setup.py`, `setup(**setup_kwargs)` is a top-level call after the version check, and no other call site or path in the file reaches it. Execution terminates for unsupported versions, so the payload is only reached through the gate's fallthrough side.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ab461270dfa3988d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guarded region calls setuptools' `setup(**setup_kwargs)` with build configuration, which performs the package setup/build operation represented by `benign_build`.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        }
+      ]
+    }
+  ]
+}

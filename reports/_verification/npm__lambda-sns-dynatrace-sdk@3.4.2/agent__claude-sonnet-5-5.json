@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "lambda-sns-dynatrace-sdk",
+    "version": "3.4.2",
+    "archive_sha256": "6e1d7cac695c39bca0b76b9a4499d3ed3931c7184e99bce33a6d2859568915e3"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b65aea06ab91d89d",
+      "packet_sha256": "d217e134bee25dc5",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_6760860858.L6.drop",
+          "claim_sha256": "f5e50b6973d7c81b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "At f1:51 the member read process.env.JBOSS is only the test of a ternary whose two branches are both process.env, so it changes nothing; the result is stored in data.is_jboss and returned via resolve(data) (f1:53). It decides no branch of what runs.",
+          "evidence_refs": [
+            "s1",
+            "f1:51",
+            "f1:53"
+          ]
+        },
+        {
+          "claim_id": "q_0514914dad.L6.drop",
+          "claim_sha256": "d0c3f8cd2931f953",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ternary at f1:51 yields process.env on both sides, so the outcome is the same whether JBOSS is set or not. It is a data-collection assignment, not an environment gate.",
+          "evidence_refs": [
+            "s2",
+            "f1:51"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "de51898aadc00067",
+      "packet_sha256": "b2c5eca63e31162d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_6760860858.L6.drop",
+          "claim_sha256": "f5e50b6973d7c81b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The ternary on process.env.JBOSS returns process.env in both branches, so the test cannot change what runs; it is not an environment gate (the whole environment is just copied into data.is_jboss).",
+          "evidence_refs": [
+            "s1",
+            "f1:51"
+          ]
+        },
+        {
+          "claim_id": "q_0514914dad.L6.drop",
+          "claim_sha256": "d0c3f8cd2931f953",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The ternary expression has identical branches (process.env : process.env), so it decides nothing and is not a gate.",
+          "evidence_refs": [
+            "s2",
+            "f1:51"
+          ]
+        }
+      ]
+    }
+  ]
+}

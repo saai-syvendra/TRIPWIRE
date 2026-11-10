@@ -1,0 +1,513 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-opus-4-8",
+  "package": {
+    "ecosystem": "npm",
+    "name": "eslint-plugin-executable-stories-jest",
+    "version": "2.1.8",
+    "archive_sha256": "881505cc4a1e40b8d8c1e9534e3a2aec4b7ecd06f4bfffdf86f18f716cd7a593"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-4-8",
+      "record_sha256": "885d2bc1dceb946a",
+      "packet_sha256": "8cd3dfc8cc58083b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f6d4912b6d79ae26",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In z7(), s1 decides on (process.env.LC_ALL||LC_MESSAGES||LANGUAGE||LANG) and s2 on (LANG||LANGUAGE||LC_ALL); both are startsWith decisions reading those env vars.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "852f4604edc5b938",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z7() returns true when those vars startsWith 'ru'; the guard `if(z7())process.exit(0)` (s3, reached via uX) exits, so the payload runs only when the vars do not_startswith ru.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "2ec01d9c467eecb8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "LC_ALL/LC_MESSAGES/LANGUAGE/LANG are locale/language environment variables; the test matches the 'ru' locale prefix.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "c7c7bf51cb84e67a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 decides on _0x446dd4.includes(...), where _0x446dd4 is bound in w4() to execSync('ps aux 2>/dev/null'/'tasklist 2>/dev/null') output (execSync imported as _0x5ef3ff); probe target '* 2>/dev/null' and stdout accessor match.",
+          "evidence_refs": [
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "05e680fcbbc47234",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "DQ array equals the claimed EDR/AV name list (f1 confirms it); when the ps/tasklist output includes any name w4() returns true, forcing the shouldExecute early-exit (s5), so the payload runs only when not_includes.",
+          "evidence_refs": [
+            "s4",
+            "s7",
+            "s8",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "92c1faa4b62a5dab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "w4() runs `ps aux`/`tasklist` and scans the listing for security-product process names: a process_list check.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "028ea54bd334cdf9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In H9(), s6 decides on process.env.CI===\"true\"||process.env.CI==='1' and s7 on process.env.CI===\"woodpecker\".",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "594c991e29f40a02",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "H9() returns true when CI equals true/1/woodpecker, driving the shouldExecute early-exit (s5), so the payload runs only when process.env.CI not_in [true,1,woodpecker].",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "53b7e3d2e590ece4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.env.CI is a CI/CD marker variable.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "586260ae3499449d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In w4(), s8 decides on _0x2716c6(dir) over the RQ list, where _0x2716c6 is the fs existsSync import.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "fc12c66509abc929",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "RQ equals the claimed EDR install-dir list (f1 confirms it); if any dir exists w4() returns true and the shouldExecute early-exit (s5) fires, so the payload runs only when those paths not_exists.",
+          "evidence_refs": [
+            "s8",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "5da7cdf7e2e3a0d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "existsSync over CrowdStrike/SentinelOne/CarbonBlack install directories is a file_or_dir_exists check.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "c9db61679ea7bf5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 decides on process.env.GITHUB_ACTIONS inside H9()'s chain of process.env lookups.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "ae24987387f72d82",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "H9() truthy-checks each listed env var (DRONE/SEMAPHORE/TEAMCITY_VERSION/bamboo_agentId/BITRISE_IO through DISTELLI_APPNAME confirmed in f1) and returns true, so the payload (via s5 early-exit) runs only when all are falsy.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s9",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "69574ca0b7d481a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The listed variables are CI/CD platform markers (GitHub Actions, GitLab, Travis, etc.): a ci_marker check.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "7d60a4e8fdf0d203",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s10 decides on Intl.DateTimeFormat().resolvedOptions().locale inside z7()'s try block.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "a214c3a16dcb412b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s10 returns true when the resolved locale startsWith 'ru', so z7() exits (s3 via uX) and the payload runs only when the locale does not_startswith ru.",
+          "evidence_refs": [
+            "s10",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "aeb53147c31615a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Intl.DateTimeFormat resolved locale read is a locale_language check.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9abe552bbab7bcbb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "z7() returns true on an Intl-ru OR env-ru match; the payload after `if(z7())exit` (s3, via uX call s11) is reached only when both are false, i.e. c1 && c12, smallest satisfying set 2.",
+          "evidence_refs": [
+            "s3",
+            "s10",
+            "s1",
+            "s2",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6e593d296fd791a0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The locale gate is a single early-exit that enables the whole recon/cred_read/exfil/self_propagation payload; it does not select a per-branch payload or redirect a target.",
+          "evidence_refs": [
+            "s3",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "88eaa4eb9d85dcbf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z7() exits on a Russian locale and the payload runs on non-Russian/CIS hosts; this geofencing runs on chosen targets (activate), not an analysis/CI/sandbox back-off.",
+          "evidence_refs": [
+            "s3",
+            "s10",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "e3545a530607e640",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Avoiding Russian/CIS locales is geographic targeting, not anti-analysis.",
+          "evidence_refs": [
+            "s3",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a65bd6c5be7611a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Regions s12-s14 run after `await uX()` (s11), which exits on the z7 gate; each sink is reachable — recon s15 via _3()/I6.execute (s16-s19), cred_read s16 in-region, exfil s20 via u1.run/finalize/flush/dispatch bound at s21, self_propagation s30 via ingest/handleNpmTokens/g1.execute/publishPackage/C4",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s20",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "e8625b2043fbd63b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "fL() is called once at module bottom and is the sole caller of uX() and _3(); new I6/w6/k6 and new g1 each occur once, so the payload has no ungated caller, export or timer.",
+          "evidence_refs": [
+            "s12",
+            "s11",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "3230aee7b44b7666",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "recon rests on hostname/gh-token collection in I6.execute (s15/s19), cred_read on the _3() token collectors (s16), exfil on sender.send network dispatch (s20), self_propagation on the fetch PUT publish to registry[.]npmjs[.]org (s30).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s20",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "eaae355f7158dc8d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "IX() returns true on any honeypot indicator (decoy-token env prefix s42, GITHUB_REPOSITORY s43, cwd /tmp/npm-safe/ s44, .aws/credentials FAKE s45); the payload after `if(IX())exit` (s41 via s11) is reached only when all are false, i.e. c2&&c3&&c4&&c5, min 4.",
+          "evidence_refs": [
+            "s41",
+            "s42",
+            "s43",
+            "s44",
+            "s45",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "d7f6f1400938731e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same fL payload regions s12-s14, gated by the IX early-exit (s41) reached via uX() (s11); recon/cred_read/exfil/self_propagation sinks trace through s15/s16/s20/s30 as cited.",
+          "evidence_refs": [
+            "s41",
+            "s12",
+            "s13",
+            "s14",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "05830f6a4b8a7d8d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Single entry fL()→uX() (both one call each) means the IX gate cannot be bypassed; no other caller/export/timer reaches the payload functions.",
+          "evidence_refs": [
+            "s41",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "5ce87c97ac194808",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Same sinks as g1: recon (I6.execute host/token recon s15), cred_read (_3 collectors s16), exfil (sender.send network s20), self_propagation (fetch publish s30).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s20",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "514b0aec8066e2f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform guard `if([\"darwin\",\"linux\"].includes(process.platform))` (s46) gates region s47; download sink s48 (downloadPackages) is in-region and self_propagation sink s30 is reached via publishPackage (s37/s38) then C4 (s39/s40).",
+          "evidence_refs": [
+            "s46",
+            "s47",
+            "s48",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "59da64cf6a8a0fe9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "new g1() occurs once (in handleNpmTokens), and downloadPackages/publishPackage/C4 run only inside the darwin/linux block of g1.execute, so the payload has no path bypassing the platform gate.",
+          "evidence_refs": [
+            "s46",
+            "s47",
+            "s48"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "8431e01f1c93000d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "download rests on downloadPackages' network fetch of tarballs (s48) and self_propagation on the fetch PUT publish to registry[.]npmjs[.]org inside C4 (s30); both are network sinks.",
+          "evidence_refs": [
+            "s48",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "7d93ad08b64c78c1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "i1.shouldExecute returns true only when cpus().length>=4 (s49) && !w4() (c8/c10) && !H9() (c9/c11); the `if(!await shouldExecute())return` early-exit (s5) makes the gate c7&&c8&&c9&&c10&&c11, min 5 (GX re-entry flag excluded).",
+          "evidence_refs": [
+            "s5",
+            "s49",
+            "s4",
+            "s8",
+            "s6",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "878f466c2714353c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate is a single early-exit that enables the drop (write updater.py) and spawn (bash) payload; no per-branch selection or target redirection.",
+          "evidence_refs": [
+            "s5",
+            "s50"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "7a85efd5a3ca32ce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "shouldExecute backs off on EDR/AV presence (w4), CI markers (H9) and low CPU count (<4, a sandbox signal): an evade gate.",
+          "evidence_refs": [
+            "s49",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "be9f98ff46cb0aa5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Detecting security products, CI and low-resource sandboxes is anti_analysis.",
+          "evidence_refs": [
+            "s4",
+            "s8",
+            "s6",
+            "s49"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "acdd679099728e60",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Region s50 (i1.execute try-block, after the shouldExecute guard s5) writes updater.py via writeFileSync (s51) and runs it via Bun.spawn(['bash',...]) (s52); both sinks are in-region.",
+          "evidence_refs": [
+            "s50",
+            "s51",
+            "s52",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "e018d277dabc13a1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The shouldExecute guard is the first statement of i1.execute (s5) and the writeFile/spawn sinks (s51/s52) sit later in the same function, so no caller can reach them without passing the gate.",
+          "evidence_refs": [
+            "s5",
+            "s51",
+            "s52"
+          ]
+        }
+      ]
+    }
+  ]
+}

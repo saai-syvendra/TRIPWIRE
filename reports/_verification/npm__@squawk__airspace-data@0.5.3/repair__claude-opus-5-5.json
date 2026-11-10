@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@squawk/airspace-data",
+    "version": "0.5.3",
+    "archive_sha256": "ee3030df5a6bc5652135a04f54d2be035713da222c979ccbf223553eedcfec0f"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "5c27c25cbbd8f212",
+      "record_sha256_after": "5c27c25cbbd8f212",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Re-checked: setup.mjs line 12 sets E = \"tanstack_runner.js\" as the script Bun runs, and package.json only has preinstall \"node setup.mjs\"; neither names router_init.js, and tanstack_runner.js is not in the archive, so the install-time record (g1 download, extract, run Bun on a missing file) stands. "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "5c27c25cbbd8f212",
+      "record_sha256_after": "5c27c25cbbd8f212",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fbe5ed002936a303",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.mjs:177 is `if (hc(\"bun\")) return;`, and it is the only place an existing bun is looked at. When bun is present main() returns and tanstack_runner.js is never run; the code at setup.mjs:195 only ever runs the freshly downloaded binary `bp`. The portability label means each side runs a platform"
+        },
+        {
+          "claim_id": "k_fb8d4a4bec.L6.drop",
+          "claim_sha256": "79a463355dc51643",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The cited test is `const w = process.platform === \"win32\"` at setup.mjs:180. `w` is read only at line 181 (file name bun.exe or bun) and line 194 (skip chmod on Windows). It does not feed ra(): ra() builds its own key from process.platform and process.arch at line 40, and `a` is computed at line 179"
+        },
+        {
+          "claim_id": "k_ee268cee48.L6.drop",
+          "claim_sha256": "551c76ae499448ea",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The test at setup.mjs:154 is in xb(), after unzip was already tried at line 149. On the true side PowerShell Expand-Archive unpacks the zip and lines 167 to 169 rename the binary to path.join(od, path.basename(en)); on the false side xn() at line 173 writes the same entry to the same path (lines 144"
+        },
+        {
+          "claim_id": "k_e3b45e7ecc.L6.drop",
+          "claim_sha256": "671ccaa9b2e18496",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The test at setup.mjs:23 feeds mu(), which is called only in the linux-x64 entry of PM (lines 31 and 32) and only changes the name of the Bun zip fetched from the same release path (line 182). Flipping it leaves the behaviour classes the same: download, extract, then run tanstack_runner.js with Bun."
+        },
+        {
+          "claim_id": "q_e15f376488.L6.drop",
+          "claim_sha256": "c5759c6919bc8197",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the `if` at setup.mjs:154 around the PowerShell route, the decision for the k_ee268cee48 test. Its body ends with the binary at path.join(od, path.basename(en)) (lines 167 to 169) and its fall-through xn() at line 173 writes the same entry to the same path (lines 144 and 145), so both sides "
+        },
+        {
+          "claim_id": "q_ef8ef5748f.L6.drop",
+          "claim_sha256": "e99e261acff8db6c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This try at setup.mjs:22 only wraps the /etc/os-release read that is mu()'s fallback after the ldd probe; its catch returns false. The result reaches nothing except the ternary at line 32, which picks the name of the linux-x64 Bun zip. On either side the same download, extraction and run of tanstack"
+        }
+      ]
+    }
+  ]
+}

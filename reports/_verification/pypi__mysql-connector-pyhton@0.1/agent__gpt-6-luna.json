@@ -1,0 +1,486 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "mysql-connector-pyhton",
+    "version": "0.1",
+    "archive_sha256": "4709764d33adc0cc3e025f1a9f9aa303b62eb77da41170ca0a1e8cd7983a403a"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "9719fcabe32bd7da",
+      "packet_sha256": "acaeb5c43b01ced5",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b518e76613e918b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly compares `sys.platform` to the platform string.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "824ce94398fc0995",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` proceeds when `sys.platform == 'win32'`; no negation reverses that sense.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads Python’s platform identifier, an operating-system property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "8af2ae213b3c66cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `elif` condition directly tests `sys.argv[1]`.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "e44e44f82884445e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `elif` proceeds when `sys.argv[1]` is a member of `bdist_wheel` or `install`.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "9939fe7ebd3b3b6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`sys.argv[1]` identifies the requested setup command, so `package_manager` fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "0956f51dd1ed56fe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition calls `file.endswith(...)` directly.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "2daf3a9afd54d995",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The code calls `endswith('.lnk')`; this is a suffix test, while the claim labels the operator `regex`, a same-polarity but different operator.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "748c8f57943d2530",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The suffix test selects shortcut files, which are target artifacts.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "c837922f2449f2cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition tests the basename assigned from `shortcut.TargetPath`; the shortcut is opened from a walked `.lnk` path through `shell.CreateShortcut`.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f1:45-46"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "b1e029cf3887c6a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition proceeds when the target path basename is in the listed browser executable names.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "68de32dee830f62d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The basename check selects browser executable targets.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "3cba11a6bd0f372f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition calls `ctypes.windll.shell32.IsUserAnAdmin()`.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "20b39fbca080c595",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` body runs when `IsUserAnAdmin()` returns a truthy value.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "5c6cdd59c8da531e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`IsUserAnAdmin()` checks the current user’s privilege level.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "82ab4ffac0f0dc04",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The Windows platform `if` contains the install-command `elif`, so both conditions are required for the body at s8.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f1de8b342c5c1e0f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Under those checks the code creates the extension directory and writes its background and manifest files.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "2d1813177c020b07",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file-writing behavior runs on the selected Windows install commands.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "9706554e2d09d37e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform and command checks restrict execution to Windows installation contexts; they describe portability, not selection of a victim target.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "fa54b05d6d1e82f6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write to `background.js` is inside the Windows `if` and install-command `elif` body.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "bc715b6f7a84e1ff",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sink is a top-level `open(..., 'w+')` in this setup file and has no other caller or entry point.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "09017f44e4f44301",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Opening `background.js` with `w+` and writing through the file handle writes a file.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "5574da6ca7118c01",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The admin check only appends the ProgramData Start Menu path; the later shortcut traversal and Save call also operate on the other paths regardless of admin status, so it is not a required condition for the persistence sink.",
+          "evidence_refs": [
+            "s7",
+            "s10",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2cae595108a6198a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Admin status adds a system Start Menu folder to the search paths, changing where the same shortcut modification can be applied.",
+          "evidence_refs": [
+            "s7",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d13811f40b448045",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When admin status is true, the code adds another path for the shortcut scan.",
+          "evidence_refs": [
+            "s7",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "1d0eba035dd2bbb8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The admin test changes which shortcut locations are scanned, so its purpose is targeting rather than the claimed data availability.",
+          "evidence_refs": [
+            "s7",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "be57b1d5ce99eb01",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `Save()` sink is within the loop over `paths` and the `.lnk` and executable-name checks; the admin branch contributes one optional path, while the sink is reached through the other cited guards too.",
+          "evidence_refs": [
+            "s7",
+            "s10",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "a07a567285bcda2a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The shortcut Save call is a top-level operation in the guarded setup code, with no other caller or entry point in the file.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "80e5fe9455de1c70",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`shortcut.Save()` saves the shortcut after the code sets its browser arguments to load the extension.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "c00e9003a71b5c35",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shortcut loop and executable-name test are nested under the `.lnk` test, which is inside the Windows install-command branch; these four conditions are required for the Save region.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "484b6de6454ef4b3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The selected browser shortcuts have their arguments rewritten to load the extension, modifying those target artifacts.",
+          "evidence_refs": [
+            "s5",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "f8403116298df26f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The shortcut modification runs when the platform, command, suffix, and executable checks pass.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "550aecf99d14ccdb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks select particular browser shortcut targets for modification, which is targeting.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "f07bd54d9af821b9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`shortcut.Save()` sits in the loop body guarded by the `.lnk` suffix and executable-name checks, themselves inside the Windows install-command branch.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "2a9dda9f62731079",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The `Save()` call is a top-level operation in this setup file and has no other caller or entry point.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "ea07b88348b198fd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code changes `shortcut.Arguments` and calls `shortcut.Save()`, persisting the modified shortcut.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "k_fcbe9adaf8.L6.drop",
+          "claim_sha256": "2a2fdf405ddb36f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence test only decides whether to create the Extension directory; the subsequent file writes and shortcut scan run after either outcome.",
+          "evidence_refs": [
+            "s13",
+            "s9",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "q_342d74f0ef.L6.drop",
+          "claim_sha256": "8c90498bf05f9d73",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is the directory-creation check in the Windows install branch; it only skips `makedirs` when the directory already exists and does not gate the later payload operations.",
+          "evidence_refs": [
+            "s14",
+            "s9",
+            "s11"
+          ]
+        }
+      ]
+    }
+  ]
+}

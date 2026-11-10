@@ -1,0 +1,281 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "move-binary-format-wasm",
+    "version": "1.3.0",
+    "archive_sha256": "a835118bc209116aacd9034efb3c3dc915ac7fdc8668d4dbf576250b0e8b1293"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "582e96e301ef3cf9",
+      "packet_sha256": "ad3190ac0df9a534",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "84c4ed7543be87fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 directly calls fs.existsSync as a ternary condition, and f1:3 binds fs to the filesystem module.",
+          "evidence_refs": [
+            "s1",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a6fc91f76fa8b58f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 tests existence of exactly the claimed constant path without negation; its true arm in s2 reads that file.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "163acbacf646fa9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s1 tests presence of the local artifact whose contents are collected at s5, supporting target_artifact.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "153ff02067e65a1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 directly calls fs.existsSync as a ternary condition, and f1:3 binds fs to the filesystem module.",
+          "evidence_refs": [
+            "s3",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "67feb8afca44ebde",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 tests existence of exactly the claimed constant path without negation; its true arm in s4 reads that file.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "32c8e1e2ad2e752a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s3 tests presence of the local artifact whose contents are collected at s6, supporting target_artifact.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "f8f3e201324d19cc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 has one existence condition and executes s5 on its true arm, matching the single-condition expression and minimum of one.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6422b03bfa869fa3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 enables file-content collection at s5 when the file exists and supplies null otherwise.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "96622836f2ce77fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 activates the read at s5 when the target file exists; the condition checks data presence rather than analysis indicators.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "482388ea08988881",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 checks source-file availability before reading it and substitutes null when absent, supporting data_availability.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "02156817cc03c4eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 is the read call directly in the true arm of s2; the region contains the sink itself and requires no witness hops.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1b9fe2912d092e7b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "s5 is directly and exclusively in the true arm of s2. Reading the complete file shows no alternate caller, export or handler reaching this call.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "f1:1",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7af59908c364ac68",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s5 calls fs.readFileSync to collect system-file contents into trackingData, supporting recon; f1:3 binds fs to the filesystem module.",
+          "evidence_refs": [
+            "s5",
+            "f1:3",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "548d3e7c3ca053d8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s4 has one existence condition and executes s6 on its true arm, matching the single-condition expression and minimum of one.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "016c302af05fa1c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 enables file-content collection at s6 when the file exists and supplies null otherwise.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "0244cb92c10a1d15",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 activates the read at s6 when the target file exists; the condition checks data presence rather than analysis indicators.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "90d3125646273c90",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 checks source-file availability before reading it and substitutes null when absent, supporting data_availability.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "d7b515fc03618ac2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 is the read call directly in the true arm of s4; the region contains the sink itself and requires no witness hops.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "7070f753e13c4dfa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "s6 is directly and exclusively in the true arm of s4. Reading the complete file shows no alternate caller, export or handler reaching this call.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "f1:1",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "83dd6c1924adc046",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s6 calls fs.readFileSync to collect system-file contents into trackingData, supporting recon; f1:3 binds fs to the filesystem module.",
+          "evidence_refs": [
+            "s6",
+            "f1:3",
+            "f1:9"
+          ]
+        }
+      ]
+    }
+  ]
+}

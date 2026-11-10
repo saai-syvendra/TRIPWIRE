@@ -1,0 +1,444 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@rspack/core",
+    "version": "1.1.7",
+    "archive_sha256": "ccb55d450eef5dec8732fbe4d9df92b31511198ab38b00ab1c50dbb83bdcd34d"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "23451d3c49c057f8",
+      "packet_sha256": "afd5fe9920189042",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b27081ee1cd76107",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The switch reads process[\"platform\"] and the resulting comparison controls the short-circuit exit.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "97a4bcbf2aae5649",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The enum switch maps \"linux\" to LINUX; the exit runs when the result differs, so following code requires equality with LINUX.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "c590482958061a3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.platform reads the operating system platform.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "6bafd2975b141014",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The helper requests the ipinfo JSON endpoint and returns data.country when the response status is 200; that returned value is switched on.",
+          "evidence_refs": [
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "32936d1c92667a90",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The switch sends CN, RU, HK, BY, and IR cases to the guarded call; the helper value is country on status 200.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "1c8ea25308c20495",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The returned country code is external IP geolocation data.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "c91958e0ce435ff1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded switch value comes from the axios GET helper, whose try/catch covers that request.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "3625c1a9049b0aed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A failed request or non-200 response makes the helper return \"UNK\", which is included among the cases reaching the call.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "2171e0d4911a0028",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The request success or failure indicates network reachability.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "beb22d76951d69e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The credential path array includes the home-relative .aliyun/config.json path, and each item is passed to fs.existsSync.",
+          "evidence_refs": [
+            "s6",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "6d494f6a86fd07eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When fs.existsSync(path) is truthy, the callback reads that path; otherwise it yields null.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "50ba181e9caa3aae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This check asks whether the target credential artifact exists.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "3927321ac6d0f172",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The credential path array includes the home-relative .hcloud/config.json path, and each item is passed to fs.existsSync.",
+          "evidence_refs": [
+            "s6",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "a78a08add6f14de4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When fs.existsSync(path) is truthy, the callback reads that path; otherwise it yields null.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "e9ae720346437bf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This check asks whether the target credential artifact exists.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "5742d6870a510e0c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The credential path array includes the home-relative .tccli/default.credential path, and each item is passed to fs.existsSync.",
+          "evidence_refs": [
+            "s6",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "07b5a9872874727c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When fs.existsSync(path) is truthy, the callback reads that path; otherwise it yields null.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "8922173010c699ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This check asks whether the target credential artifact exists.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2345c9eaa77106fc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform mismatch exits first, and the subsequent switch calls the payload for listed countries or UNK, yielding c1 && (c2 || c3).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f257598330b8d6a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate controls whether the download, file write, execution and deletion routine runs.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s15",
+            "s16",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "dac0c0336f00754b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The routine runs on Linux when the geo lookup matches a listed country or returns UNK.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "3b475ef402144c6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The country cases select targeted environments for the routine, while UNK also reaches it.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ca7f407dc827f0c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The selected case calls _0x490324; that function downloads a file, writes it, then invokes the process spawn wrapper for the downloaded executable.",
+          "evidence_refs": [
+            "s9",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "f3914f757300e40c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The guarded switch is the call site for _0x490324 in the shown file, and the payload sinks are inside its call chain.",
+          "evidence_refs": [
+            "s9",
+            "s11",
+            "s12",
+            "s13",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "3078a36b50fbc8c1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The routine performs a network GET, creates a write stream, spawns the downloaded executable with mining arguments, and unlinks the executable in the spawn wrapper.",
+          "evidence_refs": [
+            "s10",
+            "s15",
+            "s16",
+            "s17",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "19e69394713bb9c2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The credential reads are nested under the Linux and geo gates; existence checks read each matching path and the later empty-result check permits exfiltration when at least one credential file was read.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "e1b8f1304516ac59",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment checks determine whether credential contents are read and posted.",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s21",
+            "s22",
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "f4138df2b4b59fd3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Credential collection and posting occur when the listed platform, geo, and credential-availability conditions pass.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "b576b70c40675aaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence checks determine whether credential data is available to collect and send.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "665d8022b0dfba07",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readFile branch reads existing credential paths, the filter retains non-null results, and the later length check gates the POST of the joined contents.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "s21",
+            "s22",
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "3811dd22d52e574a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The credential read and POST are inline in the helper path reached from the guarded _0x490324 call; the file shows no other caller for these inline sinks.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s21",
+            "s22",
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "e870c54d931ccdba",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The existing-file branch uses fs.promises.readFile, and the nonempty collected contents are sent with axios POST.",
+          "evidence_refs": [
+            "s21",
+            "s22",
+            "s23",
+            "s24"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,987 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pcyodestyle",
+    "version": "0.1",
+    "archive_sha256": "98163d2df511c6a82e37f27bd770729965d57201c5b14203a16029aff20e9bf7"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "012416da169deb17",
+      "packet_sha256": "2f8322dcf304b559",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "cf7613d09cd74cb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:6 is the condition of the outermost if and compares sys.platform with a string built by chr() over integer arithmetic.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "9012a647fff3c9a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Evaluating the integer list by hand gives 119,105,110,51,50, which is 'win32'. The operator is == and the guarded block is the then side, so the test is positive.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform reads the operating system, so the category os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "f9eec2f74c127c91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:101 binds the result of os.path.basename(TargetPath) to a variable. The same variable is the left operand of the 'in' test at f1:94, in the same function scope and the same loop.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "f1:94",
+            "f1:101"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "839b840821c24a89",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The list at f1:94 decodes to chrome.exe, msedge.exe, launcher.exe and brave.exe. The test is a positive 'in', and its then side sets the shortcut Arguments and leads to Save.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:94"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "ca284f6349e635e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks the executable name that a shortcut points to, so target_artifact fits.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "517706145c272b17",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The only cited guard is the platform if at f1:6, with the single condition c1. The nested sys.argv[1] checks are separate decisions and are not part of the cited guards.",
+          "evidence_refs": [
+            "s3",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6d27bd959d872be2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code under the win32 check, the pip install and the file write, runs only when the check is true. No alternative payload exists on the else side, so the gate enables it.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "820afc2b20c5e461",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the platform is win32. There is no analysis, CI or sandbox check that backs off, so the polarity is activate.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows-only payload (pypiwin32, COM shortcuts, ctypes.windll) is offered nowhere else. No cross-platform fallback exists, so the check selects victims rather than providing portability.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4a86df8eeb0cba9b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "pip.main at f1:13 and the open() at f1:126 both sit inside the then block of the platform if. The state-variable loops reach them: the initial value evaluates to 108363, which sends the first loop to pip.main, and the state set at f1:124 sends the second loop to f1:126.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "f1:11",
+            "f1:13",
+            "f1:126"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "7028bbb0b9e996b7",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The whole file is one if/elif under the platform check, and there are no functions, exports or other callers. Both sinks are reachable only from inside that block.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "aef0344e1e8e4dfe",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "pip.main(['install', ...]) at f1:13 fetches a package over the network. The open() at f1:126 uses mode 'w+' and is followed by .write at f1:129, so it writes a file.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:13",
+            "f1:126",
+            "f1:129"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "79fbfc01f90544eb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform if (f1:6) encloses the shortcut loop, and the basename 'in' test (f1:94) is nested inside that loop. Both must hold to reach Arguments and Save, so they join with and, and the minimum is 2.",
+          "evidence_refs": [
+            "s3",
+            "s7",
+            "f1:6",
+            "f1:94"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "87c47a7dcfc1e364",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The shortcut is rewritten and saved only when the name matches. Otherwise the loop ends (state set to 0 at f1:99), so the gate enables the change.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "f1:99"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d5a1754e4f432494",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate acts on matching browser or launcher shortcuts. Nothing in it backs off on analysis, so the polarity is activate.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "18ac4d3eb9c3481e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Only shortcuts to chrome, msedge, brave or a launcher get a modified Arguments value, and the rest are skipped. This selects specific target applications.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "86ee3b71ffebeaa9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Arguments assignment (f1:95) is followed by a state assignment that I evaluated to 60921, then continue (f1:96-97). The loop then takes the elif at f1:103 and calls Save at f1:104. The non-matching path sets the state to 0 and ends the loop, so Save is reachable only after the basename test succ",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "f1:94",
+            "f1:96",
+            "f1:103",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "5840051953b3f466",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only assignment I found that reaches the Save state (60921) is the one at f1:96, inside the basename-gated block. The file has no other callers or entry points.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "f1:96",
+            "f1:103"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "47108317bbfae084",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The object calling .Save() comes from Dispatch(...).CreateShortcut(...) (f1:65, f1:90). Saving a modified shortcut object writes the .lnk file, so it is a file write that changes the shortcut to persist the new Arguments.",
+          "evidence_refs": [
+            "s9",
+            "f1:65",
+            "f1:90",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "k_4fb68d086f.L6.drop",
+          "claim_sha256": "d782d7f33d2b3650",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "IsUserAnAdmin() at f1:68 is a privilege check that is a gate. When it is true the state goes to the branch at f1:45, which appends an extra directory to the list scanned for shortcuts to modify (f1:46, used at f1:82). When it is false that directory is skipped. The check therefore decides whether sy",
+          "evidence_refs": [
+            "s10",
+            "f1:45",
+            "f1:46",
+            "f1:68",
+            "f1:82"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "1c5528a910384096",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The not-exists test at f1:120 only creates the staging directory (state 29059 leads to makedirs at f1:59) and then returns to the same step. The file open and write at f1:126 and f1:129 run either way, so the test is setup and decides nothing.",
+          "evidence_refs": [
+            "s11",
+            "f1:59",
+            "f1:120",
+            "f1:121",
+            "f1:126"
+          ]
+        },
+        {
+          "claim_id": "q_6301778a53.L6.drop",
+          "claim_sha256": "ad9a61890b0f3dd0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the if statement around IsUserAnAdmin() at f1:68-70. Its true side routes to the branch at f1:45 that adds an extra directory to the shortcut scan list, so it is a privilege gate for which shortcuts get modified.",
+          "evidence_refs": [
+            "s12",
+            "f1:45",
+            "f1:46",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "4d351b376fc12360",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the if not os.path.exists statement at f1:120-122. It only creates a missing directory before the write, and the write at f1:126 runs on both paths, so it is not an environment gate.",
+          "evidence_refs": [
+            "s13",
+            "f1:59",
+            "f1:120",
+            "f1:126"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ecd9707daef33883",
+      "packet_sha256": "23e2f06852f801e8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "38c63effe7ba4b54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The outer if at f1:6 compares sys.platform with == against a char-code list that decodes to 'win32'. The whole install body sits in its then arm.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "e6510b16fbf6cc1f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision at f1:94 tests the basename variable (assigned from os.path.basename(TargetPath) at f1:101) with 'in' against four lists that decode to chrome.exe, msedge.exe, launcher.exe and brave.exe. Only the in-list outcome reaches Save; otherwise the state goes to 0 and the loop ends.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:94",
+            "f1:101"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "3cff72d71a37076b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin at f1:68 tests the process's elevation, which is a privilege property. When true it adds extra directories to the scan list.",
+          "evidence_refs": [
+            "s7",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "87fe6c19e74ffded",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform if (f1:6) encloses the whole loop, and the basename-in-list if (f1:94) is nested inside it. The Arguments and Save region is reached only when both hold, so 'c1 && c4' with min 2 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "f1:6",
+            "f1:94"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "5bac36ddb6ca47d6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Save at f1:104 is the only Save call. Its state value 60921 is produced only at f1:96 (inside the browser-name if), and the not-in-list path sets state 0 and exits. I found no other caller, export or handler.",
+          "evidence_refs": [
+            "s6",
+            "s4",
+            "s5",
+            "f1:96",
+            "f1:99",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "64b88d24c2c0e43b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The admin branch only adds directories to the list that the same shortcut-rewrite loop scans. It changes the target of the same action and does not enable it or select a different payload.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:69",
+            "f1:46"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8aa3ffedd1d9fe44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate runs the shortcut persistence on a Windows target with more reach when elevated. Nothing backs off on analysis, CI or a sandbox.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "79a87476318a1541",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The admin test widens which shortcut directories are scanned. That could be targeting or data_availability, since the extra directories may only be writable when elevated. I did not decode the appended directory names.",
+          "evidence_refs": [
+            "s7",
+            "f1:46",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "820c532765718070",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The control flow is a flattened state machine. The admin arm sets state 362814 and then continues, and I traced 362814 to 18005, 37668 and 382664. I did not trace the rest of the way to the shortcut loop and Save at f1:104.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s6",
+            "f1:69",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "2410b26640fdba35",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "The non-admin fall-through at f1:71 computes state 18005, the same state the admin arm reaches through 362814. The Save sink is therefore reached without the admin test, and the admin arm only adds directories.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s6",
+            "f1:48",
+            "f1:71",
+            "f1:119"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "6df2fdb01170f741",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is Save() on a shortcut object (CreateShortcut, then Arguments set) in a browser shortcut file. That writes the modified .lnk to disk, which is fs_write for persistence.",
+          "evidence_refs": [
+            "s6",
+            "s5",
+            "f1:90",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "fad4ec32ca2af31a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test at f1:120 is not an environment gate: missing path leads to makedirs (f1:59) and then state 37668, and an existing path goes straight to 37668. Both outcomes converge, so it only creates the folder when absent.",
+          "evidence_refs": [
+            "s9",
+            "f1:59",
+            "f1:120",
+            "f1:124"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ecd9707daef33883",
+      "packet_sha256": "11f438612e08f46f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:6 compares sys.platform with a string built by chr-style map over integer arithmetic (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "38c63effe7ba4b54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The integer list at f1:6 evaluates by hand to the five characters of the Windows platform string, and the operator is == with the body in the then arm.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform is an operating-system property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "b8be373fd1188342",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:101 stores os.path.basename(shortcut.TargetPath) in a variable that the test at f1:94 reads with in.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:94",
+            "f1:101"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "e6510b16fbf6cc1f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The list at f1:94 decodes to four browser/launcher executable names matching the claim, tested with in and guarding the then arm.",
+          "evidence_refs": [
+            "s4",
+            "f1:94"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "ca284f6349e635e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks which program a shortcut points to, i.e. the target artifact.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "f16f30df155ccebb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:68 is an if whose condition is ctypes.windll.shell32.IsUserAnAdmin().",
+          "evidence_refs": [
+            "s5",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "50484a03f030ba05",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "operator_mismatch",
+          "evidence": "The truthy branch at f1:68-70 only sets the state and continues, skipping the rest; the following code runs when the call is falsy, so the positive form is falsy.",
+          "evidence_refs": [
+            "s6",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "3cff72d71a37076b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin reads the privilege level.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "52f1535ddeb0eb16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One guard, the platform if at f1:6, encloses the block; a single condition matches.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6d27bd959d872be2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test only turns the block on; there is no per-branch payload and no changed target.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "820afc2b20c5e461",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs on the matching platform and does not back off on analysis signals.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test only selects the platform whose APIs the block uses (windll, COM); I would label it portability, not targeting.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4a86df8eeb0cba9b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The pip.main call (f1:13) and the open/write calls (f1:126-129) both lie inside the block under the platform if.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "da3f89c9b8200068",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The package has only this setup.py, whose code sits inside the platform if with no other callers, exports or handlers.",
+          "evidence_refs": [
+            "s7",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "aef0344e1e8e4dfe",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "pip.main can fetch packages (network) and open plus write at f1:126-129 writes a file.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "87fe6c19e74ffded",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The basename test at f1:94 is nested inside the platform if, so the conditions join with and.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "87c47a7dcfc1e364",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The same behaviour acts on a shortcut chosen by its target program, so the effect is modifies, not enables.",
+          "evidence_refs": [
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d5a1754e4f432494",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs when the target is found and has no analysis back-off.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "18ac4d3eb9c3481e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch picks specific browser shortcuts to alter.",
+          "evidence_refs": [
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "86ee3b71ffebeaa9",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The Save call at f1:104 sits in a separate state-machine branch, not lexically inside the if at f1:94, and the shortcut object comes from a dynamic Dispatch; the path cannot be confirmed.",
+          "evidence_refs": [
+            "s4",
+            "s11",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "5bac36ddb6ca47d6",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The state-variable control flow does not show whether the Save step can be reached without passing the basename test.",
+          "evidence_refs": [
+            "s11",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "47108317bbfae084",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Save is a method on an object from a COM Dispatch call and is not bound to a known file-write API.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "d46830e3bbde6c9b",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The admin test is an early skip: the then arm only continues, and the later code runs when the call is falsy, so c5 truthy is not a condition of that code.",
+          "evidence_refs": [
+            "s6",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "64b88d24c2c0e43b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The admin check only lets the code proceed or skip; it changes no target, so the effect is enables.",
+          "evidence_refs": [
+            "s6",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8aa3ffedd1d9fe44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check does not back off on analysis; it skips an already-privileged case.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "79a87476318a1541",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code does not show why admin is skipped; the purpose is unclear.",
+          "evidence_refs": [
+            "s6",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "820c532765718070",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The region s12 holds only the continue; the Save sink at f1:104 is not reached from it.",
+          "evidence_refs": [
+            "s12",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "2410b26640fdba35",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The gate side itself is misidentified and the state-machine flow does not show who else reaches the Save step.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "6df2fdb01170f741",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Save is a method on a COM Dispatch object and is not bound to a known file-write API.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "fad4ec32ca2af31a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "The not-exists check at f1:120 decides whether the open/write step at f1:126-129 runs, so it is an environment gate the record misses.",
+          "evidence_refs": [
+            "s13",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "4d351b376fc12360",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "other",
+          "evidence": "This is the same f1:120 file-existence test: on a miss it skips ahead, otherwise the file write at f1:126 runs.",
+          "evidence_refs": [
+            "s14",
+            "s9"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "15ccbdb21767af96",
+      "packet_sha256": "4344fe8d1af79343",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "3b8d20bef2256045",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The outer if at f1:6 compares sys.platform with the string built from char codes, which decodes to win32. The inner if at f1:94 tests the basename of the shortcut target against chrome.exe, msedge.exe, launcher.exe and brave.exe. The second guard sits inside the first, so the two join with and. An i",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "f1:6",
+            "f1:7",
+            "f1:94",
+            "f1:101"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "1f483b29e00b99b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Arguments assignment at f1:95 is inside the f1:94 then arm and sets the state variable to 60921, which is the value tested at f1:103. The save call at f1:104 runs only in that state. If the basename test fails, the state becomes 0 and the loop ends. Evaluating the constant state expressions conf",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s7",
+            "f1:94",
+            "f1:96",
+            "f1:103",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "550e683631a90011",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "setup.py has a single shortcut-save call, at f1:104. It runs only in state 60921, and only the then arm at f1:96 sets that state. The loop sits inside the platform and argv guards at module level, with no function, export or timer that reaches it from elsewhere.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:96",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "591a1c3c39fa1bac",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The object saved at f1:104 comes from CreateShortcut on a Dispatch of WScript.Shell, which decodes from char codes at f1:65. Its Arguments are rewritten and Save() writes the .lnk file back to disk. That is a file write that alters existing browser shortcuts, so the persistence behaviour rests on an",
+          "evidence_refs": [
+            "s5",
+            "s7",
+            "f1:65",
+            "f1:90",
+            "f1:95",
+            "f1:104"
+          ]
+        }
+      ]
+    }
+  ]
+}

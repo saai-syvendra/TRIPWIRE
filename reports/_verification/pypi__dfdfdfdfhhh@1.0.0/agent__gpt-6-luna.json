@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "dfdfdfdfhhh",
+    "version": "1.0.0",
+    "archive_sha256": "3d60ebe5c1c0daaaca3c534ec45755a0b319f6eaf9594b4fffb783d55d793db4"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "044eee1fcfe4896d",
+      "packet_sha256": "223a5aa265a887a0",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "312af74abec7d8c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition directly calls `os.path.exists` with the System64 directory built from `login = os.getlogin()`, and branches on its result. (f1:18-19)",
+          "evidence_refs": [
+            "f1:18-19"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "8ef1989d80382871",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test compares `os.path.exists(...) == False`, so its positive form for the then branch is `not_exists` for the stated path using the login value. (f1:18-19)",
+          "evidence_refs": [
+            "f1:18-19"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "45ed37b3c79ea25f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition calls `os.path.exists` on a directory path, so `file_or_dir_exists` is the category it reads. (f1:19)",
+          "evidence_refs": [
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "7f61a3aa92c7dfcd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one `if` guard with the single condition `os.path.exists(path) == False`, and the listed then region is its body; the minimal combination is `c1`. (f1:19-28)",
+          "evidence_refs": [
+            "f1:19-28"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "3a4919f16d7877ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the directory is absent, the branch creates it, writes startup and download scripts, and runs the generated VBS; when it exists, the branch skips those actions. The gate therefore enables this behavior. (f1:19-28)",
+          "evidence_refs": [
+            "f1:19-28"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c505d38bb10f9b6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload setup runs when the user-specific System64 directory does not exist, without a check for analysis, CI, or a sandbox. This is an activate gate. (f1:19-28)",
+          "evidence_refs": [
+            "f1:19-28"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "50d0c70a9aa38acb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existing-directory branch is a no-op, while the missing-directory branch creates the directory and installs the scripts, making this a re-entry guard for one-time setup; `unclear` does not fit. (f1:19-28)",
+          "evidence_refs": [
+            "f1:19-28"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "1f51ce83a67f4a66",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each listed sink is a direct call inside the `then` body: the writes create VBS, Python, and batch files, and `subprocess.run` launches the generated VBS. The written commands include `bitsadmin` downloads and starts of the generated files, supporting the listed download and execution behaviors. (f1",
+          "evidence_refs": [
+            "f1:21-26"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "da884401517c25e1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "All listed sink calls occur in `CustomInstallCommand.run` after the missing-directory test; the file registers that method as the install command, and no other callers or sink sites appear in this file. (f1:11-29, 51-52)",
+          "evidence_refs": [
+            "f1:11-29",
+            "f1:51-52"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ee59c1dbb9a933a6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The `open(...).write(...)` calls write files, including a VBS written to the Startup folder whose command launches the helper; `subprocess.run` launches the VBS, whose batch commands invoke `bitsadmin` to download files and start the generated scripts. These sinks support file writing, persistence, ",
+          "evidence_refs": [
+            "f1:22-26"
+          ]
+        }
+      ]
+    }
+  ]
+}

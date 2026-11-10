@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "requests",
+    "version": "2.34.2",
+    "archive_sha256": "f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e0a51b6c6a7ebf03",
+      "packet_sha256": "1eac78238637af17",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "9a20e65bb06443d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison in s1 directly tests sys.version_info, with sys imported at f1:1.",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "c88613847b67dfce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 exits when sys.version_info is less than (3, 10), so reaching the following setup code requires sys.version_info >= (3, 10).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "df4e47b8edfb78a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s1 compares the Python interpreter version exposed by sys.version_info, which fits runtime_version.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9282c37168e9e289",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole guard in s2 exits on the complement of c1; s3 is reached when c1 holds. There are no additional conditions, so the minimum is one.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "851285c845d4baf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 terminates execution on older interpreters, enabling the setup call in s4 only on supported versions.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e54886d56219c740",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version condition activates the setup call for Python 3.10 or later; the complete file contains no analysis-environment check.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "11c93e3b2b8bd612",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 rejects older Python versions before the setuptools import and setup call, implementing a runtime compatibility requirement consistent with portability.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "55278daa31aba6f6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 lies after the process exit guard in the same module block. The sink in s4 is directly inside s3, so the empty witness is sufficient.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4c284d2af1b746d2",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete recorded file contains one setup call, at f1:9, reached only after the version guard. There are no alternate calls, handlers or exports that bypass it in this file.",
+          "evidence_refs": [
+            "f1:3",
+            "f1:5",
+            "f1:7",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b21191c6bd5c7ed4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:7 imports setup directly from setuptools and s4 invokes that binding, supporting the benign_build behaviour.",
+          "evidence_refs": [
+            "f1:7",
+            "s4"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,402 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "2022-requests",
+    "version": "3.0.0",
+    "archive_sha256": "11303701e094dd1d69ed8dad381a0bb99bf9dedee6e0224b5b5bb63f0662ddf2"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "b5fc0f0eaa3140f8",
+      "packet_sha256": "2728920e9be2ae0b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "af8b85d4bd133d53",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CURRENT_PYTHON is bound to sys.version_info[:2] at f1:9 and compared at f1:12 (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "ad73168d7c3124df",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison uses REQUIRED_PYTHON = (3, 7), and the less-than arm exits at f1:28, so continuation requires version >= (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:10",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "d58720a2a9f7ca9e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The compared value is the Python interpreter version from sys.version_info[:2], making runtime_version appropriate (f1:9-12).",
+          "evidence_refs": [
+            "s1",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "2667c8c58e59eec6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision at f1:168 directly compares os.name, with os imported at f1:2.",
+          "evidence_refs": [
+            "s3",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "2285b32c86813014",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload is in the then arm of the literal comparison os.name == 'nt' (f1:168).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "8586d27d4e76a870",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The decision reads the operating system identifier os.name at f1:168, fitting os.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "b9e5a8fe86eb8ea0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "At f1:204-206, a is rebound to subprocess.Popen running net session, and out is read from that process stderr before the membership test.",
+          "evidence_refs": [
+            "s5",
+            "f1:204",
+            "f1:205"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "c7dea71bad0979a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else arm executes when the literal Access is denied. is absent from decoded net session stderr at f1:204-208, matching not_includes.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:204",
+            "f1:205"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "d31e04d51a1371a0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The net session stderr check at f1:204-208 distinguishes an access-denied result before allowing the additional execution sequence, fitting privilege.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:204"
+          ]
+        },
+        {
+          "claim_id": "g11.L4",
+          "claim_sha256": "b942f79c17bbd720",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The version failure exits at f1:28, and the surviving module code enters s7 only through the os.name then arm at f1:168; both conditions are necessary, giving a minimum of two.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g11.L6.effect",
+          "claim_sha256": "8b49bc2514d4b738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows arm after the version exit contains the download, file write, batch execution and deletion sequence; the other OS arm has no alternative payload (f1:168-229).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g11.L6.polarity",
+          "claim_sha256": "c5be15962fd1caf3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The conditions enable the batch payload on Windows with a supported Python version; the tests do not inspect analysis or sandbox indicators (f1:9-28,168-201).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g11.L6.purpose",
+          "claim_sha256": "894817440fc9e98e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS comparison restricts a downloaded Windows cmd/batch execution sequence to Windows, supporting targeting for the combined gate (f1:168-201).",
+          "evidence_refs": [
+            "s4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g11.then.L3",
+          "claim_sha256": "3fb8375337fab07f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All four cited calls occur directly in s7, inside the Windows then arm and after the version early exit; no witness hops are needed.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g11.then.L3.excl",
+          "claim_sha256": "23e78688b3feba16",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited sinks are inline module statements in the Windows arm after the version exit, with no callable payload definition or alternate entry to these sites in f1.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g11.then.L5",
+          "claim_sha256": "84617660fd9a8b3a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The imported requests client retrieves data, and the binary file handle writes its content at f1:187-190; subprocess.Popen then moves the file to a batch name, invokes it and invokes deletion at f1:191-201.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "f1:172",
+            "f1:178",
+            "f1:191"
+          ]
+        },
+        {
+          "claim_id": "g13.L4",
+          "claim_sha256": "0dc917e6795cae05",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The version continuation and Windows arm enclose the else arm of the access-denied test, so s12 requires all three conditions with a minimum of three.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g13.L6.effect",
+          "claim_sha256": "4885e9196e53ca38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The absence of the access-denied string enables the second download, write, execution and deletion sequence, while its presence only leads to printing at f1:207.",
+          "evidence_refs": [
+            "s6",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g13.L6.polarity",
+          "claim_sha256": "9abdd6cd03123260",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The nested conditions activate the second batch sequence on Windows when the privilege probe does not report access denied (f1:204-222).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g13.L6.purpose",
+          "claim_sha256": "9ce0a3ad615c91e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows test and access-denied probe restrict the second downloaded batch sequence by operating system and privilege outcome, supporting targeting (f1:168,204-222).",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g13.then.L3",
+          "claim_sha256": "304753a5e61e4fd3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All four cited calls occur directly in s12, inside the access-denied else arm nested under the Windows arm and after the version early exit.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g13.then.L3.excl",
+          "claim_sha256": "02d540c16f9d60e3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited sinks are inline module statements confined to the access-denied else arm under the Windows arm and version continuation, with no alternate callable entry in f1.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s13",
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g13.then.L5",
+          "claim_sha256": "c656198315eb16b5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The requests client retrieves data and the binary file handle writes it at f1:211-214; subprocess.Popen moves the file to a batch name, invokes it and invokes deletion at f1:215-222.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "f1:215"
+          ]
+        },
+        {
+          "claim_id": "k_0feb889211.L6.drop",
+          "claim_sha256": "72a150fe0c3d4b85",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform branch only chooses the clock callable at f2:55-58, which Session.send uses to measure elapsed request time at f2:698-704; this is library portability code.",
+          "evidence_refs": [
+            "s17",
+            "s19",
+            "f2:698",
+            "f2:704"
+          ]
+        },
+        {
+          "claim_id": "k_553ef8d5c7.L6.drop",
+          "claim_sha256": "52912df6d81e7888",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform branch defines Windows registry proxy-bypass helpers at f3:68-116, used by proxy handling at f3:809; it adapts library networking rather than enabling an install payload.",
+          "evidence_refs": [
+            "s18",
+            "s20",
+            "f3:107",
+            "f3:809"
+          ]
+        },
+        {
+          "claim_id": "q_51b6b8d5aa.L6.drop",
+          "claim_sha256": "2f971ea5ee7c70d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform branch only chooses the clock callable at f2:55-58, which Session.send uses to measure elapsed request time at f2:698-704; this is library portability code.",
+          "evidence_refs": [
+            "s17",
+            "s19",
+            "f2:698",
+            "f2:704"
+          ]
+        },
+        {
+          "claim_id": "q_837d6a64a8.L6.drop",
+          "claim_sha256": "f734bcd4aa852abd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform branch defines Windows registry proxy-bypass helpers at f3:68-116, used by proxy handling at f3:809; it adapts library networking rather than enabling an install payload.",
+          "evidence_refs": [
+            "s18",
+            "s20",
+            "f3:107",
+            "f3:809"
+          ]
+        }
+      ]
+    }
+  ]
+}

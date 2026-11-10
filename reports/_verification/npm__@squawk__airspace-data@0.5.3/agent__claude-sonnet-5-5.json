@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@squawk/airspace-data",
+    "version": "0.5.3",
+    "archive_sha256": "ee3030df5a6bc5652135a04f54d2be035713da222c979ccbf223553eedcfec0f"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "5c27c25cbbd8f212",
+      "packet_sha256": "130072542fd894d7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "0ff075c6a1c4499f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hc() runs execFileSync(c, ['--version']) in a try/catch and returns true/false; main reads it at f1:177 as hc('bun'), so the test is on `bun --version`.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:75",
+            "f1:177"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2920da2adbea68b6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`if (hc('bun')) return;` exits when execFileSync succeeds, so the code after it runs only when the call throws (bun not present), which is not_exists.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "faff6df9162447c6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the bun executable is installed on the host, so installed_tool fits.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "11d0f6cbe314d69f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single early-exit guard on hc('bun') and no other condition. The rest of main (s3) runs only when it fails, so the expression c1 with min 1 is right.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "318bba4d30d7cf16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the download, extract and run sequence happens at all, and there is no alternative payload. That is enables.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "897e9f10d239db02",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the check finds no bun. Nothing in the gate looks for CI, a sandbox or analysis, so it is not an evade gate.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fbe5ed002936a303",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate skips everything when bun is already installed, so the runner script is not executed on hosts that have bun. That is not a clean portability or targeting purpose, so unclear is reasonable.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:177"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "e046d1f414534e5e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All four sinks sit in the rest of main after the early return. dl(u, zp) at s5 reaches dl (s6), which holds https.get (s4) and createWriteStream (s7). xb(...) at s9 reaches xb (s10), which holds the unzip execFileSync (s8). The execFileSync at s11 sits directly in the region.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "bd4ad3435c221233",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "dl and xb are called only from main (f1:190, f1:191). main is called only once at f1:201 and the file has no exports, timers or other handlers. The download, unzip and run code is reachable only past the hc('bun') guard.",
+          "evidence_refs": [
+            "f1:190",
+            "f1:191",
+            "f1:201",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1e62593fa081dfde",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "https.get (s4) is a network download. fs.createWriteStream (s7) is a file write. execFileSync('unzip') (s8) and execFileSync(bp) (s11) are process creation, and bp is the freshly extracted bun binary, so the last one executes downloaded code.",
+          "evidence_refs": [
+            "s4",
+            "s7",
+            "s8",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_e3b45e7ecc.L6.drop",
+          "claim_sha256": "671ccaa9b2e18496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is a musl or Alpine check inside mu(). It only picks which bun build to download and does not decide whether anything runs, so it is portability plumbing and not a gate.",
+          "evidence_refs": [
+            "s12",
+            "f1:29"
+          ]
+        },
+        {
+          "claim_id": "k_ee268cee48.L6.drop",
+          "claim_sha256": "551c76ae499448ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32 and powershell check only picks the fallback extraction method for the zip. The same file is extracted either way, so it is plumbing and not a gate.",
+          "evidence_refs": [
+            "s13",
+            "f1:149",
+            "f1:173"
+          ]
+        },
+        {
+          "claim_id": "k_fb8d4a4bec.L6.drop",
+          "claim_sha256": "79a463355dc51643",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`w = process.platform === 'win32'` only feeds the binary file name (bun.exe or bun) and the chmod step. It does not change what runs, so it is plumbing.",
+          "evidence_refs": [
+            "s14",
+            "f1:181",
+            "f1:194"
+          ]
+        },
+        {
+          "claim_id": "q_1b5207c68a.L6.drop",
+          "claim_sha256": "720dce95c1080174",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary only picks the executable file name, bun.exe or bun, which is naming plumbing and not a gate.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_d3f8d1a986.L6.drop",
+          "claim_sha256": "0f66356d88f62091",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`if (!w) chmodSync(bp, 0o755)` only sets the execute bit on non-Windows hosts before the same execFileSync runs on every platform. It is plumbing and not a gate.",
+          "evidence_refs": [
+            "s16",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "q_e15f376488.L6.drop",
+          "claim_sha256": "c5759c6919bc8197",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This branch is only the Windows fallback for extracting the zip. Extraction happens by one of the three methods either way, so it does not decide what runs.",
+          "evidence_refs": [
+            "s17",
+            "f1:149",
+            "f1:173"
+          ]
+        },
+        {
+          "claim_id": "q_ef8ef5748f.L6.drop",
+          "claim_sha256": "e99e261acff8db6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This try/catch reads /etc/os-release for the Alpine fallback of the libc check inside mu(). It only picks the build variant and is not a gate.",
+          "evidence_refs": [
+            "s18",
+            "f1:22"
+          ]
+        }
+      ]
+    }
+  ]
+}

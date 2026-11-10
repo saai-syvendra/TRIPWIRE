@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "matplotlib-requests",
+    "version": "16.12.4",
+    "archive_sha256": "8b533a135e42742f3c8532b0149ad1f7aaf48b9db3386569b923afbf777c8494"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "6686452e91cb7c93",
+      "packet_sha256": "786342da828515eb",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "518909f406545486",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:24 calls os.path.exists on a literal path as the condition of an if statement.",
+          "evidence_refs": [
+            "s1",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "42bc7a062e847d74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:24-25 exits when the path exists, so the code after it runs only when the path does not exist (not_exists); the literal is the 'hifrom' marker plus an author handle.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "dd67913f1e6267fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads whether a file or directory exists, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a77bb76095b4e6e3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one early-exit guard with a single condition, and the rest of the file (s3) is its then region, so min_conditions of 1 and expression c1 are correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4d0ef5a96dae18d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code, which decodes and execs a base64 blob, runs only when the marker is absent, so the gate enables it. No alternative payload is selected.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e7f051572fe10f9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The marker check is not an analysis, CI or sandbox check. The payload runs on a normal target when the marker is absent, so the polarity is activate.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b4bd5d8e8d6b3288",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The marker file looks like a re-run guard, and nothing in the code ties it to targeting, portability or anti-analysis, so unclear is acceptable.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c8c3be730028b3c6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exec of the decoded blob at f1:38 sits inside the region after the early exit at f1:24-25. The witness is empty and the sink is directly in the region.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "5bbd4d52bbd08608",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The exec at f1:38 is top-level code in the only packet file, with no function, export or other caller, and it is reachable only after the f1:24 check.",
+          "evidence_refs": [
+            "s4",
+            "f1:38"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b88ab90a4b348f38",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The behaviour 'other' is backed by exec on decoded data (f1:38), which is an eval-kind sink that can run arbitrary code.",
+          "evidence_refs": [
+            "s4",
+            "f1:38"
+          ]
+        }
+      ]
+    }
+  ]
+}

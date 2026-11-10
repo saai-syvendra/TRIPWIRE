@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "ember-url-hash-polyfill",
+    "version": "1.0.13",
+    "archive_sha256": "29373a2d9a179265c87d3894c24be84ac592f8d04e8aea7deb49bd454b74d828"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "6bdab50417a518f8",
+      "record_sha256_after": "5d6e2d15d7d7e01e",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Re-read main() at bundle.js bytes 3732150-3734230 and the wrapper methods. The gates match the code. I resolved two of the three analyst reasons and removed them. First, each wrapper sink reaches its real sink: extraction and migration writeFileSync a /tmp script and spawn it detached, makeRepo call"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "5d6e2d15d7d7e01e",
+      "record_sha256_after": "baabf5a79555d7e0",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "6c36f51b5d901ff7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "GCPModule.initialize only calls GoogleAuth.getProjectId and getClient. getClient returns a cached client or builds one from GOOGLE_APPLICATION_CREDENTIALS, ~/.config/gcloud/application_default_credentials.json or, on GCE, the metadata check, and no call validates the credential with a server off GCE"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "1f519baf5d2b593c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The code at the gate runs extraction and migration only when a GitHub token exists, the OS is Linux or Mac, the token starts with ghp_ or gho_ and getUser returns a user. There is no other branch, so the checks limit the payload to one kind of victim, which is targeting. The refuting verifier's own "
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "4e5d95cbd50fb65a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The test is oe && (isLinux() || isMac()) with no else side: when it fails, getPackagesByMaintainer and updatePackage do not run at all. The username is then used as data for the lookup, but no check picks between targets of a behaviour that runs either way, so flipping the gate turns the behaviour o"
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "809e64e59ec9eab1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "GCPModule.initialize sets isValidCredentials only under if(t&&r), where t is await this.auth.getProjectId() and r is await this.auth.getClient(), and isValid() returns that flag. A missing project id throws NO_PROJECT_ID_FOUND into the catch, so it is an independent requirement even when a client re"
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "cf91b240092175f3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "isAvailable is return !!this.installedStatus || await this.install(). installedStatus is existsSync(cwd/trufflehog), and when it is false install calls getLatestRelease, downloadFile (fetch into createWriteStream) and extractBinary (tar, chmod). So the te.isAvailable() sink downloads and writes the "
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "286c2e3ce317c9c2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "if(process.env.SKIP_TRUFFLE) returns early before isAvailable and scanFilesystem, and that read is the only occurrence of SKIP_TRUFFLE in bundle.js, so nothing in the code sets it or says why it exists. It does not test a platform, a kind of victim, an analysis environment or the presence of data, s"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "baabf5a79555d7e0",
+      "record_sha256_after": "baabf5a79555d7e0",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Record left unchanged, needs_manual_review stays true. Re-read main() (bytes 3732300-3734230), isLinux/isMac (3096423-3096492), getToken (3334440-3334602) and GCPModule.initialize (235711-235771): the code matches c1-c8, c10-c12 and the expressions of g1, g2, g4, g5 and g6. The flag reason still hol"
+        }
+      ]
+    }
+  ]
+}

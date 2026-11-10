@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeaotifulSoup",
+    "version": "1.0.0",
+    "archive_sha256": "6385bc63336e43f5fdf8f7f4f3d3deea960fad6ecbb56d037b917f124dedc448"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "518f9d1e75eccedb",
+      "packet_sha256": "fd5e195292c2c3b5",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "346bfa77ad5e17b6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition directly compares `os.name` to a string, so the cited site is a decision testing that API.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "7f582e45b823afcb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is guarded by `os.name == \"nt\"`; the comparison has the claimed operator and value.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads Python's `os.name` property, so the `os` category fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2bf0f302ec6c0944",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single cited then guard is the `os.name == \"nt\"` condition controlling the region, so the expression is `c1` and its minimum condition count is one.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows branch performs a request and evaluates the returned text, so this gate enables those behaviors.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The behavior runs when the environment identifies as Windows (`os.name == \"nt\"`), which is activation on a target platform.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition selects Windows by operating-system name before the request and execution, which is platform targeting.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ea3125374a83ab07",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sinks are statements inside the `os.name == \"nt\"` then branch: `requests.get(...)` makes the request and `exec(...)` evaluates the processed response text.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "902bdd8ce105e04d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks are in the custom install command's `run` method, which is registered as the `install` command; the file shows no other call path to either sink outside that guarded method body.",
+          "evidence_refs": [
+            "s3",
+            "f2:10",
+            "f2:11",
+            "f2:29"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4a0ef212c9d3b83b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`requests.get(...)` is a network request, and the `exec` call evaluates its response text after removing the wrapper tags, supporting download and exec_downloaded.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

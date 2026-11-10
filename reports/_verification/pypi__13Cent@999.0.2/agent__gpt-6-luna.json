@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "13Cent",
+    "version": "999.0.2",
+    "archive_sha256": "86f1df6643a915c6b759a0beef64dcb0b81716dae0739928a8c5dca19d3b7658"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "e7e0066e9834ee17",
+      "packet_sha256": "efbaac97a45bf674",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_7c0fcef421.L6.drop",
+          "claim_sha256": "e3c1f8358c167d57",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The install method attempts to open `/.dockerenv` and only posts its contents within the successful `with open` block, so file availability decides whether that request runs (f1:58-59). This is an environment gate for Docker marker-file availability.",
+          "evidence_refs": [
+            "f1:58-59"
+          ]
+        },
+        {
+          "claim_id": "q_59f427ce70.L6.drop",
+          "claim_sha256": "6fcfd204be7b21d1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The `try` body opens `/.dockerenv` and posts that file only after the open succeeds; an exception skips the request, so the test decides whether the guarded exfiltration runs (f1:57-61). This is an environment gate for Docker marker-file availability.",
+          "evidence_refs": [
+            "f1:57-61"
+          ]
+        }
+      ]
+    }
+  ]
+}

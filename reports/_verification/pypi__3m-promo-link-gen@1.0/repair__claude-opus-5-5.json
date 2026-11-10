@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "3m-promo-link-gen",
+    "version": "1.0",
+    "archive_sha256": "f0f3d90013b829a163d5ac1a170eb6c31a7c1a5ae2bc452ad3c5d19c60edc33a"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "296f52b7c6820b1e",
+      "record_sha256_after": "bbb16c8203503fb9",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "cb3061dd4ec4049c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The verifier is right that region setup.py:511-516 is not on the side of the c4 early exit at line 502: that exit sits inside the elif 'Steam' in arg block, so wallet and NationsGlory calls of ZipThings reach the zip and upload with c3 alone (already gate g3). For the Steam call (PathsToZip row at l"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed what the code shows: c1, c2, c3 and c4 values are now the paths from the browserPaths, discordPaths and PathsToZip tables in GatherAll (lines 519-540) and the Steam config path, marked plain; os win32 is read from the top-level windll import at line 11 and the file_present recipes of g1-g4 are"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "bbb16c8203503fb9",
+      "record_sha256_after": "94bb2a80e2895bcb",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "19f20c74fa56ebe9",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The c4 early return at setup.py:502 sits inside the elif 'Steam' in arg branch, so it does not dominate the zip, upload and remove at lines 511-516. Those lines also run for wallet and extension targets under c3 alone, and g3 already covers them. g4 now cites only the code inside the Steam branch af"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "94bb2a80e2895bcb",
+      "record_sha256_after": "7c9024eb82b4d9f2",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "cleared",
+          "reason": "c5 value had '<?>' file names, but the names are fully given by the code: KiwiFile (lines 595-609) lists Desktop, Downloads and Documents under the %TEMP% prefix before '\\AppData' and keeps entries whose lowercased name contains a key_wordsFiles keyword, a file also needing '.txt' (line 602) and a f"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "7c9024eb82b4d9f2",
+      "record_sha256_after": "cece9350d61b3562",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "0c291fe05a57e463",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "shutil.copy2 at line 419 is a staging copy to a temp file, so cred_read as fs_write did not describe it. The cred_read sink is now the open() at line 404 in getToken, kind fs_read, which reads the browser leveldb .log/.ldb files that are searched for tokens. It sits directly in the region after the "
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "1f00ff3ae222d09c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "b64decode at line 477 only decodes an already loaded key and reads no credential. The cred_read sink is now the open() at line 481 in GetDiscord, kind fs_read, which reads the Discord leveldb files holding the encrypted tokens. It sits directly in the region after the line 473 exists check."
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "ac2b58e2a0bf8fb2",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The line 586 guard is in KiwiFolder and controlled neither cited region in KiwiFile. Added the statements after that early exit (lines 587-592, inside the for body) as a third region, so the guard controls the upload at line 589. Added a second exfil payload for the folder path: call KiwiFolder at l"
+        },
+        {
+          "claim_id": "k_ee61418539.L6.drop",
+          "claim_sha256": "e3c05182f1d21a60",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Reviewers are right that not_environmental is the wrong code: the __import__ probe at line 35 does read the install environment. Changed the drop to reason_code other with a plumbing note. It stays dropped rather than becoming a gate: a failed probe only starts pip install (line 37) and sleeps, then"
+        },
+        {
+          "claim_id": "q_51818e9113.L6.drop",
+          "claim_sha256": "322a543c5e2d761b",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same decision as k_ee61418539, for the try/except at lines 35-38 around that probe. Changed reason_code from not_environmental to other with a plumbing note and kept the drop: the except handler only runs pip install and sleeps, and neither side skips the payload, so no gate is missed."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "cece9350d61b3562",
+      "record_sha256_after": "cece9350d61b3562",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "k_ee61418539.L6.drop",
+          "claim_sha256": "e467bbcdef5ee20c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:35 __import__(modl[0]) only probes whether requests or Crypto.Cipher is importable. The loop at lines 34-38 has no path that skips or changes the payload: on failure the handler at lines 37-38 starts pip for that module and sleeps 3 seconds, then both sides fall through to the unconditional"
+        },
+        {
+          "claim_id": "q_51818e9113.L6.drop",
+          "claim_sha256": "a2954836ac630853",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The try statement at setup.py:35-38 is the decision around the k_ee61418539 probe. Its except handler contains only subprocess.Popen of pip install for the missing module (line 37) and time.sleep(3) (line 38). It has no return, exit or alternate payload, so control always continues to lines 39-40 an"
+        }
+      ]
+    }
+  ]
+}

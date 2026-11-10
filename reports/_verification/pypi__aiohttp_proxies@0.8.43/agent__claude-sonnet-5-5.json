@@ -1,0 +1,207 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp_proxies",
+    "version": "0.8.43",
+    "archive_sha256": "b940a05937917e602453daf93e388ffa113e62b30ebab078fccef2e776cec331"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "e412486432e7e670",
+      "packet_sha256": "7cbc73c55c59a9f9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "c0ba59b2f35dc21c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 is the comparison `\"install\" == sys.argv[1]` in the condition of the if at f1:23, a direct decision on sys.argv.",
+          "evidence_refs": [
+            "s1",
+            "f1:23"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b1cca845c6321ed2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition is `(len(sys.argv) > 0 and \"install\" == sys.argv[1]) or ...`; the then arm is reached when sys.argv[1] == 'install' is true, with no negation. The len check is only a presence check.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:23"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6d224a38bffd796f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the setup.py command-line argument 'install', which is the package manager's invocation mode.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1edaf5709000e6d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 is `\"bdist\" in sys.argv[1]`, the second alternative in the if condition at f1:23, and it tests sys.argv directly.",
+          "evidence_refs": [
+            "s3",
+            "f1:23"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "2577c6c6af903208",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`\"bdist\" in sys.argv[1]` is a positive substring test, and its truth reaches the then block through the `or`, with no negation.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "ef4d84b36b675c2f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the setup.py command is a bdist build, so it reads the package manager's invocation.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "ccd3df90a8c7944b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code is `(len>0 and install==argv[1]) or bdist in argv[1]`, one if with two alternatives joined by or. The len check is a presence check that belongs to c1, so then_min=1 is correct.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "e3bc668311dab0a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded block holds the whole payload (beacon, dropped exe, launch) and there is no else branch, so the gate enables it.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d3bb27ac429d1949",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the install or bdist command is seen. Nothing backs off on analysis or CI, so the polarity is activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "cd77730bdd771850",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload is restricted to a real install or build invocation of the package. It is not a portability, data-availability or anti-analysis check, so targeting fits best.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "365fb727b675205e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sinks sit directly in the then block at f1:24-48: os.getlogin (s5), urlopen (s6), open(file,'wb') (s7) and subprocess.Popen (s8). Each is inside region s4, so empty witnesses are correct.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0601ffac77c834e9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The payload is inline module-level code in setup.py (f1:23-48), not in any function, so there is no other caller, export or timer. The only other code is the unrelated setup() call.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f1:23"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7cf163d8cb10c96b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Recon uses os.getlogin and platform.node. Exfil is urllib urlopen to an IP address, defanged as hxxp://144[.]24[.]115[.]170. File write is open(...,'wb') on a temp .exe, and spawn is subprocess.Popen on that file.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "k_f5f2ceb2d0.L6.drop",
+          "claim_sha256": "0c2875aa5c411b0d",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Python 3.6 version check only raises RuntimeError and guards no payload, so it is not a payload gate. But it is a live compatibility branch that runs on Python older than 3.6, so 'dead_branch' does not fit and library code or not environmental would.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:71"
+          ]
+        },
+        {
+          "claim_id": "q_62c293d311.L6.drop",
+          "claim_sha256": "1b4bed34763cdd2e",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the if statement around the same version check. It only raises an error and guards no payload, so it is not a gate, but the branch is reachable on old interpreters, so the dead_branch reason is not demonstrated.",
+          "evidence_refs": [
+            "s10",
+            "f1:71"
+          ]
+        }
+      ]
+    }
+  ]
+}

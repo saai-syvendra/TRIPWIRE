@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "ansi-universal-ui",
+    "version": "1.4.0",
+    "archive_sha256": "ed13ba42adfe25d89e70f3df47faa2d39243a928985131f4bd703e819026d982"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d091170c9edcc07b",
+      "record_sha256_after": "d091170c9edcc07b",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6a04ce2259b2160c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "index.js:28 `if (!ASSETS[PLATFORM]) process.exit(1)` is a one-sided early exit: on any platform other than win32 or darwin (ASSETS, lines 16-25) the process exits and nothing is downloaded or run, so the gate's other side has no behaviour at all. The gate-analysis definition gives portability only w"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The second stage is base64 Python fetched at line 72 from an Appwrite bucket, decoded at line 73 and written to the interpreter's stdin at line 82; its content is not in the package, so further gates there cannot be checked statically. The download sinks (https.get at lines 35 and 50) sit inside new"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d091170c9edcc07b",
+      "record_sha256_after": "b24c18739a80aa52",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "aca9a07f00d6e6d4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right: the write_file sink cited fs.mkdirSync(CACHE_DIR) at line 48, which only creates a folder. The files are written by spawn('tar', ['-x', '-f', '-', '-C', CACHE_DIR]) at line 56, which gets the download piped to its stdin at line 57 and unpacks it into python_runtime. write_f"
+        },
+        {
+          "claim_id": "k_a28ccb09c3.L6.drop",
+          "claim_sha256": "ee0b72ade3126e7e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "fs.existsSync(LOCAL_PYTHON_BIN) at line 68 is plumbing, so the drop stands. It only decides whether setupPython runs. Lines 72 to 86 sit after the if and outside it, so with the binary present or absent the code fetches the remote base64, decodes it and spawns LOCAL_PYTHON_BIN with it on stdin. Flip"
+        },
+        {
+          "claim_id": "q_67c9a2b5b4.L6.drop",
+          "claim_sha256": "224270c6a185d4f2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement at lines 68 to 70 around the same existsSync(LOCAL_PYTHON_BIN) test. Its only body is await setupPython(...), and it has no else and no exit. Execution continues to line 72 on both sides, so the remote Python is fetched and run through LOCAL_PYTHON_BIN either way. Skipping t"
+        },
+        {
+          "claim_id": "k_25c096b203.L6.drop",
+          "claim_sha256": "e9852356c4636168",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "fs.existsSync(CACHE_DIR) at line 48 only decides whether mkdirSync runs, so that mkdirSync does not fail on an existing folder. The return new Promise at line 49 follows on both sides, so the https.get at line 50 and the tar extraction at line 56 run whatever the test gives. No behaviour class chang"
+        },
+        {
+          "claim_id": "q_914e5a9395.L6.drop",
+          "claim_sha256": "e9fa788144851528",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the one-line if at line 48 around the same existsSync(CACHE_DIR) test. Its only body is fs.mkdirSync(CACHE_DIR), and it has no else and no exit. The download and extraction at lines 49 to 63 run after it on both sides, so it only prepares the extraction folder and the drop as plumbing holds."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "b24c18739a80aa52",
+      "record_sha256_after": "0a7b711df0ad5006",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed one path and the flag stays. The download sink, https.get at index.js line 35, sits in the Promise executor at line 34, which runs synchronously when downloadString is called, so I added the new Promise call and executor bind hops and removed unresolved from that payload. Three reasons remain."
+        }
+      ]
+    }
+  ]
+}

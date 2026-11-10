@@ -1,0 +1,300 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "workerd",
+    "version": "1.20261024.1",
+    "archive_sha256": "50d52f7bc717a111bbeacf6cf6573bc7676531e1a64e5f9eedee690542dfbe02"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "67ee758d56dace3d",
+      "packet_sha256": "258e77ba891c6dea",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "6b68506c75f74a4f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "platformKey is initialized from process.platform, and the following if uses that variable as its decision input.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "1bb100c8ab19f98e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "The actual test is `platformKey in knownPackages`, where platformKey is a concatenation of platform, architecture, and endianness; the code does not test this API directly against the claimed list/value.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "7ad6002d6f92bcc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.platform supplies the operating-system component of the package lookup key.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "6a7be6cabc6a4a01",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.arch() is read into the composite platformKey that the following if tests against knownPackages.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9beb8516be690981",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "The actual test is `platformKey in knownPackages`, where platformKey is a concatenation of platform, architecture, and endianness; the code does not test this API directly against the claimed list/value.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "5384ab00df6b2fa5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.arch() supplies the architecture component of the package lookup key.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "addcda2121076a86",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.endianness() is read into the composite platformKey that the following if tests against knownPackages.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1aeb37c7afdbf5a3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "The actual test is `platformKey in knownPackages`, where platformKey is a concatenation of platform, architecture, and endianness; the code does not test this API directly against the claimed list/value.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "d2f0f026d2c3e27c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.endianness() supplies the architecture-endianness component of the package lookup key.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "970914570d1dced3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "platformKey joins the three environment values into one key, and a single membership test accepts exactly the enumerated known platform, architecture, and endianness combinations.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "37b0024e69a8c4af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A supported key proceeds to package resolution and binary preparation; the gate enables that install behavior.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "54680ad5d8db1c3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The supported platform combinations enter the package preparation path, so the gate activates on its target platforms.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "0258542c15ebf537",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lookup selects the platform-specific optional binary package from knownPackages.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "afeb73d673f8317c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch calls checkAndPreparePackage, whose package-install fallback reaches the download, write, npm exec, and cleanup sinks; its completion callback then validates the binary through execFileSync.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "087bf9797b3a481b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "checkAndPreparePackage is called only from the then branch, and its helper functions have no other callers in this file; the validation callback is attached to that gated call.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s8",
+            "s12",
+            "s15",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7510b33e257745d3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sinks use https.get for network access, fs.writeFileSync for writing, fs.unlinkSync/rmdirSync for deletion, and child_process execSync/execFileSync for process execution.",
+          "evidence_refs": [
+            "s7",
+            "s10",
+            "s11",
+            "s14",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_1178b3dada.L6.drop",
+          "claim_sha256": "ed2bb9168be82fe5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "isYarn is called inside maybeOptimizePackage to decide whether the binary optimization runs, so this environment check is part of install-time behavior.",
+          "evidence_refs": [
+            "s20",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_840d917e4b.L6.drop",
+          "claim_sha256": "644d34a98c882d84",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This platform comparison only chooses the `.exe` suffix used in the binary path; it does not select an install-time behavior.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "k_b568a7c63a.L6.drop",
+          "claim_sha256": "dc73db0d0dbbd751",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Linux comparison only appends platform-specific guidance to an error message after binary validation fails.",
+          "evidence_refs": [
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "q_1613c4bb62.L6.drop",
+          "claim_sha256": "43a5344b3a2c756f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The user-agent value is tested by isYarn, and that result controls the optimization branch in maybeOptimizePackage.",
+          "evidence_refs": [
+            "s20",
+            "s23",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "q_bc5330b571.L6.drop",
+          "claim_sha256": "aa1cec24f1423c4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform comparison chooses only the executable filename suffix for the binary path.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "q_d42c314bc5.L6.drop",
+          "claim_sha256": "6acfff1eaf80eb08",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Linux comparison changes only diagnostic text in the binary-validation error path.",
+          "evidence_refs": [
+            "s25"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeautifoulSoup",
+    "version": "1.0.0",
+    "archive_sha256": "ffea41fc2d46cd37497186c6df951b496a5c48e072752a443da3b7874fc37527"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "2db80ae7353acc20",
+      "packet_sha256": "3540589be667ceb9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "3f2ad0b63d7621bb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly compares os.name, with os imported in the same function immediately before it (f1:12-13, s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:12",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "92ce8a9cde41d9f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then body runs when os.name equals the literal nt; there is no negation or early exit reversing that condition (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads the operating-system identifier os.name, so the os category fits (f1:13).",
+          "evidence_refs": [
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "7434ff05021c56bb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both supplied versions place the claimed body under the single os.name equality condition, with no additional condition or alternative (f1:13-16, f2:13-16). Thus c1 alone suffices and the minimum is one.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS condition enables the download and execution body, with no alternate payload or environment-selected target in an else branch (f2:13-18).",
+          "evidence_refs": [
+            "f2:13",
+            "s4",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The body is activated for the nt operating-system target; the condition does not test an analysis or sandbox marker (f2:13-16).",
+          "evidence_refs": [
+            "f2:13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition restricts the entire download-and-execute operation to nt systems, rather than choosing a platform-specific implementation of an operation performed on all systems (f2:13-18). This supports targeting.",
+          "evidence_refs": [
+            "f2:13",
+            "s4",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "6b12abbaffc26f7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The original region is the equality guard's then body, and the supplied derived version retains that guard around its corresponding region (s2, s3, f2:13). Both cited sinks occur directly inside the derived region, so no witness hops are needed (s4-s6).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "f2:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0c3ab2733080ba77",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The supplied files contain the payload only inside the guarded run method; its install registration provides entry to that method and does not bypass its condition (f1:10-18, f1:29-30, f2:10-18, f2:29-30). The download and exec sinks are inline in the then body, with no separate callable payload or ",
+          "evidence_refs": [
+            "f1:10",
+            "f1:13",
+            "f1:16",
+            "f1:30",
+            "f2:10",
+            "f2:13",
+            "f2:16",
+            "f2:30"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "fd6c04fc28a0da85",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "In the supplied derived file, requests is imported and requests.get retrieves response text; that text passes through tag replacements directly to Python exec (f2:14-16, s5, s6). These sinks support download and execution of the downloaded text.",
+          "evidence_refs": [
+            "f2:14",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

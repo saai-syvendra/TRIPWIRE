@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "lambda-sns-dynatrace-sdk",
+    "version": "3.4.2",
+    "archive_sha256": "6e1d7cac695c39bca0b76b9a4499d3ed3931c7184e99bce33a6d2859568915e3"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "de51898aadc00067",
+      "packet_sha256": "b2c5eca63e31162d",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_6760860858.L6.drop",
+          "claim_sha256": "f5e50b6973d7c81b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The JBOSS test selects between identical process.env expressions, so data.is_jboss receives the same environment object on either outcome (s1, s2). It does not decide whether collection or transmission runs.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "q_0514914dad.L6.drop",
+          "claim_sha256": "d0c3f8cd2931f953",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Both arms of the ternary return process.env, making the assignment independent of the truthiness of JBOSS (s2). This test therefore does not gate a behaviour or select different collected data.",
+          "evidence_refs": [
+            "s2"
+          ]
+        }
+      ]
+    }
+  ]
+}

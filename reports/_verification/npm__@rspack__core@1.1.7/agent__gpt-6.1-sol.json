@@ -1,0 +1,733 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@rspack/core",
+    "version": "1.1.7",
+    "archive_sha256": "ccb55d450eef5dec8732fbe4d9df92b31511198ab38b00ab1c50dbb83bdcd34d"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "23451d3c49c057f8",
+      "packet_sha256": "afd5fe9920189042",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b27081ee1cd76107",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 switches on process.platform and returns the Linux enum for the linux case.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "97a4bcbf2aae5649",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 exits when the platform helper returns anything other than LINUX, so continuation requires process.platform equal to linux.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "c590482958061a3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads the operating system platform, which fits os.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "6bafd2975b141014",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 returns data.country from the awaited GET response, and that return value feeds the country switch; the import binding resolves to the bundled Axios export in f1:1.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "32936d1c92667a90",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "The switch in s4 also accepts UNK, and s5 can return that literal country from a successful status-200 response; the tested country set therefore contains an additional value.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "1c8ea25308c20495",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 reads country from an external IP information response, fitting external_ip_geo.",
+          "evidence_refs": [
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "c91958e0ce435ff1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 awaits the bound Axios get call inside a try and tests its response status, with exceptions mapped to the switch input UNK.",
+          "evidence_refs": [
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "3625c1a9049b0aed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 returns UNK on a non-200 status or a caught exception, and the switch in s4 accepts UNK to call the payload.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "2171e0d4911a0028",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The status and exception handling in s5 measure whether the external network request succeeded, fitting network_reachability.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "beb22d76951d69e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In f1:1 the home-directory credential path is an element of _0x5e7140, which is passed to the mapper whose parameter reaches the fs.existsSync decision in s6; the fs and os bindings resolve through their bundle modules.",
+          "evidence_refs": [
+            "f1:1",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "6d494f6a86fd07eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 takes its readFile arm when existsSync returns true for the mapped credential path; s8 later skips sending when no successful reads remain.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "50ba181e9caa3aae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 checks for a credential artifact supplied by the home-directory path array in f1:1, fitting target_artifact.",
+          "evidence_refs": [
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "3927321ac6d0f172",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In f1:1 the home-directory credential path is an element of _0x5e7140, which is passed to the mapper whose parameter reaches the fs.existsSync decision in s6; the fs and os bindings resolve through their bundle modules.",
+          "evidence_refs": [
+            "f1:1",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "a78a08add6f14de4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 takes its readFile arm when existsSync returns true for the mapped credential path; s8 later skips sending when no successful reads remain.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "e9ae720346437bf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 checks for a credential artifact supplied by the home-directory path array in f1:1, fitting target_artifact.",
+          "evidence_refs": [
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "5742d6870a510e0c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In f1:1 the home-directory credential path is an element of _0x5e7140, which is passed to the mapper whose parameter reaches the fs.existsSync decision in s6; the fs and os bindings resolve through their bundle modules.",
+          "evidence_refs": [
+            "f1:1",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "07b5a9872874727c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 takes its readFile arm when existsSync returns true for the mapped credential path; s8 later skips sending when no successful reads remain.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "8922173010c699ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 checks for a credential artifact supplied by the home-directory path array in f1:1, fitting target_artifact.",
+          "evidence_refs": [
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "2345c9eaa77106fc",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "s5 may return country UNK even for status 200, and s4 accepts it although neither the listed countries nor the failure condition holds; the expression omits this accepted input.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f257598330b8d6a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 and s4 decide whether _0x490324 is called at all, enabling the download and execution sequence in s12.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "dac0c0336f00754b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks select Linux hosts and accepted country or failure results for execution, with no analysis-environment test shown.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "3b475ef402144c6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform and country restrictions choose which hosts execute the payload, fitting targeting.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ca7f407dc827f0c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 calls the locally defined _0x490324 after the platform exit check and accepted country cases; its downloader call reaches s14, and its two _0x255d26 calls reach s18 and the cited spawn and unlink sinks.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s9",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "f3914f757300e40c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete f1 text contains only the definition and guarded call of _0x490324, and both calls of the local spawn wrapper occur inside that function; neither function is exported or registered elsewhere.",
+          "evidence_refs": [
+            "f1:1",
+            "s9",
+            "s12",
+            "s17",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "3078a36b50fbc8c1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The bound Axios call streams downloaded data into an fs write stream, while the child_process wrapper spawns the resulting executable and unlinks it; the fallback downloads XMRig and supplies mining pool and CPU arguments.",
+          "evidence_refs": [
+            "f1:1",
+            "s10",
+            "s15",
+            "s16",
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "19e69394713bb9c2",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "s21 catches read failures and filters their null results, so s8 requires a successful read rather than mere file existence before s22; the proposed expression also omits the status-200 country UNK case accepted by s4.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s7",
+            "s8",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "e1b8f1304516ac59",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 enables credential reads for existing files and s8 enables posting only when at least one read result remains, fitting enables.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "f4138df2b4b59fd3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The credential checks activate collection and posting on hosts with available target artifacts rather than checking for an analysis environment.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "b576b70c40675aaf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The additional file and result-length checks determine whether credential data is available to read and send, fitting data_availability.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "665d8022b0dfba07",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s23 is directly inside the existing-file ternary arm s21, and s24 is inside the post-return region s22 of s8; the containing function is reached by the platform- and country-guarded call in s9.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7",
+            "s8",
+            "s9",
+            "s12",
+            "s21",
+            "s22",
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "3811dd22d52e574a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The read and post helpers are inline functions invoked only within _0x490324, whose only caller is s9; reads require the existsSync arm and posting requires a nonempty filtered result array.",
+          "evidence_refs": [
+            "f1:1",
+            "s7",
+            "s8",
+            "s9",
+            "s12",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "e870c54d931ccdba",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s23 invokes fs.promises.readFile on the home-directory credential paths, and s24 sends the combined encoded contents through the resolved Axios post method.",
+          "evidence_refs": [
+            "f1:1",
+            "s23",
+            "s24"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "33093c97275fcfa7",
+      "packet_sha256": "80a697507b44bacb",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "e2d5540d7d4fc840",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The source for f1 is unavailable: code/f1.unavailable.txt contains only a sample_missing placeholder (f1:1). No package code is present to anchor this claim.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "8c8d68a0f8cc0498",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The source for f1 is unavailable: code/f1.unavailable.txt contains only a sample_missing placeholder (f1:1). No package code is present to anchor this claim.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "77fbe6a66e50514a",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The source for f1 is unavailable: code/f1.unavailable.txt contains only a sample_missing placeholder (f1:1). No package code is present to anchor this claim.",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "s4",
+            "s1",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "b78afa46e4f683c9",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The source for f1 is unavailable: code/f1.unavailable.txt contains only a sample_missing placeholder (f1:1). No package code is present to anchor this claim.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "fb95cfe0c7e02ff5",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The source for f1 is unavailable: code/f1.unavailable.txt contains only a sample_missing placeholder (f1:1). No package code is present to anchor this claim.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "380c93d2af305894",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The source for f1 is unavailable: code/f1.unavailable.txt contains only a sample_missing placeholder (f1:1). No package code is present to anchor this claim.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "29b1ecc1b43b91a2",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The source for f1 is unavailable: code/f1.unavailable.txt contains only a sample_missing placeholder (f1:1). No package code is present to anchor this claim.",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "s7",
+            "s8",
+            "s4",
+            "s1",
+            "s5",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2cda9baec2ea3e94",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The source for f1 is unavailable: code/f1.unavailable.txt contains only a sample_missing placeholder (f1:1). No package code is present to anchor this claim.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "8b820fa3bcd6340b",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The source for f1 is unavailable: code/f1.unavailable.txt contains only a sample_missing placeholder (f1:1). No package code is present to anchor this claim.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "12565996c04dfe25",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The source for f1 is unavailable: code/f1.unavailable.txt contains only a sample_missing placeholder (f1:1). No package code is present to anchor this claim.",
+          "evidence_refs": [
+            "f1:1"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "33093c97275fcfa7",
+      "packet_sha256": "2445f3be9c54aab3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "e2d5540d7d4fc840",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The country helper feeds a switch whose CN, RU, HK, UNK, BY and IR cases fall through to the payload call; other values reach only process.exit (s1, s2, s5).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "8c8d68a0f8cc0498",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The helper requests hxxp://ipinfo[.]io/json and reads the response country field to choose the payload branch, which fits external_ip_geo (s1, s5).",
+          "evidence_refs": [
+            "s1",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "77fbe6a66e50514a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The non-Linux short circuit exits before the country switch, whose accepted country cases or UNK fallback reach the payload call (s3, s5, s6). Thus Linux and either an accepted country or request failure are required, with a minimum of two conditions.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "b78afa46e4f683c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform exit and country switch decide whether _0x490324 is called at all; its body downloads archives, writes and extracts files, spawns the resulting executable and deletes files (f1:1, s3, s6). This fits enables.",
+          "evidence_refs": [
+            "f1:1",
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "fb95cfe0c7e02ff5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code invokes the payload for Linux and the accepted country or UNK results, with no analysis-environment test in these guards (s3, s5, s6). This fits activate.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "380c93d2af305894",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The guards restrict payload execution to Linux and selected geographic results while accepting failed geolocation as UNK (s3, s5, s6). This fits targeting.",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "29b1ecc1b43b91a2",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The claimed existence disjunction is insufficient for s11: each existing file can fail readFile and become null, after which filtering leaves an empty array and s8 returns before the POST (f1:1, s7, s8). The combination for exfiltration additionally requires at least one successful file read.",
+          "evidence_refs": [
+            "f1:1",
+            "s7",
+            "s8",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2cda9baec2ea3e94",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "File existence enables each credential read, and the nonempty successful-read array enables the POST of the collected contents (s7, s8, s11). These tests enable the credential collection and exfiltration behaviour.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "8b820fa3bcd6340b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The file checks proceed to credential reads when the target artifacts exist, and the upload proceeds when collected results are available (s7, s8, s11). This fits activate.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "12565996c04dfe25",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The mapped paths are three cloud credential configuration files under the home directory; missing or unreadable files are filtered out and an empty collection suppresses the upload (f1:1, s7, s8). This fits data_availability.",
+          "evidence_refs": [
+            "f1:1",
+            "s7",
+            "s8"
+          ]
+        }
+      ]
+    }
+  ]
+}

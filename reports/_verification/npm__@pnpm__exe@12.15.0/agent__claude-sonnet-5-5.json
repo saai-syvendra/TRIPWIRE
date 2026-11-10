@@ -1,0 +1,853 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@pnpm/exe",
+    "version": "12.15.0",
+    "archive_sha256": "2df447fb7ebbd01c974366d6b6b5617bcf4125d0f1cb27c5c7a480f5ab794a8a"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "c4f50db85985f45e",
+      "packet_sha256": "9f56ee50eb71ff17",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "d255f31889e1bd5f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:25 compares process.env.npm_lifecycle_event to 'postinstall' in the if condition (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "aba273d69731d1c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else arm of the if at f1:25 (s2) calls setup(), reached only when the event is not 'postinstall'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "ddadb7488f8e77a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The npm lifecycle event is a package-manager property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "377fd39b063b2f29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:40 tests 'webcontainer' in process.versions in an if condition.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "82a06b659036733d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return at f1:40-42 fires when webcontainer is present, so the code after it runs when it is absent (not_includes).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "b52c7cebf7a51fba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.versions describes the Node runtime; webcontainer is a runtime variant.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "049692dd983a0ad2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:59 compares process.platform in an if condition.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "5a5a982304cea9ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm of the if at f1:59 runs when process.platform === 'win32'.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "9497d405621667e1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.platform is an OS property.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "4b857c703844a970",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:25 compares process.env.npm_lifecycle_event to 'postinstall'.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "6c693c1a29a5354e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm at f1:25-26 runs relinkNpmWindowsShims() when the event equals 'postinstall'.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "0a193d1d78438391",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The npm lifecycle event is a package-manager property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "8646ae9b9991196b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:124 tests process.platform !== 'win32' in the early-exit condition.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "db2b51495abc6847",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return fires when the platform is not win32, so the code after it requires platform == win32.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "7e41eac66b714044",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.platform is an OS property.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "3d6fa92b9d7313ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:125 tests npmExecPath == null, a variable bound to process.env.npm_execpath at f1:122.",
+          "evidence_refs": [
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "b508522d906c3864",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return fires when npmExecPath == null, so the guarded code requires it to exist.",
+          "evidence_refs": [
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "b2468599b5a06e51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "npm_execpath names the package manager executable.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "8f6ce9c279299b99",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:126 tests path.basename(npmExecPath).toLowerCase() against 'npm-cli.js'; npmExecPath is bound to process.env.npm_execpath.",
+          "evidence_refs": [
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "97a4fb7f88749b7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return fires when the lowercased basename !== 'npm-cli.js', so the guarded code requires equality.",
+          "evidence_refs": [
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "35369616515b9f38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check identifies which package manager is running.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "39ae3d9f29139128",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The else of the f1:25 if, the code after the webcontainer early return and the win32 then arm are nested, so the then region needs c1, c2 and c3. The else region s12 needs c1, c2 and not c3.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7343746c39ccaf4b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32 arm places .exe twins and rewrites the package.json bin map; the other arm places chmod 0755 binaries. That is a different action per branch.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "704a0c89939fe49e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code installs the native binary on supported hosts and backs off only for webcontainer or the monorepo checkout. It does not evade analysis.",
+          "evidence_refs": [
+            "s4",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ec3dd47fec068893",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks adapt binary placement to the OS and runtime (portability).",
+          "evidence_refs": [
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "557343c5179b78d2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call at f1:71 (s14) is inside the else region s12, and it reaches placeBinary (s15), whose fs.renameSync (s13) is the sink.",
+          "evidence_refs": [
+            "s12",
+            "s14",
+            "s15",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "4dac4056daa12669",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "placeBinary is also called from the win32 arm at f1:64-65 (s16), outside the else region, so the sink is reachable without this side.",
+          "evidence_refs": [
+            "s16",
+            "s15",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "19ec0d3dab86de1a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "placeBinary uses fs.linkSync, copyFileSync and renameSync, which write files.",
+          "evidence_refs": [
+            "s13",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bcf97c2700493476",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The calls at f1:64-65 (s16) are inside the then region s11, and they reach placeBinary (s15) and its renameSync (s13).",
+          "evidence_refs": [
+            "s11",
+            "s16",
+            "s15",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4551108378f0d28f",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "placeBinary is also called from the non-win32 arm at f1:71 (s14), so the sink is reachable without this side.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "5f3550609ed77ab3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "placeBinary links, copies and renames files, which is a file write.",
+          "evidence_refs": [
+            "s13",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "f1067e218c62e4b4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The then arm of the f1:25 if contains relinkNpmWindowsShims. Its single early-exit test joins c5, c6 and c7 with ||, so the guarded code needs all four conditions.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "5621cafbca7e10cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The npm rebuild spawn happens only when all the conditions hold, so the gate enables it.",
+          "evidence_refs": [
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "bcb8fc7f9608d08c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs the action when the conditions hold and does nothing otherwise. It does not back off from analysis.",
+          "evidence_refs": [
+            "s8",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "978cb7d4c3664a57",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate regenerates npm's Windows shims for pnpm.exe only when npm on Windows runs the postinstall. That is portability, not targeting a victim.",
+          "evidence_refs": [
+            "s8",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "53b52c474d360f2f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The spawnSync call at f1:149 (s18) is inside the region s17 that follows the early exit s8, so the empty witness is correct.",
+          "evidence_refs": [
+            "s17",
+            "s18",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "26574b060fd466fa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "relinkNpmWindowsShims is called only from the then arm at f1:26 and is not exported. The spawnSync sits in that function alone.",
+          "evidence_refs": [
+            "s2",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "f70a850c0aa52915",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawnSync is imported from node:child_process (f1:10) and starts a process.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "k_1dbbaade7f.L6.drop",
+          "claim_sha256": "5c6884fdba2ca92d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The non-linux return null in the libc helper only affects candidate ordering and log text. Non-linux hosts never reach the libc branch.",
+          "evidence_refs": [
+            "s19",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "k_3f117a4107.L6.drop",
+          "claim_sha256": "ba29798b53b2f309",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "On big-endian ppc64, getBinCandidates returns [] and setup() calls fail() and exits instead of placing the binary. That is an environment gate on binary placement that the record misses.",
+          "evidence_refs": [
+            "s20",
+            "s28",
+            "f1:44-47"
+          ]
+        },
+        {
+          "claim_id": "k_651e2231d7.L6.drop",
+          "claim_sha256": "26af217098a1fa86",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The global/location check picks whether the npm rebuild targets the global install or a local prefix. That changes the target of the spawned process and is an environment gate the record misses.",
+          "evidence_refs": [
+            "s21",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "k_843cd825f3.L6.drop",
+          "claim_sha256": "5ec5dc6838671e7c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "A missing or empty npm_config_local_prefix makes findNpmProjectPrefix return null, and the caller then returns without spawning. That is an environment data-availability gate on the spawn.",
+          "evidence_refs": [
+            "s22",
+            "s26",
+            "f1:143-146"
+          ]
+        },
+        {
+          "claim_id": "k_9b85748fdd.L6.drop",
+          "claim_sha256": "6206caf2177e5130",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is JSON.parse of the package's own package.json inside a try. It reads no environment property.",
+          "evidence_refs": [
+            "s23",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "k_ca44613008.L6.drop",
+          "claim_sha256": "72b1127ec7d6b4f8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The second half of the global/location test at f1:140 picks the global rebuild target, so it is part of an environment gate on the spawn arguments.",
+          "evidence_refs": [
+            "s24",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "q_029e2293b3.L6.drop",
+          "claim_sha256": "933e1cd6ad2e2598",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/catch only guards reading the wrapper's own package.json and throws on failure. It is not an environment check.",
+          "evidence_refs": [
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "q_a294e6940d.L6.drop",
+          "claim_sha256": "7cfa3f6001c1247c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "If prefix is not a string or is empty, findNpmProjectPrefix returns null and the caller skips the spawn. It decides whether the npm rebuild runs, so it is a gate the record misses.",
+          "evidence_refs": [
+            "s26",
+            "f1:143-146"
+          ]
+        },
+        {
+          "claim_id": "q_a673f48485.L6.drop",
+          "claim_sha256": "79a96020f11cbc03",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The if at f1:140 chooses the global or project-prefix target for the npm rebuild spawn, which is an environment gate the record omits.",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "q_bebc39327b.L6.drop",
+          "claim_sha256": "4b48a70242d294aa",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ppc64 big-endian branch returns no candidates, so setup() fails instead of placing the binary. It is a host gate on placement that the record misses.",
+          "evidence_refs": [
+            "s28",
+            "f1:44-47"
+          ]
+        },
+        {
+          "claim_id": "q_c6fa0d8434.L6.drop",
+          "claim_sha256": "deee3cc37141031d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The non-linux early return in the libc detector only orders candidates and shapes the log text. It does not decide what runs.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "q_cbea8e73f7.L6.drop",
+          "claim_sha256": "0468bbce05054f67",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This if at f1:140 selects the global or local npm rebuild target for the spawn, so it is a missed environment gate.",
+          "evidence_refs": [
+            "s27"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "a80a80f6ee4a315f",
+      "packet_sha256": "2a0888290ac5ac10",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "6fa32bb0b2f3d7d0",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "The packet lists no slices or files and the code folder holds no files, so the cited conditions (npm_lifecycle_event, platform, npm_execpath) cannot be tied to any code.",
+          "evidence_refs": []
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "bd5172dc266452a6",
+      "packet_sha256": "f54aaee8838c82cc",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "55c1ed17bc88cde5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "setup() runs only in the else of the postinstall test (s1, f1:25-28), and the placement code after the webcontainer early return (s2, f1:40) is reached only when 'webcontainer' is absent from process.versions; the two nest, so they join with and.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "357c60e8ee3323c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks decide whether the native binary is placed over the bins at all; they do not choose between payloads or retarget them, so enables fits.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "55aef1934dc22152",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs the install step on normal installs and only skips it inside a webcontainer, where the placeholders stay in place (f1:39). That is not analysis evasion, so activate fits.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f1:39"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b0ddc2ad0fc814ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The webcontainer skip and the lifecycle-event split exist so the wrapper works across environments (f1:1-8 comments, f1:39); portability fits.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:39"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "30ab7b851c5c3d5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "placeBinary is called inside the s5 region (s7, f1:71, with other calls at f1:64-65), the definition is s8, and it contains fs.renameSync (s6, f1:100).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ff89fe5599a0270b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "placeBinary is called only from setup() (f1:64, 65, 71), and setup() is called only from the else branch at f1:28. There are no exports, timers or other callers in install.js.",
+          "evidence_refs": [
+            "f1:28",
+            "f1:64",
+            "f1:65",
+            "f1:71",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "29f8f2dcad89169f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "placeBinary uses node:fs (linkSync/copyFileSync, then renameSync into destPath); fs is imported at f1:11, so write_file is backed by an fs write sink.",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "54a94593a493faec",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "relinkNpmWindowsShims runs in the then of the postinstall test (s1). Its early-return test (s9) exits unless platform is win32 and the lowercased basename of npm_execpath is npm-cli.js; the null check is only a presence check on the same value. So the combination is c4 && c5 && c7 and the minimum is",
+          "evidence_refs": [
+            "s1",
+            "s9",
+            "s10",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "b2b07ab75c6fee5e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks only decide whether npm rebuild is spawned to regenerate the Windows shims; there is no alternative payload.",
+          "evidence_refs": [
+            "s9",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "e00d6e98f72cad42",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code acts only on Windows under npm after postinstall. It does not back off on analysis or sandbox signals, so activate fits.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "540e11e4c6231773",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The header comment (f1:4-6) says npm's Windows shims target the wrong path, so postinstall regenerates them; this is a compatibility fix, i.e. portability.",
+          "evidence_refs": [
+            "f1:4",
+            "s9",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "314b3f34ce494fbd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "spawnSync(process.execPath, args) at f1:149 sits inside the s12 region, in the same function that holds the early-return guard, so the witness is empty as claimed.",
+          "evidence_refs": [
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "22aaf17a47af52eb",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "relinkNpmWindowsShims is called only at f1:26, in the postinstall branch. It is not exported and no timer or other caller reaches the spawnSync.",
+          "evidence_refs": [
+            "f1:26",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_9c7ac37e27.L6.drop",
+          "claim_sha256": "1b99330f5a5a1ccb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The npmExecPath == null test is a presence check on the value that the npm-cli.js basename test (c7) reads, so it is part of that condition and not a separate gate.",
+          "evidence_refs": [
+            "s14",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_c1db0e95ff.L6.drop",
+          "claim_sha256": "e2fe9293a85118ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The win32 test inside setup() only changes destination names (.exe twins), the chmod mode and the bin rewrite. The same binary is installed on both sides, so it is plumbing and not a gate.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "q_533751a1fd.L6.drop",
+          "claim_sha256": "d8c18e413ef442f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the same win32 if/else as s15. Both arms call placeBinary on the same native binary and differ only in file names and mode, so it does not decide what runs.",
+          "evidence_refs": [
+            "s16",
+            "f1:59"
+          ]
+        }
+      ]
+    }
+  ]
+}

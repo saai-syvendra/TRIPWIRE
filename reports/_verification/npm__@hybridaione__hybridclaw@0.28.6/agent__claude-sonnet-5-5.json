@@ -1,0 +1,442 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@hybridaione/hybridclaw",
+    "version": "0.28.6",
+    "archive_sha256": "e901c69a9dfafbb927ecb60b998dedfca36cb94a66433ba023a8001f9f755307"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "378f7c219493e0b2",
+      "packet_sha256": "aab74800f9a325a3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "a913865e66cb6264",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isSourceCheckout returns fs.existsSync(path.join(packageRoot,'src')), and s2 branches on that result.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "c8589cab4ffe04aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 returns needed:false when src exists, so the later install code (s6, s7) is reached only when src does not exist; s3 then exits when needed is false.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "732146527a71b871",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a directory exists on disk.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "ff4245aaad7a1de2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The prepare script runs `test -w .git/config` in an && chain before husky.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "dfb11d2111181f59",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "husky runs only when `test -w .git/config` succeeds. That is positive form and implies the file exists, though it is stricter than existence (writable).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "34bc667574a08ac2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is on the presence and writability of the git config file, which is a filesystem check.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "fc7aa90b56e0388b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The early exits in s2 and s3 nest, and the src-exists condition is the one environment condition on the route to s6/s7. The other tests on the route (container package.json exists, dependency presence) are the package's own files or an already-installed check.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "430918bb5ffebbff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check only enables the npm install; there is no alternative payload.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d2cea56a770c6737",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The install runs on a published package install and is skipped in source checkouts. It does not back off on analysis or CI.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "6118953307f918c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check separates a source checkout from a packaged install. It is not targeting or anti-analysis, so unclear is acceptable.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "9c1f35c72b63d29f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 (after the s3 exit) calls bootstrapContainerDependencies (s9). That function is defined at s10 and calls spawnSync at s8.",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "b6e406fc79c25c98",
+          "verdict": "verified",
+          "grade": "non_exclusive",
+          "reason_code": null,
+          "evidence": "bootstrapContainerDependencies is exported and takes containerDir directly, so it can reach spawnSync without passing the gate. No other caller exists in the packet files.",
+          "evidence_refs": [
+            "s10",
+            "s7",
+            "f1:158"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "999f345157bd9c3b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "spawnSync from node:child_process runs npm install, so an exec sink supports the benign_build behaviour.",
+          "evidence_refs": [
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "013098c0d072a390",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The same && chain also requires `command -v git >/dev/null 2>&1` before husky runs. That is a second condition, so the expression c2 alone, with min 1, is incomplete.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:113"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "fd6e16067075835d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check only enables husky; there is no other branch.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "b3e6312fe1d4fe38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check runs husky when a writable git config exists. It does not back off on analysis.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "90547469dc63fd8e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check only avoids running husky outside a git checkout. It is not targeting or anti-analysis, so unclear is acceptable.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "eb5e2022a81adde6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "husky follows `test -w .git/config &&` in the same command, so it sits on the then side of the short circuit.",
+          "evidence_refs": [
+            "s5",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "19e060273998c1b7",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "husky appears only in the prepare script after the guards, and I found no other invocation in the packet files.",
+          "evidence_refs": [
+            "s5",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3c4a29a5b7ac4121",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shell command runs the husky executable, so it is process creation.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_0216a9a545.L6.drop",
+          "claim_sha256": "5ca51362f3a7efb3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks that the package's own container/package.json shipped. It is a packaging sanity check, not an environment property.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "k_376abbfe30.L6.drop",
+          "claim_sha256": "7dc617aaa6c71bae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only picks how npm is launched (npm-cli path or plain npm) for the same install. That is plumbing, not a gate.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_44aa320d56.L6.drop",
+          "claim_sha256": "3fab7c4fe440c2f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test builds the list of dependencies not yet installed and only avoids redundant reinstalls (a re-entry guard). It does not select a payload.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "k_d6c5f47944.L6.drop",
+          "claim_sha256": "16ff907b8365fd6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the package's own container/package.json and returns an empty list if it is missing. It is not an environment check.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_21315b5903.L6.drop",
+          "claim_sha256": "47465e51f3cc02e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The same package-file check as s15, as the enclosing if statement.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "q_a9ebd1fa2c.L6.drop",
+          "claim_sha256": "8576b498ad1bcef9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks that the package's own container/package.json shipped, and the early return is a sanity guard rather than an environment gate.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "q_c46978f0c9.L6.drop",
+          "claim_sha256": "3fad6b5488a97521",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if statement only chooses how npm is invoked for the same install. That is plumbing.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_f21dafdab3.L6.drop",
+          "claim_sha256": "c7d229db71c48d54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if statement collects dependencies not yet installed. It is an already-installed check, not a gate on a payload.",
+          "evidence_refs": [
+            "s19"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "fe85d5e80e975000",
+      "packet_sha256": "dc322822c9dbf811",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "960c6875644887f3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:113 runs husky only after `test -w .git/config` succeeds (positive form, joined by &&); `|| true` only swallows failure.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:113"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "3cc2a0917cc20773",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks a filesystem path (.git/config) for existence and writability, which fits file_or_dir_exists.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "a0c7772e74473d03",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "no_anchor",
+          "evidence": "The claim cites fs.existsSync on <package root>/src, but the only file (package.json) has no such test. The only slices are the prepare script at f1:113.",
+          "evidence_refs": [
+            "f1:113"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "a34f5f8ebb20deae",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The prepare script has one short-circuit guard (test -w .git/config) before husky, so c2 alone is the expression with min 1. The `command -v git` check comes before it in the same && chain and is not listed as a condition.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:113"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "1c5c4ecbeedf2f7a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard decides whether husky (git hook setup) runs at all; there is no alternative branch. 'enables' fits.",
+          "evidence_refs": [
+            "s2",
+            "f1:113"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "be0f228a3f049343",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Husky runs when the git config is writable, so the gate activates the setup step. It does not back off on analysis or CI.",
+          "evidence_refs": [
+            "s2",
+            "f1:113"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "cdf8aea8f767b98f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate skips git-hook setup when git is absent or .git/config is not writable (for example in a consumer install). This is portability of a benign build step, not targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:113"
+          ]
+        }
+      ]
+    }
+  ]
+}

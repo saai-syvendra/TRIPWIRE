@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "matplotlib-requests",
+    "version": "16.12.4",
+    "archive_sha256": "8b533a135e42742f3c8532b0149ad1f7aaf48b9db3386569b923afbf777c8494"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "d29549e60ebdae99",
+      "packet_sha256": "20ecae3aed472456",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "518909f406545486",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` condition directly calls `os.path.exists` with the literal path, so the cited site tests that API.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "42bc7a062e847d74",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition is `os.path.exists(\"hifromDreamyOak\")`, and its true branch exits; code after that branch runs only when the path does not exist.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "dd67913f1e6267fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test calls `os.path.exists` on a filesystem path, so `file_or_dir_exists` is the fitting category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a77bb76095b4e6e3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one guard, and code in the region after its early exit runs when the path does not exist; the expression therefore consists of the single condition `c1`.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4d0ef5a96dae18d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the marker path is absent, execution proceeds to the `exec` call; when it exists, the process exits first, so the gate enables the guarded execution.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e7f051572fe10f9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code proceeds when the marker path is absent, so the test activates execution on that condition.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b4bd5d8e8d6b3288",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The visible code shows a marker path that suppresses subsequent execution when present, but does not establish a more specific environmental purpose for that marker.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c8c3be730028b3c6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After the guard's true branch exits, the rest of the top-level block includes the `exec(base64.b64decode(code))` call, matching the claimed sink in the guarded region.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "5bbd4d52bbd08608",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The file has a single top-level `exec` call after the guard and no function, export, timer, or other call path that can reach it without passing the guard.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b88ab90a4b348f38",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is Python's `exec` call on the guarded path, which can execute the supplied code and supports the recorded `other` behaviour.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        }
+      ]
+    }
+  ]
+}

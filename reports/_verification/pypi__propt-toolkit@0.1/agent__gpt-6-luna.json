@@ -1,0 +1,409 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "propt-toolkit",
+    "version": "0.1",
+    "archive_sha256": "ff2cbfec50bcb2531e29c02eb0ea9e8f74bed84abdfd4b203b32586671ae8292"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "707340815af1fe51",
+      "packet_sha256": "ce99b2bce70f2859",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The cited condition is encoded in f1; the readable platform check appears only in derived f2, without a registered decode derivation.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "38c63effe7ba4b54",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The cited comparison in f1 keeps its operand and value encoded, so its API, operator and value cannot be confirmed at that site.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The cited test is encoded in f1, so the environmental property is not readable at the claimed site.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly calls ctypes.windll.shell32.IsUserAnAdmin().",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call is used directly as the if condition, so its truthy result selects the then arm.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition calls the Windows admin-status API, checking process privilege.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "85032e2af2cd129c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch checks the basename of the shortcut target path.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "e8053a6a2115519f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The basename is tested with in against the four listed executable names.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "91b2317dcfce8932",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the target executable name from a shortcut TargetPath.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9651221cc031c5cf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform test alone guards the cited region, so the minimum condition set is c1.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6d27bd959d872be2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows branch runs the install-time actions, including pip installation and persistence file creation.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "820afc2b20c5e461",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch activates its actions when sys.platform equals win32.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform check selects Windows-specific behavior for portability, rather than targeting a victim property.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "60dcd2cc1617986d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited actions occur inside the Windows and argv branch: pip.main installs a package and the remaining branch writes files.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "68be102d87270e6b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The top-level actions and their sinks are nested in the cited Windows branch, with no alternate caller outside it.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "d88fca4c80315b00",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "pip.main is called with install and pypiwin32; the other cited sinks write files with open/write and create directories.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "b56eb028a2f3f4da",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The admin check is nested under the platform guard, so both conditions are required for its then region.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d14263a49e9ac562",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Admin status changes the persistence location: the elevated path adds ProgramData Start Menu while the other path proceeds through APPDATA/Desktop locations.",
+          "evidence_refs": [
+            "s12",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "041e967c8d80c71a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The persistence branch runs on Windows and the admin check selects a location when true.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "a70bca07467d0437",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The admin check selects a writable persistence location based on privilege, supporting portability across privilege contexts.",
+          "evidence_refs": [
+            "s4",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "254fd962fd73b970",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The cited region is only the elevated ProgramData path selection; the claimed Save sink is downstream outside that region, after both admin outcomes converge.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "097d1e888acfe957",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The shortcut walk and Save are also reachable when the admin check is false; that arm sets the alternate state and rejoins the common flow.",
+          "evidence_refs": [
+            "s4",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "57453163a9d18669",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shortcut Save call writes the configured shortcut, which can establish persistence.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "a049e8f5b8e9d7de",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The basename condition is nested within the Windows branch, so the region requires c1 and c4.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "7d0a6db61a0eb207",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The matching browser shortcut receives arguments to load the extension, enabling the persistence behavior.",
+          "evidence_refs": [
+            "s5",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "07324dd5cdd1bd3c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The browser branch activates the extension-loading behavior for matching executable names.",
+          "evidence_refs": [
+            "s5",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "005def6222ae0c05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The executable-name condition targets selected browser shortcuts for extension loading.",
+          "evidence_refs": [
+            "s5",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "e890110a8a14a605",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The shortcut loop and Save sink are inside the Windows branch; matching basenames set the extension arguments and continue to the Save state.",
+          "evidence_refs": [
+            "s7",
+            "s14",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "a47fad380c9ffee6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The matching-name path sets extension arguments and continues to Save; the sink is in the top-level guarded flow with no other caller shown.",
+          "evidence_refs": [
+            "s14",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "e3e491484c6fbdc1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shortcut Save call persists the changed browser shortcut arguments.",
+          "evidence_refs": [
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "af8ed6c15220a15c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This existence check only decides whether to create the Extension directory; both outcomes continue into the shared setup, making it an idempotence guard rather than an environment gate.",
+          "evidence_refs": [
+            "s15",
+            "f2:116",
+            "f2:121"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "e43a911c9b625ade",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This existence check only decides whether to create the Extension directory; both outcomes continue into the shared setup, making it an idempotence guard rather than an environment gate.",
+          "evidence_refs": [
+            "s16",
+            "f2:116",
+            "f2:121"
+          ]
+        }
+      ]
+    }
+  ]
+}

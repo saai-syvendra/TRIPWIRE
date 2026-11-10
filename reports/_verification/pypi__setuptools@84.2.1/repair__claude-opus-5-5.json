@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "setuptools",
+    "version": "84.2.1",
+    "archive_sha256": "3ff8b3b5492a0aa66960f4419365a86b84e013070d4313e4d4a6894f5d64d6bc"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "87a1f932c516b7be",
+      "record_sha256_after": "8c3643efec94a9ab",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_8bc6129c21.L6.drop",
+          "claim_sha256": "371f2a7fdbd57ba4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "sys.platform.startswith('java') at depends.py:112 reads the environment, so not_environmental was wrong; reason_code is now other. It stays dropped: the guard only defines helpers called through Require.get_version, and nothing in the package builds a Require."
+        },
+        {
+          "claim_id": "k_7169766c44.L6.drop",
+          "claim_sha256": "d733b379b863cc1a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "sys.platform != 'cli' at depends.py:112 reads the environment, so not_environmental was wrong; reason_code is now other. It stays dropped: same definition block as k_8bc6129c21, and no install path calls those helpers."
+        },
+        {
+          "claim_id": "q_c03d046564.L6.drop",
+          "claim_sha256": "b19a3add66c17c4e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The if at depends.py:112 tests sys.platform, so not_environmental was wrong; reason_code is now other. It stays dropped: it has no else side and its body only defines helpers that no install path calls, so no behaviour is decided."
+        },
+        {
+          "claim_id": "k_e2c8adda3a.L6.drop",
+          "claim_sha256": "7dd046dab433b00d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "sys.version_info at compat/py39.py:9 reads the environment, so not_environmental was wrong; reason_code is now other. It stays dropped: LOCALE_ENCODING is \"locale\" or None, both the locale encoding as an open() argument, and requires-python >=3.10 rules out None."
+        },
+        {
+          "claim_id": "q_bfc8a89481.L6.drop",
+          "claim_sha256": "67bb01a5d7899348",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The ternary at compat/py39.py:9 tests sys.version_info, so not_environmental was wrong; reason_code is now other. It stays dropped: it only picks the encoding argument value, so no behaviour differs between its sides."
+        },
+        {
+          "claim_id": "k_6189f2f0a0.L6.drop",
+          "claim_sha256": "99ca83c99a6450c3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "sys.version_info at compat/py310.py:6 reads the environment, so not_environmental was wrong; reason_code is now other. It stays dropped: both sides bind a TOML parser as tomllib (tomli is vendored in setuptools/_vendor) and load_file calls tomllib.load on either."
+        },
+        {
+          "claim_id": "k_73a525aea8.L6.drop",
+          "claim_sha256": "efde2053928e6b6a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "sys.version_info at compat/py310.py:12 reads the environment, so not_environmental was wrong; reason_code is now other. It stays dropped: both add_note versions attach a note to an exception, and the only callers are error paths in msvc.py and editable_wheel.py."
+        },
+        {
+          "claim_id": "q_04388cff90.L6.drop",
+          "claim_sha256": "c0a69a4e2fc158d3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The if at compat/py310.py:6 tests sys.version_info, so not_environmental was wrong; reason_code is now other. It stays dropped: both sides bind a TOML parser as tomllib, so the build does the same thing either way."
+        },
+        {
+          "claim_id": "q_22913be2cb.L6.drop",
+          "claim_sha256": "aaaf82527064a1e7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The if at compat/py310.py:12 tests sys.version_info, so not_environmental was wrong; reason_code is now other. It stays dropped: both sides define an add_note that attaches a note to an exception, so no behaviour differs."
+        }
+      ]
+    }
+  ]
+}

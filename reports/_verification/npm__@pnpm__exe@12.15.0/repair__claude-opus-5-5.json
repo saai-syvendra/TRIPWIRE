@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@pnpm/exe",
+    "version": "12.15.0",
+    "archive_sha256": "2df447fb7ebbd01c974366d6b6b5617bcf4125d0f1cb27c5c7a480f5ab794a8a"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "c4f50db85985f45e",
+      "record_sha256_after": "a80a80f6ee4a315f",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "978cb7d4c3664a57",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "relinkNpmWindowsShims (install.js:121-155) runs npm rebuild --ignore-scripts only so npm's Windows shims point at pnpm.exe after setup() rewrote bin on win32. It is a Windows-specific install fixup for the package itself, not a choice of victim; purpose changed from targeting to portability."
+        },
+        {
+          "claim_id": "k_651e2231d7.L6.drop",
+          "claim_sha256": "26af217098a1fa86",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "install.js:140 tests npm_config_global only to pick npm rebuild --global vs --prefix <project>. Both arms build args for the same npm rebuild of the same wrapper package, pointed at wherever npm installed it; that is the install location of the package itself, which layers.md L6 calls plumbing (wher"
+        },
+        {
+          "claim_id": "k_ca44613008.L6.drop",
+          "claim_sha256": "72b1127ec7d6b4f8",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Second operand of the same test at install.js:140 (npm_config_location === 'global'); it only selects the --global form of the same npm rebuild of the wrapper at its own install location. Plumbing as for k_651e2231d7."
+        },
+        {
+          "claim_id": "q_cbea8e73f7.L6.drop",
+          "claim_sha256": "0468bbce05054f67",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at install.js:140 chooses between args.push('--global', name) and args.push('--prefix', prefix, name) for one spawnSync at line 149; the behaviour and the package acted on are the same, only npm's install-location flag differs. Plumbing, not a gate."
+        },
+        {
+          "claim_id": "q_a673f48485.L6.drop",
+          "claim_sha256": "79a96020f11cbc03",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Same if statement at install.js:140 as q_cbea8e73f7 (duplicate candidate); it only picks npm's install-location flag for the same rebuild. Plumbing."
+        },
+        {
+          "claim_id": "k_843cd825f3.L6.drop",
+          "claim_sha256": "5ec5dc6838671e7c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "findNpmProjectPrefix (install.js:167-187) returns null when npm names no project or the project's node_modules does not hold this wrapper (npm exec installs into its cache). In a normal local npm install npm sets npm_config_local_prefix to the project holding the package, so the test passes; it fail"
+        },
+        {
+          "claim_id": "q_a294e6940d.L6.drop",
+          "claim_sha256": "7cfa3f6001c1247c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at install.js:169 is the empty-prefix check inside findNpmProjectPrefix; like k_843cd825f3 it only detects that npm named no project to rebuild, a prerequisite already listed in requirements."
+        },
+        {
+          "claim_id": "k_3f117a4107.L6.drop",
+          "claim_sha256": "ba29798b53b2f309",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "native-binary.mjs:74 returns no candidates on big-endian ppc64 because only a little-endian build is released; this is one of three 'no released binary runs on this host' exits in getBinCandidates (platform table miss at line 69, libc without an entry at line 84), all ending in fail() with exit 1 in"
+        },
+        {
+          "claim_id": "q_bebc39327b.L6.drop",
+          "claim_sha256": "4b48a70242d294aa",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if statement at native-binary.mjs:74 for the same ppc64 endianness test as k_3f117a4107; it marks an unsupported host whose install fails, a prerequisite already in requirements."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Removed runtime_version from g1's guessed fields (it states c2, 'webcontainer' not in process.versions, as read). Still flagged: g1.else os 'linux' is one pick among any non-win32 OS, g2 npm_execpath is an example path (the code only needs basename npm-cli.js), and c7 is out of set pending verificat"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "a80a80f6ee4a315f",
+      "record_sha256_after": "bd5172dc266452a6",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7343746c39ccaf4b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "selects was wrong. Both sides of the win32 test at install.js:59 run placeBinary on the same native binary and reach the same renameSync sink (line 100). The test only changes file names, the copy-path mode and the bin map that starts the .exe, which is plumbing. Removed c3 and its guard from g1 and"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "f1067e218c62e4b4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The early exit at install.js:123-127 tests npmExecPath == null in front of path.basename(npmExecPath), the same value, so under the L4 presence-check rule it is part of the basename test. Removed c6 and dropped k_9c7ac37e27. g2 is now c4 && c5 && c7 with min_conditions 3, and guard q_c36b7fa045 hold"
+        },
+        {
+          "claim_id": "k_1dbbaade7f.L6.drop",
+          "claim_sha256": "5c6884fdba2ca92d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The test platform !== 'linux' at native-binary.mjs:178 decides no behaviour. getBinCandidates calls detectLinuxLibc (line 82) only when platformEntry is an object, and PLATFORMS has object entries only under linux; other platforms return earlier at line 69 or 78. Off Linux the only caller is hostTar"
+        },
+        {
+          "claim_id": "q_c6fa0d8434.L6.drop",
+          "claim_sha256": "deee3cc37141031d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement of the same test at native-binary.mjs:178. Candidate selection reaches detectLinuxLibc (line 82) only on linux, because every other platform has a string or missing entry in PLATFORMS and returns at line 69 or 78. The non-linux return is reached only through hostTarget (line"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "bd5172dc266452a6",
+      "record_sha256_after": "15558874490a390c",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed the guessed recipe field: g2.then env_var npm_execpath held an invented Windows path; install.js line 126 only tests that the lowercased basename equals npm-cli.js, so the recipe now gives npm-cli.js, recipe_guessed_fields is empty and a note says the folder is not in the code and the line 149"
+        }
+      ]
+    }
+  ]
+}

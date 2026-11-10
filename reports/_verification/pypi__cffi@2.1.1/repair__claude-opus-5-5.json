@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "cffi",
+    "version": "2.1.1",
+    "archive_sha256": "dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "8375c1de3bbf7671",
+      "record_sha256_after": "2fa91e31e5f30438",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.else.L3",
+          "claim_sha256": "e0f44d4452975dca",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The else block at setup.py:153 (use_pkg_config, which reaches subprocess.Popen at line 29) runs after the early raise at line 21, so it stays on that guard's surviving side. That guard tests c1 and c3, but else.requires listed only c1, so the verifier flipped the guard to its raise side. else.requir"
+        },
+        {
+          "claim_id": "k_2ca02ae20e.L6.drop",
+          "claim_sha256": "8fb8e0c19e18239a",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 133 platform.machine() == 'ARM64' only picks which bundled libffi the MSVC build compiles against: the then side adds the src/c/libffi_arm64 include and library dirs, the else side lists the src/c/libffi_x86_x64 sources and adds them to sources. Both sides end in the same setup() call at line 1"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2fa91e31e5f30438",
+      "record_sha256_after": "2fa91e31e5f30438",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "35b04459c3f1a9b5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:21 is `if FREE_THREADED_BUILD and sys.version_info < (3, 14): raise`. The guard is an early exit with arm else, and conditions are written in positive form, the form true on the code that continues. Negating `<` gives `>=` (3, 14), so the claim is right. The refuting evidence itself says th"
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "3c5cc12a03593bf9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:19 stores bool(sysconfig.get_config_var('Py_GIL_DISABLED')) and setup.py:21 raises when it is truthy and the version is below 3.14. The guard has arm else, so the code after the raise is reached when the flag is falsy (or c1 holds). Truthy is the form on the raise side; `falsy` is the posit"
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "5897b584204ab476",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:19 reads Py_GIL_DISABLED, which says whether the interpreter is a free-threaded build, and setup.py:21 pairs it with the version test to refuse an unsupported interpreter. The suggested 'runtime configuration' category does not exist in the schema. runtime_version is the closest in-scope ca"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "48f7002d9abc5e43",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The refutation is right on the code, but no record edit fixes it cleanly. The line 153 else block is reached with (c3 || c1) true and c2 or c4 false, so one alternative plus one falsified condition is enough: the minimum is 2, not the recorded 3. The 3 comes from else.requires [c1, c3], which counts"
+        },
+        {
+          "claim_id": "q_cebb00cafe.L6.drop",
+          "claim_sha256": "a87071c0c73415e7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at setup.py:133 only changes build inputs. The ARM64 side appends the bundled libffi_arm64 include and library dirs; the other side points include_dirs at libffi_x86_x64 and adds its .c files to sources. Both sides fall through to the same setup() at line 185 building _cffi_backend, so flippi"
+        },
+        {
+          "claim_id": "q_98517bab29.L6.drop",
+          "claim_sha256": "c3fa0ba3613a1b93",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This candidate has the same anchor (bytes 5145 to 6346, sha 170e0347cfccb39c, setup.py:132) as q_c3f53b2ac2, which g2 cites as its guard with conditions c2 and c4. The if at line 132 is already recorded, its then block as g2.then and its else block as g2.else. The refuting evidence says it is a gate"
+        },
+        {
+          "claim_id": "k_12296761eb.L6.drop",
+          "claim_sha256": "f4d717b784c17543",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:95 is in ask_supports_sync_synchronize, called only from the else block at line 155. Its only effect is to skip the config.try_link check at line 98, whose result only appends HAVE_SYNC_SYNCHRONIZE at line 100; a failed link prints a note and continues. The check does decide whether that pr"
+        },
+        {
+          "claim_id": "q_0192d69bfb.L6.drop",
+          "claim_sha256": "8ecf904cbc92d3b5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The early return at setup.py:95 to 96 leaves only ask_supports_sync_synchronize, not setup.py. Module code carries on to setup() at line 185. What it skips is the try_link feature probe at line 98, whose only output is the HAVE_SYNC_SYNCHRONIZE macro. no_compiler_found is the package's own flag from"
+        },
+        {
+          "claim_id": "k_ebbf1e28d8.L6.drop",
+          "claim_sha256": "3c0bf923e8c8c0ba",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The darwin test at setup.py:114 guards use_homebrew_for_libffi, which does run `brew --prefix libffi` through os.popen at line 126. The only use of its output is appending to PKG_CONFIG_PATH at lines 129 to 130. use_pkg_config then runs the same pkg-config calls and the same build either way. Locati"
+        },
+        {
+          "claim_id": "k_fc00e71976.L6.drop",
+          "claim_sha256": "9063fe58badac04b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "os.path.exists('/usr/local/bin/brew') at setup.py:114 is the other half of the same test. It controls the brew query at line 126, whose output only extends PKG_CONFIG_PATH at lines 129 to 130. With or without brew, lines 117 to 121 run pkg-config and the same extension is built. A tool lookup that o"
+        },
+        {
+          "claim_id": "q_04d77445f6.L6.drop",
+          "claim_sha256": "9ee1094b90ee3591",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at setup.py:114 to 115 has one call in its body, use_homebrew_for_libffi, whose only lasting effect is the PKG_CONFIG_PATH update at lines 129 to 130. Execution continues at line 117 on both sides with the same pkg-config calls, so the build behaviour does not change. The brew subprocess serv"
+        },
+        {
+          "claim_id": "k_08532a1afc.L6.drop",
+          "claim_sha256": "56fa6113193cac9c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "`'freebsd' in sys.platform` at setup.py:161 only decides whether /usr/local/include and /usr/local/lib are appended to include_dirs and library_dirs at lines 162 to 163. The same setup() call runs either way. The refuting evidence agrees that it selects paths, which is build plumbing, not a change o"
+        },
+        {
+          "claim_id": "q_43e3d93e00.L6.drop",
+          "claim_sha256": "f0d198a920d108d9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at setup.py:161 to 163 has only two list appends in its body, adding /usr/local search dirs. There is no else and no other effect, and the same extension is built on both sides, so flipping it changes no behaviour class."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "needs_manual_review stays true. The remaining reason is `out-of-set claim pending verification` for c3 and c4, which only a reviewer can remove. No claim changed in this session, so write_report.py was not rerun; g2.L4 is escalated separately."
+        }
+      ]
+    }
+  ]
+}

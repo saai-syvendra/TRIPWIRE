@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "multidict",
+    "version": "7.2.0",
+    "archive_sha256": "f4110a13e264858eb00697751785cb2c58ee96707d8ded5ddb8239530d3b9ba4"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "41e92bca0b4ae951",
+      "packet_sha256": "83ff73be42ec3522",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_828d7521e2.L6.drop",
+          "claim_sha256": "c12077734039436f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The operating-system test only adjusts compiler and linker flags, including optional sanitizer flags (s1, f1:29-54). These flags feed extension build arguments (f1:56-69), making this portability plumbing rather than a gate deciding whether a payload runs.",
+          "evidence_refs": [
+            "s1",
+            "f1:29",
+            "f1:40",
+            "f1:53",
+            "f1:56"
+          ]
+        },
+        {
+          "claim_id": "q_e71fe157bc.L6.drop",
+          "claim_sha256": "3abb203eef867419",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The entire non-Windows branch changes only CFLAGS and LDFLAGS, with sanitizer options additionally requiring debug and sanitizer settings (s2, f1:29-54). Extension declarations consume those flags regardless of this branch, so the test controls build configuration and is portability plumbing rather ",
+          "evidence_refs": [
+            "s2",
+            "f1:29",
+            "f1:40",
+            "f1:54",
+            "f1:56",
+            "f1:135"
+          ]
+        }
+      ]
+    }
+  ]
+}

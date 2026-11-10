@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "charset-normalizer",
+    "version": "3.5.2",
+    "archive_sha256": "39de2a259fc954455c57274dc94c79d5842774e1247a016aff30bc0efed0f4ef"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "16c02da89852c191",
+      "packet_sha256": "d7d5097094814286",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "8496858c32c89255",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both cited assignments call os.getenv with the CHARSET_NORMALIZER_USE_CYTHON name and compare the result as a decision; the setup.py value is saved in USE_CYTHON and tested by the cited if. (s1, s2, s3)",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2b7d605e22c17894",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "Both checks compare the environment value to the string \"1\", not the integer 1 stated in the claim; the then branch tests that equality positively. (s1, s2, s3)",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3639e56075177415",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads CHARSET_NORMALIZER_USE_CYTHON through os.getenv, so env_var is the right category. (s1, s2)",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "6fa5a818e033431e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The setup.py then region is controlled by the single USE_CYTHON condition, whose assignment checks the cited environment variable; one condition suffices and there is no additional guard to combine. (s2, s3, s4)",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "154fe336cdf2c371",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When enabled, the code invokes cythonize on the package's two extension modules and assigns the resulting modules to ext_modules for setup, enabling the Cython build behavior. (s4, s5)",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "505be1af75f6feb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The opt-in equality enables the Cython build path when the environment value is \"1\"; the code does not use it to back off on analysis or a sandbox. (s2, s3, s5)",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "8906d6d4233ef117",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The variable opts into the Cython build path, while the shown compatibility comments concern the separate ABI3 version check; the cited condition alone does not show a portability, targeting, anti-analysis, or data-availability purpose. (s2, s3, s5)",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "346a63b61377dac8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cythonize call is in the if USE_CYTHON body, so the empty witness correctly places the sink directly in the guarded region. (s3, s4, s5)",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "9bbb6a067b7e73fb",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cythonize call is executed only inside the setup.py USE_CYTHON branch; no other call site or route to that call appears in the packet files. (s3, s5)",
+          "evidence_refs": [
+            "s3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "986ea7d1374a7df7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guarded call runs Cython's cythonize on the package extension definitions, and setup receives its results as ext_modules, supporting the benign build behavior. (s4, s5)",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "k_41491787d8.L6.drop",
+          "claim_sha256": "8167013f147ab614",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ABI3 environment check selects between two Cython requirement constraints, and _with_cython appends the selected constraint when Cython builds are enabled, so it affects build requirements at install time. (s6, s7, s9)",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "q_3e9940ddc1.L6.drop",
+          "claim_sha256": "e3fae903db0850c6",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ABI3 check selects the Cython version range that _with_cython can append to the build requirements, so it participates in install-time build configuration. (s6, s7, s9)",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "q_6af4dcdffe.L6.drop",
+          "claim_sha256": "fcb5d8314dc3c3ec",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The build_wheel hook tests USE_CYTHON and raises an error if Cython is unavailable, so this is an environment gate on build behavior. (s8)",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "q_7a9d5d6836.L6.drop",
+          "claim_sha256": "03ae51f5517faf25",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "_with_cython checks USE_CYTHON and appends CYTHON_SPEC to the requirements when enabled, making this condition part of install-time build requirement selection. (s9)",
+          "evidence_refs": [
+            "s9"
+          ]
+        }
+      ]
+    }
+  ]
+}

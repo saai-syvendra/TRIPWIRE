@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "medusa-plugin-momo",
+    "version": "0.0.68",
+    "archive_sha256": "501bb62923ebec70efc926f8ada7bf60242d2d98bd01c12f50a3ab0c9f761058"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d3f883adfe9445a0",
+      "record_sha256_after": "2bfcc71d00e0dae2",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2bb2d7251a0c2b2d",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The outer guard at d1:9405410 tests !isAuthenticated() || !repoExists(), so the inner code is reached by either alternative. Added c8 (dq.repoExists falsy, server_response, out of scope: repoExists returns gitRepo !== null, which only createRepo sets after a GitHub API call) anchored on !_0x1b7dd4[\""
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "3e36959f3d5b66de",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The gate decides on whether usable credentials exist: the wipe at d1:9405659 runs only when fetchToken() returns nothing and no npm token came from NPM_TOKEN or oL0's .npmrc read, while a present npm token leads to El() propagation. That is a credential availability check, so purpose changed from un"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged: g1, g2 and c5 to c8 are out of set and the edited g2 claims need re-verification; privilege, env_var_absent and file_absent recipe fields stay guessed (agent process check, gh CLI token and campaign-repo token have no single recipe axis); the g2 else side (El/npm publish through a Bun"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2bfcc71d00e0dae2",
+      "record_sha256_after": "ddfb95f29a00584c",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "67e6255b39731389",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The old site !isAuthenticated() does not call gh auth token: isAuthenticated returns !!this.token and the token is set by getToken in the dq constructor. c5 now sits on the test of the gh auth token output in getToken, api Bun.spawnSync, with an exec probe on that command. The env scan that feeds th"
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "82377f8b123127e6",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "getToken returns the gh output only when it starts with gho_ or ghp_, otherwise null. The guarded code needs that test false, so the operator is now not_startswith with both prefixes, cited on the startsWith test instead of a falsy reading of isAuthenticated."
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "85b05a920bbc7328",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The condition now cites the gh auth token probe directly, so the claim changed with its api, site and operator. The label stays target_artifact: stored CLI credentials are listed under that category in the gate-analysis skill, and authentication availability, the label one reviewer proposed, is not "
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "7208d7cfeae5b06d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited call is dq.fetchToken(), not the search API, and fetchToken does more than search: it reads contents.json from each hit, decodes it and validates the token with GET /user. api is now dq.fetchToken, which is what the site calls; the site is unchanged."
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "cd4f998826c0863b",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "if(!_0x441f22) tests the value returned by fetchToken, not a search response. With api dq.fetchToken the falsy operator reads the tested value directly."
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "6d859d40deddadcc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The claim changed with its api, now dq.fetchToken. The label stays server_response: fetchToken returns a token only from what remote servers answer (search results, raw contents.json, a 200 from GET /user), so nothing on the machine decides it and it stays out of scope."
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "301ba2371896a7c7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c1 && c2 && c3 && c4 holds. The if on GITHUB_ACTIONS and RUNNER_OS encloses if(await cQ0()&&await pQ0()). The reviewer's catch path in pQ0 exists, but sudo -n true runs with .nothrow() and the result is read from exitCode, so a failing sudo returns false without entering the catch. The docker run th"
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "56b066be3132294b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "evade holds. The skill defines evade as backing off from analysis or disabling monitoring it detects. cQ0 looks for the /home/agent/agent process on a CI runner, and gQ0 then stops systemd-resolved, replaces its config and flushes the iptables OUTPUT and DOCKER-USER chains. The reviewer's point that"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "edec49229d12b422",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The reviewer was right that c5 and c7 each stood for one source of a variable with two. dq.token comes from an env value scan (new c9) then gh auth token (c5), and !isAuthenticated() needs both empty. The npm token comes from NPM_TOKEN (c7) then oL0 on .npmrc (new c10), and the else arm needs both e"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "8d4f6bfd8a1d1302",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The label stays data_availability, which is also what the refuting reviewer's evidence names. purpose_reason is rewritten to list the sources the gate really reads: env scan and gh auth token, campaign repos, NPM_TOKEN and .npmrc."
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "2bbc76b45ee4f017",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:9 only picks the string where bun or which bun for isBunOnPath. Either command answers the same question and the outcome only decides how bun is obtained; bun_environment.js is launched in every case. Finding a runtime is plumbing under the skill, and bun is already a requirement."
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "a45a59034e957015",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:69 picks the PowerShell or curl installer for the same bun runtime, then both arms run the same execSync and go on to the same launch. No behaviour class differs between the arms, so this is plumbing, and the download is a recorded requirement. The reviewer's evidence only restates that"
+        },
+        {
+          "claim_id": "k_8243b60281.L6.drop",
+          "claim_sha256": "16875e932fed703e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:19 in reloadPath chooses the registry or shell profiles as the way to refresh process.env.PATH. Refreshing PATH is named as plumbing in the skill, and the reviewer's evidence itself calls it portability of the PATH reload. Both sides end at the same bun lookup."
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "aa9aca5126e0d5c0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js:180-181 joins __dirname with bun_environment.js, a file shipped in the same archive, so on an install of this package the test is always true. It reads the package's own contents, not the machine, and no VM setting can change it. It is not a target artifact, which is a thing to steal, s"
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "ceba4eccabf7a425",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The ternary at setup_bun.js:9 only selects where bun or which bun. Same reasoning as k_fb9a5db8df: locating a runtime is plumbing and the launch follows either way."
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "7cbfbef635f902f9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at setup_bun.js:69 only assigns the installer command for the same bun runtime, and both arms reach the same execSync. Same reasoning as k_9f2314f1be."
+        },
+        {
+          "claim_id": "q_53e1d98b0c.L6.drop",
+          "claim_sha256": "3142e4ac8a6e7897",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at setup_bun.js:19 only chooses how reloadPath refreshes PATH. Same reasoning as k_8243b60281."
+        },
+        {
+          "claim_id": "q_98259f004c.L6.drop",
+          "claim_sha256": "d3d7248b11f8f7ec",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the non-win32 side of the same reloadPath if at setup_bun.js:19, which sources shell profiles to refresh PATH. Reading shell profiles for PATH is named as plumbing in the skill and no payload behaviour depends on it."
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "abca9fedc31d47c9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at setup_bun.js:181 tests the same bundled file as k_8f3faff9a0. The file ships in the archive, so the then arm always runs on an install of this package and the exit arm is not reachable through any machine setting. Not an environment gate."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ddfb95f29a00584c",
+      "record_sha256_after": "fce3bb4dce0867c0",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed: g2 now has an else branch anchored on await El(token), reaching the npm publish call in Wl.updatePackage, so its effect is selects; g2's GITHUB_TOKEN stand-in was removed because the code names no such variable, which leaves g2 with no guessed field; g1's recipe gained installed_tool sudo; th"
+        }
+      ]
+    }
+  ]
+}

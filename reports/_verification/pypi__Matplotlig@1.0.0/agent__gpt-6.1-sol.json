@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "Matplotlig",
+    "version": "1.0.0",
+    "archive_sha256": "f2cac3f07288cd836140354d1844fd0a185385ff912799213918cb6bc4760523"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "b22c0fef22a7db4f",
+      "packet_sha256": "f596da84a2aa3fdb",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "73207b8c4a86b467",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly compares os.name, with os imported in the same function and no intervening rebinding (f1:12-13, s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "dee58355ef7de315",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm follows the direct equality comparison os.name == \"nt\", without negation or an early exit reversing its polarity (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads the operating-system identifier os.name, so the os category fits (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "593784090348f553",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both supplied versions have one if condition, c1, enclosing the indicated body; there are no additional conditions or alternatives, so the minimum is one (s2, s3, s4).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "In the supplied derived code the condition enables the request and execution of its response; no else payload or environment-selected destination appears (f2:13-18, s4).",
+          "evidence_refs": [
+            "s4",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Equality with the Windows operating-system identifier enters the payload body, supporting activate; the condition does not test an analysis or sandbox property (s1, s4).",
+          "evidence_refs": [
+            "s1",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The operating-system check restricts the download-and-execute body to Windows while the ordinary install call follows outside it, supporting targeting rather than a choice of platform-specific implementations (s4, f2:18).",
+          "evidence_refs": [
+            "s4",
+            "f2:18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7b99ef90e008868e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The original body is on the guard's then side, and the supplied derived version preserves that guard with both request and exec calls directly inside its body; no intermediate witness hops are needed (s2-s6).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "05e4f90a9c24b658",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete supplied files place the payload calls only inside run's os.name guard; registering the class as the install command does not bypass the condition, and no alternate payload caller appears (f1:10-38, f2:10-38).",
+          "evidence_refs": [
+            "f1:10",
+            "f1:29",
+            "f2:13",
+            "f2:16",
+            "f2:29"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "9880e914bad91dd0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The supplied derived code imports requests and uses its get method to retrieve response text, then passes that text through tag removal into the built-in exec call (f2:14-16, s5, s6).",
+          "evidence_refs": [
+            "f2:14",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

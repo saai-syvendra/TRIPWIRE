@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "nodepaysafesdk",
+    "version": "20.1.5",
+    "archive_sha256": "f5052c7e65490cce243746e661ee2bda95ad69ceec059de93f77d8bebe4100fa"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2f1eed5bbcf857f2",
+      "record_sha256_after": "8ad5c399937453e9",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "732bc56caf44aa4e",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "In the shell command at index.js:5 only `cat /etc/shadow` sits behind `[ -r /etc/shadow ] &&`; the curl exfil runs whether or not the test passes. Removed exfil from g1's then behaviours and payload, so the then branch is only the cred_read of /etc/shadow; exfil stays in behaviours.ungated."
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "653b744a71c35e77",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation rested on the then branch claiming exfil, which the gate does not decide. With the then branch now only the /etc/shadow read, which happens only when the test passes (the else side echoes a placeholder string), effect enables fits; purpose_reason now says the exfil runs either way."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The gate is a shell test inside a JS template string: cite.py cannot anchor narrower than the whole string_fragment on line 5, and the exec sink at line 9 runs that string, so the empty witness cannot be checked mechanically. c1 and g1 are out of set and still need re-verification."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "8ad5c399937453e9",
+      "record_sha256_after": "e5b816cc944ff215",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "7496be5a2719aea5",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: exec(command, ...) at index.js:9 runs unconditionally outside the region on line 5, so the empty witness wrongly claimed the sink sits in the region. The guarded cat /etc/shadow only runs in the shell exec starts, after [ -r /etc/shadow ]. Replaced the empty witness with a b"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "e5b816cc944ff215",
+      "record_sha256_after": "e5b816cc944ff215",
+      "round": 3,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a9212dbdc620c856",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Round 3, so only escalation is accepted, and the record was not changed. The refutation is right about the JS: exec(command, ...) at index.js:9 runs unconditionally at module load, and the cited guard is not a JS decision. The real decision is the shell short circuit `[ -r /etc/shadow ] && cat /etc/"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "needs_manual_review stays true and the record was not changed, so write_report.py was not rerun. All three reasons remain. The anchor reason remains because cite.py cannot go narrower than the string fragment on line 5, and the exec sink on line 9 only launches that string. `payload path not fully t"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "workerd",
+    "version": "1.20261024.1",
+    "archive_sha256": "50d52f7bc717a111bbeacf6cf6573bc7676531e1a64e5f9eedee690542dfbe02"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "67ee758d56dace3d",
+      "packet_sha256": "258e77ba891c6dea",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "6b68506c75f74a4f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform value is incorporated into platformKey, which the membership decision reads in the same function (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "1bb100c8ab19f98e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The six keys cover darwin, linux and win32 with both supported architectures and LE; membership takes the then side only for these platform values (f1:27, s2).",
+          "evidence_refs": [
+            "f1:27",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "7ad6002d6f92bcc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads process.platform, an operating system property (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "6a7be6cabc6a4a01",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os import resolves to the built-in os module, and arch() contributes to platformKey tested by the membership decision (f1:25, s3, s2).",
+          "evidence_refs": [
+            "f1:25",
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9beb8516be690981",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Every supported OS has entries for arm64 and x64, with no other architecture entries in knownPackages (f1:27, s2).",
+          "evidence_refs": [
+            "f1:27",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "5384ab00df6b2fa5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads os.arch(), which supplies the machine architecture used to select the package (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "addcda2121076a86",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The built-in os module supplies endianness(), whose result contributes to the key read by the membership decision (f1:25, s4, s2).",
+          "evidence_refs": [
+            "f1:25",
+            "s4",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1aeb37c7afdbf5a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All six supported keys end in LE, so reaching the membership then side requires LE byte order (f1:27, s4, s2).",
+          "evidence_refs": [
+            "f1:27",
+            "s4",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "d2f0f026d2c3e27c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Byte order from os.endianness() is an architecture property (s4).",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "970914570d1dced3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The table contains the complete Cartesian product of the three claimed OS values and two architectures, exclusively with LE byte order; membership therefore requires all three conditions (f1:27, s2).",
+          "evidence_refs": [
+            "f1:27",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "37b0024e69a8c4af",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "An unsupported key throws before package preparation, and rejection prevents the validation callback; a supported key enables the installation and validation paths (f1:44, f1:217, f1:246).",
+          "evidence_refs": [
+            "f1:44",
+            "f1:217",
+            "f1:246"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "54680ad5d8db1c3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The successful membership branch proceeds on supported host platforms, while unsupported hosts throw; this is activation on supported targets (s2, f1:44).",
+          "evidence_refs": [
+            "s2",
+            "f1:44"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "0258542c15ebf537",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The table maps host OS, architecture and byte order to platform-specific binary packages, and unsupported combinations throw (f1:27, f1:39).",
+          "evidence_refs": [
+            "f1:27",
+            "f1:39"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "afeb73d673f8317c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The selector must return successfully before s5 runs, and s6 runs only after preparation resolves; its unsupported branch throws (f1:44, f1:217, f1:246). The cited calls resolve to their declared functions and reach the fetch, write, process, cleanup and validation sinks in the stated order (s8–s19)",
+          "evidence_refs": [
+            "f1:44",
+            "f1:217",
+            "f1:246",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "087bf9797b3a481b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete file has no exports or independent callers of the payload functions: preparation starts with the selector, and both validation calls are in its fulfillment callback (f1:216, f1:246). The recursive cleanup and redirect calls remain downstream of that same successful selector.",
+          "evidence_refs": [
+            "f1:216",
+            "f1:246",
+            "f1:117",
+            "f1:182"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7510b33e257745d3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fetch reaches the imported https.get and buffers the response, while the other cited sinks resolve to fs.writeFileSync, fs.unlinkSync and child_process execution APIs (f1:54, f1:115, s10, s11, s14). Validation executes the prepared binary directly or through its JavaScript launcher with --version (f",
+          "evidence_refs": [
+            "f1:54",
+            "f1:115",
+            "s10",
+            "s11",
+            "s14",
+            "f1:63",
+            "s17",
+            "s18",
+            "f1:250"
+          ]
+        },
+        {
+          "claim_id": "k_1178b3dada.L6.drop",
+          "claim_sha256": "ed2bb9168be82fe5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The presence test only protects the Yarn regex; its result controls replacement of the launcher by a linked binary, changing storage and startup plumbing (s20, f1:188, f1:247).",
+          "evidence_refs": [
+            "s20",
+            "f1:188",
+            "f1:247"
+          ]
+        },
+        {
+          "claim_id": "k_840d917e4b.L6.drop",
+          "claim_sha256": "644d34a98c882d84",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ternary supplies an executable filename suffix used in binary paths; this is platform path plumbing rather than a separate behaviour gate (s21, f1:42, f1:50).",
+          "evidence_refs": [
+            "s21",
+            "f1:42",
+            "f1:50"
+          ]
+        },
+        {
+          "claim_id": "k_b568a7c63a.L6.drop",
+          "claim_sha256": "dc73db0d0dbbd751",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Linux branch only appends advice to the error message; logging and return occur regardless of this condition (s22, f1:95).",
+          "evidence_refs": [
+            "s22",
+            "f1:95"
+          ]
+        },
+        {
+          "claim_id": "q_1613c4bb62.L6.drop",
+          "claim_sha256": "43a5344b3a2c756f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The presence test only protects the Yarn regex; its result controls replacement of the launcher by a linked binary, changing storage and startup plumbing (s23, f1:188, f1:247).",
+          "evidence_refs": [
+            "s23",
+            "f1:188",
+            "f1:247"
+          ]
+        },
+        {
+          "claim_id": "q_bc5330b571.L6.drop",
+          "claim_sha256": "aa1cec24f1423c4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ternary supplies an executable filename suffix used in binary paths; this is platform path plumbing rather than a separate behaviour gate (s24, f1:42, f1:50).",
+          "evidence_refs": [
+            "s24",
+            "f1:42",
+            "f1:50"
+          ]
+        },
+        {
+          "claim_id": "q_d42c314bc5.L6.drop",
+          "claim_sha256": "6acfff1eaf80eb08",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Linux branch only appends advice to the error message; logging and return occur regardless of this condition (s25, f1:95).",
+          "evidence_refs": [
+            "s25",
+            "f1:95"
+          ]
+        }
+      ]
+    }
+  ]
+}

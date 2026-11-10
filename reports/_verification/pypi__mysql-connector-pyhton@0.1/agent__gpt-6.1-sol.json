@@ -1,0 +1,579 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "mysql-connector-pyhton",
+    "version": "0.1",
+    "archive_sha256": "4709764d33adc0cc3e025f1a9f9aa303b62eb77da41170ca0a1e8cd7983a403a"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "9719fcabe32bd7da",
+      "packet_sha256": "a1af565636175350",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "2daf3a9afd54d995",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "value_mismatch",
+          "evidence": "The argument to endswith is the literal '.lnk', not the claimed literal '\\.lnk$' (s1, f1:43). The call performs a suffix test rather than evaluating a regular expression.",
+          "evidence_refs": [
+            "s1",
+            "f1:43"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "be57b1d5ce99eb01",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform and command guards enclose both regions; the admin guard controls the append in s6, and the suffix and executable guards control s7 (f1:5-50). The sink shortcut.Save() is directly inside s7, so the empty witness reaches it.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s1",
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "a07a567285bcda2a",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The admin guard only appends an additional search path (f1:26-27); the paths already initialized at f1:20-24 are walked regardless of its result. A matching shortcut in those paths reaches shortcut.Save() at f1:50 even when the admin guard is false.",
+          "evidence_refs": [
+            "f1:20",
+            "s4",
+            "f1:40",
+            "s8"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "9719fcabe32bd7da",
+      "packet_sha256": "acaeb5c43b01ced5",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b518e76613e918b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 directly compares sys.platform in an if condition.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "824ce94398fc0995",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 uses equality with the literal win32, and s2 takes its then arm without negation.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads the operating system platform, so os is the appropriate category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "8af2ae213b3c66cb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 directly tests sys.argv[1] in the elif condition.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "e44e44f82884445e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 tests membership in the two literal command names bdist_wheel and install on the taken arm. The preceding command list at f1:6 is disjoint, so it does not exclude either value.",
+          "evidence_refs": [
+            "s3",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "9939fe7ebd3b3b6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:6 and s3 distinguish packaging commands passed to setup.py, supporting package_manager.",
+          "evidence_refs": [
+            "f1:6",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "0956f51dd1ed56fe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:41-43 supplies filenames from os.walk to file.endswith in an if condition.",
+          "evidence_refs": [
+            "f1:41",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "2daf3a9afd54d995",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "s4 uses a positive endswith call with a literal suffix, rather than a regex operation. The claimed regex operator is a different operation with the same polarity, which the review rules leave unresolved.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "748c8f57943d2530",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 selects shortcut files for inspection and modification, making target_artifact appropriate.",
+          "evidence_refs": [
+            "s4",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "c837922f2449f2cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:40-46 opens matching shortcut files found beneath the configured Start Menu, Taskbar and Desktop folders and assigns the basename of shortcut.TargetPath to executable_name. s5 tests that same binding.",
+          "evidence_refs": [
+            "f1:20",
+            "f1:40",
+            "f1:45",
+            "f1:46",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "b1e029cf3887c6a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:46 binds executable_name to the target basename, and s5 positively tests membership in exactly the four claimed executable names.",
+          "evidence_refs": [
+            "f1:46",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "68de32dee830f62d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:45-50 selects browser shortcut targets as the artifacts whose arguments are changed, supporting target_artifact.",
+          "evidence_refs": [
+            "f1:45",
+            "s5",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "3cba11a6bd0f372f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 calls ctypes.windll.shell32.IsUserAnAdmin directly as an if condition, with ctypes imported at f1:15.",
+          "evidence_refs": [
+            "s6",
+            "f1:15"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "20b39fbca080c595",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 takes the then arm when IsUserAnAdmin returns a truthy value, without negation or an explicit comparison.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "5c6cdd59c8da531e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 queries whether the current user is an administrator, supporting privilege.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "82ab4ffac0f0dc04",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s8 is nested inside both the Windows platform test and the packaging-command elif. Both conditions are needed, and the earlier command branch has disjoint values.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s8",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "f1de8b342c5c1e0f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 and s3 determine whether the extension file-writing block at s9 runs, supporting enables.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "2d1813177c020b07",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 and s3 activate the file-writing block for Windows packaging operations, without testing analysis or sandbox indicators.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "9706554e2d09d37e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 and s3 restrict installation of the extension to Windows packaging operations, while f1:38-50 integrates it into Windows browser shortcuts, supporting targeting.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "f1:38",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "fa54b05d6d1e82f6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The open call in s9 lies directly in region s8, inside the then sides of both s2 and s3. No witness hops are required.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "bc715b6f7a84e1ff",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete f1 file has one background-script open site, s9, nested under both cited tests, with no alternate function entry or caller reaching that site.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s9",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "09017f44e4f44301",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s9 opens the background script in w+ mode, and f1:33 writes to that file handle, providing the claimed file-write capability.",
+          "evidence_refs": [
+            "s9",
+            "f1:33"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "5574da6ca7118c01",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "s10 needs only c1, c3 and c6, whereas s11 needs c1, c3, c4 and c5 and lies outside the administrator if. The two regions do not require a five-condition conjunction, and their minimum is three conditions.",
+          "evidence_refs": [
+            "s7",
+            "s10",
+            "s11",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2cae595108a6198a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 adds the shared Start Menu folder to the victim-artifact search list consumed by f1:40-50. This expands which shortcuts receive the same persistence change, supporting modifies.",
+          "evidence_refs": [
+            "s7",
+            "f1:40",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d13811f40b448045",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 uses administrator status to expand shortcut targeting, and s4-s5 identify matching artifacts; these activate work on targets rather than evade analysis.",
+          "evidence_refs": [
+            "s7",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "1d0eba035dd2bbb8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 expands the set of victim shortcuts searched, and s4-s5 restrict changes to browser shortcuts, supporting targeting.",
+          "evidence_refs": [
+            "s7",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "be57b1d5ce99eb01",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s10 is inside the administrator then arm, while s11 is inside the suffix and executable-name then arms; both regions are inside the platform and command guards. The sink s12 sits directly in s11, so every guard controls at least one region as required.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s7",
+            "s10",
+            "s4",
+            "s5",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "a07a567285bcda2a",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "f1:20-24 initializes three search folders regardless of administrator status, and f1:40-50 can save their matching shortcuts when the administrator test is false. Thus s12 is reachable without c6.",
+          "evidence_refs": [
+            "f1:20",
+            "s7",
+            "f1:40",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "80e5fe9455de1c70",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:16 and f1:38 bind shell to a WScript.Shell COM object, and f1:45 obtains its shortcut object. s11 changes that shortcut to load the extension and s12 saves it, providing a persistent file modification.",
+          "evidence_refs": [
+            "f1:16",
+            "f1:38",
+            "f1:45",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "c00e9003a71b5c35",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s11 nests under the platform, command, suffix and target-name tests, requiring all four cited conditions. The administrator test only appends a folder and is not an enclosing guard.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s5",
+            "s7",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "484b6de6454ef4b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited tests determine whether a matching shortcut receives extension-loading arguments and is saved at s11-s12, supporting enables.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s5",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "f8403116298df26f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1, s3, s4 and s5 activate shortcut modification on the designated platform, command and browser artifacts, supporting activate.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s5",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "550aecf99d14ccdb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4-s5 select browser shortcut artifacts for extension-loading persistence at s11, rather than checking for data to consume. Targeting is the better purpose label.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "f07bd54d9af821b9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s11 lies inside all four cited guards, and its final call is exactly sink s12. The empty witness is therefore sufficient.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "2a9dda9f62731079",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete f1 file has a single shortcut.Save call, s12, directly nested beneath all four cited decisions, with no separate function entry or alternate call path to it.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "ea07b88348b198fd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:16 and f1:38 bind shell to a WScript.Shell COM object, and f1:45 obtains its shortcut object. s11 changes that shortcut to load the extension and s12 saves it, providing a persistent file modification.",
+          "evidence_refs": [
+            "f1:16",
+            "f1:38",
+            "f1:45",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "k_fcbe9adaf8.L6.drop",
+          "claim_sha256": "2a2fdf405ddb36f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s14 guards only creation of the extension destination directory. The file writes and shortcut changes follow outside that if, so this is storage plumbing rather than an environment gate on the payload.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s9",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "q_342d74f0ef.L6.drop",
+          "claim_sha256": "8c90498bf05f9d73",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s14 guards only creation of the extension destination directory. The file writes and shortcut changes follow outside that if, so this is storage plumbing rather than an environment gate on the payload.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s9",
+            "s11"
+          ]
+        }
+      ]
+    }
+  ]
+}

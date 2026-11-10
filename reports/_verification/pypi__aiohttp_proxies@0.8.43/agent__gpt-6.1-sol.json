@@ -1,0 +1,213 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp_proxies",
+    "version": "0.8.43",
+    "archive_sha256": "b940a05937917e602453daf93e388ffa113e62b30ebab078fccef2e776cec331"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e412486432e7e670",
+      "packet_sha256": "7cbc73c55c59a9f9",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "c0ba59b2f35dc21c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly tests sys.argv[1] against install (s1; f1:23).",
+          "evidence_refs": [
+            "s1",
+            "f1:23"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b1cca845c6321ed2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm accepts equality with install without any negation of that comparison (s1; s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6d224a38bffd796f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The setup script tests its command argument for the install operation, fitting package_manager (f1:23; f1:77).",
+          "evidence_refs": [
+            "f1:23",
+            "f1:77"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1edaf5709000e6d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly tests sys.argv[1] for substring membership (s3; f1:23).",
+          "evidence_refs": [
+            "s3",
+            "f1:23"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "2577c6c6af903208",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm accepts the positive test of bdist in sys.argv[1], with no negation (s3; s2).",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "ef4d84b36b675c2f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The setup script tests its command argument for a distribution build operation, fitting package_manager (f1:23; f1:77).",
+          "evidence_refs": [
+            "f1:23",
+            "f1:77"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "ccd3df90a8c7944b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The install comparison and bdist substring test join with or, so one condition suffices. The length check is a presence precondition on the argument rather than an independent environment condition (f1:23; s4).",
+          "evidence_refs": [
+            "f1:23",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "e3bc668311dab0a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The command check enables the information gathering, transmission, executable write and launch block, with no alternative payload branch (s2; s4).",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d3bb27ac429d1949",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The block activates on install or distribution build arguments; the check does not inspect analysis or sandbox properties (f1:23; s4).",
+          "evidence_refs": [
+            "f1:23",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "cd77730bdd771850",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The command check targets installation and distribution build invocations for information transmission and executable launch (f1:23; f1:29; f1:43).",
+          "evidence_refs": [
+            "f1:23",
+            "f1:29",
+            "f1:43"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "365fb727b675205e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All four cited sink calls sit directly inside the then block, including its nested try statements, so the empty witnesses require no call hops (s4; s5; s6; s7; s8).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "0601ffac77c834e9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited calls occur inline at module scope inside this if arm, without an enclosing callable that another caller could enter. The remaining file provides no alternate route to these call sites (s2; s4; f1:51; f1:77).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f1:51",
+            "f1:77"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7cf163d8cb10c96b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code collects login and host names and sends their encoded value using the imported urllib.request.urlopen (f1:4; f1:25; f1:29). It opens a binary output file, writes decoded data, and calls the imported subprocess.Popen on that file (f1:3; f1:36; f1:37; f1:43).",
+          "evidence_refs": [
+            "f1:3",
+            "f1:4",
+            "s5",
+            "s6",
+            "s7",
+            "f1:37",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "k_f5f2ceb2d0.L6.drop",
+          "claim_sha256": "0c2875aa5c411b0d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version check is reachable module-level code and raises for Python versions below 3.6.0 before setup executes. This is a portability gate deciding whether package setup proceeds, rather than a dead branch (s9; s10; f1:77).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:77"
+          ]
+        },
+        {
+          "claim_id": "q_62c293d311.L6.drop",
+          "claim_sha256": "1b4bed34763cdd2e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The if statement checks the interpreter version and raises below 3.6.0 before the setup call. It is a portability gate rather than a dead branch (s10; f1:77).",
+          "evidence_refs": [
+            "s10",
+            "f1:77"
+          ]
+        }
+      ]
+    }
+  ]
+}

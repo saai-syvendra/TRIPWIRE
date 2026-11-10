@@ -1,0 +1,689 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "sloana",
+    "version": "0.1",
+    "archive_sha256": "cec9f94349348a10fd012ac2e8cc034e80fc9f31d5191a37c9f16f73ddf6a276"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "766888b00c74a5db",
+      "packet_sha256": "9d90a4cbaf0d2dc6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1/f1:6 compares sys.platform in an if condition against a string built from character codes.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "38c63effe7ba4b54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The character codes at f1:6 decode to the five characters of the Windows platform name, and the == test must be true to enter the block.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "sys.platform is an operating-system property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:68 is an if whose condition is ctypes.windll.shell32.IsUserAnAdmin().",
+          "evidence_refs": [
+            "s3",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call is tested directly, with no negation, and the then arm is s4's body.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin reads the process privilege level.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "60dce352b3bf99ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:85 (f2:82) is an if on <name>.endswith(...) over file names from os.walk.",
+          "evidence_refs": [
+            "s5",
+            "f1:85"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "473c2ff53f3a7989",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The decoded suffix is '.lnk', matching the value, but the code uses endswith rather than a regex; the operator is same-polarity but different.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:85"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "f13269e668cbe4fe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test selects shortcut files as the artifact to act on.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "088f6f4ba9d92e31",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 assigns os.path.basename(shortcut.TargetPath) to a variable that the if in s8 reads.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "b9fa36ab58338bc2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8 tests that variable with 'in' against the four listed executable names, and the then arm is the guarded code.",
+          "evidence_refs": [
+            "s8",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "ba39ad2958698fe5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test picks which shortcut targets (browser launchers) are acted on.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "52f1535ddeb0eb16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single platform if at f1:6 encloses region s9, so the expression is just c1. Argument checks inside the region at f1:7 and f1:35 are not recorded as conditions.",
+          "evidence_refs": [
+            "s2",
+            "s9",
+            "f1:7",
+            "f1:35"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6d27bd959d872be2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check only lets the same code run on Windows, so it enables rather than selects or modifies.",
+          "evidence_refs": [
+            "s2",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "820afc2b20c5e461",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the platform is Windows; it does not back off from analysis.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code uses Windows-only APIs (win32com, ctypes.windll), so the gate targets Windows hosts.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ec9567f33ab5c57f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The pip.main call (f1:13, s10) and the write call (f1:73, s11) both sit in the platform block s9, with an empty witness.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "287f95722b7537fc",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "setup.py has no functions or other callers; the sinks are only inside the platform block. f2 is a derived copy of the same file.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "6cb174b066c994d2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "pip.main invokes the package installer, which downloads from the network; the .write call on a file object from open() writes a file.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "f1:126"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "755b368206ca087a",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "other",
+          "evidence": "Region s13 (f1:46) is in a different state of the loop and is not under the IsUserAnAdmin if, so it needs only c1 and then_min 2 does not fit. The admin if (f1:68-71) only sets state and continues.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s4",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d14263a49e9ac562",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The admin check only changes the state variable and does not choose a target the environment decides.",
+          "evidence_refs": [
+            "s4",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "041e967c8d80c71a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks (Windows, admin) are not analysis or sandbox detection; they let the code proceed.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0dc20a87f8622ea5",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "An admin check could be targeting or data availability; the code shown does not say what depends on it.",
+          "evidence_refs": [
+            "s4",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "12211d2afbbf6356",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "broken_hop",
+          "evidence": "The sink at f1:104 (s14) is in another state branch, not inside s12 or s13, and no cited hop connects them.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "49bef4359f7057a3",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The sink is reached through the loop state machine rather than through the admin guard; the state values are computed expressions I did not resolve.",
+          "evidence_refs": [
+            "s4",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "de645895b8ad14c2",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "s14 calls Save() on a COM object created by Dispatch with a decoded name, so what it persists is not shown by the code.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "806df42ea6af83a3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s15 is nested inside the endswith if (s6), which sits inside the platform if (s2), and s8 encloses s15, so c1, c3 and c4 join with and (min 3).",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s8",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "b8917d06d17a9a8f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Effect should be modifies: the tests choose which existing shortcut (browser launcher) is altered, with Arguments set at f1:94 and the shortcut saved.",
+          "evidence_refs": [
+            "s8",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "d2337cad73e99045",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when a matching shortcut is found; there is no evasion.",
+          "evidence_refs": [
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "f28fc8b2c3434727",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tests pick specific browser shortcuts to alter, which is targeting.",
+          "evidence_refs": [
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "898ffdc4eb30dab4",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The Save() at f2:101 (s16) is in a later state branch; s15 sets that state (60921) and continues, but the state value is a computed expression I did not resolve.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "71f0e808f31a775a",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "No other caller exists, but state-machine reachability of the Save branch is not decided by the code shown.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "3c76320df94aedfc",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Save() is called on a COM shortcut object from Dispatch, so the checker cannot classify the sink as persistence.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "23cf1b5068b604cc",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:120 returns to an earlier state if a path built from an environment value plus a decoded name does not exist; it guards the later file open, but the code does not show what it decides.",
+          "evidence_refs": [
+            "s17",
+            "f1:120"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "d7da71e35d0a8d64",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is the same test as s17 (f1:120) as a whole if statement; the code does not decide whether it is an environment gate.",
+          "evidence_refs": [
+            "s18",
+            "f1:120"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "9ec71eab4bcff85d",
+      "packet_sha256": "0745a29fec1fecf7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "fd66b2436fa58147",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The cited region s3 (f1:69-70) only assigns the dispatcher state variable and does a continue; the Save() sink at f1:104 sits in a different state branch (state 790593, f1:81-105), so the empty witness does not put the sink in the region. The code is a flattened while/elif state machine, so whether ",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "f1:68",
+            "f1:81",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "0ed556c3d98473a2",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The Save() sink at f1:104 is reached through the state-variable dispatcher loop, not through a direct call chain from the guards. Whether other state transitions also reach state 790593 cannot be decided without evaluating the obfuscated integer state arithmetic.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f1:81",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "46d1de36132707a1",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The sink is .Save() on an object from Dispatch(...).CreateShortcut(...) (f1:90, f1:104). The Dispatch argument is an obfuscated string, so the COM object type is not visible. The code sets Arguments on shortcuts found by os.walk with a matching file suffix, which suggests modifying existing shortcut",
+          "evidence_refs": [
+            "s4",
+            "f1:65",
+            "f1:90",
+            "f1:95",
+            "f1:104"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "951102764f29a88b",
+      "packet_sha256": "fac9a80173f0604b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "d072d0e6890db8e8",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The region s3 only assigns a dispatcher state value and continues inside the IsUserAnAdmin test (f1:68-70). The Save() sink at f1:104 sits in a different elif arm of the state-machine loop, and its path from the region depends on arithmetic-obfuscated state values that are not resolved here. The bin",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "7de151e46b07950b",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "Whether Save() at f1:104 is reached only through the IsUserAnAdmin then side depends on obfuscated state arithmetic that is not resolved. The else path (f1:71) also assigns a state and may reach the same code.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f1:71"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "e9c101f2c33bb068",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is Save() on a shortcut object (CreateShortcut) after its Arguments are set to load an extension. That writes a modified .lnk file, which fits persistence.",
+          "evidence_refs": [
+            "s4",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "0b93583144dc3fb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In f2 the region s8 (lines 92-94) is inside the browser-name test (s7), which is inside the .lnk endswith loop (s6), which is inside the win32 platform test (s1). It sets state 60921, and the only assignment of that value is f2:93. The state loop then reaches the elif == 60921 arm at f2:100, which c",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "f2:93",
+            "f2:101"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "cd936b76cf93f897",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "State 60921 is assigned only at f2:93, inside the browser-name test (f1 shows the same single occurrence at line 103). The Save() at f2:101 is reachable only through that arm. The other path sets state 0 and exits the loop (f2:96).",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "s10",
+            "f2:93",
+            "f2:96",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "18b8b767205518b2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The region sets the shortcut's Arguments to --load-extension for chrome/edge/brave/launcher targets, and Save() then writes the modified .lnk. That is a file write that persists the loaded extension.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "f2:92",
+            "f2:101"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "da3fbf114d21e71c",
+      "packet_sha256": "59afdffe4bc46848",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "5bdc308e228fc080",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The obfuscated string at f1:6 builds chr codes 119,105,110,51,50, which spell 'win32'. The derived f2:6 reads `if sys.platform == 'win32':` and its body holds the guarded code, so the positive form of the test is ==.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "6a038303d0bd7f0e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The decisions nest: f2:6 (win32), then f2:82 (.lnk endswith), then f2:91 (basename of TargetPath in the browser exe list). The Save() sink sits under all three, so they join with and and the minimum is 3. The code also has an argv test (`sys.argv[1] in ['bdist_wheel','install']` at f2:35) that is no",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "f2:35",
+            "f2:82",
+            "f2:91"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "d833e369c47e3cab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Save() call at f2:101 sits in the state-60921 arm, inside the .lnk loop at f2:82 and the win32 gate. That state is set only at f2:93, inside the c4 if at f2:91, so the sink is on the then side of all three guards. The sink is in the region itself, so an empty witness is correct.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s8",
+            "s9",
+            "s10",
+            "f2:93",
+            "f2:101"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "ee604e912ed192fb",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only Save() call is f2:101, and state 60921 is assigned only at f2:93 under the browser-exe test. No function, export, timer or other caller reaches it. f1 is the obfuscated form of the same file.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f2:93",
+            "f2:101"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "3f90ce6be93737ee",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code sets the .lnk Arguments to --load-extension pointing at the dropped Extension folder (f2:92), then calls shortcut.Save() (f2:101). Save() writes the modified shortcut back to disk, so a browser launched from it loads the extension. That is persistence, and the sink is a file write from a WS",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "f2:62",
+            "f2:92",
+            "f2:101"
+          ]
+        }
+      ]
+    }
+  ]
+}

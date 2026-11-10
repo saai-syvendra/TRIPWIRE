@@ -1,0 +1,1355 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@antv/data-samples",
+    "version": "1.2.1",
+    "archive_sha256": "a9eec26852057d910e8a407b941be4be4450b76a6ae2ce85efc49a4c38b7f8cd"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ee4a8b0ea796b704",
+      "packet_sha256": "cd15796bae3ba1f5",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "60fe5b2ed9179b13",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "_0x596976 is the fs existsSync import (f1 import line) and s1 and s2 both use it in an if test on Tn.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c2c851b62d6f8553",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "value_unchecked",
+          "evidence": "Tn is join(tmpdir(), <encoded name>); the temp-dir piece is visible but the file name is still encoded, so the full value is not confirmed.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "05dba072b50f1f9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is an existsSync check on a path, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "7a6ef74d53c92372",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "N6 reads process.env[envVar], keeps it in a variable and tests it with a prefix method in the same scope.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "b4b3d017b8cff4c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads an environment variable value.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "be650d4ded902373",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The env names are computed by decoder calls, so it is not visible that LANG is among them.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "f9ace27ff6601310",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The env names and the compared method are looked up through decoder or table calls, so the exact variable is unverified. The value 'ru' is visible as plain text.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "cb6d1ce826ecc7f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The function jg checks Intl locale and language env variables against 'ru', so locale_language fits.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "b601e57b475d9613",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_REPOSITORY is destructured from process.env and tested with a method call in the if condition.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "37eb19ae12406a4e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads an environment variable.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2a5ea3a25562fbc9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s6 in f6 and s7 in _9 are separate decisions on the same single condition, so expression c2 is right.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "a366468d1c296222",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The guarded code only removes a lock file, which is housekeeping rather than enabling a payload.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "acf8426832b50910",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The lock-file test is neither activation nor evasion in any visible sense.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "a5f8f123bf9ed0f8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Lock-file cleanup has no clear targeting or portability purpose, so unclear fits.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "cd6b8d391ee5f8fd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The unlink call s10 sits inside the then block s8 of the guard s6. The s9 region in _9 is the same kind of call under the guard s7.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "1afdde9d2fb8367b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The unlink calls appear only under the existsSync tests in f6 and _9.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "2b915f94453446f8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is unlinkSync from fs, which deletes files.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "b7414172cd2b2ff6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single early exit on N6() guards the rest of YP, so the expression is the single condition c3.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "03122630a3de7a64",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The flow after the early exit is not run when the test is true, so the gate enables it.",
+          "evidence_refs": [
+            "s11",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "0f5ea71a7aa9949d",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The env var names and prefix are encoded, so it is not visible what environment this backs off on.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "4938ec24f6513cb3",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The env var and prefix are encoded, so the purpose cannot be decided from the code shown.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "4593bedd283b2c40",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "BP builds objects and calls methods by table-looked-up names, so the path to the fetch wrapper cannot be followed.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "932e79b74eb32b02",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Callers cannot be fully enumerated because of table-based method dispatch.",
+          "evidence_refs": [
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "c1cc628a06b07d23",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Only the fetch wrapper is shown as a network sink. The sinks for recon, credential read and spawn are not resolved.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "ddb288cc806c9be3",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "judgement",
+          "evidence": "jg also contains an Intl locale test and other env alternatives, so c4 alone may not capture the combined exit condition.",
+          "evidence_refs": [
+            "s16",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "8976530e6672b6c4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code after the exit runs only when jg() is false, so the gate enables it.",
+          "evidence_refs": [
+            "s16",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "9ff116d8b55f38b9",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate backs off on a locale rather than on analysis, so the evade label is doubtful but not decided by the code.",
+          "evidence_refs": [
+            "s4",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "a9ce97f2679a06c0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A locale check against 'ru' that exits fits targeting.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "702a422ed6f32cfd",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The path from BP to the fetch wrapper goes through table-looked-up method names and is not followable.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "310f1e84fc3daf60",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Callers cannot be fully enumerated because of table-based method dispatch.",
+          "evidence_refs": [
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "09a285a1c1cf8f97",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Only the fetch wrapper is shown as a sink, so the other listed behaviours are not tied to sinks.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "2d8c2dac18a51a6b",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The test sits in an if/else inside a try block with a workflow-ref and repository branch, so how it combines with c5 is not settled.",
+          "evidence_refs": [
+            "s17",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "ea7d6a2f30d15cac",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The exit sits in a nested try block and its relation to the later flow is unclear.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "2ffd16abdb1ed6de",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The compared repository value is encoded or not shown, so the polarity cannot be decided.",
+          "evidence_refs": [
+            "s5",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "01bfa1bfee36e3de",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The compared repository value is not shown, so the purpose cannot be decided.",
+          "evidence_refs": [
+            "s5",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "28e76298bb361cff",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The guard is in a separate function from the cited via calls and the path to the sink goes through table-looked-up names.",
+          "evidence_refs": [
+            "s17",
+            "s18",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "64047f11ffedb519",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Callers cannot be fully enumerated because of table-based method dispatch.",
+          "evidence_refs": [
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "c33c664100a96e2d",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "Only the fetch wrapper is shown as a sink, so the other listed behaviours are not tied to sinks.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "k_c3d4066646.L6.drop",
+          "claim_sha256": "5ab4a2edbf5a076e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The __DAEMONIZED test returns early in z6, and the same function respawns the process with that variable set, so it is a re-entry guard.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "q_13b92544b9.L6.drop",
+          "claim_sha256": "cfc244b784eaca3d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return on __DAEMONIZED in z6 is a re-entry guard for the respawned process.",
+          "evidence_refs": [
+            "s20"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "ff56be60bda42b5f",
+      "packet_sha256": "a4c7025b10a3baab",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "de1f72a7ebdd5f2b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sites test the call bound to the fs existsSync import (the import list in f2 aliases it) on Tn, which is the temp dir joined with a lock file name.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "4df1c3585d0697b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Tn is joined from the OS temp dir and the literal tmp.0987654321.lock. Both ifs run their body when existsSync(Tn) is true, so the operator is exists in positive form.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "440192e4ef979284",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads whether a file exists, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "b9ad164269a66939",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "N6 reads process.env[envVar] for each entry of uP, and the only entry is GITHUB_TOKEN. The startsWith test is applied to that value.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "a3049ab3e8caa993",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "N6 returns true when the token is defined and starts with the uP prefix. YP exits when N6() is true, so the code that follows runs under not_startswith.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "77db82eebc662249",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "da824229751554cb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "s8 tests the LC_ALL/LC_MESSAGES/LANGUAGE/LANG env chain, but s7 tests the Intl.DateTimeFormat resolved locale, which is not an env var, so not every site uses the named API.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "e7972bad1264eba8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "jg() returns true when the lowercased locale starts with ru, and YP exits when jg() is true. The guarded code therefore runs under not_startswith ru.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "2348716703712b37",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the system or locale language.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "1792d85b10622e62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "DP destructures GITHUB_REPOSITORY from process.env and tests it with includes.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "367a7270d21acf51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "YP calls DP with the argument /somerepository. In the else arm DP exits when GITHUB_REPOSITORY includes it, so the continuing path is not_includes.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "51b78e0e9b858687",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads an environment variable.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "7734740a2cdf685b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single condition, existsSync(Tn). Each guard is its own if that tests it, in f6 and in _9.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "15827edb6c26687f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock check only decides whether the unlink runs, so there is no per-branch payload selection. enables is the closest label.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "fd7c30c36d4911c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch acts when the lock exists and does not back off from analysis, so activate fits.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "b45f868117d76d1a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code handles a lock file and has no targeting or evasion intent, so unclear fits.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "cd6b8d391ee5f8fd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The unlink call sits directly in the then block of the f6 if and of the _9 if, so the witness is empty as claimed.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "d87eedd6d1f0d723",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The unlink call is reachable only inside the two existsSync-guarded blocks, and I found no other unlink of Tn.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "2b915f94453446f8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is unlinkSync from the fs import, which deletes a file.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "fbca4250d3aded29",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one early-exit guard on the single condition N6(). IP reaches it through YP.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "3638306f34a3bf9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check only decides whether the later routine runs at all, so enables.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8373c0897c374c88",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when the token has a decoy-style prefix, so it backs off when it spots a honeytoken. That is evade.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "29e9e151b25a4283",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A decoy-token prefix check that exits is an analysis-avoidance check.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "a1e5798ec9e9a84c",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The cited region s16 is the top-level IP() invocation, not code in IP after the YP() call. The chain also goes through dynamic dispatch (senders array and dispatch property), so I could not confirm the path to the fetch sink end to end.",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s17",
+            "s25",
+            "s27",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "4c0d2d7862674231",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The path to the sender goes through dynamic dispatch, so I could not enumerate every caller.",
+          "evidence_refs": [
+            "s16",
+            "s25",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "c398733017b57795",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "fetch with POST in the sender class is a network sink and supports exfil. The sink cited for the other behaviours (recon, cred_read, self_propagation, spawn_process) was not shown.",
+          "evidence_refs": [
+            "s17",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "d3250b3f6ebd0925",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one early-exit guard on the locale condition, reached through YP from IP.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "4c835eb302e93067",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The locale check only decides whether the later routine runs, so enables.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "9ed615507e68ba7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when the locale starts with ru, so it backs off on a particular environment. That is evade.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "f19a0c26abe1f454",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A locale-based exclusion selects which hosts are affected, so targeting.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "7ed063f5208d28a0",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The cited region s16 is the top-level IP() call rather than code after YP() inside IP. The path goes through dynamic dispatch, so it is not confirmed end to end.",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s17",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "bd49dc5f2bbbce07",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The path to the sender goes through dynamic dispatch, so I could not enumerate every caller.",
+          "evidence_refs": [
+            "s16",
+            "s25",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "c16e5626a3ebc08a",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "fetch with POST is a network sink and supports exfil. The sinks for the other listed behaviours were not shown.",
+          "evidence_refs": [
+            "s17",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "e9ab74e7cfe50a12",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one early-exit guard on the repository condition, reached through the DP call in YP and then YP from IP.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s29",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "315f630d142cb992",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check only decides whether the later routine runs, so enables.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "73c17e23d8cee280",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when running in the named repository, so it backs off in a specific environment. That is evade.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "d448c0b53ed3d102",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A repository-specific exclusion selects which environments are affected, so targeting.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "c6e2a33c18d76016",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The cited region s16 is the top-level IP() call rather than code after YP() inside IP. The path goes through dynamic dispatch, so it is not confirmed end to end.",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s17",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "2812da74c6da169c",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The path to the sender goes through dynamic dispatch, so I could not enumerate every caller.",
+          "evidence_refs": [
+            "s16",
+            "s25",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "84291075734f9386",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "fetch with POST is a network sink and supports exfil. The sinks for the other listed behaviours were not shown.",
+          "evidence_refs": [
+            "s17",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "k_c3d4066646.L6.drop",
+          "claim_sha256": "5ab4a2edbf5a076e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "z6 returns early when __DAEMONIZED is set, and it otherwise respawns itself with that variable set. This is a re-entry guard, not an environment gate.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "q_13b92544b9.L6.drop",
+          "claim_sha256": "cfc244b784eaca3d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the same __DAEMONIZED check in z6, a re-entry guard.",
+          "evidence_refs": [
+            "s31"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "593aa899dfeab3f3",
+      "packet_sha256": "7d6235652cee500a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "6ee93c296e47152f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "In the helper (s2) the process exits when GITHUB_REPOSITORY includes the value in the else arm, so the code after it is reached only when the repository does not include that value. not_includes is the positive form.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c14.L1",
+          "claim_sha256": "892367c1532b9e34",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The third test in the locale helper reads LANG/LANGUAGE/LC_ALL, guarded by a SystemRoot presence ternary, and lowercases and tests startsWith ru in an if decision.",
+          "evidence_refs": [
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "df4bb6e8ed7f59eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The helper returns true when the value starts with ru, and the caller exits when it returns true (s4). The guarded code is therefore reached only on not_startswith ru.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c14.L6.category",
+          "claim_sha256": "ee489c5a69522413",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads locale and language environment variables and compares them to a language prefix, so locale_language fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c15.L1",
+          "claim_sha256": "652092b0175ae02f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "process.env GITHUB_ACTIONS is the condition of an if statement at the start of the helper.",
+          "evidence_refs": [
+            "s5",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c15.L2",
+          "claim_sha256": "5c32f7317723b8c6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When GITHUB_ACTIONS is unset the if body is skipped and execution continues to the guarded code, so falsy is one positive route to it. The other route is the repository check (c5).",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c15.L6.category",
+          "claim_sha256": "f747b50535f6dc00",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GITHUB_ACTIONS is a CI-environment marker, so ci_marker fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "1328438fb8c6df88",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "N6 checks the table entry GITHUB_TOKEN with a decoy prefix and the caller exits when it returns true, so the single condition c3 is the only one on this guard. The rest of YP and IP follow it.",
+          "evidence_refs": [
+            "s6",
+            "s8",
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "047924d1ca47afc8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IP awaits YP, then runs finalize, flush and dispatch, which iterates the senders and calls send. The sender class (au extends the class holding send) is built by p9.tryCreate and holds the fetch POST at s20. Each hop is in code reached after the guard.",
+          "evidence_refs": [
+            "s7",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "9ee4bacf9d334350",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "IP() is invoked once at the end of the file and YP() only from inside IP. The sender and dispatcher classes are constructed only in IP, so no other caller reaches them.",
+          "evidence_refs": [
+            "s19",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "0f86edf248845fff",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only the exfil sink (fetch POST, s20) is given a witness. Nothing is traced for recon, cred_read, self_propagation or spawn_process, so the code shown does not decide those.",
+          "evidence_refs": [
+            "s20",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "0dde578eff088e72",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "jg() has three separate ifs that each return true on a ru prefix, and the caller exits when it returns true. The guarded code needs all three to be false, which is c4 && c6 && c14, so three conditions are the minimum.",
+          "evidence_refs": [
+            "s31",
+            "s32",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "40ded28b9d331016",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The locale gate only lets the same payload run or stop, so its effect is enables.",
+          "evidence_refs": [
+            "s4",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "fcd6cbc2cc0815f3",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "A Russian-locale exclusion is not detection of analysis, CI or a sandbox. It selects which hosts the code runs on, so the label should be activate.",
+          "evidence_refs": [
+            "s3",
+            "s31",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "3012f3f800451a61",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code skips hosts by language, which is a choice of target population, so targeting fits.",
+          "evidence_refs": [
+            "s3",
+            "s31",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "2ac09d21026aa59c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After the locale exit in YP, IP runs the same finalize, flush, dispatch, send chain to the fetch POST. Each cited hop sits in the definition the previous call reaches.",
+          "evidence_refs": [
+            "s4",
+            "s7",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s26",
+            "s27",
+            "s29",
+            "s30",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "f23764371d89f34c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only call site of IP is the file-end call, and the dispatcher and sender are created only inside IP after YP. No other caller was found.",
+          "evidence_refs": [
+            "s19",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "2538c7acbff6425a",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only exfil has a traced network sink. The other listed behaviours have no cited sink or witness, so they cannot be confirmed from the cited code.",
+          "evidence_refs": [
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "cbc8036d6cad42ce",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The code exits only when GITHUB_ACTIONS is set and the repository includes the value. Execution continues when GITHUB_ACTIONS is falsy or the repository does not include it, which is c15 || c5 with a minimum of one.",
+          "evidence_refs": [
+            "s2",
+            "s1",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "83ef932c16efc9f2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate lets one payload run or stop and does not pick between payloads or targets, so enables fits.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "12b0729ad7ff11e8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate backs off only inside one named repository and workflow, not when it detects analysis or a sandbox. It runs in other CI and non-CI hosts, so activate fits better.",
+          "evidence_refs": [
+            "s2",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "b9ff3521556de0c6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It excludes a specific repository from running the code, a choice of which targets are hit, so targeting fits.",
+          "evidence_refs": [
+            "s2",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "9cb625e7db7a2096",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After DP and the other checks, IP runs finalize, flush, dispatch and send to the fetch POST. The hops are consistent with the definitions in the cited slices.",
+          "evidence_refs": [
+            "s33",
+            "s7",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s26",
+            "s27",
+            "s29",
+            "s30",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "524fc899b7f96aa4",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "IP is called once at file end and nothing else constructs the dispatcher or senders. No timers, exports or other callers reach them.",
+          "evidence_refs": [
+            "s19",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "5783632b69d42096",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "witness_gap",
+          "evidence": "Only exfil has a traced network sink. recon, cred_read, self_propagation and spawn_process have no cited sink, so they are not decided.",
+          "evidence_refs": [
+            "s20"
+          ]
+        }
+      ]
+    }
+  ]
+}

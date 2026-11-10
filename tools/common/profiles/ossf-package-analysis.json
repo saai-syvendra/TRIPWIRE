@@ -1,0 +1,46 @@
+{
+  "profile": "ossf-package-analysis",
+  "title": "OpenSSF Package Analysis dynamic sandbox",
+  "note": "The dynamicanalysis image under gVisor via podman, as the analysis worker starts it: no extra environment (sandbox.SetEnv has no caller), root, online with private ranges and cloud metadata blocked. npm installs with `npm install <pkg>` after `npm init --force` in /app; PyPI with `python -m pip install --pre <pkg>` in the /app/.pyenv venv.",
+  "sources": {
+    "image": {"url": "https://github.com/ossf/package-analysis/blob/c5c45008da694036d701ba76fe9567fc8a5b9675/sandboxes/dynamicanalysis/Dockerfile", "commit": "c5c45008da694036d701ba76fe9567fc8a5b9675", "read": "2026-10-24"},
+    "sandbox": {"url": "https://github.com/ossf/package-analysis/blob/c5c45008da694036d701ba76fe9567fc8a5b9675/internal/sandbox/sandbox.go", "commit": "c5c45008da694036d701ba76fe9567fc8a5b9675", "read": "2026-10-24"},
+    "iptables": {"url": "https://github.com/ossf/package-analysis/blob/c5c45008da694036d701ba76fe9567fc8a5b9675/tools/network/iptables.rules", "commit": "c5c45008da694036d701ba76fe9567fc8a5b9675", "read": "2026-10-24"},
+    "analyze_node": {"url": "https://github.com/ossf/package-analysis/blob/c5c45008da694036d701ba76fe9567fc8a5b9675/sandboxes/dynamicanalysis/analyze-node.js", "commit": "c5c45008da694036d701ba76fe9567fc8a5b9675", "read": "2026-10-24"},
+    "analyze_python": {"url": "https://github.com/ossf/package-analysis/blob/c5c45008da694036d701ba76fe9567fc8a5b9675/sandboxes/dynamicanalysis/analyze-python.py", "commit": "c5c45008da694036d701ba76fe9567fc8a5b9675", "read": "2026-10-24"},
+    "base": {"url": "https://github.com/docker-library/buildpack-deps/tree/fb12875aa41571f6288d524576174843fe738995/ubuntu/noble", "commit": "fb12875aa41571f6288d524576174843fe738995", "read": "2026-10-24"},
+    "base_files": {"url": "https://packages.debian.org/trixie/amd64/base-files/filelist", "read": "2026-10-24", "what": "dot.bashrc and dot.profile, installed as /root/.bashrc and /root/.profile"},
+    "runner_python": {"url": "https://github.com/actions/runner-images/blob/30b834d537f1db35a264de5ddccb57ce716f6cb8/images/ubuntu/Ubuntu2404-Readme.md", "commit": "30b834d537f1db35a264de5ddccb57ce716f6cb8", "read": "2026-10-24", "what": "Ubuntu 24.04 ships Python 3.12.3"},
+    "npm_scripts": {"url": "https://docs.npmjs.com/cli/v11/using-npm/scripts", "read": "2026-10-24", "what": "npm_lifecycle_event, npm_package_*, INIT_CWD in lifecycle scripts"},
+    "podman_hostname": {"url": "https://docs.docker.com/engine/network/", "read": "2026-10-24", "what": "a container's hostname defaults to its ID (podman follows the same default)"}
+  },
+  "axes": {
+    "os": {"value": "linux", "source": "image"},
+    "arch": {"value": "x64", "source": "image"},
+    "libc": {"value": "glibc", "source": "base"},
+    "privilege": {"value": "root_or_admin", "source": "image"},
+    "username": {"value": "root", "source": "image"},
+    "home_dir": {"value": "/root", "source": "image"},
+    "hostname": {"value": "<container id>", "random": true, "source": "podman_hostname"},
+    "locale": {"value": "C", "source": "image"},
+    "timezone": {"value": "UTC", "source": "base"},
+    "ci": {"value": "none", "source": "sandbox"},
+    "network": {"egress": "open", "blocked": ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "169.254.169.254/32"], "source": "iptables"},
+    "env_var": {"set": {"PATH": null, "HOME": "/root", "HOSTNAME": null, "DEBIAN_FRONTEND": "noninteractive", "DEBCONF_NOWARNINGS": "yes", "K8S_VERSION": "v1.35", "NODE_MAJOR": "24", "RUSTUP_HOME": "/usr/local/rustup", "CARGO_HOME": "/usr/local/cargo", "NODE_PATH": "/app/node_modules"}, "complete": true, "unknown_prefixes": [], "source": ["image", "sandbox"]},
+    "file": {"present": ["/etc/passwd", "/etc/hosts", "/app", "/app/.bowerrc", "/app/Cargo.toml", "~/.bashrc", "~/.profile", "/usr/local/bin/analyze-node.js", "/usr/local/bin/analyze-python.py"], "absent_prefixes": ["~/", "/opt/", "/tmp/", "/Library/"], "source": ["image", "base", "base_files"]},
+    "installed_tool": {"present": ["bash", "sh", "tar", "gzip", "bzip2", "xz", "unzip", "zip", "curl", "wget", "gpg", "git", "hg", "svn", "ssh", "scp", "ps", "make", "gcc", "g++", "cc", "cmake", "clang", "dig", "nslookup", "go", "ip", "ping", "kubectl", "netstat", "ifconfig", "nc", "pwsh", "protoc", "sshpass", "sudo", "tcpdump", "telnet", "tshark", "xxd", "aws", "php", "composer.phar", "node", "npm", "npx", "bun", "python3", "python", "pip", "ruby", "gem", "rustc", "cargo", "file", "patch"], "complete": true, "source": ["image", "base"]}
+  },
+  "ecosystems": {
+    "npm": {
+      "package_manager": {"value": "npm", "source": "analyze_node"},
+      "runtime_version": {"value": "24", "source": "image"},
+      "env_var": {"set": {"npm_lifecycle_event": "$hook", "INIT_CWD": "/app", "npm_package_name": null, "npm_package_version": null}, "unknown_prefixes": ["npm_config_", "npm_package_"], "source": ["npm_scripts", "analyze_node"]},
+      "file": {"present": ["/app/package.json"], "source": ["analyze_node"]}
+    },
+    "pypi": {
+      "package_manager": {"value": "pip", "source": "analyze_python"},
+      "runtime_version": {"value": "3.12.3", "source": "runner_python"},
+      "file": {"present": ["/app/.pyenv"], "source": ["image"]}
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "epic-fortnite-webpack-config",
+    "version": "1.0.1",
+    "archive_sha256": "cc2561be826500fab782a4795b3c01a1bab8899009a89ffae05d29d68bf2dfbe"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "735b59e7b6f40c91",
+      "packet_sha256": "c63a8cf0b1ed2322",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_ed9672957f.L6.drop",
+          "claim_sha256": "37de190f65a99c68",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `fs.existsSync(filePath)` check guards `fs.readFileSync`, and `readFullFile` is used only to populate `proof.etc_hosts`; this changes collected data rather than deciding what install behavior runs (f1:30-31, f1:56).",
+          "evidence_refs": [
+            "f1:30-31",
+            "f1:56"
+          ]
+        },
+        {
+          "claim_id": "k_f7fbe729cb.L6.drop",
+          "claim_sha256": "94c3d52582949b02",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check controls whether `readFullFile` reads a file, and its result is assigned to `proof.etc_hosts`; it affects the collected proof data, not which install behavior runs (f1:30-31, f1:56).",
+          "evidence_refs": [
+            "f1:30-31",
+            "f1:56"
+          ]
+        },
+        {
+          "claim_id": "q_28fb90300b.L6.drop",
+          "claim_sha256": "64b64581b202adf2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `fs.existsSync` branch only gates the file read; `readFullFile` supplies `proof.etc_hosts`, which is then sent as part of the collected system information (f1:30-31, f1:56-63).",
+          "evidence_refs": [
+            "f1:30-31",
+            "f1:56-63"
+          ]
+        },
+        {
+          "claim_id": "q_9d81308a83.L6.drop",
+          "claim_sha256": "469d1a67c028c22f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `try`/`if` code handles a missing or unreadable file by returning null or an error string, and `readFullFile` is used to fill `proof.etc_hosts`; this affects collected data rather than deciding what install behavior runs (f1:29-36, f1:56).",
+          "evidence_refs": [
+            "f1:29-36",
+            "f1:56"
+          ]
+        }
+      ]
+    }
+  ]
+}

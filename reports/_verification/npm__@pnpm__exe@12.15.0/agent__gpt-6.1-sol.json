@@ -1,0 +1,1164 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@pnpm/exe",
+    "version": "12.15.0",
+    "archive_sha256": "2df447fb7ebbd01c974366d6b6b5617bcf4125d0f1cb27c5c7a480f5ab794a8a"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "a80a80f6ee4a315f",
+      "packet_sha256": "886c8809b6048082",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "d255f31889e1bd5f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 compares the npm lifecycle event with postinstall; setup is called on the unequal else side in s2.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "aba273d69731d1c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 compares the npm lifecycle event with postinstall; setup is called on the unequal else side in s2.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "ddadb7488f8e77a4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads npm lifecycle metadata, which is package-manager state.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "377fd39b063b2f29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 tests whether the webcontainer property is present in process.versions, and s4 returns when it is present.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "82a06b659036733d",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "s3 uses property membership with in, so continuing after s4 requires not_in webcontainer. This has the same polarity as not_includes but does not establish an includes operator.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "b52c7cebf7a51fba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 checks a runtime marker in process.versions, supporting the runtime_version category.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "049692dd983a0ad2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 directly compares process.platform with win32 and s6 takes the then side on equality.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "5a5a982304cea9ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 directly compares process.platform with win32 and s6 takes the then side on equality.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "9497d405621667e1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 reads the operating-system platform identifier.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "4b857c703844a970",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 compares the npm lifecycle event with postinstall and s2 calls relinkNpmWindowsShims on equality.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "6c693c1a29a5354e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 compares the npm lifecycle event with postinstall and s2 calls relinkNpmWindowsShims on equality.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "0a193d1d78438391",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads npm lifecycle metadata, which is package-manager state.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "8646ae9b9991196b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 tests process.platform against win32; the return in s8 leaves the remaining function reachable only on equality.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "db2b51495abc6847",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 tests process.platform against win32; the return in s8 leaves the remaining function reachable only on equality.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "7e41eac66b714044",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 reads the operating-system platform identifier.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "3d6fa92b9d7313ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:122 binds npmExecPath to process.env.npm_execpath; s9 and s8 return for null or undefined, requiring a present value to continue.",
+          "evidence_refs": [
+            "f1:122",
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "b508522d906c3864",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:122 binds npmExecPath to process.env.npm_execpath; s9 and s8 return for null or undefined, requiring a present value to continue.",
+          "evidence_refs": [
+            "f1:122",
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "b2468599b5a06e51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:122 and s9 read the npm executable environment variable, identifying package-manager state.",
+          "evidence_refs": [
+            "f1:122",
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "8f6ce9c279299b99",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:122 binds the npm executable path, and s10 compares its lowercased basename with npm-cli.js; s8 continues when that comparison is equal.",
+          "evidence_refs": [
+            "f1:122",
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "97a4fb7f88749b7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:122 binds the npm executable path, and s10 compares its lowercased basename with npm-cli.js; s8 continues when that comparison is equal.",
+          "evidence_refs": [
+            "f1:122",
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "35369616515b9f38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:122 and s10 identify npm by the executable basename, supporting package_manager.",
+          "evidence_refs": [
+            "f1:122",
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "39ae3d9f29139128",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 enters setup on c1, s4 continues on absence of webcontainer, and s6 chooses c3 or its complement. Both regions require the two outer conditions and one OS outcome, giving three conditions per branch.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "7343746c39ccaf4b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:64-71 places the same native binary through the same helper on both OS branches, changing filenames and chmod handling rather than selecting different payloads. The OS distinction is plumbing; the outer lifecycle and runtime checks enable installation.",
+          "evidence_refs": [
+            "f1:64",
+            "f1:71",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "704a0c89939fe49e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks activate installation for supported runtime and OS conditions; the code does not use these checks to detect analysis.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ec3dd47fec068893",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 skips native replacement in a different runtime and f1:64-71 adapts binary placement to Windows versus other systems, supporting portability.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "557343c5179b78d2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 calls setup on its else side and s4 permits the remaining setup code only when webcontainer is absent. The cited OS branch calls placeBinary, whose resolved definition in s15 contains the rename sink s13.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s14",
+            "s15",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "4dac4056daa12669",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "f1:64-65 and s14 call the same placeBinary function from opposite OS branches. Both paths reach the rename sink in s13, so this sink is not exclusive to either branch.",
+          "evidence_refs": [
+            "f1:64",
+            "s16",
+            "s14",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "19ec0d3dab86de1a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:11 binds fs to node:fs; placeBinary links or copies the binary to a temporary file and fs.renameSync in s13 installs it at the destination, supporting write_file.",
+          "evidence_refs": [
+            "f1:11",
+            "s15",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bcf97c2700493476",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 calls setup on its else side and s4 permits the remaining setup code only when webcontainer is absent. The cited OS branch calls placeBinary, whose resolved definition in s15 contains the rename sink s13.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s16",
+            "s15",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4551108378f0d28f",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "other",
+          "evidence": "f1:64-65 and s14 call the same placeBinary function from opposite OS branches. Both paths reach the rename sink in s13, so this sink is not exclusive to either branch.",
+          "evidence_refs": [
+            "f1:64",
+            "s16",
+            "s14",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "5f3550609ed77ab3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:11 binds fs to node:fs; placeBinary links or copies the binary to a temporary file and fs.renameSync in s13 installs it at the destination, supporting write_file.",
+          "evidence_refs": [
+            "f1:11",
+            "s15",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "f1067e218c62e4b4",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "s8 combines a non-null npmExecPath check with a basename test of that same value, which is one condition under the presence-check rule. With lifecycle and OS checks, the minimum is three conditions rather than the claimed four.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "5621cafbca7e10cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 and s8 must permit execution before the rebuild subprocess in s18 can run, so these checks enable process creation.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "f1:135",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "bcb8fc7f9608d08c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 and s8 activate rebuilding specifically for npm postinstall on Windows, with no analysis-environment detection.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "f1:135",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "6fa32bb0b2f3d7d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8 limits the npm rebuild subprocess to Windows npm installs, and f1:135-149 invokes npm rebuild to regenerate installation shims, supporting portability.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "f1:135",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "53b52c474d360f2f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 calls relinkNpmWindowsShims on its then side, and s17 is the remainder after the return in s8. The spawnSync sink s18 lies directly inside s17.",
+          "evidence_refs": [
+            "s2",
+            "f1:26",
+            "s8",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "26574b060fd466fa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only call to the unexported relinkNpmWindowsShims is f1:26 under the postinstall branch. Its sole spawnSync site is s18 after the early-return checks in s8, with no alternate caller or handler in the files.",
+          "evidence_refs": [
+            "f1:26",
+            "f1:121",
+            "s8",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "f70a850c0aa52915",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:10 imports spawnSync from node:child_process, and s18 calls that binding with the Node executable and npm arguments, supporting spawn_process.",
+          "evidence_refs": [
+            "f1:10",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "k_1dbbaade7f.L6.drop",
+          "claim_sha256": "5c6884fdba2ca92d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:66-82 calls detectLinuxLibc for candidate selection only after the platform table selects an object, which occurs only for Linux. On other platforms its call from f2:100 only formats an error label, so this guard adds no install behaviour gate.",
+          "evidence_refs": [
+            "s19",
+            "f2:15",
+            "f2:66",
+            "f2:77",
+            "f2:82",
+            "f2:100",
+            "f1:46"
+          ]
+        },
+        {
+          "claim_id": "k_3f117a4107.L6.drop",
+          "claim_sha256": "ba29798b53b2f309",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f2:74-75 rejects non-little-endian ppc64 hosts by returning no candidates. f1:44-46 then exits instead of placing the native binaries, so this is an omitted architecture/endianness portability gate.",
+          "evidence_refs": [
+            "s20",
+            "f2:74",
+            "f1:44",
+            "f1:46",
+            "f1:198"
+          ]
+        },
+        {
+          "claim_id": "k_651e2231d7.L6.drop",
+          "claim_sha256": "26af217098a1fa86",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:140-149 chooses global rebuilding or a validated local project, and the local branch can return without spawning. This package-manager gate modifies the installation acted on and can enable rebuilding when no valid local prefix exists.",
+          "evidence_refs": [
+            "s21",
+            "f1:140",
+            "f1:143",
+            "f1:145",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "k_843cd825f3.L6.drop",
+          "claim_sha256": "5ec5dc6838671e7c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:168-170 tests npm_config_local_prefix and returns null for a missing or empty project prefix. Its caller at f1:143-145 then returns before spawnSync, making this an omitted package-manager gate enabling local rebuilding.",
+          "evidence_refs": [
+            "s22",
+            "f1:168",
+            "f1:143",
+            "f1:145",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "k_9b85748fdd.L6.drop",
+          "claim_sha256": "6206caf2177e5130",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:164-174 reads and parses the package’s own manifest and throws on read or parse failure. This is package integrity/error handling rather than a test of the host environment.",
+          "evidence_refs": [
+            "s23",
+            "f2:164",
+            "f2:167",
+            "f2:169",
+            "f2:174"
+          ]
+        },
+        {
+          "claim_id": "k_ca44613008.L6.drop",
+          "claim_sha256": "72b1127ec7d6b4f8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:140-149 chooses global rebuilding or a validated local project, and the local branch can return without spawning. This package-manager gate modifies the installation acted on and can enable rebuilding when no valid local prefix exists.",
+          "evidence_refs": [
+            "s24",
+            "f1:140",
+            "f1:143",
+            "f1:145",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_029e2293b3.L6.drop",
+          "claim_sha256": "933e1cd6ad2e2598",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:164-174 reads and parses the package’s own manifest and throws on read or parse failure. This is package integrity/error handling rather than a test of the host environment.",
+          "evidence_refs": [
+            "s25",
+            "f2:164",
+            "f2:167",
+            "f2:169",
+            "f2:174"
+          ]
+        },
+        {
+          "claim_id": "q_a294e6940d.L6.drop",
+          "claim_sha256": "7cfa3f6001c1247c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:168-170 tests npm_config_local_prefix and returns null for a missing or empty project prefix. Its caller at f1:143-145 then returns before spawnSync, making this an omitted package-manager gate enabling local rebuilding.",
+          "evidence_refs": [
+            "s26",
+            "f1:168",
+            "f1:143",
+            "f1:145",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_a673f48485.L6.drop",
+          "claim_sha256": "79a96020f11cbc03",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:140-149 chooses global rebuilding or a validated local project, and the local branch can return without spawning. This package-manager gate modifies the installation acted on and can enable rebuilding when no valid local prefix exists.",
+          "evidence_refs": [
+            "s27",
+            "f1:140",
+            "f1:143",
+            "f1:145",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_bebc39327b.L6.drop",
+          "claim_sha256": "4b48a70242d294aa",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f2:74-75 rejects non-little-endian ppc64 hosts by returning no candidates. f1:44-46 then exits instead of placing the native binaries, so this is an omitted architecture/endianness portability gate.",
+          "evidence_refs": [
+            "s28",
+            "f2:74",
+            "f1:44",
+            "f1:46",
+            "f1:198"
+          ]
+        },
+        {
+          "claim_id": "q_c6fa0d8434.L6.drop",
+          "claim_sha256": "deee3cc37141031d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:66-82 calls detectLinuxLibc for candidate selection only after the platform table selects an object, which occurs only for Linux. On other platforms its call from f2:100 only formats an error label, so this guard adds no install behaviour gate.",
+          "evidence_refs": [
+            "s29",
+            "f2:15",
+            "f2:66",
+            "f2:77",
+            "f2:82",
+            "f2:100",
+            "f1:46"
+          ]
+        },
+        {
+          "claim_id": "q_cbea8e73f7.L6.drop",
+          "claim_sha256": "0468bbce05054f67",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:140-149 chooses global rebuilding or a validated local project, and the local branch can return without spawning. This package-manager gate modifies the installation acted on and can enable rebuilding when no valid local prefix exists.",
+          "evidence_refs": [
+            "s27",
+            "f1:140",
+            "f1:143",
+            "f1:145",
+            "s18"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "bd5172dc266452a6",
+      "packet_sha256": "855ba403975245f8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "55c1ed17bc88cde5",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2, s3, s4, s5) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "357c60e8ee3323c8",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2, s5) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "55aef1934dc22152",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2, s5) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b0ddc2ad0fc814ca",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2, s5) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "30ab7b851c5c3d5a",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2, s5, s6, s7, s8) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ff89fe5599a0270b",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2, s5, s6, s7, s8) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "29f8f2dcad89169f",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s6, s7, s8, s5) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "54a94593a493faec",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s9, s3, s10, s11, s12) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s9",
+            "s3",
+            "s10",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "b2b07ab75c6fee5e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s9, s12) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s9",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "e00d6e98f72cad42",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s9, s12) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s9",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "540e11e4c6231773",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s9, s12) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s9",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "314b3f34ce494fbd",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s9, s12, s13) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s9",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "22aaf17a47af52eb",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s9, s12, s13) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s1",
+            "s9",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_9c7ac37e27.L6.drop",
+          "claim_sha256": "1b99330f5a5a1ccb",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s14) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "k_c1db0e95ff.L6.drop",
+          "claim_sha256": "e2fe9293a85118ac",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s15) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "q_533751a1fd.L6.drop",
+          "claim_sha256": "d8c18e413ef442f4",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s16) contain only sample-missing placeholders; code/f1.unavailable.txt likewise contains no package code. The claim cannot be anchored to the missing code.",
+          "evidence_refs": [
+            "s16"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "15558874490a390c",
+      "packet_sha256": "8b3f664b86f4d213",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "55c1ed17bc88cde5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The non-postinstall arm calls setup, whose webcontainer early return precedes s5, so the cited guards join with AND and require two conditions.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "357c60e8ee3323c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The lifecycle and runtime checks enable native-binary placement, which reaches filesystem writes.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:64",
+            "f1:71",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "55aef1934dc22152",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "These checks activate native installation outside postinstall and outside webcontainer; the guarded behavior installs binaries without detecting analysis tools.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:64",
+            "f1:71"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b0ddc2ad0fc814ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks separate native installation from postinstall shim rebuilding and skip native placement in webcontainer, fitting portability.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:64",
+            "f1:135"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "30ab7b851c5c3d5a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The non-postinstall arm calls the locally defined setup, and its webcontainer return controls s5; s7 calls placeBinary at s8, which contains the rename sink s6.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "s7",
+            "s8",
+            "s6",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ff89fe5599a0270b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "All placeBinary callers are inside setup after the webcontainer return, and setup has only the non-postinstall caller. Neither function is exported or registered as a callback.",
+          "evidence_refs": [
+            "f1:25",
+            "f1:40",
+            "f1:64",
+            "f1:65",
+            "f1:71",
+            "f1:86"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "29f8f2dcad89169f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs is imported from node:fs, and placeBinary links or copies the binary to a temporary file before renaming it to the destination.",
+          "evidence_refs": [
+            "f1:11",
+            "f1:92",
+            "f1:95",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "54a94593a493faec",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Postinstall calls relinkNpmWindowsShims, whose disjunctive early return requires Windows and a present npm executable with lowercased basename npm-cli.js to continue. The presence check is part of the executable test, giving three conjuncts.",
+          "evidence_refs": [
+            "s1",
+            "s9",
+            "s12",
+            "f1:122"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "b2b07ab75c6fee5e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The lifecycle, platform and npm-executable checks enable reaching the shim-rebuilding process spawn.",
+          "evidence_refs": [
+            "s1",
+            "s9",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "e00d6e98f72cad42",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks activate npm shim rebuilding on Windows during postinstall with the npm CLI, without testing for analysis instrumentation.",
+          "evidence_refs": [
+            "s1",
+            "s9",
+            "f1:135",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "540e11e4c6231773",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The guarded process runs the npm CLI with rebuild and --ignore-scripts for the wrapper package on Windows, fitting portability.",
+          "evidence_refs": [
+            "s9",
+            "f1:135",
+            "f1:141",
+            "f1:147",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "314b3f34ce494fbd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The postinstall arm calls the locally defined relinkNpmWindowsShims, whose early return controls s12; the spawn sink sits directly in that region.",
+          "evidence_refs": [
+            "f1:26",
+            "f1:121",
+            "s9",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "22aaf17a47af52eb",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sole caller of relinkNpmWindowsShims is the postinstall arm, and its platform/executable early return precedes the only spawnSync call. The function is neither exported nor registered as a callback.",
+          "evidence_refs": [
+            "f1:26",
+            "f1:121",
+            "s9",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "k_9c7ac37e27.L6.drop",
+          "claim_sha256": "1b99330f5a5a1ccb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The null check protects the basename test of the same npm_execpath value within one early-return condition, so it belongs to the recorded executable test rather than an additional gate.",
+          "evidence_refs": [
+            "f1:122",
+            "s9",
+            "s14",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_c1db0e95ff.L6.drop",
+          "claim_sha256": "e2fe9293a85118ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Both platform arms install the same native binary; Windows adds executable-suffixed destinations and rewrites the bin map, while the other arm supplies a file mode. This is storage and startup plumbing.",
+          "evidence_refs": [
+            "s15",
+            "f1:64",
+            "f1:65",
+            "f1:68",
+            "f1:71"
+          ]
+        },
+        {
+          "claim_id": "q_533751a1fd.L6.drop",
+          "claim_sha256": "d8c18e413ef442f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows branch changes executable suffixes and the bin map, while both branches place the same native binary. This check chooses storage and startup plumbing.",
+          "evidence_refs": [
+            "s16",
+            "f1:64",
+            "f1:65",
+            "f1:68",
+            "f1:71"
+          ]
+        }
+      ]
+    }
+  ]
+}

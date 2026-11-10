@@ -1,0 +1,290 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "xlsxwriteer",
+    "version": "0.1",
+    "archive_sha256": "c4b346e95b8c26f69c53b9bdfe8a956267cf37ffc45862310cfe33aca0e381c9"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "bae5315750adae0c",
+      "packet_sha256": "87c048dc1f6935f2",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly reads sys.platform at the cited decision.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "d7427d5832e56e16",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The comparison and sys.platform are visible, but the compared string is constructed through an obfuscated expression, so its value cannot be established from readable code.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads sys.platform, an operating system property.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly calls ctypes.windll.shell32.IsUserAnAdmin().",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition tests the call result directly for truthiness, with no negation on the then path.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition calls the Windows administrator privilege check.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "52f1535ddeb0eb16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The claimed region is inside the then arm of the sys.platform decision; its minimum condition set is the single condition c1.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ca1d2cec9c0342b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the Windows branch the code enters the payload sequence, so the gate enables the listed actions.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "4d3bfdde81c5afa2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch runs only when the platform comparison succeeds, so the gate activates on its target.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bffa50649625a977",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform condition selects Windows-specific behavior, which is portability rather than targeting.",
+          "evidence_refs": [
+            "s1",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "e659405a13abfe80",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each cited sink is syntactically inside the region controlled by the outer platform branch.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "162da4ad3f4b4368",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The payload calls occur at top level inside the platform branch, with no other caller or handler shown in this file.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7db261aeb4876d34",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The file calls pip.main with obfuscated arguments, so the code shown does not establish that this call performs a download; file writes are visible, but the claim requires every listed behavior.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "f062323b662e4151",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The admin check is nested under the outer platform branch, and the cited then region is on both then sides; the minimum is two conditions.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d14263a49e9ac562",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The admin check only controls whether execution skips the remaining loop iteration; it does not choose a different target, so the described gate effect is enables.",
+          "evidence_refs": [
+            "f1:68",
+            "f1:70"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "041e967c8d80c71a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then side of the admin check is taken when the privilege check is truthy.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0dc20a87f8622ea5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The privilege check determines whether execution continues into the remaining payload sequence, making its purpose unclear rather than targeting.",
+          "evidence_refs": [
+            "s4",
+            "f1:68",
+            "f1:70"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "fca333cb60d66634",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The shortcut creation call is in the later loop body, reached after the admin check false path; the true path continues the loop before reaching it.",
+          "evidence_refs": [
+            "s4",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "0221c4993fc901ba",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The shortcut creation path remains reachable when the admin check is false, since the true arm continues the loop.",
+          "evidence_refs": [
+            "s4",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "ace7572bb032aa4b",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The persistence candidate calls CreateShortcut on an object produced by a computed Dispatch identifier; the code shown does not resolve the COM object behavior.",
+          "evidence_refs": [
+            "s9",
+            "f1:65"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "c902145e4e5160c8",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The missing-path check controls a continue and therefore gates whether later install code runs; it is an environment data-availability check.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "f599a783a9e0bcf4",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The missing-path check controls a continue and therefore gates whether later install code runs; it is an environment data-availability check.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        }
+      ]
+    }
+  ]
+}

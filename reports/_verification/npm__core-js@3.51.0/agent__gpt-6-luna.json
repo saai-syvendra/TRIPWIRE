@@ -1,0 +1,328 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "core-js",
+    "version": "3.51.0",
+    "archive_sha256": "2a7abc3121a44b75acdf02b9bdd7408e22633f70f422fc0bd5b9e00abb17bb31"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "0d7d990fb4955807",
+      "packet_sha256": "46178e8eb2b8bb7f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "954a1c3cf1bbb6a7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "SILENT is assigned from the loglevel comparison, which is read in the gate at s2.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "3942e129c55ac07a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "SILENT is true for exactly the listed values; the early return suppresses the banner when SILENT is true, so the guarded code runs when loglevel is not in the list.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "3ad75e5e0552a518",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The property is npm_config_loglevel, a package manager configuration setting.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "f22c1efb66825065",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ADBLOCK is assigned from env.ADBLOCK and then read in the gate condition.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "241ab46179849fa8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "is(it) returns a boolean coercion of the value, so ADBLOCK is falsy when the environment value is absent, empty, '0', or 'false'; the gate returns when ADBLOCK is truthy.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "1853e0423f8ccdba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ADBLOCK is read as an environment variable.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "25487552701e21a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The some callback reads env[it], with env bound to process.env, and its result initializes CI, which the gate tests.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "c43387dac4ceb2ee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CI is truthy when any listed environment marker passes is(); the gate returns when CI is truthy, so it proceeds only when none is set to a value accepted by is().",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "e2e318c8b1d3b64e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code checks common CI environment markers by name.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "4c4467f428ab7f4d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "DISABLE_OPENCOLLECTIVE is assigned from env.DISABLE_OPENCOLLECTIVE and read in the gate condition.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "45ee16249bc2bc4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "is(it) yields false when the variable is absent, empty, '0', or 'false'; a truthy result triggers the early return, leaving falsy values to pass this gate.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "1fa4ae4547d9d2fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "DISABLE_OPENCOLLECTIVE is read as an environment variable.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "483a288f62f3d9c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "OPEN_SOURCE_CONTRIBUTOR is assigned from env.OPEN_SOURCE_CONTRIBUTOR and read in the gate condition.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "a17e750a3732d50f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "is(it) yields false when the variable is absent, empty, '0', or 'false'; a truthy result triggers the early return, so this test passes when the value is falsy.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "f1:30"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "2862879810d3c952",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "OPEN_SOURCE_CONTRIBUTOR is read as an environment variable.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "0a51ab39c3af68f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Inside the recent-file branch, fs.readFileSync(file) supplies the content parsed into banners, whose indexOf result is tested.",
+          "evidence_refs": [
+            "s7",
+            "f1:42-45"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "b4fe82f1b6988d85",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The read file is parsed as banners and indexOf(BANNER) triggers an early return when present; the guarded code proceeds when the banner is not included.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "f1:38-39"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "6398b256c727933c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks prior file content for the banner string.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "8e2ec2963770ab69",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The first early return requires all five suppression conditions to be false, and the second early return requires the banner not already be present; these nested conditions join with and.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6ccfcd870255a4a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Passing the gate enables the banner tracking write, which otherwise is skipped when a suppression condition or recent duplicate is found.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "6f3b621a736a81f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off from the banner when ad blocking, CI, explicit opt out, contributor status, quiet logging, or a recent duplicate is detected.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "1b7b134aabc19699",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The conditions suppress the optional banner for quiet/package-manager settings, CI, explicit opt outs, and recent repeats; this is a data-availability/presentation gate, so the purpose is not unclear.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "6c85c42aebc5c4fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fs.writeFileSync call is inside the try body after both early returns, so it is reached only on the then side of both guards.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "df39f5798da162a5",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "isBannerRequired is called only by the final top-level condition, and the write is inside that function after its guards; no other caller or export appears in this file.",
+          "evidence_refs": [
+            "s2",
+            "s9",
+            "s10",
+            "f1:56-57"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4073f2a7bd881364",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "fs.writeFileSync writes the serialized banner array to the temporary file path, which is a file write sink.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "f1:38-39"
+          ]
+        }
+      ]
+    }
+  ]
+}

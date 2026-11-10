@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "schubismomv3",
+    "version": "1.4.0",
+    "archive_sha256": "ad69b41870bac36f48682dd4fc5b5d43ac7515a3fb88c66c3972dd135d21c7f2"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "ba4c5f7147301ca1",
+      "packet_sha256": "45a805e69f33ab62",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "e0b6a43745b58431",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly tests os.name, bound to the os import at f1:3.",
+          "evidence_refs": [
+            "s1",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "512d0f3405bf52c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is taken when os.name equals the literal \"nt\", with no negation or early exit reversing the comparison.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the operating system identifier os.name, so the os category fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "0ae358541b396fbb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single if condition, c1, controls the entire then block; satisfying that one condition is sufficient for the claimed combination.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "2f733a23adb8d0ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS condition enables the file write and process launch in its then block, with no alternative payload branch.",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "6c66b589154d30db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then block writes and launches the script when os.name is \"nt\", activating the behaviour on that OS.",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "678cd5844b69618e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition restricts script dropping and execution to Windows, supporting targeting; other systems skip these behaviours and proceed to the base installer.",
+          "evidence_refs": [
+            "s1",
+            "f1:20",
+            "s5",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "54fb766356c35e54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both the write-mode open call and subprocess.Popen call sit directly inside the cited if statement’s then block, so no witness hops are needed.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "78eb5170ec9a8599",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Both cited sinks occur only inside the OS-guarded block of GruppeInstall.run; registering that class as the install command does not bypass its condition.",
+          "evidence_refs": [
+            "f1:10",
+            "s1",
+            "s4",
+            "s5",
+            "f1:39"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b699d54eb198f073",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The built-in open call uses write mode and is followed by file.write(content); Popen is bound through the subprocess import and launches the interpreter with the written script.",
+          "evidence_refs": [
+            "f1:14",
+            "s4",
+            "f1:23",
+            "s5"
+          ]
+        }
+      ]
+    }
+  ]
+}

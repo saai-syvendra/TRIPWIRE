@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "beautifulsoup-numpy",
+    "version": "10.13.10",
+    "archive_sha256": "185594beac54aae7825f13a97466ac03618750e9370a7134a87c0a9f509dce47"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "eafa150c82504e29",
+      "packet_sha256": "bc4dd2c8c8375b33",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "1ddc7c81afe04586",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly calls `os.path.exists` with the marker path. (s1; f1:24)",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "6aab9ef75db3a7aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition exits when `os.path.exists` is true, so subsequent code runs only when the path does not exist. The literal is `hifromDreamyOak`, matching the claim's redacted value. (s1-s3; f1:24-26)",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "dd67913f1e6267fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test calls `os.path.exists` on a path string, so it checks whether a filesystem path exists. (s1; f1:24)",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d8d3b866357c7f68",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The continuation region is after a single early-exit decision: when the marker exists, execution exits; otherwise the statements in the following region run. There is one condition, so the expression is `c1` and the minimum is 1. (s2-s3; f1:24-26)",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "af9dfe773edf1a1b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the marker is absent, execution continues into the install-time code; when it exists, the process exits before that code. The gate therefore enables the continuation path. (s2-s3; f1:24-26)",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "305917b7decc3351",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code proceeds when the marker path is absent and exits when it is present; this is an activate gate, with no analysis or sandbox check shown. (s2-s3; f1:24-26)",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "4ccf99c7688078c2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code uses a marker-path existence check to stop when the marker is present, but the shown code does not explain what purpose the marker serves. `unclear` fits. (s2-s3; f1:24-26)",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        }
+      ]
+    }
+  ]
+}

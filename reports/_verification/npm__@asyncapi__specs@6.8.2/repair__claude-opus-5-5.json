@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@asyncapi/specs",
+    "version": "6.8.2",
+    "archive_sha256": "30ac614c0afa6ee935e1dd40ac14790453b59cd1d9ba00e85a23ed586ebfbe93"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "62e4782b4ca8d075",
+      "record_sha256_after": "aba85a89d630032e",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c14.L1",
+          "claim_sha256": "c655ac9cdf46d5e6",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited site is the _authToken regex match in oL0, and the .npmrc content it tests comes from mL0, which reads with (await import('fs/promises')).readFile. Changed api and probe callee from fs.readFileSync to fs/promises.readFile."
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "4b13fe6440ae000e",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same fix as c14.L1: the tested content is read by fs/promises readFile in mL0, so api and probe callee now name fs/promises.readFile; operator falsy still holds (no _authToken match means oL0 returns null)."
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "a241af57df021eca",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The guard runs gQ0 (stop systemd-resolved, flush iptables OUTPUT and DOCKER-USER) only when on a Linux GitHub Actions runner with the agent process present and passwordless sudo; it acts on that environment rather than backing off, so polarity changed from evade to activate."
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9779d44a9a5fb109",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The outer guard is !isAuthenticated() || !repoExists(); repoExists() is gitRepo !== null, which stays null when an authenticated createRepo fails. Added c16 (repoExists falsy, server_response, out of scope) cited at the repoExists() call in the guard, set expression to ((c11 && c12) || c16) && c15 &"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "471599a4e89365cb",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Every g2 condition asks whether a usable credential or exfil channel is available (GitHub token, exfil repo, C2 fallback token, NPM_TOKEN, .npmrc _authToken), and the wipe runs when none is; purpose changed from unclear to data_availability."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Removed the guessed recipe fields: g1 privilege root_or_admin follows pQ0 (sudo -n true exit code 0), g2 env_var_absent NPM_TOKEN and file_absent ./.npmrc and ~/.npmrc follow oL0. The flag stays because both gates are hand-added out-of-set claims now pending re-verification, c15 and c16 are out-of-s"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "aba85a89d630032e",
+      "record_sha256_after": "dc53af764d66c5db",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "866df32294513db8",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "At the innermost guard (bun_environment.js d1 bytes 9316655-9317325) the code is `if(npmToken) await El(npmToken); else { wipe via Bun.spawnSync; process.exit(0) }`. The true side only calls El, which aL0 also calls unconditionally later (recorded as ungated self_propagation), and both sides otherwi"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "dc53af764d66c5db",
+      "record_sha256_after": "dc53af764d66c5db",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Re-read the g2 block at bun_environment.js (d1) bytes 9316508-9317581: the shred/del wipe runs only when (!isAuthenticated() || !repoExists()) and await fetchToken() returns nothing and the npm token (NPM_TOKEN or oL0 .npmrc read) is empty. fetchToken is a GitHub repo search (c15) and repoExists dep"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "dc53af764d66c5db",
+      "record_sha256_after": "f2142bf1e2f03789",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "44f5976e1440968d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The site tests a value enumerated by the for-of loop over Object.entries(process.env) in findGitHubTokenEnvVars, not the process.env object itself. api changed to Object.entries(process.env), which names what the code reads. The condition stays on the startsWith test."
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "f621c964a82056a1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The code tests each environment value with startsWith over the array ['ghp_','gho_'] and returns the first match, so the wipe path needs no value with either prefix. falsy with a null value did not describe that test. Operator changed to not_startswith, value to [ghp_, gho_]."
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "6fcce1d410364b64",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "getToken keeps gh auth token stdout only when it starts with gho_ or ghp_, otherwise it returns null. Falsiness of stdout is not what the code tests. Operator changed to not_startswith, value to [gho_, ghp_], and the site moved from the spawnSync call to the startsWith test. The probe is unchanged."
+        },
+        {
+          "claim_id": "c15.L2",
+          "claim_sha256": "e1916d0e019f0f2c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The g2 decision if(!token) reads the result of await fetchToken(), not the search response. fetchToken also returns nothing when content fetch, parsing or GET /user validation fails after a good search. api changed to fetchToken and the site moved to that call in g2. Operator stays falsy, which matc"
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "1e33d5413f2395b7",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The drop stands but its note was wrong: setup_bun.js line 9 is in isBunOnPath and picks where bun or which bun, not the installer command. Note corrected. The ternary only spells one lookup per OS, and both forms run the same check, so it decides no behaviour. Whether Bun is found is runtime-locatio"
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "906209a2a5b007ff",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The drop stands but its note called line 9 the installer-command ternary. It is the isBunOnPath lookup-command ternary, so the note was corrected. Both arms only set the lookup command string. The refuter's evidence is about the existsSync path checks, which are not this site."
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "121d9ec6e4b74a6f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The drop stands but its note put line 69 in findBunExecutable. It is in downloadAndSetupBun and picks the per-OS installer command, so the note was corrected. Both arms install Bun with the same execSync, the portable plumbing the record already describes. The refuter's evidence is about the which/w"
+        },
+        {
+          "claim_id": "k_997be1f6bc.L6.drop",
+          "claim_sha256": "c553c2e7782724e1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js line 125 is fs.existsSync on candidate Bun paths in findBunExecutable, which returns the first path found. It only locates the runtime after install: a hit returns a path to the same launch, and no hit throws and exits 0 in downloadAndSetupBun. Finding a runtime and a lookup that only a"
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "c0974ed97e8e9c63",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js line 181 tests path.join(__dirname, 'bun_environment.js'), the package's own file shipped beside setup_bun.js, so it holds on every install of this package. It reads no machine property a VM could set, and it is not a thing to steal, so target_artifact does not fit. A missing file only "
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "3960afd2140d161c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement at setup_bun.js line 181 around the same existsSync on the package's own bun_environment.js, with an else that only exits 0. The file ships in the package, so the test does not vary with the environment and is not a target artifact. It is a prerequisite check, as for k_8f3fa"
+        },
+        {
+          "claim_id": "q_53e1d98b0c.L6.drop",
+          "claim_sha256": "51eea36450395aba",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js line 19 is the if in reloadPath. Its win32 arm reads PATH from the registry through powershell, the other arm sources shell profiles; both only update process.env.PATH and swallow errors. The refuter's evidence describes the Bun detection command at line 9, not this branch. Refreshing P"
+        },
+        {
+          "claim_id": "q_fd4553b6fa.L6.drop",
+          "claim_sha256": "6232a210c7fff41f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js line 101 is the if in findBunExecutable that fills possiblePaths with the Windows or Unix candidates. Both arms only push path strings. The refuter's evidence is about the later existsSync loop, not this branch. Choosing where to look for the runtime is plumbing, and the same lookup fol"
+        },
+        {
+          "claim_id": "q_e8c9ed15f1.L6.drop",
+          "claim_sha256": "15da85f4b1419c6f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js line 59 only prepends ~/.bun/bin to process.env.PATH when the folder exists and is not already listed. The refuter's evidence describes the installer-command branch, which is not this site. The block changes no behaviour: execution continues to the same findBunExecutable call either way"
+        },
+        {
+          "claim_id": "q_af02d7c460.L6.drop",
+          "claim_sha256": "6e891019bb465c94",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup_bun.js line 125 is the if inside the candidate path loop of findBunExecutable: on existsSync it returns that path, else the loop goes on. The refuter's evidence describes the installer-command platform branch, which is not this site. It only locates the runtime for the same launch, so it is pl"
+        }
+      ]
+    }
+  ]
+}

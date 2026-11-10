@@ -1,0 +1,1354 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@hestjs/core",
+    "version": "0.2.1",
+    "archive_sha256": "df945a5b0777fb9c5bfde20c2cf959b005109c45b4d08aca81357b86ef3ab02a"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b8014948d64a2f2e",
+      "packet_sha256": "4e14065d30c397b3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "071b8b0d30d99d62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "getToken reads process.env.GITHUB_TOKEN into t and branches on it (if(t)return t), and the result becomes this.token, which isAuthenticated() tests.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ef02884e58eabd75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`if(t)return t` is a positive truthy test. isAuthenticated() is !!this.token, and the guards s2/s3/s4 all call it or use the token it holds.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "f450dbbf57a2ce3e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads an environment variable, so env_var fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "31795a8c352ffd8c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "execSync('gh auth token') output is trimmed into t, and `if(t)return t` tests it. That value becomes this.token, which the later gates read.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "6ffb29a5c84fc214",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The trimmed stdout of the probe is tested for non-empty (`if(t)return t`), which is the exists form. A thrown error is swallowed, so the gate stays closed on failure.",
+          "evidence_refs": [
+            "s5",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "51c9f1c2c961d061",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test runs the gh CLI to fetch a credential, which could be read as installed_tool or as credential availability. The category list is not in the material, so target_artifact is not clearly right or wrong.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "0ca32656b51100ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isLinux() returns \"linux\"===os.platform() (F=n(70857)), and the gates s2 and s7 call it.",
+          "evidence_refs": [
+            "s6",
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "f2b005d100d60ff9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The operator is a positive equality with 'linux'. It is one arm of isLinux()||isMac() in the then-guards s2 and s7.",
+          "evidence_refs": [
+            "s6",
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "978c8170b5c0aa44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the OS platform.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "1796fd4454ba8054",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isMac() returns \"darwin\"===os.platform(), and the gates s2 and s7 call it.",
+          "evidence_refs": [
+            "s8",
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "836047e2d072e037",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Positive equality with 'darwin', joined by || with isLinux() in the guards.",
+          "evidence_refs": [
+            "s8",
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "5a16c5326e7d3b68",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the OS platform.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "f91452806815e662",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "t=F.getCurrentToken() returns this.token, which getToken set from process.env.GITHUB_TOKEN (with a gh-CLI fallback). The test is t.startsWith(\"ghp_\").",
+          "evidence_refs": [
+            "s9",
+            "s1",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "e884d7a1bc845209",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "t.startsWith(\"ghp_\") is the positive form inside `(ghp_||gho_)` in the then-guard s3.",
+          "evidence_refs": [
+            "s9",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "04aac178501d0438",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The token that is tested comes from the env var, so env_var fits.",
+          "evidence_refs": [
+            "s9",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "7c7a60a420870b00",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The same token variable t is tested with startsWith(\"gho_\").",
+          "evidence_refs": [
+            "s10",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "3b978e33329e6b13",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "startsWith('gho_') is the positive form, joined by || with ghp_ in the guard s3.",
+          "evidence_refs": [
+            "s10",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "16f9004f269d7837",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The token that is tested comes from the env var, so env_var fits.",
+          "evidence_refs": [
+            "s10",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "7f61ce25a112c1dd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "r=await F.getUser() with no argument calls octokit.rest.users.getAuthenticated, and returns null on error. The guard s3 then tests `&&r`.",
+          "evidence_refs": [
+            "s11",
+            "s3",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "d61c8862c79d4118",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The bare `r` in the && chain is a truthy test, and the guarded block uses r.login.",
+          "evidence_refs": [
+            "s11",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "4929c9de3ed639cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition depends on an answer from the GitHub API.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "a743e98a5431d5f3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "se=await ie.validateToken() runs fetch(.../-/whoami) and the gate tests `se&&(isLinux||isMac)`.",
+          "evidence_refs": [
+            "s12",
+            "s7",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "036923892ca62bf6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`se&&...` is a truthy test on the whoami result. validateToken returns null on failure.",
+          "evidence_refs": [
+            "s12",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "06294960100b9d4e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition depends on the npm registry's response.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "fddb81fcaa673fce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "repoExists wraps octokit.rest.repos.get in a try and returns true or false, and the s4 chain tests it with `!F.repoExists(...)`. Note that repoExists is async and the call is not awaited.",
+          "evidence_refs": [
+            "s13",
+            "s4",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "f5a4ab1f7f4ee837",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The written form is `!repoExists(...)`, a negated (falsy) test. Caveat: repoExists is async and not awaited, so `!Promise` is always false and makeRepo as written never runs.",
+          "evidence_refs": [
+            "s13",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "c1ad6b7916d58db3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition depends on a GitHub API lookup.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "6eed01b62e044c8e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "te.isValid() returns AWSModule.initialize(), which succeeds only if STSClient.send(GetCallerIdentityCommand) returns UserId, Account and Arn. s15 tests that result.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "ae5ebd434dca80ce",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`await te.isValid()&&(...)` is a positive truthy test.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "6a6c3c8f6b280fea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition depends on an AWS STS response.",
+          "evidence_refs": [
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "c9212461130ef4a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "re.isValid() runs GCPModule.initialize(), which calls auth.getProjectId() in a try. s17 tests the result.",
+          "evidence_refs": [
+            "s16",
+            "s17",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "73f6da37b240131c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`await re.isValid()&&(...)` is a positive truthy test.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "9acadfcbbe67f8de",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition depends on a Google auth response.",
+          "evidence_refs": [
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "0aed700fd188d41c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ne.isAvailable() returns installedStatus, which checkIfInstalled sets from existsSync(binaryPath). The binary path is cwd/trufflehog. s19 tests the result. isAvailable also falls back to install().",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "322d7bfad365122c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`t&&(n=await ne.scanFilesystem())` is a positive test on whether the trufflehog binary is present.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "9bfa6e9270ff7ca4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition tests whether the trufflehog tool is installed.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "c7883747519acfa6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The outer if is isAuthenticated() (token from env or gh, so c1||c2) && (isLinux||isMac). The nested if is (ghp_||gho_) && r, with t!=null as a presence check. Nesting joins with and, giving (c1||c2)&&(c3||c4)&&(c5||c6)&&c7, and the minimum is 4.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "37ab012dc2309883",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the extraction and migration scripts run at all, so it enables.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "353f8ae66fff9683",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when a suitable token and platform are present, so the polarity is activate. No analysis or sandbox backoff is present.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "7e3ce329593333c0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ghp_/gho_ token-type test and the Linux/macOS restriction pick the targets, so targeting fits.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "55bf91cf7ba50c32",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "F.extraction(t) (s22) sits in the block s20, which is inside both guards. It reaches the method definition (s23), which contains the spawn sink (s21).",
+          "evidence_refs": [
+            "s20",
+            "s22",
+            "s23",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "977dff23c904df4a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "extraction( has a single call site, in the guarded block s20. No other caller, export or timer reaches it.",
+          "evidence_refs": [
+            "s22",
+            "s23",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "6ddcdff9e9d2f2c6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Directly visible in the method: writeFileSync of /tmp scripts (write_file) and a detached spawn of them with the process env (spawn_process). The other behaviours (exfil, persistence, self_propagation via migration) are carried out by the embedded scripts that this spawn runs, so the spawn sink can ",
+          "evidence_refs": [
+            "s21",
+            "s23",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "24afb384f86c53d5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The decision is `se&&(isLinux()||isMac())`, with se coming from the fetch-based validateToken. That is c8 && (c3||c4), and the minimum is 2.",
+          "evidence_refs": [
+            "s7",
+            "s12",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "a24676d440554c70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the package-updating code runs, so it enables.",
+          "evidence_refs": [
+            "s7",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "8bd98409586f23a6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when a valid npm token is present on Linux or macOS, with no evasion logic, so the polarity is activate.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "d7da695e75bd6f3c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The tests are whether the npm token is valid (data availability) and whether the OS can run the exec step (portability). Nothing selects a victim by identity, so I would label this data_availability, not targeting.",
+          "evidence_refs": [
+            "s7",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "15ced037d60ea5a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ie.updatePackage(t) call (s25) is inside the block s24 under the guard s7. The wrapper uses child_process exec, so the sink is reached with an empty witness.",
+          "evidence_refs": [
+            "s24",
+            "s25",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "807d72a4185225f3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "updatePackage( has a single call site, in the guarded block s24.",
+          "evidence_refs": [
+            "s25",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "0a80dbfde91081d0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "updatePackage destructures exec from child_process (node module 35317) and promisifies it. getPackagesByMaintainer plus updatePackage across the maintainer's packages gives self_propagation and modify_other_packages through an exec sink.",
+          "evidence_refs": [
+            "s25",
+            "s24",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "3717fc3e46fb4c3a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The chain is isAuthenticated() && !repoExists(...) && makeRepo(...). isAuthenticated is the token (c1||c2) and the second term is c9, giving (c1||c2)&&c9, with a minimum of 2.",
+          "evidence_refs": [
+            "s4",
+            "s13",
+            "s1",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "d8bcb1728b699159",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the data upload to a new repo runs, so it enables.",
+          "evidence_refs": [
+            "s4",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "0f03d6f3bf946e12",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs the upload when a token is present and the repo is absent, so the polarity is activate.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "d46ba5bf2483f7c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate checks whether the credential exists and whether the target repo is already there, which is resource availability and not host selection.",
+          "evidence_refs": [
+            "s4",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "479dee97f85f7304",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "F.makeRepo(...) (s26) is the right-hand side of the && chain in s4, so it is inside the guard, and makeRepo calls octokit repos.createForAuthenticatedUser. Caveat: repoExists is async and not awaited, so at runtime `!Promise` is false and this call looks unreachable.",
+          "evidence_refs": [
+            "s26",
+            "s4",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "d2cae4c14fc386fe",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "makeRepo( has a single call site, in s26.",
+          "evidence_refs": [
+            "s26",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "c55834cab4fa73cd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "makeRepo uses the octokit client to create a private repo and write file contents (the formatOutput data), which is a network sink that can exfiltrate.",
+          "evidence_refs": [
+            "s26",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "7bf29ded1994f79d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`await te.isValid()&&(ue=await te.getAllSecretValues())` is a single condition, c10.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "fb0f1c80d7575bdc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The AWS secrets are only read when the credentials validate, so the gate enables.",
+          "evidence_refs": [
+            "s15",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "78793946cc75350a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs when valid credentials are present and has no evasion logic, so it is activate.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "4fe819b4e7224994",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is whether AWS credentials are usable, which is data availability.",
+          "evidence_refs": [
+            "s14",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "90a112bddd978575",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "te.getAllSecretValues() (s27) is the right-hand side of the && guarded by isValid() (s15), and it uses the AWS Secrets Manager client.",
+          "evidence_refs": [
+            "s27",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "cffa4bed44a65d0c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only call of te.getAllSecretValues() is in s27. initialize is reached from other methods, but the secret-reading method is not.",
+          "evidence_refs": [
+            "s27",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "efe02a849e4decdd",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The AWS module reads secrets through a Secrets Manager client (client.send), which is a network sink.",
+          "evidence_refs": [
+            "s27",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "bab5327e876c3db5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`await re.isValid()&&(de=await re.getAllSecretValues())` is a single condition, c11.",
+          "evidence_refs": [
+            "s16",
+            "s17",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "ed01aeb787647e15",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The GCP secrets are only read when the credentials validate, so the gate enables.",
+          "evidence_refs": [
+            "s17",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "f73a413a51e4b1b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs when valid credentials are present and has no evasion logic, so it is activate.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "9a66de419d14c6de",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is whether GCP credentials are usable, which is data availability.",
+          "evidence_refs": [
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "4b5dfd326a8dfd8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "re.getAllSecretValues() (s28) is the right-hand side of the && guarded by isValid() (s17), and it uses the SecretManager client.",
+          "evidence_refs": [
+            "s28",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "93a9c27d195bf947",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only call of re.getAllSecretValues() is in s28.",
+          "evidence_refs": [
+            "s28",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "a7de4d6d097c65e9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The GCP module reads secrets through SecretManagerServiceClient, which is a network client.",
+          "evidence_refs": [
+            "s28",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "9df60839faf485b6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`t&&(n=await ne.scanFilesystem())` is a single condition, c12.",
+          "evidence_refs": [
+            "s18",
+            "s19",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "fd53fb8a94509659",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The scan only runs when the trufflehog binary is available, so the gate enables.",
+          "evidence_refs": [
+            "s19",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "9e8f623d84e5cb98",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The scan runs when the tool is available and has no evasion logic, so it is activate.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "d44224976da28085",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is whether the scanner binary is present, which is data availability.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "f83f800fe4f6a794",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ne.scanFilesystem() (s29) is inside the && guard s19, and its definition spawns the binary with child_process.spawn.",
+          "evidence_refs": [
+            "s29",
+            "s19",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "636eadd6c272f40f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only call of scanFilesystem() is in s29.",
+          "evidence_refs": [
+            "s29",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "5d15d81ff8046a1b",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "The then region only runs scanFilesystem (a spawn of the binary), which covers exec_downloaded and recon. The download happens in install(), which is called inside the tested isAvailable() call, not in the guarded region, so the download behaviour has no sink on the then side.",
+          "evidence_refs": [
+            "s29",
+            "s18",
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "k_8518fb5657.L6.drop",
+          "claim_sha256": "52cd836a79d8fdb6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is GOOGLE_APPLICATION_CREDENTIALS lookup inside the bundled google-auth-library, which is third-party library code and not the package's own gate.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "k_ccc1cce0b7.L6.drop",
+          "claim_sha256": "683e387bb9cd993e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the lowercase fallback of the same credential lookup inside the bundled google-auth-library, so it is library code.",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "q_18dd9a4edc.L6.drop",
+          "claim_sha256": "aec782e5200c678a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is an early return on an empty credential path inside the bundled google-auth-library, so it is library code.",
+          "evidence_refs": [
+            "s32"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "12cd0f576cdd2aec",
+      "packet_sha256": "c0e7f69edc732551",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "c46b4cb235f5c73a",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate in s1 combines a truthy npm username (se, token validity) with an isLinux/isMac check. The first part is data availability and the second is portability, so the single label data_availability only half fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "3e6577baac0ac7bc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "scanFilesystem returns early with 'binary not available' unless existsSync(binaryPath) is true, so the existence test decides whether the scan runs at all. It does not pick a payload or a target, so enables fits.",
+          "evidence_refs": [
+            "f1:2",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "c4031b9e4a3270ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existsSync check on the trufflehog binary lets the scan proceed when the tool is present. It does not back off on analysis, CI or a sandbox, so the polarity is activate.",
+          "evidence_refs": [
+            "f1:2",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "d47f59d935615691",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks whether the trufflehog binary is present, with a download fallback in isAvailable. That is tool availability, which could be read as data_availability or as portability, and the code does not settle which.",
+          "evidence_refs": [
+            "f1:2"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "868d8197a56771e2",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The s1 sink calls scanFilesystem, which runs spawn on the downloaded trufflehog binary with 'filesystem' and '--json' in the home directory. The binary is fetched by fetch and extracted with tar, so that is exec_downloaded, and scanning the filesystem for secrets is recon.",
+          "evidence_refs": [
+            "s1",
+            "f1:2"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "f96ce554f3d784be",
+      "packet_sha256": "1dbc21bc6002a75b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "0406565c361a6290",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "getToken reads process.env.GITHUB_TOKEN into t and returns it on `if(t)`, a positive truthy test; isAuthenticated() returns !!this.token and gates the guarded block.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "773dfce6e7e905d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fallback runs execSync of 'gh auth token', takes stdout .trim() into t and returns it only if truthy; that feeds this.token and isAuthenticated().",
+          "evidence_refs": [
+            "s4",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "3a9b88e3988b6819",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fetch to the npm whoami endpoint is assigned to t, and t.status and t.ok are tested; the username it returns is what gates later code.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "ed79d59528254354",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "se holds validateToken(), which wraps the fetch and returns the username. The guard `se&&(isLinux()||isMac())` needs se to be truthy to reach the guarded block.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "f1f5f6e12ad8464a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition depends on the npm registry's whoami response, so server_response fits.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "50c9b489cf21eddc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "te is the result of STSClient.send(GetCallerIdentityCommand), and `te.UserId&&te.Account&&te.Arn` tests its fields.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "6f2fa42ab6947907",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard `await te.isValid()&&(...)` calls AWSModule.isValid, which returns initialize(). initialize returns true only when the STS response fields are truthy.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "804b125d260a8976",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads the response of an AWS STS call, so server_response fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "4af069e2dafdd054",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "t and r hold the results of auth.getProjectId() and auth.getClient(), and `if(t&&r)` tests them.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "87ba5283aea681ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard `await re.isValid()&&(...)` calls GCPModule.isValid, which returns isValidCredentials. That flag is set true only when `t&&r` is truthy.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "4441c5f90aef56d6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks whether Google credentials and a project are available on the host, which is a target artifact.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "ff14af1744320204",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One guard, `se&&(isLinux()||isMac())`, joins the validateToken/fetch truthiness (c8) with the OS alternatives linux (c3) or darwin (c4). That is c8 && (c3||c4), and the minimum is 2 conditions.",
+          "evidence_refs": [
+            "s6",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "94718718e8d53db0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The block that updates the maintainer's npm packages runs only when the token is valid on linux or mac, so the gate enables it.",
+          "evidence_refs": [
+            "s6",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "5f42846752dc9c62",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The guarded code runs when the conditions hold. Nothing backs off on analysis or CI.",
+          "evidence_refs": [
+            "s6",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "bd9bb732be6eb313",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate mainly asks whether a valid npm identity exists, with an OS check on top, so data_availability fits.",
+          "evidence_refs": [
+            "s6",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "4eff8a18d7431507",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single short-circuit `await te.isValid()&&(ue=...)` depends only on the STS identity check (c10), which gives one condition.",
+          "evidence_refs": [
+            "s8",
+            "s7",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "485c10225b34be50",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "getAllSecretValues for AWS is called only if isValid is true, so the gate enables the credential read.",
+          "evidence_refs": [
+            "s8",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "5f3cd02b00c4d8d2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The secret read runs when valid AWS credentials are present, so it activates on a target.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "fbda67bd967dcd2c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check only decides whether usable AWS credentials exist before reading secrets, so data_availability fits.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "3888248a71f17f23",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single short-circuit `await re.isValid()&&(de=...)` depends only on the GCP credential check (c11), which gives one condition.",
+          "evidence_refs": [
+            "s10",
+            "s9",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "c647f23b1582d740",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "getAllSecretValues for GCP is called only if isValid is true, so the gate enables the credential read.",
+          "evidence_refs": [
+            "s10",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "8ab9d767ef060c36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The secret read runs when GCP credentials are present, so it activates on a target.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "3e0a32e0fe2a04eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check only decides whether usable GCP credentials exist before reading secrets, so data_availability fits.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "data-processing-utils",
+    "version": "0.1.8",
+    "archive_sha256": "c627db5caefeff1d59f4fd0f50ea17d5b2a750557a6e15db1166bff0e1c9c7f0"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "27a1561775593923",
+      "record_sha256_after": "7940c2c69892ebdc",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "cleared",
+          "reason": "setup.py line 7 is the only install-time code: os.system runs sh with an alias builtin whose value holds the curl command. Only env runs (inside $(env)); builtin arguments are not re-parsed, so the && and curl text never execute, and the alias dies with the non-interactive child shell. The code sett"
+        }
+      ]
+    }
+  ]
+}

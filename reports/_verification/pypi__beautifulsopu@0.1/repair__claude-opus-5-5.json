@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "beautifulsopu",
+    "version": "0.1",
+    "archive_sha256": "e1b02e284e5e69f4dfa75f668d0234d51b484c5f9c354ae839199ded091dfe37"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "6f6983f5bff0ede3",
+      "record_sha256_after": "a720378f3ce5dbde",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "149fc1fccff0904e",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "g2 is a modifies gate. The then block of the IsUserAnAdmin() test (setup.py line 68, d2 line 64) sets the state to 362814, whose block (d2 line 45) appends C:\\ProgramData\\Microsoft\\Windows\\Start Menu to the folder list that the shortcut walk in state 790593 iterates. Save() at d2 line 100 on shortcu"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "05287b1a480ce918",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "When c6 (.lnk suffix, d2 line 81) or c7 (TargetPath basename in the browser list, d2 line 90) fails, the code sets the inner state to 0 (d2 line 95) and does nothing to that file: no other target gets the --load-extension rewrite and Save(). Without a matching browser shortcut no persistence happens"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "d1105ce7b74dc8c5",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The os.walk over Desktop, Start Menu and TaskBar folders (d2 lines 78 to 81) searches for the artifact the payload needs, and c6/c7 test whether a Chromium browser shortcut is present to rewrite. The gate-analysis definition gives data_availability when a check makes sure the thing to use exists, an"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "f7a3a73ec0159c10",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "portability means each branch runs a platform-specific version of the same behaviour. Here the c1 test (sys.platform == 'win32', setup.py line 6) has no else branch: off Windows nothing runs. The pip.main(['install', 'pypiwin32']) at d2 line 13 only prepares the win32com import of the Windows-only c"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed one reason: g3's file_present was a guessed example shortcut. It now gives what the code tests (any .lnk under the walked Desktop, Start Menu and TaskBar folders whose TargetPath basename is in the browser list), and recipe_guessed_fields is empty. Still flagged: (1) the pip >= 10 question (pi"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "a720378f3ce5dbde",
+      "record_sha256_after": "e11e24a9529bcd11",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "4d3d294b42a1b525",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refutation misreads the branch. At d2 lines 63-67 IsUserAnAdmin() true goes to state 362814, which appends the ProgramData Start Menu to the folder list (line 45) and then to 18005; false goes straight to 18005. Nothing is skipped when elevated: both paths run the same shortcut walk (line 78), a"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "55a210b8c5a86f1b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The objection was right that Save() at d2 line 100 sat outside the only cited region while the witness was empty, which claims the sink is in the region. The path is still real: state 60921 is set only at line 92, inside c7's then side, and the arm at line 99 runs only in that state. Added the Save("
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "05287b1a480ce918",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "modifies needs the same behaviour acting on a different target when the condition flips. At d2 lines 81 and 90 a false test acts on nothing else: a non-.lnk file is ignored, and a non-browser shortcut goes to state 0 (line 95) with no Arguments change and no Save(). There is no alternative target, a"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "d1105ce7b74dc8c5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "data_availability covers a check that the thing to steal or use exists, and target_artifact checks are usually labelled that way. d2 lines 81 and 90 test whether a .lnk with a browser target exists among the walked files, which is the object the payload needs in order to act; without one nothing is "
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "f7a3a73ec0159c10",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "portability means each branch runs a platform-specific version of the same behaviour. Here sys.platform == 'win32' at d2 line 6 has no else and no version for another OS: off Windows only setup() runs. pip.main(['install', 'pypiwin32']) at line 13 exists only to prepare the Windows-only payload, whi"
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "db8d1f05b88c3799",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The check at d2 line 116 (raw setup.py line 120) only decides whether os.makedirs runs first. True goes to state 29059 (makedirs, line 55) and then 37668; false goes straight to 37668, where background.js is opened (line 122). Both sides write the same extension files and go on to the same shortcut "
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "c07e4bd26a91291a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement around the same os.path.exists test as k_648bbff21c (d2 line 116, raw setup.py line 120). Its then side only sets state 29059 for makedirs, and both sides reach state 37668 and write the same files, so flipping it changes no behaviour. Creating a folder a later write needs i"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "e11e24a9529bcd11",
+      "record_sha256_after": "e11e24a9529bcd11",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Record not edited; needs_manual_review stays true with three reasons. (1) payload path not fully traced: read by hand, d2 line 64 (c2) sets state 362814, the only assignment of that state; line 45 appends the ProgramData Start Menu to the folder list; states 18005, 37668, 382664, 12768, 162346, 4030"
+        }
+      ]
+    }
+  ]
+}

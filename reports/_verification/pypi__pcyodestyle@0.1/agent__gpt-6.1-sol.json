@@ -1,0 +1,508 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pcyodestyle",
+    "version": "0.1",
+    "archive_sha256": "98163d2df511c6a82e37f27bd770729965d57201c5b14203a16029aff20e9bf7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "ecd9707daef33883",
+      "packet_sha256": "11f438612e08f46f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 directly compares sys.platform in the outer if condition, using the sys import at f1:1.",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "38c63effe7ba4b54",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "s1 shows equality on the then arm, but its right operand is constructed through an obfuscated getattr and character mapping; no checked decoded derivation is supplied.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s1 reads sys.platform, which describes the operating system platform.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "b8be373fd1188342",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 assigns os.path.basename of the shortcut TargetPath to the variable tested for membership at f1:94; these uses share the module scope.",
+          "evidence_refs": [
+            "s3",
+            "f1:94",
+            "f1:79"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "e6510b16fbf6cc1f",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "s4 uses positive membership on the basename variable, but the candidate strings remain obfuscated constructions without a checked decoded derivation.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "ca284f6349e635e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:90 creates a shortcut object, and s3 reads the basename of its TargetPath for the membership test in s4, identifying a target artifact.",
+          "evidence_refs": [
+            "f1:90",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "f16f30df155ccebb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 directly calls ctypes.windll.shell32.IsUserAnAdmin as an if condition, with ctypes imported at f1:117.",
+          "evidence_refs": [
+            "s5",
+            "f1:117"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "50484a03f030ba05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 takes its then arm when IsUserAnAdmin returns a truthy value, with no negation or comparison.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "3cff72d71a37076b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s5 tests administrator status through IsUserAnAdmin, a privilege property.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "52f1535ddeb0eb16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s7 is the outer platform condition’s then block, so the single cited guard contributes one required condition.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6d27bd959d872be2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 encloses both the pip call and file-opening code in its then block, enabling those operations when the platform condition holds.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "820afc2b20c5e461",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 runs the enclosed operations on a matching platform rather than backing off upon an analysis-environment signal.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform check surrounds Windows-specific win32com, shell32 and shortcut operations, supporting portability rather than a separate victim-targeting purpose.",
+          "evidence_refs": [
+            "s2",
+            "f1:19",
+            "s5",
+            "f1:90"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4a86df8eeb0cba9b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both cited calls occur directly in the outer then block s7, including its nested command-line and state branches; neither requires an interprocedural hop.",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "da3f89c9b8200068",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited calls are module-level statements nested under the outer platform then arm; the full file contains no function, export or callback providing another entry to them.",
+          "evidence_refs": [
+            "s2",
+            "s8",
+            "s9",
+            "f1:132"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "aef0344e1e8e4dfe",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "s8 calls pip.main with obfuscated arguments and s9 opens a file with an obfuscated mode, so downloading and writing cannot be established from these calls without resolving those values.",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "87fe6c19e74ffded",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The assignment region s10 is nested in the membership then arm s4, which is itself inside the platform then arm s2; the two cited conditions therefore combine with and.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "87c47a7dcfc1e364",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test changes obfuscated loop state, but establishing its eventual persistence effect requires resolving later state transitions and the dynamically created shortcut object. s10 also assigns encoded shortcut arguments.",
+          "evidence_refs": [
+            "s4",
+            "s10",
+            "s11",
+            "f1:65"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d5a1754e4f432494",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 matches a shortcut target basename before assigning its arguments, consistent with activation on a target.",
+          "evidence_refs": [
+            "s4",
+            "s10",
+            "s11",
+            "f1:65"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "18ac4d3eb9c3481e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s3 and s4 restrict shortcut argument modification to matching target basenames, supporting targeting.",
+          "evidence_refs": [
+            "s4",
+            "s10",
+            "s11",
+            "f1:65"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "86ee3b71ffebeaa9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "s10 contains an Arguments assignment and state update, while s11 is in a separate loop-state arm, outside that region; the empty witness supplies no call path.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "5bac36ddb6ca47d6",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "s11 is reached through a flattened loop-state dispatcher rather than lexical nesting under this inner guard; exclusivity requires resolving the arithmetic state transitions and all incoming states.",
+          "evidence_refs": [
+            "s4",
+            "f1:88",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "47108317bbfae084",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "s11 invokes Save on an object returned by CreateShortcut, but the object originates from Dispatch with an encoded program identifier, so the concrete method binding and persistence capability remain unresolved.",
+          "evidence_refs": [
+            "f1:65",
+            "f1:90",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "d46830e3bbde6c9b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s12 is directly inside the administrator then arm s6 and the outer platform then arm s2, requiring both cited conditions.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "64b88d24c2c0e43b",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test changes obfuscated loop state, but establishing its eventual persistence effect requires resolving later state transitions and the dynamically created shortcut object. The adjacent branches manipulate a directory list.",
+          "evidence_refs": [
+            "s6",
+            "s12",
+            "f1:46",
+            "f1:50",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "8aa3ffedd1d9fe44",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s6 branches on administrator privilege, with no analysis or sandbox detection signal.",
+          "evidence_refs": [
+            "s6",
+            "s12",
+            "f1:46",
+            "f1:50",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "79a87476318a1541",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s6 changes the state controlling later directory-list processing, but the encoded paths and unresolved transitions do not establish targeting rather than portability.",
+          "evidence_refs": [
+            "s6",
+            "s12",
+            "f1:46",
+            "f1:50",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "820c532765718070",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "s12 contains only a state assignment and continue, while s11 is in a later loop-state arm outside the region; the empty witness supplies no call path.",
+          "evidence_refs": [
+            "s12",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "2410b26640fdba35",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "s11 is reached through a flattened loop-state dispatcher rather than lexical nesting under this inner guard; exclusivity requires resolving the arithmetic state transitions and all incoming states.",
+          "evidence_refs": [
+            "s6",
+            "f1:38",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "6df2fdb01170f741",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "s11 invokes Save on an object returned by CreateShortcut, but the object originates from Dispatch with an encoded program identifier, so the concrete method binding and persistence capability remain unresolved.",
+          "evidence_refs": [
+            "f1:65",
+            "f1:90",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "fad4ec32ca2af31a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:120 checks the same directory expression passed to makedirs at f1:59; directory creation rejoins the existing-directory continuation through identical state assignments at f1:60 and f1:124, making this directory setup plumbing.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "f1:59",
+            "f1:60",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "4d351b376fc12360",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:120 checks the same directory expression passed to makedirs at f1:59; directory creation rejoins the existing-directory continuation through identical state assignments at f1:60 and f1:124, making this directory setup plumbing.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "f1:59",
+            "f1:60",
+            "f1:124"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "15ccbdb21767af96",
+      "packet_sha256": "4344fe8d1af79343",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "3b8d20bef2256045",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The platform comparison and artifact membership test use strings constructed through a computed built-in lookup, without a registered readable derivation (f1:6, f1:94). Their claimed values cannot be confirmed from these encoded sites, so the stated combination and minimum are not established.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "1f483b29e00b99b1",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "incomplete_cfg",
+          "evidence": "The argument assignment is directly inside the membership test, but Save is in a separate state-dispatch arm (f1:94-104). Establishing that the latter is reached from the claimed side requires resolving the obfuscated loop's arithmetic state transitions, which remain unconfirmed.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "f1:88",
+            "f1:96",
+            "f1:99"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "550e683631a90011",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "Save is enclosed by the platform branch but dispatched by a loop state rather than directly nested under the artifact test (f1:6, f1:88-104). The unresolved state transitions prevent proving that every route to Save passes the artifact test's then side.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s7",
+            "f1:86",
+            "f1:88",
+            "f1:96",
+            "f1:102"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "591a1c3c39fa1bac",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The Save receiver comes from CreateShortcut on an object returned by win32com.client.Dispatch, whose class identifier is encoded (f1:65, f1:90, f1:111). Without resolving that COM object and its Save method, the cited call cannot positively establish a persistence-capable file write.",
+          "evidence_refs": [
+            "f1:65",
+            "f1:90",
+            "f1:111",
+            "s7"
+          ]
+        }
+      ]
+    }
+  ]
+}

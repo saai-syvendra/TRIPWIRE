@@ -1,0 +1,778 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "matpplotlib",
+    "version": "0.1",
+    "archive_sha256": "7d120516e562fb2fc08d823c24fd88bbdfaef3132b864039f998042622c3c419"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "97c8ee5ee1050d64",
+      "packet_sha256": "bbab97caa864ce79",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "9b482247e9e63acb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The administrator guard directly contains s4, while the platform and install-command branches enclose the path-list update and shortcut loop (f1:6, f2:34-78). The Save call is directly inside the loop region s6, so its empty witness reaches the sink (f2:78-100).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "f2:78",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "975b67f576536e34",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "When IsUserAnAdmin is false, the dispatcher goes directly to state 18005; the true path appends the additional directory and then also enters state 18005 (f2:44-46, f2:63-67). Both paths continue through extension setup to the shortcut loop and Save, so the sink does not require the administrator gu",
+          "evidence_refs": [
+            "s3",
+            "s5",
+            "s6",
+            "s7",
+            "f2:44",
+            "f2:63",
+            "f2:115",
+            "f2:109",
+            "f2:60",
+            "f2:100"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "97c8ee5ee1050d64",
+      "packet_sha256": "8069f7aed78b3ca3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison in s1 directly reads sys.platform, imported from sys at f1:1.",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "49e7803b55613936",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The right operand in s1 is produced through an obfuscated getattr and character construction; its claimed decoded value is not readable at that anchor. The supplied readable f2 does not register a checked decode for s1.",
+          "evidence_refs": [
+            "s1",
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison reads the operating system platform through sys.platform in s1.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly calls ctypes.windll.shell32.IsUserAnAdmin, with ctypes imported at f1:117.",
+          "evidence_refs": [
+            "s3",
+            "f1:117"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call is the unnegated condition of the if, and its truthy result enters s14.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "IsUserAnAdmin tests administrator privilege in s3.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "af51f4cde8d010e6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision in s5 directly tests sys.argv[1].",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "b3a12538c317513f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The unnegated membership test at f2:7 uses exactly egg_info and build and takes its then arm on a match.",
+          "evidence_refs": [
+            "s5",
+            "f2:7"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "b2fcce69e2348a82",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The setup command in sys.argv[1] selects the package build or installation phase at f2:7.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "fd2ca48f4b78b6ca",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decision in s6 directly tests sys.argv[1].",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "fbe484b24c8b9ab8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The unnegated membership test at f2:34 uses exactly bdist_wheel and install and takes its then arm on a match.",
+          "evidence_refs": [
+            "s6",
+            "f2:34"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "2bec1fbef30b0563",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The setup command in sys.argv[1] selects the package build or installation phase at f2:34.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "d8673dec6540d2e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The filenames yielded by os.walk are tested with endswith in s7; the directory list includes user Start Menu, TaskBar and Desktop locations.",
+          "evidence_refs": [
+            "s7",
+            "f2:48",
+            "f2:58",
+            "f2:79"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "87942839737f889c",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "s7 calls endswith with the literal suffix .lnk rather than a regex operator; these are different operators of the same polarity.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "85c524b2ca81bba1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The suffix check in s7 selects shortcut files as artifacts to inspect.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "f05d4d0419838d83",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested variable receives os.path.basename of the shortcut TargetPath; that shortcut comes from CreateShortcut on the Dispatch-created WScript.Shell object.",
+          "evidence_refs": [
+            "s8",
+            "f2:61",
+            "f2:86",
+            "f2:97"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "f4ea7557a3c3383a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8 uses unnegated membership in exactly the four claimed executable names.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "ad10ca5a6766b892",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check in s8 selects shortcut artifacts by their target executable basename.",
+          "evidence_refs": [
+            "s8",
+            "f2:97"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "780fd20a8f6e877e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform if encloses the command decision, and s9 lies within both then sides; two conditions are required.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s9",
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "301966418ac3b3bf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The setup-command branches select dependency installation for egg_info/build and extension creation for bdist_wheel/install.",
+          "evidence_refs": [
+            "f2:7",
+            "f2:13",
+            "f2:34",
+            "f2:122"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "49dab0142c22ef86",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform and setup-command checks activate their branch on matching installation environments, with no analysis or sandbox check.",
+          "evidence_refs": [
+            "f2:6",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "9504ee4d2a4804c9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The better label is portability: the Windows build branch installs pypiwin32, whose COM facilities are used by the installation branch.",
+          "evidence_refs": [
+            "f2:6",
+            "s10",
+            "f2:107"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "925c6c7f74bbd3fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The pip.main call s10 sits directly in region s9 under the nested platform and build-command branches.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "a141dd241dd970e6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sole pip.main call is top-level code inside the platform and build-command branches; there are no other callers or exported wrappers in either file.",
+          "evidence_refs": [
+            "s10",
+            "f1:13",
+            "f2:6",
+            "f2:7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "c870849860b21f4c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s10 calls the imported pip installer with install and pypiwin32, which can download the dependency.",
+          "evidence_refs": [
+            "f2:12",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "01356bfb20b1c2ad",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform if encloses the command decision, and s11 lies within both then sides; two conditions are required.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s11",
+            "f2:6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "14b70d8cc68581d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The setup-command branches select dependency installation for egg_info/build and extension creation for bdist_wheel/install.",
+          "evidence_refs": [
+            "f2:7",
+            "f2:13",
+            "f2:34",
+            "f2:122"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "a4e9fa273a445e31",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform and setup-command checks activate their branch on matching installation environments, with no analysis or sandbox check.",
+          "evidence_refs": [
+            "f2:6",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e3858361e3cd7da8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows installation branch creates the clipboard-manipulating extension and later alters browser shortcuts, supporting targeting of that installation environment.",
+          "evidence_refs": [
+            "f2:34",
+            "f2:69",
+            "s12",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "dd669da3e2178872",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both writable open calls sit directly within region s11, enclosed by the platform if and installation-command elif.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "4e886a38adfd183a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Both file-opening sites occur only in the top-level installation-command branch under the platform guard, with no alternate callers.",
+          "evidence_refs": [
+            "f2:6",
+            "s6",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "b7a783e0883a7ff0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both sinks are built-in open calls with w+ mode, and the returned handles are subsequently written and closed.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "f2:69",
+            "f2:125"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "92fc55dcff5d8663",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "Administrator status adds the system Start Menu directory, but both outcomes converge on state 18005 and subsequently the same traversal. Thus the traversal region does not require c2 and the claimed conjunction and minimum of three are incorrect.",
+          "evidence_refs": [
+            "f2:44",
+            "f2:63",
+            "f2:67",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "f0384a9ef6166ab8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Administrator status adds the system Start Menu to the directories whose shortcuts are modified, changing the victim artifact set for the same persistence operation.",
+          "evidence_refs": [
+            "f2:44",
+            "f2:48",
+            "f2:63",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "18edc7a610481a42",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The positive administrator check expands the shortcut scan to system artifacts rather than avoiding an analysis environment.",
+          "evidence_refs": [
+            "f2:44",
+            "f2:63"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "ea38fdc5c23d73ab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The administrator check targets additional system Start Menu shortcuts when privilege is available.",
+          "evidence_refs": [
+            "f2:44",
+            "f2:63",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "9b482247e9e63acb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The outer platform and installation guards enclose the traversal region s16 and its Save sink s17; the administrator guard controls region s14 and its transition to the directory append. Each guard controls a cited region, although administrator status is not exclusive to the sink.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s4",
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "975b67f576536e34",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "A false administrator result also sets state 18005; both paths create the extension and reach traversal and Save using the user directory list.",
+          "evidence_refs": [
+            "f2:48",
+            "f2:63",
+            "f2:67",
+            "f2:115",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "2f807ab3ae9672bf",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shortcut object is created through WScript.Shell.CreateShortcut, its Arguments are changed to load the extension, and Save writes that modified shortcut for later browser launches.",
+          "evidence_refs": [
+            "f2:61",
+            "f2:86",
+            "s18",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "e0370cc248a2fed6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform, installation-command and shortcut suffix checks nest; the browser-target match sets state 60921, the only state that saves the shortcut. All four conditions are necessary for the cited update and save regions.",
+          "evidence_refs": [
+            "f2:6",
+            "s6",
+            "s7",
+            "s8",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "4d0d1dc2e85e3e35",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Matching shortcut suffix and browser target enables argument replacement and saving; the nonmatching target path exits the inner state loop without saving.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s18",
+            "f2:95",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "7ac1e0d384068164",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks activate shortcut changes for the selected browser artifacts, with no analysis-environment avoidance.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "3c6f14342eeb58bf",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The better label is targeting: the test selects shortcuts to four particular browser executables for modification, rather than checking availability of data to collect.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "64f0089ca5db2519",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The update region s18 is in the browser-match arm, which schedules state 60921; that state contains region s19 and the direct Save sink. The enclosing command, platform and suffix guards also control these regions.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7",
+            "s8",
+            "s18",
+            "s19",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "b3e6953649901485",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sole Save site is reached only through state 60921, assigned exclusively by the positive browser-target match inside the suffix, platform and installation-command guards.",
+          "evidence_refs": [
+            "f2:82",
+            "f2:90",
+            "f2:92",
+            "f2:95",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "b98bd4bc075d246b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shortcut object is created through WScript.Shell.CreateShortcut, its Arguments are changed to load the extension, and Save writes that modified shortcut for later browser launches.",
+          "evidence_refs": [
+            "f2:61",
+            "f2:86",
+            "s18",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "0d3bf58727a50479",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check only decides whether to create the extension storage directory; both paths converge on state 37668 and write the same extension files, so this is storage plumbing.",
+          "evidence_refs": [
+            "s20",
+            "s21",
+            "f2:54",
+            "f2:115",
+            "f2:122"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "2d8fc23b3c305704",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check only decides whether to create the extension storage directory; both paths converge on state 37668 and write the same extension files, so this is storage plumbing.",
+          "evidence_refs": [
+            "s20",
+            "s21",
+            "f2:54",
+            "f2:115",
+            "f2:122"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "1b1cf698e71fb056",
+      "packet_sha256": "46454f6caeae8bca",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "bde9ca1d2fc185c0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform and install-command branches enclose the administrator test, whose true arm selects state 362814 and the additional directory append; these cited regions require all three conditions. The decoded guards and state transitions show conjunction with a minimum of three conditions.",
+          "evidence_refs": [
+            "f2:6",
+            "f2:34",
+            "f2:44",
+            "f2:63",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "3686a96440bea6ce",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "broken_hop",
+          "evidence": "The claimed bind hop s9 is a directory string passed to list.append, not a function or object binding that leads to Save(). The saved object instead comes from CreateShortcut at f2:86, so the cited witness does not reach the sink.",
+          "evidence_refs": [
+            "s9",
+            "f2:45",
+            "f2:86",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "2b68f3b5472af53e",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "When IsUserAnAdmin() is false, state 18005 still proceeds through extension creation to Dispatch and shortcut traversal, where Save() can execute. Administrator success only adds a directory to the existing search list, so the sink is also reachable without the administrator then arm.",
+          "evidence_refs": [
+            "f2:48",
+            "f2:63",
+            "f2:67",
+            "f2:115",
+            "f2:121",
+            "f2:110",
+            "f2:60",
+            "f2:78",
+            "f2:100"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "01b5bc2d63b6b1df",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Dispatch imported from win32com.client creates WScript.Shell, whose CreateShortcut result receives extension-loading arguments and is saved with Save(). This writes modified browser shortcuts in the searched directories, supporting persistence.",
+          "evidence_refs": [
+            "f2:107",
+            "f2:61",
+            "f2:48",
+            "f2:78",
+            "f2:86",
+            "f2:90",
+            "f2:91",
+            "s8"
+          ]
+        }
+      ]
+    }
+  ]
+}

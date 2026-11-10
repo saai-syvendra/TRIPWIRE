@@ -1,0 +1,576 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "node-core-libs",
+    "version": "1.0.0",
+    "archive_sha256": "fed0f5b410cf6d312f0e5c40be26e00deb3278477a3757814a2dfc437e22fdbe"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "b443e0852cd81591",
+      "packet_sha256": "353862ae3cbc9a58",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "49154b658fd1e643",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares process.platform with 'win32'; process.exit(0) runs when the comparison is false, so later code runs on Windows.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b64170d74dab349b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares process.platform with 'win32'; process.exit(0) runs when the comparison is false, so later code runs on Windows.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "09aef09ce13f160f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition compares process.platform with 'win32'; process.exit(0) runs when the comparison is false, so later code runs on Windows.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "a32d20d55b99239a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition calls f.existsSync(up), where up is joined from the node_modules path, 'node-fetch-utils', and 'package.json'; its then block reads and rewrites that package file.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "bf751a11a6a86c0c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition calls f.existsSync(up), where up is joined from the node_modules path, 'node-fetch-utils', and 'package.json'; its then block reads and rewrites that package file.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "9bc41475336296db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition calls f.existsSync(up), where up is joined from the node_modules path, 'node-fetch-utils', and 'package.json'; its then block reads and rewrites that package file.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "d68220064d5c3bfa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition calls f.existsSync(op), where op resolves to the package.json beside the script; the then block reads and rewrites it.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "761c0fa1636cfb29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition calls f.existsSync(op), where op resolves to the package.json beside the script; the then block reads and rewrites it.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "160e9c8d1b73a27f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition calls f.existsSync(op), where op resolves to the package.json beside the script; the then block reads and rewrites it.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "063a07eab191ec04",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The response body d exits when absent or when d.length is below 16; reaching subsequent code therefore requires a body length of at least 16.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "5a2ebb78b6a7823d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The response body d exits when absent or when d.length is below 16; reaching subsequent code therefore requires a body length of at least 16.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "f987e6b37bbe24c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The response body d exits when absent or when d.length is below 16; reaching subsequent code therefore requires a body length of at least 16.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "93d72d77a010f1a8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early exit on a non-win32 platform leaves the rest of the file on the win32 side, so c1 alone is the smallest condition set.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "77001a549828b60a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the win32 side, the code fetches a response and performs the later payload actions, so the gate enables those actions.",
+          "evidence_refs": [
+            "s1",
+            "s8",
+            "s10",
+            "s15",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "ad4efd521fe7ba91",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The body runs only on win32, where it requests and launches the payload, matching activate polarity.",
+          "evidence_refs": [
+            "s1",
+            "s8",
+            "s10",
+            "s15",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "5d5b4ee97033fb09",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows check selects the platform on which the HTTP request and Windows Script Host launch can operate; this is portability, not targeting.",
+          "evidence_refs": [
+            "s1",
+            "s8",
+            "s10",
+            "s15",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "df4e48793509f06d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The async IIFE after the platform exit calls _g, whose definition performs http.get, and calls _tidy, whose definition writes the marker; no other callers or exports appear in the file.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "92d5c5a4569f811d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The async IIFE after the platform exit calls _g, whose definition performs http.get, and calls _tidy, whose definition writes the marker; no other callers or exports appear in the file.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "a11c32674cce2679",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "http.get performs the network request and returns its response body, and _tidy reaches writeFileSync for the marker file.",
+          "evidence_refs": [
+            "s10",
+            "s15",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9d07c1eb46da40fe",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The package existence check is nested after the win32 early exit, so both conditions are required for the guarded rewrite.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "4997d87742a2eb11",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate controls an edit to node-fetch-utils/package.json, changing that environment-selected artifact; its effect is modifies, not enables.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "b899928277933740",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "On the selected win32 and package-present target, the code enters the package rewrite block, matching activate polarity.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "62067768e02b49eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The presence check establishes that the other package's manifest is available for the guarded rewrite, matching data_availability.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "a8d56319ea198b63",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The writeFileSync call is inside the node-fetch-utils manifest existence block, itself nested after the win32 early exit; there are no other paths to this sink.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "14caef8364e5c71c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The writeFileSync call is inside the node-fetch-utils manifest existence block, itself nested after the win32 early exit; there are no other paths to this sink.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "4efdc165e9e9664b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guarded fs.writeFileSync rewrites the node-fetch-utils package manifest, supporting the modify_other_packages behavior.",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "ac6796085934c93e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The own-manifest existence check is nested after the win32 early exit, so both c1 and c3 are required for the guarded block.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "s6",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "6209075dd5a7781d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate enables the manifest cleanup and marker write performed in its then block.",
+          "evidence_refs": [
+            "s1",
+            "s5",
+            "s6",
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "9539e59fa989e813",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The selected win32 platform with an existing own manifest triggers cleanup, matching activate polarity.",
+          "evidence_refs": [
+            "s1",
+            "s5",
+            "s6",
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "2e5fc89d49c15a72",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks for the package's own manifest so cleanup can run; this is a local prerequisite, not evidence of data availability as the gate's purpose, which is unclear.",
+          "evidence_refs": [
+            "s1",
+            "s5",
+            "s6",
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "c344a039e5ef1aa7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The manifest rewrite is inside the existing-manifest block nested after the win32 exit; no alternate callers or paths to the write are present.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "6c19166311839726",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The manifest rewrite is inside the existing-manifest block nested after the win32 exit; no alternate callers or paths to the write are present.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "7331b4168616c406",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The fs.writeFileSync sink rewrites the package manifest and removes its install scripts, supporting cleanup as defense evasion.",
+          "evidence_refs": [
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "eb2434207e188fe4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The response-length early exit is inside the win32 path, and code after it requires both win32 and a response body length of at least 16.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s7",
+            "s8",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "8fdb39927b850374",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate enables writing and launching the fetched body and then deleting the installer file.",
+          "evidence_refs": [
+            "s1",
+            "s7",
+            "s8",
+            "s22",
+            "s23",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "fb40496df1b0f52f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fetched payload is launched only after a sufficiently long response on win32, matching activate polarity.",
+          "evidence_refs": [
+            "s1",
+            "s7",
+            "s8",
+            "s22",
+            "s23",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "de597a309806784a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The response length check requires usable payload data before the writes and launch, matching data_availability.",
+          "evidence_refs": [
+            "s1",
+            "s7",
+            "s8",
+            "s22",
+            "s23",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "65a6055491b30451",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each listed write, spawn, and unlink is in the code after both early exits; this file shows no alternate entry path.",
+          "evidence_refs": [
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "84a87e08a0e1ccef",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Each listed write, spawn, and unlink is in the code after both early exits; this file shows no alternate entry path.",
+          "evidence_refs": [
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "0b89fb3891ce6b9d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The fs.writeFileSync calls write the fetched body and VBS launcher, spawn launches wscript.exe with that launcher, and unlinkSync deletes this script.",
+          "evidence_refs": [
+            "s23",
+            "s24",
+            "s25",
+            "s26"
+          ]
+        }
+      ]
+    }
+  ]
+}

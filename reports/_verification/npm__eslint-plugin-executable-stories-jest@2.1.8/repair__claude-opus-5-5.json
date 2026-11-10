@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "eslint-plugin-executable-stories-jest",
+    "version": "2.1.8",
+    "archive_sha256": "881505cc4a1e40b8d8c1e9534e3a2aec4b7ecd06f4bfffdf86f18f716cd7a593"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "09be75a9172b00ed",
+      "record_sha256_after": "2a22658b6c50556d",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "c3c8e872adab2cb8",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "z7() returns true when the Intl locale or LC_ALL/LC_MESSAGES/LANGUAGE/LANG starts with 'ru', and uX() then calls process.exit(0). This excludes a class of victims by region and does not detect analysis, CI or a sandbox, so polarity changed from evade to activate."
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "8f76697b389a37b0",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The same Russian-locale exit in uX() limits which victims the payload runs on, so purpose changed from anti_analysis to targeting and purpose_reason reworded to describe a victim filter."
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "fe362a7c26eae089",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "In g1.execute() the test ['darwin','linux'].includes(process.platform) guards downloadPackages plus publishPackage (republishing the victim's npm packages). When it is false the method skips straight to return true, so Windows gets no other version of the behaviour. The gate-analysis definition labe"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged for reasons that need a person or more verification: the payload is read only through a hand-built 5-step decode chain (d20-d24) whose replay needs checking; all 13 conditions and gates are out of set and still unverified; several provider-level gates (repeated w4() EDR and H9() CI che"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2a22658b6c50556d",
+      "record_sha256_after": "885d2bc1dceb946a",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "0f4dfb1e274b4fbe",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right: w4 picks the command by platform, `tasklist 2>/dev/null` on win32 and `ps aux 2>/dev/null` elsewhere, so the target `ps aux` was not exact. probe.target is now `* 2>/dev/null`, with both commands in execution.notes. execSync is the import aliased _0x5ef3ff, and the site sti"
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "5f44b4552e6efaa6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The value was prose, listed carbonblack (not in DQ) and mixed in the RQ paths. It is now the exact 17 DQ names under not_includes. The RQ fs.existsSync test is its own condition c10 (not_exists, the 7 RQ paths). A match in w4 makes shouldExecute return false, so the negated operator stands."
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "ea4493fbf2daac33",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "recon had no payload entry and self_propagation sat on the run call. Added recon witnessed through _3 to the I6 execute method and its os.hostname call. self_propagation now follows ingest, handleNpmTokens, class g1 execute, publishPackage and C4 to the registry PUT fetch, with the ingest loop added"
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "8e4126036950c9c8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right: z7 returns true on any of three tests, so the single LANG condition was too narrow. Added c12 for the Intl locale test, widened c1's api to the env variables read and added the SystemRoot fallback as a second c1 site. Expression is now c1 && c12 with both on the if(z7()) gu"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "1239523a1fb7b51a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The claim changed because g1's expression gained c12, c1's api changed and purpose_reason now names the Windows fallback. The label targeting stands: z7 excludes Russian locale hosts by exit before any collection, which selects victims by region and tests nothing about analysis or sandboxes, so the "
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "c64eb3afc883e076",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "recon and self_propagation had no payload entry and exfil rested on the unresolved run call. Added the same witnesses as g1: recon to os.hostname in I6 execute, self_propagation through ingest to the C4 registry PUT, exfil through run, finalize, flush and bound dispatch to send. The ingest loop was "
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "6a80f8d8e49c8d85",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "self_propagation had no payload entry. Added it on the fetch PUT in C4, witnessed from this.publishPackage in the guarded block through publishPackage and C4. C4 publishes the tarball rewritten by updateTarball using the stolen token. The download entry stands: downloadPackages fetches registry meta"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "fe362a7c26eae089",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "In class g1 execute, the if on [darwin, linux].includes(process.platform) guards the only code that downloads, rewrites and publishes packages. The false side just falls to return true and no Windows variant exists. Portability needs each branch to run a platform-specific version of the same behavio"
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "64e297e509e61ff9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right about H9 and w4: H9 tests CI values and about 30 provider markers, and w4 tests paths as well as processes. c9 is now CI not_in true, 1, woodpecker with two sites, c11 holds the provider markers, c10 the RQ paths. Expression is c7 && c8 && c9 && c10 && c11, min_conditions 5."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "yarn",
+    "version": "1.22.22",
+    "archive_sha256": "c17d3797fb9a9115bf375e31bfd30058cac6bc9c3b8807a3d8cb2094794b51ca"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "46c4232b4c5429af",
+      "record_sha256_after": "d3f2a011830df1e8",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "c1a2a8035a131f59",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Under the gate-analysis definitions, portability means each branch runs a platform-specific version of the same behaviour. g2 has one branch and no platform or OS split, so portability does not fit. In preinstall.js the deletion fs.unlinkSync(binPath) (line 51) only runs when fs.readlinkSync(binPath"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Resolved 'guessed recipe fields'. I dropped package_manager npm from the g1 and g2 recipes because neither gate tests it: the only installer check is process.env.npm_config_global (c1), which env_var already covers, and the npm CLI path is a requirement (npm_execpath). I replaced the g2 file_present"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d3f2a011830df1e8",
+      "record_sha256_after": "d3f2a011830df1e8",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "141497dac6e40227",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "preinstall.js:21 is `if (process.env.npm_config_global) { ... }` with no else, and the whole script body sits inside it (bytes 1160-2339), so a non-global install runs nothing at all. The gate-analysis definition of portability is that each branch runs a platform-specific version of the same behavio"
+        }
+      ]
+    }
+  ]
+}

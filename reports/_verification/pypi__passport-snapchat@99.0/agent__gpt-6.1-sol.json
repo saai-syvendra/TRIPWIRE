@@ -1,0 +1,891 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "passport-snapchat",
+    "version": "99.0",
+    "archive_sha256": "8be2bd37d56006cc85f76bd8042cfbaa41f5efe64eeefab96f1f7263a1fae471"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "da4d02251b5c9870",
+      "packet_sha256": "3017897a637a1779",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b9e0f25200b76ab8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The open call reads the expanded pip configuration path inside a try whose read failures return without an index URL.",
+          "evidence_refs": [
+            "s1",
+            "f1:263",
+            "f1:266"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "9a0e8d58f6e74e75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Opening the configuration must succeed before get_index can return the nonempty URL required to pass the early return.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f4036eb939291c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition concerns availability of a specific user configuration artifact.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "cf4f96877fe3b951",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested line comes from readlines on the file opened as the user pip configuration.",
+          "evidence_refs": [
+            "s3",
+            "f1:262",
+            "f1:268"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c95f35bb2473b435",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A line must contain index-url to supply the URL used by the guarded commands.",
+          "evidence_refs": [
+            "s3",
+            "f1:271"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "031365bf1f7aaa0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This tests a substring in configuration file content.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "56c3d45714ed8095",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch condition directly tests membership in sys.argv.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1e4fadf4dc11434e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The wheel-handling body runs when bdist_wheel is present in sys.argv.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "efa21c10c3cca387",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The argument identifies the package build command being requested.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "99f71817adc012a9",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The expression omits the requirement that the extracted URL be nonempty: a readable file containing a line ending with index-url= satisfies c1 and c2 but returns an empty string and exits.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:271"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "0ae1dda7ed14e2ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return disables the pip install command when no index URL is available.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "55fd37758409a68b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The URL availability check activates installation when configuration is available, without checking for analysis tools.",
+          "evidence_refs": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ba8562a3dde2711c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Data_availability fits better: the configuration supplies the index URL interpolated into pip install, and absence of that input returns early.",
+          "evidence_refs": [
+            "f1:271",
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "afdc6fae1a0e0a8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The subprocess call lies directly in the region after the no-index early return.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "27fc22ca9b404811",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sink is inside the nested callback after its URL guard; registering the callback at exit does not bypass that guard.",
+          "evidence_refs": [
+            "f1:277",
+            "s2",
+            "s7",
+            "f1:323"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "998ed673f4ce383b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The resolved subprocess.check_output invokes pip install through the shell, which can download a package and execute installation code.",
+          "evidence_refs": [
+            "f1:16",
+            "f1:279",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2ce0b3b8d8634b64",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "Even with bdist_wheel present, a readable configuration with an empty index-url value satisfies the listed conditions but exits; the conjunction omits the nonempty extracted URL requirement.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5",
+            "f1:271"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2794ac854d28e919",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guards enable the download and wheel replacement operations.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "891b1190e6ed0648",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The configuration and command checks activate wheel handling for the matching invocation.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "98d9859c800a7cb1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Portability fits better: the build-command check adapts wheel download and placement to bdist_wheel, using the configured index as input.",
+          "evidence_refs": [
+            "s5",
+            "f1:309",
+            "f1:321"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "57f03e9ee402fba2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All three sinks lie after the URL early return and inside the bdist_wheel body, including the nested directory branches.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "e75839507bb9ffbb",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The download, move and unlink sites are local to the callback and cannot be reached there without passing both cited guards.",
+          "evidence_refs": [
+            "f1:277",
+            "s2",
+            "s5",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "31719745b2c96e89",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The subprocess command runs pip download, shutil.move writes the destination artifact, and os.unlink deletes the existing artifact.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11",
+            "f1:254",
+            "f1:255"
+          ]
+        },
+        {
+          "claim_id": "k_150aad96d4.L6.drop",
+          "claim_sha256": "011c42a25ec0c37c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check handles creation or replacement in the same wheel destination directory; this is storage plumbing for the wheel operation.",
+          "evidence_refs": [
+            "s12",
+            "f1:309",
+            "f1:321"
+          ]
+        },
+        {
+          "claim_id": "k_1523bfa150.L6.drop",
+          "claim_sha256": "fab4734479a61d1a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check only changes the PYTHONPATH prefix used to launch the same pip command, which is execution plumbing.",
+          "evidence_refs": [
+            "s13",
+            "f1:288",
+            "f1:296"
+          ]
+        },
+        {
+          "claim_id": "k_34a2ff9669.L6.drop",
+          "claim_sha256": "74b541a3d39d0a56",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects the IP and MAC reconnaissance operations, including platform-specific file reads, process creation or hostname resolution during collection.",
+          "evidence_refs": [
+            "s14",
+            "f1:167",
+            "f1:186",
+            "f1:196",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "k_41d568be42.L6.drop",
+          "claim_sha256": "729b29e6baa845d7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check only changes the PYTHONPATH prefix used to launch the same pip command, which is execution plumbing.",
+          "evidence_refs": [
+            "s15",
+            "f1:288",
+            "f1:296"
+          ]
+        },
+        {
+          "claim_id": "k_49929842f8.L6.drop",
+          "claim_sha256": "96338c5924546b5f",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The interpreter-version check enables the interface-address ioctl lookup; otherwise the function returns UNKNOWN, so it gates host reconnaissance.",
+          "evidence_refs": [
+            "s16",
+            "f1:125",
+            "f1:127",
+            "f1:168",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "k_4a0c260f6b.L6.drop",
+          "claim_sha256": "67f23c94969c7a38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check selects the compatible HTTP import for the same request operation, which is runtime compatibility plumbing.",
+          "evidence_refs": [
+            "s17",
+            "f1:8",
+            "f1:11",
+            "f1:242"
+          ]
+        },
+        {
+          "claim_id": "k_4bd66fc71c.L6.drop",
+          "claim_sha256": "4f3da8f328a5a1c9",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This environmental check controls hashed artifact discovery and whether detect_system skips the later local HTTP probe; it participates in a gate deciding reconnaissance at install.",
+          "evidence_refs": [
+            "s18",
+            "f1:39",
+            "f1:46",
+            "f1:75",
+            "f1:77"
+          ]
+        },
+        {
+          "claim_id": "k_53a2a073c3.L6.drop",
+          "claim_sha256": "afbd4bac489763e0",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This environmental check controls hashed artifact discovery and whether detect_system skips the later local HTTP probe; it participates in a gate deciding reconnaissance at install.",
+          "evidence_refs": [
+            "s19",
+            "f1:39",
+            "f1:46",
+            "f1:75",
+            "f1:77"
+          ]
+        },
+        {
+          "claim_id": "k_6898806f80.L6.drop",
+          "claim_sha256": "7ae63871d03aed3e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects the IP and MAC reconnaissance operations, including platform-specific file reads, process creation or hostname resolution during collection.",
+          "evidence_refs": [
+            "s20",
+            "f1:167",
+            "f1:186",
+            "f1:196",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "k_7694cc91ae.L6.drop",
+          "claim_sha256": "b83ebdf505ef1d30",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects interface reconnaissance through a system file, an ifconfig process or socket enumeration, so it decides collection behavior at install.",
+          "evidence_refs": [
+            "s21",
+            "f1:142",
+            "f1:158",
+            "f1:194",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "k_91f78649e6.L6.drop",
+          "claim_sha256": "6cf945e7a4fdcca5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects interface reconnaissance through a system file, an ifconfig process or socket enumeration, so it decides collection behavior at install.",
+          "evidence_refs": [
+            "s22",
+            "f1:142",
+            "f1:158",
+            "f1:194",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "k_b87d1c2f03.L6.drop",
+          "claim_sha256": "b27c42766526b655",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects interface reconnaissance through a system file, an ifconfig process or socket enumeration, so it decides collection behavior at install.",
+          "evidence_refs": [
+            "s23",
+            "f1:142",
+            "f1:158",
+            "f1:194",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "k_d50ab6d3b5.L6.drop",
+          "claim_sha256": "11ef09b42b056597",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version checks enable collection of the local timezone instead of an empty value, gating part of the host reconnaissance included in the transmitted data.",
+          "evidence_refs": [
+            "s24",
+            "f1:110",
+            "f1:114",
+            "f1:214"
+          ]
+        },
+        {
+          "claim_id": "k_dff8dcc169.L6.drop",
+          "claim_sha256": "b18575c32013c092",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version checks enable collection of the local timezone instead of an empty value, gating part of the host reconnaissance included in the transmitted data.",
+          "evidence_refs": [
+            "s25",
+            "f1:110",
+            "f1:114",
+            "f1:214"
+          ]
+        },
+        {
+          "claim_id": "k_e380934d46.L6.drop",
+          "claim_sha256": "37e84ed86547a0e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check selects the compatible HTTP import for the same request operation, which is runtime compatibility plumbing.",
+          "evidence_refs": [
+            "s26",
+            "f1:8",
+            "f1:11",
+            "f1:242"
+          ]
+        },
+        {
+          "claim_id": "k_ec73b446af.L6.drop",
+          "claim_sha256": "0892e2dab3ab93c4",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects the IP and MAC reconnaissance operations, including platform-specific file reads, process creation or hostname resolution during collection.",
+          "evidence_refs": [
+            "s27",
+            "f1:167",
+            "f1:186",
+            "f1:196",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "q_226c58a329.L6.drop",
+          "claim_sha256": "31d10cda85d2195b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try and its exception returns are the same configuration-read availability check already represented by c1, rather than an additional independent gate.",
+          "evidence_refs": [
+            "s28",
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "q_256c150c65.L6.drop",
+          "claim_sha256": "15c24ad844e4ea0a",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This environmental check controls hashed artifact discovery and whether detect_system skips the later local HTTP probe; it participates in a gate deciding reconnaissance at install.",
+          "evidence_refs": [
+            "s29",
+            "f1:39",
+            "f1:46",
+            "f1:75",
+            "f1:77"
+          ]
+        },
+        {
+          "claim_id": "q_47990afd34.L6.drop",
+          "claim_sha256": "431e603266d139ae",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The interpreter-version check enables the interface-address ioctl lookup; otherwise the function returns UNKNOWN, so it gates host reconnaissance.",
+          "evidence_refs": [
+            "s30",
+            "f1:125",
+            "f1:127",
+            "f1:168",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "q_5ccc73db93.L6.drop",
+          "claim_sha256": "e00f42511c53e6a2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects the IP and MAC reconnaissance operations, including platform-specific file reads, process creation or hostname resolution during collection.",
+          "evidence_refs": [
+            "s31",
+            "f1:167",
+            "f1:186",
+            "f1:196",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "q_73c468bf50.L6.drop",
+          "claim_sha256": "093a7174f0e51a2e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check selects the compatible HTTP import for the same request operation, which is runtime compatibility plumbing.",
+          "evidence_refs": [
+            "s32",
+            "f1:8",
+            "f1:11",
+            "f1:242"
+          ]
+        },
+        {
+          "claim_id": "q_7b6cfc3093.L6.drop",
+          "claim_sha256": "28bcdea7d46a2b05",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects the IP and MAC reconnaissance operations, including platform-specific file reads, process creation or hostname resolution during collection.",
+          "evidence_refs": [
+            "s33",
+            "f1:167",
+            "f1:186",
+            "f1:196",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "q_a36675be35.L6.drop",
+          "claim_sha256": "bbbfe1f854dd4a48",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects interface reconnaissance through a system file, an ifconfig process or socket enumeration, so it decides collection behavior at install.",
+          "evidence_refs": [
+            "s34",
+            "f1:142",
+            "f1:158",
+            "f1:194",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "q_b206121ffc.L6.drop",
+          "claim_sha256": "0fb054d581deda96",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects the IP and MAC reconnaissance operations, including platform-specific file reads, process creation or hostname resolution during collection.",
+          "evidence_refs": [
+            "s35",
+            "f1:167",
+            "f1:186",
+            "f1:196",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "q_c6834b6084.L6.drop",
+          "claim_sha256": "d7dc9bbadf8faae5",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version checks enable collection of the local timezone instead of an empty value, gating part of the host reconnaissance included in the transmitted data.",
+          "evidence_refs": [
+            "s36",
+            "f1:110",
+            "f1:114",
+            "f1:214"
+          ]
+        },
+        {
+          "claim_id": "q_cc6042522e.L6.drop",
+          "claim_sha256": "da8630f8daf5fb5e",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This environmental check controls hashed artifact discovery and whether detect_system skips the later local HTTP probe; it participates in a gate deciding reconnaissance at install.",
+          "evidence_refs": [
+            "s37",
+            "f1:39",
+            "f1:46",
+            "f1:75",
+            "f1:77"
+          ]
+        },
+        {
+          "claim_id": "q_e41f5c33d1.L6.drop",
+          "claim_sha256": "a8192cc669c6d859",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects interface reconnaissance through a system file, an ifconfig process or socket enumeration, so it decides collection behavior at install.",
+          "evidence_refs": [
+            "s38",
+            "f1:142",
+            "f1:158",
+            "f1:194",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "q_f45ae3a8f9.L6.drop",
+          "claim_sha256": "bb76ad6616f9352c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS decision selects interface reconnaissance through a system file, an ifconfig process or socket enumeration, so it decides collection behavior at install.",
+          "evidence_refs": [
+            "s39",
+            "f1:142",
+            "f1:158",
+            "f1:194",
+            "f1:213"
+          ]
+        },
+        {
+          "claim_id": "q_f53d440567.L6.drop",
+          "claim_sha256": "1fddbc0a8986c7a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check handles creation or replacement in the same wheel destination directory; this is storage plumbing for the wheel operation.",
+          "evidence_refs": [
+            "s40",
+            "f1:309",
+            "f1:321"
+          ]
+        },
+        {
+          "claim_id": "q_f9aa7aff3a.L6.drop",
+          "claim_sha256": "0686cbf3d44580f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check selects the compatible HTTP import for the same request operation, which is runtime compatibility plumbing.",
+          "evidence_refs": [
+            "s41",
+            "f1:8",
+            "f1:11",
+            "f1:242"
+          ]
+        },
+        {
+          "claim_id": "q_ffde2c7879.L6.drop",
+          "claim_sha256": "03452d56f9357c29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check only changes the PYTHONPATH prefix used to launch the same pip command, which is execution plumbing.",
+          "evidence_refs": [
+            "s42",
+            "f1:288",
+            "f1:296"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "158328ea3e127367",
+      "packet_sha256": "bcd02ea6c32b7c36",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "8398840c59305000",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "get_index reads the user's pip configuration and returns the index-url value; the post-install callback returns without invoking pip when that value is unavailable. This makes availability of the configured package source a prerequisite for the subsequent pip install and download operations (f1:260-",
+          "evidence_refs": [
+            "f1:260",
+            "f1:268",
+            "f1:283",
+            "f1:296",
+            "f1:304"
+          ]
+        },
+        {
+          "claim_id": "k_49929842f8.L6.drop",
+          "claim_sha256": "48173594a7e29b19",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version test chooses whether the interface-name encoding and ioctl-based IP lookup can run, otherwise returning UNKNOWN (s1, f1:130). This is compatibility handling within network-information collection, whose result is included in the report regardless, rather than a payload activation gate (f1",
+          "evidence_refs": [
+            "s1",
+            "f1:130",
+            "f1:167",
+            "f1:213",
+            "f1:229"
+          ]
+        },
+        {
+          "claim_id": "k_4bd66fc71c.L6.drop",
+          "claim_sha256": "9af3c33b106c230d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The home-directory check is required for the artifact search to return true (s2, f1:42-50). A true result suppresses the fallback local HTTP probe and environment scan in detect_system, so this environment check participates in deciding which reconnaissance runs during installation (f1:75-80, f1:324",
+          "evidence_refs": [
+            "s2",
+            "f1:42",
+            "f1:50",
+            "f1:75",
+            "f1:77",
+            "f1:324"
+          ]
+        },
+        {
+          "claim_id": "k_53a2a073c3.L6.drop",
+          "claim_sha256": "f4d7a61a6812c6a1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The operating-system test restricts the artifact search and its possible true result to Darwin or Linux (s3, f1:36-50). That result controls whether detect_system performs its fallback local HTTP probe and environment scan, making this a gate on installation-time reconnaissance (f1:75-80, f1:324).",
+          "evidence_refs": [
+            "s3",
+            "f1:36",
+            "f1:50",
+            "f1:75",
+            "f1:77",
+            "f1:324"
+          ]
+        },
+        {
+          "claim_id": "k_d50ab6d3b5.L6.drop",
+          "claim_sha256": "13655c13f5bb9881",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The major-version comparison only controls whether the reported timestamp includes local timezone information; both branches produce the same time field (s4, f1:114-117). collect_info includes that field without using it to enable or select subsequent behavior, so the check is compatibility handling",
+          "evidence_refs": [
+            "s4",
+            "f1:114",
+            "f1:117",
+            "f1:214",
+            "f1:228"
+          ]
+        },
+        {
+          "claim_id": "k_dff8dcc169.L6.drop",
+          "claim_sha256": "8f418b4d1daddfe8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The minor-version comparison only controls whether the reported timestamp includes local timezone information; both branches produce the same time field (s5, f1:114-117). collect_info includes that field without using it to enable or select subsequent behavior, so the check is compatibility handling",
+          "evidence_refs": [
+            "s5",
+            "f1:114",
+            "f1:117",
+            "f1:214",
+            "f1:228"
+          ]
+        },
+        {
+          "claim_id": "q_256c150c65.L6.drop",
+          "claim_sha256": "409b38921c090156",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The operating-system branch permits an artifact match to make mJdzrtzhMJ_1 return true (s6, f1:50). detect_system uses that result to skip the local HTTP probe and subsequent environment scan, so the branch participates in gating installation-time reconnaissance (f1:75-80, f1:324).",
+          "evidence_refs": [
+            "s6",
+            "f1:50",
+            "f1:75",
+            "f1:77",
+            "f1:324"
+          ]
+        },
+        {
+          "claim_id": "q_cc6042522e.L6.drop",
+          "claim_sha256": "1d623ec426b1b471",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The directory-existence branch permits an artifact match to make mJdzrtzhMJ_1 return true (s7, f1:50). detect_system uses that result to skip the local HTTP probe and subsequent environment scan, so the branch participates in gating installation-time reconnaissance (f1:75-80, f1:324).",
+          "evidence_refs": [
+            "s7",
+            "f1:50",
+            "f1:75",
+            "f1:77",
+            "f1:324"
+          ]
+        }
+      ]
+    }
+  ]
+}

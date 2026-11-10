@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "attr_property",
+    "version": "0.2.101",
+    "archive_sha256": "ece7a75a7aa98dfa333b24c11af8512f91976a2167d6648c058b062bb95444ae"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f17bd73325726a50",
+      "record_sha256_after": "2fc0040ebac050cf",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed what the code shows: the exfil witness now runs run() (setup.py:106) to def run, Popen([pythonw, file]) (:93) as run_file into d1, run_until_complete(main()) (d1:363) and def main (d1:267), where session.post to /receive_log (d1:346) sits directly, so its computed_callee mark is removed. The r"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "2fc0040ebac050cf",
+      "record_sha256_after": "2fc0040ebac050cf",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "338c5a985c721919",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "d3:34 is a real decision, `if f == \"passphrase.json\":`, and it uses os.walk through variables bound in the same function. `walk` is imported from os at d3:4, d3:32 is `for dirpath, dirnames, filenames in walk(bacukps_folder):` and d3:33 is `for f in filenames:`, so f is only ever a name yielded by o"
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "7ae0e8596605befe",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The operator and value match the code: d3:34 compares with == against the literal \"passphrase.json\", and that true side holds the copy at d3:38, so == is the positive form. The compared operand f is a filename yielded by walk (d3:32-33), so the claim reads as: a name from the os.walk listing equals "
+        },
+        {
+          "claim_id": "g10.L6.purpose",
+          "claim_sha256": "fa97bd22a07b03b0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "d1:353 is `if 'DEBUG' not in {i.name for i in scandir(join(TEMP, '__pycache__'))}:` and its body (d1:354-359) deletes the drop folder and log folder after the upload at d1:346. The check looks only for a file named DEBUG in the malware's own drop folder. It reads no sandbox, debugger, analysis tool "
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,590 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@rspack/cli",
+    "version": "1.1.7",
+    "archive_sha256": "f77f3b9068bb0478b3f005249370489038bef26fd9de6c5978d7a3a1dc997646"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "3cf2a0bd375b7aec",
+      "packet_sha256": "876114c7895cc68e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "43c7aae5d8ad89e2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The switch on process.platform returns the LINUX enum for case linux, and its result is compared with !== LINUX before process.exit(0).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "4850e4b4ad53ac59",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`platform !== LINUX && process.exit(0)` exits unless the platform is linux, so the guarded code runs only when platform == linux.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "c590482958061a3b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the operating system via process.platform.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1a7d470589202150",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The switch discriminant is the country from axios.get of ipinfo[.]io/json (status 200 ? data.country : 'UNK').",
+          "evidence_refs": [
+            "s3",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "921fce2a3cda7584",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Cases CN, RU, HK, UNK, BY, IR share one body that yields _0x490324(); the default exits.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "8c8d68a0f8cc0498",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The value is a country code from an external IP-geolocation service.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "d005ba27d1120962",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "existsSync(path) is the ternary test, mapped over the array holding ~/.aliyun/config.json, ~/.hcloud/config.json and ~/.tccli/default.credential.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "52d6bdb12529361a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file is read only when existsSync is true (ternary then arm), and the later length===0 early return skips the upload when nothing was read.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "c94498ac4f20619f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a cloud credential file the code targets is present.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "51accd3f9eb6caad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same existsSync site, applied to the ~/.hcloud/config.json entry of the path array.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "7f9dccc11a188fc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Read only when existsSync is true; the empty-list early return guards the upload.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "50ba181e9caa3aae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a targeted credential file exists.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "a5df226956467f0e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same existsSync site, applied to the ~/.tccli/default.credential entry of the path array.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "c54803694e82fcf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Read only when existsSync is true; the empty-list early return guards the upload.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "e9ae720346437bf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a targeted credential file exists.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a22f4ddf7ab54450",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single platform guard (exit unless linux) precedes the geo switch in s8, so one condition gates it.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4cff6d9cb1d152bb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Without linux the process exits before the geo lookup and payload, so the gate enables the rest.",
+          "evidence_refs": [
+            "s2",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "b8e38e95625d5a00",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code continues on linux and exits otherwise; it is not an analysis or sandbox check.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "d9e2f57ea66fbdab",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS check exits on non-linux because the payload is a linux-static x64 binary run from /tmp, so I would label it portability, not targeting.",
+          "evidence_refs": [
+            "s2",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "1c70abb6b9bb3609",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The IIFE called inside the s8 switch discriminant is defined at s11, and axios.get of ipinfo[.]io/json (s9) sits inside that definition.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "678e1338c728427c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The lookup is an anonymous inline function called once, right after the platform guard; nothing else can reach it.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "a2d7ba35b4533760",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The recon sink is an axios GET to an IP-info service, which is network.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "4d9602cd6eba4547",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform guard encloses the geo switch, whose matching case runs _0x490324(), so the two conditions nest with and.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "82a41e95f42e4f76",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The miner download, execution and credential theft run only when both conditions pass, otherwise the process exits.",
+          "evidence_refs": [
+            "s4",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "31e90f49d89353cc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs on linux with a matching country code; this is not an evasion check.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "37bfd8e42f661902",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload is limited to a chosen set of country codes, which is targeting.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "2b3d5bdd3e1bc482",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call at s14 reaches _0x490324 (s15), which holds the axios downloads (s13, s16) and createWriteStream (s17) and calls _0x255d26; that function holds spawn (s18) and unlinkSync (s19).",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "6f7a13508490fe4c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "_0x490324 appears only at its definition and the single call in the gated case; _0x255d26 appears only at its definition and two calls inside _0x490324.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "9934977670b8035d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Downloads use axios (network), the archive goes through createWriteStream (write), child_process spawn runs it, unlinkSync deletes it, and the spawn arguments point at a mining pool.",
+          "evidence_refs": [
+            "s13",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "cb39d762704a626c",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Platform and geo guards nest with and; each path is read only if existsSync is true, and the upload is skipped when no file was read, so the three path checks act as an or (min 3).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s7",
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "dbd141c64d78fa06",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Credential reading and upload happen only if at least one credential file exists.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "2d284982ccd33d9a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Credential theft runs when the target files are present; this is not evasion.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "c05494a2d75158b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file-existence checks only determine whether there is credential data to read and send.",
+          "evidence_refs": [
+            "s5",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "0f741c6c68429639",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readFile sink lies in the ternary then-arm (s20), and the axios post to hxxp://80[.]78[.]28[.]72/tokens lies in the try after the empty-list early return (s21).",
+          "evidence_refs": [
+            "s20",
+            "s21",
+            "s22",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "8db6030640235275",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The read and post code sits inside _0x490324, which has a single call site, in the gated geo case.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s20",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "2bb7c60615639865",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "cred_read rests on fs promises readFile and exfil on an axios post, which are a file read and a network send.",
+          "evidence_refs": [
+            "s20",
+            "s22"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "10ffe1d21e050302",
+      "packet_sha256": "3a0db21d279fb2e2",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "784236583efb0918",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The switch in s2 runs only when the platform check in s1 does not exit (platform is linux). Its discriminant calls the IIFE (s4, def s5), which calls the __awaiter helper (s6) with the generator (s7), and the generator holds the ipinfo[.]io axios get (s3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "12ea37616f3b7113",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The ipinfo[.]io request appears once in f1, inside this anonymous IIFE. That IIFE is invoked only from the switch discriminant after the linux check, and no other caller, export or timer reaches it.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "118e3b82f6105409",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is an axios GET to an IP and geolocation service whose country code feeds the gate. That is a network request used for recon.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "ce002ab3c480d02a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call to _0x490324 (s11) sits in the case group CN/RU/HK/UNK/BY/IR (s8, s9), after the linux check (s1). It reaches the definition (s12), whose __awaiter generator (s13, s14) holds the blob download (s10) and the helper IIFE calls. Those reach the xmrig download (s19) and file write (s24), and th",
+          "evidence_refs": [
+            "s1",
+            "s8",
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "61a296d3c75dd855",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "_0x490324 is defined once and called once, at s11 in the gated case. _0x255d26 is called only inside _0x490324. None of these functions is exported or otherwise referenced in f1.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "8f17c10bbc4c751f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The download sink s10 is an axios GET to a GitHub blob, and the writes use fs.createWriteStream (s24). _0x255d26 uses child_process.spawn (s25) and fs.unlinkSync (s30). The xmrig fetch (s19) is followed by a spawn with wallet and pool arguments, which is the mining. The crypto_mining claim rests on ",
+          "evidence_refs": [
+            "s10",
+            "s19",
+            "s20",
+            "s24",
+            "s25",
+            "s26",
+            "s30"
+          ]
+        }
+      ]
+    }
+  ]
+}

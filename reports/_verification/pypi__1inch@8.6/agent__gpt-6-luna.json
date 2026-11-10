@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "1inch",
+    "version": "8.6",
+    "archive_sha256": "34d90396fa38233e71a488618672e9471ee2b517f57641706c764f582d9fb957"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "a90204f6ab06f913",
+      "packet_sha256": "c7addbdb653e4fd2",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f72a39578617bfef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `if` decision directly calls `os.path.exists` on the updater path (f1:9).",
+          "evidence_refs": [
+            "s1",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "65a67bc084d96e14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition negates `os.path.exists(r\"C:/ProgramData/Updater\")`, so the then branch runs when that path does not exist (f1:9).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "c0c7f32986f2a291",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate calls `os.path.exists` with a directory path, checking whether that filesystem path exists (f1:9).",
+          "evidence_refs": [
+            "s1",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "4575e9ac18d0f3a1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole guard is the single `if not os.path.exists(...)` condition, and its then region is the print and `run` call; the minimum condition set is one (f1:9-11).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:9-11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "5a4bb871961a0939",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When the updater directory is absent, the branch downloads and extracts an archive, removes the temporary archive, and starts Python with the installed server script (f1:11), enabling those actions.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:9-11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d1f506fe574f1971",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch performs the install and launch sequence when the updater directory is absent, so this gate activates on its target condition (f1:9-11).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:9-11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "62a94fcdc8141723",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code uses the updater directory's presence to skip the download and launch sequence, but does not state why that directory is the criterion; its purpose is unclear (f1:9-11).",
+          "evidence_refs": [
+            "s2",
+            "f1:9-11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a6e558e43882b3fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then region calls `run` (f1:11); that call reaches the `run` definition, whose `subprocess.Popen(..., shell=True)` executes the supplied command (f1:4-7). The command downloads and extracts the archive and launches the installed server (f1:11).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5",
+            "s6",
+            "s4",
+            "f1:4-11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "addcd5e74f0e67bc",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only call to `run` in the complete setup.py text is inside the guarded then branch, and its definition has no other caller there (f1:4-11).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "f1:4-11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "0989aa9650489f71",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The guarded command passed to `run` downloads and extracts a ZIP, removes the temporary ZIP, starts Python, and invokes the extracted server; `run` executes it through `subprocess.Popen` with `shell=True` (f1:4-5, f1:11). The command also suppresses PowerShell errors and starts hidden processes, sup",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "f1:4-5",
+            "f1:11"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "paypalad",
+    "version": "8.27",
+    "archive_sha256": "6bd4680d70b1fdac303019d01355fdd72b4dff2bf80d5d5db549702bc73bb63a"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "fd615e03bb12b84c",
+      "packet_sha256": "98b166d7bc16eaa8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f281fab9f86070ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:6 tests os.path.exists('tahg') directly as the condition of an if statement.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "6bac43f58e050650",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code is `if not os.path.exists('tahg'):` and the Popen call runs only when the path does not exist, so not_exists with value 'tahg' is correct.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "23e12015f45e8a9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks whether a relative file or directory path exists, which fits file_or_dir_exists.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "8964b2aa0fdfbca9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if with one condition and no other guard around it (the try wrapper is not a condition), so the expression c1 and then_min 1 are right.",
+          "evidence_refs": [
+            "s2",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "862dc58bf64237e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code runs only when the gate passes and there is no else branch, so the gate enables the behaviour rather than selecting or modifying it.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "9d0eb8f13479ae8b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the marker path is absent. This is a run-once check, not a back-off on analysis, so it is activate.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "35e10de02b13fd33",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check only looks for a marker path 'tahg'. That does not identify a target or detect analysis, and nothing else in the file fits portability or data availability, so unclear fits.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4d343398131e8376",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The subprocess.Popen call at f1:7 sits inside the then block (s3) of the if at f1:6, so the empty witness is valid because the sink lies in the region itself.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "12497bec91a9fb70",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The Popen call is module-level code inside the guarded block. No function, export, timer or other caller reaches it without passing the gate.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "a36430a10747ad5d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.Popen is a process-creation sink. The command is powershell with a hidden window and -EncodedCommand. The encoded argument reads as a download followed by running the downloaded file, so download, exec_downloaded and defense_evasion all rest on this exec sink.",
+          "evidence_refs": [
+            "s3",
+            "f1:7"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "fd615e03bb12b84c",
+      "packet_sha256": "52220e2aa3a6de34",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "ef456bf7d85c12b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:6 is the condition of an if statement and calls os.path.exists('tahg') with os imported at f1:5.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2858fa249818b3d3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `if not os.path.exists('tahg')` and the Popen call runs in its then arm, so the positive form is not_exists with value tahg. There is no else arm and no other negation.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "23e12015f45e8a9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a local path exists, which is a file-or-directory existence check.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5f03e9e1c21e81e7",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single if guard with one condition, and its then block (s3) is the only region. The expression c1 matches and then_min of 1 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "862dc58bf64237e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The marker check decides whether the single payload runs at all. It does not choose between payloads or targets, so enables fits.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "9d0eb8f13479ae8b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the marker path is absent. Nothing in the test looks for analysis, CI or a sandbox, so it is activate rather than evade.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "35e10de02b13fd33",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check on a relative path 'tahg' looks like a run-once marker. It does not target a victim, evade analysis or depend on data availability, so unclear fits.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4d343398131e8376",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The subprocess.Popen call at f1:7 sits directly inside the then block of the guard at f1:6, so the empty witness is correct. subprocess is imported at f1:4.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1bb5a59e01f11634",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "setup.py is the only file in the packet. The Popen call appears once, at f1:7, inside the guarded block, and no function, export or other caller reaches it.",
+          "evidence_refs": [
+            "f1:7",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "a36430a10747ad5d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is subprocess.Popen, which creates a process. The command is powershell with a hidden window and CREATE_NO_WINDOW, and its base64 argument starts with the UTF-16 text for 'powershell Invoke-WebRequest', which supports download and run. The hidden-window flags support defense_evasion.",
+          "evidence_refs": [
+            "s3",
+            "f1:7"
+          ]
+        }
+      ]
+    }
+  ]
+}

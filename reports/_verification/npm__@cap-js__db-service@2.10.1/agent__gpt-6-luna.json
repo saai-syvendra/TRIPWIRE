@@ -1,0 +1,835 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@cap-js/db-service",
+    "version": "2.10.1",
+    "archive_sha256": "893729fbd285d0278850bd48f818d83a86be215bceb0c7f62922772e98c4b834"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "6ff4362c1df8335c",
+      "packet_sha256": "916d5cf170a5e229",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "38eab909c143f2fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`hasCommand(\"bun\")` is the decision, and its helper calls `execFileSync(cmd, args)` with the default `--version`; the false result reaches the body.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b23c501c7404df0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When `hasCommand(\"bun\")` is false, `main` continues after the early return, so the remaining branch is guarded by `bun` not existing.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e067e34a49e8dabd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "9f4dd69924e29f89",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The expression reads the `LANG` fallback in a chain with other locale variables and tests the resulting string with `startsWith`.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "d54aecceceefb850",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`J30` returns true for a locale starting with `ru`, and `jZh` exits on true; the subsequent code therefore runs when that test is false.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "6f9184db6124b1c2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "6cc0f573a8d9849e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`aA0` calls the `fs.existsSync` wrapper `_0x37ceb6` on the lock path and branches on its result.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "fb0194cbfca5a713",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The function checks the lock file, probes its PID, deletes a stale lock and writes a new one; the guard consumes the combined lock-acquisition result rather than a single `existsSync` polarity.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "bfd099bf989ddcf3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "0e3757620346338f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited expression directly reads and tests the stated environment property or API.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "b234855c709c4006",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test and its guarded side match the stated operator and value in the cited code.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "49f5b3273c34bfe8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "097b9acfd4fa35cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited expression directly reads and tests the stated environment property or API.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "040b3d9aa897993c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test and its guarded side match the stated operator and value in the cited code.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "e34f5704d628190d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "be3d631798b02b0e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The destructured `GITHUB_WORKFLOW_REF` value is tested by `includes` in the condition; its searched value is computed by `K5`.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "1dc73aa387658444",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "324c8a5a6f901b7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited expression directly reads and tests the stated environment property or API.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "8ca2f85da71beddc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test and its guarded side match the stated operator and value in the cited code.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "3c5d3b77067347eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "e72209cb6d44496b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited expression directly reads and tests the stated environment property or API.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "fb926fe418e9b8f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test and its guarded side match the stated operator and value in the cited code.",
+          "evidence_refs": [
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "322f4321e5135957",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "2c1a83adc17dd8a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file helper awaits the imported `fs.promises.stat` binding; its result controls the `isFile()` return check.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "be68abc98a1d2b15",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "value_unchecked",
+          "evidence": "The path passed to `stat` is a computed helper argument; the cited text does not establish the claimed OS-selected credential path set.",
+          "evidence_refs": [
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "105b63a299eb78aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a0de1841a2924c07",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited guard structure contains the listed condition or nested conditions, which combine as stated for the cited region.",
+          "evidence_refs": [
+            "s2",
+            "s1",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ebacb012b14b8b8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "cda9e330d4f3db76",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "64a9fc537c3b5798",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The installer checks whether Bun is already available and downloads a compatible Bun binary when absent, which is a portability fallback rather than an unclear purpose.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0aa604458c424774",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch and its cited call path lead to the listed sink in the guarded region.",
+          "evidence_refs": [
+            "s2",
+            "s17",
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "36f15e2f6028c70e",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The cited branch reaches the listed operation, but the record does not establish that no other caller or entry path reaches it.",
+          "evidence_refs": [
+            "s2",
+            "s17",
+            "s18",
+            "s19",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "2ce201780f752703",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shown network, process, filesystem, or command sink can perform the listed behavior in the surrounding code.",
+          "evidence_refs": [
+            "s19",
+            "s17",
+            "s20",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "c0346559db27a171",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited guard structure contains the listed condition or nested conditions, which combine as stated for the cited region.",
+          "evidence_refs": [
+            "s4",
+            "s21",
+            "s3",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "8c39cac1cc6a0da2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "8957491df5b44a94",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "76e6e95182f7f1c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "392befddd0b405b3",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The branch invokes the guarded execution path, but the cited call uses computed dispatch and the remaining sink path cannot be resolved from these slices.",
+          "evidence_refs": [
+            "s4",
+            "s21",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "22d0f0a06e644e4b",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The cited branch reaches the listed operation, but the record does not establish that no other caller or entry path reaches it.",
+          "evidence_refs": [
+            "s4",
+            "s21",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "b791123d512214cf",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The shown child-process call can support credential reading, but the recon and exfil behavior cannot be assigned from the unresolved dispatch path in the cited code.",
+          "evidence_refs": [
+            "s23",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "835a67be2562a90e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited guard structure contains the listed condition or nested conditions, which combine as stated for the cited region.",
+          "evidence_refs": [
+            "s6",
+            "s21",
+            "s5",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "1e8c054870f86bbe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "6fbecf82bf27c3d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "9ddbd745efe6e951",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "a84237e412bb5fb9",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The branch invokes the guarded execution path, but the cited call uses computed dispatch and the remaining sink path cannot be resolved from these slices.",
+          "evidence_refs": [
+            "s6",
+            "s21",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "21ed7a22ac441599",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The cited branch reaches the listed operation, but the record does not establish that no other caller or entry path reaches it.",
+          "evidence_refs": [
+            "s6",
+            "s21",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "90189c1a3e3975f2",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The shown child-process call can support credential reading, but the recon and exfil behavior cannot be assigned from the unresolved dispatch path in the cited code.",
+          "evidence_refs": [
+            "s23",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "6acce2a89a778aba",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited guard structure contains the listed condition or nested conditions, which combine as stated for the cited region.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "b8c40f539ef93e8f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "91a519ab7a6f050f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "776c87eea1243a3f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "d7bb62e8988c644d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch and its cited call path lead to the listed sink in the guarded region.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "7437bbcee9d429f8",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The cited branch reaches the listed operation, but the record does not establish that no other caller or entry path reaches it.",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "34a8e793f1015600",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shown network, process, filesystem, or command sink can perform the listed behavior in the surrounding code.",
+          "evidence_refs": [
+            "s24",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "7364e185eef558e3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited guard structure contains the listed condition or nested conditions, which combine as stated for the cited region.",
+          "evidence_refs": [
+            "s12",
+            "s14",
+            "s11",
+            "s13",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "9a9e8a2e8072fdff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "60c34dd4db86192e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "fdfe8421e58f967c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "55d56e221bb3f720",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch and its cited call path lead to the listed sink in the guarded region.",
+          "evidence_refs": [
+            "s12",
+            "s14",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "01d8ff4e90ca201c",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The cited branch reaches the listed operation, but the record does not establish that no other caller or entry path reaches it.",
+          "evidence_refs": [
+            "s12",
+            "s14",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "d8185f0e48a86d15",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shown network, process, filesystem, or command sink can perform the listed behavior in the surrounding code.",
+          "evidence_refs": [
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "e893a4bdbcee767a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The cited guard structure contains the listed condition or nested conditions, which combine as stated for the cited region.",
+          "evidence_refs": [
+            "s16",
+            "s15",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "02c156abe53a091b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "c5710283d470cfdf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "95d4ecbddafd9717",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The environment check enables behavior on the matching host or environment, and the cited code supports the stated label.",
+          "evidence_refs": []
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "a0854ec97bed384b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch and its cited call path lead to the listed sink in the guarded region.",
+          "evidence_refs": [
+            "s16",
+            "s26",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "f06b44f01d9185d6",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The cited branch reaches the listed operation, but the record does not establish that no other caller or entry path reaches it.",
+          "evidence_refs": [
+            "s16",
+            "s26",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "db49d1826e5670fe",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The shown network, process, filesystem, or command sink can perform the listed behavior in the surrounding code.",
+          "evidence_refs": [
+            "s27",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "k_0e3be12221.L6.drop",
+          "claim_sha256": "c623251bbca65c0c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check selects an asset name, adjusts executable permissions, or constructs a binary filename; it is installation plumbing and does not decide whether the payload behavior runs.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "k_5fcf090a4e.L6.drop",
+          "claim_sha256": "2c0254ff82422dbb",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows and PowerShell availability test chooses an extractor and controls the install-time extraction path, so it is an environment gate.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "q_30fe1bc14f.L6.drop",
+          "claim_sha256": "18027d1f934b72d1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows and PowerShell availability test chooses an extractor and controls the install-time extraction path, so it is an environment gate.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "q_7f9b1af689.L6.drop",
+          "claim_sha256": "d8d8d8d1e1b8ffc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check selects an asset name, adjusts executable permissions, or constructs a binary filename; it is installation plumbing and does not decide whether the payload behavior runs.",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "q_813f1d7772.L6.drop",
+          "claim_sha256": "262b181335fd282c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check selects an asset name, adjusts executable permissions, or constructs a binary filename; it is installation plumbing and does not decide whether the payload behavior runs.",
+          "evidence_refs": [
+            "s32"
+          ]
+        }
+      ]
+    }
+  ]
+}

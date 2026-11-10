@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "core-js-pure",
+    "version": "3.51.0",
+    "archive_sha256": "58e146de212fdaacdb1551fd1e0e0bdfda767cdefeff2cec91deadb79754ff04"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "3c71967d9c2f3ea3",
+      "record_sha256_after": "27bec9a6013c920c",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "5b042e0d00eafd17",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The early return at postinstall.js:45 sits inside the DELTA block of the try at line 42, so a missing, stale or unparsable marker goes past it to the write at line 52. That guard is not needed to reach the write. Removed the line 45 guard and its condition c6 from g1; the remaining guard is the line"
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "29d3c2dabf9d9f3d",
+          "final_seen": "refuted",
+          "confirmed": true,
+          "decision": "fixed",
+          "reason": "The write at line 52 needs only the line 38 opt-out check (c1 to c5); the line 45 dedup return is bypassed whenever the marker is absent, stale or unparsable. Changed the expression to c1 && c2 && c3 && c4 && c5 and then.min_conditions from 6 to 5, dropped c6, and updated the notes and summary."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Resolved 'guessed recipe fields': c1 at line 12 is ['silent','error','warn'].indexOf(npm_config_loglevel) === -1, so any other value, including unset, satisfies it, and 'notice' is one such value; recipe_guessed_fields is now empty. Still flagged: out-of-set conditions c2 to c5 are pending verificat"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "27bec9a6013c920c",
+      "record_sha256_after": "27bec9a6013c920c",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "241ab46179849fa8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "postinstall.js:9 sets ADBLOCK = is(env.ADBLOCK), and line 38 returns early when it is true, so the write on line 52 needs is() to return false. is() on line 34 is a normalised boolean test (!!it && it !== '0' && it !== 'false'), and falsy is the closest operator with the right polarity: the code has"
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "8e0dc620a7e7c9ae",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "postinstall.js:17-23 sets CI to true when is(env[it]) holds for any of BUILD_NUMBER, CI, CONTINUOUS_INTEGRATION, DRONE, RUN_ID, and line 38 returns early on CI, so the write on line 52 needs is() false for all five. The value lists exactly those five names, and falsy applies to each named entry, not"
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "45ee16249bc2bc4a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "postinstall.js:11 sets DISABLE_OPENCOLLECTIVE = is(env.DISABLE_OPENCOLLECTIVE), and line 38 returns early when it is true, so the write on line 52 needs is() to return false. Same reading as c2: is() on line 34 is a normalised boolean test with no compared value, falsy is the closest listed operator"
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "a17e750a3732d50f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "postinstall.js:13 sets OPEN_SOURCE_CONTRIBUTOR = is(env.OPEN_SOURCE_CONTRIBUTOR), and line 38 returns early when it is true, so the write on line 52 needs is() to return false. Same reading as c2: is() on line 34 is a normalised boolean test with no compared value, falsy is the closest listed operat"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "4df4c5a8c3a6fb7f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The proposed data_availability means the check tests that the thing to steal or use exists. None of the conditions at postinstall.js:38 does that: ADBLOCK, the CI variables, DISABLE_OPENCOLLECTIVE, OPEN_SOURCE_CONTRIBUTOR and npm_config_loglevel are output preferences and opt-outs, and the code the "
+        }
+      ]
+    }
+  ]
+}

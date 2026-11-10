@@ -1,0 +1,1473 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "parser_scrapper",
+    "version": "7.2",
+    "archive_sha256": "d5979f658d80ce7c4d91dfb2d60f11c49c12ae477cf81a0db59cf6103eb752dd"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b0581b72fed88555",
+      "packet_sha256": "677ac995b1ee924f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "5803a25d5603ec0d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:27 compares `name`, imported from os, in an if test.",
+          "evidence_refs": [
+            "s1",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "03d3135994ec06f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch of `name == 'nt'` is the guarded code; the operator is positive.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating-system family, so os fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "c370d367bc18fafb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:62 tests K().lower() in an early-exit if; K is platform.platform imported at f2:55.",
+          "evidence_refs": [
+            "s2",
+            "f2:55",
+            "f2:62"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "b2fde45cf419d1eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "U is 'linux' (f2:39). The code exits when it is not in the platform string, so the rest runs only when the string includes linux.",
+          "evidence_refs": [
+            "s2",
+            "f2:39",
+            "f2:62"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "8c318520fc7cdb11",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the platform string, an os property.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "161f0bee4e9f6eed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:32 negates o.path.exists(p), and p is the temp directory joined with the named file (f2:31).",
+          "evidence_refs": [
+            "s3",
+            "f2:31",
+            "f2:32"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "6e3b5e349f4eadf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write and launch run only when the exists call returns false, so not_exists holds. Both pieces of the path are present in the code.",
+          "evidence_refs": [
+            "s3",
+            "f2:31"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "ef0b8b9c44956243",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a file exists.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "13cf9247e5ed9999",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:83-84 test H.lower(), where H comes from the response of a PoolManager request (G is urllib3 PoolManager) at f2:79-82.",
+          "evidence_refs": [
+            "s4",
+            "s8",
+            "f2:79"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "7102630e9aad5b09",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when the loop value 'google' is in H, so code after that runs only when it is not included.",
+          "evidence_refs": [
+            "s4",
+            "f2:84"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "bb6d0c9e0a495931",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks the ISP name returned by an external IP lookup.",
+          "evidence_refs": [
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "52e7f689b70b2ae4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same test as c4, f2:83-84, on the PoolManager response.",
+          "evidence_refs": [
+            "s5",
+            "f2:84"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "02aaf448a7c177c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when 'mythic beasts' is in H, so the rest runs only when it is not included.",
+          "evidence_refs": [
+            "s5",
+            "f2:84"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "5560b7e504482bcd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks the ISP name from an external IP lookup.",
+          "evidence_refs": [
+            "s5",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a7fe1848b3ebf512",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single if on the os test, so the expression is c1 alone.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "1058ba54e375e8d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The nt branch and the else branch each hold a different payload, so the gate selects.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1cb2d7c3c9054fbc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both arms run payloads on the matching OS and neither backs off, so the polarity is activate.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "569d19edf4456cf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The os test only picks the payload variant for each platform, which is portability.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "fc34feeb2ce6fa0e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Module-level calls m(), n(i) and p(C) at f2:123-126 sit in the else region. They reach the defs at f2:78, 103 and 122, and n reaches H at f2:91. Each cited sink is inside those defs.",
+          "evidence_refs": [
+            "s7",
+            "s9",
+            "s10",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "20c029b479235eff",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "m, n, H and p are called only from the else-block module-level statements and from n; there are no other callers, exports or handlers.",
+          "evidence_refs": [
+            "s7",
+            "f2:123",
+            "f2:126"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "2c1a741722dcccd0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Network calls use urllib3 requests (f2:79 GET, f2:122 POST). File reads use shutil.copy, file writes use open(...,'w') and make_archive, and deletion uses rmtree.",
+          "evidence_refs": [
+            "s8",
+            "s11",
+            "s16",
+            "s17",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c29ea9bd9eb6172d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The open(...,'wb') write and o.startfile sit directly inside the nt branch.",
+          "evidence_refs": [
+            "s21",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6202c7441f0e98d3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The statements are inline in the nt branch with no functions or other callers.",
+          "evidence_refs": [
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "447cec64f85eed11",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(p,'wb') writes a file and os.startfile launches it.",
+          "evidence_refs": [
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "a32c26753ae71e1b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The not-exists if is nested inside the nt if, so the guards join with and.",
+          "evidence_refs": [
+            "s6",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "437623186d5e701d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The nested guard only allows the write and launch and has no alternative arm, so it enables.",
+          "evidence_refs": [
+            "s24",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "090cec130bad9668",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when conditions hold, and nothing backs off.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "7d51bd50d65b1e1b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file-exists check only avoids rewriting the dropped file, which is a re-entry guard and fits none of the named purposes.",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "f41548c17f951761",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write (f2:33) and startfile (f2:35) are in the body of the exists-negation if, which is inside the nt branch.",
+          "evidence_refs": [
+            "s24",
+            "s25",
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "93cf7b7b2d339415",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The code is inline and has no other callers.",
+          "evidence_refs": [
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "89f1afb3fde59e4b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(...,'wb') writes a file and os.startfile spawns a process.",
+          "evidence_refs": [
+            "s22",
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "f4af13b767ced69d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single early exit on the platform test, with the rest of the block as the claimed side.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "68ff8ddee27c1278",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exit gates everything after it with no alternative payload, so it enables.",
+          "evidence_refs": [
+            "s26",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "e61640676b64acf8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs on matching targets, linux, and does not evade analysis.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "360d307b874917ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "It refuses to continue on anything but linux. Code the analyst could trace is limited to a linux target, which is targeting.",
+          "evidence_refs": [
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "36d61f48639a9603",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The m() call at f2:123 follows the exit within the region, and m defines the cited request.",
+          "evidence_refs": [
+            "s26",
+            "s27",
+            "s9",
+            "s10",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "081eec9408e351a1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "m is called only once, at f2:123, after the exit.",
+          "evidence_refs": [
+            "s9",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "3393bd1d474ac98b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The recon sink is a urllib3 PoolManager request to an IP lookup service.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "2f423d3fb0fb2868",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The loop exits when either value is in H, so the code after runs only when neither is, which is c4 and c5.",
+          "evidence_refs": [
+            "s28",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "c1aa993174dea7df",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exit only enables the later collection and upload with no alternative arm.",
+          "evidence_refs": [
+            "s28",
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "556e7bfc3914ca1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code backs off with exit(5) when the ISP name matches hosting or cloud providers.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "546d23666da19d95",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Exiting on cloud and hosting ISPs avoids sandboxes and analysis infrastructure.",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "15e42b4faf1adbe2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exit sits in m, called at f2:123. The rest of m and the calls to n(i) at f2:124 and p(C) at f2:126 are on the guard's side. n reaches H, the archive and delete calls; p reaches the upload.",
+          "evidence_refs": [
+            "s28",
+            "s9",
+            "s29",
+            "s30",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s18",
+            "s19",
+            "s20",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "18078bde14485132",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "n and p have a single call each at module level after m(); no other callers or entry points.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "c1404e9dbfe62273",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The POST is a urllib3 request, shutil.copy reads files, make_archive writes an archive and rmtree deletes.",
+          "evidence_refs": [
+            "s17",
+            "s11",
+            "s31",
+            "s20"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d5ce4366585162db",
+      "packet_sha256": "d7e41b050329e35c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "844f5cb9b666b16c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 (f1:32) is `if not o.path.exists(p)`, a branch decision on os.path.exists, and p is joined from tempfile.gettempdir() and the .exe name, matching the probe target.",
+          "evidence_refs": [
+            "s1",
+            "f1:31",
+            "f1:32"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "76ecd974b905b1d7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code is `if not o.path.exists(p):` with p = temp dir + 'pee77a...fd.exe', so the write and startfile body runs only when the file does not exist (not_exists). The guard s2 is this if statement, then arm.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:31",
+            "f1:32"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "5c868b8c96f6387f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The 'google' literal at f1:83 is the operand of `N in H.lower()` at f1:84. H comes from the response of L.request(V, ip-api[.]com ...) (M.data.decode), where L=G() is urllib3.PoolManager, so the decision reads the request result.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s10",
+            "f1:79",
+            "f1:82",
+            "f1:84"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d3badc4b9419b1ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`if N in H.lower(): exit(5)` ends the process when the ISP string includes 'google'. The code after it therefore runs only when the string does not include 'google' (not_includes). The early-exit guard's else side is the continuing code.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:83",
+            "f1:84"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "bb5d984e792ce7c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "'mythic beasts' is the second item in the loop list at f1:83. It is tested by `N in H.lower()` at f1:84, and H is the ISP line from the urllib3 PoolManager request at f1:79.",
+          "evidence_refs": [
+            "s5",
+            "s4",
+            "s10",
+            "f1:79",
+            "f1:84"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "1e0b29fae939bfbd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The same exit(5) test runs for N='mythic beasts', so execution continues only when the ISP string does not include it (not_includes).",
+          "evidence_refs": [
+            "s5",
+            "s4",
+            "f1:83",
+            "f1:84"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5499579edb3492de",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single guard `if name == 'nt'` (f2:27, decoded at f1:28) is the only cited decision. The then region is the Windows dropper (s8) and the else region is the Linux stealer (s9), so one condition c1 gives min 1 on each side. An outer `'sdist' not in argv` check exists at f2:26 but is not a cited gu",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "f2:26",
+            "f2:27"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "b9d8e9598ea7ceef",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "m() is called only at f1:123, n(i) at f1:124 and p(C) at f1:126, all in the else block. H is reached only from n and from itself. The sinks are request (s10), copy (s13), open for write (s18), POST (s19) and rmtree (s22). No other caller, export or timer reaches these functions.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "23861da64af514f1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The open(p,'wb') write (s23) and o.startfile(p) (s24) sit directly in the nt-branch body, with no function wrapper and no other caller. The f2 exec(b64decode(...)) is the same code in encoded form.",
+          "evidence_refs": [
+            "s8",
+            "s23",
+            "s24",
+            "s7",
+            "f1:33",
+            "f1:35"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "71b464d063b76336",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`if not o.path.exists(p)` (s2) is nested directly inside `if name == 'nt'` (s6), and the write and startfile body (s25) is under both, so the expression is c1 && c3 with min 2.",
+          "evidence_refs": [
+            "s6",
+            "s2",
+            "s7",
+            "s1",
+            "s25",
+            "f1:27",
+            "f1:32"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "a787f75fd4e0fbd7",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The write (f1:33) and startfile (f1:35) are inside the not-exists block inside the nt block, with an empty witness. No function wraps them and nothing else calls them.",
+          "evidence_refs": [
+            "s25",
+            "s23",
+            "s24",
+            "f1:32",
+            "f1:33",
+            "f1:35"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "e82b7451604fa9fa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`if U not in K().lower(): exit(1)` requires 'linux' in platform() (c2). In m(), the exit(5) loop requires the ISP string to include neither 'google' nor 'mythic beasts' (c4 and c5). m() is called at f1:123 before the rest of the block (f1:124-126), so s28 and s29 are on the guard's side. All of thes",
+          "evidence_refs": [
+            "s26",
+            "s27",
+            "s4",
+            "s3",
+            "s5",
+            "s11",
+            "s28",
+            "s29",
+            "f1:62",
+            "f1:84",
+            "f1:123"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "2c26fb9cd526a004",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks are early exits with no alternative payload, so passing them enables the one collect, archive and upload flow (enables) rather than choosing between payloads.",
+          "evidence_refs": [
+            "s26",
+            "s4",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "f4ad169ad2597974",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decisive checks exit(5) when the ISP looks like Google or Mythic Beasts hosting, which backs off on cloud or analysis environments (evade). The Linux check only routes to the Linux stealer, since Windows has its own branch.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "790a81c27c3170f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exits on Google and Mythic Beasts hosting ISPs avoid sandboxes and analysis infrastructure (anti_analysis). The Linux check is a platform route. Both sit in front of the credential theft and exfiltration, and the ISP checks are the discriminating gate.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "d8fa72426dbf51e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After the guards, the module-level calls run n(i) (f1:124) and p(C) (f1:126). The n body reaches H via H(e,Z,b) (f1:113), which reaches copy (s13). It also reaches make_archive (s30) and rmtree (s22). p reaches the POST request (s19). Each hop lands in the next definition and no name is shadowed.",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s13",
+            "s30",
+            "s22",
+            "s20",
+            "s21",
+            "s19",
+            "f1:113",
+            "f1:118",
+            "f1:124",
+            "f1:126"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "5f837abbe96daffc",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "n and p are each called once, at f1:124 and f1:126, after the exit(1) check at f1:62 and after m() (which holds the exit(5) check) at f1:123. H is called only from n and from itself. The file has no other caller, export, handler or timer, and the f2 exec(b64decode(...)) carries the same code.",
+          "evidence_refs": [
+            "s14",
+            "s20",
+            "s11",
+            "s15",
+            "s17",
+            "s21",
+            "s26",
+            "s4",
+            "f1:62",
+            "f1:123"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d5ce4366585162db",
+      "packet_sha256": "705c14cb6439c045",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "2c08c44eeb2a4489",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:27 is `if name == 'nt'` with `name` imported from os, so it is a decision on os.name.",
+          "evidence_refs": [
+            "s1",
+            "f1:27"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "998fb5cc5961f40e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows payload sits in the then arm of `if name == 'nt'` and the other platforms go to the else arm, so the positive form is `== nt`.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.name reads the operating system family, so `os` is the right category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1fda6ca3d1075b05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:62 is `if U not in K().lower():exit(1)`, where K is platform.platform (imported at f2:55) and U='linux'.",
+          "evidence_refs": [
+            "s3",
+            "f2:55",
+            "f2:62"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "7c2899df9ea77bdf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when 'linux' is not in the platform string, so reaching the guarded code requires the platform to include linux.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "8c318520fc7cdb11",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the platform string for the OS name, so the category is os.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "844f5cb9b666b16c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:32 is `if not o.path.exists(p)`, where p joins gettempdir() and the fixed .exe name from f2:31.",
+          "evidence_refs": [
+            "s5",
+            "f2:31",
+            "f2:32"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "76ecd974b905b1d7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write and startfile calls run only when `not o.path.exists(p)`, so the operator is not_exists on the temp-dir path.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "ef0b8b9c44956243",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether a file exists, so file_or_dir_exists fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "5c868b8c96f6387f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loop at f2:83-84 tests `N in H.lower()`, and H is the ISP line from the urllib3 PoolManager request at f2:79-82. The cited site is the 'google' list entry.",
+          "evidence_refs": [
+            "s7",
+            "s12",
+            "f2:79",
+            "f2:84"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d3badc4b9419b1ea",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code calls exit(5) when 'google' is in the ISP string, so continuing requires not_includes google. The request-failure fallback 'Unknown' also satisfies it.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "bb6d0c9e0a495931",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested value is the ISP name returned by an ip-api geo lookup, so external_ip_geo fits.",
+          "evidence_refs": [
+            "s7",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "bb5d984e792ce7c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same loop as c4: 'mythic beasts' is tested against the ISP string H from the PoolManager request.",
+          "evidence_refs": [
+            "s9",
+            "s12",
+            "f2:84"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "1e0b29fae939bfbd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code calls exit(5) when 'mythic beasts' is in the ISP string, so continuing requires not_includes.",
+          "evidence_refs": [
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "5560b7e504482bcd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is on the ISP name from an external IP geo lookup.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "5499579edb3492de",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single decision, `if name == 'nt'`, with the Windows code in then and the Linux code in else, so the expression is c1.",
+          "evidence_refs": [
+            "s2",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "1058ba54e375e8d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each branch runs a different payload: a Windows exe dropper in then, a Linux collector and exfiltrator in else. That is `selects`.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1cb2d7c3c9054fbc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS check chooses which payload runs on the target and does not back off on analysis, so it is activate.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "569d19edf4456cf7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS test picks the platform-appropriate payload for Windows versus non-Windows, which fits portability.",
+          "evidence_refs": [
+            "s2",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3",
+          "claim_sha256": "fc34feeb2ce6fa0e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All calls sit in the else block. m() at f2:123 reaches the request and system.json write; n(i) at f2:124 reaches H (copy) and rmtree/make_archive; p(C) at f2:126 reaches the telegram POST. The witness hops match the definitions.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L3.excl",
+          "claim_sha256": "b9d8e9598ea7ceef",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "m, n, o and p are called only at f2:123-126, inside the else block, with no other callers, exports or timers.",
+          "evidence_refs": [
+            "f2:123",
+            "f2:126",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g1.else.L5",
+          "claim_sha256": "2c1a741722dcccd0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Recon and exfil use urllib3 PoolManager.request (network). cred_read uses shutil.copy on browser and app credential files, write_file uses open(...,'w') with json.dump, and delete_file uses shutil.rmtree.",
+          "evidence_refs": [
+            "s12",
+            "s15",
+            "s20",
+            "s21",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c29ea9bd9eb6172d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "open(p,'wb') at f2:33 and o.startfile(p) at f2:35 sit directly in the then arm, so the empty witness is correct.",
+          "evidence_refs": [
+            "s10",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "23861da64af514f1",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The write and startfile are inline statements in the nt branch with no function wrapper, so no other caller reaches them.",
+          "evidence_refs": [
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "447cec64f85eed11",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(...,'wb') plus write is a file write, and os.startfile launches the dropped exe, which is process creation.",
+          "evidence_refs": [
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "71b464d063b76336",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`if not exists` is nested inside `if name == 'nt'` and the write and startfile sit inside both, so the expression is c1 && c3 with min 2.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "437623186d5e701d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write and launch of the exe run only when both conditions hold, and there is no else arm, so the gate enables.",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "090cec130bad9668",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The drop runs on Windows hosts and does not back off on analysis, so it is activate.",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "7d51bd50d65b1e1b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The not-exists test on the temp file is a re-drop guard and the OS test is plumbing for the Windows branch, so no clear purpose beyond that; unclear is acceptable.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "f41548c17f951761",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both sinks sit inside region s27, which is within both the nt and not-exists then blocks.",
+          "evidence_refs": [
+            "s27",
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "a787f75fd4e0fbd7",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks are inline statements and are reached only through the two guards.",
+          "evidence_refs": [
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "89f1afb3fde59e4b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(p,'wb') is a file write and o.startfile is process creation.",
+          "evidence_refs": [
+            "s25",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "55dec7eab1142b68",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The only guard on this region is the early exit when 'linux' is not in the platform string, so the expression is c2.",
+          "evidence_refs": [
+            "s4",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "68ff8ddee27c1278",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check exits unless the host is Linux and otherwise lets the rest of the code run, so it enables.",
+          "evidence_refs": [
+            "s4",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "e61640676b64acf8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs only on Linux targets and does not evade analysis, so it is activate.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "360d307b874917ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Linux-only check precedes Linux-specific credential paths, so it restricts execution to the intended OS; targeting fits.",
+          "evidence_refs": [
+            "s4",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "11d7288b25ac3721",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The m() call at f2:123 lies after the exit(1) guard in region s28 and reaches def m, which holds the PoolManager request.",
+          "evidence_refs": [
+            "s28",
+            "s12",
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "3d4873a6f716d557",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "m is called only at f2:123, after the platform guard.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "3393bd1d474ac98b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The recon sink is an ip-api request through urllib3 PoolManager, which is network access.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "e82b7451604fa9fa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The platform exit at module level and the two ISP exits in m() (exit(5), which ends the process) all guard the code after the m() call, so the conditions join with and: c2 && c4 && c5, min 3.",
+          "evidence_refs": [
+            "s4",
+            "s8",
+            "s13",
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "2c26fb9cd526a004",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The credential collection and exfiltration run only if no exit fires, and there is no else arm, so the gate enables.",
+          "evidence_refs": [
+            "s29",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "f4ad169ad2597974",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when the ISP is Google or Mythic Beasts, which are typical of hosted analysis environments, so it backs off on a suspected sandbox: evade.",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "790a81c27c3170f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Exiting on cloud or hosting ISPs before collecting and sending data is anti-analysis behaviour.",
+          "evidence_refs": [
+            "s8",
+            "s7",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "d8fa72426dbf51e5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After the guards, n(i) (f2:124) reaches H (copy), the make_archive and rmtree calls and the zip read, and p(C) (f2:126) reaches the telegram POST. The witness hops match the definitions.",
+          "evidence_refs": [
+            "s30",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s15",
+            "s31",
+            "s24",
+            "s22",
+            "s23",
+            "s21"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "5f837abbe96daffc",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "n, H and p have no callers other than the module-level calls at f2:124 and f2:126, which follow the guards.",
+          "evidence_refs": [
+            "s16",
+            "s22",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "c1404e9dbfe62273",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Exfil is a urllib3 POST, cred_read is shutil.copy of credential files, write_file is shutil.make_archive, and delete_file is shutil.rmtree.",
+          "evidence_refs": [
+            "s21",
+            "s15",
+            "s31",
+            "s24"
+          ]
+        }
+      ]
+    }
+  ]
+}

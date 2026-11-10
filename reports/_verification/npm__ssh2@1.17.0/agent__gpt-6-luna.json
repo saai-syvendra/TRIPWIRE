@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "ssh2",
+    "version": "1.17.0",
+    "archive_sha256": "8bf2fff9c148973ed24a95087c0b4cea9b8f07a61621c8ab3ded453e3cbcd7d7"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "2e341ece29107fb8",
+      "packet_sha256": "6ac9a71bb1e52369",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_0306aded0e.L6.drop",
+          "claim_sha256": "8d772816c2aafcdd",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads `process.env.CI_CHECK_FAIL` and sets `forceFailOnNonZero` only when it equals `ssh2`; this value later controls whether a failed optional binding build exits with status 1. It is an environment gate deciding install-time failure behavior, so leaving it out for `other` is not supported",
+          "evidence_refs": [
+            "s1",
+            "f1:20-23"
+          ]
+        },
+        {
+          "claim_id": "q_3b6a3f1960.L6.drop",
+          "claim_sha256": "8daf3afe15dfcd30",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "On a build error or nonzero status, this branch exits with status 1 only when `forceFailOnNonZero` is truthy; the value comes from the `CI_CHECK_FAIL === 'ssh2'` environment test. The branch is therefore part of an environment gate that decides install-time failure behavior (s2; f1:5,20-23).",
+          "evidence_refs": [
+            "s2",
+            "f1:5",
+            "f1:20-23"
+          ]
+        }
+      ]
+    }
+  ]
+}

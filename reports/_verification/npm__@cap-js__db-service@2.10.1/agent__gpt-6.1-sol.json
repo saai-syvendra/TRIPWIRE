@@ -1,0 +1,1311 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@cap-js/db-service",
+    "version": "2.10.1",
+    "archive_sha256": "893729fbd285d0278850bd48f818d83a86be215bceb0c7f62922772e98c4b834"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "6ff4362c1df8335c",
+      "packet_sha256": "916d5cf170a5e229",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "38eab909c143f2fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "hasCommand calls the imported execFileSync with bun and the default --version argument, returning a boolean from success or failure (s1; f1:78).",
+          "evidence_refs": [
+            "s1",
+            "f1:78"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b23c501c7404df0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early return occurs when the bun probe succeeds; the remaining main body requires probe failure (s2; f1:78).",
+          "evidence_refs": [
+            "s2",
+            "f1:78"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "e067e34a49e8dabd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The probe checks whether the bun command can run with --version, an installed tool check (s1; f1:78).",
+          "evidence_refs": [
+            "s1",
+            "f1:78"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "9f4dd69924e29f89",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "LANG is a fallback operand in the locale string tested by startsWith (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "d54aecceceefb850",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The visible fallback locale test returns true for prefix ru, and jZh exits when J30 returns true, making the continuation require this test to be false (s3, s4).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "6f9184db6124b1c2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads locale environment variables and checks their language prefix (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "6cc0f573a8d9849e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fs import binds _0x37ceb6 to existsSync, and aA0 tests it with mP, assembled from tmpdir and the stated lock filename (s5; f2:1).",
+          "evidence_refs": [
+            "s5",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "fb0194cbfca5a713",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "aA0 rejects a lock whose stored pid passes process.kill(pid, 0); otherwise it removes a stale lock if present and writes its own pid before returning true (s5, s6; f2:1).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "bfd099bf989ddcf3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The decision begins with a lock file existence check and then tests the recorded process (s5).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "0e3757620346338f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "bZh directly branches on process.env.GITHUB_ACTIONS (s7).",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "b234855c709c4006",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The outer if uses GITHUB_ACTIONS directly as a truthy condition (s8).",
+          "evidence_refs": [
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "49f5b3273c34bfe8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "GITHUB_ACTIONS is tested as the marker for the CI execution context (s7, s8).",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "097b9acfd4fa35cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested _0x4fe52f binding is destructured from process.env.GITHUB_REPOSITORY in the same block (s8, s9).",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "040b3d9aa897993c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "moUVk holds the literal /cds-dbs and is passed to the repository binding's includes call on the then path (s9, s10).",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "e34f5704d628190d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The repository name is obtained from an environment variable and used for targeting (s8, s9).",
+          "evidence_refs": [
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "be3d631798b02b0e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The _0x288b5d binding comes from GITHUB_WORKFLOW_REF and its includes result participates in the inner if condition (s8, s10).",
+          "evidence_refs": [
+            "s8",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "1dc73aa387658444",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test reads a workflow reference supplied through process.env (s8, s10).",
+          "evidence_refs": [
+            "s8",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "324c8a5a6f901b7b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The constructor compares GITHUB_ACTIONS and saves the result to isGitHubActions, which execute tests before continuing (s11, s12).",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "8ca2f85da71beddc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "zVzcV implements strict equality with the string true; execute returns early when that saved comparison is false (s11, s12).",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "3c5d3b77067347eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This comparison identifies the GitHub Actions CI context (s11, s12).",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "e72209cb6d44496b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison helper receives process.env.RUNNER_OS as its first operand (s13).",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "fb926fe418e9b8f0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "lwfOy implements inequality with Linux, and its true result returns early; continuation therefore requires equality (s13, s14).",
+          "evidence_refs": [
+            "s13",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "322f4321e5135957",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "RUNNER_OS is an environment variable used to choose the runner context (s13).",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "2c1a83adc17dd8a9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fs promises import binds _0x1894ac, whose stat result is tested with isFile and whose failure is caught before reading the hotspot (s15, s16; f2:1).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "be68abc98a1d2b15",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "The cited guard requires stat's isFile result, rather than mere existence; a further size check precedes the read (s16, s26). These are stronger same-polarity tests than the stated exists operator.",
+          "evidence_refs": [
+            "s16",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "105b63a299eb78aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The filesystem collector applies stat to hotspots selected from OS-specific credential and secret file lists (s15; f2:1).",
+          "evidence_refs": [
+            "s15",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "a0de1841a2924c07",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One early return on a successful bun probe guards both the download and execution regions, so the single condition suffices (s2, s17, s18).",
+          "evidence_refs": [
+            "s2",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ebacb012b14b8b8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Probe failure enables the download, extraction and invocation of bun; success returns before those actions (s2, s17, s18).",
+          "evidence_refs": [
+            "s2",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "cda9e330d4f3db76",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The installer activates its bootstrap actions when bun is unavailable, without testing for analysis (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "64a9fc537c3b5798",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The purpose is portability: the missing-tool branch downloads an OS/architecture-specific bun runtime and uses it to run the entry script (f1:125; s17, s18).",
+          "evidence_refs": [
+            "f1:125",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "0aa604458c424774",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The downloadToFile call resolves to the cited definition containing https.get, and execFileSync is directly in the continuation after the bun early return (s2, s17, s18, s20).",
+          "evidence_refs": [
+            "s2",
+            "s17",
+            "s18",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "36f15e2f6028c70e",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The download helper is called from guarded main and recursively for redirects; the cited runtime invocation is directly in guarded main, with no exported alternative entry (f1:45, f1:123, s18).",
+          "evidence_refs": [
+            "f1:45",
+            "f1:123",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "2ce201780f752703",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "https.get pipes into a file stream, extraction produces the executable, and imported execFileSync runs that downloaded runtime (f1:64; s17, s18, s19).",
+          "evidence_refs": [
+            "f1:64",
+            "s17",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "c0346559db27a171",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "J30 also returns true from two additional locale prefix tests whose arguments are decoded at runtime, so the complete condition for its false result cannot be reduced to the single visible ru test (s3, s4; f2:1).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "8c39cac1cc6a0da2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "A true locale detection exits the process before the awaited jZh call can continue to dZh and its collectors (s4, s21, s22).",
+          "evidence_refs": [
+            "s4",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "8957491df5b44a94",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The locale exclusion activates collection on the remaining locale population, rather than checking for analysis instrumentation (s3, s4, s22).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "76e6e95182f7f1c3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Excluding a language prefix before collection is locale targeting (s3, s4, s22).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "392befddd0b405b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "After jZh returns, kZh calls dZh, which instantiates whf and calls its execute method; that method contains the cited token command (s21, s22, s23; f2:1).",
+          "evidence_refs": [
+            "s21",
+            "s22",
+            "s23",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "22d0f0a06e644e4b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only whf instance is local to dZh, and dZh is called only after the awaited jZh locale check in kZh (s21, s22, s23; f2:1).",
+          "evidence_refs": [
+            "s21",
+            "s22",
+            "s23",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "b791123d512214cf",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "The cited execSync sink obtains a CLI credential and the method records environment data, but neither transmits data; no exfiltration sink is provided in this payload (s23).",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "835a67be2562a90e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The composite no-live-lock-holder predicate is returned by aA0 and used by one early exit before the continuation through jZh to dZh (s5, s6, s21, s22).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "1e8c054870f86bbe",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Successful lock acquisition permits jZh to return and the collectors to run; a live holder ends the process (s5, s6, s21, s22).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "6fbecf82bf27c3d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition allows work when there is no live lock holder; it does not identify an analysis environment (s5, s6).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "9ddbd745efe6e951",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The lock implements single-instance coordination, which does not fit portability, targeting, anti_analysis or data_availability (s5, s6).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "a84237e412bb5fb9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The lock check precedes return from jZh; the following dZh call creates whf and invokes its execute method containing the cited sink (s6, s21, s22, s23; f2:1).",
+          "evidence_refs": [
+            "s6",
+            "s21",
+            "s22",
+            "s23",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "21ed7a22ac441599",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "whf is instantiated only in dZh, whose sole call follows awaited jZh and its lock check; the collector has no separate exported entry (s6, s21, s22, s23; f2:1).",
+          "evidence_refs": [
+            "s6",
+            "s21",
+            "s22",
+            "s23",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "90189c1a3e3975f2",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "no_sink",
+          "evidence": "The cited sink retrieves a CLI token and the surrounding method records environment data, but it does not send them; exfiltration lacks a sink in the supplied payload (s23).",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "6acce2a89a778aba",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The outer GITHUB_ACTIONS test encloses an inner conjunction of workflow-reference and repository includes checks, requiring all three conditions for execute (s8, s10).",
+          "evidence_refs": [
+            "s8",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "b8c40f539ef93e8f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The conjunction enables el.execute, while its failed inner branch only logs; el updates package tarballs and publishes them (s10, s24; f2:1).",
+          "evidence_refs": [
+            "s10",
+            "s24",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "91a519ab7a6f050f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Matching CI, workflow and repository conditions activates the package propagation routine (s8, s10, s24).",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "776c87eea1243a3f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate restricts propagation to a specific repository and workflow context, supporting targeting (s8, s10, s24).",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "d7bb62e8988c644d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited new el().execute call is the consequent of the inner decision, inside the outer GITHUB_ACTIONS block (s8, s10, s24).",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L3.excl",
+          "claim_sha256": "7437bbcee9d429f8",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sole el instantiation and execute call is inside the repository/workflow conjunction nested under GITHUB_ACTIONS (s8, s10, s24; f2:1).",
+          "evidence_refs": [
+            "s8",
+            "s10",
+            "s24",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "34a8e793f1015600",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "el.execute reaches downloadPackages, updateTarball and publishPackage; these copy the running script into packages, add a preinstall hook and invoke publishing after network token exchange (s24; f2:1).",
+          "evidence_refs": [
+            "s24",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "7364e185eef558e3",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Two sequential early returns require both the saved GITHUB_ACTIONS equality and RUNNER_OS equality before the command (s11, s12, s14, s25).",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s14",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.effect",
+          "claim_sha256": "9a9e8a2e8072fdff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The runner checks enable the subsequent command and secret-record parsing; either failed check returns before them (s12, s14, s25).",
+          "evidence_refs": [
+            "s12",
+            "s14",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.polarity",
+          "claim_sha256": "60c34dd4db86192e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code activates this collector on Linux GitHub Actions runners (s11, s14, s25).",
+          "evidence_refs": [
+            "s11",
+            "s14",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g5.L6.purpose",
+          "claim_sha256": "fdfe8421e58f967c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks identify a runner context for collection and parsing of secret-valued records, supporting targeting (s12, s14, s25).",
+          "evidence_refs": [
+            "s12",
+            "s14",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "55d56e221bb3f720",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The cited command sits directly after both early-return checks in the same execute try block (s12, s14, s25).",
+          "evidence_refs": [
+            "s12",
+            "s14",
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "01d8ff4e90ca201c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The command occurs only inside w6f.execute after its two checks; isGitHubActions is assigned by the constructor and the sole instance is created in dZh (s11, s12, s14, s25; f2:1).",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s14",
+            "s25",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "d8185f0e48a86d15",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The sink resolves to imported execSync and its visible pipeline parses secret-valued records, but the Python input t8f is compressed encoded data, leaving its actual reconnaissance and credential-reading operations unresolved (s25; f2:1).",
+          "evidence_refs": [
+            "s25",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "e893a4bdbcee767a",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "The read region requires a regular file and also passing the subsequent size limit; a single existence condition does not describe this combination (s16, s26).",
+          "evidence_refs": [
+            "s16",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "02c156abe53a091b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Passing the file checks enables readFile; failed stat, non-file status or excessive size prevents reading the contents (s15, s16, s26).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "c5710283d470cfdf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The checks activate credential-file reading when a suitable target file is available (s15, s16, s27).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "95d4ecbddafd9717",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The collector checks that a hotspot is a readable candidate regular file before collecting its contents, supporting data_availability (s15, s16, s26).",
+          "evidence_refs": [
+            "s15",
+            "s16",
+            "s26"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "a0854ec97bed384b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readFile sink is directly within the cited read declaration after the non-file early return (s16, s26, s27).",
+          "evidence_refs": [
+            "s16",
+            "s26",
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "f06b44f01d9185d6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Every invocation of the local hotspot callback enters its stat and isFile checks before reaching this readFile call; no alternate entry into its continuation is present (s16, s26, s27; f2:1).",
+          "evidence_refs": [
+            "s16",
+            "s26",
+            "s27",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "db49d1826e5670fe",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is fs.promises.readFile on paths from the collector's OS-selected credential and secret hotspot lists (s27; f2:1).",
+          "evidence_refs": [
+            "s27",
+            "f2:1"
+          ]
+        },
+        {
+          "claim_id": "k_0e3be12221.L6.drop",
+          "claim_sha256": "c623251bbca65c0c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The isWin value chooses a runtime filename and whether to chmod it; this is launch plumbing for the same downloaded runtime behavior (s28, s31, s32).",
+          "evidence_refs": [
+            "s28",
+            "s31",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "k_5fcf090a4e.L6.drop",
+          "claim_sha256": "2c0254ff82422dbb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The Windows and PowerShell checks choose an available archive extraction mechanism before launching the same entry script, so they are startup plumbing (s29, s30; f1:137).",
+          "evidence_refs": [
+            "s29",
+            "s30",
+            "f1:137"
+          ]
+        },
+        {
+          "claim_id": "q_30fe1bc14f.L6.drop",
+          "claim_sha256": "18027d1f934b72d1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This branch selects PowerShell archive extraction when applicable, implementing a platform-specific way to prepare the same executable (s30; f1:137).",
+          "evidence_refs": [
+            "s30",
+            "f1:137"
+          ]
+        },
+        {
+          "claim_id": "q_7f9b1af689.L6.drop",
+          "claim_sha256": "d8d8d8d1e1b8ffc0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The platform check only decides whether to add executable permission before the common runtime invocation, which is launch plumbing (s31, s18).",
+          "evidence_refs": [
+            "s31",
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_813f1d7772.L6.drop",
+          "claim_sha256": "262b181335fd282c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The ternary selects the platform's bun executable filename used during extraction and invocation; it changes startup plumbing (s32; f1:137; s18).",
+          "evidence_refs": [
+            "s32",
+            "f1:137",
+            "s18"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "37668eb422c65cd4",
+      "packet_sha256": "8f3709b3cee88c0a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "4ea64a780e9dad14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fs promises import binds _0x1894ac, and the awaited stat result supplies both isFile() and size decisions in the hotspot reader (s1–s4; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "3d39133f06f3eb48",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The reader returns for non-files or size greater than Ya1, whose declaration is 0x500000; stat failures are caught before readFile, and the caller supplies OS-selected hotspot paths (s1–s4; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s33",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "60451733de8ae920",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decisions inspect the type and size of a candidate credential artifact before reading it, fitting target_artifact (s1–s4, s33).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "89911a2f27387680",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "J30 also returns true from Intl locale and Windows-specific locale tests whose compared prefixes are computed by __decodeScrambled; the readable environment fallback test alone does not establish the complete c2 combination (s7; f1:1).",
+          "evidence_refs": [
+            "s5",
+            "s7",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "4e8a4e1621fa692d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "jZh exits at s5 before its awaited call returns to the regions; dZh binds whf for the credential and environment sinks, while al dispatches through sl to Fc returned by E6f and then commitToRepo (s6, s8–s30; f1:1).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s8",
+            "s13",
+            "s14",
+            "s16",
+            "s19",
+            "s20",
+            "s26",
+            "s28",
+            "s30",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "eb0fbb7abae3a15f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only dZh and E6f construction sites are in kZh after awaited jZh, and the local whf and Fc instances have no other entry path bypassing s5 in this file (s6, s8, s13, s14; f1:1).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s8",
+            "s13",
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "a0f36436b16295d4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The execSync import executes the credential command, whf includes process.env in its result, and Fc sends the encoded envelope using the repository-content API whose bundled route is PUT repos/{owner}/{repo}/contents/{path} (s11, s16–s18, s30; f1:1).",
+          "evidence_refs": [
+            "s11",
+            "s16",
+            "s17",
+            "s18",
+            "s30",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "bf82f1cd0cb64cb8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "aA0 returns false for an existing lock with a live PID, otherwise removes a stale lock and writes its own PID; jZh exits on false before returning to the cited regions (s31, s32, s6; f1:1).",
+          "evidence_refs": [
+            "s31",
+            "s32",
+            "s6",
+            "s8",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "2c6e7ab9a6c7d4b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "jZh exits at s31 before its awaited call returns to the regions; dZh binds whf for the credential and environment sinks, while al dispatches through sl to Fc returned by E6f and then commitToRepo (s6, s8–s30; f1:1).",
+          "evidence_refs": [
+            "s31",
+            "s6",
+            "s8",
+            "s13",
+            "s14",
+            "s16",
+            "s19",
+            "s20",
+            "s26",
+            "s28",
+            "s30",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "7a8c0ded39066a0c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The only dZh and E6f construction sites are in kZh after awaited jZh, and the local whf and Fc instances have no other entry path bypassing s31 in this file (s6, s8, s13, s14; f1:1).",
+          "evidence_refs": [
+            "s31",
+            "s6",
+            "s8",
+            "s13",
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "06ffb387d21c1c86",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The execSync import executes the credential command, whf includes process.env in its result, and Fc sends the encoded envelope using the repository-content API whose bundled route is PUT repos/{owner}/{repo}/contents/{path} (s11, s16–s18, s30; f1:1).",
+          "evidence_refs": [
+            "s11",
+            "s16",
+            "s17",
+            "s18",
+            "s30",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "b4b1ce80842c1ed8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Both early returns precede the same read: isFile() must hold and size must not exceed Ya1, together constituting the single composite c9 condition (s3, s4, s33).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.effect",
+          "claim_sha256": "14717b87ab55d1a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Passing the artifact checks enables readFile on that candidate; failing either check returns before the read (s3, s4, s33).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.polarity",
+          "claim_sha256": "6fbc7110c08e6685",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The reader proceeds when a candidate is a regular file within the size limit, activating collection on a qualifying artifact (s3, s4, s34).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "g6.L6.purpose",
+          "claim_sha256": "4bb28b7f9bf17fcb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The stat, file-type and size checks determine whether a candidate can be collected, fitting data_availability (s1–s4, s34).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "236f497ca94da03c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readFile sink is inside the cited declaration after both early returns in the same try block (s3, s4, s33, s34).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s33",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "g6.then.L3.excl",
+          "claim_sha256": "b34bf7878062e933",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited readFile call occurs only after both checks in its local async helper; every invocation enters that helper before reaching the sink (s3, s4, s34; f1:1).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s34",
+            "f1:1"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "7e53b3e18bf6d76d",
+      "packet_sha256": "dd37ae763a0a19a8",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "43ce97979c6246c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested variable _0x288b5d is destructured from process.env.GITHUB_WORKFLOW_REF in the same scope and its includes call participates in the inner if condition.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "fa73ae2a2a4bb9a3",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "The positive includes test uses the result of K5 on an encoded constant; the readable code does not establish that the decoded operand is release-please.yml.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "b62c62962c470fd6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads GITHUB_WORKFLOW_REF from process.env through a local destructuring binding, so env_var fits.",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "8ce72fb07f33b7a9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The GITHUB_ACTIONS truthiness guard encloses the inner condition, which joins the workflow-reference and repository tests with &&. All three tests must pass to reach the execute call, giving a minimum of three conditions.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "1739fb86dd85e68b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The matching branch invokes el.execute while the alternative only logs; el downloads packages, inserts the current execution file and a preinstall script, and republishes the modified packages. This gate therefore enables propagation.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.polarity",
+          "claim_sha256": "c9d7f18e70b59df5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code invokes el.execute when the CI marker and repository/workflow tests match, rather than exiting on a detected analysis environment. This is activation on a matching target.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "2e5cd02e2c2cdecc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate restricts execution to GitHub Actions with a particular repository substring and workflow-reference match, selecting a target environment for package propagation. These restrictions support targeting.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:1"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "ryptocompare",
+    "version": "0.1",
+    "archive_sha256": "6d17681b29a052aae383030b838984d1aa756a75752df68dcd62164aaf57f218"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "de75a1182ff77f32",
+      "record_sha256_after": "4a74bfe12af410f5",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "33ea9711d51ff2da",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The cited sink at d1 line 45 is a list.append that adds the all-users Start Menu folder to the shortcut folder list; it writes nothing. The persistence is done by shortcut.Save() at d1 line 100 (state 60921), which saves the .lnk after its Arguments get --load-extension. The g3 payload now cites tha"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The guessed package_manager recipe fields are replaced in g1, g2 and g3 with what the code tests: sys.argv[1] in ['egg_info','build'] (d1 line 7) and sys.argv[1] in ['bdist_wheel','install'] (d1 line 34); that reason is gone. The record stays flagged because the g3 payload path now runs through the "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "4a74bfe12af410f5",
+      "record_sha256_after": "b78dde5a50dad1eb",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "71876aa340e76d05",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "unclear was wrong: d1 line 13 installs pypiwin32, which supplies the win32com import that the Windows-only payload uses (d1 line 107). Changed purpose to targeting, not the verifiers' portability: there is no other-platform branch running a version of the same behaviour, and the whole payload exists"
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "1e2936acd108eefc",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c1 && c4 with min 2 holds. The elif at d1 line 34 does run only when the if at line 7 is false, but both test the same sys.argv[1] against disjoint lists (egg_info, build versus bdist_wheel, install), so c4 true already implies c3 false and not c3 adds no condition to satisfy. The encoded operand is"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "35c23ab08d60915f",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The empty witness wrongly claimed Save (d1 line 100) sits in g3's regions; it sits in state 790593. Added a bind hop on the all-users folder appended at d1 line 45, which sits in the region and is what the loop later walks. Kept unresolved dynamic_dispatch because the rest of the path is state assig"
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "ffd03efaa0bd9701",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "c1 && c4 && c2 with min 3 holds. As for g2, c3 and c4 test the same sys.argv[1] against disjoint lists, so c4 true implies c3 false and not c3 adds no condition. The admin if at d1 line 64 is the guard the then arm comes from: true sets state 362814 and continues, false goes straight to 18005 and sk"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "9b297cbfbfd34f9b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "modifies fits what g3 adds. c1 and c4 enabling the payload is already g2; the only test g3 adds is c2. At d1 lines 64-67 c2 true appends the all-users Start Menu to the folder list and c2 false skips that, and both paths then run the same extension write and the same shortcut rewrite at 790593. Flip"
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "2640d07a080bb3e4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The test at d1 lines 115-120 (setup.py line 120) only decides whether os.makedirs runs. Missing folder goes 18005 to 29059 to 37668, existing folder goes 18005 to 37668, and both then write the same extension files and rewrite the same shortcuts. It does not skip the payload when the folder exists, "
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "3e0436c290d8f385",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement around the same existence check as k_648bbff21c. Its true side only runs os.makedirs through state 29059 and rejoins at state 37668, the same state its false side goes to, so the same files are written either way. No behaviour or target depends on it, and the existing folder"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "b78dde5a50dad1eb",
+      "record_sha256_after": "a71b0f1858a50d9b",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bf47ad853144295f",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Purpose stays targeting. Decoded setup.py line 6 is `if sys.platform == 'win32':` with no else, and the only top-level code after it is setup() at line 128, so no other OS runs any version of the pip step. The project defines portability as each branch running a platform-specific version of the same"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "1f4e379be60ef3a2",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The broken_hop refutation was right: the bind hop cited a path string passed to list.append at decoded line 45, which stores nothing callable, and Save's receiver comes from CreateShortcut at line 86. Removed that hop and the dynamic_dispatch unresolved marker, and added the folder walk (for stateme"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged after write_report.py. The reason `payload path not fully traced` is gone because g3's Save sink now sits in a region with no unresolved marker. The reason `out-of-set claim pending verification` remains for c3, c4, g1, g2 and g3 and can only be removed once a reviewer verifies those c"
+        }
+      ]
+    }
+  ]
+}

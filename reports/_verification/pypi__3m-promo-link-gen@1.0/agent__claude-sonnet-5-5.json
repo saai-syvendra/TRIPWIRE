@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "3m-promo-link-gen",
+    "version": "1.0",
+    "archive_sha256": "f0f3d90013b829a163d5ac1a170eb6c31a7c1a5ae2bc452ad3c5d19c60edc33a"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "cece9350d61b3562",
+      "packet_sha256": "196ea3a5005243d4",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "ddcfea57b7750611",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each of getToken, getPassw and getCookie starts with 'if not os.path.exists(path): return' (f1:400, 415, 445), so the rest of each body (s4, s5, s6) runs only when the path exists. The file read (s7, f1:404), the uploadToken call (s8, f1:411) and os.remove (s9, f1:426) sit directly inside those regi",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "6549668b46638c67",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "getToken, getPassw and getCookie are referenced only as threading.Thread targets in GatherAll (f1:542, 550, 555), and the exists guard is inside each function, so every call passes it. I found no other caller, export or timer.",
+          "evidence_refs": [
+            "f1:542",
+            "f1:550",
+            "f1:555",
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "72102411ff21fe33",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s7 opens and reads browser leveldb .log/.ldb files, which is a file read. s8 calls uploadToken, which posts to the webhook through LoadUrlib using urlopen or requests (f1:292, f1:79-95), so it is a network sink. s9 is os.remove, which deletes a file.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "f1:292"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "cc6634dcb6837683",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "GetDiscord returns early when '{path}/Local State' does not exist (f1:473), so s11 is the rest of the block. The file read (f1:481) and uploadToken call (f1:488) are directly in that region.",
+          "evidence_refs": [
+            "s10",
+            "s11",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "2aca051b5926d87d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "GetDiscord is called only as a thread target at f1:546, and the guard is inside the function. No other caller reaches it.",
+          "evidence_refs": [
+            "f1:546",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "49dc21425859a9df",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s12 opens and reads leveldb files, which is a file read. s13 calls uploadToken, which sends to the webhook over the network.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "f1:292"
+          ]
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "bc9e708192a82979",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is a single condition, the os.path.isfile / os.path.isdir existence test. s14 (an early return in KiwiFolder) and the s15 and s16 ifs (in KiwiFile) lead to separate regions s22, s20 and s21, so one condition satisfies each and then_min=1 is right. The keyword and '.txt' tests are part of the s",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s16",
+            "s17",
+            "s18",
+            "s19",
+            "s20",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3",
+          "claim_sha256": "da14458fd3e204cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Witness 1: the uploadToAnonfiles call at f1:603 (s24) is inside the s15 then-region (s20), and it reaches the def at f1:571 (s25) whose requests.post (s23) is the sink. Witness 2: the KiwiFolder call at f1:607 (s26) is inside the s16 region (s21) and reaches the def at f1:579 (s27). The uploadToAnon",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "s16",
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L3.excl",
+          "claim_sha256": "65b79f1fce3d5475",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "uploadToAnonfiles is called only at f1:589 and f1:603. KiwiFolder is called only at f1:607. KiwiFile is started only as a thread from Kiwi (f1:654). Every path therefore passes the isfile or isdir guards.",
+          "evidence_refs": [
+            "f1:589",
+            "f1:603",
+            "f1:607",
+            "f1:654"
+          ]
+        },
+        {
+          "claim_id": "g5.then.L5",
+          "claim_sha256": "940f75a105c10af0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is requests.post to an external file-sharing host with the file's contents (f1:574). requests is imported at f1:39, so this is a network upload that fits exfil.",
+          "evidence_refs": [
+            "s23",
+            "s25",
+            "f1:39"
+          ]
+        },
+        {
+          "claim_id": "k_ee61418539.L6.drop",
+          "claim_sha256": "e467bbcdef5ee20c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/except __import__ only checks whether requests or pycryptodome is installed and pip-installs it if missing. That is dependency bootstrapping, not an environment gate deciding which payload runs, so leaving it out is reasonable.",
+          "evidence_refs": [
+            "s29",
+            "f1:34-38"
+          ]
+        },
+        {
+          "claim_id": "q_51818e9113.L6.drop",
+          "claim_sha256": "a2954836ac630853",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the same try/except import fallback that pip-installs missing dependencies. It does not choose between payloads or targets, so it is not a gate.",
+          "evidence_refs": [
+            "s30",
+            "f1:34-38"
+          ]
+        }
+      ]
+    }
+  ]
+}

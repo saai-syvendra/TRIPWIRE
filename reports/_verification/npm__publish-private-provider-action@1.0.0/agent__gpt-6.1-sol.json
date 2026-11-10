@@ -1,0 +1,307 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "publish-private-provider-action",
+    "version": "1.0.0",
+    "archive_sha256": "dc113fb73db865803e2bdce09d98b856631b68ac6fc4f3d603eaf513fb20f55b"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "dd3ca2ea054ee645",
+      "packet_sha256": "5761c448be339a1a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "779ad5242b1f80fd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 directly calls fs.existsSync as the ternary condition; fs is bound to the fs module at f1:3.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a3596e997e9b42b2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 tests the claimed literal path with fs.existsSync without negation, and s2 reads that same file on the true arm.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "94bc2de50acfb5c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s1 checks file existence with fs.existsSync, supporting the file_or_dir_exists category.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "ed70c709b6e60ef7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 directly calls fs.existsSync as the ternary condition; fs is bound to the fs module at f1:3.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "73ce50a6e9ae714a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 tests the claimed literal path with fs.existsSync without negation, and s4 reads that same file on the true arm.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "cf6cd018d4d226aa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s3 checks file existence with fs.existsSync, supporting the file_or_dir_exists category.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "af5dc44c2f5bb44a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 has only the claimed existence condition and directly controls s5. The single-condition expression and minimum of one match the code.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "5dbf348445c89f3d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 enables the read in s5 when the file exists and supplies null otherwise, supporting enables for this reconnaissance.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "0aa0c90c044ef991",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 activates the read in s5 on file presence; this check does not identify or evade an analysis environment.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "c4f32f5708c1fa5d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s2 checks availability of the exact file read in s5 and supplies null when absent, supporting data_availability.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "02156817cc03c4eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s5 is the fs.readFileSync call directly in the true arm of s2, so the empty witness reaches the sink within the claimed region.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1b9fe2912d092e7b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "s5 appears directly and only in the true arm of s2. The complete file has no alternate caller, export, timer, or handler reaching this read site.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3",
+            "f1:1",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7af59908c364ac68",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s5 uses fs.readFileSync to collect system-file contents into trackingData at f1:9, supporting reconnaissance through a file-read sink.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5",
+            "f1:3",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "cb891b3238e77a10",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s4 has only the claimed existence condition and directly controls s6. The single-condition expression and minimum of one match the code.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "13ccdfa7844141d2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 enables the read in s6 when the file exists and supplies null otherwise, supporting enables for this reconnaissance.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "b31b9f28fe618633",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 activates the read in s6 on file presence; this check does not identify or evade an analysis environment.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "9da227c617cf5f7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "s4 checks availability of the exact file read in s6 and supplies null when absent, supporting data_availability.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "d7b515fc03618ac2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 is the fs.readFileSync call directly in the true arm of s4, so the empty witness reaches the sink within the claimed region.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "7070f753e13c4dfa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "s6 appears directly and only in the true arm of s4. The complete file has no alternate caller, export, timer, or handler reaching this read site.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3",
+            "f1:1",
+            "f1:54"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "83dd6c1924adc046",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s6 uses fs.readFileSync to collect system-file contents into trackingData at f1:9, supporting reconnaissance through a file-read sink.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6",
+            "f1:3",
+            "f1:9"
+          ]
+        }
+      ]
+    }
+  ]
+}

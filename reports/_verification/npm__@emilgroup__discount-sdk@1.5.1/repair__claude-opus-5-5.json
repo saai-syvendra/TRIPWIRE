@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/discount-sdk",
+    "version": "1.5.1",
+    "archive_sha256": "7812ba81af2c2139b4ff186e75d5fb583834a3d28226a9f562d5aac842c7991b"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "7223c8f935808498",
+      "record_sha256_after": "aeeae9c939f84851",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Removed the guessed env_var flag from g1: index.js line 28 filters process.env keys with k === 'NPM_TOKEN' and lines 31-34 add any non-empty value to tokens, so NPM_TOKEN set to anything non-empty makes tokens.length > 0 (c1). The flag must stay for two reasons. First, g2's env_var is still a guess:"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "aeeae9c939f84851",
+      "record_sha256_after": "f3c520ba4a7528e3",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6936f89666c95b18",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The category target_artifact stands: stored npm credentials are a target artifact, and data availability is a purpose, not a category. c1 itself changed because tokens.length mixed three sources. It is now the .npmrc source (fs.readFileSync, _authToken regex at index.js:20), still target_artifact."
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "0e051b5593c9f087",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The early return at deploy.js:93 fires on !whoami || !whoami.username, so the code after it needs a truthy username, not just a truthy fetchJson result. api is now whoami.username, truthy, and the site is !whoami.username; !whoami is a presence check on the same value."
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "121423fe8c30e0e3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The regions sat only in deploy.js, so the index.js guards controlled none of them, and no hop covered the launch. Added the index.js:89 statement and the block at index.js:90 as regions. Every payload witness now runs spawn (index.js:91), run_file, deployWithToken call (deploy.js:211) and def, then "
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9a0376cf28986748",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The conjunction with the launcher guards is correct: deploy.js has no install path other than the spawn at index.js:91, which sits behind the guards at lines 88 and 90. The guards now each control a cited region, and the expression is (c1 || c4 || c5) && c2 && c3 after the token sources were split."
+        },
+        {
+          "claim_id": "k_b09f29b842.L6.drop",
+          "claim_sha256": "a30ba66129fc1e00",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: with no other token, the npm config read alone decides whether deploy.js starts. Under the rule for several credential sources it is its own condition. No longer dropped: it is a site of new c5, joined with || at the guard on index.js:88."
+        },
+        {
+          "claim_id": "k_40b927fb03.L6.drop",
+          "claim_sha256": "5119beaec856bb85",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The test on configToken at index.js:41 decides whether the npm config source adds a token, which can decide the launch. No longer dropped: it is the test site of new c5 (truthy, exec probe on stdout)."
+        },
+        {
+          "claim_id": "k_fa8a4fbbf3.L6.drop",
+          "claim_sha256": "0338f7bba11426cb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The old note folded this into c1, which hid the npm config source. That source is now c5. This comparison only rejects the string npm prints for an unset key, so it is part of the same test and stays dropped as duplicate_of c5 rather than as a separate condition."
+        },
+        {
+          "claim_id": "k_7f3aae8bfb.L6.drop",
+          "claim_sha256": "d68aea7bb1b99589",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The old note folded this into c1, which hid the npm config source. That source is now c5. This comparison only rejects the literal output null, so it is part of the same test and stays dropped as duplicate_of c5 rather than as a separate condition."
+        },
+        {
+          "claim_id": "q_c6a7742791.L6.drop",
+          "claim_sha256": "39b3592fdf78c4f9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The probe the try wraps now counts as c5. The try only swallows a failed read, which leaves c5 false, and error swallowing is not a gate, so it stays dropped. Reason changed to duplicate_of c5, with the note naming the guard at index.js:88 as the decision that acts on it."
+        },
+        {
+          "claim_id": "q_b30584949f.L6.drop",
+          "claim_sha256": "a585863055c73edb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The test in this if now counts as c5. The if only adds the token to the set and no behaviour sits directly behind it; the decision on the merged set is index.js:88, which the skill names as the guard for merged sources. Reason changed to duplicate_of c5."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "f3c520ba4a7528e3",
+      "record_sha256_after": "7d9bdb8790d87038",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Record is still flagged after write_report.py, with two reasons left. (1) guessed recipe fields: g2's env_var stays guessed. The name NPM_TOKEN is read (index.js:28), but c3 (scripts/deploy.js:93) needs a token for which the registry's /-/whoami returns a username, so any non-empty value satisfies c"
+        }
+      ]
+    }
+  ]
+}

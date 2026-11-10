@@ -1,0 +1,403 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "discord-ewbhook",
+    "version": "0.1",
+    "archive_sha256": "28933d04d674a1155eecd9c9b25a6494c83f755b7618e2e3f73859dcaa755dac"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "8684212ab7ddad7e",
+      "packet_sha256": "a8fcb4dca9ff807b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:6 compares sys.platform in the condition of the top-level if, so the site is a decision on that API.",
+          "evidence_refs": [
+            "s1",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "d7427d5832e56e16",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The right side of the == at f1:6 is built from character codes that give the five characters of the Windows platform name. The comparison is positive and the body of the if is the guarded code.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating system platform, so os is the right category.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:68 uses the IsUserAnAdmin() call directly as the condition of an if.",
+          "evidence_refs": [
+            "s3",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call is used bare in the condition at f1:68 and the then side runs when it is truthy. That side sets the next state to a value that works out to 362814, the state at f1:45-46. The fall-through side goes to a different state.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:68",
+            "f1:45"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the process has administrator rights, which is the privilege category.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "52f1535ddeb0eb16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single platform if encloses the whole body (the region s5), so the expression c1 is correct. The inner sys.argv[1] checks only choose the sub-branch.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ca1d2cec9c0342b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All the install behaviour sits inside the platform if and there is no else branch, so the gate only enables it.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "4d3bfdde81c5afa2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs when the platform matches. It does not back off because of analysis, so the polarity is activate.",
+          "evidence_refs": [
+            "s1",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bffa50649625a977",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded code is built on Windows-only APIs (ctypes.windll, win32com shortcuts). The gate selects the Windows targets for the dropped and modified files, which fits targeting.",
+          "evidence_refs": [
+            "s5",
+            "f1:68",
+            "f1:111"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "c51dbc1bbbd7ffab",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Every sink lies inside the body of the platform if, which is the region s5: the pip.main call at f1:13, os.makedirs at f1:59, the file write at f1:73 and the shortcut Save() at f1:104. The witnesses are empty, so no hops are needed.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "e9200df9ae80bfbf",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "setup.py is the only file in the packet. It defines no functions or exports, and the sinks are only in the platform-guarded body, with no other caller.",
+          "evidence_refs": [
+            "s2",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b0196be17888aaed",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "pip.main is the pip package installer, which fetches packages from a network index, so the download behaviour rests on it. The write at f1:73 is a file-object write, which is real file writing. The shortcut Save() at f1:104 persists changes to the shortcut files. The makedirs call only creates folde",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2cba268135f4a0f9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The IsUserAnAdmin if (f1:68) is nested in the loop inside the platform if (f1:6). The region s10 is reached only when both hold, so c1 && c2 with a minimum of 2 is correct.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d14263a49e9ac562",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The admin result changes which extra folder is added to the list of directories that are processed later. It does not change whether the payload runs, so the effect modifies fits.",
+          "evidence_refs": [
+            "s4",
+            "s10",
+            "f1:46"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "041e967c8d80c71a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The extra work runs when the process is elevated. Nothing backs off, so the polarity is activate.",
+          "evidence_refs": [
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0dc20a87f8622ea5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Elevation decides whether system-wide locations are targeted in addition to the user's, which fits targeting.",
+          "evidence_refs": [
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "edb406909a1f95b4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The truthy side of the admin if sets the state to the one at f1:45, and its body is the append at f1:46 (s10). That state sits inside the platform if and the loop, so it lies on the then side of both guards.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10",
+            "f1:46"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "26352da1140b54a9",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Only the single state loop in setup.py reaches the append at f1:46, and it is entered from the admin test at f1:68. The file has no other callers or exports.",
+          "evidence_refs": [
+            "s10",
+            "s4",
+            "f1:68"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "318e7ed3ca5b8822",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "sink_kind_mismatch",
+          "evidence": "The cited sink at f1:46 is a list append. That records a path in an in-memory list and does not write, modify or schedule anything. The persistence is done later by the Save() at f1:104, which is not the cited sink.",
+          "evidence_refs": [
+            "s10",
+            "s9",
+            "f1:46"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "e61c879c7ecca87d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test at f1:120 checks whether a folder exists. If not, the next state creates it with os.makedirs (f1:59) before a file is opened for writing. This only prepares the destination folder, which is plumbing and not an environment gate.",
+          "evidence_refs": [
+            "s11",
+            "s7",
+            "f1:120"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "a6fd2db9a71fb493",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This is the same not-exists-then-makedirs check at f1:120. It only ensures that the destination folder exists and does not decide what runs.",
+          "evidence_refs": [
+            "s12",
+            "s7",
+            "f1:120"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "602e2095b1c357b4",
+      "packet_sha256": "5af1b66b9fbde60c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "33b7875487c68d05",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The s2 guard (IsUserAnAdmin, f1:68) only encloses f1:69-70, which set the state variable and continue; the s3 region (f1:46, the state-45 append) and the Save() sink (s4, f1:104) are separate states of the dispatch loop and not inside that then arm, so s2 controls no region.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f1:68",
+            "f1:46",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "20b646fc15cdb786",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "witness_gap",
+          "evidence": "The code is a flattened state machine with computed state transitions, and the Save() at f1:104 sits in its own state with no traced witness path from the cited guards, so exclusivity cannot be decided.",
+          "evidence_refs": [
+            "s4",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "e31be66211acd8c3",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "dynamic_dispatch",
+          "evidence": "The sink is Save() on a shortcut object from a COM Dispatch object's CreateShortcut call (f1:90, f1:104); the Dispatch target string is obfuscated, so the sink kind is not resolved from the text, though a shortcut save plausibly writes a file.",
+          "evidence_refs": [
+            "s4",
+            "f1:90",
+            "f1:104"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "d4c01aec11792800",
+      "packet_sha256": "0f1afbb6ca7c6ded",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "6c6908947c683004",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "The region s3 (f1:69-70) only resets the dispatcher state variable and does a continue under the IsUserAnAdmin test. The cited sink, the shortcut .Save() at f1:104 (s4), is in a different state block of the loop (the os.walk shortcut loop, state 790593, f1:81-105). It is not in the region and not on",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "f1:68",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "acb271e41cc30199",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The sink at f1:104 sits in its own state of an obfuscated state-machine loop. The IsUserAnAdmin test at f1:68 only chooses the next state value. Whether the sink can be reached without that branch depends on the computed state transitions, which are not resolved here.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f1:68",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "3c68b405effd67af",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sink is Save() on a shortcut object created with CreateShortcut on a win32com Dispatch object (f1:90, f1:111). The code walks directories for files with a matching suffix, edits the shortcut's Arguments (f1:95) and saves it back. That is a file write that modifies shortcuts, which fits persisten",
+          "evidence_refs": [
+            "s4",
+            "f1:90",
+            "f1:95",
+            "f1:104",
+            "f1:111"
+          ]
+        }
+      ]
+    }
+  ]
+}

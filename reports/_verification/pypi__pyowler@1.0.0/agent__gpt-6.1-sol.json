@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pyowler",
+    "version": "1.0.0",
+    "archive_sha256": "56e5884d24e97508aeaea82cd5b257dfc2e75eb62451480138008b226e5a6918"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "f6164df1990e56f0",
+      "packet_sha256": "fa8ba9ab5c81ae0f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "70da62798f413cb4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly calls os.path.exists on the System64 directory template, with login supplied by os.getlogin and no alternate os binding (f1:1-4).",
+          "evidence_refs": [
+            "s1",
+            "f1:3"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "2e481aab66fd6012",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exists result is compared to False, so the then body requires directory absence; the fixed path components and login interpolation match the claimed template (f1:3-4).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "30e1cd3fb1dedd28",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition uses os.path.exists to test filesystem directory existence (f1:4).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "b6fb1a8a02fcf569",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "One condition controls the entire then region without any additional nested guard, so c1 alone suffices and the minimum is one (f1:4-13).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "299eb8f425efc458",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Directory absence enables the writes and launch in the then body; the else body only passes (f1:4-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "1728c2d13af4280f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition activates setup when the destination directory is absent and does not test an analysis or sandbox marker (f1:4-13).",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fd45784cca06ef23",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check prevents repeated setup in an existing payload directory, without establishing portability, targeting, analysis detection, or input data availability; unclear fits the supplied purpose choices (f1:4-13).",
+          "evidence_refs": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "eeb8428fbd775733",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The file-writing calls and subprocess.run are directly inside the cited then region, requiring no witness hops (f1:6-13).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "e3a7a3b2699ab798",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "All cited sinks are top-level statements inside the if body, and the full file contains no other callers, functions, timers or handlers reaching those sites (f1:1-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "d42acb01c54c7e43",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The writes create a batch file and Startup script, and subprocess.run launches the written VBS that runs the batch with its window hidden (f1:7-13). The batch downloads executables, starts the Startup script that runs them, and sends the login through curl, supporting the claimed behaviours (f1:8-13",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "f1:7",
+            "f1:12"
+          ]
+        }
+      ]
+    }
+  ]
+}

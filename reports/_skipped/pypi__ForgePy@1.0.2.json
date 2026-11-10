@@ -1,0 +1,21 @@
+{
+  "schema_version": "3.2",
+  "record_type": "skip",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "ForgePy",
+    "version": "1.0.2",
+    "archive_sha256": "988e63c3264ef0bc615c463967852b2a4b5ef0195650cbbc5786cc9aad869cd7",
+    "source_dataset": "pypi_malregistry",
+    "source_label": "malicious",
+    "released_at": null,
+    "released_at_source": null,
+    "sample_path": "pypi_malregistry/pypi/malicious_intent/ForgePy-1.0.2.tar.gz",
+    "package_root": "layer0/ForgePy-1.0.2",
+    "cluster_key": "fbb7a3dd825c7df4c59253cddf1828e8664be6b174d5797ed44a6751c850ca4d",
+    "analysis_type": "ai",
+    "model_name": "claude-opus-5-5"
+  },
+  "reason": "import_time_only",
+  "note": "setup.py only calls setup() with metadata and a cryptography dependency. ForgePy/__init__.py hex+Fernet-decrypts a blob, base64/base32-decodes it, unmarshals and exec()s it when the package is imported; payload not decoded."
+}

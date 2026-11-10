@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "BeaitifulSoop",
+    "version": "1.0.0",
+    "archive_sha256": "135fa54416d95c905205b09b31f98c048c90bdc1c591d184d268e371d26f8505"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "f02043e47526be6e",
+      "packet_sha256": "af9dd11eeea991c7",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "92970ed927922900",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly compares os.name with the string \"nt\", so the cited site tests the named API (s1; f1:13).",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "f70d2d72c2381431",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch is controlled by os.name == \"nt\" with no negation between the comparison and branch (s1, s2; f1:13).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "1ee4310c3ee40fcf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads os.name, an operating-system property (s1; f1:13).",
+          "evidence_refs": [
+            "s1",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "cd7c7e78a33a3d22",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one cited if guard, and its single condition c1 controls the then region; the minimum condition set is one (s2, s3; f1:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "906a2cde481b1ba7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "On the Windows branch the code invokes exec on a decrypted value; the corresponding readable payload in the derived file executes response text fetched with requests, so the gate enables those behaviors (s2, s4; f1:13-16, f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "f1:13-16",
+            "f2:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d0da5cf8213001a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The branch runs the payload when os.name is \"nt\", indicating activation on the targeted operating system rather than backing off from analysis (s1-s3; f1:13-16).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "471882c84074273d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The OS-name check selects Windows as the environment in which the payload runs, which is targeting (s1-s3; f1:13-16).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "4dd483eb28237e63",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "witness_gap",
+          "evidence": "The guarded f1 code calls exec on the result of decrypt, but the readable network call in s4 is from the distinct derived f2 file and the packet does not show that this is the value produced by that decrypt call (s2, s4, s5; f1:13-16, f2:13-16).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s5",
+            "f1:13-16",
+            "f2:13-16"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "dc5b2b72a267fb05",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The f1 install hook reaches an opaque decrypted value through exec only inside the OS branch; the packet does not expose all calls that the decrypted code could introduce, so exclusivity of the payload sink cannot be established from these files (s2, s5; f1:10-18).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "f1:10-18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "64a0bb734a4f9413",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The readable derived code passes requests.get(...).text through exec, providing a network download and dynamic execution sinks for the two claimed behaviors (s4, s5; f2:13-16, f1:13-16).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "f2:13-16",
+            "f1:13-16"
+          ]
+        }
+      ]
+    }
+  ]
+}

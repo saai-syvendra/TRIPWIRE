@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "cmp-ocr-liveness-acquisition",
+    "version": "0.0.24",
+    "archive_sha256": "cae2e2bf394e0e0d856384476205986e2ae6c8d1058bd9f29e3470d586117224"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "8ae7eb68f9e2db14",
+      "packet_sha256": "e95922b0b3473cfa",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_6c914314b2.L6.drop",
+          "claim_sha256": "ddbdf31485540cc9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `npm whoami` call obtains a username and returns it (or `Unknown` on error); it does not test an environment condition to decide what runs at install. The surrounding code always proceeds to collect and send data, so this call is data collection rather than a gate (f1:31, f1:54-60).",
+          "evidence_refs": [
+            "f1:31",
+            "f1:54-60"
+          ]
+        },
+        {
+          "claim_id": "k_d1ce47b8d9.L6.drop",
+          "claim_sha256": "a3b95cbc1069ac53",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `whoami` call obtains a username and returns it (or `Unknown` on error); it does not test an environment condition to decide what runs at install. Its result is included in collected system information, while collection continues regardless (f1:40, f1:47-61).",
+          "evidence_refs": [
+            "f1:40",
+            "f1:47-61"
+          ]
+        },
+        {
+          "claim_id": "q_e92c5d9c28.L6.drop",
+          "claim_sha256": "b92615ae26d1fac0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This `try` statement only wraps the `whoami` lookup and substitutes `Unknown` if it throws; neither path decides whether subsequent code runs. The result is gathered with other system information and sent (s3; f1:47-61).",
+          "evidence_refs": [
+            "s3",
+            "f1:47-61"
+          ]
+        },
+        {
+          "claim_id": "q_f63b45765a.L6.drop",
+          "claim_sha256": "03cce1894f8d8786",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "This `try` statement only wraps the `npm whoami` lookup and substitutes `Unknown` if it throws; neither path decides whether subsequent code runs. The result is gathered with other system information and sent (s4; f1:47-61).",
+          "evidence_refs": [
+            "s4",
+            "f1:47-61"
+          ]
+        }
+      ]
+    }
+  ]
+}

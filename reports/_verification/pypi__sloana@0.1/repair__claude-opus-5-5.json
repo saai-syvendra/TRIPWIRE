@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "sloana",
+    "version": "0.1",
+    "archive_sha256": "cec9f94349348a10fd012ac2e8cc034e80fc9f31d5191a37c9f16f73ddf6a276"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "766888b00c74a5db",
+      "record_sha256_after": "9ec71eab4bcff85d",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "755b368206ca087a",
+          "final_seen": "refuted",
+          "confirmed": true,
+          "decision": "fixed",
+          "reason": "The second then region (setup.py:46, the append of C:\\ProgramData\\Microsoft\\Windows\\Start Menu) is the separate elif for state 362814 of the flattened loop, not code under the IsUserAnAdmin if at setup.py:68, so it sat only under c1. Removed it; the then region is now only the admin if's then block "
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "12211d2afbbf6356",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The verifier is right that no hop connects the region to the Save sink at setup.py:104. The admin then block only sets the state to 362814 and continues; the loop then appends the ProgramData Start Menu folder, and a later state (790593) walks the folder list and calls Save. That path runs through i"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "b8917d06d17a9a8f",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "In d1 the .lnk test (line 82) and the TargetPath basename test against chrome.exe, msedge.exe, launcher.exe, brave.exe (line 98) decide whether Arguments is set to --load-extension and Save runs at all. With no matching browser shortcut the persistence behaviour never happens; it is not the same beh"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed the guessed recipe field: g3 file_present now states what the code checks (any .lnk under the APPDATA Start Menu, the pinned TaskBar folder or ~\\Desktop whose TargetPath basename is one of the four browser exes) rather than a made-up Google Chrome.lnk name. The flag stays: c3, c4 and g3 are st"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "9ec71eab4bcff85d",
+      "record_sha256_after": "951102764f29a88b",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "fcd1c4a5e54ec705",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Purpose stays targeting. The if at setup.py:6 has no else, so off Windows the code only falls through to setup() (d1:129) and no other-OS version of the behaviour exists. The skill defines portability as each branch running a platform-specific version of the same behaviour, and targeting as a payloa"
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "fd66b2436fa58147",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that the empty witness wrongly put Save in the region: the admin block at setup.py:69-70 only assigns the state and continues, and Save is at setup.py:104 in another state branch. Added a bind hop on the state assignment at setup.py:69 and kept unresolved dynamic_dispatch, si"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "898ffdc4eb30dab4",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that the empty witness wrongly put Save in the region: d1:92-94 sets Arguments, assigns the state and continues, and Save is at d1:101 in the elif for state 60921. Added a bind hop on the assignment of 60921 at d1:93 and kept unresolved dynamic_dispatch. That assignment is th"
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "b8917d06d17a9a8f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Effect stays enables. When c3 or c4 is false the inner state goes to 0 (d1:96) or the .lnk branch is skipped (d1:82), so Arguments is not set and Save (d1:101) does not run. No other target is acted on instead, and on a host with no matching shortcut the persistence behaviour does not run at all. Mo"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "951102764f29a88b",
+      "record_sha256_after": "da3fbf114d21e71c",
+      "round": 3,
+      "decisions": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "d072d0e6890db8e8",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Round 3, so only escalation is allowed; claim left unchanged. The verifier is right that the bind hop at the admin block stores the integer state 362814, not a function or object, so the hop does not meet the bind definition. The path itself holds in d1: state 362814 (line 45) appends the ProgramDat"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "0b93583144dc3fb1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation was right: the bind hop at d1 line 93 stores the integer state 60921, not a function or object. Removed the hop and the unresolved mark. State 60921 is assigned only at line 93, inside the c4 block, so the elif arm that runs Save (lines 101-102) runs only when c4 holds. That arm is no"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "needs_manual_review is still true after write_report. Out-of-set claims c3, c4 and g3 are pending verification, which a repair session cannot remove. The payload path is still not fully traced for g2, which keeps unresolved dynamic_dispatch and is escalated. g3 no longer contributes to that second r"
+        }
+      ]
+    }
+  ]
+}

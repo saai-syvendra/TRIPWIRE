@@ -1,0 +1,1211 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@asyncapi/specs",
+    "version": "6.8.2",
+    "archive_sha256": "30ac614c0afa6ee935e1dd40ac14790453b59cd1d9ba00e85a23ed586ebfbe93"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "dc53af764d66c5db",
+      "packet_sha256": "6fcf073f7d6d05fd",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "c18a30de322b4228",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads GITHUB_ACTIONS directly in the condition of s2.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "ffd7b1c419dc20d5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 reaches its then side when the GITHUB_ACTIONS value is truthy.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c7.L6.category",
+          "claim_sha256": "249e569bf4a4f9f3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 reads a GitHub Actions CI marker.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "d8a10db65614e7c0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 compares RUNNER_OS with Linux in s2.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "1491b7f166d33de8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 requires RUNNER_OS to equal Linux on the then side of s2.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "322f4321e5135957",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s3 reads the RUNNER_OS environment variable.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "b9fda2b022861a6c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 runs the process-list probe and cQ0 returns whether its trimmed output is nonempty; s5 awaits that result.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "fe5359f148143348",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "cQ0 returns true for nonempty trimmed probe output and false on its reachable catch path; s5 requires that true result.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "cbfd354667c31a21",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 inspects process-list output.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "ee0d9a6c5073d91d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 runs the sudo probe and pQ0 compares its exitCode to zero before s5 uses the result.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "655a96ee3a9dffc1",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "pQ0 also returns true after its catch-path container command without checking that command’s exit status, so a successful sudo probe is not established on every true result (f1:1).",
+          "evidence_refs": [
+            "s6",
+            "s5",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "786caa81f0851ca7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s6 checks whether passwordless sudo succeeds.",
+          "evidence_refs": [
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "44f5976e1440968d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 tests prefixes of values enumerated from process.env, and getToken stores the selected credential used by isAuthenticated in s8.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "f621c964a82056a1",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "s7 tests credential prefixes rather than environment-value falsiness; s8 tests the resulting stored token through isAuthenticated.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "e29d44ffd22434f1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s7 searches environment-variable values for credentials.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "50e951560acfe8d5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 runs gh auth token and tests its stdout before returning the credential used by isAuthenticated in s8.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "6fcce1d410364b64",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "s9 accepts stdout only with one of two credential prefixes; s8 tests the selected token, not merely stdout falsiness.",
+          "evidence_refs": [
+            "s9",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "82de9dc098f91ef2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s9 retrieves a credential through the installed gh command.",
+          "evidence_refs": [
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "2a1cba803e66127c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s10 initializes the variable from NPM_TOKEN, and s11 tests that binding after a possible configuration-file fallback.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c13.L2",
+          "claim_sha256": "1116f12f98cd11ac",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s11 takes its else side only when the token variable is falsy; that variable can contain either NPM_TOKEN or the npmrc fallback.",
+          "evidence_refs": [
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c13.L6.category",
+          "claim_sha256": "56ecdedd6348840f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s10 reads an environment variable for an npm credential.",
+          "evidence_refs": [
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "c14.L1",
+          "claim_sha256": "9935b20f44ab91df",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s12 matches text read through mL0, whose resolved fs/promises.readFile binding reads the current-directory and home-directory npmrc candidates (f1:1).",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c14.L2",
+          "claim_sha256": "99fbf189d1587def",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "s12 tests a regex capture extracted from file contents, with two candidate files; s11 tests the resulting token rather than raw file-content falsiness.",
+          "evidence_refs": [
+            "s12",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c14.L6.category",
+          "claim_sha256": "9bf1e7e42ef594c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s12 extracts a token from npmrc file contents read by mL0 (f1:1).",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "c15.L1",
+          "claim_sha256": "36eb5668521131c0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s13 calls the repository search API and fetchToken tests its status and items before extracting and validating a token (f1:1).",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c15.L2",
+          "claim_sha256": "e1916d0e019f0f2c",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "operator_unchecked",
+          "evidence": "fetchToken can return null after a successful search because later content retrieval, parsing or token validation fails; s14 tests that derived result rather than the search response’s falsiness (f1:1).",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c15.L6.category",
+          "claim_sha256": "d419222026b29f6a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s13 searches remote repositories and fetchToken derives its result from remote responses (f1:1).",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "c16.L1",
+          "claim_sha256": "1bd34c82a56a73f6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s15 negates the repoExists call directly in s8.",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c16.L2",
+          "claim_sha256": "f44f9f574eda802a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8 explicitly negates repoExists, so its then side admits a falsy result.",
+          "evidence_refs": [
+            "s8",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "c16.L6.category",
+          "claim_sha256": "9c30de26183bf6d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "repoExists tests gitRepo, which createRepo sets from a successful repository-creation response (f1:1; s15).",
+          "evidence_refs": [
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "387c562802a37a7f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 conjoins the CI marker and Linux comparison, and its nested s5 conjoins both awaited probe results; all four conditions are required for s16.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ca36adf7ccba8a7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 and s5 enable the gQ0 firewall and resolver changes only when their conditions pass.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "f2f5ac6d687cff54",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 and s5 activate gQ0 on the selected CI runner and privilege state rather than backing off.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "93f708877b6fe55b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 identifies the agent process and s19 flushes firewall rules and changes resolver configuration, supporting anti_analysis.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "dac150bcccda9f3a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s16 is inside both then arms, and its s18 call resolves to the gQ0 definition in s19 containing the s17 sink.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s16",
+            "s18",
+            "s19",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "5fb49120210c1e2f",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full f1 text contains one gQ0 definition and one call, the guarded s18 call; its s17 sink therefore has no other entry in the provided files.",
+          "evidence_refs": [
+            "f1:1",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "b3ebf46f3b8a5df0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s17 executes a firewall-chain flush, and s19 also flushes outbound rules and changes resolver configuration; these commands can disable network defenses.",
+          "evidence_refs": [
+            "s17",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2741f59b32bd3b6d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Token acquisition tries environment credentials then gh, and s8 permits missing authentication or repository; s14 and the else side of s11 further require no fetched or npm credential. This gives the stated conjunction with a minimum of four conditions (s7–s15; s20).",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s11",
+            "s14",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "bf684ff512141417",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8, s14 and the else side of s11 enable the destructive commands in s20.",
+          "evidence_refs": [
+            "s8",
+            "s14",
+            "s11",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "f346d5e14c9c5b84",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s20 activates destructive execution when usable credential and repository routes fail.",
+          "evidence_refs": [
+            "s8",
+            "s14",
+            "s11",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "14219fb15db9ad79",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s8, s14 and s11 choose destruction when credential and repository availability is insufficient, supporting data_availability.",
+          "evidence_refs": [
+            "s8",
+            "s14",
+            "s11",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "8ff072acc16b2d8e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s20 is nested inside s8 then, s14 then and s11 else; both s21 and s22 are calls directly inside that region.",
+          "evidence_refs": [
+            "s8",
+            "s14",
+            "s11",
+            "s20",
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "de568a463d380394",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "Both destructive sink calls are inline within s20, so entering their enclosing function by another route still passes s8, s14 and s11.",
+          "evidence_refs": [
+            "s8",
+            "s14",
+            "s11",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "209e7e781e7fa6bb",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s21 launches file shredding and directory deletion, while s22 launches recursive deletion and free-space wiping; both process-creation sinks can perform destructive actions.",
+          "evidence_refs": [
+            "s21",
+            "s22"
+          ]
+        },
+        {
+          "claim_id": "k_50e0566ba2.L6.drop",
+          "claim_sha256": "1b32570843ef9a67",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only adds the Bun executable directory to PATH, which is launch plumbing (f2:58–61).",
+          "evidence_refs": [
+            "s23"
+          ]
+        },
+        {
+          "claim_id": "k_7f3e4e84a7.L6.drop",
+          "claim_sha256": "ce4e58775dc30b49",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only avoids adding an existing Bun directory to PATH twice, which is launch plumbing (f2:58–61).",
+          "evidence_refs": [
+            "s24"
+          ]
+        },
+        {
+          "claim_id": "k_8243b60281.L6.drop",
+          "claim_sha256": "bdbd7797e002cc97",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branch chooses how to reload PATH, which is executable-discovery plumbing (f2:17–64).",
+          "evidence_refs": [
+            "s25"
+          ]
+        },
+        {
+          "claim_id": "k_8f3faff9a0.L6.drop",
+          "claim_sha256": "c0974ed97e8e9c63",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence test decides whether bun_environment.js is launched at all, otherwise exiting; it is a target-artifact availability gate for payload execution (f2:180–185).",
+          "evidence_refs": [
+            "s26",
+            "f2:181"
+          ]
+        },
+        {
+          "claim_id": "k_997be1f6bc.L6.drop",
+          "claim_sha256": "c553c2e7782724e1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence test selects a Bun executable location, which is launch plumbing (f2:123–130).",
+          "evidence_refs": [
+            "s27"
+          ]
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "0f27ebfaefa8fc28",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branch selects the shell command used to install the same Bun runtime, which is setup plumbing (f2:66–89).",
+          "evidence_refs": [
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "k_d36ad8d600.L6.drop",
+          "claim_sha256": "c6348dff2b748e41",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test chooses an available profile to reload PATH, which is executable-discovery plumbing (f2:39–54).",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "k_e0dfd8b59b.L6.drop",
+          "claim_sha256": "448bcd4c0b7cdf63",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branch chooses candidate Bun executable paths, which is launch plumbing (f2:98–116).",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "1e33d5413f2395b7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform ternary chooses the command used to locate Bun, which is executable-discovery plumbing (f2:7–14).",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "q_53e1d98b0c.L6.drop",
+          "claim_sha256": "51eea36450395aba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branch chooses how to reload PATH, which is executable-discovery plumbing (f2:17–64).",
+          "evidence_refs": [
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "906209a2a5b007ff",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform ternary chooses the command used to locate Bun, which is executable-discovery plumbing (f2:7–14).",
+          "evidence_refs": [
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "q_98259f004c.L6.drop",
+          "claim_sha256": "7d4c2a5d20cdc29b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branch chooses how to reload PATH, which is executable-discovery plumbing (f2:17–64).",
+          "evidence_refs": [
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "q_af02d7c460.L6.drop",
+          "claim_sha256": "6e891019bb465c94",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence test selects a Bun executable location, which is launch plumbing (f2:123–130).",
+          "evidence_refs": [
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "q_ba68018d36.L6.drop",
+          "claim_sha256": "3960afd2140d161c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence test decides whether bun_environment.js is launched at all, otherwise exiting; it is a target-artifact availability gate for payload execution (f2:180–185).",
+          "evidence_refs": [
+            "s35",
+            "f2:181"
+          ]
+        },
+        {
+          "claim_id": "q_d012987235.L6.drop",
+          "claim_sha256": "10ed1e694230777e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test chooses an available profile to reload PATH, which is executable-discovery plumbing (f2:39–54).",
+          "evidence_refs": [
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "121d9ec6e4b74a6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branch selects the shell command used to install the same Bun runtime, which is setup plumbing (f2:66–89).",
+          "evidence_refs": [
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "q_e8c9ed15f1.L6.drop",
+          "claim_sha256": "15da85f4b1419c6f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test only adds the Bun executable directory to PATH, which is launch plumbing (f2:58–61).",
+          "evidence_refs": [
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "q_fd4553b6fa.L6.drop",
+          "claim_sha256": "6232a210c7fff41f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform branch chooses candidate Bun executable paths, which is launch plumbing (f2:98–116).",
+          "evidence_refs": [
+            "s39"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "f2142bf1e2f03789",
+      "packet_sha256": "b4e2734e94edbeb0",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "c666e8fcbf09d79d",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "0a93a2af35336af4",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "778a85f2b449d045",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "6ed2313c1c9e60cd",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s3, s2) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "b21eab422100412e",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s3, s2) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "076a3514efc6520d",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s3, s2) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c15.L1",
+          "claim_sha256": "eb8918e65c225f27",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s4, s5) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c15.L2",
+          "claim_sha256": "1436c6335feb44ba",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s4, s5) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c15.L6.category",
+          "claim_sha256": "ed680d9b677c3814",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s4, s5) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "d51afe4a43901498",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s5, s6, s10) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "09bb72e03d8231bd",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s5, s6, s10) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "81e65bb505f0c8a2",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s5, s6, s10) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "1ed3b8a081bb243b",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s2, s5, s6, s10) contain only sample-missing placeholders, and the supplied f1 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "4fba84c6a6995598",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s11) contain only sample-missing placeholders, and the supplied f2 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "907ee5d9fdb5a57f",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s12) contain only sample-missing placeholders, and the supplied f2 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "76ce19d40e803e07",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s13) contain only sample-missing placeholders, and the supplied f2 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "d4d7750d548d5f2f",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s14) contain only sample-missing placeholders, and the supplied f2 file also contains only a sample-missing placeholder. No source bytes are available to anchor this claim.",
+          "evidence_refs": [
+            "s14"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "f2142bf1e2f03789",
+      "packet_sha256": "bd49ebb63ca53c23",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "c666e8fcbf09d79d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loop destructures values from Object.entries(process.env), and tests each nonempty value with startsWith against the prefix list (s1; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "0a93a2af35336af4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "findGitHubTokenEnvVars returns only a value beginning with one of the two listed prefixes; when none matches, getToken falls back to the CLI and isAuthenticated tests the resulting token. Its negation in s2 therefore includes failure of both prefix sources (s1, s3; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "778a85f2b449d045",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested strings come from the values of process.env, so env_var fits this check (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "6ed2313c1c9e60cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "getToken assigns the trimmed stdout of Bun.spawnSync with the argument vector gh, auth, token to the variable tested by the two startsWith calls (s3; f1:1).",
+          "evidence_refs": [
+            "s3",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "b21eab422100412e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The stdout check accepts either listed prefix and otherwise returns null; isAuthenticated returns the truthiness of that token, which s2 negates. Thus the CLI failure condition has the claimed negative prefix polarity (s3, s2; f1:1).",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "076a3514efc6520d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check obtains a credential through the installed gh command and examines its stdout, fitting installed_tool (s3).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c15.L1",
+          "claim_sha256": "eb8918e65c225f27",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The awaited fetchToken result is assigned to a local variable that the immediately following if statement negates (s4, s5).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c15.L2",
+          "claim_sha256": "1436c6335feb44ba",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then side of s5 runs on the explicit negation of the awaited fetchToken result, exactly a falsy test (s4, s5).",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c15.L6.category",
+          "claim_sha256": "ed680d9b677c3814",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "fetchToken searches remote repositories, fetches their contents, and returns a recovered token only after a remote user request succeeds; otherwise it returns null. The caller therefore tests an outcome of server responses (f1:1; s4, s5).",
+          "evidence_refs": [
+            "f1:1",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "d51afe4a43901498",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Authentication fails when both environment and CLI token discovery fail, and s2 ORs that failure with a missing repository; s5 and the else side of s6 add failed token recovery and absent environment/config npm credentials. The smallest satisfying set is c16, c15, c13, and c14, matching then_min 4 (",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "09bb72e03d8231bd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The nested credential-failure branches enable the destructive process calls in s10; the credential-present path instead calls El or installs the recovered GitHub token. This fits enables for the destructive behaviour (s5, s6, s10).",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "81e65bb505f0c8a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch activates destruction on credential and repository failures, without checking for analysis or sandbox markers in these conditions. Activate fits the claimed gate (s2, s5, s6, s10).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "1ed3b8a081bb243b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The decisions concern availability of usable GitHub credentials, a repository, recovered credentials, and npm credentials from the environment or configuration. Data_availability fits the fallback that reaches destruction when those resources are unavailable (s1–s10; f1:1).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s5",
+            "s6",
+            "s8",
+            "s9",
+            "s10",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "k_9f2314f1be.L6.drop",
+          "claim_sha256": "4fba84c6a6995598",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform comparison chooses PowerShell or curl/bash to perform the same Bun installation, after which both paths execute the selected command and locate Bun. This changes startup plumbing rather than gating a distinct payload behaviour (s11; f2:66–94).",
+          "evidence_refs": [
+            "s11",
+            "f2:66",
+            "f2:77",
+            "f2:86"
+          ]
+        },
+        {
+          "claim_id": "k_fb9a5db8df.L6.drop",
+          "claim_sha256": "907ee5d9fdb5a57f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform comparison chooses where or which for the same Bun PATH lookup, with both commands feeding the same success/failure result. It is a portability detail of the probe rather than a separate environment gate (s12; f2:7–15).",
+          "evidence_refs": [
+            "s12",
+            "f2:7",
+            "f2:10"
+          ]
+        },
+        {
+          "claim_id": "q_85ff2db321.L6.drop",
+          "claim_sha256": "76ce19d40e803e07",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both arms of the ternary perform the same Bun PATH lookup using the platform-appropriate command, and share the same execution and return logic. The omitted test is probe plumbing (s13; f2:7–15).",
+          "evidence_refs": [
+            "s13",
+            "f2:7",
+            "f2:10"
+          ]
+        },
+        {
+          "claim_id": "q_d71e66e7e1.L6.drop",
+          "claim_sha256": "d4d7750d548d5f2f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Both branches set the command used by the shared execSync call to install Bun, then share PATH reload and executable discovery. Choosing the installation shell is startup plumbing under the stated gate definition (s14; f2:66–94).",
+          "evidence_refs": [
+            "s14",
+            "f2:66",
+            "f2:77",
+            "f2:83"
+          ]
+        }
+      ]
+    }
+  ]
+}

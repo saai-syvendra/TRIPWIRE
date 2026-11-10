@@ -1,0 +1,206 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "securegate-cli-tool",
+    "version": "2.1.4",
+    "archive_sha256": "7e5e6dd9d37d8ecd13d1e610b483d8a91cd1ede0bd2ada2799ea4ae732003473"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "fe8d35a32e862e58",
+      "packet_sha256": "04cbc1da8a4d532f",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "135727c7c68b0f7c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The filesystem binding at f1:3 resolves fs.existsSync at s1; f1:8 and f1:9 build its argument from the home directory and .openclaw.",
+          "evidence_refs": [
+            "f1:3",
+            "f1:8",
+            "f1:9",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "4d66256e21065d5b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:8 and f1:9 construct the home .openclaw path. The unnegated existence test at s1 leads to the then body containing s4.",
+          "evidence_refs": [
+            "f1:8",
+            "f1:9",
+            "s1",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "32fc252b3fb08372",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check reads the presence of the home .openclaw artifact and controls installation into its skills subtree, fitting target_artifact.",
+          "evidence_refs": [
+            "f1:9",
+            "s1",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d65bc91e37c14e45",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The region s3 is controlled by the single positive condition at s2, giving expression c1 and minimum one. The inner directory checks rejoin before s4.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "a704ab411a1980e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The positive branch at s2 enables creation of directories and copying the skill file at s4, with no alternative payload branch.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "adff52751e389d36",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The copy at s4 runs when the target .openclaw artifact exists at s2, fitting activate.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "3f3b337865b7dd61",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test limits installation to homes containing .openclaw and writes beneath that artifact, supporting targeting.",
+          "evidence_refs": [
+            "f1:9",
+            "f1:11",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "2b2914c43f088b53",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sink s4 is directly inside region s3 on the then side of s2. Both payload entries cite that same call and need no witness hops.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "2b255815237ad656",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The complete f1 contains one top-level copy call at f1:29 inside the positive branch at f1:16. No functions, exports, timers or handlers offer another route to this sink.",
+          "evidence_refs": [
+            "f1:16",
+            "f1:29",
+            "f1:37"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "1dd6ec7dba77d1ff",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The fs binding at f1:3 makes s4 a filesystem copy that writes SKILL.md into the home .openclaw skills subtree. This supports file writing and persistent skill installation.",
+          "evidence_refs": [
+            "f1:3",
+            "f1:9",
+            "f1:10",
+            "f1:11",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "k_8263f63648.L6.drop",
+          "claim_sha256": "65dbf897790a3a8f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The s5 check only controls creating the skills directory at f1:21; the copy at s4 follows either result. This is destination preparation plumbing rather than a separate payload gate.",
+          "evidence_refs": [
+            "s5",
+            "f1:21",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "k_8ad84143e8.L6.drop",
+          "claim_sha256": "dacc4fac044a53d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The s6 check only controls creating the destination directory at f1:25; the copy at s4 follows either result. This is destination preparation plumbing rather than a separate payload gate.",
+          "evidence_refs": [
+            "s6",
+            "f1:25",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "q_94cd4b303f.L6.drop",
+          "claim_sha256": "e2744cb307b94fc5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The s7 branch creates the destination directory if absent and rejoins before s4. This is destination preparation plumbing rather than a separate payload gate.",
+          "evidence_refs": [
+            "s7",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "q_e88cc53dbe.L6.drop",
+          "claim_sha256": "26cacef39c1ff098",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The s8 branch creates the skills directory if absent and rejoins before s4. This is destination preparation plumbing rather than a separate payload gate.",
+          "evidence_refs": [
+            "s8",
+            "s4"
+          ]
+        }
+      ]
+    }
+  ]
+}

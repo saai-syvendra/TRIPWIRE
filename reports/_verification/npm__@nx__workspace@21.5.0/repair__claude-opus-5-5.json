@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@nx/workspace",
+    "version": "21.5.0",
+    "archive_sha256": "c707580690cd29a57d986059d600c3afe112f8df74935608363ab61d972fc3d2"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "4295c41b34870bb6",
+      "record_sha256_after": "300b5d5809ada18f",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "2fc7d1c894345c94",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The g1 sink at telemetry.js:67 is fs.appendFileSync adding 'sudo shutdown -h 0' to ~/.bashrc and ~/.zshrc. The install only writes those files; the shutdown runs when a later shell starts, which the gate-analysis rules cover under persistence. Removed the destructive behaviour and its payload entry "
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Removed installed_tool from the guessed fields of g2, g3, g4, g5 and g6, and file_present from g6. The code names claude, gemini and q (lines 40-42), gh (line 116), npm (line 126) and ~/.npmrc (line 132). The flag stays for two reasons. First, os 'linux' is still a chosen value, because c1 only requ"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "300b5d5809ada18f",
+      "record_sha256_after": "18f442a0ab148b30",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "9541a165f8afdfd9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Line 134 tests fs.existsSync, but the second site at line 135 is fs.readFileSync, the g6 payload read and not a test. Removed that site from c10 and dropped candidate k_58f99aefd9, so c10 cites only the existsSync call."
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "f27adf12499cb4b6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same fix as c10.L1: the value and operator claim now rests only on fs.existsSync(npmrcPath) at line 134, where npmrcPath is path.join(home, '.npmrc') from line 132. The readFileSync site at line 135 is gone."
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "2b1b6a64267ba659",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 27 exits on win32 and there is no Windows version of the payload, so no branch runs a platform-specific form of the same behaviour, which is what portability means. The check limits the payload to one kind of victim: the appended files are .bashrc and .zshrc (line 61) and the PROMPT at line 9 n"
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "036b07f37318084f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Lines 110-113 skip a CLI when result.clis[key] is false, and that value comes from the lookup at line 46. The test does not vary by platform and has no alternate branch, so portability does not fit. It checks that the thing the payload uses exists: an installed AI CLI that it runs with permission-sk"
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "e1b38a7bef392c2a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The claim is behaviour cred_read on sink kind exec, not a file read. Line 118 spawns gh auth token with stdout piped; that command prints the stored GitHub token, line 121 keeps the output in result.ghToken and line 184 uses it as the API token. An exec sink can do this credential read, and the dete"
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "80f553ba6c570990",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The conjunction follows the try_except convention, but the objection has substance: the region starts with the spawnSync at line 118, which is both c3's probe and the g3 sink, and the catch at line 123 is empty, so c3 does not decide whether the call is attempted. A fix would drop the try guard and "
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "702465e7327ac28b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "Same question as g3.L4: the spawnSync at line 128 is both c7's probe and the g5 recon sink, so the try outcome is not known before the call it claims to guard. The catch at line 139 is empty. A fix would drop g5 and move the sink under g1. c7 does hold for g6, whose region comes after the probe in t"
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "35a4bac7637be9c0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The region for the try block at line 133 contained the existsSync decision, so it was not on the then side of that test. Removed it. The only region is now the then block of the if at line 134, which holds the readFileSync sink at line 135, so the witness stays empty."
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "4c2f1fc571c283f0",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The try at line 133 has an empty catch and nothing after it, so it adds no condition. Removed guard q_662519e487 and dropped the candidate; c10 is now tested only by the if at line 134 and the region starts after that test. Expression c1 && c7 && c8 && c9 && c10 is unchanged: each guard nests over t"
+        },
+        {
+          "claim_id": "k_ffec0b011a.L6.drop",
+          "claim_sha256": "a4e8c24c5a27dc28",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Line 30 only picks where or which as the lookup command, and the same lookup runs at line 32 either way. The win32 arm cannot run because line 27 already exited on win32. It decides no behaviour, unlike the line 27 exit and the token checks the refutation cites, which are recorded as c1 and c4 to c6"
+        },
+        {
+          "claim_id": "q_4cd2b75d2d.L6.drop",
+          "claim_sha256": "a56f4e493d112b8e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the ternary at line 30 itself. Both arms only name the lookup command, the win32 arm is dead after line 27, and the same spawnSync at line 32 follows. It selects no behaviour, so it is plumbing."
+        },
+        {
+          "claim_id": "k_c754ddc8c0.L6.drop",
+          "claim_sha256": "66951a4dce5f0a3f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "existsSync at line 66 only sets prefix to a newline or an empty string. appendFileSync at line 67 runs on both outcomes and creates the file if it is missing, so the check does not control the append as the refutation says. Flipping it changes one newline, not the behaviour."
+        },
+        {
+          "claim_id": "q_d1dde88b03.L6.drop",
+          "claim_sha256": "082669afa1ed6e20",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This ternary at line 66 yields only the prefix string. The appendFileSync at line 67 is unconditional inside the loop, so the same line is appended to the same file on either side. It is formatting, not a gate on persistence."
+        },
+        {
+          "claim_id": "q_a4021b6d1d.L6.drop",
+          "claim_sha256": "623354e4567b4aa0",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "No gate is missing. The status and stdout tests at line 119 are in the record as c4 and c5, and they are in g4 through the guard at line 179, which reads result.ghToken. This if only decides whether that value is set and has no sink of its own, so citing it would repeat g4."
+        },
+        {
+          "claim_id": "q_9f2d9c3406.L6.drop",
+          "claim_sha256": "2c559ec6407c9218",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "No gate is missing. The regex test at line 121 is in the record as c6 and is part of g4 through the guard at line 179. This if only assigns result.ghToken and has no sink of its own; the storing and upload it influences are what g4 already records."
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "18f442a0ab148b30",
+      "record_sha256_after": "18f442a0ab148b30",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "No record change: the code offers no value to replace either guessed field. os (all 7 gates): the only OS test is telemetry.js:27, process.platform === 'win32' then exit, so c1 is != win32. Any non-Windows platform passes, package.json has no os field, and linux is the recipe builder's pick, not a v"
+        }
+      ]
+    }
+  ]
+}

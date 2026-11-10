@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "urlliib3",
+    "version": "0.1",
+    "archive_sha256": "53e38266103fa7f765c6c180e877226f2544a04aea3ceead26a0ca8e2b1a3274"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "778596e2b5ecb79e",
+      "record_sha256_after": "e10a3d71f39db7c3",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "ae8d15f0e6090281",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "In the decoded setup.py (d2, line 81 to 100) each file from os.walk is tested with endswith('.lnk') and then os.path.basename(TargetPath) in the browser list; only matching shortcuts get Arguments set and Save() called. The behaviour is the same, the tests choose which victim shortcuts it acts on, s"
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "e55f9aeda6217e54",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The same tests select the browser shortcuts to hijack; nothing concerns data being available. Purpose changed from data_availability to targeting and purpose_reason reworded."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "g3 and g4 sit in a flattened while/state loop: the c7 guard only sets the state to 60921, and Save() at line 100 runs in a later state outside the guarded block, so the sink cannot be placed in a guarded region or reached by a call witness and stays unresolved dynamic_dispatch. The package_manager r"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "e10a3d71f39db7c3",
+      "record_sha256_after": "842361ede9f904cc",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "87c89bfcfca8f351",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "selects holds. Decoded lines 7 and 34 are one if/elif on sys.argv[1]: egg_info/build runs pip.main(['install','pypiwin32']) at line 13, and bdist_wheel/install takes the elif and writes the extension and rewrites shortcuts. Flipping c4 changes which behaviour class that setup.py run performs (downlo"
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "03530df6d393f922",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "targeting holds. Portability needs each branch to run a platform-specific version of the same behaviour, but the if at setup.py line 6 has no else, so no other OS gets any version and only the plain setup() call runs there. pypiwin32 is not a build need of the package: setup() declares no extension "
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "68084f5d32718fc6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "selects holds. The bdist_wheel/install test at decoded line 34 is the elif of the egg_info/build test at line 7, so the same sys.argv[1] dispatch picks the extension dropper instead of the pip install at line 13. The two sides run different behaviours, so this is a choice of payload per branch and n"
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "aab9cfd693faf8b3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The outside_region refutation was right about the form: the region at decoded lines 91 to 93 holds only the Arguments assignment, the state assignment and continue, while Save is at line 100, so an empty witness wrongly placed the sink in the region. Added a bind hop on the state assignment at line "
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "e6ae30dd6339b061",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The outside_region refutation was right about the form: the admin block holds only a state assignment and continue, and Save is in a later state, so an empty witness wrongly placed the sink in the region. Added a bind hop on that state assignment (setup.py line 69, 362814 once folded) and kept unres"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "842361ede9f904cc",
+      "record_sha256_after": "c6626c82955a8122",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "99a52ce6ec4dca8b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right about the hop: decoded line 92 stores the integer state 60921, not a function or object, so it is not a valid bind. The path itself holds: 60921 is assigned only at line 92, inside c7's block, and the elif at line 99 runs Save at line 100. Removed the bind hop and the unresol"
+        },
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "eb1115b176a3e0d1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right about the hop: the assignment at raw setup.py:69 stores an integer state, not a function or object. Removed the bind hop and the unresolved marker. Added decoded lines 45-46, reached only through 362814, assigned only under c2 at line 65, and the walk loop at decoded line 78,"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged after write_report.py, with one reason left: out-of-set claim pending verification (c4, c5, c6, c7, g1 to g4), which only a reviewer can remove. Payload path not fully traced is gone: g3 and g4 no longer carry unresolved, since every state in the chain to Save is a constant. Guessed re"
+        }
+      ]
+    }
+  ]
+}

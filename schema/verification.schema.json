@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tripwire/verification.schema.json",
+  "title": "TRIPWIRE verification sidecar (v1.0): verdicts on one record's claims by one verifier",
+  "type": "object",
+  "required": ["schema_version", "method", "by_slug", "package", "runs"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "method": { "enum": ["deterministic", "agent"] },
+    "by_slug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$" },
+    "package": {
+      "type": "object",
+      "required": ["ecosystem", "name", "version", "archive_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "ecosystem": { "enum": ["npm", "pypi"] },
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "archive_sha256": { "type": ["string", "null"] }
+      }
+    },
+    "runs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/run" } }
+  },
+  "$defs": {
+    "run": {
+      "description": "One pass of one verifier over some claims. Runs are appended, never edited.",
+      "type": "object",
+      "required": ["by", "record_sha256", "packet_sha256", "blinded", "verdicts"],
+      "additionalProperties": false,
+      "properties": {
+        "by": { "type": "string", "description": "verify@<environment>, or a model id" },
+        "record_sha256": { "type": "string", "pattern": "^[0-9a-f]{16}$" },
+        "packet_sha256": { "type": ["string", "null"], "pattern": "^[0-9a-f]{16}$" },
+        "blinded": { "type": "boolean" },
+        "verdicts": { "type": "array", "items": { "$ref": "#/$defs/verdict" } }
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "required": ["claim_id", "claim_sha256", "verdict", "grade", "reason_code", "evidence", "evidence_refs"],
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": { "type": "string",
+                      "pattern": "^(c\\d+\\.L[12]|c\\d+\\.L6\\.category|g\\d+\\.L4|g\\d+\\.L6\\.(polarity|effect|purpose)|g\\d+\\.(then|else)\\.L[35](\\.excl)?|[kq]_[0-9a-f]{10}\\.L6\\.drop)$" },
+        "claim_sha256": { "type": "string", "pattern": "^[0-9a-f]{16}$" },
+        "verdict": { "enum": ["verified", "refuted", "unanchored", "cannot_tell"] },
+        "grade": { "enum": ["consistent", "inconsistent", "cannot_tell", "exclusive", "non_exclusive", "unknown", null] },
+        "reason_code": { "enum": ["no_anchor", "sample_missing", "anchor_hash_mismatch", "recipe_failed", "parse_failed",
+                                  "lang_unsupported", "value_unchecked", "value_redacted", "encoded_unchecked", "budget_exceeded", "dynamic_dispatch", "not_a_test",
+                                  "operator_unchecked", "api_mismatch", "value_mismatch", "operator_mismatch", "outside_region",
+                                  "broken_hop", "no_sink", "sink_kind_mismatch", "expression_mismatch",
+                                  "unresolved_binding", "bundle_unresolved", "name_only_link", "witness_gap", "incomplete_cfg",
+                                  "checker_error", "judgement", "other", null] },
+        "evidence": { "type": "string", "maxLength": 300 },
+        "evidence_refs": { "type": "array", "items": { "type": "string", "maxLength": 120 } }
+      },
+      "allOf": [
+        { "if": { "properties": { "verdict": { "const": "unanchored" } } },
+          "then": { "properties": { "reason_code": { "type": "string" } } } }
+      ]
+    }
+  }
+}

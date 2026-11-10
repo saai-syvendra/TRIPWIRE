@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pcodestyle",
+    "version": "0.1",
+    "archive_sha256": "9e988bcffda9c7ef1868a5eb1cc3755be9e66c8bdc90631ea969f1c65a868658"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "aefc7ebde4e9dbf8",
+      "record_sha256_after": "12ad18091ea5ec05",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "93e54d17d641a054",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The extra c1 && c4 disjunct comes from the region at line 46, which sits lexically outside the c2 if but is the flattened state 362814. Only the IsUserAnAdmin() then side at line 68 sets the next state to 362814 (436*(853&963)+756//406-(374|279+62) = 362814, and the shifted term is 0). The non-admin"
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "e5fb883b8b812f55",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Save() at line 104 sits lexically outside the c6 if but is state 60921 of the inner state machine inside the c5 block. Only the c6 then side at line 95 sets the state to 60921 (211*(953&360)+310//386-(178|812+705) = 60921, and the shifted term is 0). The c6 false side at line 97 sets (...)>>8932, wh"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed 'payload path not fully traced': g3 reaches Save() through the folder list (line 46 append, line 82 os.walk), not dynamic dispatch, so I removed unresolved. The flag stays: the flattened state order is folded by hand; background.js and manifest.json bodies are not decoded; package_manager and "
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "12ad18091ea5ec05",
+      "record_sha256_after": "d090df0f883936e2",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "0dd0430a1593757e",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Save() at line 104 is state 60921, a sibling elif of the flattened loop, not inside the line 69 block or the line 46 state. It is reached only through the state variable (line 69 sets 362814 = 436*833+1-375; line 46 appends the ProgramData folder walked at line 82). No witness hop expresses a state "
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "4e8def5fa1b23bc8",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The second region (line 46, state 362814) is a sibling elif state outside the c2 if, so the checker read it as an alternative (c1 && c4). That state is only entered from the IsUserAnAdmin() true side at line 69, so the gate really is c1 && c4 && c2; dropped the line 46 region so the only region is t"
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "2900aca5a4f6fa08",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The second region (line 104, state 60921) is a sibling elif inside the c5 if but outside the c6 if at line 94. State 60921 is set only on c6's then side at line 95 (211*296+0-1535 = 60921); c6 false sets state 0 (>>8932) and ends the loop. Dropped the line 104 region so the only region is the c6 the"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d090df0f883936e2",
+      "record_sha256_after": "d090df0f883936e2",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "5883388aa6d6dc02",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "escalated",
+          "reason": "The refutation is right: the g3 region (setup.py line 69, inside the IsUserAnAdmin() test at line 68) only sets the state variable to the value for state 362814 and continues; the ProgramData Start Menu append (line 46) and the shortcut Save() at line 104 are sibling elif states of the flattened whi"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Every reason still holds in the code: the state order on lines 7 to 130 is a flattened while/elif machine folded by hand from next-state arithmetic; the background.js (line 73) and manifest.json (line 129) bodies are only decoded at their start; package_manager pip (all gates) and g4 file_present ar"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "d090df0f883936e2",
+      "record_sha256_after": "077eeafe30ceaf00",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g4.L6.effect",
+          "claim_sha256": "26a883bdb57f4226",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "setup.py lines 82-95 walk every file in the shortcut folders; c5 (endswith .lnk, line 85) and c6 (TargetPath basename in chrome/msedge/launcher/brave, line 94) only pick which shortcut gets its Arguments set and saved. The behaviour is the same shortcut patch and the environment decides which artifa"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "077eeafe30ceaf00",
+      "record_sha256_after": "cacc5945b9d6e3df",
+      "round": 3,
+      "decisions": [
+        {
+          "claim_id": "g4.then.L3",
+          "claim_sha256": "b5d6db100206d990",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The refuter is right that Save() (setup.py:104) is outside the line 95 region, but the claim does not place it there: the payload is marked unresolved dynamic_dispatch, so its empty witness means no hop could be written, not that the sink is in the region. Following the rest of the path as layers.md"
+        },
+        {
+          "claim_id": "g4.L6.purpose",
+          "claim_sha256": "9531aea8a1495b04",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "data_availability fits. c5 (setup.py:85) and c6 (setup.py:94) test each walked file for a browser shortcut the payload can use, and the code acts on every match it finds, which is the skill's definition of a check that the thing to use exists. The refuter's point that the filters choose shortcuts fo"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged. Removed two reasons: registering derivation d1 (py_chr_shift_fold) replaces the hand folding of the state order, and it fully recovers background.js and manifest.json, so obfuscation.unrecovered is empty. Three reasons remain. Out-of-set claims c3-c6 and g1-g4 still await verification"
+        }
+      ]
+    }
+  ]
+}

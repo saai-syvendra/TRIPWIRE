@@ -1,0 +1,842 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@firebase/util",
+    "version": "1.15.3",
+    "archive_sha256": "0a812b12ea0d186c2c864417140ef27954dc28bf9cbb6097dc5cb447a24be877"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "58ceedff8a1073c6",
+      "packet_sha256": "eb318c4fae374f51",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f8bde5c929cbf578",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison directly reads process.env.X_GOOGLE_TARGET_PLATFORM (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "3436f51f68d36025",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Equality with fah returns immediately, so reaching the later fetch requires inequality (s2).",
+          "evidence_refs": [
+            "s2",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "da00e9cd88760537",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads an environment variable directly (s1).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "31fdc77d1ffc987b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "ENV_VARIABLE is the constant FIREBASE_WEBAPP_CONFIG, and envVariable holds its trimmed environment value before the test (f1:22, f1:25, s3).",
+          "evidence_refs": [
+            "f1:22",
+            "f1:25",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "9fdb650baf937bf5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The falsy trimmed environment value returns immediately; the remaining parsing and file-reading code requires its truthiness (f1:25, s5).",
+          "evidence_refs": [
+            "f1:25",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "3d91c5a8a026f6cd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested local value comes from FIREBASE_WEBAPP_CONFIG (f1:22, f1:25, s3).",
+          "evidence_refs": [
+            "f1:22",
+            "f1:25",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "0ffb13af95e0306d",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The receiver is projectId, bound to partialConfig.projectId or a fallback, rather than a same-scope binding of process.env.FIREBASE_WEBAPP_CONFIG (f1:61, f1:70, s6).",
+          "evidence_refs": [
+            "f1:61",
+            "f1:70",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d902e36c19b49c8b",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The non-prefix requirement applies to partialConfig.projectId or its fallback, not the raw environment string; that string can instead name a configuration file (f1:45, f1:70, s7).",
+          "evidence_refs": [
+            "f1:45",
+            "f1:70",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "8dc5d8ef143ce351",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The appropriate category is configuration content: the test reads a parsed projectId, which can come from file contents rather than the environment value itself (f1:50, f1:51, f1:70, s6).",
+          "evidence_refs": [
+            "f1:50",
+            "f1:51",
+            "f1:70",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "35773ff1639a3b3c",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "The condition tests appId and apiKey bound to properties of the partialConfig parameter, not a same-scope environment-variable binding (f1:61, f1:76, f1:77, s8).",
+          "evidence_refs": [
+            "f1:61",
+            "f1:76",
+            "f1:77",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "5c4300207e69f870",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "api_mismatch",
+          "evidence": "Continuing requires both parsed appId and apiKey to be truthy, which is different from testing the raw FIREBASE_WEBAPP_CONFIG value for truthiness (f1:76, f1:77, s9).",
+          "evidence_refs": [
+            "f1:76",
+            "f1:77",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "6de75a2e3846a6e1",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The appropriate category is configuration content: these are parsed appId and apiKey properties and may originate in a configuration file (f1:50, f1:51, f1:76, f1:77, s8).",
+          "evidence_refs": [
+            "f1:50",
+            "f1:51",
+            "f1:76",
+            "f1:77",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "015075811a0fca86",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The four cited early returns must all be bypassed to enter s10, so their continuation predicates combine with AND and require all four conditions (s4, s2, s7, s9).",
+          "evidence_refs": [
+            "s4",
+            "s2",
+            "s7",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "061eb4cd35c4de94",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early returns enable or suppress the configuration fetch; only the continuation reaches that operation (f1:62, f1:67, f1:73, f1:78, s11).",
+          "evidence_refs": [
+            "f1:62",
+            "f1:67",
+            "f1:73",
+            "f1:78",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e3daf7dc5e3b326d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks activate config retrieval for eligible configuration and platform values, with no analysis-detection predicate in this path (f1:62, f1:67, f1:73, f1:78, s11).",
+          "evidence_refs": [
+            "f1:62",
+            "f1:67",
+            "f1:73",
+            "f1:78",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bd4b3351a5073c5b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code requires configuration and request credentials and reuses supplied configuration on the platform and demo branches, supporting data_availability (f1:62, f1:68, f1:74, f1:78, f1:89).",
+          "evidence_refs": [
+            "f1:62",
+            "f1:68",
+            "f1:74",
+            "f1:78",
+            "f1:89"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "98c18706e364a551",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fetch sink lies directly in s10 after all four early-return guards, requiring no witness hops (s4, s2, s7, s9, s11).",
+          "evidence_refs": [
+            "s4",
+            "s2",
+            "s7",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1918266cd2f8977c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sole fetch is inside getFinalConfig after all cited guards; its only caller is the promise continuation and there is no export or alternate entry to the sink (f1:61, f1:88, f1:124).",
+          "evidence_refs": [
+            "f1:61",
+            "f1:88",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "6b335c5c1d034eb0",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The fetch retrieves configuration JSON, which is returned and incorporated into generated defaults files, supporting benign build configuration work (f1:88, f1:103, f1:104, f1:127, f1:138).",
+          "evidence_refs": [
+            "f1:88",
+            "f1:103",
+            "f1:104",
+            "f1:127",
+            "f1:138"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "5369dcaba3472faa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single early-return guard requires the trimmed environment value to be truthy before entering s12, so the combination has one condition (s5, s12).",
+          "evidence_refs": [
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "14b8b09364f7fe99",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The presence test enables configuration loading, including the file read, by returning before any loading when its value is falsy (s5, s12, s13).",
+          "evidence_refs": [
+            "s5",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "d08facdbd4b62959",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The predicate activates configuration loading when a value is supplied; it does not detect an analysis environment (f1:25, s5, s12).",
+          "evidence_refs": [
+            "f1:25",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "e3480e37259b8df6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guard skips loading when no usable configuration value is supplied, supporting data_availability (f1:25, s5, s12).",
+          "evidence_refs": [
+            "f1:25",
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "1ab300dc65ca80a8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The readFile call is inside s12 on the continuation after s5, so the sink is directly in the guarded region (s5, s12, s13).",
+          "evidence_refs": [
+            "s5",
+            "s12",
+            "s13"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "f2bb645b954005f6",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sole readFile call is inside getPartialConfig after the cited guard, and getPartialConfig is invoked only by the top-level promise chain (f1:24, s5, f1:50, f1:122).",
+          "evidence_refs": [
+            "f1:24",
+            "s5",
+            "f1:50",
+            "f1:122"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "aae41931e4a6672e",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "readFile is imported from node:fs/promises and loads JSON configuration subsequently used for generated defaults files (f1:18, f1:50, f1:51, f1:124, f1:138).",
+          "evidence_refs": [
+            "f1:18",
+            "f1:50",
+            "f1:51",
+            "f1:124",
+            "f1:138"
+          ]
+        },
+        {
+          "claim_id": "k_fe169d0b26.L6.drop",
+          "claim_sha256": "14a530ba1589feb2",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The environment-value prefix test chooses inline JSON parsing versus reading the file named by that value, so it is an environment gate deciding file-read behavior at install (s14, s15, f1:35, s13, f1:122).",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "f1:35",
+            "s13",
+            "f1:122"
+          ]
+        },
+        {
+          "claim_id": "q_c0cb4022cc.L6.drop",
+          "claim_sha256": "d114d3ce1e0bcb91",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The environment-value prefix test chooses inline JSON parsing versus reading the file named by that value, so it is an environment gate deciding file-read behavior at install (s14, s15, f1:35, s13, f1:122).",
+          "evidence_refs": [
+            "s14",
+            "s15",
+            "f1:35",
+            "s13",
+            "f1:122"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e805a51b7ee49499",
+      "packet_sha256": "46f93b22ce86880e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "752f1e8b2f4b1b84",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "f81df4198a213598",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "987a300680e2bbcc",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s1, s2) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "3ca5e81b84bb813a",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s3) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "a60605c3db84f54b",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s3, s4) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "c20732d8c50e5ce9",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s3, s4) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "4afd231385a7c0b6",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s5) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "a3683333a960d2ed",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s5, s4) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "9f5e82a2082ac26b",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s5, s4) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "bc1f15a59f5c967b",
+          "verdict": "unanchored",
+          "grade": "cannot_tell",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s6, s7, s2, s4, s8, s9, s1, s3, s5, s10) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s8",
+            "s9",
+            "s1",
+            "s3",
+            "s5",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "290eb80b8938e3a5",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s6, s7, s2, s4, s10, s11) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "107d08c4e6f4352a",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s6, s7, s2, s4, s10, s11) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "11a30f96adbf3ef5",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s6, s7, s2, s4, s10, s11) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "59244a9abdcd8e8d",
+          "verdict": "unanchored",
+          "grade": null,
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s6, s7, s2, s4, s10, s11) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ae575508b91ce4cb",
+          "verdict": "unanchored",
+          "grade": "unknown",
+          "reason_code": "sample_missing",
+          "evidence": "The cited slices (s6, s7, s2, s4, s10, s11) contain only sample-missing placeholders, and code/f1.unavailable.txt likewise contains no source code. The missing sample prevents anchoring this claim to package bytes.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s10",
+            "s11"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e805a51b7ee49499",
+      "packet_sha256": "3349fd0d9a2c55a3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "752f1e8b2f4b1b84",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "projectId is bound to partialConfig.projectId with a fallback at f1:70 and is tested for a prefix in s1.",
+          "evidence_refs": [
+            "f1:70",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "f81df4198a213598",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "A demo- prefix match returns immediately, so reaching the subsequent fetch requires not_startswith demo- (s2, f1:88).",
+          "evidence_refs": [
+            "s2",
+            "f1:88"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "987a300680e2bbcc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested projectId belongs to the configuration loaded from FIREBASE_WEBAPP_CONFIG, as inline JSON or through its specified file (f1:25–51, f1:124).",
+          "evidence_refs": [
+            "f1:25",
+            "f1:35",
+            "f1:51",
+            "f1:70",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "3ca5e81b84bb813a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "appId is bound directly to partialConfig.appId at f1:76 and tested in s3.",
+          "evidence_refs": [
+            "f1:76",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "a60605c3db84f54b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The return on !appId || !apiKey means continuation to fetch requires appId to be truthy (s4, f1:88).",
+          "evidence_refs": [
+            "s4",
+            "f1:88"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "c20732d8c50e5ce9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested appId comes from configuration loaded using FIREBASE_WEBAPP_CONFIG, either inline or from its specified file (f1:25–51, f1:124).",
+          "evidence_refs": [
+            "f1:25",
+            "f1:35",
+            "f1:51",
+            "f1:76",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "4afd231385a7c0b6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "apiKey is bound directly to partialConfig.apiKey at f1:77 and tested in s5.",
+          "evidence_refs": [
+            "f1:77",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "a3683333a960d2ed",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The return on !appId || !apiKey means continuation to fetch requires apiKey to be truthy (s4, f1:88).",
+          "evidence_refs": [
+            "s4",
+            "f1:88"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "9f5e82a2082ac26b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The tested apiKey comes from configuration loaded using FIREBASE_WEBAPP_CONFIG, either inline or from its specified file (f1:25–51, f1:124).",
+          "evidence_refs": [
+            "f1:25",
+            "f1:35",
+            "f1:51",
+            "f1:77",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "bc1f15a59f5c967b",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "s6 tests the parsed partialConfig, rather than merely a truthy FIREBASE_WEBAPP_CONFIG: a nonempty malformed JSON value or unreadable configuration file returns undefined before this guard (f1:33–57, f1:124). Thus c2 does not express the first guard, although the remaining continuation guards require",
+          "evidence_refs": [
+            "s6",
+            "f1:33",
+            "f1:41",
+            "f1:50",
+            "f1:57",
+            "f1:124",
+            "s7",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "290eb80b8938e3a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The early returns decide whether the configuration-fetch call runs at all, and the continuation retrieves and returns configuration (f1:62–104). This supports enables.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s11",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "107d08c4e6f4352a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks activate fetching for supplied configuration outside fah and demo cases with appId and apiKey present (f1:62–89). The fetched configuration feeds generated defaults, supporting activate (f1:126–148).",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s11",
+            "f1:126",
+            "f1:138",
+            "f1:144"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "11a30f96adbf3ef5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Missing configuration or credentials prevents fetching, while fah and demo configurations are returned directly; otherwise retrieved JSON becomes the configuration (f1:62–104). This supports data_availability.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "f1:103",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "59244a9abdcd8e8d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The fetch in s11 lies directly in region s10 after all four early-return guards in the same function, and each return prevents that continuation.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "ae575508b91ce4cb",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sole fetch call lies inside getFinalConfig after all cited early returns, and its only use elsewhere in the file is the promise continuation at f1:124. The complete file has no alternate entry into the fetch region or export of this function.",
+          "evidence_refs": [
+            "f1:61",
+            "s6",
+            "s7",
+            "s2",
+            "s4",
+            "s11",
+            "f1:124"
+          ]
+        }
+      ]
+    }
+  ]
+}

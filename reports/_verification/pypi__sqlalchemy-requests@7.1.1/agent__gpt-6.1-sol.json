@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "sqlalchemy-requests",
+    "version": "7.1.1",
+    "archive_sha256": "51a983166778853322273f0336b970f3406b1bac6cf84cf2353b04f14679c7c8"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "4a61fd4fe23129fd",
+      "packet_sha256": "ce577c09b804383e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "2aaf47adce7f0b44",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "value_redacted",
+          "evidence": "s1 directly tests os.path.exists, but the claim's probe target contains a redacted author handle, so its exact correspondence to the literal operand cannot be established.",
+          "evidence_refs": [
+            "s1",
+            "f1:23",
+            "f1:24"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "b3b6e63ee2e82de6",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "value_redacted",
+          "evidence": "s2 exits when the path exists, so reaching s3 requires not_exists. The claimed comparison value is redacted, preventing confirmation of the exact operand.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "dd67913f1e6267fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 uses os.path.exists to test a filesystem path, which supports file_or_dir_exists.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "013e1da7e6f03198",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single early exit in s2 makes s3 conditional on the path being absent. There are no additional guards in this region, so the combination is c1 with a minimum of one condition.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "4d0ef5a96dae18d9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s2 terminates execution on path presence and otherwise permits the exec call in s4, supporting enables.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "e7f051572fe10f9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check activates the subsequent exec call on hosts lacking the specified path; the visible code does not identify that path as an analysis or sandbox artifact.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b4bd5d8e8d6b3288",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The visible code checks a path and exits on its presence without explaining its role or connecting it to portability, targeting, analysis detection, or required input data. The purpose is therefore unclear.",
+          "evidence_refs": [
+            "f1:23",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bbf51c2f309da1f7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s4 is directly inside the s3 region following the early exit in s2. The empty witness correctly describes this direct placement on the path-absent side.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "4a1ffc04545b878c",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sink at f1:38 is a single top-level statement after the terminating check at f1:24-25. The full supplied file contains no alternate caller, handler, or control-flow entry to that statement.",
+          "evidence_refs": [
+            "f1:24",
+            "f1:25",
+            "f1:38",
+            "f1:40"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "8b221878c10fac2f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s4 directly calls the unshadowed built-in exec with base64-decoded bytes, supporting the eval sink kind and the generic other behaviour without establishing any more specific payload behaviour.",
+          "evidence_refs": [
+            "f1:29",
+            "s4"
+          ]
+        }
+      ]
+    }
+  ]
+}

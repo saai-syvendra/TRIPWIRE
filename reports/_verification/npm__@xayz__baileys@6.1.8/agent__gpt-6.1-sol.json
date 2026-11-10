@@ -1,0 +1,158 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@xayz/baileys",
+    "version": "6.1.8",
+    "archive_sha256": "9505f372ff51c1136dfb03ca5309a95f46dd08017e5aaee307cee700c9a261ac"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "57db7f1bfbbcfffc",
+      "packet_sha256": "9ba8c07bfa8fa434",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "26a0f60fd354fe42",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition directly compares process.env.BAILEYS_SKIP_SELFTEST with the string '1' (s1, f1:124).",
+          "evidence_refs": [
+            "s1",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "5497ecff1399f8c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Equality with the string '1' causes process.exit(0), so the subsequent guarded code is reached on inequality with that string (s2, s3).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "63280a54e018a5d8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition reads a property of process.env, making env_var the appropriate category (f1:124).",
+          "evidence_refs": [
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "d2a4eeeb361bae25",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single early exit tests c1's complement, leaving s3 controlled by c1 alone; the minimum satisfying set contains one condition (s1, s2, s3).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "5b4ead7e91b0b871",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The environment comparison either exits or permits the integrity and network checks to run, so it enables those checks (f1:124, f1:130, f1:131).",
+          "evidence_refs": [
+            "f1:124",
+            "f1:126",
+            "f1:130",
+            "f1:131"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "ba3f7fadf952d335",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The explicit skip flag controls whether the checks run, with no analysis or sandbox detection in this decision; activate fits the running side (f1:124–131).",
+          "evidence_refs": [
+            "f1:124",
+            "f1:126",
+            "f1:131"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "edd8e3ced39239db",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The flag simply bypasses module and connectivity checks; the executable code does not establish portability, targeting, anti-analysis or data-availability as the gate's purpose, so unclear fits (f1:124–131).",
+          "evidence_refs": [
+            "f1:124",
+            "f1:126",
+            "f1:130",
+            "f1:131"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "d83edc91e2986a93",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call at s5 lies after the early exit in s2 and resolves to the declaration at f1:58. Its Promise executor immediately reaches the WebSocket constructor at s4 (f1:59–66).",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5",
+            "s6",
+            "s4",
+            "f1:59"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "920167a561283396",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "In the complete supplied file, testNetworkReachability has one caller at f1:131, after the skip exit, and is neither exported nor passed to another callback. The timers and socket handlers inside it do not call the function or recreate the constructor sink (f1:58–99).",
+          "evidence_refs": [
+            "f1:58",
+            "f1:66",
+            "f1:86",
+            "f1:92",
+            "f1:124",
+            "f1:131"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "9996b96981f48134",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "WebSocket is the default import from ws and its constructor opens the connection whose outcome handlers record success, error or timeout (f1:24, f1:66, f1:77–97). This supports the claimed network sink and other behaviour as a connectivity check.",
+          "evidence_refs": [
+            "f1:24",
+            "s4",
+            "f1:77",
+            "f1:86",
+            "f1:92",
+            "f1:94"
+          ]
+        }
+      ]
+    }
+  ]
+}

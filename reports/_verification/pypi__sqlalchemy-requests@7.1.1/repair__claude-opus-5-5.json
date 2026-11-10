@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "sqlalchemy-requests",
+    "version": "7.1.1",
+    "archive_sha256": "51a983166778853322273f0336b970f3406b1bac6cf84cf2353b04f14679c7c8"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "0fffb74d803250db",
+      "record_sha256_after": "4a61fd4fe23129fd",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "effba51e7f5a161c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "setup.py line 24 exits when a file named after the author exists in the build directory. No file in the package creates that marker, so calling it targeting (keeping it off the author's machine) was a guess; it is not a re-entry guard either. Purpose changed to unclear with that reason."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Both reasons still hold. The base64 blob exec'd at setup.py line 38 decodes to invalid Python (for example 'if os.exceptions \"\\\"list\\\"\" exit(0)' and 'interface url= ...'), so the gated install-time payload only raises SyntaxError; whether a gate over a broken payload belongs in the dataset is a pers"
+        }
+      ]
+    }
+  ]
+}

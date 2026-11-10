@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@emilgroup/changelog-sdk-node",
+    "version": "1.0.3",
+    "archive_sha256": "9f6b69a0e89749375c67df59c67435be4a33249c9a1e3d198dd05945d4b2a00c"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "04d6332fab96c9f9",
+      "packet_sha256": "3406bd5f69613e0a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c7.L1",
+          "claim_sha256": "a3a10b876f410ba1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:18 reads each npmrc path with fs.readFileSync into content; f1:19-21 split it into lines and the line.match result m is tested in the if at f1:21 (s1), so the decision reads the file content. The paths are .npmrc and /etc/npmrc, matching *npmrc.",
+          "evidence_refs": [
+            "s1",
+            "f1:18",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c7.L2",
+          "claim_sha256": "e5fe95f0d9255688",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 matches each line of the file content against the regex (?:_authToken\\s*=\\s*|:_authToken=)([^\\s]+), and f1:21 requires m to be truthy to reach tokens.add, so regex is the positive form. The pattern is identical to the claimed value; tokens.length>0 at s2 is a later gate on the collected result.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:21"
+          ]
+        },
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "50a6bffd456fa744",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The f1:21 condition (s3) tests m[1].startsWith, and m comes from line.match on lines of the content read by fs.readFileSync at f1:18, so the decision depends on the file content.",
+          "evidence_refs": [
+            "s3",
+            "f1:18",
+            "f1:20"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "cd1bd44448c96c89",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:21 has !m[1].startsWith('${'), and this must be true to reach tokens.add. The positive form is therefore not_startswith with value ${.",
+          "evidence_refs": [
+            "s3",
+            "f1:21"
+          ]
+        }
+      ]
+    }
+  ]
+}

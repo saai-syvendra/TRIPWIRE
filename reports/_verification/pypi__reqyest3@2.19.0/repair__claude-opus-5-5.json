@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "reqyest3",
+    "version": "2.19.0",
+    "archive_sha256": "d82108f00567a979619df59f6a42f98c2dd753f37111b4ef94280dd7b408eed7"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "7ee71f35800ebcbb",
+      "record_sha256_after": "7ee71f35800ebcbb",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g16.then.L5",
+          "claim_sha256": "93d991ffbd674e5b",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The sink at setup.py:112 is os.system(\"touch /tmp/license.py\"). The record already gives sink_kind exec, which matches the call, so the sink kind is not misstated. The behaviour is the effect of that command: touch with a fixed literal path does one thing, which is to create /tmp/license.py on disk."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Both install payloads are pyarmor-encrypted bytes literals passed to __pyarmor__ (setup.py lines 71 and 78), and the 32-bit Windows runtimes that would decrypt them are compiled DLLs. Static analysis cannot recover them, so the g1 branch behaviours stay 'other'. What the decrypted code does with /tm"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "7ee71f35800ebcbb",
+      "record_sha256_after": "7ee71f35800ebcbb",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "g16.then.L5",
+          "claim_sha256": "93d991ffbd674e5b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The sink at setup.py line 112 (bytes 14527-14561) is os.system(\"touch /tmp/license.py\"), with os bound by the plain import at line 1. It sits at top level after the line 16 version guard, so it runs on every setup.py execution that passes c8. The record already gives sink_kind exec, so the kind matc"
+        }
+      ]
+    }
+  ]
+}

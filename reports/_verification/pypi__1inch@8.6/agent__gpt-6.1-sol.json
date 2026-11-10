@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "1inch",
+    "version": "8.6",
+    "archive_sha256": "34d90396fa38233e71a488618672e9471ee2b517f57641706c764f582d9fb957"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "a90204f6ab06f913",
+      "packet_sha256": "c7addbdb653e4fd2",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "f72a39578617bfef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:2 imports os directly, and s1 tests os.path.exists in the condition of the if statement at f1:9.",
+          "evidence_refs": [
+            "s1",
+            "f1:2",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "65a67bc084d96e14",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "s1 supplies the claimed literal path to os.path.exists and negates the result once. The guarded call is in the then arm, so it runs when that path does not exist.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "c0c7f32986f2a291",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition at f1:9 reads filesystem path existence through os.path.exists, which fits file_or_dir_exists.",
+          "evidence_refs": [
+            "f1:9",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "4575e9ac18d0f3a1",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "s2 has one condition, c1, controlling the entire region s3 without additional nested or alternative tests. Exactly one condition must hold to enter that region.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "5a4bb871961a0939",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition at f1:9 determines whether the command at f1:11 is invoked at all, and there is no alternative payload branch. This enables the guarded behaviour.",
+          "evidence_refs": [
+            "f1:9",
+            "f1:11",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "d1f506fe574f1971",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:9 activates the command when the installation destination is absent. The tested path is also the destination used by the command at f1:11, with no check for analysis, CI or sandbox properties.",
+          "evidence_refs": [
+            "f1:9",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "62a94fcdc8141723",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "f1:9 skips the command when its destination already exists, suggesting avoidance of repeated installation. The code does not establish portability, targeting, anti_analysis or data_availability as the purpose, so unclear fits the available labels.",
+          "evidence_refs": [
+            "f1:9",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a6e558e43882b3fb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The call s5 lies within the then region s3 and resolves to the run definition s6. That definition directly invokes the subprocess.Popen sink s4 with the supplied command.",
+          "evidence_refs": [
+            "s2",
+            "s3",
+            "s5",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "addcd5e74f0e67bc",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "In the complete file f1:1-23, the sole call to run is f1:11 inside the then arm, and the sole subprocess.Popen call is inside run. There are no other callers, exported callback registrations, timers or handlers providing another route to this payload.",
+          "evidence_refs": [
+            "f1:4",
+            "f1:5",
+            "f1:9",
+            "f1:11",
+            "f1:13"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "0989aa9650489f71",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "f1:11 passes a command to the bound subprocess.Popen sink at f1:5 that downloads an archive, writes and extracts files, removes the archive, and starts processes including the extracted launcher and Python script. Hidden windows, batch script execution and suppressed output support defense_evasion.",
+          "evidence_refs": [
+            "f1:2",
+            "f1:5",
+            "f1:6",
+            "f1:11",
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

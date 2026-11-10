@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "larpexodus",
+    "version": "0.1",
+    "archive_sha256": "d6942ef7bff3c44886dc01ab155d0a40967974ed9c0b3e442ff6f451924fbf4d"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "c2ce311bceaeb042",
+      "packet_sha256": "ae3051a8e2dfa1b6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_9299f491be.L6.drop",
+          "claim_sha256": "114cb96c449d52e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test at f1:15 only checks the exit status and existence of the file the script itself just downloaded (f1:12-13); it reads no property of the host environment.",
+          "evidence_refs": [
+            "s1",
+            "f1:15"
+          ]
+        },
+        {
+          "claim_id": "q_3575928f06.L6.drop",
+          "claim_sha256": "230cc6702e708ed6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if at f1:15 is a success check on the script's own download; the else branch only prints a message and install.run still follows, so no environment property decides what runs.",
+          "evidence_refs": [
+            "s2",
+            "f1:15"
+          ]
+        }
+      ]
+    }
+  ]
+}

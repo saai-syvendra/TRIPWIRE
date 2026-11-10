@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "metrics-probe-dc85",
+    "version": "1.0.0",
+    "archive_sha256": "68420bc5503a8e98bd93f48c1bf2ffe402ee2658e1ed95d82d940b40e649c8f2"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "4c62863ad7ff1a05",
+      "packet_sha256": "fc6c8dd9bff448f6",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "bfe1481fca413969",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "At f1:67-71 the `dirs.length > 0` test reads `dirs`, which is built from fs.readdirSync(base, ...) with base looping over D:\\TRANSFER and C:\\TRANSFER (f1:65), so the probe target matches.",
+          "evidence_refs": [
+            "s1",
+            "f1:65",
+            "f1:67"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "2eb7d5ca0831364f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`dirs.length > 0` is the positive form: it must be true for xtfDir to be set from the readdirSync result. The later `if (xtfDir)` then-arm (s2) is the guarded code, and the only negation is the `!xtfDir` fallback wrapper.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:64",
+            "f1:71",
+            "f1:79"
+          ]
+        },
+        {
+          "claim_id": "g7.L4",
+          "claim_sha256": "2cab7c742ea00400",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The win32 check (s3/s4) encloses main(), whose `if (xtfDir)` region (s2/s6) is reached when xtfDir is set either from DetonationLogFilePath (s5) or from the readdirSync fallback (s1). That gives c1 && (c8 || c9), and the minimum satisfying set is 2 conditions.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s5",
+            "s1",
+            "s2",
+            "s6",
+            "f1:61",
+            "f1:62",
+            "f1:71",
+            "f1:79"
+          ]
+        }
+      ]
+    }
+  ]
+}

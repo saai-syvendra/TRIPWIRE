@@ -1,0 +1,1527 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "passport-snapchat",
+    "version": "99.0",
+    "archive_sha256": "8be2bd37d56006cc85f76bd8042cfbaa41f5efe64eeefab96f1f7263a1fae471"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "bbde484f0e8f5207",
+      "packet_sha256": "c976fd110a505a2b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "e613bd8964037ce1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "get_index opens ~/.pip/pip.conf in a try; an OSError/IOError returns early, so the open call decides whether the rest runs (s1, f1:262-266).",
+          "evidence_refs": [
+            "s1",
+            "s28"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "e6dc9c4629e842b8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Failure of open returns from get_index; the lookup only continues when the file opens, so the positive form is 'file exists'. The path is written in plain form at f1:262.",
+          "evidence_refs": [
+            "s1",
+            "f1:262"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f4036eb939291c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks for the presence of a specific pip configuration file, which is a target artifact.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "3f179f5eced22794",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loop variable line iterates over f.readlines() and the branch tests 'index-url' in line, so the decision reads the readlines result.",
+          "evidence_refs": [
+            "s2",
+            "f1:268-269"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "d3f14374d59afc7d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The positive form 'index-url' in line leads to returning the URL; the literal is plain at f1:269.",
+          "evidence_refs": [
+            "s2",
+            "f1:269"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "031365bf1f7aaa0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the content of the pip config file lines, i.e. file content.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "c6e627f7233919c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if tests 'bdist_wheel' in sys.argv directly.",
+          "evidence_refs": [
+            "s3",
+            "f1:302"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "26f5a1dbc7fa702e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Membership test with literal bdist_wheel in positive form guards the download/move code.",
+          "evidence_refs": [
+            "s3",
+            "f1:302"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "efa21c10c3cca387",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the setuptools/pip build command from argv (bdist_wheel), which is about the packaging tool invocation.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "1647cdfa3a4f4a7d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "index_url is only truthy if the pip.conf opened and a line contained index-url; otherwise get_index returns None and _post_install exits at s4, so the conditions join with and (min 2).",
+          "evidence_refs": [
+            "s4",
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "0ae1dda7ed14e2ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The conditions only decide whether the pip install runs at all; nothing selects between payloads, so enables fits.",
+          "evidence_refs": [
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "55fd37758409a68b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs when the config is present and has an index-url; it does not back off on analysis signals, so activate.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ba8562a3dde2711c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Only machines with a custom pip index configured proceed, and that index is reused for the install, which is targeting of such hosts.",
+          "evidence_refs": [
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "afdc6fae1a0e0a8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check_output at f1:296 lies inside the stmt range after the early exit at s4, so it is on the claimed side; the empty witness is right since the sink sits in the region.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "bf63d58d2e17a96e",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sink is inside the nested _post_install, whose only reference is the atexit.register at f1:323; no other caller or export reaches it.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:323"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "998ed673f4ce383b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.check_output with shell=True runs pip install from a chosen index, which is process creation that downloads and installs a package.",
+          "evidence_refs": [
+            "s6",
+            "f1:296"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "885027a95fd0a388",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The bdist_wheel if (s7) is nested after the index_url early exit (s4), so all three conditions are joined with and.",
+          "evidence_refs": [
+            "s4",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2794ac854d28e919",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if only decides whether the wheel download and move run; no alternative payload is chosen.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "891b1190e6ed0648",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs on a matching target build and does not retreat on analysis.",
+          "evidence_refs": [
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "98d9859c800a7cb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The step is limited to hosts with a custom pip index that are building a wheel, so it is targeting.",
+          "evidence_refs": [
+            "s4",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "57f03e9ee402fba2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The download call (f1:304), shutil.move (f1:313) and os.unlink (f1:319) all lie in the stmt range s8 inside the bdist_wheel if, after the s4 exit.",
+          "evidence_refs": [
+            "s4",
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "04da780d93009462",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "These sinks are only inside _post_install under the bdist_wheel if; the function has no other caller than atexit.register.",
+          "evidence_refs": [
+            "s8",
+            "f1:323"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "31719745b2c96e89",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "check_output with pip download is process creation that downloads, shutil.move writes the file into the target dir, and os.unlink deletes a file.",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_150aad96d4.L6.drop",
+          "claim_sha256": "011c42a25ec0c37c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.path.exists(t_dir) checks the output directory from argv[-1] only to choose between create or replace for the wheel; it is not an environment property.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "k_1523bfa150.L6.drop",
+          "claim_sha256": "fab4734479a61d1a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Python version check only picks a PYTHONPATH prefix for the same pip command in both arms; it is portability and gates nothing.",
+          "evidence_refs": [
+            "s13",
+            "s42"
+          ]
+        },
+        {
+          "claim_id": "k_34a2ff9669.L6.drop",
+          "claim_sha256": "74b541a3d39d0a56",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS branch only selects how the host's IPs are read for the reconnaissance data; no payload hangs on it, so it is portability.",
+          "evidence_refs": [
+            "s14",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "k_41d568be42.L6.drop",
+          "claim_sha256": "729b29e6baa845d7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Python version check selecting the PYTHONPATH prefix for the same command; portability only.",
+          "evidence_refs": [
+            "s15",
+            "s42"
+          ]
+        },
+        {
+          "claim_id": "k_49929842f8.L6.drop",
+          "claim_sha256": "96338c5924546b5f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Version check in getifip decides only whether the encode and ioctl path is used to read an interface address; it gates no payload.",
+          "evidence_refs": [
+            "s16",
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "k_4a0c260f6b.L6.drop",
+          "claim_sha256": "67f23c94969c7a38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Python 2/3 import selection of the http module; compatibility only.",
+          "evidence_refs": [
+            "s17",
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "k_4bd66fc71c.L6.drop",
+          "claim_sha256": "4f3da8f328a5a1c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isdir(home_dir) is a guard inside mJdzrtzhMJ_1, which only sets a boolean reported in the collected data; it controls no download, write, delete or exec sink.",
+          "evidence_refs": [
+            "s18",
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "k_53a2a073c3.L6.drop",
+          "claim_sha256": "afbd4bac489763e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform test in mJdzrtzhMJ_1 only decides how a value k is computed for the reported data; it does not control any local behaviour sink.",
+          "evidence_refs": [
+            "s19",
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "k_6898806f80.L6.drop",
+          "claim_sha256": "7ae63871d03aed3e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin branch picks how interface addresses are read for the info report; portability, no payload depends on it.",
+          "evidence_refs": [
+            "s20",
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "k_7694cc91ae.L6.drop",
+          "claim_sha256": "b83ebdf505ef1d30",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "OS branch in get_network_interfaces chooses the way interfaces are listed; portability.",
+          "evidence_refs": [
+            "s21",
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "k_91f78649e6.L6.drop",
+          "claim_sha256": "6cf945e7a4fdcca5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin branch only selects the ifconfig method for listing interfaces; portability.",
+          "evidence_refs": [
+            "s22",
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "k_b87d1c2f03.L6.drop",
+          "claim_sha256": "b27c42766526b655",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The windows branch lists interfaces with socket.if_nameindex; portability for the report.",
+          "evidence_refs": [
+            "s23",
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "k_d50ab6d3b5.L6.drop",
+          "claim_sha256": "11ef09b42b056597",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Version check in get_time_zone decides only whether the tzinfo is included in the timestamp string; portability.",
+          "evidence_refs": [
+            "s24",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "k_dff8dcc169.L6.drop",
+          "claim_sha256": "b18575c32013c092",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Second half of the same version condition in get_time_zone; portability for the time string.",
+          "evidence_refs": [
+            "s25",
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "k_e380934d46.L6.drop",
+          "claim_sha256": "37e84ed86547a0e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Python 2 import branch of the http module; compatibility only.",
+          "evidence_refs": [
+            "s26",
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "k_ec73b446af.L6.drop",
+          "claim_sha256": "0892e2dab3ab93c4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The linux branch in get_ip_addresses reads the interface address and MAC for the report; portability.",
+          "evidence_refs": [
+            "s27",
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "q_226c58a329.L6.drop",
+          "claim_sha256": "31d10cda85d2195b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try statement wraps the same open of ~/.pip/pip.conf that is already recorded as condition c1.",
+          "evidence_refs": [
+            "s28",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "q_256c150c65.L6.drop",
+          "claim_sha256": "15c24ad844e4ea0a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform if in mJdzrtzhMJ_1 only sets a flag returned into the reported data; it guards no sink.",
+          "evidence_refs": [
+            "s29"
+          ]
+        },
+        {
+          "claim_id": "q_47990afd34.L6.drop",
+          "claim_sha256": "431e603266d139ae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if statement in getifip is a Python version portability check with no payload behind it.",
+          "evidence_refs": [
+            "s30"
+          ]
+        },
+        {
+          "claim_id": "q_5ccc73db93.L6.drop",
+          "claim_sha256": "e00f42511c53e6a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS if/elif chain in get_ip_addresses picks the way addresses are collected for the report; portability.",
+          "evidence_refs": [
+            "s31"
+          ]
+        },
+        {
+          "claim_id": "q_73c468bf50.L6.drop",
+          "claim_sha256": "093a7174f0e51a2e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The import-time version if chooses the http module; compatibility only.",
+          "evidence_refs": [
+            "s32"
+          ]
+        },
+        {
+          "claim_id": "q_7b6cfc3093.L6.drop",
+          "claim_sha256": "28bcdea7d46a2b05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin elif only picks how addresses are read; portability.",
+          "evidence_refs": [
+            "s33"
+          ]
+        },
+        {
+          "claim_id": "q_a36675be35.L6.drop",
+          "claim_sha256": "bbbfe1f854dd4a48",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The windows elif in get_network_interfaces only selects the listing method; portability.",
+          "evidence_refs": [
+            "s34"
+          ]
+        },
+        {
+          "claim_id": "q_b206121ffc.L6.drop",
+          "claim_sha256": "0fb054d581deda96",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The windows elif in get_ip_addresses only selects the address lookup; portability.",
+          "evidence_refs": [
+            "s35"
+          ]
+        },
+        {
+          "claim_id": "q_c6834b6084.L6.drop",
+          "claim_sha256": "d7dc9bbadf8faae5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Version if/else in get_time_zone only formats the time string.",
+          "evidence_refs": [
+            "s36"
+          ]
+        },
+        {
+          "claim_id": "q_cc6042522e.L6.drop",
+          "claim_sha256": "da8630f8daf5fb5e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The isdir if in mJdzrtzhMJ_1 only feeds the reported flag k and guards no behaviour sink.",
+          "evidence_refs": [
+            "s37"
+          ]
+        },
+        {
+          "claim_id": "q_e41f5c33d1.L6.drop",
+          "claim_sha256": "a8192cc669c6d859",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin branch lists interfaces via ifconfig for the report; portability.",
+          "evidence_refs": [
+            "s38"
+          ]
+        },
+        {
+          "claim_id": "q_f45ae3a8f9.L6.drop",
+          "claim_sha256": "bb76ad6616f9352c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "OS if/elif chain in get_network_interfaces is portability for the interface listing.",
+          "evidence_refs": [
+            "s39"
+          ]
+        },
+        {
+          "claim_id": "q_f53d440567.L6.drop",
+          "claim_sha256": "1fddbc0a8986c7a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exists check on the argv-supplied target directory only selects between creating it and replacing the existing wheel; it is not an environment check.",
+          "evidence_refs": [
+            "s40"
+          ]
+        },
+        {
+          "claim_id": "q_f9aa7aff3a.L6.drop",
+          "claim_sha256": "0686cbf3d44580f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Python 2 import if selects urllib2; compatibility only.",
+          "evidence_refs": [
+            "s41"
+          ]
+        },
+        {
+          "claim_id": "q_ffde2c7879.L6.drop",
+          "claim_sha256": "03452d56f9357c29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version if/else sets a PYTHONPATH prefix for the same pip install in both arms; portability.",
+          "evidence_refs": [
+            "s42"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "da4d02251b5c9870",
+      "packet_sha256": "443351b4ef59337e",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b9e0f25200b76ab8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "get_index opens the expanded ~/.pip/pip.conf inside a try whose OSError/IOError handlers return None, so the open call decides whether execution continues (s1, f1:262-266).",
+          "evidence_refs": [
+            "s1",
+            "f1:262"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "9a0e8d58f6e74e75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "If open fails, get_index returns None and _post_install exits at 'if not index_url: return'. The guarded code therefore runs only when the file opens, which is an exists test on ~/.pip/pip.conf.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:262",
+            "f1:284"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "cf4f96877fe3b951",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loop variable 'line' iterates over f.readlines(), and the test '\"index-url\" in line' decides the return value (s3, f1:268-269).",
+          "evidence_refs": [
+            "s3",
+            "f1:268"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c95f35bb2473b435",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The positive-form substring test '\"index-url\" in line' over lines of readlines() must be true for get_index to return a value, so the guard at s2 is passed. It is an includes test on a line, not on the list.",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "f1:269"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "99f71817adc012a9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single early exit at s2 passes only when get_index returned a non-empty value. That requires both the open to succeed (c1) and a line containing index-url (c2), so the conditions join with and. The rest of the block (s4) is the guarded region.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2ce0b3b8d8634b64",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The s2 early exit requires c1 and c2. The download call at line 304 is also nested in 'if \"bdist_wheel\" in sys.argv' (c3, s5/s6), so all three conditions are needed and the join is and.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s7",
+            "f1:302",
+            "f1:304"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "da4d02251b5c9870",
+      "packet_sha256": "3017897a637a1779",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "b9e0f25200b76ab8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "get_index opens ~/.pip/pip.conf inside a try whose OSError/IOError handlers return, so the open call decides whether the function continues.",
+          "evidence_refs": [
+            "s1",
+            "f1:262"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "9a0e8d58f6e74e75",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "If open fails, get_index returns None and `if not index_url: return` exits (s2), so the guarded code runs only when the file can be opened (exists).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:262-266",
+            "f1:284"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f4036eb939291c5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks for the victim's pip configuration file, a target artifact.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "cf4f96877fe3b951",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The loop variable `line` comes from f.readlines() on the pip.conf handle, and the decision `\"index-url\" in line` reads it.",
+          "evidence_refs": [
+            "s3",
+            "f1:268-269"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "c95f35bb2473b435",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Substring test `\"index-url\" in line` returns the value; if no line matches get_index returns None and the caller exits at s2, so includes is the positive form.",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "f1:269-272"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "031365bf1f7aaa0b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition reads the contents of a file, so file_content fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "56c3d45714ed8095",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if condition at line 302 is a membership test on sys.argv.",
+          "evidence_refs": [
+            "s4",
+            "f1:302"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "1e4fadf4dc11434e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch of `if \"bdist_wheel\" in sys.argv` holds the download and wheel-replacement code, so includes is the positive form.",
+          "evidence_refs": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "efa21c10c3cca387",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the packaging command is bdist_wheel, which is packaging tool invocation context.",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "99f71817adc012a9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "get_index only returns a value if open succeeds and a line contains index-url, and s2 exits otherwise, so the rest of the block (s6) needs both conditions: c1 && c2, min 2.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "0ae1dda7ed14e2ad",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The checks decide whether the pip install/download runs at all, with no alternative payload, so enables.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "55fd37758409a68b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs only when the pip config with an index-url is found; nothing backs off on analysis or sandbox signals, so activate.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "ba8562a3dde2711c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code runs only for hosts with a pip config that sets a custom index-url, and reuses that index for the install, which selects such victims (targeting).",
+          "evidence_refs": [
+            "s2",
+            "s7",
+            "f1:271"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "afdc6fae1a0e0a8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The check_output call at line 296 sits directly inside region s6, after the early exit at s2, so the empty witness is right.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "27fc22ca9b404811",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "_post_install is a closure defined inside CustomInstall.run and is only passed to atexit.register; nothing else calls it, and get_index has no other caller.",
+          "evidence_refs": [
+            "s6",
+            "f1:277",
+            "f1:323"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "998ed673f4ce383b",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "subprocess.check_output with shell=True runs `pip install PACKAGE --index-url ...`, which creates a process that downloads and installs (executes setup of) the package.",
+          "evidence_refs": [
+            "s7",
+            "f1:296"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "2ce0b3b8d8634b64",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "Region s8 lies after the early exit at s2 (c1 and c2) and inside the then arm of the bdist_wheel if (c3), so the guards nest and join with and, min 3.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2794ac854d28e919",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch only adds download, wheel move and delete steps when the gate holds; there is no per-branch alternative payload, so enables.",
+          "evidence_refs": [
+            "s5",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "891b1190e6ed0648",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code activates when a wheel is being built with a custom index; there is no evasion of analysis or sandboxes.",
+          "evidence_refs": [
+            "s5",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "98d9859c800a7cb1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch swaps the freshly built wheel for the downloaded one only for bdist_wheel runs on hosts with a custom index, i.e. it targets specific victims and artifacts.",
+          "evidence_refs": [
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "57f03e9ee402fba2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The pip download call (304), shutil.move (313) and os.unlink (319) all lie within region s8, which is on the then side of both guards; empty witnesses are correct.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "e75839507bb9ffbb",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks sit in _post_install, which is only registered via atexit in CustomInstall.run; no other function or caller reaches them.",
+          "evidence_refs": [
+            "s8",
+            "f1:277",
+            "f1:323"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "31719745b2c96e89",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "check_output runs `pip download` (download), shutil.move places the wheel in the target dir (write), and os.unlink removes the existing wheel (delete).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "k_150aad96d4.L6.drop",
+          "claim_sha256": "011c42a25ec0c37c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.path.exists(t_dir) on the output dir argument only picks makedirs versus replacing the old wheel; it is plumbing for where the wheel is stored, not an environment gate.",
+          "evidence_refs": [
+            "s12",
+            "f1:309-321"
+          ]
+        },
+        {
+          "claim_id": "k_1523bfa150.L6.drop",
+          "claim_sha256": "fab4734479a61d1a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Python version test only chooses whether to prefix the pip command with PYTHONPATH; the same pip install runs either way.",
+          "evidence_refs": [
+            "s13",
+            "f1:288-291"
+          ]
+        },
+        {
+          "claim_id": "k_34a2ff9669.L6.drop",
+          "claim_sha256": "74b541a3d39d0a56",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS test only selects how to read the host IP; the collection runs unconditionally from run_me, so it is portability, not a gate.",
+          "evidence_refs": [
+            "s14",
+            "f1:234-238"
+          ]
+        },
+        {
+          "claim_id": "k_41d568be42.L6.drop",
+          "claim_sha256": "729b29e6baa845d7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Same Python version test as s13: only chooses the PYTHONPATH prefix of the pip command.",
+          "evidence_refs": [
+            "s15",
+            "f1:288-291"
+          ]
+        },
+        {
+          "claim_id": "k_49929842f8.L6.drop",
+          "claim_sha256": "96338c5924546b5f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Python 3 check only selects how the interface name is encoded for the ioctl; it is portability inside data collection.",
+          "evidence_refs": [
+            "s16",
+            "f1:125-127"
+          ]
+        },
+        {
+          "claim_id": "k_4a0c260f6b.L6.drop",
+          "claim_sha256": "67f23c94969c7a38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Import selection of urllib.request versus urllib2 by Python version is library compatibility code, not a gate.",
+          "evidence_refs": [
+            "s17",
+            "f1:8-11"
+          ]
+        },
+        {
+          "claim_id": "k_4bd66fc71c.L6.drop",
+          "claim_sha256": "4f3da8f328a5a1c9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isdir(home_dir) is a guard inside the fingerprint helper whose result only fills the reported `key` field; no code branches on it, so no install behaviour is decided.",
+          "evidence_refs": [
+            "s18",
+            "f1:36-50",
+            "f1:229"
+          ]
+        },
+        {
+          "claim_id": "k_53a2a073c3.L6.drop",
+          "claim_sha256": "afbd4bac489763e0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin/linux platform test only limits where the home-folder hash lookup runs; its result is just a flag in the reported data, and nothing local depends on it.",
+          "evidence_refs": [
+            "s19",
+            "f1:39",
+            "f1:215",
+            "f1:229"
+          ]
+        },
+        {
+          "claim_id": "k_6898806f80.L6.drop",
+          "claim_sha256": "7ae63871d03aed3e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin branch only picks the ifconfig method of reading addresses for the unconditional data collection; portability.",
+          "evidence_refs": [
+            "s20",
+            "f1:173-183"
+          ]
+        },
+        {
+          "claim_id": "k_7694cc91ae.L6.drop",
+          "claim_sha256": "b83ebdf505ef1d30",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The linux branch selects /proc/net/dev for interface listing in unconditional collection; portability.",
+          "evidence_refs": [
+            "s21",
+            "f1:142-148"
+          ]
+        },
+        {
+          "claim_id": "k_91f78649e6.L6.drop",
+          "claim_sha256": "6cf945e7a4fdcca5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin branch chooses ifconfig parsing for interface listing; portability only.",
+          "evidence_refs": [
+            "s22",
+            "f1:149-156"
+          ]
+        },
+        {
+          "claim_id": "k_b87d1c2f03.L6.drop",
+          "claim_sha256": "b27c42766526b655",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The windows branch chooses socket.if_nameindex for interface listing; portability only.",
+          "evidence_refs": [
+            "s23",
+            "f1:157-158"
+          ]
+        },
+        {
+          "claim_id": "k_d50ab6d3b5.L6.drop",
+          "claim_sha256": "11ef09b42b056597",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Python version test only decides whether a timezone string is added to the reported data; no payload depends on it.",
+          "evidence_refs": [
+            "s24",
+            "f1:110-114"
+          ]
+        },
+        {
+          "claim_id": "k_dff8dcc169.L6.drop",
+          "claim_sha256": "b18575c32013c092",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Second half of the same timezone version test; it only affects a reported string.",
+          "evidence_refs": [
+            "s25",
+            "f1:110-114"
+          ]
+        },
+        {
+          "claim_id": "k_e380934d46.L6.drop",
+          "claim_sha256": "37e84ed86547a0e7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Python 2 import fallback for urllib2; library compatibility, not a gate.",
+          "evidence_refs": [
+            "s26",
+            "f1:10-11"
+          ]
+        },
+        {
+          "claim_id": "k_ec73b446af.L6.drop",
+          "claim_sha256": "0892e2dab3ab93c4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The linux branch selects how to read the interface IP and MAC for data collection that runs regardless; portability.",
+          "evidence_refs": [
+            "s27",
+            "f1:167-171"
+          ]
+        },
+        {
+          "claim_id": "q_226c58a329.L6.drop",
+          "claim_sha256": "31d10cda85d2195b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try statement wraps the same open of ~/.pip/pip.conf already recorded as condition c1 (s1), so it duplicates that test.",
+          "evidence_refs": [
+            "s28",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "q_256c150c65.L6.drop",
+          "claim_sha256": "15c24ad844e4ea0a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The whole if only sets the flag k that is put in the reported data; no install behaviour branches on it.",
+          "evidence_refs": [
+            "s29",
+            "f1:36-50",
+            "f1:229"
+          ]
+        },
+        {
+          "claim_id": "q_47990afd34.L6.drop",
+          "claim_sha256": "431e603266d139ae",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version check in getifip only decides whether the ioctl IP lookup runs; data collection portability.",
+          "evidence_refs": [
+            "s30",
+            "f1:125-127"
+          ]
+        },
+        {
+          "claim_id": "q_5ccc73db93.L6.drop",
+          "claim_sha256": "e00f42511c53e6a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS if/elif chain only selects the method of reading addresses for collection that runs unconditionally.",
+          "evidence_refs": [
+            "s31",
+            "f1:167-188"
+          ]
+        },
+        {
+          "claim_id": "q_73c468bf50.L6.drop",
+          "claim_sha256": "093a7174f0e51a2e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The two version-based imports select the HTTP library; compatibility code.",
+          "evidence_refs": [
+            "s32",
+            "f1:8-11"
+          ]
+        },
+        {
+          "claim_id": "q_7b6cfc3093.L6.drop",
+          "claim_sha256": "28bcdea7d46a2b05",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin elif only picks ifconfig parsing for address collection; portability.",
+          "evidence_refs": [
+            "s33",
+            "f1:173-183"
+          ]
+        },
+        {
+          "claim_id": "q_a36675be35.L6.drop",
+          "claim_sha256": "bbbfe1f854dd4a48",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The windows elif only picks socket.if_nameindex for interface listing; portability.",
+          "evidence_refs": [
+            "s34",
+            "f1:157-158"
+          ]
+        },
+        {
+          "claim_id": "q_b206121ffc.L6.drop",
+          "claim_sha256": "0fb054d581deda96",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The windows elif only picks gethostbyname for the IP; portability within unconditional collection.",
+          "evidence_refs": [
+            "s35",
+            "f1:185-186"
+          ]
+        },
+        {
+          "claim_id": "q_c6834b6084.L6.drop",
+          "claim_sha256": "d7dc9bbadf8faae5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if/else only decides the timezone string in the reported data.",
+          "evidence_refs": [
+            "s36",
+            "f1:110-114"
+          ]
+        },
+        {
+          "claim_id": "q_cc6042522e.L6.drop",
+          "claim_sha256": "da8630f8daf5fb5e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The isdir(home_dir) block only computes the flag k reported in the data; no local branch depends on it.",
+          "evidence_refs": [
+            "s37",
+            "f1:41-46",
+            "f1:229"
+          ]
+        },
+        {
+          "claim_id": "q_e41f5c33d1.L6.drop",
+          "claim_sha256": "a8192cc669c6d859",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The darwin elif only picks ifconfig parsing for listing interfaces; portability.",
+          "evidence_refs": [
+            "s38",
+            "f1:149-156"
+          ]
+        },
+        {
+          "claim_id": "q_f45ae3a8f9.L6.drop",
+          "claim_sha256": "bb76ad6616f9352c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The OS if/elif chain only selects how interfaces are listed for the unconditional collection.",
+          "evidence_refs": [
+            "s39",
+            "f1:142-158"
+          ]
+        },
+        {
+          "claim_id": "q_f53d440567.L6.drop",
+          "claim_sha256": "1fddbc0a8986c7a3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exists/else on t_dir only chooses between makedirs and replacing the old wheel before the same move; storage plumbing, not an environment gate.",
+          "evidence_refs": [
+            "s40",
+            "f1:311-321"
+          ]
+        },
+        {
+          "claim_id": "q_f9aa7aff3a.L6.drop",
+          "claim_sha256": "0686cbf3d44580f4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Python 2 urllib2 import fallback; library compatibility.",
+          "evidence_refs": [
+            "s41",
+            "f1:10-11"
+          ]
+        },
+        {
+          "claim_id": "q_ffde2c7879.L6.drop",
+          "claim_sha256": "03452d56f9357c29",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version if/else only chooses a PYTHONPATH prefix for the pip command; the same command runs either way.",
+          "evidence_refs": [
+            "s42",
+            "f1:288-291"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "158328ea3e127367",
+      "packet_sha256": "bcd02ea6c32b7c36",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "8398840c59305000",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "_post_install returns unless get_index() finds an index-url line in ~/.pip/pip.conf, because the pip install/download commands need that URL value; the gate is about the needed data being available (f1:262-296).",
+          "evidence_refs": [
+            "f1:262",
+            "f1:283",
+            "f1:296"
+          ]
+        },
+        {
+          "claim_id": "k_49929842f8.L6.drop",
+          "claim_sha256": "48173594a7e29b19",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Python 3 check in getifip only chooses between bytes and str handling when reading an interface address for the recon report. It is a compatibility check and does not decide what runs (s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:125"
+          ]
+        },
+        {
+          "claim_id": "k_4bd66fc71c.L6.drop",
+          "claim_sha256": "9af3c33b106c230d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "isdir(home_dir) is a robustness check inside the hashed-folder probe mJdzrtzhMJ_1. The result only sets the reported 'key' field, and the same data is sent whatever it returns (f1:41, f1:229, f1:236-242).",
+          "evidence_refs": [
+            "s2",
+            "f1:41",
+            "f1:229"
+          ]
+        },
+        {
+          "claim_id": "k_53a2a073c3.L6.drop",
+          "claim_sha256": "f4d7a61a6812c6a1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform check is part of the hashed-folder probe, whose boolean only feeds the 'key' telemetry field. The same exfiltration request is sent on every path, so no payload is gated by it (s3).",
+          "evidence_refs": [
+            "s3",
+            "f1:39",
+            "f1:75"
+          ]
+        },
+        {
+          "claim_id": "k_d50ab6d3b5.L6.drop",
+          "claim_sha256": "13655c13f5bb9881",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Python 3 version check only decides whether astimezone() is used to build a timezone string for the report, so it is portability plumbing (s4).",
+          "evidence_refs": [
+            "s4",
+            "f1:110"
+          ]
+        },
+        {
+          "claim_id": "k_dff8dcc169.L6.drop",
+          "claim_sha256": "8f418b4d1daddfe8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The minor-version check (>=3) in the same condition only decides whether astimezone() is used for the timezone string, so it is portability plumbing (s5).",
+          "evidence_refs": [
+            "s5",
+            "f1:110"
+          ]
+        },
+        {
+          "claim_id": "q_256c150c65.L6.drop",
+          "claim_sha256": "409b38921c090156",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The whole if block in mJdzrtzhMJ_1 only computes a boolean for the reported 'key' field. It does not choose which install-time behaviour runs, since the beacon is sent regardless (s6).",
+          "evidence_refs": [
+            "s6",
+            "f1:36-50",
+            "f1:229"
+          ]
+        },
+        {
+          "claim_id": "q_cc6042522e.L6.drop",
+          "claim_sha256": "1d623ec426b1b471",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The nested isdir and hashed-name lookup only produces the telemetry 'key' value in mJdzrtzhMJ_1. The same data is sent on every path, so it gates no payload (s7).",
+          "evidence_refs": [
+            "s7",
+            "f1:41-46"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "profile": "github-ubuntu",
+  "title": "GitHub Actions ubuntu-latest hosted runner",
+  "note": "A workflow step on the standard x64 `ubuntu-latest` runner (Ubuntu 24.04 until the November 2026 switch to 26.04), public repository, running `npm install <pkg>` or `pip install <pkg>` with no secrets passed. The runner's user, home folder, locale, hostname and full environment are not documented, so those axes stay unknown.",
+  "sources": {
+    "readme": {"url": "https://github.com/actions/runner-images/blob/30b834d537f1db35a264de5ddccb57ce716f6cb8/images/ubuntu/Ubuntu2404-Readme.md", "commit": "30b834d537f1db35a264de5ddccb57ce716f6cb8", "read": "2026-10-24", "what": "Image 20261012.334.1: Node.js 22.23.3, Python 3.12.3, Npm 10.9.9, Pip 24.0, tool list"},
+    "variables": {"url": "https://docs.github.com/en/actions/reference/workflows-and-actions/variables", "read": "2026-10-24", "what": "default environment variables: CI=true, GITHUB_ACTIONS=true, RUNNER_OS, RUNNER_ARCH, RUNNER_ENVIRONMENT"},
+    "hosted": {"url": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners", "read": "2026-10-24", "what": "4 CPU and 16 GB RAM for public repositories; passwordless sudo; Azure-hosted VMs that connect out to GitHub-owned endpoints"},
+    "npm_scripts": {"url": "https://docs.npmjs.com/cli/v11/using-npm/scripts", "read": "2026-10-24", "what": "npm_lifecycle_event, npm_package_*, INIT_CWD in lifecycle scripts"}
+  },
+  "axes": {
+    "os": {"value": "linux", "source": "readme"},
+    "arch": {"value": "x64", "source": "hosted"},
+    "libc": {"value": "glibc", "source": "readme"},
+    "privilege": {"value": "root_or_admin", "source": "hosted", "note": "steps run as a normal user with passwordless sudo, so a sudo probe or a step that elevates gets root"},
+    "cpu_count": {"value": 4, "source": "hosted"},
+    "memory_mb": {"value": 16384, "source": "hosted"},
+    "ci": {"value": "github_actions", "source": "variables"},
+    "network": {"egress": "open", "blocked": [], "source": "hosted"},
+    "env_var": {"set": {"CI": "true", "GITHUB_ACTIONS": "true", "RUNNER_OS": "Linux", "RUNNER_ARCH": "X64", "RUNNER_ENVIRONMENT": "github-hosted", "GITHUB_ACTION": null, "GITHUB_ACTOR": null, "GITHUB_API_URL": null, "GITHUB_ENV": null, "GITHUB_EVENT_NAME": null, "GITHUB_EVENT_PATH": null, "GITHUB_JOB": null, "GITHUB_OUTPUT": null, "GITHUB_PATH": null, "GITHUB_REF": null, "GITHUB_REF_NAME": null, "GITHUB_REPOSITORY": null, "GITHUB_REPOSITORY_OWNER": null, "GITHUB_RUN_ID": null, "GITHUB_RUN_NUMBER": null, "GITHUB_SERVER_URL": null, "GITHUB_SHA": null, "GITHUB_STEP_SUMMARY": null, "GITHUB_WORKFLOW": null, "GITHUB_WORKFLOW_REF": null, "GITHUB_WORKFLOW_SHA": null, "GITHUB_WORKSPACE": null, "RUNNER_NAME": null, "RUNNER_TEMP": null, "RUNNER_TOOL_CACHE": null, "HOME": null, "CONDA": "/usr/share/miniconda", "VCPKG_INSTALLATION_ROOT": "/usr/local/share/vcpkg"}, "complete": false, "unknown_prefixes": [], "source": ["variables", "readme"]},
+    "file": {"present": ["/etc/passwd", "/etc/hosts"], "absent_prefixes": [], "source": ["readme"]},
+    "installed_tool": {"present": ["bash", "git", "gh", "docker", "jq", "curl", "ssh", "node", "npm", "yarn", "python3", "pip", "pip3", "pipx", "conda"], "complete": false, "source": ["readme"]}
+  },
+  "ecosystems": {
+    "npm": {
+      "package_manager": {"value": "npm", "source": "readme"},
+      "runtime_version": {"value": "22.23.3", "source": "readme"},
+      "env_var": {"set": {"npm_lifecycle_event": "$hook", "INIT_CWD": null, "npm_package_name": null, "npm_package_version": null}, "unknown_prefixes": ["npm_config_", "npm_package_"], "source": ["npm_scripts"]}
+    },
+    "pypi": {
+      "package_manager": {"value": "pip", "source": "readme"},
+      "runtime_version": {"value": "3.12.3", "source": "readme"}
+    }
+  }
+}

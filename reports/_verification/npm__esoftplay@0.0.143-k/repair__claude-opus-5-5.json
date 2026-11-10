@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "esoftplay",
+    "version": "0.0.143-k",
+    "archive_sha256": "b8c355d1f1abf89738c700996bcc70163d283f3d21f515ddd5cc67884e3d2e6a"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ea526485e0addf65",
+      "record_sha256_after": "ea526485e0addf65",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_9bedd86efc.L6.drop",
+          "claim_sha256": "b85eaa2d2ffb5c4b",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "bin/build.js:80 tests !fs.existsSync(conflivejson) only to avoid overwriting an existing config.live.json; it is create-if-missing initialisation of the package's own config. write_file happens on both sides inside c1 (config.json is written unconditionally at line 76 just above), so the test decide"
+        },
+        {
+          "claim_id": "q_4404d2d07a.L6.drop",
+          "claim_sha256": "90273f65bb84dfdf",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement of the line 80 create-if-missing check on config.live.json. Both arms leave write_file in place (config.json is written unconditionally at line 76), so the guard only avoids clobbering an existing config file and is plumbing."
+        },
+        {
+          "claim_id": "k_5df869dddc.L6.drop",
+          "claim_sha256": "564740f57e4678e2",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "bin/build.js:357 checks ../../node_modules/<lib> to skip an already installed Expo library (reuse installed copy). execSync(cmd + \"|| true\") at line 387 runs unconditionally either way, and @expo/vector-icons is pushed into installExpoLibs even when present (lines 359-361), so bunx expo install is a"
+        },
+        {
+          "claim_id": "q_8fcdab1c47.L6.drop",
+          "claim_sha256": "5b77191e16bdfdf9",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Guard of the line 357 per-lib node_modules check. Its arms only decide whether one library name joins installExpoLibs; execSync at line 387 runs regardless, so spawn_process happens on both sides. Reusing an installed copy instead of fetching it again is plumbing."
+        },
+        {
+          "claim_id": "k_8782dc6b72.L6.drop",
+          "claim_sha256": "82472a6ef51858a3",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "bin/build.js:368 checks ../../node_modules/<devlib> to skip an already installed dev dependency. execSync at line 387 runs unconditionally (cmd starts as \"cd ../../ \" and always gets \"|| true\"), and the Expo install segment is still appended, so the process is spawned either way; the test only chang"
+        },
+        {
+          "claim_id": "q_d064eb7d36.L6.drop",
+          "claim_sha256": "84245ac8bf3e3e54",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "Guard of the line 368 per-devlib node_modules check. Its arms only decide whether a name joins installDevLibs; the execSync at line 387 and the router/locale execSync calls at 389-390 run on both sides, so spawn_process does not depend on it. Plumbing."
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "The flag rests on the label disagreement: the source label is malicious but the install path (bin/build.js, router.js, locale.js) is the framework scaffolder with no credential access, exfiltration or remote payload. Whether the label rests on something outside install time cannot be settled from th"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "ea526485e0addf65",
+      "record_sha256_after": "ea526485e0addf65",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_af98d19d96.L6.drop",
+          "claim_sha256": "11077c05b63a8a9c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "build.js line 54 fs.existsSync(confjson) has one statement behind it: the try at lines 55-57 that parses config.json into $config. Neither side leaves the block. With the file absent $config stays {}, line 58 fills the default config, and line 76 writes config.json exactly as it does with the file p"
+        },
+        {
+          "claim_id": "k_d0050db34a.L6.drop",
+          "claim_sha256": "03c69ef57bc19910",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "build.js line 88 fs.existsSync(appjson) has one statement behind it: the try at lines 89-91 that parses app.json into $appjson, with {} as the fallback. Its then side holds only that read, so the rewrite at line 137 and everything after it are outside the decision. What decides the later code is $ap"
+        },
+        {
+          "claim_id": "k_61b42fa257.L6.drop",
+          "claim_sha256": "4ba01a11fc99e0d8",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "build.js line 375 !fs.existsSync(DIR + 'modules') guards only fs.mkdirSync at line 376. Both sides continue at line 377 and build and run the same install command, and nothing later reads the folder or branches on it. The test only makes sure a folder exists, so flipping it does not change which beh"
+        },
+        {
+          "claim_id": "q_82839eef7e.L6.drop",
+          "claim_sha256": "c8295802ac78666d",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement at build.js lines 54-57 around the config.json read, the guard of k_af98d19d96. Its body is only the try that parses the file into $config, and there is no else or exit, so control reaches line 58 on both sides. Line 76 writes config.json either way and the install at line 3"
+        },
+        {
+          "claim_id": "q_d28601a4e2.L6.drop",
+          "claim_sha256": "f5d1eb21df7d02aa",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement at build.js lines 88-91 around the app.json read, the guard of k_d0050db34a. Its body is only the try that parses the file into $appjson, and there is no else or exit, so control reaches line 92 on both sides. The code after it is not on this guard's then side, so a gate on "
+        },
+        {
+          "claim_id": "q_718ee59a2b.L6.drop",
+          "claim_sha256": "ccc3b7680575bef6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the if statement at build.js lines 375-376, the guard of k_61b42fa257. Its body is only fs.mkdirSync(DIR + 'modules'), with no else or exit, and control reaches line 377 on both sides. The refutation's text describes skipping dependencies, loading configuration and initialising settings, non"
+        }
+      ]
+    }
+  ]
+}

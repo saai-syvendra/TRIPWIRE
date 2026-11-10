@@ -1,0 +1,553 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "npm",
+    "name": "vue-demi",
+    "version": "0.14.10",
+    "archive_sha256": "b239890af0797bac06350b2e78d9030aff37824b03f74711130bd9dcf3198e19"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "2b3292a1266a75a7",
+      "packet_sha256": "e2dd0770e7262b09",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "03f8853f8ce6b50a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The require call is inside loadModule’s try body, and its result or caught failure feeds the Vue decision (f1:6-11; f2:3-5).",
+          "evidence_refs": [
+            "s1",
+            "s20",
+            "f2:3",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ff07f724d166c932",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The caller supplies vue to loadModule, whose require result must be present to reach the else side of the missing-Vue check; that side also requires a string version (f2:3-8; f1:6-11).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f2:3",
+            "f1:6"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "a2d0f9a5fc4e0a2e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks whether the Vue dependency can be loaded (f2:3-5; f1:6-11), fitting dependency_tree.",
+          "evidence_refs": [
+            "f2:3",
+            "s2",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "d465c39f58b7f490",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly calls Vue.version.startsWith to decide its branch (f2:8).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "267efa7227ce9212",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch requires the unnegated startsWith test with the literal 2.7. (f2:8).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "795098fce71b966b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the version of the loaded Vue dependency (f2:3; f2:8), fitting dependency_tree.",
+          "evidence_refs": [
+            "f2:3",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "4fb592e5d6a55167",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly calls Vue.version.startsWith to decide its branch (f2:11).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "fad64b484aa556c7",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch requires the unnegated startsWith test with the literal 2. (f2:11).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "01af976762ceacf4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the version of the loaded Vue dependency (f2:3; f2:11), fitting dependency_tree.",
+          "evidence_refs": [
+            "f2:3",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "d0d99f23b211676b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly calls Vue.version.startsWith to decide its branch (f2:14).",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "d76882e355d9ea4e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then branch requires the unnegated startsWith test with the literal 3. (f2:14).",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "13cf60fdaac4cb51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the version of the loaded Vue dependency (f2:3; f2:14), fitting dependency_tree.",
+          "evidence_refs": [
+            "f2:3",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "c5.L1",
+          "claim_sha256": "7da187b5f2c4f1a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "VCA is bound to loadModule’s result and tested immediately; the resolved helper calls require and returns undefined on failure (f1:6-11; f1:29-30).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s20"
+          ]
+        },
+        {
+          "claim_id": "c5.L2",
+          "claim_sha256": "f51bc7ccfd169ab4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The helper is called with @vue/composition-api, and the early return on missing VCA makes its presence necessary for the subsequent write (f1:29-47).",
+          "evidence_refs": [
+            "s9",
+            "s10",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "c5.L6.category",
+          "claim_sha256": "30558694d2522653",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks availability of the Composition API dependency through loadModule (f1:29-30), fitting dependency_tree.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "6febb235c2e065a4",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The supported-version branches are alternatives beneath the valid-Vue check; one presence condition and one version condition suffice to enter a copy region (f2:5-15).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "1f9beb079cc3b894",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The supported-version checks enable copying the compatibility entry files; missing or unsupported Vue only causes a warning (f2:5-18; f1:51-54).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s8",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "f7243d5fe8b63d51",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branches activate compatibility writes for supported installed Vue versions (f2:8-15; f1:51-54).",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s8",
+            "s15"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b63624c36db56393",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The version branches copy the corresponding Vue compatibility files into the library entry points (f2:8-15; f1:14-24), fitting portability.",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "s8",
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "fbd7296906e2ba4a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All three call regions lie in the claimed guard sides, and the imported switchVersion binding resolves to the function that calls copy and reaches the write (f2:1,8-15; f1:51-54,62; f1:14-24).",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s13",
+            "s15",
+            "s16",
+            "s17",
+            "s14",
+            "f2:1",
+            "f1:62"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "d4024c9824765041",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "switchVersion is exported and unconditionally calls copy, allowing the write without the postinstall Vue checks (f1:51-54,62).",
+          "evidence_refs": [
+            "s15",
+            "f1:62",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "cfd96f3d7f88008d",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The fs binding comes from require of fs, and copy reads version-specific entry files and writes their contents to the library entry files (f1:1,14-24).",
+          "evidence_refs": [
+            "f1:1",
+            "s17",
+            "s14"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "9bb766ff014a3be8",
+          "verdict": "refuted",
+          "grade": "inconsistent",
+          "reason_code": "expression_mismatch",
+          "evidence": "Vue 2.7 versions satisfy c1 and c3 but take the earlier branch, which passes 2.7 and skips updateVue2API; the stated expression omits that exclusion (f2:8-12; f1:56-57).",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "f1:56",
+            "f1:57"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "2c22ec4bc5468fd5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The dependency check returns before the export rewrite when VCA is absent and enables that rewrite when present (f1:29-47).",
+          "evidence_refs": [
+            "s10",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "1dbe1b65b784d4bb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The path activates export generation for the Vue 2 compatibility case with Composition API available (f2:11-12; f1:29-47,56-57).",
+          "evidence_refs": [
+            "s6",
+            "s10",
+            "s18",
+            "f1:56"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "30bfc5eaf015bbde",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The update enumerates Composition API exports and rewrites the compatibility entry point to expose them, fitting portability (f1:35-47).",
+          "evidence_refs": [
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "dbbd37d417d09043",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The write is inside the cited region after the missing-VCA early return; the Vue 2 branch reaches it through switchVersion(2) and updateVue2API (f2:11-12; f1:56-57,29-47).",
+          "evidence_refs": [
+            "s6",
+            "s10",
+            "s18",
+            "s19",
+            "f1:56",
+            "f1:57"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "8b30949c64ae10f6",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "The exported switchVersion can be called with 2 to reach updateVue2API and its write without either postinstall Vue check, although the local VCA check still applies (f1:29-47,56-57,62).",
+          "evidence_refs": [
+            "f1:62",
+            "f1:56",
+            "s10",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "fb01009756fd784f",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The fs.writeFileSync sink uses the fs module binding and writes the entry file after replacing its generated Composition API exports (f1:1,35-47).",
+          "evidence_refs": [
+            "f1:1",
+            "s18",
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "q_252e2ae770.L6.drop",
+          "claim_sha256": "fa42d38d653f6239",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The try/catch implements the same dependency availability probe already represented by c1 and c5, returning undefined for their caller checks rather than adding an independent gate (f1:6-11,29-30; f2:3-5).",
+          "evidence_refs": [
+            "s20",
+            "s9",
+            "s10",
+            "f2:3",
+            "s2"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "e94c26b589b96814",
+      "packet_sha256": "a49dc292cd66f442",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c6.L1",
+          "claim_sha256": "532ef4db38ac0347",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else-if condition directly calls Vue.version.startsWith('2.7.') (s1; f1:8).",
+          "evidence_refs": [
+            "s1",
+            "f1:8"
+          ]
+        },
+        {
+          "claim_id": "c6.L2",
+          "claim_sha256": "b5f6795d7991cc12",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Reaching the else arm of the version 2.7 test requires startsWith('2.7.') to be false, so the claimed positive condition is not_startswith 2.7. (s2; f1:8-12).",
+          "evidence_refs": [
+            "s2",
+            "f1:8",
+            "f1:11"
+          ]
+        },
+        {
+          "claim_id": "c6.L6.category",
+          "claim_sha256": "29299ce07123a4ef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Vue is loaded from the vue dependency and its version is tested, making dependency_tree an appropriate category (f1:3, f1:8).",
+          "evidence_refs": [
+            "f1:3",
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "f4f66990e4fc1694",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The install path requires the outer Vue check to pass, the 2.7 test to fail, and the 2.x test to pass before switchVersion(2) calls updateVue2API; its remaining region requires VCA to pass the early return (f1:5-12; f2:29-35, f2:56-57). These four cited conditions are conjunctive on this path, givin",
+          "evidence_refs": [
+            "s3",
+            "s2",
+            "s4",
+            "s5",
+            "f2:56",
+            "f2:57"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "3e1a5cb9de374219",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This path enables the additional Composition API export rewrite: switchVersion invokes updateVue2API only for version 2, and missing VCA returns before the write (f2:29-47, f2:56-57).",
+          "evidence_refs": [
+            "s5",
+            "s9",
+            "s10",
+            "f2:56",
+            "f2:57"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "49f4b6692e72a56f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The conditions activate compatibility generation for Vue 2 with an available Composition API dependency; they do not inspect analysis environments (f1:3-15; f2:29-47).",
+          "evidence_refs": [
+            "f1:3",
+            "s4",
+            "s5",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "1942f643f4dfa6cf",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Version-specific files are copied into lib and the Vue 2 module exports are adapted to the installed Composition API, supporting the portability label (f2:14-24, f2:35-47, f2:51-57).",
+          "evidence_refs": [
+            "f2:14",
+            "f2:24",
+            "s9",
+            "f2:51",
+            "f2:57"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "7c60ab2c1f59c45d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded call switchVersion(2) resolves through the utils import to the function that calls updateVue2API for version 2; its VCA early return controls s9 (f1:1, f1:12; f2:51-57). The sink at f2:47 lies directly inside s9, consistent with an empty witness.",
+          "evidence_refs": [
+            "f1:1",
+            "f1:12",
+            "f2:51",
+            "f2:56",
+            "f2:57",
+            "s5",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "6682e0b29a8e99be",
+          "verdict": "refuted",
+          "grade": "non_exclusive",
+          "reason_code": "outside_region",
+          "evidence": "switchVersion is exported, allowing a caller to pass 2 and reach updateVue2API and its write without traversing the postinstall Vue presence and version guards (f2:51-62). The local VCA check remains required, but the full claimed gate is not exclusive.",
+          "evidence_refs": [
+            "f2:51",
+            "f2:56",
+            "f2:57",
+            "f2:62",
+            "s10"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,369 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "xlsxwriteer",
+    "version": "0.1",
+    "archive_sha256": "c4b346e95b8c26f69c53b9bdfe8a956267cf37ffc45862310cfe33aca0e381c9"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "bae5315750adae0c",
+      "packet_sha256": "87c048dc1f6935f2",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "18253eb496ff14f5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The comparison directly reads sys.platform, bound by import sys.",
+          "evidence_refs": [
+            "s1",
+            "f1:1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "d7427d5832e56e16",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "encoded_unchecked",
+          "evidence": "Equality and its then side are visible, but the compared string is constructed through a computed built-in lookup without a checked readable derivation.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "6f29dc7a471fdf70",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the operating-system platform property sys.platform.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "1b79a0d079ca9937",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly calls ctypes.windll.shell32.IsUserAnAdmin(), and ctypes is imported in this module.",
+          "evidence_refs": [
+            "s3",
+            "f1:117"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "ded045eb23700496",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The administrator call is the unnegated if condition, whose then block requires a truthy result.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "18304e4c7dbac252",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition tests administrator privilege.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "52f1535ddeb0eb16",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole listed condition is the outer platform comparison; s5 is its then block, requiring that one condition.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "ca1d2cec9c0342b1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform condition encloses installation, directory, file and shortcut operations without an alternative payload branch.",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "4d3bfdde81c5afa2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The platform match admits the enclosed operations rather than backing off on analysis detection.",
+          "evidence_refs": [
+            "s1",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "bffa50649625a977",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The guarded Windows administrator and COM facilities also support a portability explanation; the encoded payload and platform operand do not establish targeting as the purpose.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "f1:65",
+            "f1:111"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "e659405a13abfe80",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "All four cited sinks are inline calls nested inside the platform then block s5, requiring no witness hops.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "162da4ad3f4b4368",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The cited sink sites are inline module-level operations inside the platform branch; no function, export or alternate caller exposes those sites outside it.",
+          "evidence_refs": [
+            "f1:6",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "f1:132"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7db261aeb4876d34",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "Directory creation is visible, but pip arguments, file mode, COM dispatch class and shortcut arguments are encoded; sink names alone do not establish downloading and persistence.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "s8",
+            "f1:65",
+            "s9",
+            "f1:95",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "f062323b662e4151",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The administrator then region is nested inside the platform then branch, so the two listed conditions join with and and require minimum two.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "d14263a49e9ac562",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The administrator branch changes a flattened-loop state and continues; this does not establish that the environment selects a different victim target for the shortcut operation in another state branch.",
+          "evidence_refs": [
+            "s4",
+            "s10",
+            "f1:71",
+            "f1:81",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "041e967c8d80c71a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "These conditions admit a platform and administrator state, with no visible analysis or sandbox detection in the tests.",
+          "evidence_refs": [
+            "s1",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "0dc20a87f8622ea5",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Administrator-dependent state transitions and Windows APIs could accommodate platform privileges; the encoded operations do not establish targeting as the purpose.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:65",
+            "f1:81"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "fca333cb60d66634",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "outside_region",
+          "evidence": "Region s10 contains only a state assignment and continue, while the empty-witness shortcut sink s9 lies outside it in a separate elif branch.",
+          "evidence_refs": [
+            "s10",
+            "s9",
+            "f1:81"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "0221c4993fc901ba",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The administrator outcomes set different loop states, while the shortcut belongs to another state branch; unresolved flattened transitions prevent proving exclusive passage through the administrator then side.",
+          "evidence_refs": [
+            "s4",
+            "f1:71",
+            "f1:81",
+            "s9"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "ace7572bb032aa4b",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The shortcut receiver comes from Dispatch with an encoded class name, and shortcut arguments are encoded before Save; the visible method names alone do not prove persistent execution.",
+          "evidence_refs": [
+            "f1:65",
+            "s9",
+            "f1:95",
+            "f1:104"
+          ]
+        },
+        {
+          "claim_id": "k_648bbff21c.L6.drop",
+          "claim_sha256": "c902145e4e5160c8",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check concerns the same destination directory passed to makedirs; the missing-directory route creates it and rejoins the same subsequent state, making this storage preparation plumbing.",
+          "evidence_refs": [
+            "s11",
+            "f1:59",
+            "f1:60",
+            "f1:124"
+          ]
+        },
+        {
+          "claim_id": "q_a9279e344a.L6.drop",
+          "claim_sha256": "f599a783a9e0bcf4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence branch creates the destination directory when absent and converges on the same subsequent state as the present-directory route; this prepares storage rather than gating a payload.",
+          "evidence_refs": [
+            "s12",
+            "f1:59",
+            "f1:60",
+            "f1:124"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "50b2ee6829c2fbbc",
+      "packet_sha256": "f19568899a2734a1",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "b68c48f428641dce",
+          "verdict": "refuted",
+          "grade": null,
+          "reason_code": "broken_hop",
+          "evidence": "The bind hop in s5 assigns an integer arithmetic expression to a loop state variable, rather than storing a function or object used by a later call. The CreateShortcut receiver in s4 instead comes from the separate Dispatch assignment at f1:65, so the cited bind does not establish the claimed witnes",
+          "evidence_refs": [
+            "s5",
+            "s4",
+            "f1:65"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "59c83967a2ceb6c1",
+          "verdict": "cannot_tell",
+          "grade": "unknown",
+          "reason_code": "incomplete_cfg",
+          "evidence": "The administrator test updates a state variable and continues the enclosing dispatch loop at f1:68-71; the shortcut call occurs in a separate state arm at f1:81-90. The cited integer assignment supplies no callable binding, and the flattened state transitions do not establish an exclusive path throu",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "f1:38",
+            "f1:81",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "7dcb247d60afde9d",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The receiver of CreateShortcut comes from win32com.client.Dispatch with an encoded class identifier at f1:65, and the later Arguments value is also encoded at f1:95. CreateShortcut and Save calls are visible at f1:90 and f1:104, but without resolving those encoded values their names alone do not pro",
+          "evidence_refs": [
+            "f1:65",
+            "f1:90",
+            "f1:95",
+            "f1:104",
+            "f1:111"
+          ]
+        }
+      ]
+    }
+  ]
+}

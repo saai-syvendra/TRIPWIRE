@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pydeobf",
+    "version": "0.1",
+    "archive_sha256": "91a38bc0e5379e3f6f13b61d4a9785b0855244aa726e7230a64089cfca86f6cf"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "c3d3b55bc1b51e27",
+      "packet_sha256": "1a2242c9c6b67715",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_9299f491be.L6.drop",
+          "claim_sha256": "a9d4623041ba0518",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test at f1:15 only checks that the package's own PowerShell download returned 0 and that the output file exists. That is a success check on its own action, not a read of host environment, so it does not decide what runs by environment. The download and Start-Process run unconditionally beforehan",
+          "evidence_refs": [
+            "s1",
+            "f1:15"
+          ]
+        },
+        {
+          "claim_id": "q_3575928f06.L6.drop",
+          "claim_sha256": "0db9ef6a249626a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if statement at f1:15-25 branches on the download's exit status and file existence, which are results of the package's own command. It is not an environment gate. The else branch only prints a failure message, and install.run follows either way (f1:28).",
+          "evidence_refs": [
+            "s2",
+            "f1:15"
+          ]
+        }
+      ]
+    }
+  ]
+}

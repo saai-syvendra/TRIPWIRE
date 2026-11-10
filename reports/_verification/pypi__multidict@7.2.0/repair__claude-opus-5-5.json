@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "multidict",
+    "version": "7.2.0",
+    "archive_sha256": "f4110a13e264858eb00697751785cb2c58ee96707d8ded5ddb8239530d3b9ba4"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "41e92bca0b4ae951",
+      "record_sha256_after": "41e92bca0b4ae951",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_828d7521e2.L6.drop",
+          "claim_sha256": "c12077734039436f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "setup.py:29 tests platform.system() != \"Windows\", and its then side (lines 30-54) only extends the CFLAGS and LDFLAGS lists with compiler warning, strictness and optional sanitizer flags. There is no else side and no network, file or process call in the block. The extensions list (lines 56-70) is bu"
+        },
+        {
+          "claim_id": "q_e71fe157bc.L6.drop",
+          "claim_sha256": "3abb203eef867419",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if statement at setup.py:29-54 only calls CFLAGS.extend and LDFLAGS.extend. The nested branch at line 40 additionally needs MULTIDICT_DEBUG_BUILD plus an ASAN or TSAN variable, and it too only adds -fsanitize and related flags to those lists (lines 48-54). Both lists feed extra_compile_args and "
+        }
+      ]
+    }
+  ]
+}

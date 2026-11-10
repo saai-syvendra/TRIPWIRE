@@ -1,0 +1,253 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "six",
+    "version": "1.17.0",
+    "archive_sha256": "ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "1ef05c590a800b30",
+      "record_sha256_after": "1ef05c590a800b30",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "k_33c3f1b65f.L6.drop",
+          "claim_sha256": "b5ef9d26fc31c719",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:37 only assigns the boolean PY3. The branches that read it (40-72, 531-546, 564-589, 602-637, 647-694, 715-747) bind type aliases, attribute-name strings and helper definitions. setup.py uses only six.__version__ and calls none of them, so flipping PY3 changes no behaviour class. The refutati"
+        },
+        {
+          "claim_id": "k_461defb882.L6.drop",
+          "claim_sha256": "550141c092390c49",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:55 sits in the Python 2 side and decides only how the integer MAXSIZE is computed: a constant at 57, or a len() overflow probe on a local class at 60-72. Both sides end with the same module constant and no sink, so this is a library constant, not a choice of behaviour. The refutation is right"
+        },
+        {
+          "claim_id": "k_6c44040ba6.L6.drop",
+          "claim_sha256": "0ecdb7950de2ebfb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:38 only assigns the boolean PY34. It is read at 74-77 (stdlib import of spec_from_loader, or None) and at 262 (the module-name string importlib or imp in a lazy MovedAttribute). spec_from_loader is called only in find_spec at 196, for six.moves imports that setup.py never makes. No behaviour "
+        },
+        {
+          "claim_id": "k_c4de5ab08b.L6.drop",
+          "claim_sha256": "78ab3a74ea35d9bb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:274 picks the string collections.abc or collections as an argument to MovedModule, whose constructor at 110-117 only stores the name. The module is imported only by _resolve at 119 on later access, which setup.py never makes. Flipping the test changes a stored string, not a behaviour, so the "
+        },
+        {
+          "claim_id": "k_52fe8593a3.L6.drop",
+          "claim_sha256": "9be74f46a96d3338",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:278 picks the string _dummy_thread or _thread as an argument to MovedModule, whose constructor at 110-117 only stores the name. Nothing resolves it during setup.py, which reads only six.__version__. Flipping the test changes a stored string, not a behaviour, so the drop holds."
+        },
+        {
+          "claim_id": "k_76a19642b6.L6.drop",
+          "claim_sha256": "84ed610c96777fac",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:323-326 appends one lazy MovedModule descriptor for winreg on win32. The constructor only stores names and no registry module is imported or read at install, since _resolve at 119 runs only on later access. The only effect is one more six.moves alias, so no behaviour class depends on the test"
+        },
+        {
+          "claim_id": "k_4c2757c535.L6.drop",
+          "claim_sha256": "ff8eb9e2c2899c85",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:442-448 adds two MovedAttribute descriptors for URLopener and FancyURLopener when Python is older than 3.14. The constructor at 146-162 only stores module and attribute names, so nothing touches urllib or the network at install. The test decides whether two aliases exist, not a behaviour, so "
+        },
+        {
+          "claim_id": "k_635955c5da.L6.drop",
+          "claim_sha256": "4668e9eee8da8001",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:665-672 picks three unittest method-name strings by Python 3 minor version. They are read only by the assertion helpers at 699-712, which setup.py never calls. Flipping the test changes unused strings, not a behaviour, so the drop holds."
+        },
+        {
+          "claim_id": "k_9a8d5e2de4.L6.drop",
+          "claim_sha256": "58ee1ab30992eb4c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:750-759 defines raise_from on both sides: through exec_ of a literal def string, or as a plain def. The exec only creates the function, with no external input, and raise_from is never called in six.py or setup.py. Both sides end with the same helper name defined, so no behaviour class changes"
+        },
+        {
+          "claim_id": "k_cb2ec65f95.L6.drop",
+          "claim_sha256": "e3b825d2f0ca543a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:817-825 wraps print_ with flush support on Python older than 3.3. It only rebinds a function and print_ is never called in six.py or setup.py. The wrapper is a definition with no install effect, so the test decides no behaviour and the drop holds."
+        },
+        {
+          "claim_id": "k_3e6d64719f.L6.drop",
+          "claim_sha256": "a245cc9bd55ef435",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "six.py:829-858 binds wraps to a local backport or to functools.wraps. Both give the same decorator interface and wraps is not used at the top level of six.py or in setup.py. No behaviour class depends on the test, so the drop holds."
+        },
+        {
+          "claim_id": "q_5f43a9a3a1.L6.drop",
+          "claim_sha256": "50274474997f3cb9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if PY3 statement at six.py:40 is the decision reading the flag dropped as k_33c3f1b65f, so the duplicate holds. Its then side at 41-47 only binds type aliases and MAXSIZE. These are compatibility names with no sink, so it is not a gate the record misses."
+        },
+        {
+          "claim_id": "q_006614b37c.L6.drop",
+          "claim_sha256": "08c3f0c7410c98b4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "This is the else side of the if PY3 statement at six.py:40, the same anchor as q_5f43a9a3a1 and the flag dropped as k_33c3f1b65f, so the duplicate holds. Lines 49-72 only bind Python 2 aliases and compute MAXSIZE, with no sink, so no behaviour is decided."
+        },
+        {
+          "claim_id": "q_1c687ccc40.L6.drop",
+          "claim_sha256": "f63ca4871aba2acb",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at six.py:55 is the decision containing the test dropped as k_461defb882, so the duplicate holds. Both sides only produce the MAXSIZE integer, and the len() probe at 65 is on a local class, so the refutation names no behaviour this guard decides."
+        },
+        {
+          "claim_id": "q_be34db2e54.L6.drop",
+          "claim_sha256": "b9dbe4744d169b87",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if PY3 at six.py:531 reads the flag dropped as k_33c3f1b65f, so the duplicate holds. Both sides at 532-546 assign six attribute-name strings used by the attrgetter helpers at 594-599, which only build getters. No behaviour is decided."
+        },
+        {
+          "claim_id": "q_2f1cb10814.L6.drop",
+          "claim_sha256": "29310c7e6277652c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if PY3 at six.py:564 reads the flag dropped as k_33c3f1b65f, so the duplicate holds. Both sides at 565-589 define method-binding helpers and Iterator, and none is called during setup.py. No behaviour is decided."
+        },
+        {
+          "claim_id": "q_fdddd1caf7.L6.drop",
+          "claim_sha256": "90a2e702eb7d5b55",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if PY3 at six.py:602 reads the flag dropped as k_33c3f1b65f, so the duplicate holds. Both sides at 603-637 define dictionary iteration helpers and methodcaller objects under the same names, and none is called during setup.py. No behaviour is decided."
+        },
+        {
+          "claim_id": "q_97b0ce962e.L6.drop",
+          "claim_sha256": "9792dfa8797e25a9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if PY3 at six.py:647 reads the flag dropped as k_33c3f1b65f, so the duplicate holds. Both sides at 648-694 define byte and text helpers and import only stdlib struct, io or StringIO to bind names. Nothing is called on the install path, so no behaviour is decided."
+        },
+        {
+          "claim_id": "q_167c2c22e6.L6.drop",
+          "claim_sha256": "2ae792ff9d393450",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if PY3 at six.py:715 reads the flag dropped as k_33c3f1b65f, so the duplicate holds. Both sides at 716-747 define exec_ and reraise. The only exec runs on the Python 2 side, on literal strings that define reraise, and no external or decoded input reaches it, so both sides leave the same two help"
+        },
+        {
+          "claim_id": "q_a44a5e2890.L6.drop",
+          "claim_sha256": "c3e3d859ce1fab94",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if PY34 at six.py:74 reads the flag dropped as k_6c44040ba6, so the duplicate holds. It imports a stdlib name or sets it to None, and that name is used only in find_spec at 196 for six.moves imports that setup.py never makes. No behaviour is decided."
+        },
+        {
+          "claim_id": "q_92e9659deb.L6.drop",
+          "claim_sha256": "501e15c5d0383e89",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The ternary at six.py:262 reads the flag dropped as k_6c44040ba6, so the duplicate holds. It picks the string importlib or imp for a MovedAttribute, whose constructor at 146-162 only stores it. Nothing imports either module at install, so no behaviour is decided."
+        },
+        {
+          "claim_id": "q_cf4f35947c.L6.drop",
+          "claim_sha256": "9766df82d0061d7b",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The ternary at six.py:274 contains the test dropped as k_c4de5ab08b, so the duplicate holds. It yields a module-name string that MovedModule stores without importing, so no behaviour is decided."
+        },
+        {
+          "claim_id": "q_2508047e11.L6.drop",
+          "claim_sha256": "c231d29452ceed55",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The ternary at six.py:278 contains the test dropped as k_52fe8593a3, so the duplicate holds. It yields a module-name string that MovedModule stores without importing, so no behaviour is decided."
+        },
+        {
+          "claim_id": "q_ebb508809c.L6.drop",
+          "claim_sha256": "12097646cf1d284f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at six.py:323 contains the test dropped as k_76a19642b6, so the duplicate holds. Its body at 324-326 only appends a lazy descriptor and touches no registry data, so no behaviour is decided."
+        },
+        {
+          "claim_id": "q_d336a9f6a5.L6.drop",
+          "claim_sha256": "1376995736f215b1",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at six.py:442 contains the test dropped as k_4c2757c535, so the duplicate holds. Its body at 443-448 only adds two lazy descriptors that store names, with no network use, so no behaviour is decided."
+        },
+        {
+          "claim_id": "q_03f62689fd.L6.drop",
+          "claim_sha256": "8eab768f597bca28",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at six.py:665 contains the test dropped as k_635955c5da, so the duplicate holds. Both sides only assign unittest method-name strings that setup.py never reads, so no behaviour is decided."
+        },
+        {
+          "claim_id": "q_83ca5e7bd4.L6.drop",
+          "claim_sha256": "fed121922f0c536c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at six.py:750 contains the test dropped as k_9a8d5e2de4, so the duplicate holds. Both sides only define raise_from, which is never called on the install path, so no behaviour is decided."
+        },
+        {
+          "claim_id": "q_6afedeb41c.L6.drop",
+          "claim_sha256": "18fca62491b5ca8e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at six.py:817 contains the test dropped as k_cb2ec65f95, so the duplicate holds. Its body only rebinds print_ to a wrapper, and print_ is not called during setup.py, so no behaviour is decided."
+        },
+        {
+          "claim_id": "q_034cee3034.L6.drop",
+          "claim_sha256": "8cff357769d5efd4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The if at six.py:829 contains the test dropped as k_3e6d64719f, so the duplicate holds. Both sides only bind wraps to a decorator with the same interface, and it is not used on the install path, so no behaviour is decided."
+        }
+      ]
+    }
+  ]
+}

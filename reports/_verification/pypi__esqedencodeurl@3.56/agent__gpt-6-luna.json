@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "esqedencodeurl",
+    "version": "3.56",
+    "archive_sha256": "0ed0ebbd542f5f36453f3e30ff779f349dfe746427106e7e84290c4517d70fa4"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "0ac892a49529e901",
+      "packet_sha256": "34ce57aace197efc",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "00596324f5a12637",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if decision directly calls os.path.exists with the path argument 'tahg'.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "9725ae10cf66b9ec",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition is `not os.path.exists('tahg')`, so the then arm runs when that path does not exist.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "23e12015f45e8a9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition calls os.path.exists on 'tahg', which checks whether that filesystem path exists.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "9ffff905fbeebd73",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "There is one cited guard and its then arm is controlled by condition c1; the smallest condition set for the region is therefore c1 alone.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "dd189fefa1c65d1a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The missing-path branch invokes the process-launch sink, enabling the guarded action when the path is absent.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "dda56a656b446a64",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded process launch occurs when 'tahg' does not exist, which is an activating condition rather than a check for analysis or a sandbox.",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "8c6b865f330b5941",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code only checks for the existence of 'tahg' before launching the command and does not explain why that marker controls the action, so the purpose remains unclear.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "fafdd81af5d90aee",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The subprocess.Popen call is directly inside the then block of the cited if, so the sink is reached on that side of the guard.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "8d898b600663d76d",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "In setup.py the subprocess.Popen sink appears only inside the cited then block, with no other caller or path reaching that call site.",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "4ad16856de77a6a8",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "subprocess.Popen establishes process creation, but the command that would show download, file writing, execution of the downloaded file, and defense evasion is contained in an encoded command string that is not readable as code here.",
+          "evidence_refs": [
+            "s3"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "autotel-eventcatalog",
+    "version": "3.0.1",
+    "archive_sha256": "0fe7bd6a948af689541c48d0b7b9a1ffa09b3f327877164af0311ac2609705fa"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "705814807dfa07c5",
+      "record_sha256_after": "46fbc57dc38ff9cf",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "8d6c46ff3d0c6c56",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "the c12 anchor (d24 bytes 179050-179076) is process.env[\"CI\"]===\"true\", the first test in H9(); H9() returning true makes shouldExecute return false, so the gate needs CI != \"true\". Set operator != and value \"true\"; the other H9 tests (CI === '1' and about 35 more CI variables) are now described in "
+        },
+        {
+          "claim_id": "g4.then.L5",
+          "claim_sha256": "b2bdc7f0d73754bb",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "the persistence sink was cited at stdin.write(n7), which is not process creation. Re-cited it to Bun.spawn([\"bash\",\"-s\",\"--\",updater.py]) (sink_kind exec) and added that declaration to the regions. Persistence itself holds: n7, run by that bash, copies the monitor to ~/.local/share/updater/update.py"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "removed the guessed cpu_count from g4 (c9 compares os.cpus().length >= 4 as a plain literal), but the flag stays: the 580 KB payload was not read line by line and some gates are only in notes, attack_type has no registry history behind it, c1 lists only part of the decoy prefix table, g1's absent-to"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "46fbc57dc38ff9cf",
+      "record_sha256_after": "1068a3b4c28c4323",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "1d0fd6300579d54a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "w4 loops over RQ, a fixed list of EDR install paths, and returns true when fs.existsSync finds one; i1.shouldExecute then backs off. The test looks for host artifacts that show the machine is monitored, and the schema has no security-software category, so vm_sandbox_artifact is the closest fit. The "
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "e6db40a1cd03ed6c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right about the command string: w4 runs ps aux 2>/dev/null, or tasklist 2>/dev/null on win32, through execSync, not bare ps aux. Set probe.target to ps aux 2>/dev/null and noted the win32 command in execution.notes, since a probe holds one target."
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "c61438cdfbb0e133",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The operator not_includes stands: a DQ name in the output makes w4 true and shouldExecute return false. The probe command behind this claim is corrected to ps aux 2>/dev/null, and the value now lists all 17 DQ names instead of a shortened list."
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "a8ad6b90439d324d",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that five behaviours had no sink. Added the ingest loop as a region, a C4 npm publish sink for self_propagation and an A9 tarball rewrite sink for modify_other_packages, both with witnesses through u1.ingest. Added the c6 Bun.spawn sink for persistence, marked dynamic_dispatc"
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "dc0ca8d13e7b1b6f",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same payload as g1, and the guard sits in the same uX preflight. Added the ingest region, the C4 self_propagation sink, the A9 modify_other_packages sink and the c6 Bun.spawn persistence sink (dynamic_dispatch at this.dispatch). Removed destructive, a later effect of the monitor, and defense_evasion"
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "228fbb52a15fe9eb",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same payload as g1, and the lock guard sits in the same uX preflight. Added the ingest region, the C4 self_propagation sink, the A9 modify_other_packages sink and the c6 Bun.spawn persistence sink (dynamic_dispatch at this.dispatch). Removed destructive, a later effect of the monitor, and defense_ev"
+        },
+        {
+          "claim_id": "g4.L4",
+          "claim_sha256": "dc4803c188617b7f",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right that c12 covered only CI === true while H9 tests many markers. c12 is now CI not_in true, 1, woodpecker. Added c13 (27 variables tested for presence, one site each) and c14 to c16 (CI_NAME, NETLIFY, CF_PAGES values). The expression and guard now join c9 to c16 with and. GX st"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "1068a3b4c28c4323",
+      "record_sha256_after": "eaac254d17320d5c",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "c13.L1",
+          "claim_sha256": "09584106599b48ee",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "rejected",
+          "reason": "The code contradicts the api_mismatch refutation. All 27 c13 sites are in H9() in d24 (bytes 179116-180423). Each is a process.env[\"NAME\"] subscript that is the test, or one side of the || test, of an if that returns true, and each NAME is one of the 27 alternatives in the api field, one site per al"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "needs_manual_review is still true after the rewrite. Fixed: c1 is fully recovered (RK has five env var/prefix pairs, not 10+ as the old note said), so 'condition value not fully recovered' is gone. g1's recipe is now read from the code, with all five RK variables and GITHUB_REPOSITORY absent and no "
+        }
+      ]
+    }
+  ]
+}

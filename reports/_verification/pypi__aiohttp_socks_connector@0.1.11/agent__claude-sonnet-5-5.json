@@ -1,0 +1,323 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "aiohttp_socks_connector",
+    "version": "0.1.11",
+    "archive_sha256": "183decb0bec9e159ff575058c6474063d8c55791cd471fd90872f1f6a78c2aab"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "2d910a5f7551a108",
+      "packet_sha256": "420ba89b48d4fc29",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "34477d04f7c950d0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:26 compares sys.version_info to (3, 5, 3) in an if that raises.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "ed08a52adefa7d3e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code raises when sys.version_info < (3,5,3), so the guarded code runs when it is >= (3,5,3).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "803a386414de1790",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the Python interpreter version.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c3.L1",
+          "claim_sha256": "b59de925fdaa76f9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:58 compares sys.argv[1] to 'install' inside the exit condition.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L2",
+          "claim_sha256": "f235375f9a4fd469",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The exit fires on not(install == argv[1] or ...), so the code after it runs when argv[1] == 'install' (or the bdist alternative).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c3.L6.category",
+          "claim_sha256": "d1fe29fb89ab8ae0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks which setup command (install) the package manager invoked.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c4.L1",
+          "claim_sha256": "e3c5beff4a43c407",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:58 tests 'bdist' in sys.argv[1] in the exit condition.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L2",
+          "claim_sha256": "76ccd8a21eb23967",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code after the early exit runs when 'bdist' is a substring of argv[1] (or argv[1] is 'install'), which is a positive includes.",
+          "evidence_refs": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c4.L6.category",
+          "claim_sha256": "2787758ef3f46882",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The test checks which setup command (bdist*) the package manager invoked.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "81c24425345faab9",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "A single early-exit guard on the version test; the f1:51 region follows it, so the expression is c1 with a minimum of 1 condition.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "0b43b19ce03ec765",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version check decides whether the later code runs at all.",
+          "evidence_refs": [
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "7292349f298efec2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code runs on supported Python versions and does not back off on analysis.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "b8d8f780d2b41649",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "This is an ordinary minimum-Python-version check (3.5.3+), which is portability.",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "bc19b4e0dfcc0b8a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The open(..., 'a+') write at f1:51 sits after the version guard in the same top-level block, with an empty witness.",
+          "evidence_refs": [
+            "s2",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "dbcefac4b9460d2a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The write is top-level setup.py code with no functions, callers or exports, so it is reached only past the guard.",
+          "evidence_refs": [
+            "s6",
+            "s7",
+            "f1:51"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "27d3a75b3460b484",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(path, 'a+') followed by f.write is a file write.",
+          "evidence_refs": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "4dba9b22286f0a03",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The version guard and the argv guard are sequential early exits, so they join with and. The argv guard exits on not(install or bdist), so c3 and c4 are alternatives joined with or. The minimum is 2 (c1 plus one of c3/c4).",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "f530818d4c92f058",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gates decide whether the dropper try block runs at all.",
+          "evidence_refs": [
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "826f711a3f7f0997",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The code runs when the install or bdist command is used and does not back off on analysis.",
+          "evidence_refs": [
+            "s4",
+            "s8"
+          ]
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "d255a1a0626992a2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The gate is a Python version check plus a setup-command check; it does not clearly serve portability or targeting, so unclear fits.",
+          "evidence_refs": [
+            "s2",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "502b6ed802721400",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The open(..., 'w') write (f1:81) and os.system (f1:91) both sit inside the try block that follows both early-exit guards, with no function hops needed.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L3.excl",
+          "claim_sha256": "abc085c177d4cf1a",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The try block is top-level setup.py code with no other callers, so it is reached only past both guards.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "4a2feafd26616159",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "open(..., 'w') followed by write is a file write, and os.system('start ...vbs') creates a process.",
+          "evidence_refs": [
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "k_282f990700.L6.drop",
+          "claim_sha256": "2713afba1403e559",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "isdir(main_dir) only creates the staging folder if it is missing. That is plumbing and does not decide what runs.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "q_8feea40970.L6.drop",
+          "claim_sha256": "ffe113461be24bef",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The if not isdir(main_dir): mkdir(...) statement is directory-setup plumbing. The payload is written whether or not the folder existed.",
+          "evidence_refs": [
+            "s12"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "pytz",
+    "version": "2026.5",
+    "archive_sha256": "fa23724b9c486543b9ff54a327ee7569ac83ade54bb9afd0fc18676620401c86"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "961974f81bdfad26",
+      "packet_sha256": "e754771db871918a",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "k_41422e65cf.L6.drop",
+          "claim_sha256": "81f1c9b22fc2eb05",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The environment test skips resource opening in resource_exists (s1, f1:130), which is called by the generator passed to LazyList at f1:1136. The imported LazyList implementation and installation entry points are absent, so the supplied code does not establish that this test cannot run during install",
+          "evidence_refs": [
+            "s1",
+            "f1:130",
+            "f1:1136",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "k_45a2122dd8.L6.drop",
+          "claim_sha256": "6fd896532dd58eac",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence test selects fallback resource readers inside open_resource (s2, f1:104), and resource_exists calls that function at f1:131. Its generator is passed to an imported LazyList at f1:1136; without that implementation or installation callers, installation-time reachability is undecided.",
+          "evidence_refs": [
+            "s2",
+            "f1:104",
+            "f1:131",
+            "f1:1136",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "k_71f79590ba.L6.drop",
+          "claim_sha256": "47c77b420e31c268",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The version test selects the unicode alias and ASCII conversion helper implementations (f1:41, f1:62). These branches implement library compatibility across Python versions, supporting exclusion as library portability code.",
+          "evidence_refs": [
+            "s3",
+            "f1:45",
+            "f1:47",
+            "f1:62",
+            "f1:75"
+          ]
+        },
+        {
+          "claim_id": "q_5470fda323.L6.drop",
+          "claim_sha256": "4cabc3b3dce05cd7",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The guarded region chooses importlib or pkg_resources readers when the local resource is missing (s4). The open_resource call from resource_exists and the generator passed to imported LazyList leave installation-time execution unresolved without the missing implementation and installation callers (f",
+          "evidence_refs": [
+            "s4",
+            "f1:131",
+            "f1:1136",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "q_6d4c8eb44c.L6.drop",
+          "claim_sha256": "4b7dcbdd1cf4c1bc",
+          "verdict": "cannot_tell",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The branch returns True instead of opening the resource when the environment value is truthy (s5, f1:131). The generator invoking resource_exists is passed to imported LazyList, whose implementation and installation callers are not supplied, so the stated timing exclusion cannot be established (f1:1",
+          "evidence_refs": [
+            "s5",
+            "f1:131",
+            "f1:1136",
+            "f1:19"
+          ]
+        },
+        {
+          "claim_id": "q_d129f724e9.L6.drop",
+          "claim_sha256": "ddc9cfbeba17eb7a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "Both sides of the version branch define ASCII conversion helpers, with the Python 3 side also binding unicode to str (s6, f1:45, f1:75). This is library portability logic, supporting its exclusion from the install-time gate record.",
+          "evidence_refs": [
+            "s6",
+            "f1:45",
+            "f1:75"
+          ]
+        }
+      ]
+    }
+  ]
+}

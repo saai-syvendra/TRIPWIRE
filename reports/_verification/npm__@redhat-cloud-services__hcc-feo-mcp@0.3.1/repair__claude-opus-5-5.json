@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@redhat-cloud-services/hcc-feo-mcp",
+    "version": "0.3.1",
+    "archive_sha256": "73dfde3dc5ac8f3d69e1847499f7b214ec8464f323d207d5f51355be61cde0d6"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "8590bd1dd3a836c6",
+      "record_sha256_after": "7883a9d51a92ee2c",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "c0bdf11d873e6b13",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The helper in d10 at bytes 174953-175719 returns true (the caller then exits) when the Intl locale or the LANG-style env vars start with 'ru', or the timezone env value matches an encoded needle. That excludes Russian victims; it does not detect analysis, CI or a sandbox. Polarity changed from evade"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Still flagged for reasons that need a person or a decoder. The f4abccab2 per-string cipher is not cracked, so the env var names, the decoy-token prefixes, the Intl and timezone needles (c1, c2, c4, c5 values), the lock path and the C2 host/path stay unrecovered, and the g2 locale and timezone recipe"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "7883a9d51a92ee2c",
+      "record_sha256_after": "1c83948119c692b0",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "566b999c5d415bed",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The verifiers were right that only cred_read and recon had sinks. The code does reach the other four after kq() returns, so each now has its own sink: exfil is the q5.send POST fetch (reached by finalize, flush, dispatch; witness stops at dispatch, unresolved dynamic_dispatch, because senders are a "
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "9e4e5412adcb9ab7",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same fix as g1.then: added exfil (q5.send POST fetch), self_propagation (e1 PUT publish), modify_other_packages (Bun.write in R8.updateTarball) and persistence (Bun.write in s4.addHook) payloads, with ingest, finalize and _q as regions. These all run in bq after await kq(), so after ZZ() has passed."
+        },
+        {
+          "claim_id": "g3.then.L5",
+          "claim_sha256": "9dfedcc5b146e2b2",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Same fix as g1.then: added exfil (q5.send POST fetch), self_propagation (e1 PUT publish), modify_other_packages (Bun.write in R8.updateTarball) and persistence (Bun.write in s4.addHook) payloads, with ingest, finalize and _q as regions. These all run in bq after await kq(), so after the W9() lock ch"
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "7edb70261a8f8434",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. W9() returns true when the lock file is absent, and also when it exists but mq(pid) is false, after deleting the stale lock. Added c6 (process_list, process.kill, not_exists, anchored on process.kill(pid,0) in mq, whose throw means no such process), listed it on the guard, a"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "1c83948119c692b0",
+      "record_sha256_after": "83bd9cd0aacdc576",
+      "round": 2,
+      "decisions": [
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed: f4abccab2 is reversed with the registered scramble_feistel decoder using the key and salt literals in the file (d11), and the embedded scripts with aesgcm_gunzip (d12), so the unrecovered code and condition value reasons are gone. c1, c2, c4 and the c5 lock path are recovered. c4 was wrong: i"
+        }
+      ]
+    }
+  ]
+}

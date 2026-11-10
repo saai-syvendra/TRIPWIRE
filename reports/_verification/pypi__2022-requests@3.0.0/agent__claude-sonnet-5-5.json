@@ -1,0 +1,761 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "claude-sonnet-5-5",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "2022-requests",
+    "version": "3.0.0",
+    "archive_sha256": "11303701e094dd1d69ed8dad381a0bb99bf9dedee6e0224b5b5bb63f0662ddf2"
+  },
+  "runs": [
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b5fc0f0eaa3140f8",
+      "packet_sha256": "4fc53ef1f517a237",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "ab855021f48655c6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:9 binds CURRENT_PYTHON to sys.version_info[:2] and the if at f1:12 compares it with (3, 7), then exits.",
+          "evidence_refs": [
+            "s1",
+            "f1:9",
+            "f1:12"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "742c4ecd33fe059a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `< (3, 7)` followed by sys.exit(1), so the code after it runs only when the version is >= (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "s4",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "d58720a2a9f7ca9e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the Python interpreter version, so runtime_version fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "709b0c2307703583",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:168 is an if statement that directly compares os.name.",
+          "evidence_refs": [
+            "s2",
+            "f1:168"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "007c90d5a4c73d66",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block runs when os.name == 'nt'; the operator is positive and the value matches.",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "8586d27d4e76a870",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.name distinguishes the operating system, so os fits.",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "2a2eb09097c6cfb9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:204-206: out comes from a.stderr.read() of subprocess.Popen('net session'), and the if at f1:206 tests it.",
+          "evidence_refs": [
+            "s3",
+            "f1:204",
+            "f1:205",
+            "f1:206"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "ff963ed46461a5b3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload is in the else of `\"Access is denied.\" in out`, so it is reached when the string is not in the net session stderr (not_includes).",
+          "evidence_refs": [
+            "s3",
+            "s11",
+            "f1:206",
+            "f1:208"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "d31e04d51a1371a0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "`net session` fails with access denied unless the process is elevated, so the test reads administrator privilege.",
+          "evidence_refs": [
+            "s3",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g11.L4",
+          "claim_sha256": "0fa1a3624bcc58c6",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The version check exits early, so the code after it is on the c8 side. The os.name block is nested inside that code, so the two conditions join with and. Both are needed to reach the first payload (min 2).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g11.L6.effect",
+          "claim_sha256": "8b49bc2514d4b738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate only turns on the download, write and run of a remote script; there is no alternative payload on the other side.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g11.L6.polarity",
+          "claim_sha256": "c5be15962fd1caf3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs only on Windows with a supported Python version, and nothing backs off on analysis, so the polarity is activate.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g11.L6.purpose",
+          "claim_sha256": "894817440fc9e98e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Windows-only branch runs cmd.exe batch files fetched from a remote server, so the OS test selects the targets (targeting).",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g11.then.L3",
+          "claim_sha256": "3fb8375337fab07f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sinks at f1:187, 190, 197 and 200 sit directly in the os.name block, after the version exit, with no function call in between, so the empty witness is correct.",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g11.then.L3.excl",
+          "claim_sha256": "431127c54971dd70",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks are module-level statements in setup.py and sit in no function, so no other caller, export or handler reaches them.",
+          "evidence_refs": [
+            "s5",
+            "s6",
+            "f1:168"
+          ]
+        },
+        {
+          "claim_id": "g11.then.L5",
+          "claim_sha256": "84617660fd9a8b3a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get downloads, open(...,'wb') plus file.write writes the file, Popen('cmd /c local.bat') runs it, and Popen('cmd /c del local.bat') deletes it through a process call.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        },
+        {
+          "claim_id": "g13.L4",
+          "claim_sha256": "66be89024dfeec75",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The else of the Access-denied test is nested in the os.name block, which is nested after the version exit, so c8, c9 and c11 all join with and (min 3).",
+          "evidence_refs": [
+            "s4",
+            "s5",
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g13.L6.effect",
+          "claim_sha256": "4885e9196e53ca38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate enables the second download-and-run payload only when the process is elevated; the other side only prints a message.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g13.L6.polarity",
+          "claim_sha256": "9abdd6cd03123260",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The branch runs the payload when the process has admin rights, so the polarity is activate. It does not back off from analysis.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g13.L6.purpose",
+          "claim_sha256": "9ce0a3ad615c91e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Running the extra payload only on Windows with administrator rights selects the targets, so the purpose is targeting.",
+          "evidence_refs": [
+            "s11",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g13.then.L3",
+          "claim_sha256": "304753a5e61e4fd3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sinks at f1:211, 214, 217 and 221 are in the else block of the Access-denied test, which is inside the os.name block and after the version exit.",
+          "evidence_refs": [
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g13.then.L3.excl",
+          "claim_sha256": "d0538a9b37ee62b3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "These are module-level statements inside the else block and no function wraps them, so nothing else reaches them.",
+          "evidence_refs": [
+            "s12",
+            "f1:208"
+          ]
+        },
+        {
+          "claim_id": "g13.then.L5",
+          "claim_sha256": "c656198315eb16b5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get downloads, open(...,'wb') plus file.write writes the file, Popen('cmd /c loc.bat') runs it, and Popen('cmd /c del loc.bat') deletes it through a process call.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_0feb889211.L6.drop",
+          "claim_sha256": "72a150fe0c3d4b85",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "requests/sessions.py:55 only picks the preferred clock (perf_counter or time.time), which is ordinary library code and decides nothing at install.",
+          "evidence_refs": [
+            "s17",
+            "f2:55"
+          ]
+        },
+        {
+          "claim_id": "k_553ef8d5c7.L6.drop",
+          "claim_sha256": "52912df6d81e7888",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "requests/utils.py:68 only defines a Windows proxy_bypass helper, which is ordinary library code and decides nothing at install.",
+          "evidence_refs": [
+            "s18",
+            "f3:68"
+          ]
+        },
+        {
+          "claim_id": "q_51b6b8d5aa.L6.drop",
+          "claim_sha256": "2f971ea5ee7c70d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if statement at requests/sessions.py:55 only picks a clock function, which is ordinary library code.",
+          "evidence_refs": [
+            "s19",
+            "f2:55"
+          ]
+        },
+        {
+          "claim_id": "q_837d6a64a8.L6.drop",
+          "claim_sha256": "f734bcd4aa852abd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if statement at requests/utils.py:68 only defines a registry-based proxy bypass helper, which is ordinary library code.",
+          "evidence_refs": [
+            "s20",
+            "f3:68"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b5fc0f0eaa3140f8",
+      "packet_sha256": "6bafa4dc9861fc56",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "af8b85d4bd133d53",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "CURRENT_PYTHON is sys.version_info[:2] (f1:9) and the comparison at f1:12 against REQUIRED_PYTHON decides the early exit.",
+          "evidence_refs": [
+            "s1",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "ad73168d7c3124df",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test is `CURRENT_PYTHON < (3, 7)` followed by sys.exit(1), so the code after it runs only when version_info[:2] >= (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:12",
+            "f1:28"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "b9e5a8fe86eb8ea0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The Popen of \"net session\" is bound to a, out is a.stderr.read().decode(), and the `in out` test at f1:206 decides the branch.",
+          "evidence_refs": [
+            "s3",
+            "f1:204",
+            "f1:205"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "c7dea71bad0979a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The else arm of `\"Access is denied.\" in out` holds the download and run code, so it is reached only when the stderr text does not include that string.",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:206",
+            "f1:208"
+          ]
+        }
+      ]
+    },
+    {
+      "by": "claude-sonnet-5-5",
+      "record_sha256": "b5fc0f0eaa3140f8",
+      "packet_sha256": "2728920e9be2ae0b",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "af8b85d4bd133d53",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:12 compares CURRENT_PYTHON, which is assigned sys.version_info[:2] at f1:9, against (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "ad73168d7c3124df",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The code exits when CURRENT_PYTHON < (3, 7) and has no else block, so the rest of the file runs only when the version is >= (3, 7).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "d58720a2a9f7ca9e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test reads the Python interpreter version, so runtime_version fits.",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c9.L1",
+          "claim_sha256": "2667c8c58e59eec6",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f1:168 compares os.name directly.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "2285b32c86813014",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The block at f1:169 onward runs when os.name == 'nt'. There is no negation and no else block.",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c9.L6.category",
+          "claim_sha256": "8586d27d4e76a870",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "os.name reads the operating system family, so os fits.",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "b9e5a8fe86eb8ea0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The f1:206 test reads out, which comes from the stderr of a subprocess.Popen('net session') call at f1:204-205. This matches the probe.",
+          "evidence_refs": [
+            "s5",
+            "f1:204"
+          ]
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "c7dea71bad0979a5",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload sits in the else arm of 'if \"Access is denied.\" in out', so reaching it requires the string to be absent, which is not_includes.",
+          "evidence_refs": [
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "d31e04d51a1371a0",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "'net session' failing with 'Access is denied.' is an administrator-rights check, so privilege fits.",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g11.L4",
+          "claim_sha256": "b942f79c17bbd720",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The version early exit (s2) and the os.name 'nt' if (s4) are nested, so the block s7 needs both: c8 && c9.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g11.L6.effect",
+          "claim_sha256": "8b49bc2514d4b738",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate decides whether the single download-and-run chain executes at all, so effect enables fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g11.L6.polarity",
+          "claim_sha256": "c5be15962fd1caf3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload runs on Windows with a supported Python. The gate does not back off for analysis, so activate fits.",
+          "evidence_refs": [
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g11.L6.purpose",
+          "claim_sha256": "894817440fc9e98e",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The payload is a Windows-only batch script run through cmd, so the os gate selects its intended target. The version check only drops unsupported Pythons.",
+          "evidence_refs": [
+            "s3",
+            "s7"
+          ]
+        },
+        {
+          "claim_id": "g11.then.L3",
+          "claim_sha256": "3fb8375337fab07f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sinks at f1:187 (requests.get), f1:190 (file.write), f1:197 (Popen cmd /c local.bat) and f1:200 (Popen cmd /c del) are directly in the os.name block (s7) after the version exit, so the empty witnesses are right.",
+          "evidence_refs": [
+            "s7",
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g11.then.L3.excl",
+          "claim_sha256": "23e78688b3feba16",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks are module-level statements in setup.py inside the gate. They are in no function, so there are no other callers, exports or timers.",
+          "evidence_refs": [
+            "s7",
+            "f1:168"
+          ]
+        },
+        {
+          "claim_id": "g11.then.L5",
+          "claim_sha256": "84617660fd9a8b3a",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get downloads, open('wb') plus write drops a file, Popen runs the dropped local.bat, and Popen 'cmd /c del' deletes it. Each sink can do its behaviour.",
+          "evidence_refs": [
+            "s8",
+            "s9",
+            "s10",
+            "s11"
+          ]
+        },
+        {
+          "claim_id": "g13.L4",
+          "claim_sha256": "0dc917e6795cae05",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The else block s12 is nested inside the os.name 'nt' if, which is after the version exit, so it needs c8 && c9 && c11. The minimum is 3.",
+          "evidence_refs": [
+            "s2",
+            "s4",
+            "s6",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g13.L6.effect",
+          "claim_sha256": "4885e9196e53ca38",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The second download-and-run chain runs only in this branch, so the gate enables it.",
+          "evidence_refs": [
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g13.L6.polarity",
+          "claim_sha256": "9abdd6cd03123260",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The second payload runs only when the process has admin rights. It does not evade analysis, so activate fits.",
+          "evidence_refs": [
+            "s6",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g13.L6.purpose",
+          "claim_sha256": "9ce0a3ad615c91e4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The gate picks Windows hosts with administrator rights for the second payload, which is targeting.",
+          "evidence_refs": [
+            "s5",
+            "s12"
+          ]
+        },
+        {
+          "claim_id": "g13.then.L3",
+          "claim_sha256": "304753a5e61e4fd3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The sinks at f1:211, 214, 217 and 221 are directly in the else block of the 'Access is denied.' test (s12), so the empty witnesses are right.",
+          "evidence_refs": [
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "g13.then.L3.excl",
+          "claim_sha256": "02d540c16f9d60e3",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The sinks are module-level code in setup.py inside the nested else block. There are no functions or other callers that reach them.",
+          "evidence_refs": [
+            "s12",
+            "f1:206"
+          ]
+        },
+        {
+          "claim_id": "g13.then.L5",
+          "claim_sha256": "c656198315eb16b5",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "requests.get downloads, open('wb') plus write drops loc.bat, Popen runs it, and Popen 'cmd /c del' deletes it. Each sink can do its behaviour.",
+          "evidence_refs": [
+            "s13",
+            "s14",
+            "s15",
+            "s16"
+          ]
+        },
+        {
+          "claim_id": "k_0feb889211.L6.drop",
+          "claim_sha256": "72a150fe0c3d4b85",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f2:55 picks time.perf_counter or time.time in the requests Session library. It only sets a clock choice and gates no install-time behaviour.",
+          "evidence_refs": [
+            "s17"
+          ]
+        },
+        {
+          "claim_id": "k_553ef8d5c7.L6.drop",
+          "claim_sha256": "52912df6d81e7888",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "f3:68 defines a Windows proxy_bypass helper in the requests utils library. It is import-time library code with no payload.",
+          "evidence_refs": [
+            "s18"
+          ]
+        },
+        {
+          "claim_id": "q_51b6b8d5aa.L6.drop",
+          "claim_sha256": "2f971ea5ee7c70d4",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The if/else at f2:55 only assigns the preferred_clock function in library code and gates no payload.",
+          "evidence_refs": [
+            "s19"
+          ]
+        },
+        {
+          "claim_id": "q_837d6a64a8.L6.drop",
+          "claim_sha256": "f734bcd4aa852abd",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The f3:68 win32 block only defines proxy-bypass registry lookup helpers in library code and gates no payload.",
+          "evidence_refs": [
+            "s20"
+          ]
+        }
+      ]
+    }
+  ]
+}

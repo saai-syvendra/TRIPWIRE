@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6.1-sol",
+  "package": {
+    "ecosystem": "pypi",
+    "name": "esqreultramask",
+    "version": "6.89",
+    "archive_sha256": "011ff17702e86efe12bc96325479d535686320b0ca92d327ac8077f3aa7bb2ab"
+  },
+  "runs": [
+    {
+      "by": "gpt-6.1-sol",
+      "record_sha256": "3f0ed763ac2e98fa",
+      "packet_sha256": "895bb05824628a8c",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "00596324f5a12637",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition directly calls os.path.exists, with os bound by the import immediately above it (f1:6-7, s1).",
+          "evidence_refs": [
+            "s1",
+            "f1:6",
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "805aa8787d97dd3c",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm requires not os.path.exists('tahg'), so the guarded process call requires that path to be absent (s1, s2).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "23e12015f45e8a9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The condition checks whether a filesystem path exists, which fits file_or_dir_exists (f1:7).",
+          "evidence_refs": [
+            "f1:7"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "f9ab230920890dfa",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The sole conditional guard on the process call is the negated existence check c1; satisfying that one condition reaches the then region (s2, s3).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "862dc58bf64237e9",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The existence check enables the process launch when the path is absent, with no alternative payload branch or target modification (f1:7-10).",
+          "evidence_refs": [
+            "f1:7",
+            "f1:9",
+            "f1:10"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "9d0eb8f13479ae8b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The check activates the process launch on environments lacking the named path; the code does not identify that path as an analysis indicator (f1:7-9).",
+          "evidence_refs": [
+            "f1:7",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "35e10de02b13fd33",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": "judgement",
+          "evidence": "The file tests the path but never explains or establishes its role, supporting unclear as the purpose label (f1:7-9).",
+          "evidence_refs": [
+            "f1:7",
+            "f1:9"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "a11dec3e286f087b",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "Each payload entry cites the same subprocess.Popen call, which sits directly inside the claimed then region and requires no witness hops (s2, s3).",
+          "evidence_refs": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "fc011242ff9cc1f2",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file contains one process-launch site, directly under this guard, and no wrapper, alternate caller, timer or handler reaching it (f1:1-36).",
+          "evidence_refs": [
+            "f1:7",
+            "f1:9",
+            "f1:36"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "acce796208cdfac0",
+          "verdict": "cannot_tell",
+          "grade": "cannot_tell",
+          "reason_code": "encoded_unchecked",
+          "evidence": "The resolved subprocess.Popen sink launches PowerShell with hidden-window options, supporting process creation and concealment. Download and execution of downloaded content depend on an encoded command whose readable derivation is not supplied (f1:5, f1:9).",
+          "evidence_refs": [
+            "f1:5",
+            "f1:9",
+            "s3"
+          ]
+        }
+      ]
+    }
+  ]
+}

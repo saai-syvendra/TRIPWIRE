@@ -1,0 +1,253 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "lambda-demo",
+    "version": "1.1.0",
+    "archive_sha256": "82e8c2ac5f588dd83b31426910a3d6a09ce28c1cb36dda02e42cd19cc4beeebf"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "b0d6b892d449ded3",
+      "packet_sha256": "e16242135aefa611",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "84c4ed7543be87fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary condition directly calls `fs.existsSync('/etc/passwd')`, so the cited site is a decision on that API (s1, f1:18).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a6fc91f76fa8b58f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm is selected when `fs.existsSync('/etc/passwd')` is truthy and reads that file; this is an existence test for `/etc/passwd` (s1-s2, f1:18).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "163acbacf646fa9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks whether the system artifact `/etc/passwd` exists, so `target_artifact` fits (s1, f1:18).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "153ff02067e65a1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary condition directly calls `fs.existsSync('/etc/hosts')`, so the cited site is a decision on that API (s3, f1:19).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "67feb8afca44ebde",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The then arm is selected when `fs.existsSync('/etc/hosts')` is truthy and reads that file; this is an existence test for `/etc/hosts` (s3-s4, f1:19).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "32c8e1e2ad2e752a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition checks whether the system artifact `/etc/hosts` exists, so `target_artifact` fits (s3, f1:19).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "f8f3e201324d19cc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The `/etc/passwd` existence check alone controls the then value of the ternary, so its minimum condition set is the single condition `c1` (s2, f1:18).",
+          "evidence_refs": [
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6422b03bfa869fa3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When `/etc/passwd` exists, the expression reads and includes its contents in trackingData; the gate enables this recon behavior (s1-s2, f1:18).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "96622836f2ce77fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The read occurs when the target system file exists, so the gate activates on that environment (s1-s2, f1:18).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "482388ea08988881",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check determines whether `/etc/passwd` contents are available to add to the collected data, fitting `data_availability` (s1-s2, f1:18).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "02156817cc03c4eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `fs.readFileSync('/etc/passwd', 'utf8')` sink is the then arm of the `/etc/passwd` existence ternary, directly in the claimed region (s2, f1:18).",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1b9fe2912d092e7b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file has one `/etc/passwd` read, inside the ternary's then arm; that read is not called elsewhere (f1:18).",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7af59908c364ac68",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`fs.readFileSync` reads `/etc/passwd` into the collected tracking data, which supports recon (s5, f1:18).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "548d3e7c3ca053d8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The `/etc/hosts` existence check alone controls the then value of the ternary, so its minimum condition set is the single condition `c2` (s4, f1:19).",
+          "evidence_refs": [
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "016c302af05fa1c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When `/etc/hosts` exists, the expression reads and includes its contents in trackingData; the gate enables this recon behavior (s3-s4, f1:19).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "0244cb92c10a1d15",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The read occurs when the target system file exists, so the gate activates on that environment (s3-s4, f1:19).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "90d3125646273c90",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check determines whether `/etc/hosts` contents are available to add to the collected data, fitting `data_availability` (s3-s4, f1:19).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "d7b515fc03618ac2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `fs.readFileSync('/etc/hosts', 'utf8')` sink is the then arm of the `/etc/hosts` existence ternary, directly in the claimed region (s4, f1:19).",
+          "evidence_refs": [
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "7070f753e13c4dfa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The full file has one `/etc/hosts` read, inside the ternary's then arm; that read is not called elsewhere (f1:19).",
+          "evidence_refs": [
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "83dd6c1924adc046",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`fs.readFileSync` reads `/etc/hosts` into the collected tracking data, which supports recon (s6, f1:19).",
+          "evidence_refs": [
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}

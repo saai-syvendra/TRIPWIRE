@@ -1,0 +1,229 @@
+{
+  "schema_version": "1.0",
+  "method": "repair",
+  "by_slug": "claude-opus-5-5",
+  "package": {
+    "ecosystem": "npm",
+    "name": "@hestjs/core",
+    "version": "0.2.1",
+    "archive_sha256": "df945a5b0777fb9c5bfde20c2cf959b005109c45b4d08aca81357b86ef3ab02a"
+  },
+  "runs": [
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "b8014948d64a2f2e",
+      "record_sha256_after": "12cd0f576cdd2aec",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "d7da695e75bd6f3c",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The guard at bundle.js byte 3733966 tests se=await ie.validateToken() (an npm token from NPM_TOKEN or parseNpmToken, checked via whoami) and isLinux()||isMac(). Neither selects a victim by identity: one checks that a usable credential exists, the other that the platform can run the repack step. Chan"
+        },
+        {
+          "claim_id": "g6.then.L5",
+          "claim_sha256": "5d15d81ff8046a1b",
+          "final_seen": "refuted",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "TruffleHogModule.isAvailable() is `return!!this.installedStatus||await this.install()`, so the download runs inside the tested call, which is evaluated unconditionally in Promise.all. The guarded region `t&&(n=await ne.scanFilesystem())` only spawns the binary. Removed download from g6 then.behaviou"
+        },
+        {
+          "claim_id": "record",
+          "claim_sha256": "record",
+          "final_seen": "flagged",
+          "confirmed": false,
+          "decision": "kept_flag",
+          "reason": "Fixed g2's guessed env_var: the code reads process.env.NPM_TOKEN literally (bundle.js near byte 3733400), so the recipe now names NPM_TOKEN with no invented value and g2 has no guessed fields. The flag stays because g1's recipe still needs a server-valid ghp_/gho_ token (c7 getAuthenticated), g3's f"
+        }
+      ]
+    },
+    {
+      "by": "claude-opus-5-5",
+      "record_sha256_before": "12cd0f576cdd2aec",
+      "record_sha256_after": "f96ce554f3d784be",
+      "round": 1,
+      "decisions": [
+        {
+          "claim_id": "c8.L1",
+          "claim_sha256": "a743e98a5431d5f3",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The old site was ie.validateToken(), a multi-line helper, while the api said fetch(). The site now sits on the fetch(.../-/whoami) call inside NpmModule.validateToken, whose username result the gate reads through se, and the api is written fetch."
+        },
+        {
+          "claim_id": "c8.L2",
+          "claim_sha256": "036923892ca62bf6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed by the c8 site and api fix. The operator stands: validateToken returns (await t.json()).username||null and the guard tests se&&(...), a positive truthy test. The refutation was only about the api at the old site."
+        },
+        {
+          "claim_id": "c8.L6.category",
+          "claim_sha256": "06294960100b9d4e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed by the c8 site and api fix. The label server_response stands: the value is the npm registry whoami response, and a 401 or non-ok status throws so the guarded code is skipped."
+        },
+        {
+          "claim_id": "c9.L2",
+          "claim_sha256": "f5a4ab1f7f4ee837",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. repoExists is declared async and main() calls it without await, so !F.repoExists(\"Shai-Hulud\") negates a Promise and is always false. It does not test the repo response, so c9 is removed from the record and a note explains why."
+        },
+        {
+          "claim_id": "c10.L1",
+          "claim_sha256": "6eed01b62e044c8e",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The old site was te.isValid(), which reaches STS only through AWSModule.initialize. The site now sits on te.UserId&&te.Account&&te.Arn in initialize, the test of the n.send(new GetCallerIdentityCommand) result, and the api names that call."
+        },
+        {
+          "claim_id": "c10.L2",
+          "claim_sha256": "ae5ebd434dca80ce",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed by the c10 site and api fix. The operator stands: te.UserId&&te.Account&&te.Arn must be truthy for initialize to return true, and the guard is the positive await te.isValid()&&(...) test."
+        },
+        {
+          "claim_id": "c10.L6.category",
+          "claim_sha256": "6a6c3c8f6b280fea",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed by the c10 site and api fix. The label server_response stands: the test reads the fields of the AWS STS GetCallerIdentity response, so it validates the credentials against a server."
+        },
+        {
+          "claim_id": "c11.L1",
+          "claim_sha256": "c9212461130ef4a5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The old site was re.isValid(). The site now sits on t&&r in GCPModule.initialize, where t is await this.auth.getProjectId() and r is await this.auth.getClient(), and the api names both calls."
+        },
+        {
+          "claim_id": "c11.L2",
+          "claim_sha256": "73f6da37b240131c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed by the c11 site and api fix. The operator stands: if(t&&r) is a positive truthy test, and only that side sets isValidCredentials to true, which isValid returns to the guard."
+        },
+        {
+          "claim_id": "c11.L6.category",
+          "claim_sha256": "9acadfcbbe67f8de",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Category changed from server_response to target_artifact. getProjectId tries env vars, a credential file and gcloud config before the metadata server, and with a key file nothing is validated against a server, so the test is whether stored credentials exist. A note records the GCE path."
+        },
+        {
+          "claim_id": "c12.L1",
+          "claim_sha256": "0aed700fd188d41c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "c12 is removed. The guard reads t from ne.isAvailable(), which is !!installedStatus||await install(), so existsSync does not decide the branch. It only reuses an existing copy, which is plumbing, and the download is now a requirement."
+        },
+        {
+          "claim_id": "c12.L2",
+          "claim_sha256": "322d7bfad365122c",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "c12 is removed for the same reason as c12.L1: exists on trufflehog is not what must hold to reach the scan, because install() downloads a missing binary and also makes t true."
+        },
+        {
+          "claim_id": "c12.L6.category",
+          "claim_sha256": "9bfa6e9270ff7ca4",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "c12 is removed, so the installed_tool label goes with it. A tool that the code fetches itself when missing is a requirement on the network, not a tool lookup that picks a behaviour."
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "24afb384f86c53d5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "Changed by the c8 site move, since this claim carries the condition sites. The expression and minimum stand: the test is se&&(isLinux()||isMac()), which is c8 && (c3 || c4) with a minimum of 2, and se comes from the fetch-based validateToken."
+        },
+        {
+          "claim_id": "g3.then.L3",
+          "claim_sha256": "479dee97f85f7304",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right. F.makeRepo sits after !F.repoExists(...) in the && chain, and that term is always false because the async call is not awaited, so the sink is unreachable. g3 is removed as a dead branch and the exfil claim for it is gone."
+        },
+        {
+          "claim_id": "g3.L4",
+          "claim_sha256": "3717fc3e46fb4c3a",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "g3 is removed. The chain F.isAuthenticated()&&!F.repoExists(...)&&await F.makeRepo(...) cannot be true on any host, so (c1 || c2) && c9 did not describe a decision the environment can open."
+        },
+        {
+          "claim_id": "g3.L6.polarity",
+          "claim_sha256": "0f03d6f3bf946e12",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "g3 is removed as a dead branch, so no polarity is claimed. Flipping the environment changes nothing because makeRepo never runs."
+        },
+        {
+          "claim_id": "g3.L6.effect",
+          "claim_sha256": "d8bcb1728b699159",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "g3 is removed as a dead branch, so no effect is claimed. The test never enables the upload, and the summary and assessment no longer say the data is uploaded to a new repo."
+        },
+        {
+          "claim_id": "g3.L6.purpose",
+          "claim_sha256": "d46ba5bf2483f7c9",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "g3 is removed as a dead branch, so no purpose is claimed. The dedupe reading in the old purpose_reason does not hold because the repo check result is never read."
+        },
+        {
+          "claim_id": "g5.L4",
+          "claim_sha256": "bab5327e876c3db5",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "c11 now cites t&&r, so both required results are in the one tested site, and the api names getProjectId and getClient. It stays one condition with a minimum of 1 because both come from the same GoogleAuth credential lookup, tested in one expression."
+        },
+        {
+          "claim_id": "g6.then.L3",
+          "claim_sha256": "f83f800fe4f6a794",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "g6 is removed. ne.scanFilesystem() does sit in the && region, but t is true whenever the binary exists or the download works, so the guard is a prerequisite and not a gate. The scan is now recorded as ungated exec_downloaded."
+        },
+        {
+          "claim_id": "g6.L4",
+          "claim_sha256": "9df60839faf485b6",
+          "final_seen": "disputed",
+          "confirmed": false,
+          "decision": "fixed",
+          "reason": "The refutation is right: isAvailable is installedStatus or a successful install(), so c12 alone was wrong. Only a failed download closes the branch, and needing the connection is a requirement, so g6 is removed and github[.]com:443 is added to requirements."
+        }
+      ]
+    }
+  ]
+}

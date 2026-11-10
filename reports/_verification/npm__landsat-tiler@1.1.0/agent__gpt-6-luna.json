@@ -1,0 +1,265 @@
+{
+  "schema_version": "1.0",
+  "method": "agent",
+  "by_slug": "gpt-6-luna",
+  "package": {
+    "ecosystem": "npm",
+    "name": "landsat-tiler",
+    "version": "1.1.0",
+    "archive_sha256": "2e6bf52f5389eb306d5a0fa2f60651c745dfc3ee34dbd7439c9114f501f984c5"
+  },
+  "runs": [
+    {
+      "by": "gpt-6-luna",
+      "record_sha256": "4c398931503623e8",
+      "packet_sha256": "573d3a980e0696c3",
+      "blinded": true,
+      "verdicts": [
+        {
+          "claim_id": "c1.L1",
+          "claim_sha256": "84c4ed7543be87fa",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary condition directly calls `fs.existsSync('/etc/passwd')` (s1, f1:18).",
+          "evidence_refs": [
+            "s1"
+          ]
+        },
+        {
+          "claim_id": "c1.L2",
+          "claim_sha256": "a6fc91f76fa8b58f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition tests existence of `/etc/passwd`, and its true arm reads that file with `fs.readFileSync` (s1-s2, f1:18).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c1.L6.category",
+          "claim_sha256": "163acbacf646fa9f",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the target system's `/etc/passwd` artifact exists before collecting its contents (s1-s2, f1:18).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "c2.L1",
+          "claim_sha256": "153ff02067e65a1d",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The ternary condition directly calls `fs.existsSync('/etc/hosts')` (s3, f1:19).",
+          "evidence_refs": [
+            "s3"
+          ]
+        },
+        {
+          "claim_id": "c2.L2",
+          "claim_sha256": "67feb8afca44ebde",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The condition tests existence of `/etc/hosts`, and its true arm reads that file with `fs.readFileSync` (s3-s4, f1:19).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "c2.L6.category",
+          "claim_sha256": "32c8e1e2ad2e752a",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The test checks whether the target system's `/etc/hosts` artifact exists before collecting its contents (s3-s4, f1:19).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g1.L4",
+          "claim_sha256": "f8f3e201324d19cc",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single condition `fs.existsSync('/etc/passwd')` guards the read in the ternary's true arm, so the expression is `c1` and the minimum is one condition (s1-s2, f1:18).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.effect",
+          "claim_sha256": "6422b03bfa869fa3",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When `/etc/passwd` exists, its contents are added to `trackingData`, which is subsequently serialized for transmission (s1-s2, f1:18-26).",
+          "evidence_refs": [
+            "s1",
+            "s2",
+            "f1:10",
+            "f1:24-26"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.polarity",
+          "claim_sha256": "96622836f2ce77fc",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded collection runs when `/etc/passwd` exists, adding information from the target environment to `trackingData` (s1-s2, f1:18).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.L6.purpose",
+          "claim_sha256": "482388ea08988881",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check determines whether contents of `/etc/passwd` are available to include in the collected data; the false arm contributes `null` (s1-s2, f1:18).",
+          "evidence_refs": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3",
+          "claim_sha256": "02156817cc03c4eb",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `fs.readFileSync('/etc/passwd', 'utf8')` sink is directly in the true arm of the cited ternary, with no intervening call or wrapper (s2, s5, f1:18).",
+          "evidence_refs": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L3.excl",
+          "claim_sha256": "1b9fe2912d092e7b",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The `/etc/passwd` read appears only in this ternary's true arm while constructing `trackingData`; the full file contains no other caller or path to that read (s2, s5, f1:10-18).",
+          "evidence_refs": [
+            "s2",
+            "s5",
+            "f1:10-18"
+          ]
+        },
+        {
+          "claim_id": "g1.then.L5",
+          "claim_sha256": "7af59908c364ac68",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`fs.readFileSync` reads `/etc/passwd` as UTF-8 in the claimed branch, supporting recon behavior (s5, f1:18).",
+          "evidence_refs": [
+            "s5"
+          ]
+        },
+        {
+          "claim_id": "g2.L4",
+          "claim_sha256": "548d3e7c3ca053d8",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "The single condition `fs.existsSync('/etc/hosts')` guards the read in the ternary's true arm, so the expression is `c2` and the minimum is one condition (s3-s4, f1:19).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.effect",
+          "claim_sha256": "016c302af05fa1c1",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "When `/etc/hosts` exists, its contents are added to `trackingData`, which is subsequently serialized for transmission (s3-s4, f1:19-26).",
+          "evidence_refs": [
+            "s3",
+            "s4",
+            "f1:10",
+            "f1:24-26"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.polarity",
+          "claim_sha256": "0244cb92c10a1d15",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The guarded collection runs when `/etc/hosts` exists, adding information from the target environment to `trackingData` (s3-s4, f1:19).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.L6.purpose",
+          "claim_sha256": "90d3125646273c90",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The existence check determines whether contents of `/etc/hosts` are available to include in the collected data; the false arm contributes `null` (s3-s4, f1:19).",
+          "evidence_refs": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3",
+          "claim_sha256": "d7b515fc03618ac2",
+          "verdict": "verified",
+          "grade": null,
+          "reason_code": null,
+          "evidence": "The `fs.readFileSync('/etc/hosts', 'utf8')` sink is directly in the true arm of the cited ternary, with no intervening call or wrapper (s4, s6, f1:19).",
+          "evidence_refs": [
+            "s4",
+            "s6"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L3.excl",
+          "claim_sha256": "7070f753e13c4dfa",
+          "verdict": "verified",
+          "grade": "exclusive",
+          "reason_code": null,
+          "evidence": "The `/etc/hosts` read appears only in this ternary's true arm while constructing `trackingData`; the full file contains no other caller or path to that read (s4, s6, f1:10-19).",
+          "evidence_refs": [
+            "s4",
+            "s6",
+            "f1:10-19"
+          ]
+        },
+        {
+          "claim_id": "g2.then.L5",
+          "claim_sha256": "83dd6c1924adc046",
+          "verdict": "verified",
+          "grade": "consistent",
+          "reason_code": null,
+          "evidence": "`fs.readFileSync` reads `/etc/hosts` as UTF-8 in the claimed branch, supporting recon behavior (s6, f1:19).",
+          "evidence_refs": [
+            "s6"
+          ]
+        }
+      ]
+    }
+  ]
+}
